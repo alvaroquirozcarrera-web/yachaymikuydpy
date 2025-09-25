@@ -1,0 +1,3066 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juegos Educativos - Yachay Mikuy</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* Estilos similares a chicos.html para mantener consistencia */
+        :root {
+            --primary-blue: #2c5aa0;
+            --light-blue: #5d8cc4;
+            --dark-blue: #1a3a6e;
+            --success-green: #28a745;
+            --accent-orange: #ff9800;
+            --accent-purple: #6f42c1;
+            --accent-teal: #20c997;
+            --accent-pink: #d63384;
+            --accent-cyan: #0dcaf0;
+            --gray: #6c757d;
+            --light-gray: #f8f9fa;
+            --white: #ffffff;
+            --shadow-color: rgba(40, 50, 70, 0.1);
+            --danger-red: #dc3545;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        body {
+            background-image: linear-gradient(120deg, #f5f9ff 0%, #e6f0fa 100%);
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            flex: 1;
+        }
+
+        /* Header Styles */
+        .header {
+            background: var(--white);
+            border-radius: 20px;
+            box-shadow: 0 8px 30px var(--shadow-color);
+            padding: 25px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-left: 8px solid var(--accent-pink);
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .header-icon {
+            font-size: 2.5rem;
+            color: var(--accent-pink);
+        }
+
+        .header-title h1 {
+            color: var(--dark-blue);
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 5px;
+        }
+
+        .header-title p {
+            color: var(--gray);
+            font-size: 1.1rem;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, var(--primary-blue), var(--light-blue));
+            color: var(--white);
+            box-shadow: 0 4px 15px rgba(44, 90, 160, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(44, 90, 160, 0.4);
+        }
+
+        .btn-danger {
+            background: linear-gradient(45deg, var(--danger-red), #e85d75);
+            color: var(--white);
+            box-shadow: 0 4px 15px rgba(220, 53, 69, 0.3);
+        }
+
+        .btn-danger:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(220, 53, 69, 0.4);
+        }
+
+        /* Children Tags */
+        .children-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .child-tag {
+            background-color: rgba(93, 140, 196, 0.1);
+            color: var(--primary-blue);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* Games Container - MODIFICADO PARA 3 COLUMNAS */
+        .games-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .game-card {
+            background: var(--white);
+            border-radius: 20px;
+            box-shadow: 0 8px 30px var(--shadow-color);
+            padding: 20px;
+            transition: all 0.3s ease;
+            border-top: 5px solid var(--accent-pink);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .game-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 40px rgba(40, 50, 70, 0.15);
+        }
+
+        .game-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, var(--accent-pink), #f06292);
+            border-radius: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--white);
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 10px rgba(214, 51, 132, 0.3);
+        }
+
+        .game-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--dark-blue);
+            margin-bottom: 8px;
+        }
+
+        .game-age {
+            display: inline-block;
+            background: rgba(214, 51, 132, 0.1);
+            color: var(--accent-pink);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .game-description {
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            flex-grow: 1;
+        }
+
+        .game-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-top: auto;
+            padding-top: 12px;
+            border-top: 1px solid #eee;
+        }
+
+        .stat-item {
+            text-align: center;
+            flex: 1;
+        }
+
+        .stat-value {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--dark-blue);
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: var(--gray);
+        }
+
+        .stats-container {
+            background: var(--white);
+            border-radius: 20px;
+            box-shadow: 0 8px 30px var(--shadow-color);
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+
+        .stats-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--dark-blue);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            border-left: 4px solid var(--accent-pink);
+        }
+
+        .game-area {
+            background: var(--white);
+            border-radius: 20px;
+            box-shadow: 0 8px 30px var(--shadow-color);
+            padding: 30px;
+            margin-bottom: 40px;
+            min-height: 500px;
+            display: none;
+        }
+
+        .game-area.active {
+            display: block;
+        }
+
+        .game-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 15px;
+        }
+
+        .game-title-area {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--dark-blue);
+        }
+
+        .game-timer {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--accent-pink);
+        }
+
+        .trophy-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.5s ease;
+        }
+
+        .trophy-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .trophy-container {
+            text-align: center;
+            transform: scale(0.5);
+            transition: transform 0.5s ease;
+        }
+
+        .trophy-overlay.active .trophy-container {
+            transform: scale(1);
+        }
+
+        .trophy-icon {
+            font-size: 15rem;
+            color: gold;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.7);
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .trophy-text {
+            color: var(--white);
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-top: 20px;
+        }
+
+        /* Estilos específicos para juegos */
+        .memory-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .memory-card {
+            aspect-ratio: 1;
+            background: linear-gradient(135deg, var(--light-blue), var(--primary-blue));
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            transform-style: preserve-3d;
+        }
+
+        .memory-card.flipped {
+            transform: rotateY(180deg);
+        }
+
+        .memory-card.matched {
+            background: linear-gradient(135deg, var(--success-green), #58c271);
+            cursor: default;
+            animation: matchPulse 0.6s ease;
+        }
+
+        @keyframes matchPulse {
+            0% { transform: scale(1) rotateY(180deg); }
+            50% { transform: scale(1.1) rotateY(180deg); }
+            100% { transform: scale(1) rotateY(180deg); }
+        }
+
+        .memory-card-front, .memory-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 10px;
+            backface-visibility: hidden;
+        }
+
+        .memory-card-back {
+            background: linear-gradient(135deg, var(--light-blue), var(--primary-blue));
+            color: white;
+        }
+
+        .memory-card-front {
+            background: white;
+            transform: rotateY(180deg);
+        }
+
+        .drag-drop-area {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+
+        .food-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            width: 45%;
+        }
+
+        .food-item {
+            width: 80px;
+            height: 80px;
+            background: white;
+            border-radius: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
+            cursor: grab;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .food-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+        }
+
+        .food-item.dragging {
+            opacity: 0.5;
+            cursor: grabbing;
+        }
+
+        .body-area {
+            width: 45%;
+            background: #f8f9fa;
+            border-radius: 20px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+
+        .body-outline {
+            width: 150px;
+            height: 300px;
+            background: white;
+            border-radius: 50% 50% 40% 40%;
+            position: relative;
+            margin: 20px 0;
+            border: 3px dashed var(--gray);
+        }
+
+        .drop-zone {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: rgba(214, 51, 132, 0.1);
+            border: 2px dashed var(--accent-pink);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .drop-zone.head {
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .drop-zone.chest {
+            top: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .drop-zone.stomach {
+            top: 180px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .drop-zone.filled {
+            background: rgba(40, 167, 69, 0.2);
+            border-color: var(--success-green);
+            animation: fillZone 0.5s ease;
+        }
+
+        @keyframes fillZone {
+            0% { transform: translateX(-50%) scale(1); }
+            50% { transform: translateX(-50%) scale(1.2); }
+            100% { transform: translateX(-50%) scale(1); }
+        }
+
+        .maze-container {
+            margin-top: 30px;
+            position: relative;
+        }
+
+        .maze {
+            display: grid;
+            grid-template-columns: repeat(10, 40px);
+            grid-template-rows: repeat(10, 40px);
+            gap: 2px;
+            margin: 0 auto;
+            width: fit-content;
+        }
+
+        .maze-cell {
+            background: #e9ecef;
+            border-radius: 4px;
+            position: relative;
+        }
+
+        .maze-wall {
+            background: var(--dark-blue);
+        }
+
+        .maze-path {
+            background: white;
+        }
+
+        .maze-start {
+            background: var(--success-green);
+        }
+
+        .maze-end {
+            background: var(--accent-pink);
+        }
+
+        .maze-player {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: var(--accent-orange);
+            border-radius: 50%;
+            top: 5px;
+            left: 5px;
+            z-index: 10;
+            transition: all 0.2s ease;
+        }
+
+        .maze-food {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: var(--accent-teal);
+            border-radius: 50%;
+            top: 10px;
+            left: 10px;
+            z-index: 5;
+            animation: foodPulse 1.5s infinite;
+        }
+
+        @keyframes foodPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        .recipe-container {
+            margin-top: 30px;
+        }
+
+        .ingredients-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .ingredient {
+            width: 70px;
+            height: 70px;
+            background: white;
+            border-radius: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .ingredient:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+        }
+
+        .ingredient.selected {
+            background: var(--accent-pink);
+            color: white;
+            transform: scale(1.1);
+            animation: selectPulse 0.5s ease;
+        }
+
+        @keyframes selectPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1.1); }
+        }
+
+        .recipe-result {
+            background: #f8f9fa;
+            border-radius: 20px;
+            padding: 20px;
+            text-align: center;
+            min-height: 150px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .quiz-container {
+            margin-top: 30px;
+        }
+
+        .quiz-question {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .quiz-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .quiz-option {
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 15px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .quiz-option:hover {
+            border-color: var(--accent-pink);
+            transform: translateY(-3px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .quiz-option.correct {
+            background: var(--success-green);
+            color: white;
+            border-color: var(--success-green);
+            animation: correctAnswer 0.6s ease;
+        }
+
+        @keyframes correctAnswer {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .quiz-option.incorrect {
+            background: var(--danger-red);
+            color: white;
+            border-color: var(--danger-red);
+            animation: shake 0.5s ease;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+
+        .farm-container {
+            margin-top: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .farm-field {
+            display: grid;
+            grid-template-columns: repeat(5, 80px);
+            grid-template-rows: repeat(4, 80px);
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        .farm-plot {
+            background: #d4a574;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .farm-plot:hover {
+            background: #c19660;
+        }
+
+        .farm-plot.planted {
+            background: #8bc34a;
+            animation: plantGrow 0.5s ease;
+        }
+
+        @keyframes plantGrow {
+            0% { transform: scale(0.8); }
+            100% { transform: scale(1); }
+        }
+
+        .farm-plot.ready {
+            background: #ff9800;
+            animation: pulse 1.5s infinite;
+        }
+
+        .farm-actions {
+            display: flex;
+            gap: 15px;
+        }
+
+        .farm-btn {
+            padding: 10px 20px;
+            background: var(--accent-pink);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .farm-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .hero-game {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .hero-area {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(to bottom, #87CEEB, #98FB98);
+            border-radius: 20px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .hero-character {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background: var(--accent-purple);
+            border-radius: 50%;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            transition: all 0.2s ease;
+            z-index: 10;
+        }
+
+        .hero-enemy {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background: var(--danger-red);
+            border-radius: 50%;
+            top: 20px;
+            animation: moveEnemy 5s linear infinite;
+        }
+
+        @keyframes moveEnemy {
+            0% { left: -40px; }
+            100% { left: 100%; }
+        }
+
+        .hero-food {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: var(--success-green);
+            border-radius: 50%;
+            bottom: 20px;
+            animation: moveFood 7s linear infinite;
+        }
+
+        @keyframes moveFood {
+            0% { left: -30px; }
+            100% { left: 100%; }
+        }
+
+        .hero-controls {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .hero-btn {
+            width: 60px;
+            height: 60px;
+            background: var(--accent-purple);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .hero-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .puzzle-container {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .puzzle-board {
+            display: grid;
+            grid-template-columns: repeat(2, 150px);
+            grid-template-rows: repeat(2, 150px);
+            gap: 10px;
+            perspective: 1000px;
+        }
+
+        .puzzle-piece {
+            width: 150px;
+            height: 150px;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.5s;
+            cursor: pointer;
+        }
+
+        .puzzle-piece.flipped {
+            transform: rotateY(180deg);
+        }
+
+        .puzzle-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 4rem;
+        }
+
+        .puzzle-back {
+            background: linear-gradient(135deg, var(--accent-pink), #f06292);
+            color: white;
+        }
+
+        .puzzle-front {
+            background: white;
+            transform: rotateY(180deg);
+            border: 2px solid #e9ecef;
+        }
+
+        .race-container {
+            margin-top: 30px;
+        }
+
+        .race-track {
+            height: 100px;
+            background: #d4a574;
+            border-radius: 50px;
+            position: relative;
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+
+        .race-line {
+            position: absolute;
+            height: 100%;
+            width: 2px;
+            background: white;
+            top: 0;
+        }
+
+        .race-player {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background: var(--accent-teal);
+            border-radius: 50%;
+            top: 30px;
+            left: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .race-food {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: var(--accent-orange);
+            border-radius: 50%;
+            top: 35px;
+            animation: foodFloat 2s infinite ease-in-out;
+        }
+
+        @keyframes foodFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .race-controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .race-btn {
+            padding: 10px 20px;
+            background: var(--accent-teal);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .race-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .chef-container {
+            margin-top: 30px;
+        }
+
+        .chef-kitchen {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
+
+        .chef-ingredients {
+            width: 45%;
+            background: #f8f9fa;
+            border-radius: 20px;
+            padding: 20px;
+        }
+
+        .chef-pot {
+            width: 45%;
+            background: #f8f9fa;
+            border-radius: 20px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 300px;
+        }
+
+        .chef-ingredient {
+            display: inline-block;
+            width: 60px;
+            height: 60px;
+            background: white;
+            border-radius: 15px;
+            margin: 5px;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.8rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .chef-ingredient:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .chef-ingredient.selected {
+            background: var(--accent-pink);
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .chef-pot-icon {
+            font-size: 5rem;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .chef-pot-ingredients {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .chef-pot-ingredient {
+            width: 50px;
+            height: 50px;
+            background: white;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+            animation: ingredientAdd 0.5s ease;
+        }
+
+        @keyframes ingredientAdd {
+            0% { transform: scale(0); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .chef-actions {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .chef-btn {
+            padding: 12px 25px;
+            background: var(--accent-pink);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .chef-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .game-message {
+            text-align: center;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            margin-top: 20px;
+            font-weight: 600;
+            color: var(--dark-blue);
+        }
+
+        .floating-message {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            z-index: 1000;
+            opacity: 0;
+            transition: all 0.3s ease;
+            max-width: 80%;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .floating-message.success {
+            border-left: 5px solid var(--success-green);
+            color: var(--success-green);
+        }
+
+        .floating-message.error {
+            border-left: 5px solid var(--danger-red);
+            color: var(--danger-red);
+        }
+
+        .floating-message.warning {
+            border-left: 5px solid var(--accent-orange);
+            color: var(--accent-orange);
+        }
+
+        .floating-message.show {
+            opacity: 1;
+        }
+
+        .recommendation-message {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 15px;
+            margin-top: 20px;
+            border-left: 5px solid var(--accent-purple);
+            animation: slideIn 0.5s ease;
+        }
+
+        @keyframes slideIn {
+            0% { transform: translateY(-20px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+
+        .recommendation-message h4 {
+            color: var(--accent-purple);
+            margin-bottom: 10px;
+        }
+
+        .recommendation-message ul {
+            padding-left: 20px;
+        }
+
+        .recommendation-message li {
+            margin-bottom: 5px;
+        }
+
+        .game-instructions {
+            background: rgba(44, 90, 160, 0.1);
+            border-radius: 15px;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-left: 5px solid var(--primary-blue);
+        }
+
+        .game-instructions h3 {
+            color: var(--primary-blue);
+            margin-bottom: 10px;
+        }
+
+        .game-instructions p {
+            margin-bottom: 5px;
+        }
+
+        .game-footer {
+            text-align: center;
+            margin-top: 30px;
+            display: none;
+        }
+
+        /* Footer Styles */
+        .footer {
+            background-color: var(--white);
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+            padding: 40px 0 20px;
+            margin-top: 50px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .footer-logo i {
+            font-size: 2rem;
+            color: var(--primary-blue);
+        }
+
+        .footer-logo span {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--dark-blue);
+        }
+
+        .footer-nav ul {
+            display: flex;
+            flex-wrap: wrap;
+            list-style: none;
+            gap: 20px;
+        }
+
+        .footer-nav a {
+            text-decoration: none;
+            color: var(--gray);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .footer-nav a:hover {
+            color: var(--primary-blue);
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 15px;
+        }
+
+        .footer-social a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(44, 90, 160, 0.1);
+            color: var(--primary-blue);
+            transition: all 0.3s ease;
+        }
+
+        .footer-social a:hover {
+            background-color: var(--primary-blue);
+            color: var(--white);
+            transform: translateY(-3px);
+        }
+
+        .footer-copyright {
+            max-width: 1200px;
+            margin: 30px auto 0;
+            padding: 20px 20px 0;
+            text-align: center;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        /* Media Queries para hacer el diseño responsive */
+        @media (max-width: 992px) {
+            .games-container {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            .header {
+                flex-direction: column;
+                text-align: center;
+                gap: 15px;
+                padding: 20px;
+            }
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            .header-title h1 {
+                font-size: 1.8rem;
+            }
+            .games-container {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            .game-card {
+                padding: 15px;
+            }
+            .trophy-icon {
+                font-size: 10rem;
+            }
+            .trophy-text {
+                font-size: 1.8rem;
+            }
+            .drag-drop-area {
+                flex-direction: column;
+            }
+            .food-items, .body-area {
+                width: 100%;
+            }
+            .maze {
+                grid-template-columns: repeat(8, 35px);
+                grid-template-rows: repeat(8, 35px);
+            }
+            .farm-field {
+                grid-template-columns: repeat(4, 70px);
+                grid-template-rows: repeat(3, 70px);
+            }
+            .puzzle-board {
+                grid-template-columns: repeat(2, 120px);
+                grid-template-rows: repeat(2, 120px);
+            }
+            .puzzle-piece {
+                width: 120px;
+                height: 120px;
+            }
+            .chef-kitchen {
+                flex-direction: column;
+            }
+            .chef-ingredients, .chef-pot {
+                width: 100%;
+            }
+            
+            /* Footer responsive styles */
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 25px;
+            }
+            
+            .footer-nav ul {
+                justify-content: center;
+            }
+            
+            .footer-copyright {
+                padding-top: 15px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .container {
+                padding: 10px;
+            }
+            .header {
+                padding: 15px;
+            }
+            .header-title h1 {
+                font-size: 1.5rem;
+            }
+            .game-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 1.5rem;
+            }
+            .game-title {
+                font-size: 1.1rem;
+            }
+            .game-age {
+                font-size: 0.8rem;
+            }
+            .game-description {
+                font-size: 0.85rem;
+            }
+            .stat-value {
+                font-size: 1.1rem;
+            }
+            .stat-label {
+                font-size: 0.7rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-content">
+                <div class="header-icon">
+                    <i class="fas fa-puzzle-piece"></i>
+                </div>
+                <div class="header-title">
+                    <h1>Jugando es Divertido</h1>
+                    <p>Panel Familiar</p>
+                    <div class="children-tags" id="childrenTags">
+                        <!-- Se llenará dinámicamente -->
+                    </div>
+                </div>
+            </div>
+            <div class="header-actions">
+                <a href="yachay.html" class="btn btn-primary">
+                    <i class="fas fa-arrow-left"></i> Volver al Panel
+                </a>
+                <a href="index.html" class="btn btn-danger">
+                    <i class="fas fa-sign-out-alt"></i> Salir
+                </a>
+            </div>
+        </header>
+
+        <section class="stats-container">
+            <h2 class="stats-title">Estadísticas de Juegos Familiares</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value" id="totalGames">0</div>
+                    <div class="stat-label">Juegos Jugados</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="totalWins">0</div>
+                    <div class="stat-label">Victorias</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="winPercentage">0%</div>
+                    <div class="stat-label">Porcentaje de Victorias</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="avgTime">0s</div>
+                    <div class="stat-label">Tiempo Promedio</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="games-container" id="gamesMenu">
+            <!-- Los juegos se cargarán dinámicamente aquí -->
+        </section>
+
+        <section class="game-area" id="gameArea">
+            <div class="game-header">
+                <h2 class="game-title-area" id="currentGameTitle">Juego Seleccionado</h2>
+                <div class="game-timer" id="gameTimer">00:00</div>
+            </div>
+            <div id="gameContent">
+                <!-- El contenido del juego se cargará aquí -->
+            </div>
+            <div class="game-footer" id="gameFooter">
+                <button class="btn btn-primary" id="backToGamesMenu">
+                    <i class="fas fa-arrow-left"></i> Volver a Juegos
+                </button>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <i class="fas fa-heart"></i>
+                <span>Yachay Mikuy</span>
+            </div>
+            <nav class="footer-nav">
+                <ul>
+                    <li><a href="#">Acerca de nosotros</a></li>
+                    <li><a href="#">Términos y condiciones</a></li>
+                    <li><a href="#">Política de privacidad</a></li>
+                    <li><a href="#">Contacto</a></li>
+                </ul>
+            </nav>
+            <div class="footer-social">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <p>© 2023 Yachay Mikuy. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <div class="trophy-overlay" id="trophyOverlay">
+        <div class="trophy-container">
+            <i class="fas fa-trophy trophy-icon"></i>
+            <div class="trophy-text">¡Ganaron!</div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Cargar datos de todos los niños desde localStorage
+            const storedData = localStorage.getItem('yachayMikuyChildren');
+            
+            if (!storedData) {
+                document.body.innerHTML = '<h1>Error: No se encontraron datos de niños.</h1>';
+                return;
+            }
+            
+            const allChildrenData = JSON.parse(storedData);
+            // Filtrar para usar solo los perfiles que han completado el cuestionario
+            const completedChildren = allChildrenData.filter(child => child.completed);
+
+            if (completedChildren.length === 0) {
+                document.body.innerHTML = '<h1>No hay perfiles completados. Por favor, finalice al menos un cuestionario para continuar.</h1>';
+                return;
+            }
+
+            // Mostrar etiquetas de niños en la cabecera
+            const childrenTags = document.getElementById('childrenTags');
+            completedChildren.forEach(child => {
+                const childTag = document.createElement('span');
+                childTag.className = 'child-tag';
+                childTag.innerHTML = `<i class="fas fa-child"></i> ${child.name}`;
+                childrenTags.appendChild(childTag);
+            });
+
+            // Definición de los juegos - Todos con 30 segundos
+            const games = [
+                {
+                    id: 'memory',
+                    title: 'Memoria de Hierro',
+                    age: '1-3 años',
+                    description: 'Encuentra pares de alimentos ricos en hierro.',
+                    icon: 'fa-brain',
+                    timeLimit: 30 // 30 segundos
+                },
+                {
+                    id: 'vitamin-hunter',
+                    title: 'Cazador de Vitaminas',
+                    age: '2-5 años',
+                    description: 'Arrastra alimentos al cuerpo para ganar energía.',
+                    icon: 'fa-apple-alt',
+                    timeLimit: 30 // 30 segundos
+                },
+                {
+                    id: 'nutrition-maze',
+                    title: 'Laberinto Nutritivo',
+                    age: '3-6 años',
+                    description: 'Recorre el laberinto recolectando alimentos.',
+                    icon: 'fa-route',
+                    timeLimit: 30 // 30 segundos
+                },
+                {
+                    id: 'magic-recipe',
+                    title: 'Receta Mágica',
+                    age: '4-7 años',
+                    description: 'Combina ingredientes para crear platos nutritivos.',
+                    icon: 'fa-magic',
+                    timeLimit: 30 // 30 segundos
+                },
+                {
+                    id: 'iron-quiz',
+                    title: 'Quiz del Hierro',
+                    age: '5-8 años',
+                    description: 'Responde preguntas sobre nutrición.',
+                    icon: 'fa-question-circle',
+                    timeLimit: 30 // 30 segundos
+                },
+                {
+                    id: 'nutrient-farm',
+                    title: 'Granja de Nutrientes',
+                    age: '6-9 años',
+                    description: 'Cultiva alimentos ricos en hierro.',
+                    icon: 'fa-seedling',
+                    timeLimit: 30 // 30 segundos
+                },
+                {
+                    id: 'nutrition-hero',
+                    title: 'Superhéroe Nutricional',
+                    age: '7-10 años',
+                    description: 'Derrota monstruos con alimentos nutritivos.',
+                    icon: 'fa-mask',
+                    timeLimit: 30 // 30 segundos
+                },
+                {
+                    id: 'nutrition-puzzle',
+                    title: 'Rompecabezas Nutritivo',
+                    age: '8-11 años',
+                    description: 'Resuelve rompecabezas 3D de alimentos.',
+                    icon: 'fa-puzzle-piece',
+                    timeLimit: 30 // 30 segundos
+                },
+                {
+                    id: 'nutrition-race',
+                    title: 'Carrera Nutricional',
+                    age: '9-12 años',
+                    description: 'Corre y recoge alimentos en el camino.',
+                    icon: 'fa-running',
+                    timeLimit: 30 // 30 segundos
+                },
+                {
+                    id: 'chef-against-anemia',
+                    title: 'Chef contra la Anemia',
+                    age: '10-13 años',
+                    description: 'Prepara platos balanceados para clientes.',
+                    icon: 'fa-utensils',
+                    timeLimit: 30 // 30 segundos (ahora todos tienen 30 segundos)
+                }
+            ];
+
+            // Obtener estadísticas familiares
+            let familyStats = JSON.parse(localStorage.getItem('familyGameStats')) || {};
+            
+            // Inicializar estadísticas para juegos que no existen
+            games.forEach(game => {
+                if (!familyStats[game.id]) {
+                    familyStats[game.id] = {
+                        played: 0,
+                        wins: 0,
+                        times: [],
+                        children: {} // Almacenar estadísticas por niño
+                    };
+                }
+                
+                // Inicializar estadísticas para cada niño en este juego
+                completedChildren.forEach(child => {
+                    if (!familyStats[game.id].children[child.id]) {
+                        familyStats[game.id].children[child.id] = {
+                            played: 0,
+                            wins: 0,
+                            times: []
+                        };
+                    }
+                });
+            });
+            
+            // Guardar estadísticas actualizadas
+            localStorage.setItem('familyGameStats', JSON.stringify(familyStats));
+
+            // Calcular estadísticas globales
+            function updateGlobalStats() {
+                let totalPlayed = 0;
+                let totalWins = 0;
+                let totalTime = 0;
+                let timeCount = 0;
+
+                Object.values(familyStats).forEach(gameStats => {
+                    totalPlayed += gameStats.played;
+                    totalWins += gameStats.wins;
+                    gameStats.times.forEach(time => {
+                        totalTime += time;
+                        timeCount++;
+                    });
+                });
+
+                const winPercentage = totalPlayed > 0 ? Math.round((totalWins / totalPlayed) * 100) : 0;
+                const avgTime = timeCount > 0 ? Math.round(totalTime / timeCount) : 0;
+
+                document.getElementById('totalGames').textContent = totalPlayed;
+                document.getElementById('totalWins').textContent = totalWins;
+                document.getElementById('winPercentage').textContent = `${winPercentage}%`;
+                document.getElementById('avgTime').textContent = `${avgTime}s`;
+            }
+
+            updateGlobalStats();
+
+            // Crear tarjetas de juegos
+            const gamesMenu = document.getElementById('gamesMenu');
+            
+            games.forEach(game => {
+                const gameStats = familyStats[game.id];
+                const winPercentage = gameStats.played > 0 ? Math.round((gameStats.wins / gameStats.played) * 100) : 0;
+                
+                const gameCard = document.createElement('div');
+                gameCard.className = 'game-card';
+                gameCard.innerHTML = `
+                    <div class="game-icon">
+                        <i class="fas ${game.icon}"></i>
+                    </div>
+                    <h3 class="game-title">${game.title}</h3>
+                    <div class="game-age">${game.age}</div>
+                    <p class="game-description">${game.description}</p>
+                    <div class="game-stats">
+                        <div class="stat-item">
+                            <div class="stat-value">${gameStats.played}</div>
+                            <div class="stat-label">Jugadas</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">${gameStats.wins}</div>
+                            <div class="stat-label">Victorias</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">${winPercentage}%</div>
+                            <div class="stat-label">Éxito</div>
+                        </div>
+                    </div>
+                `;
+                
+                gameCard.addEventListener('click', () => startGame(game));
+                gamesMenu.appendChild(gameCard);
+            });
+
+            // Variables globales para el juego actual
+            let currentGame = null;
+            let timerInterval = null;
+            let timeRemaining = 0;
+            let gameWon = false;
+            let activeChild = null; // El niño que está jugando actualmente
+
+            // Función para iniciar un juego
+            function startGame(game) {
+                // Si ya hay un juego en curso, limpiarlo
+                if (currentGame) {
+                    clearInterval(timerInterval);
+                }
+                
+                currentGame = game;
+                gameWon = false;
+                document.getElementById('gamesMenu').style.display = 'none';
+                document.getElementById('gameArea').classList.add('active');
+                document.getElementById('currentGameTitle').textContent = game.title;
+                document.getElementById('gameFooter').style.display = 'none'; // Ocultar botón de volver durante el juego
+                
+                // Seleccionar un niño aleatorio para jugar
+                activeChild = completedChildren[Math.floor(Math.random() * completedChildren.length)];
+                
+                // Mostrar mensaje con el nombre del niño que está jugando
+                showFloatingMessage(`¡Ahora juega ${activeChild.name}!`, 'success');
+                
+                // Cargar el juego específico
+                loadGame(game);
+                
+                // Iniciar temporizador
+                timeRemaining = game.timeLimit;
+                updateTimerDisplay();
+                
+                timerInterval = setInterval(() => {
+                    timeRemaining--;
+                    updateTimerDisplay();
+                    
+                    if (timeRemaining <= 0) {
+                        clearInterval(timerInterval);
+                        if (!gameWon) {
+                            loseGame();
+                        }
+                    }
+                }, 1000);
+            }
+
+            // Función para actualizar el display del temporizador
+            function updateTimerDisplay() {
+                const minutes = Math.floor(timeRemaining / 60);
+                const seconds = timeRemaining % 60;
+                document.getElementById('gameTimer').textContent = 
+                    `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            }
+
+            // Función para cargar un juego específico
+            function loadGame(game) {
+                const gameContent = document.getElementById('gameContent');
+                gameContent.innerHTML = `<div class="loading">Cargando ${game.title}...</div>`;
+                
+                setTimeout(() => {
+                    switch(game.id) {
+                        case 'memory':
+                            loadMemoryGame(game);
+                            break;
+                        case 'vitamin-hunter':
+                            loadVitaminHunterGame(game);
+                            break;
+                        case 'nutrition-maze':
+                            loadMazeGame(game);
+                            break;
+                        case 'magic-recipe':
+                            loadRecipeGame(game);
+                            break;
+                        case 'iron-quiz':
+                            loadQuizGame(game);
+                            break;
+                        case 'nutrient-farm':
+                            loadFarmGame(game);
+                            break;
+                        case 'nutrition-hero':
+                            loadHeroGame(game);
+                            break;
+                        case 'nutrition-puzzle':
+                            loadPuzzleGame(game);
+                            break;
+                        case 'nutrition-race':
+                            loadRaceGame(game);
+                            break;
+                        case 'chef-against-anemia':
+                            loadChefGame(game);
+                            break;
+                        default:
+                            gameContent.innerHTML = `<div class="game-message">Juego no disponible</div>`;
+                    }
+                }, 500);
+            }
+
+            // Juego 1: Memoria de Hierro
+            function loadMemoryGame(game) {
+                const gameContent = document.getElementById('gameContent');
+                const foods = ['🥬', '🥩', '🍳', '🐟', '🥜', '🥚'];
+                const cards = [...foods, ...foods];
+                
+                // Barajar las cartas
+                for (let i = cards.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [cards[i], cards[j]] = [cards[j], cards[i]];
+                }
+                
+                gameContent.innerHTML = `
+                    <div class="game-instructions">
+                        <h3>Instrucciones:</h3>
+                        <p>• Haz clic en las cartas para voltearlas</p>
+                        <p>• Encuentra todos los pares de alimentos ricos en hierro</p>
+                        <p>• ¡Tienes ${game.timeLimit} segundos para completar el juego!</p>
+                    </div>
+                    <div class="memory-grid" id="memoryGrid"></div>
+                    <div class="game-message">Encuentra todos los pares de alimentos ricos en hierro</div>
+                `;
+                
+                const memoryGrid = document.getElementById('memoryGrid');
+                let flippedCards = [];
+                let matchedPairs = 0;
+                let attempts = 0;
+                const maxAttempts = 15;
+                
+                cards.forEach((food, index) => {
+                    const card = document.createElement('div');
+                    card.className = 'memory-card';
+                    card.dataset.index = index;
+                    card.dataset.food = food;
+                    
+                    card.innerHTML = `
+                        <div class="memory-card-back">?</div>
+                        <div class="memory-card-front">${food}</div>
+                    `;
+                    
+                    card.addEventListener('click', function() {
+                        if (flippedCards.length < 2 && !this.classList.contains('flipped') && !this.classList.contains('matched')) {
+                            this.classList.add('flipped');
+                            flippedCards.push(this);
+                            
+                            if (flippedCards.length === 2) {
+                                attempts++;
+                                
+                                setTimeout(() => {
+                                    if (flippedCards[0].dataset.food === flippedCards[1].dataset.food) {
+                                        flippedCards[0].classList.add('matched');
+                                        flippedCards[1].classList.add('matched');
+                                        matchedPairs++;
+                                        
+                                        if (matchedPairs === foods.length) {
+                                            winGame(game);
+                                        }
+                                    } else {
+                                        flippedCards[0].classList.remove('flipped');
+                                        flippedCards[1].classList.remove('flipped');
+                                    }
+                                    flippedCards = [];
+                                    
+                                    // Si falla muchos intentos, dar recomendaciones
+                                    if (attempts > maxAttempts && matchedPairs < foods.length/2) {
+                                        showRecommendation('memory', '¡Concéntrate en las cartas que ya has visto! Intenta recordar su posición.');
+                                    }
+                                }, 1000);
+                            }
+                        }
+                    });
+                    
+                    memoryGrid.appendChild(card);
+                });
+            }
+
+            // Juego 2: Cazador de Vitaminas
+            function loadVitaminHunterGame(game) {
+                const gameContent = document.getElementById('gameContent');
+                const foods = ['🥬', '🥩', '🍳', '🐟', '🥜', '🥚', '🥕', '🍎'];
+                
+                gameContent.innerHTML = `
+                    <div class="game-instructions">
+                        <h3>Instrucciones:</h3>
+                        <p>• Arrastra los alimentos a las zonas del cuerpo</p>
+                        <p>• Cada alimento tiene un efecto diferente en el cuerpo</p>
+                        <p>• Llena todas las zonas para ganar</p>
+                        <p>• ¡Tienes ${game.timeLimit} segundos para completar el juego!</p>
+                    </div>
+                    <div class="drag-drop-area">
+                        <div class="food-items" id="foodItems"></div>
+                        <div class="body-area">
+                            <h3>Arrastra los alimentos al cuerpo</h3>
+                            <div class="body-outline">
+                                <div class="drop-zone head" data-zone="head">🧠</div>
+                                <div class="drop-zone chest" data-zone="chest">❤️</div>
+                                <div class="drop-zone stomach" data-zone="stomach">🍽️</div>
+                            </div>
+                            <div class="game-message">Llena todas las zonas con alimentos</div>
+                        </div>
+                    </div>
+                `;
+                
+                const foodItems = document.getElementById('foodItems');
+                const dropZones = document.querySelectorAll('.drop-zone');
+                let filledZones = 0;
+                
+                // Crear elementos de alimentos
+                foods.forEach(food => {
+                    const foodItem = document.createElement('div');
+                    foodItem.className = 'food-item';
+                    foodItem.draggable = true;
+                    foodItem.textContent = food;
+                    
+                    foodItem.addEventListener('dragstart', function(e) {
+                        this.classList.add('dragging');
+                        e.dataTransfer.setData('text/plain', food);
+                    });
+                    
+                    foodItem.addEventListener('dragend', function() {
+                        this.classList.remove('dragging');
+                    });
+                    
+                    foodItems.appendChild(foodItem);
+                });
+                
+                // Configurar zonas de soltado
+                dropZones.forEach(zone => {
+                    zone.addEventListener('dragover', function(e) {
+                        e.preventDefault();
+                        this.style.transform = 'scale(1.1)';
+                    });
+                    
+                    zone.addEventListener('dragleave', function() {
+                        this.style.transform = 'scale(1)';
+                    });
+                    
+                    zone.addEventListener('drop', function(e) {
+                        e.preventDefault();
+                        this.style.transform = 'scale(1)';
+                        const food = e.dataTransfer.getData('text/plain');
+                        
+                        if (!this.classList.contains('filled')) {
+                            this.textContent = food;
+                            this.classList.add('filled');
+                            filledZones++;
+                            
+                            // Mostrar información del alimento
+                            showFoodInfo(food, this.dataset.zone);
+                            
+                            if (filledZones === dropZones.length) {
+                                winGame(game);
+                            }
+                        }
+                    });
+                });
+            }
+
+            // Función para mostrar información del alimento
+            function showFoodInfo(food, zone) {
+                const foodInfo = {
+                    '🥬': 'Las espinacas son ricas en hierro y vitamina K',
+                    '🥩': 'La carne roja es una excelente fuente de hierro',
+                    '🍳': 'Los huevos contienen hierro y proteínas',
+                    '🐟': 'El pescado tiene hierro y ácidos grasos omega-3',
+                    '🥜': 'Los frutos secos aportan hierro y grasas saludables',
+                    '🥚': 'Los huevos son una buena fuente de hierro',
+                    '🥕': 'Las zanahorias tienen betacaroteno y vitaminas',
+                    '🍎': 'Las manzanas contienen vitamina C que ayuda a absorber hierro'
+                };
+                
+                const zoneInfo = {
+                    'head': 'cerebro',
+                    'chest': 'corazón',
+                    'stomach': 'estómago'
+                };
+                
+                const message = `${food} es bueno para el ${zoneInfo[zone]} de ${activeChild.name}. ${foodInfo[food] || ''}`;
+                showFloatingMessage(message, 'success');
+            }
+
+            // Juego 3: Laberinto Nutritivo
+            function loadMazeGame(game) {
+                const gameContent = document.getElementById('gameContent');
+                
+                // Definir el laberinto (0 = camino, 1 = pared)
+                const mazeLayout = [
+                    [0, 1, 0, 0, 0, 1, 0, 0, 0, 1],
+                    [0, 1, 0, 1, 0, 1, 0, 1, 0, 0],
+                    [0, 0, 0, 1, 0, 0, 0, 1, 1, 0],
+                    [0, 1, 1, 1, 0, 1, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 1, 1, 1, 1, 0],
+                    [1, 1, 1, 1, 0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 1, 1, 1, 1, 1, 0, 1],
+                    [0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+                    [0, 1, 0, 1, 1, 1, 1, 1, 1, 0],
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+                ];
+                
+                gameContent.innerHTML = `
+                    <div class="game-instructions">
+                        <h3>Instrucciones:</h3>
+                        <p>• Usa las flechas del teclado para moverte</p>
+                        <p>• Recolecta todos los alimentos antes de llegar a la meta</p>
+                        <p>• ¡Evita las paredes del laberinto!</p>
+                        <p>• ¡Tienes ${game.timeLimit} segundos para completar el juego!</p>
+                    </div>
+                    <div class="maze-container">
+                        <div class="maze" id="maze"></div>
+                        <div class="game-message">Usa las flechas del teclado para moverte y recolectar alimentos</div>
+                    </div>
+                `;
+                
+                const maze = document.getElementById('maze');
+                let playerPosition = { x: 0, y: 0 };
+                let foodsCollected = 0;
+                const totalFoods = 3; // Reducido a 3 alimentos para hacerlo más rápido
+                
+                // Crear el laberinto
+                for (let y = 0; y < mazeLayout.length; y++) {
+                    for (let x = 0; x < mazeLayout[y].length; x++) {
+                        const cell = document.createElement('div');
+                        cell.className = 'maze-cell';
+                        
+                        if (mazeLayout[y][x] === 1) {
+                            cell.classList.add('maze-wall');
+                        } else {
+                            cell.classList.add('maze-path');
+                            
+                            // Posición de inicio
+                            if (x === 0 && y === 0) {
+                                cell.classList.add('maze-start');
+                                const player = document.createElement('div');
+                                player.className = 'maze-player';
+                                player.id = 'player';
+                                cell.appendChild(player);
+                            }
+                            
+                            // Posición de fin
+                            if (x === 9 && y === 9) {
+                                cell.classList.add('maze-end');
+                            }
+                        }
+                        
+                        maze.appendChild(cell);
+                    }
+                }
+                
+                // Añadir alimentos aleatorios
+                for (let i = 0; i < totalFoods; i++) {
+                    let x, y;
+                    do {
+                        x = Math.floor(Math.random() * 10);
+                        y = Math.floor(Math.random() * 10);
+                    } while (mazeLayout[y][x] === 1 || (x === 0 && y === 0) || (x === 9 && y === 9));
+                    
+                    const cellIndex = y * 10 + x;
+                    const cell = maze.children[cellIndex];
+                    const food = document.createElement('div');
+                    food.className = 'maze-food';
+                    food.dataset.food = '🥬';
+                    cell.appendChild(food);
+                }
+                
+                // Control del jugador con teclado
+                document.addEventListener('keydown', function(e) {
+                    if (!currentGame || currentGame.id !== 'nutrition-maze') return;
+                    
+                    const player = document.getElementById('player');
+                    if (!player) return;
+                    
+                    let newX = playerPosition.x;
+                    let newY = playerPosition.y;
+                    
+                    switch(e.key) {
+                        case 'ArrowUp':
+                            newY--;
+                            break;
+                        case 'ArrowDown':
+                            newY++;
+                            break;
+                        case 'ArrowLeft':
+                            newX--;
+                            break;
+                        case 'ArrowRight':
+                            newX++;
+                            break;
+                        default:
+                            return;
+                    }
+                    
+                    // Verificar si el movimiento es válido
+                    if (newX >= 0 && newX < 10 && newY >= 0 && newY < 10 && mazeLayout[newY][newX] === 0) {
+                        playerPosition.x = newX;
+                        playerPosition.y = newY;
+                        
+                        const newCellIndex = newY * 10 + newX;
+                        const newCell = maze.children[newCellIndex];
+                        newCell.appendChild(player);
+                        
+                        // Verificar si hay alimento en la celda
+                        const food = newCell.querySelector('.maze-food');
+                        if (food) {
+                            food.remove();
+                            foodsCollected++;
+                            showFloatingMessage(`¡Alimento recolectado! ${foodsCollected}/${totalFoods}`, 'success');
+                            
+                            if (foodsCollected === totalFoods && newX === 9 && newY === 9) {
+                                winGame(game);
+                            }
+                        }
+                        
+                        // Verificar si llegó al final
+                        if (newX === 9 && newY === 9 && foodsCollected === totalFoods) {
+                            winGame(game);
+                        } else if (newX === 9 && newY === 9 && foodsCollected < totalFoods) {
+                            showFloatingMessage('¡Debes recolectar todos los alimentos antes de llegar a la meta!', 'warning');
+                        }
+                    }
+                });
+            }
+
+            // Juego 4: Receta Mágica
+            function loadRecipeGame(game) {
+                const gameContent = document.getElementById('gameContent');
+                const ingredients = ['🥬', '🥩', '🍅', '🧄', '🧅', '🥕', '🥔', '🌽'];
+                const validRecipes = [
+                    {
+                        ingredients: ['🥬', '🥩', '🧄'],
+                        name: 'Estofado nutritivo',
+                        description: 'Combina hierro de la carne con vitaminas de las verduras'
+                    },
+                    {
+                        ingredients: ['🍅', '🧄', '🧅'],
+                        name: 'Salsa de tomate',
+                        description: 'El tomate tiene vitamina C que ayuda a absorber hierro'
+                    },
+                    {
+                        ingredients: ['🥕', '🥔', '🌽'],
+                        name: 'Guiso de vegetales',
+                        description: 'Los vegetales aportan fibra y nutrientes esenciales'
+                    }
+                ];
+                
+                gameContent.innerHTML = `
+                    <div class="game-instructions">
+                        <h3>Instrucciones:</h3>
+                        <p>• Selecciona 3 ingredientes para crear una receta</p>
+                        <p>• Las combinaciones correctas crearán platos nutritivos</p>
+                        <p>• ¡Crea 1 receta diferente para ganar!</p>
+                        <p>• ¡Tienes ${game.timeLimit} segundos para completar el juego!</p>
+                    </div>
+                    <div class="recipe-container">
+                        <h3>Selecciona 3 ingredientes para crear una receta nutritiva</h3>
+                        <div class="ingredients-list" id="ingredientsList"></div>
+                        <div class="recipe-result" id="recipeResult">
+                            <div class="game-message">Selecciona 3 ingredientes</div>
+                        </div>
+                    </div>
+                `;
+                
+                const ingredientsList = document.getElementById('ingredientsList');
+                const recipeResult = document.getElementById('recipeResult');
+                let selectedIngredients = [];
+                let recipesCreated = 0;
+                const targetRecipes = 1; // Reducido a 1 receta para hacerlo más rápido
+                
+                // Crear elementos de ingredientes
+                ingredients.forEach(ingredient => {
+                    const ingredientEl = document.createElement('div');
+                    ingredientEl.className = 'ingredient';
+                    ingredientEl.textContent = ingredient;
+                    
+                    ingredientEl.addEventListener('click', function() {
+                        if (this.classList.contains('selected')) {
+                            this.classList.remove('selected');
+                            selectedIngredients = selectedIngredients.filter(item => item !== ingredient);
+                        } else if (selectedIngredients.length < 3) {
+                            this.classList.add('selected');
+                            selectedIngredients.push(ingredient);
+                        }
+                        
+                        if (selectedIngredients.length === 3) {
+                            // Verificar si es una receta válida
+                            const recipe = validRecipes.find(r => 
+                                r.ingredients.every(item => selectedIngredients.includes(item)) &&
+                                selectedIngredients.every(item => r.ingredients.includes(item))
+                            );
+                            
+                            if (recipe) {
+                                recipeResult.innerHTML = `
+                                    <div class="game-message" style="color: var(--success-green);">
+                                        ¡${recipe.name}!<br>
+                                        <small>${recipe.description}</small>
+                                    </div>
+                                `;
+                                recipesCreated++;
+                                
+                                setTimeout(() => {
+                                    if (recipesCreated >= targetRecipes) {
+                                        winGame(game);
+                                    } else {
+                                        // Limpiar selección
+                                        document.querySelectorAll('.ingredient.selected').forEach(el => {
+                                            el.classList.remove('selected');
+                                        });
+                                        selectedIngredients = [];
+                                        recipeResult.innerHTML = `<div class="game-message">Crea ${targetRecipes - recipesCreated} recetas más</div>`;
+                                    }
+                                }, 3000);
+                            } else {
+                                recipeResult.innerHTML = `
+                                    <div class="game-message" style="color: var(--danger-red);">
+                                        Esta combinación no es nutritiva. Intenta de nuevo.
+                                    </div>
+                                `;
+                                
+                                // Limpiar selección después de 2 segundos
+                                setTimeout(() => {
+                                    document.querySelectorAll('.ingredient.selected').forEach(el => {
+                                        el.classList.remove('selected');
+                                    });
+                                    selectedIngredients = [];
+                                    recipeResult.innerHTML = '<div class="game-message">Selecciona 3 ingredientes</div>';
+                                }, 2000);
+                            }
+                        } else {
+                            recipeResult.innerHTML = `<div class="game-message">Seleccionados: ${selectedIngredients.length}/3</div>`;
+                        }
+                    });
+                    
+                    ingredientsList.appendChild(ingredientEl);
+                });
+            }
+
+            // Juego 5: Quiz del Hierro
+            function loadQuizGame(game) {
+                const gameContent = document.getElementById('gameContent');
+                const questions = [
+                    {
+                        question: "¿Qué alimento es rico en hierro?",
+                        options: ["🥬 Espinacas", "🍎 Manzana", "🍌 Plátano"],
+                        correct: 0,
+                        explanation: "Las espinacas son una excelente fuente de hierro no hemo."
+                    },
+                    {
+                        question: "¿Qué mineral ayuda a combatir la anemia?",
+                        options: ["Calcio", "Hierro", "Potasio"],
+                        correct: 1,
+                        explanation: "El hierro es esencial para producir hemoglobina, que transporta oxígeno."
+                    },
+                    {
+                        question: "¿Qué tipo de carne tiene más hierro?",
+                        options: ["Pollo", "Pescado", "Carne roja"],
+                        correct: 2,
+                        explanation: "La carne roja contiene hierro hemo, que se absorbe mejor."
+                    }
+                ];
+                
+                gameContent.innerHTML = `
+                    <div class="game-instructions">
+                        <h3>Instrucciones:</h3>
+                        <p>• Responde todas las preguntas correctamente</p>
+                        <p>• Cada respuesta correcta te acerca a la victoria</p>
+                        <p>• ¡Aprende sobre nutrición mientras juegas!</p>
+                        <p>• ¡Tienes ${game.timeLimit} segundos para completar el juego!</p>
+                    </div>
+                    <div class="quiz-container">
+                        <div class="quiz-question" id="quizQuestion"></div>
+                        <div class="quiz-options" id="quizOptions"></div>
+                        <div class="game-message" id="quizMessage">Responde todas las preguntas correctamente</div>
+                    </div>
+                `;
+                
+                const quizQuestion = document.getElementById('quizQuestion');
+                const quizOptions = document.getElementById('quizOptions');
+                const quizMessage = document.getElementById('quizMessage');
+                
+                let currentQuestion = 0;
+                let correctAnswers = 0;
+                
+                function showQuestion() {
+                    if (currentQuestion >= questions.length) {
+                        if (correctAnswers === questions.length) {
+                            winGame(game);
+                        } else {
+                            quizMessage.textContent = `${activeChild.name} ha respondido correctamente ${correctAnswers} de ${questions.length} preguntas. Intenta de nuevo.`;
+                            quizMessage.style.color = 'var(--danger-red)';
+                            
+                            // Reiniciar después de 3 segundos
+                            setTimeout(() => {
+                                currentQuestion = 0;
+                                correctAnswers = 0;
+                                showQuestion();
+                            }, 3000);
+                        }
+                        return;
+                    }
+                    
+                    const q = questions[currentQuestion];
+                    quizQuestion.textContent = `Pregunta ${currentQuestion + 1}: ${q.question}`;
+                    quizOptions.innerHTML = '';
+                    
+                    q.options.forEach((option, index) => {
+                        const optionEl = document.createElement('div');
+                        optionEl.className = 'quiz-option';
+                        optionEl.textContent = option;
+                        
+                        optionEl.addEventListener('click', function() {
+                            // Deshabilitar todas las opciones
+                            document.querySelectorAll('.quiz-option').forEach(opt => {
+                                opt.style.pointerEvents = 'none';
+                            });
+                            
+                            if (index === q.correct) {
+                                this.classList.add('correct');
+                                correctAnswers++;
+                                quizMessage.textContent = `¡Correcto! ${correctAnswers}/${questions.length}`;
+                                quizMessage.style.color = 'var(--success-green)';
+                                showFloatingMessage(q.explanation, 'success');
+                            } else {
+                                this.classList.add('incorrect');
+                                document.querySelectorAll('.quiz-option')[q.correct].classList.add('correct');
+                                quizMessage.textContent = `Incorrecto. ${correctAnswers}/${questions.length}`;
+                                quizMessage.style.color = 'var(--danger-red)';
+                                showFloatingMessage(q.explanation, 'error');
+                            }
+                            
+                            // Siguiente pregunta después de 2 segundos
+                            setTimeout(() => {
+                                currentQuestion++;
+                                showQuestion();
+                            }, 2000);
+                        });
+                        
+                        quizOptions.appendChild(optionEl);
+                    });
+                }
+                
+                showQuestion();
+            }
+
+            // Juego 6: Granja de Nutrientes
+            function loadFarmGame(game) {
+                const gameContent = document.getElementById('gameContent');
+                const crops = ['🥬', '🥕', '🌽', '🥔', '🍅'];
+                let plantedCrops = 0;
+                let harvestedCrops = 0;
+                const targetCrops = 2; // Reducido a 2 cultivos para hacerlo más rápido
+                
+                gameContent.innerHTML = `
+                    <div class="game-instructions">
+                        <h3>Instrucciones:</h3>
+                        <p>• Haz clic en "Plantar" para sembrar cultivos</p>
+                        <p>• Espera a que los cultivos crezcan y estén listos</p>
+                        <p>• Haz clic en los cultivos listos para cosecharlos</p>
+                        <p>• ¡Tienes ${game.timeLimit} segundos para completar el juego!</p>
+                    </div>
+                    <div class="farm-container">
+                        <h3>Cultiva y cosecha alimentos ricos en hierro</h3>
+                        <div class="farm-field" id="farmField"></div>
+                        <div class="farm-actions">
+                            <button class="farm-btn" id="plantBtn">Plantar</button>
+                            <button class="farm-btn" id="harvestBtn">Cosechar Todo</button>
+                        </div>
+                        <div class="game-message">Cosecha ${targetCrops} cultivos para ganar</div>
+                    </div>
+                `;
+                
+                const farmField = document.getElementById('farmField');
+                const plantBtn = document.getElementById('plantBtn');
+                const harvestBtn = document.getElementById('harvestBtn');
+                
+                // Crear parcelas de cultivo
+                for (let i = 0; i < 20; i++) {
+                    const plot = document.createElement('div');
+                    plot.className = 'farm-plot';
+                    plot.dataset.index = i;
+                    
+                    plot.addEventListener('click', function() {
+                        if (this.classList.contains('ready')) {
+                            this.textContent = '';
+                            this.classList.remove('ready', 'planted');
+                            harvestedCrops++;
+                            showFloatingMessage(`¡${activeChild.name} cosechó un cultivo!`, 'success');
+                            
+                            if (harvestedCrops >= targetCrops) {
+                                winGame(game);
+                            }
+                        }
+                    });
+                    
+                    farmField.appendChild(plot);
+                }
+                
+                plantBtn.addEventListener('click', function() {
+                    const emptyPlots = document.querySelectorAll('.farm-plot:not(.planted):not(.ready)');
+                    if (emptyPlots.length > 0 && plantedCrops < 10) {
+                        const randomPlot = emptyPlots[Math.floor(Math.random() * emptyPlots.length)];
+                        const randomCrop = crops[Math.floor(Math.random() * crops.length)];
+                        
+                        randomPlot.textContent = randomCrop;
+                        randomPlot.classList.add('planted');
+                        plantedCrops++;
+                        
+                        // Hacer que el cultivo esté listo después de 1 segundo (reducido de 2)
+                        setTimeout(() => {
+                            randomPlot.classList.add('ready');
+                            showFloatingMessage('¡Cultivo listo para cosechar!', 'success');
+                        }, 1000);
+                    }
+                });
+                
+                harvestBtn.addEventListener('click', function() {
+                    const readyPlots = document.querySelectorAll('.farm-plot.ready');
+                    readyPlots.forEach(plot => {
+                        plot.click();
+                    });
+                });
+            }
+
+            // Juego 7: Superhéroe Nutricional
+            function loadHeroGame(game) {
+                const gameContent = document.getElementById('gameContent');
+                let heroPosition = 50; // Posición en porcentaje
+                let heroHealth = 100;
+                let enemiesDefeated = 0;
+                const targetEnemies = 2; // Reducido a 2 enemigos para hacerlo más rápido
+                
+                gameContent.innerHTML = `
+                    <div class="game-instructions">
+                        <h3>Instrucciones:</h3>
+                        <p>• Usa los botones para mover al héroe</p>
+                        <p>• Recoge alimentos para recuperar energía</p>
+                        <p>• Derrota monstruos acercándote y atacando</p>
+                        <p>• ¡Tienes ${game.timeLimit} segundos para completar el juego!</p>
+                    </div>
+                    <div class="hero-game">
+                        <div class="hero-area" id="heroArea">
+                            <div class="hero-character" id="heroCharacter"></div>
+                        </div>
+                        <div class="hero-controls">
+                            <button class="hero-btn" id="moveLeft"><i class="fas fa-arrow-left"></i></button>
+                            <button class="hero-btn" id="attackBtn"><i class="fas fa-bolt"></i></button>
+                            <button class="hero-btn" id="moveRight"><i class="fas fa-arrow-right"></i></button>
+                        </div>
+                        <div class="game-message">Derrota ${targetEnemies} monstruos de la anemia</div>
+                    </div>
+                `;
+                
+                const heroArea = document.getElementById('heroArea');
+                const heroCharacter = document.getElementById('heroCharacter');
+                const moveLeftBtn = document.getElementById('moveLeft');
+                const moveRightBtn = document.getElementById('moveRight');
+                const attackBtn = document.getElementById('attackBtn');
+                
+                // Actualizar posición del héroe
+                function updateHeroPosition() {
+                    heroCharacter.style.left = `${heroPosition}%`;
+                }
+                
+                moveLeftBtn.addEventListener('click', function() {
+                    if (heroPosition > 10) {
+                        heroPosition -= 10;
+                        updateHeroPosition();
+                    }
+                });
+                
+                moveRightBtn.addEventListener('click', function() {
+                    if (heroPosition < 90) {
+                        heroPosition += 10;
+                        updateHeroPosition();
+                    }
+                });
+                
+                // Crear enemigos y alimentos
+                function spawnEnemy() {
+                    const enemy = document.createElement('div');
+                    enemy.className = 'hero-enemy';
+                    enemy.innerHTML = '👹';
+                    heroArea.appendChild(enemy);
+                    
+                    // Eliminar enemigo después de 5 segundos
+                    setTimeout(() => {
+                        if (enemy.parentNode) {
+                            enemy.remove();
+                        }
+                    }, 5000);
+                }
+                
+                function spawnFood() {
+                    const food = document.createElement('div');
+                    food.className = 'hero-food';
+                    food.textContent = '🥬';
+                    heroArea.appendChild(food);
+                    
+                    // Eliminar alimento después de 7 segundos
+                    setTimeout(() => {
+                        if (food.parentNode) {
+                            food.remove();
+                        }
+                    }, 7000);
+                }
+                
+                // Ataque del héroe
+                attackBtn.addEventListener('click', function() {
+                    const enemies = document.querySelectorAll('.hero-enemy');
+                    const heroRect = heroCharacter.getBoundingClientRect();
+                    
+                    enemies.forEach(enemy => {
+                        const enemyRect = enemy.getBoundingClientRect();
+                        
+                        // Verificar si el enemigo está cerca del héroe
+                        if (Math.abs(heroRect.left - enemyRect.left) < 100) {
+                            enemy.remove();
+                            enemiesDefeated++;
+                            showFloatingMessage(`¡${activeChild.name} derrotó un monstruo!`, 'success');
+                            
+                            if (enemiesDefeated >= targetEnemies) {
+                                winGame(game);
+                            }
+                        }
+                    });
+                });
+                
+                // Colisión con alimentos
+                setInterval(() => {
+                    const foods = document.querySelectorAll('.hero-food');
+                    const heroRect = heroCharacter.getBoundingClientRect();
+                    
+                    foods.forEach(food => {
+                        const foodRect = food.getBoundingClientRect();
+                        
+                        // Verificar colisión
+                        if (
+                            heroRect.left < foodRect.right &&
+                            heroRect.right > foodRect.left &&
+                            heroRect.top < foodRect.bottom &&
+                            heroRect.bottom > foodRect.top
+                        ) {
+                            food.remove();
+                            heroHealth = Math.min(100, heroHealth + 10);
+                            showFloatingMessage(`¡${activeChild.name} recuperó energía!`, 'success');
+                        }
+                    });
+                }, 100);
+                
+                // Generar enemigos y alimentos periódicamente
+                setInterval(spawnEnemy, 2000);
+                setInterval(spawnFood, 3000);
+                
+                // Iniciar generación
+                spawnEnemy();
+                spawnFood();
+            }
+
+            // Juego 8: Rompecabezas Nutritivo
+            function loadPuzzleGame(game) {
+                const gameContent = document.getElementById('gameContent');
+                const puzzlePieces = ['🥬', '🥩', '🍳', '🐟'];
+                let flippedPieces = 0;
+                
+                gameContent.innerHTML = `
+                    <div class="game-instructions">
+                        <h3>Instrucciones:</h3>
+                        <p>• Haz clic en las piezas para voltearlas</p>
+                        <p>• Descubre todos los alimentos ocultos</p>
+                        <p>• ¡Gira todas las piezas para ganar!</p>
+                        <p>• ¡Tienes ${game.timeLimit} segundos para completar el juego!</p>
+                    </div>
+                    <div class="puzzle-container">
+                        <div class="puzzle-board" id="puzzleBoard"></div>
+                        <div class="game-message">Voltea todas las piezas para ver la imagen completa</div>
+                    </div>
+                `;
+                
+                const puzzleBoard = document.getElementById('puzzleBoard');
+                
+                // Barajar las piezas
+                const shuffledPieces = [...puzzlePieces];
+                for (let i = shuffledPieces.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [shuffledPieces[i], shuffledPieces[j]] = [shuffledPieces[j], shuffledPieces[i]];
+                }
+                
+                // Crear piezas del rompecabezas
+                shuffledPieces.forEach((piece, index) => {
+                    const puzzlePiece = document.createElement('div');
+                    puzzlePiece.className = 'puzzle-piece';
+                    
+                    puzzlePiece.innerHTML = `
+                        <div class="puzzle-face puzzle-back">?</div>
+                        <div class="puzzle-face puzzle-front">${piece}</div>
+                    `;
+                    
+                    puzzlePiece.addEventListener('click', function() {
+                        if (!this.classList.contains('flipped')) {
+                            this.classList.add('flipped');
+                            flippedPieces++;
+                            
+                            if (flippedPieces === puzzlePieces.length) {
+                                winGame(game);
+                            }
+                        }
+                    });
+                    
+                    puzzleBoard.appendChild(puzzlePiece);
+                });
+            }
+
+            // Juego 9: Carrera Nutricional
+            function loadRaceGame(game) {
+                const gameContent = document.getElementById('gameContent');
+                let playerPosition = 10;
+                let foodsCollected = 0;
+                const targetFoods = 2; // Reducido a 2 alimentos para hacerlo más rápido
+                const trackLength = 90;
+                
+                gameContent.innerHTML = `
+                    <div class="game-instructions">
+                        <h3>Instrucciones:</h3>
+                        <p>• Haz clic en "Avanzar" para moverte</p>
+                        <p>• Recoge alimentos en el camino</p>
+                        <p>• ¡Llega a la meta con todos los alimentos!</p>
+                        <p>• ¡Tienes ${game.timeLimit} segundos para completar el juego!</p>
+                    </div>
+                    <div class="race-container">
+                        <div class="race-track" id="raceTrack">
+                            <div class="race-player" id="racePlayer"></div>
+                        </div>
+                        <div class="race-controls">
+                            <button class="race-btn" id="moveForwardBtn">Avanzar</button>
+                            <button class="race-btn" id="collectFoodBtn">Recoger</button>
+                        </div>
+                        <div class="game-message">Recoge ${targetFoods} alimentos y llega a la meta</div>
+                    </div>
+                `;
+                
+                const raceTrack = document.getElementById('raceTrack');
+                const racePlayer = document.getElementById('racePlayer');
+                const moveForwardBtn = document.getElementById('moveForwardBtn');
+                const collectFoodBtn = document.getElementById('collectFoodBtn');
+                
+                // Actualizar posición del jugador
+                function updatePlayerPosition() {
+                    racePlayer.style.left = `${playerPosition}%`;
+                }
+                
+                // Crear líneas de meta
+                for (let i = 20; i <= 100; i += 20) {
+                    const line = document.createElement('div');
+                    line.className = 'race-line';
+                    line.style.left = `${i}%`;
+                    raceTrack.appendChild(line);
+                }
+                
+                // Crear alimentos
+                function createFood() {
+                    const food = document.createElement('div');
+                    food.className = 'race-food';
+                    food.textContent = '🥬';
+                    food.style.left = `${Math.random() * 80 + 10}%`;
+                    raceTrack.appendChild(food);
+                }
+                
+                // Crear alimentos iniciales
+                for (let i = 0; i < 5; i++) {
+                    createFood();
+                }
+                
+                moveForwardBtn.addEventListener('click', function() {
+                    if (playerPosition < trackLength) {
+                        playerPosition += 15; // Incremento más grande para hacerlo más rápido
+                        updatePlayerPosition();
+                        
+                        if (playerPosition >= trackLength && foodsCollected >= targetFoods) {
+                            winGame(game);
+                        } else if (playerPosition >= trackLength && foodsCollected < targetFoods) {
+                            showFloatingMessage('¡Debes recoger todos los alimentos antes de llegar a la meta!', 'warning');
+                        }
+                    }
+                });
+                
+                collectFoodBtn.addEventListener('click', function() {
+                    const foods = document.querySelectorAll('.race-food');
+                    const playerRect = racePlayer.getBoundingClientRect();
+                    
+                    foods.forEach(food => {
+                        const foodRect = food.getBoundingClientRect();
+                        
+                        // Verificar si el alimento está cerca del jugador
+                        if (Math.abs(playerRect.left - foodRect.left) < 50) {
+                            food.remove();
+                            foodsCollected++;
+                            showFloatingMessage(`¡${activeChild.name} recogió un alimento!`, 'success');
+                            
+                            // Crear un nuevo alimento
+                            createFood();
+                        }
+                    });
+                });
+            }
+
+            // Juego 10: Chef contra la Anemia (ahora con 30 segundos)
+            function loadChefGame(game) {
+                const gameContent = document.getElementById('gameContent');
+                // Forzar el tiempo límite a 30 segundos para este juego
+                game.timeLimit = 30;
+                
+                // Reducido a 6 ingredientes para hacerlo más manejable
+                const ingredients = ['🥬', '🥩', '🍅', '🧄', '🧅', '🥕'];
+                const validRecipes = [
+                    {
+                        ingredients: ['🥬', '🥩', '🧄'],
+                        name: 'Estofado de carne con espinacas',
+                        description: 'La carne roja y las espinacas son ricas en hierro. El ajo ayuda a absorberlo.',
+                        benefits: 'Aporta hierro hemo y no hemo, con vitamina C para mejor absorción.'
+                    },
+                    {
+                        ingredients: ['🍅', '🧄', '🧅'],
+                        name: 'Salsa de tomate nutritiva',
+                        description: 'El tomate tiene vitamina C que ayuda a absorber el hierro de otros alimentos.',
+                        benefits: 'Combina licopeno con compuestos azufrados que mejoran la absorción de hierro.'
+                    },
+                    {
+                        ingredients: ['🥕', '🥬', '🍅'],
+                        name: 'Ensalada nutritiva',
+                        description: 'Combina vegetales ricos en hierro y vitamina C.',
+                        benefits: 'Aporta hierro no hemo y vitamina C para mejorar su absorción.'
+                    }
+                ];
+                let selectedIngredients = [];
+                let recipesCompleted = 0;
+                const targetRecipes = 1; // Solo se necesita 1 receta para ganar
+                let failedAttempts = 0;
+                const maxFailedAttempts = 3;
+                
+                gameContent.innerHTML = `
+                    <div class="game-instructions">
+                        <h3>Instrucciones:</h3>
+                        <p>• Selecciona 3 ingredientes para crear una receta</p>
+                        <p>• Las combinaciones correctas crearán platos nutritivos</p>
+                        <p>• ¡Crea ${targetRecipes} receta diferente para ganar!</p>
+                        <p>• Tienes solo ${game.timeLimit} segundos</p>
+                    </div>
+                    <div class="chef-container">
+                        <div class="chef-kitchen">
+                            <div class="chef-ingredients">
+                                <h3>Ingredientes Disponibles</h3>
+                                <div id="chefIngredientsList"></div>
+                            </div>
+                            <div class="chef-pot">
+                                <i class="fas fa-fire-burner chef-pot-icon"></i>
+                                <div class="chef-pot-ingredients" id="chefPotIngredients"></div>
+                                <div class="game-message">Agrega 3 ingredientes a la olla</div>
+                            </div>
+                        </div>
+                        <div class="chef-actions">
+                            <button class="chef-btn" id="cookBtn">Cocinar</button>
+                            <button class="chef-btn" id="clearBtn">Limpiar Olla</button>
+                        </div>
+                        <div id="recommendationMessage" class="recommendation-message" style="display: none;"></div>
+                    </div>
+                `;
+                
+                // Actualizar el temporizador para mostrar 30 segundos
+                timeRemaining = game.timeLimit;
+                updateTimerDisplay();
+                
+                const chefIngredientsList = document.getElementById('chefIngredientsList');
+                const chefPotIngredients = document.getElementById('chefPotIngredients');
+                const cookBtn = document.getElementById('cookBtn');
+                const clearBtn = document.getElementById('clearBtn');
+                const gameMessage = document.querySelector('.chef-pot .game-message');
+                const recommendationMessage = document.getElementById('recommendationMessage');
+                
+                // Crear elementos de ingredientes
+                ingredients.forEach(ingredient => {
+                    const ingredientEl = document.createElement('div');
+                    ingredientEl.className = 'chef-ingredient';
+                    ingredientEl.textContent = ingredient;
+                    ingredientEl.title = `Ingrediente: ${ingredient}`;
+                    
+                    ingredientEl.addEventListener('click', function() {
+                        if (selectedIngredients.length < 3) {
+                            selectedIngredients.push(ingredient);
+                            
+                            const potIngredient = document.createElement('div');
+                            potIngredient.className = 'chef-pot-ingredient';
+                            potIngredient.textContent = ingredient;
+                            potIngredient.title = `Ingrediente: ${ingredient}`;
+                            chefPotIngredients.appendChild(potIngredient);
+                            
+                            // Actualizar mensaje
+                            if (selectedIngredients.length === 3) {
+                                gameMessage.textContent = '¡Listo para cocinar!';
+                                gameMessage.style.color = 'var(--success-green)';
+                            } else {
+                                gameMessage.textContent = `Agrega ${3 - selectedIngredients.length} ingredientes más`;
+                                gameMessage.style.color = 'var(--gray)';
+                            }
+                        } else {
+                            showFloatingMessage('Ya has seleccionado 3 ingredientes', 'warning');
+                        }
+                    });
+                    
+                    chefIngredientsList.appendChild(ingredientEl);
+                });
+                
+                cookBtn.addEventListener('click', function() {
+                    if (selectedIngredients.length === 3) {
+                        // Verificar si es una receta válida
+                        const recipe = validRecipes.find(r => 
+                            r.ingredients.every(item => selectedIngredients.includes(item)) &&
+                            selectedIngredients.every(item => r.ingredients.includes(item))
+                        );
+                        
+                        if (recipe) {
+                            recipesCompleted++;
+                            
+                            // Mostrar información detallada de la receta
+                            showRecipeInfo(recipe);
+                            
+                            if (recipesCompleted >= targetRecipes) {
+                                winGame(game);
+                            } else {
+                                // Limpiar la olla después de un tiempo
+                                setTimeout(() => {
+                                    chefPotIngredients.innerHTML = '';
+                                    selectedIngredients = [];
+                                    gameMessage.textContent = `¡Receta completada! ${recipesCompleted}/${targetRecipes}`;
+                                    gameMessage.style.color = 'var(--success-green)';
+                                }, 4000);
+                            }
+                        } else {
+                            failedAttempts++;
+                            
+                            // Mostrar por qué la combinación no es válida
+                            showInvalidCombination(selectedIngredients);
+                            
+                            // Si falla 3 veces, mostrar recomendaciones
+                            if (failedAttempts >= maxFailedAttempts) {
+                                showRecommendationMessage();
+                            }
+                        }
+                    } else {
+                        showFloatingMessage('Selecciona 3 ingredientes para cocinar.', 'warning');
+                    }
+                });
+                
+                clearBtn.addEventListener('click', function() {
+                    chefPotIngredients.innerHTML = '';
+                    selectedIngredients = [];
+                    gameMessage.textContent = 'Agrega 3 ingredientes a la olla';
+                    gameMessage.style.color = 'var(--gray)';
+                });
+                
+                // Función para mostrar información detallada de la receta
+                function showRecipeInfo(recipe) {
+                    const floatingMessage = document.createElement('div');
+                    floatingMessage.className = 'floating-message success';
+                    floatingMessage.innerHTML = `
+                        <h3>¡${recipe.name}!</h3>
+                        <p>${recipe.description}</p>
+                        <p><strong>Beneficios:</strong> ${recipe.benefits}</p>
+                    `;
+                    document.body.appendChild(floatingMessage);
+                    
+                    // Animación de entrada
+                    setTimeout(() => {
+                        floatingMessage.classList.add('show');
+                    }, 10);
+                    
+                    // Eliminar después de 4 segundos
+                    setTimeout(() => {
+                        floatingMessage.classList.remove('show');
+                        setTimeout(() => {
+                            floatingMessage.remove();
+                        }, 300);
+                    }, 4000);
+                }
+                
+                // Función para mostrar por qué una combinación no es válida
+                function showInvalidCombination(ingredients) {
+                    const reasons = [
+                        'Esta combinación no tiene suficiente hierro',
+                        'Falta vitamina C para ayudar a absorber el hierro',
+                        'Los ingredientes no se complementan nutricionalmente',
+                        'Esta combinación tiene exceso de carbohidratos',
+                        'Falta proteína de alta calidad en esta combinación'
+                    ];
+                    
+                    const randomReason = reasons[Math.floor(Math.random() * reasons.length)];
+                    
+                    const floatingMessage = document.createElement('div');
+                    floatingMessage.className = 'floating-message error';
+                    floatingMessage.innerHTML = `
+                        <h3>Combinación no válida</h3>
+                        <p>${randomReason}</p>
+                        <p>Intenta otra combinación de ingredientes</p>
+                    `;
+                    document.body.appendChild(floatingMessage);
+                    
+                    // Animación de entrada
+                    setTimeout(() => {
+                        floatingMessage.classList.add('show');
+                    }, 10);
+                    
+                    // Eliminar después de 3 segundos
+                    setTimeout(() => {
+                        floatingMessage.classList.remove('show');
+                        setTimeout(() => {
+                            floatingMessage.remove();
+                        }, 300);
+                    }, 3000);
+                }
+                
+                // Función para mostrar recomendaciones
+                function showRecommendationMessage() {
+                    recommendationMessage.style.display = 'block';
+                    recommendationMessage.innerHTML = `
+                        <h4>Recomendaciones para crear recetas nutritivas:</h4>
+                        <ul>
+                            <li>Combina carnes rojas con vegetales verdes (espinacas, brócoli)</li>
+                            <li>Añade alimentos ricos en vitamina C (tomate, pimientos)</li>
+                            <li>Incluye legumbres y frutos secos para más hierro</li>
+                            <li>Evita combinar demasiados alimentos con bajo contenido de hierro</li>
+                            <li>Recuerda que el hierro se absorbe mejor con vitamina C</li>
+                        </ul>
+                    `;
+                    
+                    // Reiniciar contador de fallos después de mostrar recomendaciones
+                    setTimeout(() => {
+                        failedAttempts = 0;
+                        recommendationMessage.style.display = 'none';
+                    }, 10000);
+                }
+            }
+
+            // Función para mostrar mensajes flotantes
+            function showFloatingMessage(message, type) {
+                const floatingMessage = document.createElement('div');
+                floatingMessage.className = `floating-message ${type}`;
+                floatingMessage.textContent = message;
+                document.body.appendChild(floatingMessage);
+                
+                // Animación de entrada
+                setTimeout(() => {
+                    floatingMessage.classList.add('show');
+                }, 10);
+                
+                // Eliminar después de 3 segundos
+                setTimeout(() => {
+                    floatingMessage.classList.remove('show');
+                    setTimeout(() => {
+                        floatingMessage.remove();
+                    }, 300);
+                }, 3000);
+            }
+
+            // Función para mostrar recomendaciones específicas por juego
+            function showRecommendation(gameId, message) {
+                const recommendationDiv = document.createElement('div');
+                recommendationDiv.className = 'recommendation-message';
+                recommendationDiv.innerHTML = `
+                    <h4>Consejo:</h4>
+                    <p>${message}</p>
+                `;
+                
+                const gameContent = document.getElementById('gameContent');
+                gameContent.appendChild(recommendationDiv);
+                
+                // Eliminar después de 5 segundos
+                setTimeout(() => {
+                    recommendationDiv.remove();
+                }, 5000);
+            }
+
+            // Función para ganar un juego
+            function winGame(game) {
+                if (gameWon) return;
+                gameWon = true;
+                
+                clearInterval(timerInterval);
+                
+                // Actualizar estadísticas
+                const gameStats = familyStats[game.id];
+                gameStats.played++;
+                gameStats.wins++;
+                gameStats.times.push(game.timeLimit - timeRemaining);
+                
+                // Actualizar estadísticas del niño activo
+                if (activeChild && gameStats.children[activeChild.id]) {
+                    gameStats.children[activeChild.id].played++;
+                    gameStats.children[activeChild.id].wins++;
+                    gameStats.children[activeChild.id].times.push(game.timeLimit - timeRemaining);
+                }
+                
+                localStorage.setItem('familyGameStats', JSON.stringify(familyStats));
+                updateGlobalStats();
+                
+                // Mostrar copa
+                showTrophy();
+            }
+
+            // Función para perder un juego
+            function loseGame() {
+                // Actualizar estadísticas
+                const gameStats = currentGame.id ? familyStats[currentGame.id] : null;
+                if (gameStats) {
+                    gameStats.played++;
+                    
+                    // Actualizar estadísticas del niño activo
+                    if (activeChild && gameStats.children[activeChild.id]) {
+                        gameStats.children[activeChild.id].played++;
+                    }
+                    
+                    localStorage.setItem('familyGameStats', JSON.stringify(familyStats));
+                    updateGlobalStats();
+                }
+                
+                // Guardar el juego actual antes de resetear
+                const gameToRetry = currentGame;
+                
+                // Mostrar mensaje de derrota
+                const gameContent = document.getElementById('gameContent');
+                gameContent.innerHTML = `
+                    <div style="text-align: center; padding: 50px;">
+                        <h3>¡Tiempo agotado!</h3>
+                        <p>${activeChild.name} no pudo completar el juego a tiempo. Intenta nuevamente.</p>
+                        <button id="retryBtn" style="margin-top: 20px; padding: 10px 20px; background: var(--accent-pink); color: white; border: none; border-radius: 5px; cursor: pointer;">
+                            Reintentar
+                        </button>
+                    </div>
+                `;
+                
+                // Añadir evento al botón de reintentar
+                const retryBtn = document.getElementById('retryBtn');
+                retryBtn.addEventListener('click', function() {
+                    // Limpiar el estado actual
+                    clearInterval(timerInterval);
+                    
+                    // Reiniciar el juego actual
+                    startGame(gameToRetry);
+                });
+                
+                // Mostrar botón de volver
+                document.getElementById('gameFooter').style.display = 'block';
+            }
+
+            // Función para mostrar la copa
+            function showTrophy() {
+                document.getElementById('trophyOverlay').classList.add('active');
+                
+                // Ocultar el trofeo después de 4 segundos y volver a la selección de juegos
+                setTimeout(() => {
+                    document.getElementById('trophyOverlay').classList.remove('active');
+                    // Regresar a la página de selección de juegos
+                    backToGamesMenu();
+                }, 4000);
+            }
+
+            // Función para ocultar la copa
+            function hideTrophy() {
+                document.getElementById('trophyOverlay').classList.remove('active');
+            }
+
+            // Función para reiniciar el juego (limpiar estado)
+            function resetGame() {
+                document.getElementById('gameArea').classList.remove('active');
+                document.getElementById('gamesMenu').style.display = 'grid';
+                document.getElementById('gameFooter').style.display = 'none';
+                // No establecer currentGame = null aquí, porque necesitamos el juego actual para reintentar
+                // activeChild se mantendrá para el reintento
+            }
+
+            // Función para volver al menú de juegos (limpiar todo)
+            function backToGamesMenu() {
+                document.getElementById('gameArea').classList.remove('active');
+                document.getElementById('gamesMenu').style.display = 'grid';
+                document.getElementById('gameFooter').style.display = 'none';
+                currentGame = null;
+                gameWon = false;
+                activeChild = null;
+            }
+
+            // Configurar botón para volver al menú de juegos
+            document.getElementById('backToGamesMenu').addEventListener('click', function() {
+                backToGamesMenu();
+            });
+        });
+    </script>
+</body>
+</html>

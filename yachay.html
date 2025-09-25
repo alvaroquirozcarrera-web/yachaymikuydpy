@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plan Familiar - Yachay Mikuy</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-blue: #2c5aa0;
+            --light-blue: #5d8cc4;
+            --dark-blue: #1a3a6e;
+            --success-green: #28a745;
+            --success-green-dark: #218838;
+            --accent-orange: #ff9800;
+            --accent-orange-dark: #e08e0b;
+            --accent-purple: #6f42c1;
+            --accent-purple-dark: #5a32a3;
+            --accent-teal: #20c997;
+            --accent-teal-dark: #1aa27d;
+            --accent-pink: #d63384;
+            --accent-pink-dark: #b02a6e;
+            --accent-cyan: #0dcaf0;
+            --accent-cyan-dark: #0baccc;
+            --gray: #6c757d;
+            --light-gray: #f8f9fa;
+            --white: #ffffff;
+            --shadow-color: rgba(40, 50, 70, 0.1);
+            --danger-red: #dc3545;
+            --danger-red-dark: #c82333;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        body {
+            background-image: linear-gradient(120deg, #f5f9ff 0%, #e6f0fa 100%);
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 30px;
+        }
+
+        /* --- ESTILO PARA EL ENCABEZADO GRUPAL --- */
+        .group-header {
+            background: var(--white);
+            border-radius: 20px;
+            box-shadow: 0 8px 30px var(--shadow-color);
+            padding: 30px 40px;
+            margin-bottom: 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-left: 8px solid var(--accent-purple);
+        }
+
+        .group-header-content {
+            text-align: center;
+            flex: 1;
+        }
+
+        .group-header-icon {
+            font-size: 3rem;
+            color: var(--accent-purple);
+            margin-bottom: 15px;
+        }
+
+        .group-header h1 {
+            color: var(--dark-blue);
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .group-header p {
+            color: var(--gray);
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+
+        .children-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .child-tag {
+            background-color: rgba(93, 140, 196, 0.1);
+            color: var(--primary-blue);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .btn-exit {
+            padding: 12px 25px;
+            background: linear-gradient(45deg, var(--danger-red), #e85d75);
+            color: var(--white);
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 15px rgba(220, 53, 69, 0.3);
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .btn-exit:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(220, 53, 69, 0.4);
+            background: linear-gradient(45deg, var(--danger-red-dark), var(--danger-red));
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .dashboard-card {
+            background-color: var(--white);
+            border-radius: 20px;
+            box-shadow: 0 8px 30px var(--shadow-color);
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s ease-in-out;
+            border-top: 5px solid transparent;
+            animation: fadeIn 0.5s ease-out forwards;
+            opacity: 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .dashboard-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100px;
+            height: 100px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transform: translate(30px, -30px);
+        }
+        
+        .dashboard-card:nth-child(1) { animation-delay: 0.1s; }
+        .dashboard-card:nth-child(2) { animation-delay: 0.2s; }
+        .dashboard-card:nth-child(3) { animation-delay: 0.3s; }
+        .dashboard-card:nth-child(4) { animation-delay: 0.4s; }
+        .dashboard-card:nth-child(5) { animation-delay: 0.5s; }
+        .dashboard-card:nth-child(6) { animation-delay: 0.6s; }
+
+        .dashboard-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 40px rgba(40, 50, 70, 0.15);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .card-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--white);
+            font-size: 1.8rem;
+            flex-shrink: 0;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--dark-blue);
+        }
+
+        .card-description {
+            color: var(--gray);
+            font-weight: 400;
+            margin-bottom: 25px;
+            flex-grow: 1;
+            position: relative;
+            z-index: 1;
+        }
+
+        .card-content {
+            margin-top: auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .profile-indicator {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(111, 66, 193, 0.1);
+            color: var(--accent-purple);
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .region-selector, .btn-action {
+            width: 100%;
+            padding: 15px;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .region-selector {
+            border: 2px solid #ddd;
+            background-color: var(--light-gray);
+            color: var(--dark-blue);
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 0.75rem center;
+            background-size: 16px 12px;
+            margin-bottom: 15px;
+        }
+
+        .btn-action {
+            border: none;
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .btn-action:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+        }
+        
+        .card-pantry { border-top-color: var(--success-green); }
+        .card-pantry .card-icon { background: linear-gradient(45deg, var(--success-green), #58c271); }
+        .card-pantry .btn-action { background: linear-gradient(45deg, var(--success-green), #58c271); }
+
+        .card-region { border-top-color: var(--accent-orange); }
+        .card-region .card-icon { background: linear-gradient(45deg, var(--accent-orange), #ffb74d); }
+        .card-region .btn-action { background: linear-gradient(45deg, var(--accent-orange), #ffb74d); }
+        
+        .card-wellness { border-top-color: var(--accent-purple); }
+        .card-wellness .card-icon { background: linear-gradient(45deg, var(--accent-purple), #9575cd); }
+        .card-wellness .btn-action { background: linear-gradient(45deg, var(--accent-purple), #9575cd); }
+
+        .card-academic { border-top-color: var(--accent-teal); }
+        .card-academic .card-icon { background: linear-gradient(45deg, var(--accent-teal), #4dd9b4); }
+        .card-academic .btn-action { background: linear-gradient(45deg, var(--accent-teal), #4dd9b4); }
+        
+        .card-games { border-top-color: var(--accent-pink); }
+        .card-games .card-icon { background: linear-gradient(45deg, var(--accent-pink), #f06292); }
+        .card-games .btn-action { background: linear-gradient(45deg, var(--accent-pink), #f06292); }
+
+        .card-daily { border-top-color: var(--accent-cyan); }
+        .card-daily .card-icon { background: linear-gradient(45deg, var(--accent-cyan), #4dd0e1); }
+        .card-daily .btn-action { background: linear-gradient(45deg, var(--accent-cyan), #4dd0e1); }
+        
+        .back-button-container {
+            margin-top: 40px;
+            text-align: center;
+        }
+        
+        .btn-back {
+            padding: 14px 35px;
+            border: 2px solid var(--gray);
+            color: var(--gray);
+            background-color: transparent;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .btn-back:hover {
+            background-color: var(--gray);
+            color: var(--white);
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 768px) {
+            .container { padding: 20px; }
+            .group-header { 
+                padding: 25px; 
+                flex-direction: column;
+                gap: 20px;
+            }
+            .group-header h1 { font-size: 2rem; }
+            .dashboard-grid { grid-template-columns: 1fr; }
+            .btn-exit {
+                align-self: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="group-header">
+            <div class="group-header-content">
+                <div class="group-header-icon"><i class="fas fa-users"></i></div>
+                <h1>Panel de Planificación Familiar</h1>
+                <p>Gestionando el bienestar de:</p>
+                <div class="children-list" id="childrenListContainer">
+                </div>
+            </div>
+            <a href="index.html" class="btn-exit">
+                <i class="fas fa-sign-out-alt"></i> Salir
+            </a>
+        </header>
+
+        <main class="dashboard-grid">
+            <div class="dashboard-card card-pantry">
+                <div class="profile-indicator">
+                    <i class="fas fa-users"></i> Panel familiar
+                </div>
+                <div class="card-header">
+                    <div class="card-icon"><i class="fas fa-shopping-basket"></i></div>
+                    <h2 class="card-title">Comida con Despensa</h2>
+                </div>
+                <p class="card-description">Genera planes de comidas para toda la familia utilizando los ingredientes disponibles en casa.</p>
+                <div class="card-content">
+                    <a href="nino1.html" id="pantryLink" class="btn-action">
+                        <i class="fas fa-utensils"></i> Empezar
+                    </a>
+                </div>
+            </div>
+
+            <div class="dashboard-card card-region">
+                <div class="profile-indicator">
+                    <i class="fas fa-users"></i> Panel familiar
+                </div>
+                <div class="card-header">
+                    <div class="card-icon"><i class="fas fa-map-marked-alt"></i></div>
+                    <h2 class="card-title">Comida por Región</h2>
+                </div>
+                <p class="card-description">Descubre platos y dietas basadas en los alimentos típicos de cada departamento del Perú.</p>
+                <div class="card-content">
+                    <select id="regionSelector" class="region-selector" name="departamento">
+                        <option value="">Selecciona un departamento</option>
+                    </select>
+                    <button id="regionButton" class="btn-action">
+                        <i class="fas fa-search-location"></i> Generar
+                    </button>
+                </div>
+            </div>
+
+            <div class="dashboard-card card-wellness">
+                <div class="profile-indicator">
+                    <i class="fas fa-users"></i> Panel familiar
+                </div>
+                <div class="card-header">
+                    <div class="card-icon"><i class="fas fa-brain"></i></div>
+                    <h2 class="card-title">Bienestar Psicológico</h2>
+                </div>
+                <p class="card-description">Accede a consejos y actividades para fomentar el desarrollo emocional de todos los niños.</p>
+                <div class="card-content">
+                    <a href="nino3.html" id="wellnessLink" class="btn-action">
+                        <i class="fas fa-lightbulb"></i> Ver Recomendaciones
+                    </a>
+                </div>
+            </div>
+
+            <div class="dashboard-card card-academic">
+                <div class="profile-indicator">
+                    <i class="fas fa-users"></i> Panel familiar
+                </div>
+                <div class="card-header">
+                    <div class="card-icon"><i class="fas fa-book-reader"></i></div>
+                    <h2 class="card-title">Apoyo Académico</h2>
+                </div>
+                <p class="card-description">Encuentra estrategias y recomendaciones para potenciar el rendimiento académico familiar.</p>
+                <div class="card-content">
+                    <a href="nino4.html" id="academicLink" class="btn-action">
+                        <i class="fas fa-graduation-cap"></i> Explorar Estrategias
+                    </a>
+                </div>
+            </div>
+            
+            <div class="dashboard-card card-games">
+                <div class="profile-indicator">
+                    <i class="fas fa-users"></i> Panel familiar
+                </div>
+                <div class="card-header">
+                    <div class="card-icon"><i class="fas fa-puzzle-piece"></i></div>
+                    <h2 class="card-title">Jugando es Divertido</h2>
+                </div>
+                <p class="card-description">Descubre juegos educativos para estimular la mente y creatividad de tus hijos.</p>
+                <div class="card-content">
+                    <a href="nino5.html" id="gamesLink" class="btn-action">
+                        <i class="fas fa-gamepad"></i> Ver Juegos
+                    </a>
+                </div>
+            </div>
+            
+            <div class="dashboard-card card-daily">
+                <div class="profile-indicator">
+                    <i class="fas fa-users"></i> Panel familiar
+                </div>
+                <div class="card-header">
+                    <div class="card-icon"><i class="fas fa-plate-wheat"></i></div>
+                    <h2 class="card-title">Platos del Día</h2>
+                </div>
+                <p class="card-description">Recibe recomendaciones diarias de platos balanceados para toda la familia.</p>
+                <div class="card-content">
+                    <a href="nino6.html" id="dailyLink" class="btn-action">
+                        <i class="fas fa-calendar-day"></i> Consultar
+                    </a>
+                </div>
+            </div>
+        </main>
+        
+        <div class="back-button-container">
+            <a href="#" id="backToDashboardBtn" class="btn-back">
+                <i class="fas fa-arrow-left"></i> Volver al panel de niños
+            </a>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Cargar los datos de TODOS los niños desde localStorage
+            const storedData = localStorage.getItem('yachayMikuyChildren');
+            
+            if (!storedData) {
+                document.body.innerHTML = '<h1>Error: No se encontraron datos de niños. Por favor, complete al menos un cuestionario.</h1>';
+                return;
+            }
+            
+            const allChildrenData = JSON.parse(storedData);
+            // Filtrar para usar solo los perfiles que han completado el cuestionario
+            const completedChildren = allChildrenData.filter(child => child.completed);
+
+            if (completedChildren.length === 0) {
+                document.body.innerHTML = '<h1>No hay perfiles completados. Por favor, finalice al menos un cuestionario para continuar.</h1>';
+                return;
+            }
+
+            // Poblar la lista de niños en el encabezado
+            const childrenListContainer = document.getElementById('childrenListContainer');
+            completedChildren.forEach(child => {
+                const childTag = document.createElement('span');
+                childTag.className = 'child-tag';
+                childTag.innerHTML = `<i class="fas fa-child"></i> ${child.name}`;
+                childrenListContainer.appendChild(childTag);
+            });
+            
+            // Poblar el selector de departamentos
+            const departments = [
+                "Amazonas", "Áncash", "Apurímac", "Arequipa", "Ayacucho", "Cajamarca", 
+                "Callao", "Cusco", "Huancavelica", "Huánuco", "Ica", "Junín", 
+                "La Libertad", "Lambayeque", "Lima", "Loreto", "Madre de Dios", 
+                "Moquegua", "Pasco", "Piura", "Puno", "San Martín", "Tacna", 
+                "Tumbes", "Ucayali"
+            ];
+            
+            const regionSelector = document.getElementById('regionSelector');
+            departments.forEach(dept => {
+                const option = document.createElement('option');
+                option.value = dept.toLowerCase().replace(/á/g, 'a').replace(/\s+/g, '-');
+                option.textContent = dept;
+                regionSelector.appendChild(option);
+            });
+
+            // Configurar el botón del tablero de región
+            const regionButton = document.getElementById('regionButton');
+            regionButton.addEventListener('click', function() {
+                const selectedDepartment = regionSelector.value;
+                if (selectedDepartment) {
+                    // Redirigir a nino2.html solo con el departamento.
+                    // La página nino2.html deberá leer los datos de todos los niños desde localStorage.
+                    window.location.href = `nino2.html?departamento=${selectedDepartment}`;
+                } else {
+                    alert('Por favor, selecciona un departamento antes de generar.');
+                }
+            });
+
+            // Configurar el botón de volver para que lleve a la pantalla de finalización de yachaymikuy.html
+            const totalQuestionsInYachay = 55;
+            const backButton = document.getElementById('backToDashboardBtn');
+            // Este enlace hará que yachaymikuy.html cargue y salte directamente a la pantalla del dashboard.
+            // Necesitamos el ID de al menos un niño para que la página cargue correctamente el contexto.
+            const firstChildId = completedChildren[0].id;
+            backButton.href = `yachaymikuy.html?childId=${firstChildId}&question=${totalQuestionsInYachay}&edit=true`;
+        });
+    </script>
+</body>
+</html>

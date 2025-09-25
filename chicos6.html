@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Platos del Día - YachayMikuy</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #FF5722;
+            --secondary-color: #FF9800;
+            --accent-color: #4CAF50;
+            --light-color: #F9F9F9;
+            --dark-color: #333;
+            --danger-color: #F44336;
+            --warning-color: #FFC107;
+            --success-color: #4CAF50;
+            --info-color: #03A9F4;
+            --breakfast-color: #FF9800;
+            --snack-color: #8BC34A;
+            --lunch-color: #F44336;
+            --tea-color: #9C27B0;
+            --dinner-color: #3F51B5;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: var(--dark-color);
+            line-height: 1.6;
+            background-image: linear-gradient(135deg, rgba(255, 245, 238, 0.5), rgba(255, 243, 224, 0.5));
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background-color: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .header h1 {
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.8rem;
+        }
+
+        .header h1 i {
+            font-size: 1.8rem;
+        }
+
+        .header-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn-secondary {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+
+        .btn-danger {
+            background-color: var(--danger-color);
+            color: white;
+        }
+
+        .btn-warning {
+            background-color: var(--warning-color);
+            color: white;
+        }
+
+        .btn-success {
+            background-color: var(--success-color);
+            color: white;
+        }
+
+        .btn-info {
+            background-color: var(--info-color);
+            color: white;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .generate-section {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .generate-btn {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 20px 40px;
+            font-size: 1.3rem;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 87, 34, 0.3);
+        }
+
+        .generate-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 87, 34, 0.4);
+        }
+
+        .generate-btn i {
+            font-size: 1.5rem;
+        }
+
+        .meals-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .meal-card {
+            background-color: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            animation: fadeIn 0.5s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .meal-card.removing {
+            animation: fadeOut 0.5s forwards;
+        }
+
+        .meal-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .meal-header {
+            padding: 15px 20px;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .meal-header.breakfast {
+            background-color: var(--breakfast-color);
+        }
+
+        .meal-header.snack {
+            background-color: var(--snack-color);
+        }
+
+        .meal-header.lunch {
+            background-color: var(--lunch-color);
+        }
+
+        .meal-header.tea {
+            background-color: var(--tea-color);
+        }
+
+        .meal-header.dinner {
+            background-color: var(--dinner-color);
+        }
+
+        .meal-body {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .meal-title {
+            font-size: 1.4rem;
+            color: var(--dark-color);
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .meal-image {
+            width: 100%;
+            height: 180px;
+            background-color: #f0f0f0;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .meal-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .meal-image i {
+            font-size: 3rem;
+            color: #ccc;
+        }
+
+        .meal-ingredients {
+            margin-bottom: 15px;
+        }
+
+        .meal-ingredients h4 {
+            color: var(--primary-color);
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .meal-ingredients ul {
+            list-style-type: none;
+            margin-left: 5px;
+        }
+
+        .meal-ingredients li {
+            margin-bottom: 5px;
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+        }
+
+        .meal-ingredients li::before {
+            content: "•";
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        .meal-preparation {
+            margin-bottom: 15px;
+        }
+
+        .meal-preparation h4 {
+            color: var(--primary-color);
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .meal-preparation ol {
+            margin-left: 20px;
+            margin-bottom: 10px;
+        }
+
+        .meal-preparation li {
+            margin-bottom: 5px;
+        }
+
+        .meal-benefits {
+            background-color: #f0fff4;
+            border-left: 4px solid var(--success-color);
+            padding: 10px;
+            margin: 15px 0;
+            border-radius: 0 5px 5px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .meal-benefits h4 {
+            color: var(--success-color);
+            margin-bottom: 5px;
+            font-size: 1rem;
+        }
+
+        .meal-benefits p {
+            color: var(--dark-color);
+            font-size: 0.9rem;
+            flex: 1;
+        }
+
+        .meal-alert {
+            background-color: #fff8f0;
+            border-left: 4px solid var(--warning-color);
+            padding: 10px;
+            margin: 15px 0;
+            border-radius: 0 5px 5px 0;
+        }
+
+        .meal-alert h4 {
+            color: var(--warning-color);
+            margin-bottom: 5px;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .meal-alert p {
+            color: var(--dark-color);
+            font-size: 0.9rem;
+        }
+
+        .copy-meal-btn {
+            background-color: var(--info-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 8px 15px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            margin-top: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            align-self: flex-end;
+        }
+
+        .loader {
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid var(--primary-color);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 30px auto;
+            display: none;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeOut {
+            from { opacity: 1; transform: translateY(0); }
+            to { opacity: 0; transform: translateY(-20px); }
+        }
+
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            color: white;
+            z-index: 1000;
+            animation: fadeIn 0.5s;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .development-message {
+            background-color: #fff3cd;
+            border: 1px solid #ffeeba;
+            color: #856404;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .header-buttons {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .generate-btn {
+                font-size: 1.1rem;
+                padding: 15px 30px;
+            }
+
+            .meals-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-utensils"></i> Platos del Día</h1>
+            <div class="header-buttons">
+                <a href="#" id="backToProfile" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Volver al Perfil</a>
+                <a href="index.html" class="btn btn-danger"><i class="fas fa-sign-out-alt"></i> Salir</a>
+            </div>
+        </div>
+
+        <div class="generate-section">
+            <button id="generate-menu" class="generate-btn">
+                <i class="fas fa-magic"></i> Generar Menú de Hoy
+            </button>
+        </div>
+
+        <div class="loader" id="loader"></div>
+
+        <div class="meals-container" id="meals-container"></div>
+    </div>
+
+    <script>
+        // Datos de ejemplo para el menú inicial
+        const sampleMenu = {
+            desayuno: {
+                nombreReceta: "Batido Energético de Espinacas y Frutas",
+                ingredientes: ["1 taza de espinacas frescas", "1 plátano", "1/2 taza de fresas", "1/2 taza de yogur griego", "1 cucharada de semillas de chía", "1/2 taza de leche o bebida vegetal fortificada", "Miel al gusto"],
+                preparacion: ["Lavar bien las espinacas y las fresas.", "Pelar y cortar el plátano en trozos.", "Colocar todos los ingredientes en la licuadora.", "Licuar hasta obtener una mezcla homogénea.", "Servir inmediatamente, optional espolvoreando un poco de chía por encima."],
+                beneficiosNiño: "Este batido es rico en hierro de las espinacas, vitamina C de las fresas y calcio del yogur. La chía añade ácidos grasos omega-3, esenciales para el desarrollo cerebral.",
+                alertaAlergenos: "Contiene lácteos (yogur, leche). Para opción vegana, usar bebida vegetal y yogur de soja."
+            },
+            mediaManana: {
+                nombreReceta: "Palitos de Zanahoria con Hummus",
+                ingredientes: ["2 zanahorias medianas", "1/2 taza de garbanzos cocidos", "1 diente de ajo", "1 cucharada de tahini", "Jugo de limón", "Aceite de oliva", "Pimentón dulce", "Sal"],
+                preparacion: ["Lavar y cortar las zanahorias en palitos.", "Para el hummus, triturar los garbanzos con el ajo.", "Añadir el tahini, jugo de limón, aceite de oliva y sal.", "Mezclar hasta obtener una pasta homogénea.", "Espolvorear con pimentón dulce.", "Servir los palitos de zanahoria con el hummus."],
+                beneficiosNiño: "Las zanahorias aportan betacarotenos que se convierten en vitamina A. Los garbanzos son una excelente fuente de hierro vegetal y proteínas.",
+                alertaAlergenos: "Contiene tahini (sésamo). Apto para la mayoría de las dietas, pero verificar alergias al sésamo."
+            },
+            almuerzo: {
+                nombreReceta: "Lomo Saltado con Quinua",
+                ingredientes: ["300g de lomo de res en tiras", "1 taza de quinua cocida", "1 tomate", "1 cebolla roja", "1 ají amarillo", "2 dientes de ajo", "Vinagre", "Salsa de soja", "Aceite", "Sal y pimienta", "Cilantro fresco"],
+                preparacion: ["Marinar el lomo con ajo, salsa de soja, vinagre, sal y pimienta.", "Cocinar la quinua según las instrucciones del paquete.", "Cortar la cebolla, tomate y ají en juliana.", "En una sartén caliente con aceite, saltear el lomo a fuego fuerte.", "Añadir la cebolla, tomate y ají picado.", "Saltear todo junto por unos minutos.", "Servir acompañado de quinua y espolvorear con cilantro fresco."],
+                beneficiosNiño: "El lomo de res es una excelente fuente de hierro hemo de fácil absorción. La quinua añade hierro adicional, proteínas completas y fibra dietética.",
+                alertaAlergenos: "Contiene carne de res. La salsa de soja puede contener gluten."
+            },
+            merienda: {
+                nombreReceta: "Muffins de Avena y Pasas",
+                ingredientes: ["1 taza de harina de avena", "1/2 taza de harina integral", "1/4 taza de azúcar moreno", "1 cucharadita de polvo de hornear", "1/2 cucharadita de canela", "1/2 taza de pasas", "1 huevo", "1/2 taza de leche", "1/4 taza de aceite vegetal"],
+                preparacion: ["Precalentar el horno a 180°C.", "Mezclar los ingredientes secos: avena, harina integral, azúcar, polvo de hornear y canela.", "Añadir las pasas y mezclar.", "En otro recipiente, batir el huevo con la leche y el aceite.", "Incorporar los ingredientes húmedos a los secos y mezclar sin batir en exceso.", "Distribuir la mezcla en moldes para muffins.", "Hornear durante 15-20 minutos o hasta que al insertar un palillo salga limpio."],
+                beneficiosNiño: "La avena es rica en hierro y fibra. Las pasas aportan hierro adicional y energía natural de liberación lenta, ideal para mantener la concentración.",
+                alertaAlergenos: "Contiene huevo y gluten (avena, harina integral). Puede contener trazas de frutos secos."
+            },
+            cena: {
+                nombreReceta: "Salmón al Horno con Espárragos",
+                ingredientes: ["2 filetes de salmón", "1 manojo de espárragos", "1 limón", "2 dientes de ajo", "Aceite de oliva", "Sal", "Pimienta", "Eneldo fresco"],
+                preparacion: ["Precalentar el horno a 200°C.", "Lavar y cortar los espárragos.", "Colocar los filetes de salmón y los espárragos en una bandeja para horno.", "Rociar con aceite de oliva, sal, pimienta y ajo picado.", "Exprimir el jugo de medio limón sobre todo.", "Hornear durante 15-20 minutos.", "Servir decorado con eneldo fresco y rodajas de limón."],
+                beneficiosNiño: "El salmón es rico en hierro hemo de fácil absorción y también aporta omega-3, beneficioso para el desarrollo cerebral. Los espárragos aportan ácido fólico.",
+                alertaAlergenos: "Contiene pescado. No recomendado para alérgicos al pescado o mariscos."
+            }
+        };
+
+        // Variables globales
+        let childId = "";
+        let childData = {};
+        let menu = {};
+
+        // Función para obtener el childId de la URL
+        function getChildIdFromUrl() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get('childId');
+        }
+
+        // Función para cargar los datos del niño desde localStorage
+        function loadChildData() {
+            const childrenData = localStorage.getItem('yachayMikuyChildren');
+            if (childrenData) {
+                const childrenArray = JSON.parse(childrenData);
+                const child = childrenArray.find(c => c.id === childId);
+                if (child) {
+                    childData = child;
+                    updateHeaderWithChildName();
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        // Función para actualizar el encabezado con el nombre del niño
+        function updateHeaderWithChildName() {
+            const headerTitle = document.querySelector('.header h1');
+            headerTitle.innerHTML = `<i class="fas fa-utensils"></i> Platos del Día para ${childData.name}`;
+            
+            // Actualizar enlace de volver al perfil
+            const backToProfileLink = document.getElementById('backToProfile');
+            backToProfileLink.href = `chicos.html?childId=${childId}`;
+        }
+
+        // Función para mostrar notificaciones
+        function showNotification(message, type) {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            
+            if (type === 'success') {
+                notification.style.backgroundColor = 'var(--success-color)';
+            } else if (type === 'error') {
+                notification.style.backgroundColor = 'var(--danger-color)';
+            } else if (type === 'info') {
+                notification.style.backgroundColor = 'var(--info-color)';
+            }
+            
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.animation = 'fadeOut 0.5s';
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 500);
+            }, 3000);
+        }
+
+        // Función para generar el menú diario
+        function generateMenu() {
+            // Mostrar mensaje de desarrollo
+            showDevelopmentMessage();
+        }
+
+        // Función para mostrar mensaje de desarrollo
+        function showDevelopmentMessage() {
+            const existingMessage = document.querySelector('.development-message');
+            if (existingMessage) {
+                existingMessage.remove();
+            }
+            
+            const message = document.createElement('div');
+            message.className = 'development-message';
+            message.textContent = 'Funcionalidad en desarrollo. Próximamente podrás generar menús diarios personalizados con IA.';
+            
+            const mealsContainer = document.getElementById('meals-container');
+            mealsContainer.parentNode.insertBefore(message, mealsContainer);
+            
+            setTimeout(() => {
+                message.style.animation = 'fadeOut 0.5s';
+                setTimeout(() => {
+                    if (message.parentNode) {
+                        message.parentNode.removeChild(message);
+                    }
+                }, 500);
+            }, 5000);
+        }
+
+        // Función para actualizar el menú
+        function updateMenu(newMenu) {
+            // Eliminar las tarjetas existentes con animación
+            const existingCards = document.querySelectorAll('.meal-card');
+            existingCards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.classList.add('removing');
+                }, index * 100);
+            });
+            
+            // Añadir las nuevas tarjetas después de que se completen las animaciones
+            setTimeout(() => {
+                menu = newMenu;
+                renderMenu();
+            }, existingCards.length * 100 + 500);
+        }
+
+        // Función para renderizar el menú
+        function renderMenu() {
+            const mealsContainer = document.getElementById('meals-container');
+            mealsContainer.innerHTML = '';
+            
+            // Orden de las comidas
+            const mealOrder = ['desayuno', 'mediaManana', 'almuerzo', 'merienda', 'cena'];
+            
+            mealOrder.forEach((mealType, index) => {
+                if (menu[mealType]) {
+                    const meal = menu[mealType];
+                    const card = document.createElement('div');
+                    card.className = 'meal-card';
+                    
+                    // Clases CSS según el tipo de comida
+                    const mealClasses = {
+                        desayuno: 'breakfast',
+                        mediaManana: 'snack',
+                        almuerzo: 'lunch',
+                        merienda: 'tea',
+                        cena: 'dinner'
+                    };
+                    
+                    // Nombres de las comidas
+                    const mealNames = {
+                        desayuno: 'Desayuno',
+                        mediaManana: 'Media Mañana',
+                        almuerzo: 'Almuerzo',
+                        merienda: 'Merienda',
+                        cena: 'Cena'
+                    };
+                    
+                    // Iconos para las comidas
+                    const mealIcons = {
+                        desayuno: 'fa-coffee',
+                        mediaManana: 'fa-apple-alt',
+                        almuerzo: 'fa-utensils',
+                        merienda: 'fa-cookie-bite',
+                        cena: 'fa-moon'
+                    };
+                    
+                    // Generar HTML para ingredientes
+                    const ingredientsHtml = meal.ingredientes.map(ing => `<li>${ing}</li>`).join('');
+                    
+                    // Generar HTML para preparación
+                    const preparationHtml = meal.preparacion.map(step => `<li>${step}</li>`).join('');
+                    
+                    // Generar una imagen aleatoria para el plato
+                    const imageUrl = `https://picsum.photos/seed/${mealType}${Date.now()}/400/180.jpg`;
+                    
+                    card.innerHTML = `
+                        <div class="meal-header ${mealClasses[mealType]}">
+                            <i class="fas ${mealIcons[mealType]}"></i>
+                            ${mealNames[mealType]}
+                        </div>
+                        <div class="meal-body">
+                            <h3 class="meal-title">${meal.nombreReceta}</h3>
+                            <div class="meal-image">
+                                <img src="${imageUrl}" alt="${meal.nombreReceta}">
+                            </div>
+                            <div class="meal-ingredients">
+                                <h4><i class="fas fa-carrot"></i> Ingredientes</h4>
+                                <ul>${ingredientsHtml}</ul>
+                            </div>
+                            <div class="meal-preparation">
+                                <h4><i class="fas fa-list-ol"></i> Preparación</h4>
+                                <ol>${preparationHtml}</ol>
+                            </div>
+                            <div class="meal-benefits">
+                                <i class="fas fa-heartbeat"></i>
+                                <div>
+                                    <h4>Beneficios para el Niño</h4>
+                                    <p>${meal.beneficiosNiño}</p>
+                                </div>
+                            </div>
+                            ${meal.alertaAlergenos ? `
+                            <div class="meal-alert">
+                                <h4><i class="fas fa-exclamation-triangle"></i> Alerta de Alérgenos</h4>
+                                <p>${meal.alertaAlergenos}</p>
+                            </div>
+                            ` : ''}
+                            <button class="copy-meal-btn" data-meal="${mealType}">
+                                <i class="fas fa-copy"></i> Copiar Receta
+                            </button>
+                        </div>
+                    `;
+                    
+                    mealsContainer.appendChild(card);
+                }
+            });
+            
+            // Añadir event listeners a los botones de copiar
+            document.querySelectorAll('.copy-meal-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const mealType = this.getAttribute('data-meal');
+                    copyMeal(mealType);
+                });
+            });
+        }
+
+        // Función para copiar una comida al portapapeles
+        function copyMeal(mealType) {
+            const meal = menu[mealType];
+            
+            // Nombres de las comidas
+            const mealNames = {
+                desayuno: 'Desayuno',
+                mediaManana: 'Media Mañana',
+                almuerzo: 'Almuerzo',
+                merienda: 'Merienda',
+                cena: 'Cena'
+            };
+            
+            let textToCopy = `${mealNames[mealType]}: ${meal.nombreReceta}\n\n`;
+            textToCopy += `Ingredientes:\n`;
+            meal.ingredientes.forEach(ing => {
+                textToCopy += `- ${ing}\n`;
+            });
+            
+            textToCopy += `\nPreparación:\n`;
+            meal.preparacion.forEach((step, i) => {
+                textToCopy += `${i + 1}. ${step}\n`;
+            });
+            
+            textToCopy += `\nBeneficios para el Niño: ${meal.beneficiosNiño}\n`;
+            
+            if (meal.alertaAlergenos) {
+                textToCopy += `Alerta de Alérgenos: ${meal.alertaAlergenos}\n`;
+            }
+            
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                showNotification('Receta copiada al portapapeles', 'success');
+            }).catch(err => {
+                showNotification('Error al copiar la receta', 'error');
+                console.error('Error al copiar: ', err);
+            });
+        }
+
+        // Función para inicializar el menú de ejemplo
+        function initializeSampleMenu() {
+            menu = {...sampleMenu};
+            renderMenu();
+        }
+
+        // Función de inicialización
+        function init() {
+            // Obtener el childId de la URL
+            childId = getChildIdFromUrl();
+            
+            if (!childId) {
+                showNotification('No se encontró el ID del niño', 'error');
+                return;
+            }
+            
+            // Cargar los datos del niño
+            if (!loadChildData()) {
+                showNotification('No se encontraron datos del niño', 'error');
+                return;
+            }
+            
+            // Inicializar menú de ejemplo
+            initializeSampleMenu();
+            
+            // Event listeners
+            document.getElementById('generate-menu').addEventListener('click', generateMenu);
+        }
+
+        // Ejecutar la inicialización cuando el DOM esté cargado
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>

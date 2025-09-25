@@ -1,0 +1,2903 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yachay Mikuy - Cuestionario de Salud Infantil</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-blue: #2c5aa0;
+            --light-blue: #5d8cc4;
+            --very-light-blue: #e6f0fa;
+            --dark-blue: #1a3a6e;
+            --success-green: #28a745;
+            --warning-red: #dc3545;
+            --gray: #6c757d;
+            --light-gray: #f8f9fa;
+            --medium-gray: #e9ecef;
+            --accent-green: #4caf50;
+            --accent-orange: #ff9800;
+            --progress-yellow: #ffc107;
+            --avatar-bg: #f0f7ff;
+            --avatar-border: #d1e5ff;
+            --bubble-color: #ffffff;
+            --bubble-shadow: rgba(0, 0, 0, 0.1);
+            --robot-blue: #3498db;
+            --robot-dark: #2c3e50;
+            --required-color: #e74c3c;
+            --pulse-color: #ff6b6b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        body {
+            background-color: #f5f9ff;
+            color: #333;
+            line-height: 1.6;
+            background-image: linear-gradient(120deg, #f5f9ff 0%, #e6f0fa 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            flex: 1;
+        }
+
+        header {
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            padding: 25px;
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 8px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--primary-blue), var(--light-blue));
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo i {
+            color: var(--primary-blue);
+            font-size: 2.5rem;
+            margin-right: 15px;
+        }
+
+        .logo h1 {
+            color: var(--primary-blue);
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .child-info {
+            text-align: right;
+        }
+
+        .child-name {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--dark-blue);
+            margin-bottom: 5px;
+        }
+
+        .child-age {
+            color: var(--gray);
+            font-size: 1rem;
+        }
+
+        .progress-container {
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            padding: 20px;
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .progress-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--dark-blue);
+        }
+
+        .progress-percentage {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--primary-blue);
+        }
+
+        .progress-bar {
+            height: 12px;
+            background-color: var(--medium-gray);
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-blue), var(--light-blue));
+            border-radius: 10px;
+            width: 0%;
+            transition: width 0.7s ease;
+            position: relative;
+        }
+
+        .progress-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            background: linear-gradient(to right, rgba(255,255,255,0.3), transparent);
+            border-radius: 10px;
+        }
+
+        .section-indicator {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+        }
+
+        .section-item {
+            flex: 1;
+            text-align: center;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .section-item::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 3px;
+            background-color: var(--primary-blue);
+            transition: width 0.3s ease;
+        }
+
+        .section-item.active {
+            color: var(--primary-blue);
+            background-color: rgba(44, 90, 160, 0.1);
+        }
+
+        .section-item.active::after {
+            width: 60%;
+        }
+
+        .question-container {
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            padding: 30px;
+            margin-bottom: 25px;
+            min-height: 420px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .question-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--primary-blue), var(--light-blue));
+        }
+
+        .question-title {
+            font-size: 1.5rem;
+            color: var(--dark-blue);
+            margin-bottom: 25px;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .required-indicator {
+            color: var(--required-color);
+            font-weight: bold;
+            margin-left: 5px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        .answer-options {
+            margin-bottom: 25px;
+        }
+
+        .option {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            padding: 15px 20px;
+            background-color: var(--light-gray);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-left: 4px solid transparent;
+        }
+
+        .option:hover {
+            background-color: var(--very-light-blue);
+            transform: translateX(5px);
+        }
+
+        .option input[type="radio"] {
+            margin-right: 15px;
+            transform: scale(1.3);
+            accent-color: var(--primary-blue);
+        }
+
+        .option.selected {
+            background-color: var(--very-light-blue);
+            border-left: 4px solid var(--primary-blue);
+        }
+
+        .text-input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 1rem;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .text-input:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 3px rgba(44, 90, 160, 0.2);
+        }
+
+        .input-group {
+            margin-bottom: 25px;
+        }
+
+        .input-label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 500;
+            color: var(--dark-blue);
+            font-size: 1.1rem;
+        }
+
+        .file-upload {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .file-upload input[type="file"] {
+            position: absolute;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+
+        .file-upload-label {
+            display: block;
+            padding: 15px;
+            background-color: var(--light-gray);
+            border-radius: 10px;
+            text-align: center;
+            border: 2px dashed #ccc;
+            transition: all 0.3s ease;
+        }
+
+        .file-upload:hover .file-upload-label {
+            background-color: var(--very-light-blue);
+            border-color: var(--primary-blue);
+        }
+
+        .error-message {
+            color: var(--warning-red);
+            font-size: 0.9rem;
+            margin-top: 8px;
+            display: none;
+            font-weight: 500;
+        }
+
+        .weight-height-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            margin: 30px 0;
+        }
+
+        .weight-figure, .height-figure {
+            font-size: 6rem;
+            transition: all 0.5s ease;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+        }
+
+        .weight-input-container, .height-input-container {
+            text-align: center;
+        }
+
+        .weight-value, .height-value {
+            font-size: 1.3rem;
+            margin-top: 15px;
+            font-weight: 600;
+            color: var(--primary-blue);
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 25px;
+        }
+
+        .btn {
+            padding: 14px 28px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn i {
+            margin-right: 8px;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-blue);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--dark-blue);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn-secondary {
+            background-color: #6c757d;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background-color: #5a6268;
+            transform: translateY(-2px);
+        }
+
+        .btn-danger {
+            background-color: var(--warning-red);
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background-color: #c82333;
+            transform: translateY(-2px);
+        }
+
+        .btn-success {
+            background-color: var(--success-green);
+            color: white;
+        }
+
+        .btn-success:hover {
+            background-color: #218838;
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--primary-blue);
+            border: 2px solid var(--primary-blue);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--very-light-blue);
+        }
+
+        .completion-screen {
+            text-align: center;
+            padding: 40px 20px;
+            display: none;
+        }
+
+        .completion-icon {
+            font-size: 5rem;
+            color: var(--success-green);
+            margin-bottom: 25px;
+            animation: checkmark 0.8s ease-in-out;
+        }
+
+        @keyframes checkmark {
+            0% { transform: scale(0); opacity: 0; }
+            50% { transform: scale(1.2); opacity: 1; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .completion-title {
+            font-size: 2.5rem;
+            color: var(--dark-blue);
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .completion-message {
+            font-size: 1.3rem;
+            color: #555;
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .children-dashboard {
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            padding: 30px;
+            margin: 30px 0;
+        }
+
+        .dashboard-title {
+            font-size: 1.8rem;
+            color: var(--dark-blue);
+            margin-bottom: 25px;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .children-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .child-card {
+            border-radius: 15px;
+            padding: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .child-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+        }
+
+        .child-card.not-started {
+            background-color: var(--light-gray);
+            border: 2px solid var(--gray);
+        }
+
+        .child-card.not-started::before {
+            background-color: var(--gray);
+        }
+
+        .child-card.in-progress {
+            background-color: #fff8e1;
+            border: 2px solid var(--progress-yellow);
+        }
+
+        .child-card.in-progress::before {
+            background-color: var(--progress-yellow);
+        }
+
+        .child-card.incomplete {
+            background-color: #ffe0b2;
+            border: 2px solid var(--accent-orange);
+        }
+
+        .child-card.incomplete::before {
+            background-color: var(--accent-orange);
+        }
+
+        .child-card.completed {
+            background-color: #e8f5e9;
+            border: 2px solid var(--success-green);
+        }
+
+        .child-card.completed::before {
+            background-color: var(--success-green);
+        }
+
+        .child-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .child-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .child-avatar {
+            width: 60px;
+            height: 60px;
+            background-color: var(--light-blue);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .child-avatar i {
+            color: white;
+            font-size: 1.8rem;
+        }
+
+        .child-name {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--dark-blue);
+        }
+
+        .child-age {
+            font-size: 1rem;
+            color: var(--gray);
+            margin-top: 3px;
+        }
+
+        .progress-container-card {
+            margin-top: 20px;
+        }
+
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        .progress-bar-card {
+            height: 10px;
+            background-color: #e0e0e0;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .progress-fill-card {
+            height: 100%;
+            border-radius: 8px;
+            width: 0%;
+            transition: width 0.7s ease;
+        }
+
+        .child-card.in-progress .progress-fill-card {
+            background-color: var(--progress-yellow);
+        }
+
+        .child-card.incomplete .progress-fill-card {
+            background-color: var(--accent-orange);
+        }
+
+        .child-card.completed .progress-fill-card {
+            background-color: var(--success-green);
+        }
+
+        .child-status {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .child-card.not-started .child-status {
+            background-color: var(--gray);
+            color: white;
+        }
+
+        .child-card.in-progress .child-status {
+            background-color: var(--progress-yellow);
+            color: var(--dark-blue);
+        }
+
+        .child-card.incomplete .child-status {
+            background-color: var(--accent-orange);
+            color: white;
+        }
+
+        .child-card.completed .child-status {
+            background-color: var(--success-green);
+            color: white;
+        }
+
+        .child-warning {
+            font-size: 0.85rem;
+            color: var(--warning-red);
+            margin-top: 10px;
+            padding: 8px;
+            background-color: rgba(220, 53, 69, 0.1);
+            border-radius: 6px;
+            display: none;
+        }
+
+        .child-card.incomplete .child-warning {
+            display: block;
+        }
+
+        .actions-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .image-question {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        .image-option {
+            width: 120px;
+            height: 120px;
+            border-radius: 10px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 3px solid transparent;
+            position: relative;
+        }
+
+        .image-option:hover {
+            transform: scale(1.05);
+        }
+
+        .image-option.selected {
+            border-image: linear-gradient(45deg, var(--primary-blue), var(--success-green)) 1;
+            box-shadow: 0 0 15px rgba(44, 160, 90, 0.4);
+            transform: scale(1.05);
+        }
+
+        .image-option img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .image-option .checkmark {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background-color: var(--primary-blue);
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .image-option.selected .checkmark {
+            opacity: 1;
+        }
+
+        .image-option .image-title {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 5px;
+            font-size: 0.8rem;
+            text-align: center;
+        }
+
+        .no-exam-option {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--light-gray);
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .no-exam-option:hover {
+            background-color: var(--very-light-blue);
+            border-color: var(--primary-blue);
+        }
+
+        .no-exam-option.selected {
+            background-color: var(--very-light-blue);
+            border-color: var(--primary-blue);
+        }
+
+        .no-exam-option input {
+            margin-right: 10px;
+            transform: scale(1.2);
+            accent-color: var(--primary-blue);
+        }
+
+        .additional-inputs {
+            background-color: rgba(255, 152, 0, 0.1);
+            border: 2px dashed var(--accent-orange);
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .additional-inputs.visible {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .additional-inputs-title {
+            font-weight: 600;
+            color: var(--accent-orange);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .additional-inputs-title i {
+            margin-right: 8px;
+        }
+
+        /* Word count styling */
+        .word-count-container {
+            text-align: right;
+            font-size: 0.8rem;
+            color: var(--gray);
+            margin-top: -15px;
+            margin-bottom: 15px;
+        }
+
+        /* Avatar personalizado con logo */
+        .avatar-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 100;
+            display: flex;
+            align-items: flex-end;
+            flex-direction: column;
+        }
+
+        .avatar {
+            width: 180px;
+            height: 250px;
+            border-radius: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            position: relative;
+            z-index: 2;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            animation: float 3s ease-in-out infinite;
+            background-image: url('dpy.png');
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-color: transparent;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .avatar:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .message-bubble {
+            background-color: var(--bubble-color);
+            border-radius: 20px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 8px var(--bubble-shadow);
+            max-width: 250px;
+            position: relative;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
+        }
+
+        .message-bubble.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .message-bubble::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            right: 30px;
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-top: 10px solid var(--bubble-color);
+        }
+
+        .message-text {
+            font-size: 0.9rem;
+            color: var(--dark-blue);
+            font-weight: 500;
+        }
+
+        /* Pie de página */
+        footer {
+            background-color: white;
+            border-top: 1px solid #e9ecef;
+            padding: 30px 0;
+            margin-top: 50px;
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .footer-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .footer-logo i {
+            color: var(--primary-blue);
+            font-size: 2rem;
+            margin-right: 10px;
+        }
+
+        .footer-logo h3 {
+            color: var(--primary-blue);
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--gray);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-blue);
+        }
+
+        .footer-social {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .footer-social a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: var(--very-light-blue);
+            color: var(--primary-blue);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .footer-social a:hover {
+            background-color: var(--primary-blue);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .footer-copyright {
+            text-align: center;
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+
+            header {
+                flex-direction: column;
+                text-align: center;
+                padding: 20px;
+            }
+
+            .child-info {
+                margin-top: 15px;
+                text-align: center;
+            }
+
+            .question-container {
+                padding: 20px;
+                min-height: 380px;
+            }
+
+            .question-title {
+                font-size: 1.3rem;
+            }
+
+            .navigation-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+            .actions-container {
+                flex-direction: column;
+            }
+
+            .children-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .weight-height-container {
+                flex-direction: column;
+                gap: 30px;
+            }
+
+            .avatar-container {
+                bottom: 10px;
+                right: 10px;
+            }
+
+            .avatar {
+                width: 140px;
+                height: 200px;
+            }
+
+            .message-bubble {
+                max-width: 200px;
+                padding: 12px;
+                font-size: 0.8rem;
+            }
+            
+            .footer-links {
+                gap: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo h1 {
+                font-size: 1.5rem;
+            }
+            
+            .logo i {
+                font-size: 2rem;
+            }
+            
+            .child-name {
+                font-size: 1.2rem;
+            }
+            
+            .question-title {
+                font-size: 1.1rem;
+            }
+            
+            .section-item {
+                font-size: 0.8rem;
+                padding: 8px 5px;
+            }
+            
+            .image-option {
+                width: 100px;
+                height: 100px;
+            }
+            
+            .weight-figure, .height-figure {
+                font-size: 4rem;
+            }
+            
+            .completion-title {
+                font-size: 2rem;
+            }
+            
+            .completion-message {
+                font-size: 1.1rem;
+            }
+            
+            .footer-links {
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+            }
+            
+            .avatar {
+                width: 120px;
+                height: 170px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <i class="fas fa-heartbeat"></i>
+                <h1>Yachay Mikuy</h1>
+            </div>
+            <div class="child-info">
+                <div class="child-name" id="childNameDisplay">Nombre del Niño</div>
+                <div class="child-age">Edad: <span id="childAgeDisplay">-</span> años</div>
+            </div>
+        </header>
+
+        <div class="progress-container">
+            <div class="progress-header">
+                <div class="progress-title">Progreso del cuestionario</div>
+                <div class="progress-percentage" id="progressText">0%</div>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <div class="section-indicator">
+                <div class="section-item active" id="section1">Datos Generales</div>
+                <div class="section-item" id="section2">Nutricionales</div>
+                <div class="section-item" id="section3">Cognitivos</div>
+                <div class="section-item" id="section4">Psicológicos</div>
+            </div>
+        </div>
+
+        <div class="question-container" id="questionContainer">
+            </div>
+
+        <div class="navigation-buttons">
+            <button class="btn btn-danger" id="exitBtn">
+                <i class="fas fa-sign-out-alt"></i> Salir
+            </button>
+            <button class="btn btn-outline hidden" id="dashboardBtn">
+                <i class="fas fa-th-large"></i> Ir a Tablero
+            </button>
+            <button class="btn btn-secondary hidden" id="backBtn">
+                <i class="fas fa-arrow-left"></i> Regresar
+            </button>
+            <button class="btn btn-primary" id="nextBtn">
+                Siguiente <i class="fas fa-arrow-right"></i>
+            </button>
+        </div>
+
+        <div class="completion-screen" id="completionScreen">
+            <div class="completion-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h2 class="completion-title">¡Datos guardados con éxito!</h2>
+            <p class="completion-message">La información del cuestionario ha sido guardada correctamente. Ahora puedes revisar el estado de todos tus hijos.</p>
+            
+            <div class="children-dashboard">
+                <h3 class="dashboard-title">Panel de Control de Niños</h3>
+                <div class="children-grid" id="childrenGridContainer">
+                    </div>
+            </div>
+            
+            <div class="actions-container">
+                <button class="btn btn-primary" id="selectAnotherChildBtn">
+                    <i class="fas fa-child"></i> Seleccionar otro niño
+                </button>
+                <button class="btn btn-success" id="generatePlanBtn">
+                    <i class="fas fa-utensils"></i> Generar plan nutricional
+                </button>
+                <button class="btn btn-danger" id="exitBtnFinal">
+                    <i class="fas fa-sign-out-alt"></i> Salir
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="avatar-container">
+        <div class="message-bubble" id="messageBubble">
+            <p class="message-text" id="messageText">¡Vamos a comenzar! Tu participación es clave para la salud de tu hijo.</p>
+        </div>
+        <div class="avatar" id="avatarRobot"></div>
+    </div>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-logo">
+                <i class="fas fa-heartbeat"></i>
+                <h3>Yachay Mikuy</h3>
+            </div>
+            <div class="footer-links">
+                <a href="#">Acerca de nosotros</a>
+                <a href="#">Términos y condiciones</a>
+                <a href="#">Política de privacidad</a>
+                <a href="#">Contacto</a>
+            </div>
+            <div class="footer-social">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-whatsapp"></i></a>
+            </div>
+            <div class="footer-copyright">
+                © 2023 Yachay Mikuy. Todos los derechos reservados.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Base de datos de preguntas
+        const questions = [
+            // Grupo 1: Datos Generales y de Salud
+            {
+                id: "weight",
+                question: "¿Cuál es el peso del niño/niña?",
+                type: "image",
+                section: 1,
+                requiresAdditionalInfo: true,
+                options: [
+                    { value: "Muy bajo peso", image: "yachay.jpg", title: "Muy bajo" },
+                    { value: "Bajo peso", image: "yachay.jpg", title: "Bajo" },
+                    { value: "Peso normal", image: "yachay.jpg", title: "Normal" },
+                    { value: "Sobrepeso", image: "yachay.jpg", title: "Sobrepeso" },
+                    { value: "Obesidad", image: "yachay.jpg", title: "Obesidad" }
+                ]
+            },
+            {
+                id: "height",
+                question: "¿Cuál es la talla del niño/niña?",
+                type: "image",
+                section: 1,
+                requiresAdditionalInfo: true,
+                options: [
+                    { value: "Muy baja estatura", image: "yachay.jpg", title: "Muy baja" },
+                    { value: "Baja estatura", image: "yachay.jpg", title: "Baja" },
+                    { value: "Estatura normal", image: "yachay.jpg", title: "Normal" },
+                    { value: "Alta estatura", image: "yachay.jpg", title: "Alta" },
+                    { value: "Muy alta estatura", image: "yachay.jpg", title: "Muy alta" }
+                ]
+            },
+            {
+                id: "hemoglobin",
+                question: "Si tiene un examen de hemoglobina reciente, puede subirlo aquí.",
+                type: "file",
+                section: 1,
+                requiresAdditionalInfo: true
+            },
+            {
+                id: "skinTone",
+                question: "¿Cómo describiría el tono de piel del niño últimamente?",
+                type: "image",
+                options: [
+                    { value: "Normal, sin cambios", image: "yachay.jpg", title: "Normal" },
+                    { value: "Más pálido de lo habitual", image: "yachay.jpg", title: "Pálido" },
+                    { value: "Amarillento", image: "yachay.jpg", title: "Amarillento" },
+                    { value: "Con manchas o decoloración", image: "yachay.jpg", title: "Manchas" }
+                ],
+                section: 1
+            },
+            {
+                id: "eyelids",
+                question: "¿Ha notado si el interior de sus párpados o encías se ven más claros de lo habitual?",
+                type: "image",
+                options: [
+                    { value: "No, se ven normales", image: "yachay.jpg", title: "Normales" },
+                    { value: "Sí, un poco más claros", image: "yachay.jpg", title: "Un poco claros" },
+                    { value: "Sí, significativamente más claros", image: "yachay.jpg", title: "Muy claros" },
+                    { value: "No he revisado", image: "yachay.jpg", title: "No revisado" }
+                ],
+                section: 1
+            },
+            {
+                id: "energyLevel",
+                question: "¿Cómo describiría su nivel de energía diario?",
+                type: "image",
+                options: [
+                    { value: "Muy alto, siempre activo", image: "yachay.jpg", title: "Muy alto" },
+                    { value: "Normal, adecuado para su edad", image: "yachay.jpg", title: "Normal" },
+                    { value: "Un poco bajo, se cansa fácilmente", image: "yachay.jpg", title: "Un poco bajo" },
+                    { value: "Muy bajo, poca energía para actividades", image: "yachay.jpg", title: "Muy bajo" }
+                ],
+                section: 1
+            },
+            {
+                id: "bleeding",
+                question: "Respecto a episodios de sangrado (nariz, encías, etc.), ¿con qué frecuencia ocurren?",
+                type: "image",
+                options: [
+                    { value: "Nunca o rara vez", image: "yachay.jpg", title: "Nunca" },
+                    { value: "Ocasionalmente (1-2 veces al mes)", image: "yachay.jpg", title: "Ocasionalmente" },
+                    { value: "Frecuentemente (1-2 veces por semana)", image: "yachay.jpg", title: "Frecuentemente" },
+                    { value: "Muy frecuentemente (casi a diario)", image: "yachay.jpg", title: "Muy frecuente" }
+                ],
+                section: 1
+            },
+            {
+                id: "familyHistory",
+                question: "¿Existen antecedentes de anemia o trastornos sanguíneos en la familia?",
+                type: "image",
+                options: [
+                    { value: "No que yo sepa", image: "yachay.jpg", title: "No" },
+                    { value: "Sí, en padres o hermanos", image: "yachay.jpg", title: "Padres/hermanos" },
+                    { value: "Sí, en abuelos o tíos", image: "yachay.jpg", title: "Abuelos/tíos" },
+                    { value: "Sí, en varios miembros de la familia", image: "yachay.jpg", title: "Varios miembros" }
+                ],
+                section: 1
+            },
+            {
+                id: "medicalCondition",
+                question: "¿El niño ha sido diagnosticado con alguna condición médica relevante (celiaquía, enfermedad renal)?",
+                type: "image",
+                options: [
+                    { value: "No, no tiene condiciones médicas diagnosticadas", image: "yachay.jpg", title: "Ninguna" },
+                    { value: "Sí, celiaco/a", image: "yachay.jpg", title: "Celiaquía" },
+                    { value: "Sí, enfermedad renal", image: "yachay.jpg", title: "Enfermedad renal" },
+                    { value: "Sí, otra condición (especificar)", image: "yachay.jpg", title: "Otra" }
+                ],
+                section: 1,
+                hasOther: true
+            },
+            {
+                id: "medication",
+                question: "¿El niño está tomando algún medicamento o suplemento actualmente?",
+                type: "image",
+                options: [
+                    { value: "No, no toma ningún medicamento o suplemento", image: "yachay.jpg", title: "Ninguno" },
+                    { value: "Sí, vitaminas o suplementos", image: "yachay.jpg", title: "Vitaminas" },
+                    { value: "Sí, medicamentos recetados", image: "yachay.jpg", title: "Medicamentos" },
+                    { value: "Sí, ambos (medicamentos y suplementos)", image: "yachay.jpg", title: "Ambos" }
+                ],
+                section: 1
+            },
+
+            // Grupo 2: Información Nutricional
+            {
+                id: "ironRichFood",
+                question: "¿Cómo considera el consumo de alimentos ricos en hierro en su dieta?",
+                type: "image",
+                options: [
+                    { value: "Adecuado, consume regularmente", image: "yachay.jpg", title: "Adecuado" },
+                    { value: "Moderado, consume ocasionalmente", image: "yachay.jpg", title: "Moderado" },
+                    { value: "Bajo, rara vez consume", image: "yachay.jpg", title: "Bajo" },
+                    { value: "Muy bajo o nulo", image: "yachay.jpg", title: "Muy bajo" }
+                ],
+                section: 2
+            },
+            {
+                id: "mealsPerDay",
+                question: "¿Cuántas comidas completas hace el niño al día?",
+                type: "image",
+                options: [
+                    { value: "1 comida", image: "yachay.jpg", title: "1 comida" },
+                    { value: "2 comidas", image: "yachay.jpg", title: "2 comidas" },
+                    { value: "3 comidas", image: "yachay.jpg", title: "3 comidas" },
+                    { value: "4 o más comidas", image: "yachay.jpg", title: "4+ comidas" }
+                ],
+                section: 2
+            },
+            {
+                id: "redMeat",
+                question: "¿Con qué frecuencia come carnes rojas a la semana?",
+                type: "image",
+                options: [
+                    { value: "Nunca o rara vez", image: "yachay.jpg", title: "Nunca" },
+                    { value: "1-2 veces por semana", image: "yachay.jpg", title: "1-2 veces" },
+                    { value: "3-4 veces por semana", image: "yachay.jpg", title: "3-4 veces" },
+                    { value: "Diariamente", image: "yachay.jpg", title: "Diariamente" }
+                ],
+                section: 2
+            },
+            {
+                id: "greenVegetables",
+                question: "¿Con qué frecuencia come verduras de hoja verde?",
+                type: "image",
+                options: [
+                    { value: "Nunca o rara vez", image: "yachay.jpg", title: "Nunca" },
+                    { value: "1-2 veces por semana", image: "yachay.jpg", title: "1-2 veces" },
+                    { value: "3-4 veces por semana", image: "yachay.jpg", title: "3-4 veces" },
+                    { value: "Diariamente", image: "yachay.jpg", title: "Diariamente" }
+                ],
+                section: 2
+            },
+            {
+                id: "legumes",
+                question: "¿Con qué frecuencia come legumbres?",
+                type: "image",
+                options: [
+                    { value: "Nunca o rara vez", image: "yachay.jpg", title: "Nunca" },
+                    { value: "1-2 veces por semana", image: "yachay.jpg", title: "1-2 veces" },
+                    { value: "3-4 veces por semana", image: "yachay.jpg", title: "3-4 veces" },
+                    { value: "Diariamente", image: "yachay.jpg", title: "Diariamente" }
+                ],
+                section: 2
+            },
+            {
+                id: "appetite",
+                question: "¿Cómo calificaría su apetito en general?",
+                type: "image",
+                options: [
+                    { value: "Muy bueno, come bien", image: "yachay.jpg", title: "Muy bueno" },
+                    { value: "Bueno, come adecuadamente", image: "yachay.jpg", title: "Bueno" },
+                    { value: "Regular, a veces come bien", image: "yachay.jpg", title: "Regular" },
+                    { value: "Pobre, come muy poco", image: "yachay.jpg", title: "Pobre" }
+                ],
+                section: 2
+            },
+            {
+                id: "pica",
+                question: "¿Ha mostrado antojos por cosas no comestibles como hielo o tierra (pica)?",
+                type: "image",
+                options: [
+                    { value: "Nunca", image: "yachay.jpg", title: "Nunca" },
+                    { value: "Rara vez", image: "yachay.jpg", title: "Rara vez" },
+                    { value: "Ocasionalmente", image: "yachay.jpg", title: "Ocasionalmente" },
+                    { value: "Frecuentemente", image: "yachay.jpg", title: "Frecuentemente" }
+                ],
+                section: 2
+            },
+            {
+                id: "dairy",
+                question: "¿Cuál es su consumo diario de leche o derivados lácteos?",
+                type: "image",
+                options: [
+                    { value: "No consume", image: "yachay.jpg", title: "No consume" },
+                    { value: "1 vaso o porción al día", image: "yachay.jpg", title: "1 vaso/día" },
+                    { value: "2-3 vasos o porciones al día", image: "yachay.jpg", title: "2-3 vasos/día" },
+                    { value: "Más de 3 vasos o porciones al día", image: "yachay.jpg", title: "+3 vasos/día" }
+                ],
+                section: 2
+            },
+            {
+                id: "beverages",
+                question: "¿Consume bebidas como té, café o gaseosas oscuras?",
+                type: "image",
+                options: [
+                    { value: "Nunca", image: "yachay.jpg", title: "Nunca" },
+                    { value: "Rara vez", image: "yachay.jpg", title: "Rara vez" },
+                    { value: "Ocasionalmente", image: "yachay.jpg", title: "Ocasionalmente" },
+                    { value: "Frecuentemente o diariamente", image: "yachay.jpg", title: "Frecuentemente" }
+                ],
+                section: 2
+            },
+            {
+                id: "processedFood",
+                question: "¿Con qué frecuencia consume alimentos procesados o comida rápida?",
+                type: "image",
+                options: [
+                    { value: "Nunca o rara vez", image: "yachay.jpg", title: "Nunca" },
+                    { value: "1-2 veces por semana", image: "yachay.jpg", title: "1-2 veces" },
+                    { value: "3-4 veces por semana", image: "yachay.jpg", title: "3-4 veces" },
+                    { value: "Diariamente", image: "yachay.jpg", title: "Diariamente" }
+                ],
+                section: 2
+            },
+            {
+                id: "fortifiedCereals",
+                question: "¿Su dieta incluye cereales de desayuno que estén fortificados con hierro?",
+                type: "image",
+                options: [
+                    { value: "Nunca", image: "yachay.jpg", title: "Nunca" },
+                    { value: "Rara vez", image: "yachay.jpg", title: "Rara vez" },
+                    { value: "Ocasionalmente", image: "yachay.jpg", title: "Ocasionalmente" },
+                    { value: "Frecuentemente", image: "yachay.jpg", title: "Frecuentemente" }
+                ],
+                section: 2
+            },
+            {
+                id: "vitaminC",
+                question: "¿Consume regularmente alimentos ricos en Vitamina C?",
+                type: "image",
+                options: [
+                    { value: "Nunca o rara vez", image: "yachay.jpg", title: "Nunca" },
+                    { value: "Ocasionalmente", image: "yachay.jpg", title: "Ocasionalmente" },
+                    { value: "Frecuentemente", image: "yachay.jpg", title: "Frecuentemente" },
+                    { value: "Diariamente", image: "yachay.jpg", title: "Diariamente" }
+                ],
+                section: 2
+            },
+            {
+                id: "ironCookware",
+                question: "¿En su hogar, ¿suelen cocinar con ollas o sartenes de hierro?",
+                type: "image",
+                options: [
+                    { value: "Nunca", image: "yachay.jpg", title: "Nunca" },
+                    { value: "Rara vez", image: "yachay.jpg", title: "Rara vez" },
+                    { value: "Ocasionalmente", image: "yachay.jpg", title: "Ocasionalmente" },
+                    { value: "Frecuentemente", image: "yachay.jpg", title: "Frecuentemente" }
+                ],
+                section: 2
+            },
+            {
+                id: "allergies",
+                question: "¿El niño tiene alguna alergia o intolerancia alimentaria conocida?",
+                type: "file",
+                section: 2,
+                requiresAdditionalInfo: true
+            },
+            {
+                id: "variedDiet",
+                question: "¿Qué tan variada diría que es la dieta del niño?",
+                type: "image",
+                options: [
+                    { value: "Muy variada, come de todos los grupos alimenticios", image: "yachay.jpg", title: "Muy variada" },
+                    { value: "Moderadamente variada, come de varios grupos", image: "yachay.jpg", title: "Moderada" },
+                    { value: "Poco variada, come de pocos grupos", image: "yachay.jpg", title: "Poco variada" },
+                    { value: "Muy poco variada, come pocos alimentos", image: "yachay.jpg", title: "Muy poco variada" }
+                ],
+                section: 2
+            },
+
+            // Grupo 3: Desarrollo Cognitivo
+            {
+                id: "concentration",
+                question: "¿Cómo es su capacidad de concentración en las tareas escolares?",
+                type: "image",
+                options: [
+                    { value: "Muy buena, se concentra fácilmente", image: "yachay.jpg", title: "Muy buena" },
+                    { value: "Buena, se concentra la mayor parte del tiempo", image: "yachay.jpg", title: "Buena" },
+                    { value: "Regular, se distrae con facilidad", image: "yachay.jpg", title: "Regular" },
+                    { value: "Pobre, le cuesta mucho concentrarse", image: "yachay.jpg", title: "Pobre" }
+                ],
+                section: 3
+            },
+            {
+                id: "headaches",
+                question: "¿Con qué frecuencia se queja de dolores de cabeza?",
+                type: "image",
+                options: [
+                    { value: "Nunca o rara vez", image: "yachay.jpg", title: "Nunca" },
+                    { value: "Ocasionalmente (1-2 veces al mes)", image: "yachay.jpg", title: "Ocasionalmente" },
+                    { value: "Frecuentemente (1-2 veces por semana)", image: "yachay.jpg", title: "Frecuentemente" },
+                    { value: "Muy frecuentemente (varias veces por semana)", image: "yachay.jpg", title: "Muy frecuente" }
+                ],
+                section: 3
+            },
+            {
+                id: "distracted",
+                question: "Durante las tareas o clases, ¿se distrae con facilidad?",
+                type: "image",
+                options: [
+                    { value: "Nunca, mantiene la atención", image: "yachay.jpg", title: "Nunca" },
+                    { value: "Rara vez", image: "yachay.jpg", title: "Rara vez" },
+                    { value: "Ocasionalmente", image: "yachay.jpg", title: "Ocasionalmente" },
+                    { value: "Frecuentemente, se distrae muy fácilmente", image: "yachay.jpg", title: "Frecuentemente" }
+                ],
+                section: 3
+            },
+            {
+                id: "schoolPerformance",
+                question: "Respecto a su rendimiento escolar, ¿ha notado cambios?",
+                type: "image",
+                options: [
+                    { value: "No, ha sido consistente", image: "yachay.jpg", title: "Consistente" },
+                    { value: "Sí, ha mejorado", image: "yachay.jpg", title: "Mejorado" },
+                    { value: "Sí, ha disminuido un poco", image: "yachay.jpg", title: "Disminuido" },
+                    { value: "Sí, ha disminuido significativamente", image: "yachay.jpg", title: "Disminuido mucho" }
+                ],
+                section: 3
+            },
+            {
+                id: "memory",
+                question: "¿Qué tal es su capacidad para recordar información reciente?",
+                type: "image",
+                options: [
+                    { value: "Muy buena, recuerda con facilidad", image: "yachay.jpg", title: "Muy buena" },
+                    { value: "Buena, recuerda la mayoría de las cosas", image: "yachay.jpg", title: "Buena" },
+                    { value: "Regular, olvida algunas cosas", image: "yachay.jpg", title: "Regular" },
+                    { value: "Pobre, le cuesta recordar información reciente", image: "yachay.jpg", title: "Pobre" }
+                ],
+                section: 3
+            },
+            {
+                id: "curiosity",
+                question: "¿Muestra interés y curiosidad por aprender cosas nuevas?",
+                type: "image",
+                options: [
+                    { value: "Mucho interés, siempre pregunta", image: "yachay.jpg", title: "Mucho interés" },
+                    { value: "Bastante interés, muestra curiosidad", image: "yachay.jpg", title: "Bastante interés" },
+                    { value: "Poco interés, pocas preguntas", image: "yachay.jpg", title: "Poco interés" },
+                    { value: "Muy poco interés, no muestra curiosidad", image: "yachay.jpg", title: "Muy poco interés" }
+                ],
+                section: 3
+            },
+            {
+                id: "motorSkills",
+                question: "¿Ha observado alguna dificultad en su desarrollo motor (escribir, coordinar)?",
+                type: "image",
+                options: [
+                    { value: "No, su desarrollo motor es adecuado", image: "yachay.jpg", title: "Adecuado" },
+                    { value: "Sí, leves dificultades ocasionales", image: "yachay.jpg", title: "Leves dificultades" },
+                    { value: "Sí, dificultades notables", image: "yachay.jpg", title: "Dificultades notables" },
+                    { value: "Sí, dificultades significativas", image: "yachay.jpg", title: "Dificultades graves" }
+                ],
+                section: 3
+            },
+            {
+                id: "followingInstructions",
+                question: "¿Le resulta fácil seguir instrucciones con varios pasos?",
+                type: "image",
+                options: [
+                    { value: "Sí, sigue instrucciones complejas sin problemas", image: "yachay.jpg", title: "Muy fácil" },
+                    { value: "Sí, generalmente sigue bien las instrucciones", image: "yachay.jpg", title: "Fácil" },
+                    { value: "A veces le cuesta, necesita que se repitan", image: "yachay.jpg", title: "A veces difícil" },
+                    { value: "Le cuesta mucho, necesita ayuda constante", image: "yachay.jpg", title: "Muy difícil" }
+                ],
+                section: 3
+            },
+            {
+                id: "organization",
+                question: "¿Cómo es para organizar sus cosas (juguetes, útiles escolares)?",
+                type: "image",
+                options: [
+                    { value: "Muy organizado/a, todo en su lugar", image: "yachay.jpg", title: "Muy organizado" },
+                    { value: "Bastante organizado/a", image: "yachay.jpg", title: "Bastante organizado" },
+                    { value: "Poco organizado/a, a menudo desordenado/a", image: "yachay.jpg", title: "Poco organizado" },
+                    { value: "Muy desorganizado/a, siempre pierde cosas", image: "yachay.jpg", title: "Muy desorganizado" }
+                ],
+                section: 3
+            },
+            {
+                id: "problemSolving",
+                question: "Al enfrentar un problema sencillo, ¿busca una solución por sí mismo?",
+                type: "image",
+                options: [
+                    { value: "Siempre, es muy independiente", image: "yachay.jpg", title: "Muy independiente" },
+                    { value: "La mayoría de las veces", image: "yachay.jpg", title: "Independiente" },
+                    { value: "A veces, necesita ayuda", image: "yachay.jpg", title: "A veces necesita ayuda" },
+                    { value: "Rara vez, siempre pide ayuda", image: "yachay.jpg", title: "Poco independiente" }
+                ],
+                section: 3
+            },
+            {
+                id: "reactionTime",
+                question: "En juegos o actividades, ¿su tiempo de reacción le parece adecuado?",
+                type: "image",
+                options: [
+                    { value: "Sí, muy rápido/a", image: "yachay.jpg", title: "Muy rápido" },
+                    { value: "Sí, adecuado para su edad", image: "yachay.jpg", title: "Adecuado" },
+                    { value: "Un poco lento/a", image: "yachay.jpg", title: "Un poco lento" },
+                    { value: "Muy lento/a", image: "yachay.jpg", title: "Muy lento" }
+                ],
+                section: 3
+            },
+            {
+                id: "copyingSkills",
+                question: "¿Qué tal es su habilidad para copiar formas o letras?",
+                type: "image",
+                options: [
+                    { value: "Muy buena, copia con precisión", image: "yachay.jpg", title: "Muy buena" },
+                    { value: "Buena, copia con pocos errores", image: "yachay.jpg", title: "Buena" },
+                    { value: "Regular, comete varios errores", image: "yachay.jpg", title: "Regular" },
+                    { value: "Pobre, le cuesta mucho copiar", image: "yachay.jpg", title: "Pobre" }
+                ],
+                section: 3
+            },
+            {
+                id: "alertness",
+                question: "¿Cómo describiría su estado de alerta general durante el día?",
+                type: "image",
+                options: [
+                    { value: "Muy alerta, siempre atento/a", image: "yachay.jpg", title: "Muy alerta" },
+                    { value: "Alerta, atento/a la mayor parte del tiempo", image: "yachay.jpg", title: "Alerta" },
+                    { value: "Poco alerta, a veces somnoliento/a", image: "yachay.jpg", title: "Poco alerta" },
+                    { value: "Muy poco alerta, frecuentemente somnoliento/a", image: "yachay.jpg", title: "Muy poco alerta" }
+                ],
+                section: 3
+            },
+            {
+                id: "earRinging",
+                question: "¿Alguna vez se ha quejado de zumbidos en los oídos?",
+                type: "image",
+                options: [
+                    { value: "Nunca", image: "yachay.jpg", title: "Nunca" },
+                    { value: "Rara vez", image: "yachay.jpg", title: "Rara vez" },
+                    { value: "Ocasionalmente", image: "yachay.jpg", title: "Ocasionalmente" },
+                    { value: "Frecuentemente", image: "yachay.jpg", title: "Frecuentemente" }
+                ],
+                section: 3
+            },
+            {
+                id: "balance",
+                question: "¿Ha notado problemas de equilibrio o coordinación en sus movimientos?",
+                type: "image",
+                options: [
+                    { value: "No, su equilibrio y coordinación son buenos", image: "yachay.jpg", title: "Buen equilibrio" },
+                    { value: "Leves problemas ocasionales", image: "yachay.jpg", title: "Leves problemas" },
+                    { value: "Problemas notables de equilibrio", image: "yachay.jpg", title: "Problemas notables" },
+                    { value: "Problemas significativos de equilibrio y coordinación", image: "yachay.jpg", title: "Problemas graves" }
+                ],
+                section: 3
+            },
+
+            // Grupo 4: Bienestar Psicológico y Emocional
+            {
+                id: "physicalExertion",
+                question: "¿Se cansa o le falta el aire con actividades físicas leves?",
+                type: "image",
+                options: [
+                    { value: "Nunca, tiene buena resistencia", image: "yachay.jpg", title: "Buena resistencia" },
+                    { value: "Rara vez", image: "yachay.jpg", title: "Rara vez" },
+                    { value: "Ocasionalmente, con actividades moderadas", image: "yachay.jpg", title: "Ocasionalmente" },
+                    { value: "Frecuentemente, incluso con actividades leves", image: "yachay.jpg", title: "Frecuentemente" }
+                ],
+                section: 4
+            },
+            {
+                id: "mood",
+                question: "¿Cómo describiría su estado de ánimo general últimamente?",
+                type: "image",
+                options: [
+                    { value: "Muy positivo, alegre y entusiasta", image: "yachay.jpg", title: "Muy positivo" },
+                    { value: "Bueno, generalmente contento/a", image: "yachay.jpg", title: "Bueno" },
+                    { value: "Regular, a veces triste o irritado/a", image: "yachay.jpg", title: "Regular" },
+                    { value: "Negativo, frecuentemente triste o irritado/a", image: "yachay.jpg", title: "Negativo" }
+                ],
+                section: 4
+            },
+            {
+                id: "interestLoss",
+                question: "¿Ha perdido interés en juegos o actividades que antes le encantaban?",
+                type: "image",
+                options: [
+                    { value: "No, mantiene el mismo interés", image: "yachay.jpg", title: "Mismo interés" },
+                    { value: "Un poco menos de interés", image: "yachay.jpg", title: "Un poco menos" },
+                    { value: "Sí, ha perdido interés en varias actividades", image: "yachay.jpg", title: "Perdió interés" },
+                    { value: "Sí, ha perdido interés en casi todas sus actividades favoritas", image: "yachay.jpg", title: "Perdió todo interés" }
+                ],
+                section: 4
+            },
+            {
+                id: "socialEnergy",
+                question: "¿Cómo es su nivel de energía para jugar o socializar?",
+                type: "image",
+                options: [
+                    { value: "Muy alto, siempre quiere jugar con otros", image: "yachay.jpg", title: "Muy alto" },
+                    { value: "Bueno, disfruta jugar y socializar", image: "yachay.jpg", title: "Bueno" },
+                    { value: "Regular, a veces prefiere estar tranquilo/a", image: "yachay.jpg", title: "Regular" },
+                    { value: "Bajo, rara vez quiere jugar o socializar", image: "yachay.jpg", title: "Bajo" }
+                ],
+                section: 4
+            },
+            {
+                id: "sadness",
+                question: "¿Expresa sentimientos de tristeza o desmotivación?",
+                type: "image",
+                options: [
+                    { value: "Nunca o rara vez", image: "yachay.jpg", title: "Nunca" },
+                    { value: "Ocasionalmente", image: "yachay.jpg", title: "Ocasionalmente" },
+                    { value: "Frecuentemente", image: "yachay.jpg", title: "Frecuentemente" },
+                    { value: "Muy frecuentemente, casi siempre", image: "yachay.jpg", title: "Muy frecuente" }
+                ],
+                section: 4
+            },
+            {
+                id: "coldSensitivity",
+                question: "¿Se queja de sentir frío más de lo normal?",
+                type: "image",
+                options: [
+                    { value: "Nunca", image: "yachay.jpg", title: "Nunca" },
+                    { value: "Rara vez", image: "yachay.jpg", title: "Rara vez" },
+                    { value: "Ocasionalmente", image: "yachay.jpg", title: "Ocasionalmente" },
+                    { value: "Frecuentemente, siempre tiene frío", image: "yachay.jpg", title: "Frecuentemente" }
+                ],
+                section: 4
+            },
+            {
+                id: "sleepPatterns",
+                question: "¿Cómo son sus patrones de sueño?",
+                type: "image",
+                options: [
+                    { value: "Muy buenos, duerme bien toda la noche", image: "yachay.jpg", title: "Muy buenos" },
+                    { value: "Buenos, generalmente duerme bien", image: "yachay.jpg", title: "Buenos" },
+                    { value: "Regulares, a veces tiene problemas para dormir", image: "yachay.jpg", title: "Regulares" },
+                    { value: "Pobres, frecuentemente tiene problemas para dormir", image: "yachay.jpg", title: "Pobres" }
+                ],
+                section: 4
+            },
+            {
+                id: "behaviorChanges",
+                question: "¿Ha notado cambios de comportamiento significativos y repentinos?",
+                type: "image",
+                options: [
+                    { value: "No, su comportamiento ha sido consistente", image: "yachay.jpg", title: "Consistente" },
+                    { value: "Leves cambios ocasionales", image: "yachay.jpg", title: "Leves cambios" },
+                    { value: "Cambios notables pero ocasionales", image: "yachay.jpg", title: "Cambios notables" },
+                    { value: "Cambios significativos y frecuentes", image: "yachay.jpg", title: "Cambios graves" }
+                ],
+                section: 4
+            },
+            {
+                id: "dizziness",
+                question: "¿Con qué frecuencia se queja de sentirse mareado o aturdido?",
+                type: "image",
+                options: [
+                    { value: "Nunca", image: "yachay.jpg", title: "Nunca" },
+                    { value: "Rara vez", image: "yachay.jpg", title: "Rara vez" },
+                    { value: "Ocasionalmente", image: "yachay.jpg", title: "Ocasionalmente" },
+                    { value: "Frecuentemente", image: "yachay.jpg", title: "Frecuentemente" }
+                ],
+                section: 4
+            },
+            {
+                id: "physicalStrength",
+                question: "¿Cómo percibe su fortaleza física general?",
+                type: "image",
+                options: [
+                    { value: "Muy fuerte/a para su edad", image: "yachay.jpg", title: "Muy fuerte" },
+                    { value: "Fuerte/a, adecuado para su edad", image: "yachay.jpg", title: "Fuerte" },
+                    { value: "Un poco débil", image: "yachay.jpg", title: "Un poco débil" },
+                    { value: "Muy débil, se cansa fácilmente", image: "yachay.jpg", title: "Muy débil" }
+                ],
+                section: 4
+            },
+            {
+                id: "socialSkills",
+                question: "Socialmente, ¿le resulta fácil relacionarse con otros niños?",
+                type: "image",
+                options: [
+                    { value: "Muy fácil, hace amigos rápidamente", image: "yachay.jpg", title: "Muy fácil" },
+                    { value: "Bastante fácil, le gusta socializar", image: "yachay.jpg", title: "Bastante fácil" },
+                    { value: "Un poco difícil, le cuesta hacer amigos", image: "yachay.jpg", title: "Un poco difícil" },
+                    { value: "Muy difícil, prefiere estar solo/a", image: "yachay.jpg", title: "Muy difícil" }
+                ],
+                section: 4
+            },
+            {
+                id: "isolation",
+                question: "¿Tiende a aislarse o prefiere estar solo más de lo habitual?",
+                type: "image",
+                options: [
+                    { value: "Nunca, siempre quiere estar con otros", image: "yachay.jpg", title: "Nunca" },
+                    { value: "Rara vez", image: "yachay.jpg", title: "Rara vez" },
+                    { value: "Ocasionalmente", image: "yachay.jpg", title: "Ocasionalmente" },
+                    { value: "Frecuentemente, prefiere estar solo/a", image: "yachay.jpg", title: "Frecuentemente" }
+                ],
+                section: 4
+            },
+            {
+                id: "frustration",
+                question: "¿Cómo reacciona ante situaciones de frustración?",
+                type: "image",
+                options: [
+                    { value: "Muy bien, maneja la frustración adecuadamente", image: "yachay.jpg", title: "Muy bien" },
+                    { value: "Bien, generalmente se calma solo/a", image: "yachay.jpg", title: "Bien" },
+                    { value: "Regular, a veces necesita ayuda para calmarse", image: "yachay.jpg", title: "Regular" },
+                    { value: "Mal, tiene rabietas o se altera fácilmente", image: "yachay.jpg", title: "Mal" }
+                ],
+                section: 4
+            },
+            {
+                id: "pains",
+                question: "¿Se queja de dolores (musculares, abdominales) sin una causa clara?",
+                type: "image",
+                options: [
+                    { value: "Nunca", image: "yachay.jpg", title: "Nunca" },
+                    { value: "Rara vez", image: "yachay.jpg", title: "Rara vez" },
+                    { value: "Ocasionalmente", image: "yachay.jpg", title: "Ocasionalmente" },
+                    { value: "Frecuentemente", image: "yachay.jpg", title: "Frecuentemente" }
+                ],
+                section: 4
+            },
+            {
+                id: "sensitivity",
+                question: "¿Ha notado si está más sensible a ruidos o luces fuertes?",
+                type: "image",
+                options: [
+                    { value: "No, no muestra sensibilidad especial", image: "yachay.jpg", title: "No sensible" },
+                    { value: "Un poco sensible ocasionalmente", image: "yachay.jpg", title: "Poco sensible" },
+                    { value: "Bastante sensible a ruidos o luces fuertes", image: "yachay.jpg", title: "Bastante sensible" },
+                    { value: "Muy sensible, le molestan fácilmente", image: "yachay.jpg", title: "Muy sensible" }
+                ],
+                section: 4
+            }
+        ];
+
+        // Mensajes de ánimo para el robot
+        const encouragementMessages = [
+            "¡Excelente trabajo! Cada respuesta ayuda a mejorar la salud de tu hijo.",
+            "¡Sigue así! Estás contribuyendo al bienestar de tu familia.",
+            "¡Tus respuestas son muy valiosas! Gracias por tu dedicación.",
+            "¡Lo estás haciendo genial! La nutrición es fundamental para el desarrollo.",
+            "¡Continúa adelante! Estás construyendo un futuro más saludable.",
+            "¡Fantástico! Tu compromiso con la salud de tu hijo es admirable.",
+            "¡Sigue adelante! Cada pregunta respondida es un paso importante.",
+            "¡Qué bien! La información que proporcionas es muy útil.",
+            "¡Excelente! Estás ayudando a prevenir problemas de salud.",
+            "¡Adelante! Tu esfuerzo marcará una gran diferencia.",
+            "¡Hola! Soy tu asistente de salud infantil. ¡Estoy aquí para ayudarte!",
+            "¿Necesitas ayuda? ¡Estoy a tu disposición!",
+            "¡Tus respuestas son importantes para el desarrollo de tu hijo!",
+            "¡Juntos podemos mejorar la salud infantil!",
+            "¡La nutrición adecuada es clave para el crecimiento!",
+            "¡Cada pregunta contestada es un paso hacia un futuro saludable!",
+            "¡Gracias por tu tiempo y dedicación!",
+            "¡La información que proporcionas es muy valiosa!",
+            "¡Estoy aquí para apoyarte en este proceso!",
+            "¡Tu participación es fundamental para el bienestar de tu familia!"
+        ];
+
+        // Variables globales
+        let currentQuestionIndex = 0;
+        let currentChild = null;
+        let childrenData = [];
+        let answers = {};
+        let isEditMode = false;
+        let currentMessageIndex = 0;
+        let incompleteQuestions = [];
+
+        // Elementos del DOM
+        const questionContainer = document.getElementById('questionContainer');
+        const progressFill = document.getElementById('progressFill');
+        const progressText = document.getElementById('progressText');
+        const nextBtn = document.getElementById('nextBtn');
+        const backBtn = document.getElementById('backBtn');
+        const exitBtn = document.getElementById('exitBtn');
+        const exitBtnFinal = document.getElementById('exitBtnFinal');
+        const dashboardBtn = document.getElementById('dashboardBtn');
+        const completionScreen = document.getElementById('completionScreen');
+        const selectAnotherChildBtn = document.getElementById('selectAnotherChildBtn');
+        const generatePlanBtn = document.getElementById('generatePlanBtn');
+        const childNameDisplay = document.getElementById('childNameDisplay');
+        const childAgeDisplay = document.getElementById('childAgeDisplay');
+        const childrenGridContainer = document.getElementById('childrenGridContainer');
+        const messageBubble = document.getElementById('messageBubble');
+        const messageText = document.getElementById('messageText');
+        const avatarRobot = document.getElementById('avatarRobot');
+
+        // Inicialización
+        document.addEventListener('DOMContentLoaded', function() {
+            // Cargar datos del almacenamiento local
+            loadDataFromStorage();
+            
+            // Obtener el niño seleccionado de la URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const childId = urlParams.get('childId');
+            const editMode = urlParams.get('edit');
+            const startQuestion = urlParams.get('question');
+            
+            // Verificar si estamos en modo edición
+            isEditMode = editMode === 'true';
+            
+            if (childId) {
+                currentChild = childrenData.find(child => child.id === childId);
+                if (currentChild) {
+                    childNameDisplay.textContent = currentChild.name;
+                    childAgeDisplay.textContent = currentChild.age;
+                    
+                    // Cargar respuestas guardadas si existen
+                    if (currentChild.answers) {
+                        answers = {...currentChild.answers};
+                    }
+                    
+                    // Si estamos en modo edición y se especificó una pregunta inicial
+                    if (isEditMode && startQuestion !== null) {
+                        currentQuestionIndex = parseInt(startQuestion);
+                    } else {
+                        // Si no, cargar el último índice de pregunta guardado
+                        currentQuestionIndex = currentChild.lastQuestionIndex || 0;
+                    }
+                    
+                    // Mostrar el botón de dashboard si hay respuestas guardadas
+                    if (currentQuestionIndex > 0) {
+                        dashboardBtn.classList.remove('hidden');
+                    }
+                    
+                    // Mostrar la pregunta actual
+                    displayQuestion();
+                    
+                    // Mostrar mensaje de ánimo
+                    showEncouragementMessage();
+                } else {
+                    // Si no se encuentra el niño, redirigir a la página principal
+                    window.location.href = 'index.html';
+                }
+            } else {
+                // Si no hay ID de niño en la URL, redirigir a la página principal
+                window.location.href = 'index.html';
+            }
+            
+            // Configurar event listeners
+            nextBtn.addEventListener('click', nextQuestion);
+            backBtn.addEventListener('click', previousQuestion);
+            exitBtn.addEventListener('click', exitQuestionnaire);
+            exitBtnFinal.addEventListener('click', exitQuestionnaire);
+            dashboardBtn.addEventListener('click', showCompletionScreenDirectly);
+            selectAnotherChildBtn.addEventListener('click', () => {
+                window.location.href = 'index.html';
+            });
+            generatePlanBtn.addEventListener('click', generateNutritionalPlan);
+            
+            // Event listener para el robot - hacer que muestre mensajes al hacer clic
+            avatarRobot.addEventListener('click', showRandomMessage);
+        });
+
+        // Mostrar mensaje de ánimo del robot
+        function showEncouragementMessage() {
+            // Seleccionar un mensaje aleatorio
+            const randomIndex = Math.floor(Math.random() * encouragementMessages.length);
+            messageText.textContent = encouragementMessages[randomIndex];
+            
+            // Mostrar la burbuja con animación
+            messageBubble.classList.add('show');
+            
+            // Ocultar después de 5 segundos
+            setTimeout(() => {
+                messageBubble.classList.remove('show');
+            }, 5000);
+        }
+
+        // Mostrar un mensaje aleatorio al hacer clic en el robot
+        function showRandomMessage() {
+            // Seleccionar un mensaje aleatorio diferente al actual
+            let randomIndex;
+            do {
+                randomIndex = Math.floor(Math.random() * encouragementMessages.length);
+            } while (randomIndex === currentMessageIndex && encouragementMessages.length > 1);
+            
+            currentMessageIndex = randomIndex;
+            messageText.textContent = encouragementMessages[randomIndex];
+            
+            // Mostrar la burbuja con animación
+            messageBubble.classList.add('show');
+            
+            // Ocultar después de 5 segundos
+            setTimeout(() => {
+                messageBubble.classList.remove('show');
+            }, 5000);
+        }
+
+        // Cargar datos desde el almacenamiento local
+        function loadDataFromStorage() {
+            const storedData = localStorage.getItem('yachayMikuyChildren');
+            if (storedData) {
+                childrenData = JSON.parse(storedData);
+            }
+        }
+
+        // Guardar datos en el almacenamiento local
+        function saveDataToStorage() {
+            localStorage.setItem('yachayMikuyChildren', JSON.stringify(childrenData));
+        }
+
+        // Mostrar la pantalla de finalización directamente
+        function showCompletionScreenDirectly() {
+            // Ocultar contenedor de preguntas y botones de navegación
+            questionContainer.style.display = 'none';
+            document.querySelector('.navigation-buttons').style.display = 'none';
+            document.querySelector('.progress-container').style.display = 'none';
+            
+            // Mostrar pantalla de finalización
+            completionScreen.style.display = 'block';
+            
+            // Cargar lista de niños
+            loadChildrenList();
+        }
+
+        // Mostrar la pregunta actual
+        function displayQuestion() {
+            if (currentQuestionIndex >= questions.length) {
+                showCompletionScreen();
+                return;
+            }
+            
+            const question = questions[currentQuestionIndex];
+            updateProgressBar();
+            updateSectionIndicator(question.section);
+            
+            // Actualizar botones de navegación
+            backBtn.classList.toggle('hidden', currentQuestionIndex === 0);
+            
+            // Mostrar el botón de dashboard si hay respuestas guardadas
+            if (currentQuestionIndex > 0) {
+                dashboardBtn.classList.remove('hidden');
+            } else {
+                dashboardBtn.classList.add('hidden');
+            }
+            
+            // Limpiar el contenedor de preguntas
+            questionContainer.innerHTML = '';
+            
+            // Crear el título de la pregunta (sin numeración)
+            const questionTitle = document.createElement('h2');
+            questionTitle.className = 'question-title';
+            questionTitle.innerHTML = question.question + '<span class="required-indicator">*</span>';
+            questionContainer.appendChild(questionTitle);
+            
+            // Crear el contenedor de respuestas
+            const answerOptions = document.createElement('div');
+            answerOptions.className = 'answer-options';
+            questionContainer.appendChild(answerOptions);
+            
+            // Mostrar el tipo de pregunta correspondiente
+            switch (question.type) {
+                case 'radio':
+                    displayRadioQuestion(question, answerOptions);
+                    break;
+                case 'text':
+                    displayTextQuestion(question, answerOptions);
+                    break;
+                case 'file':
+                    displayFileQuestion(question, answerOptions);
+                    break;
+                case 'image':
+                    displayImageQuestion(question, answerOptions);
+                    break;
+            }
+            
+            // Restaurar respuesta guardada si existe
+            if (answers[question.id]) {
+                restoreAnswer(question.id, question.type);
+            }
+        }
+
+        // Mostrar pregunta de opción múltiple
+        function displayRadioQuestion(question, container) {
+            question.options.forEach((option, index) => {
+                const optionDiv = document.createElement('div');
+                optionDiv.className = 'option';
+                
+                const input = document.createElement('input');
+                input.type = 'radio';
+                input.id = `option-${index}`;
+                input.name = question.id;
+                input.value = option;
+                
+                const label = document.createElement('label');
+                label.htmlFor = `option-${index}`;
+                label.textContent = option;
+                
+                optionDiv.appendChild(input);
+                optionDiv.appendChild(label);
+                container.appendChild(optionDiv);
+                
+                // Event listener para selección
+                optionDiv.addEventListener('click', function() {
+                    input.checked = true;
+                    document.querySelectorAll(`.option`).forEach(opt => {
+                        opt.classList.remove('selected');
+                    });
+                    optionDiv.classList.add('selected');
+                    
+                    // Guardar respuesta
+                    answers[question.id] = option;
+                    
+                    // Si hay una opción "otro", mostrar campo de texto
+                    if (question.hasOther && option.includes("otra condición")) {
+                        showOtherField(container, question.id);
+                    }
+                });
+            });
+        }
+
+        // Mostrar pregunta de texto
+        function displayTextQuestion(question, container) {
+            const inputGroup = document.createElement('div');
+            inputGroup.className = 'input-group';
+            
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.className = 'text-input';
+            input.id = question.id;
+            input.placeholder = 'Escriba su respuesta aquí...';
+            
+            inputGroup.appendChild(input);
+            container.appendChild(inputGroup);
+            
+            // Event listener para guardar respuesta
+            input.addEventListener('input', function() {
+                answers[question.id] = input.value;
+            });
+        }
+        
+        // Función para limitar palabras en textarea
+        function limitWords(textarea, wordCountDisplay, maxWords) {
+            const text = textarea.value;
+            const words = text.split(/\s+/).filter(word => word.length > 0);
+            
+            if (words.length > maxWords) {
+                const trimmedText = words.slice(0, maxWords).join(' ');
+                textarea.value = trimmedText;
+            }
+            
+            wordCountDisplay.textContent = `${words.length > maxWords ? maxWords : words.length}/${maxWords} palabras`;
+        }
+
+        // Mostrar pregunta de carga de archivo
+        function displayFileQuestion(question, container) {
+            // Opción de subir archivo
+            const fileUploadDiv = document.createElement('div');
+            fileUploadDiv.className = 'file-upload';
+            const fileInput = document.createElement('input');
+            fileInput.type = 'file';
+            fileInput.id = question.id;
+            fileInput.accept = '.pdf,.jpg,.jpeg,.png';
+            const fileLabel = document.createElement('label');
+            fileLabel.className = 'file-upload-label';
+            fileLabel.htmlFor = question.id;
+            fileLabel.innerHTML = '<i class="fas fa-cloud-upload-alt"></i> Haga clic para subir un archivo o arrástrelo aquí';
+            fileUploadDiv.appendChild(fileInput);
+            fileUploadDiv.appendChild(fileLabel);
+            container.appendChild(fileUploadDiv);
+
+            // Opción "No tengo"
+            const noExamOption = document.createElement('div');
+            noExamOption.className = 'no-exam-option';
+            const noExamInput = document.createElement('input');
+            noExamInput.type = 'radio';
+            noExamInput.id = `no-exam-${question.id}`;
+            noExamInput.name = question.id;
+            noExamInput.value = 'no-exam';
+            const noExamLabel = document.createElement('label');
+            noExamLabel.htmlFor = `no-exam-${question.id}`;
+            noExamLabel.textContent = `No tengo ${question.id === 'hemoglobin' ? 'examen de hemoglobina' : 'alergias conocidas'}`;
+            noExamOption.appendChild(noExamInput);
+            noExamOption.appendChild(noExamLabel);
+            container.appendChild(noExamOption);
+
+            // Campo de texto para descripción
+            const textGroup = document.createElement('div');
+            textGroup.className = 'input-group';
+            textGroup.style.marginTop = '20px';
+            const textLabel = document.createElement('label');
+            textLabel.className = 'input-label';
+            textLabel.textContent = 'Opcional: Añada una breve descripción';
+            const textInput = document.createElement('textarea');
+            textInput.className = 'text-input';
+            textInput.id = `${question.id}-text`;
+            textInput.rows = 3;
+            textInput.placeholder = 'Describa aquí...';
+            const wordCountContainer = document.createElement('div');
+            wordCountContainer.className = 'word-count-container';
+            wordCountContainer.id = `${question.id}-word-count`;
+            wordCountContainer.textContent = '0/50 palabras';
+            
+            textGroup.appendChild(textLabel);
+            textGroup.appendChild(textInput);
+            textGroup.appendChild(wordCountContainer);
+            container.appendChild(textGroup);
+            
+            // Event listeners
+            fileInput.addEventListener('change', function() {
+                if (fileInput.files.length > 0) {
+                    fileLabel.innerHTML = `<i class="fas fa-file"></i> ${fileInput.files[0].name}`;
+                    noExamInput.checked = false;
+                    noExamOption.classList.remove('selected');
+                    // Guardar respuesta
+                    if (!answers[question.id]) {
+                        answers[question.id] = {};
+                    }
+                    answers[question.id].fileName = fileInput.files[0].name;
+                    answers[question.id].fileType = fileInput.files[0].type;
+                    answers[question.id].noExam = false; // porque se está subiendo un archivo
+                }
+            });
+
+            noExamOption.addEventListener('click', function() {
+                noExamInput.checked = true;
+                noExamOption.classList.add('selected');
+                fileInput.value = ''; // Limpiar archivo seleccionado
+                fileLabel.innerHTML = '<i class="fas fa-cloud-upload-alt"></i> Haga clic para subir un archivo o arrástrelo aquí';
+                // Guardar respuesta
+                if (!answers[question.id]) {
+                    answers[question.id] = {};
+                }
+                answers[question.id].noExam = true;
+            });
+
+            textInput.addEventListener('input', function() {
+                limitWords(textInput, wordCountContainer, 50);
+                // Guardar respuesta
+                if (!answers[question.id]) {
+                    answers[question.id] = {};
+                }
+                answers[question.id].text = textInput.value;
+            });
+        }
+
+        // Mostrar pregunta con imágenes
+        function displayImageQuestion(question, container) {
+            const imageContainer = document.createElement('div');
+            imageContainer.className = 'image-question';
+            
+            question.options.forEach((option, index) => {
+                const imageOption = document.createElement('div');
+                imageOption.className = 'image-option';
+                
+                const img = document.createElement('img');
+                img.src = option.image;
+                img.alt = option.value;
+                
+                const checkmark = document.createElement('div');
+                checkmark.className = 'checkmark';
+                checkmark.innerHTML = '<i class="fas fa-check"></i>';
+                
+                const imageTitle = document.createElement('div');
+                imageTitle.className = 'image-title';
+                imageTitle.textContent = option.title;
+                
+                imageOption.appendChild(img);
+                imageOption.appendChild(checkmark);
+                imageOption.appendChild(imageTitle);
+                imageContainer.appendChild(imageOption);
+                
+                // Event listener para selección
+                imageOption.addEventListener('click', function() {
+                    document.querySelectorAll('.image-option').forEach(opt => {
+                        opt.classList.remove('selected');
+                    });
+                    imageOption.classList.add('selected');
+                    
+                    // Guardar respuesta
+                    answers[question.id] = option.value;
+                    
+                    // Si la pregunta requiere información adicional, mostrar campos
+                    if (question.requiresAdditionalInfo) {
+                        // Verificar si ya existe el contenedor de campos adicionales
+                        let additionalInputs = document.getElementById(`${question.id}-additional`);
+                        
+                        if (!additionalInputs) {
+                            // Crear contenedor para campos adicionales
+                            additionalInputs = document.createElement('div');
+                            additionalInputs.className = 'additional-inputs';
+                            additionalInputs.id = `${question.id}-additional`;
+                            
+                            const additionalTitle = document.createElement('div');
+                            additionalTitle.className = 'additional-inputs-title';
+                            additionalTitle.innerHTML = '<i class="fas fa-exclamation-circle"></i> Información adicional';
+                            additionalInputs.appendChild(additionalTitle);
+                            
+                            // Campo de texto para información adicional
+                            const textGroup = document.createElement('div');
+                            textGroup.className = 'input-group';
+                            
+                            const textLabel = document.createElement('label');
+                            textLabel.className = 'input-label';
+                            
+                            // Personalizar etiqueta según el tipo de pregunta
+                            if (question.id === 'weight') {
+                                textLabel.textContent = 'Ingrese el peso exacto (kg):';
+                            } else if (question.id === 'height') {
+                                textLabel.textContent = 'Ingrese la talla exacta (cm):';
+                            } else {
+                                textLabel.textContent = 'Por favor, proporcione más detalles:';
+                            }
+                            
+                            const textInput = document.createElement('input');
+                            textInput.type = 'text';
+                            textInput.className = 'text-input';
+                            textInput.id = `${question.id}-text`;
+                            
+                            // Personalizar placeholder según el tipo de pregunta
+                            if (question.id === 'weight') {
+                                textInput.placeholder = 'Ej: 25.5';
+                            } else if (question.id === 'height') {
+                                textInput.placeholder = 'Ej: 120';
+                            } else {
+                                textInput.placeholder = 'Describa aquí...';
+                            }
+                            
+                            textGroup.appendChild(textLabel);
+                            textGroup.appendChild(textInput);
+                            additionalInputs.appendChild(textGroup);
+                            
+                            // Para preguntas de peso y talla, agregar visualización
+                            if (question.id === 'weight' || question.id === 'height') {
+                                const visualContainer = document.createElement('div');
+                                visualContainer.className = 'weight-height-container';
+                                visualContainer.style.marginTop = '20px';
+                                
+                                const figureContainer = document.createElement('div');
+                                figureContainer.className = question.id === 'weight' ? 'weight-input-container' : 'height-input-container';
+                                
+                                const figure = document.createElement('div');
+                                figure.className = question.id === 'weight' ? 'weight-figure' : 'height-figure';
+                                figure.textContent = '🧍';
+                                
+                                const valueDisplay = document.createElement('div');
+                                valueDisplay.className = question.id === 'weight' ? 'weight-value' : 'height-value';
+                                valueDisplay.textContent = question.id === 'weight' ? '0 kg' : '0 cm';
+                                
+                                figureContainer.appendChild(figure);
+                                figureContainer.appendChild(valueDisplay);
+                                visualContainer.appendChild(figureContainer);
+                                additionalInputs.appendChild(visualContainer);
+                                
+                                // Event listener para actualizar la visualización
+                                textInput.addEventListener('input', function() {
+                                    const value = parseFloat(textInput.value);
+                                    
+                                    if (!isNaN(value)) {
+                                        // Actualizar el valor mostrado
+                                        valueDisplay.textContent = question.id === 'weight' ? `${value} kg` : `${value} cm`;
+                                        
+                                        // Actualizar la figura según el valor
+                                        if (question.id === 'weight') {
+                                            if (value < 15) {
+                                                figure.textContent = '🧍'; // Figura delgada
+                                                figure.style.transform = 'scale(0.8)';
+                                            } else if (value < 30) {
+                                                figure.textContent = '🧍'; // Figura normal
+                                                figure.style.transform = 'scale(1)';
+                                            } else {
+                                                figure.textContent = '🧍'; // Figura robusta
+                                                figure.style.transform = 'scale(1.2)';
+                                            }
+                                        } else { // height
+                                            if (value < 100) {
+                                                figure.textContent = '🧍'; // Figura pequeña
+                                                figure.style.transform = 'scale(0.7)';
+                                            } else if (value < 130) {
+                                                figure.textContent = '🧍'; // Figura mediana
+                                                figure.style.transform = 'scale(0.9)';
+                                            } else {
+                                                figure.textContent = '🧍'; // Figura alta
+                                                figure.style.transform = 'scale(1.1)';
+                                            }
+                                        }
+                                    }
+                                });
+                            }
+                            
+                            // Opción para subir archivo (excepto para peso y talla)
+                            if (question.id !== 'weight' && question.id !== 'height') {
+                                const fileGroup = document.createElement('div');
+                                fileGroup.className = 'input-group';
+                                
+                                const fileLabel = document.createElement('label');
+                                fileLabel.className = 'input-label';
+                                fileLabel.textContent = 'O puede subir un archivo:';
+                                
+                                const fileUploadDiv = document.createElement('div');
+                                fileUploadDiv.className = 'file-upload';
+                                
+                                const fileInput = document.createElement('input');
+                                fileInput.type = 'file';
+                                fileInput.id = `${question.id}-file`;
+                                fileInput.accept = '.pdf,.jpg,.jpeg,.png';
+                                
+                                const fileUploadLabel = document.createElement('label');
+                                fileUploadLabel.className = 'file-upload-label';
+                                fileUploadLabel.htmlFor = `${question.id}-file`;
+                                fileUploadLabel.innerHTML = '<i class="fas fa-cloud-upload-alt"></i> Haga clic para subir un archivo';
+                                
+                                fileUploadDiv.appendChild(fileInput);
+                                fileUploadDiv.appendChild(fileUploadLabel);
+                                fileGroup.appendChild(fileLabel);
+                                fileGroup.appendChild(fileUploadDiv);
+                                additionalInputs.appendChild(fileGroup);
+                                
+                                // Event listener para el archivo
+                                fileInput.addEventListener('change', function() {
+                                    if (fileInput.files.length > 0) {
+                                        fileUploadLabel.innerHTML = `<i class="fas fa-file"></i> ${fileInput.files[0].name}`;
+                                        if (!answers[question.id]) {
+                                            answers[question.id] = {};
+                                        }
+                                        answers[question.id].file = {
+                                            fileName: fileInput.files[0].name,
+                                            fileType: fileInput.files[0].type
+                                        };
+                                    }
+                                });
+                            }
+                            
+                            // Agregar al contenedor principal
+                            container.appendChild(additionalInputs);
+                        }
+                        
+                        // Mostrar campos adicionales con animación
+                        additionalInputs.classList.add('visible');
+                    }
+                });
+            });
+            
+            container.appendChild(imageContainer);
+        }
+
+        // Mostrar campo para "otro" cuando es necesario
+        function showOtherField(container, questionId) {
+            const existingField = document.getElementById(`${questionId}-other`);
+            if (existingField) {
+                existingField.remove();
+            }
+            
+            const otherGroup = document.createElement('div');
+            otherGroup.className = 'input-group';
+            otherGroup.id = `${questionId}-other`;
+            
+            const otherLabel = document.createElement('label');
+            otherLabel.className = 'input-label';
+            otherLabel.textContent = 'Por favor especifique:';
+            
+            const otherInput = document.createElement('input');
+            otherInput.type = 'text';
+            otherInput.className = 'text-input';
+            otherInput.id = `${questionId}-other-input`;
+            otherInput.placeholder = 'Especifique aquí...';
+            
+            otherGroup.appendChild(otherLabel);
+            otherGroup.appendChild(otherInput);
+            container.appendChild(otherGroup);
+            
+            // Event listener para guardar la respuesta "otro"
+            otherInput.addEventListener('input', function() {
+                answers[`${questionId}-other`] = otherInput.value;
+            });
+        }
+        
+        // Restaurar respuesta guardada
+        function restoreAnswer(questionId, questionType) {
+            const answer = answers[questionId];
+
+            switch (questionType) {
+                case 'radio':
+                    const selectedOption = document.querySelector(`input[name="${questionId}"][value="${answer}"]`);
+                    if (selectedOption) {
+                        selectedOption.checked = true;
+                        selectedOption.closest('.option').classList.add('selected');
+                        const question = questions.find(q => q.id === questionId);
+                        if (question && question.hasOther && answer.includes("otra condición")) {
+                            showOtherField(document.querySelector('.answer-options'), questionId);
+                            if (answers[`${questionId}-other`]) {
+                                const otherInput = document.getElementById(`${questionId}-other-input`);
+                                if (otherInput) otherInput.value = answers[`${questionId}-other`];
+                            }
+                        }
+                    }
+                    break;
+                
+                case 'text':
+                    const textInputText = document.getElementById(questionId);
+                    if (textInputText) textInputText.value = answer;
+                    break;
+                    
+                case 'file':
+                    if (answer) {
+                        if (answer.fileName) {
+                            const fileLabel = document.querySelector(`label[for="${questionId}"]`);
+                            if (fileLabel) fileLabel.innerHTML = `<i class="fas fa-file"></i> ${answer.fileName}`;
+                        }
+                        if (answer.noExam) {
+                            const noExamInput = document.getElementById(`no-exam-${questionId}`);
+                            if (noExamInput) {
+                                noExamInput.checked = true;
+                                noExamInput.closest('.no-exam-option').classList.add('selected');
+                            }
+                        }
+                        if (answer.text) {
+                            const textInputFile = document.getElementById(`${questionId}-text`);
+                            const wordCountContainer = document.getElementById(`${questionId}-word-count`);
+                            if (textInputFile && wordCountContainer) {
+                                textInputFile.value = answer.text;
+                                limitWords(textInputFile, wordCountContainer, 50);
+                            }
+                        }
+                    }
+                    break;
+                    
+                case 'image':
+                    const selectedImageOption = document.querySelector(`.image-option img[alt="${answer}"]`);
+                    if (selectedImageOption) {
+                        selectedImageOption.closest('.image-option').classList.add('selected');
+                        const question = questions.find(q => q.id === questionId);
+                        if (question && question.requiresAdditionalInfo) {
+                            const additionalInputs = document.getElementById(`${questionId}-additional`);
+                            if (additionalInputs) {
+                                additionalInputs.classList.add('visible');
+                                if (answer && answer.text) {
+                                    const textInputImage = document.getElementById(`${questionId}-text`);
+                                    if (textInputImage) {
+                                        textInputImage.value = answer.text;
+                                        if (questionId === 'weight' || questionId === 'height') {
+                                            textInputImage.dispatchEvent(new Event('input'));
+                                        }
+                                    }
+                                }
+                                if (answer && answer.file) {
+                                    const fileLabel = document.querySelector(`label[for="${questionId}-file"]`);
+                                    if (fileLabel) fileLabel.innerHTML = `<i class="fas fa-file"></i> ${answer.file.fileName}`;
+                                }
+                            }
+                        }
+                    }
+                    break;
+            }
+        }
+
+        // Actualizar la barra de progreso
+        function updateProgressBar() {
+            const progress = (currentQuestionIndex / questions.length) * 100;
+            progressFill.style.width = `${progress}%`;
+            progressText.textContent = `${Math.round(progress)}%`;
+        }
+
+        // Actualizar el indicador de sección
+        function updateSectionIndicator(section) {
+            // Resetear todas las secciones
+            for (let i = 1; i <= 4; i++) {
+                document.getElementById(`section${i}`).classList.remove('active');
+            }
+            
+            // Activar la sección actual
+            document.getElementById(`section${section}`).classList.add('active');
+        }
+
+        // Ir a la siguiente pregunta
+        function nextQuestion() {
+            const currentQuestion = questions[currentQuestionIndex];
+            
+            // Validar respuesta actual
+            if (!validateAnswer(currentQuestion)) {
+                return;
+            }
+            
+            // Guardar progreso
+            saveProgress();
+            
+            // Avanzar a la siguiente pregunta
+            currentQuestionIndex++;
+            displayQuestion();
+            
+            // Mostrar mensaje de ánimo
+            showEncouragementMessage();
+        }
+
+        // Volver a la pregunta anterior
+        function previousQuestion() {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                displayQuestion();
+            }
+        }
+
+        // Validar respuesta actual
+        function validateAnswer(question) {
+            let isValid = true;
+            let errorMessage = '';
+            
+            switch (question.type) {
+                case 'radio':
+                    const selectedOption = document.querySelector(`input[name="${question.id}"]:checked`);
+                    if (!selectedOption) {
+                        isValid = false;
+                        errorMessage = 'Por favor seleccione una opción';
+                    }
+                    break;
+                    
+                case 'text':
+                    const textInput = document.getElementById(question.id);
+                    if (!textInput || !textInput.value.trim()) {
+                        isValid = false;
+                        errorMessage = 'Por favor complete este campo';
+                    }
+                    break;
+                    
+                case 'file':
+                    const answer = answers[question.id];
+                    let hasFile = false;
+                    let hasNoExam = false;
+                    let hasText = false;
+
+                    if (answer) {
+                        hasFile = !!answer.fileName;
+                        hasNoExam = !!answer.noExam;
+                        hasText = !!(answer.text && answer.text.trim() !== '');
+                    }
+
+                    if (!hasFile && !hasNoExam && !hasText) {
+                        isValid = false;
+                        errorMessage = 'Por favor suba un archivo, marque "No tengo" o escriba una descripción';
+                    }
+                    break;
+                    
+                case 'image':
+                    const selectedImage = document.querySelector(`.image-option.selected`);
+                    if (!selectedImage) {
+                        isValid = false;
+                        errorMessage = 'Por favor seleccione una opción';
+                    } else if (question.requiresAdditionalInfo) {
+                        // Verificar si hay información adicional
+                        const textInput = document.getElementById(`${question.id}-text`);
+                        
+                        if (!textInput || !textInput.value.trim()) {
+                            isValid = false;
+                            errorMessage = 'Por favor proporcione la información adicional requerida';
+                        }
+                    }
+                    break;
+            }
+            
+            if (!isValid) {
+                showErrorMessage(errorMessage);
+            }
+            
+            return isValid;
+        }
+
+        // Mostrar mensaje de error
+        function showErrorMessage(message) {
+            // Crear elemento de mensaje de error
+            const errorDiv = document.createElement('div');
+            errorDiv.className = 'error-message';
+            errorDiv.style.display = 'block';
+            errorDiv.style.marginTop = '15px';
+            errorDiv.style.textAlign = 'center';
+            errorDiv.style.padding = '10px';
+            errorDiv.style.backgroundColor = 'rgba(220, 53, 69, 0.1)';
+            errorDiv.style.borderRadius = '8px';
+            errorDiv.textContent = message;
+            
+            // Agregar al contenedor de preguntas
+            questionContainer.appendChild(errorDiv);
+            
+            // Eliminar después de 3 segundos
+            setTimeout(() => {
+                errorDiv.remove();
+            }, 3000);
+        }
+
+        // Guardar progreso
+        function saveProgress() {
+            // Actualizar datos del niño actual
+            if (currentChild) {
+                currentChild.answers = {...answers};
+                currentChild.lastQuestionIndex = currentQuestionIndex;
+                currentChild.completed = currentQuestionIndex >= questions.length;
+                currentChild.incompleteQuestions = [...incompleteQuestions];
+                
+                // Actualizar en el array de niños
+                const index = childrenData.findIndex(child => child.id === currentChild.id);
+                if (index !== -1) {
+                    childrenData[index] = currentChild;
+                }
+                
+                // Guardar en almacenamiento local
+                saveDataToStorage();
+            }
+        }
+
+        // Salir del cuestionario
+        function exitQuestionnaire() {
+            // Guardar progreso actual
+            saveProgress();
+            
+            // Redirigir a la página principal
+            window.location.href = 'index.html';
+        }
+
+        // Mostrar pantalla de finalización
+        function showCompletionScreen() {
+            // Marcar el cuestionario como completado
+            currentChild.completed = true;
+            currentChild.lastQuestionIndex = questions.length;
+            saveProgress();
+            
+            // Ocultar contenedor de preguntas y botones de navegación
+            questionContainer.style.display = 'none';
+            document.querySelector('.navigation-buttons').style.display = 'none';
+            document.querySelector('.progress-container').style.display = 'none';
+            
+            // Mostrar pantalla de finalización
+            completionScreen.style.display = 'block';
+            
+            // Cargar lista de niños
+            loadChildrenList();
+        }
+
+        // Cargar lista de niños
+        function loadChildrenList() {
+            childrenGridContainer.innerHTML = '';
+            
+            childrenData.forEach(child => {
+                const childCard = document.createElement('div');
+                
+                // Determinar estado de la tarjeta
+                let cardStatus = 'not-started';
+                let progressPercentage = 0;
+                
+                if (child.lastQuestionIndex > 0) {
+                    progressPercentage = Math.round((child.lastQuestionIndex / questions.length) * 100);
+                    
+                    if (child.completed) {
+                        cardStatus = 'completed';
+                    } else if (child.incompleteQuestions && child.incompleteQuestions.length > 0) {
+                        cardStatus = 'incomplete';
+                    } else {
+                        cardStatus = 'in-progress';
+                    }
+                }
+                
+                childCard.className = `child-card ${cardStatus}`;
+                
+                // Contenido de la tarjeta
+                childCard.innerHTML = `
+                    <div class="child-status">${
+                        cardStatus === 'completed' ? 'Completado' : 
+                        cardStatus === 'incomplete' ? 'Incompleto' :
+                        cardStatus === 'in-progress' ? 'En progreso' : 'No iniciado'
+                    }</div>
+                    <div class="child-header">
+                        <div class="child-avatar">
+                            <i class="fas fa-child"></i>
+                        </div>
+                        <div>
+                            <div class="child-name">${child.name}</div>
+                            <div class="child-age">${child.age} años</div>
+                        </div>
+                    </div>
+                    <div class="progress-container-card">
+                        <div class="progress-label">
+                            <span>Progreso del cuestionario</span>
+                            <span>${progressPercentage}%</span>
+                        </div>
+                        <div class="progress-bar-card">
+                            <div class="progress-fill-card" style="width: ${progressPercentage}%"></div>
+                        </div>
+                    </div>
+                    <div class="child-warning">
+                        ${cardStatus === 'incomplete' ? 
+                            'Le falta llenar datos obligatorios' : 
+                            cardStatus === 'not-started' ? 
+                            'No ha iniciado el cuestionario' : ''}
+                    </div>
+                `;
+                
+                // Event listener para seleccionar otro niño
+                childCard.addEventListener('click', function() {
+                    // Permitir acceder solo si está completado al 100%
+                    if (cardStatus === 'completed') {
+                        // Redirigir a chicos.html con el ID del niño
+                        window.location.href = `chicos.html?childId=${child.id}`;
+                    } else {
+                        // Mostrar mensaje estético
+                        const warningDiv = document.createElement('div');
+                        warningDiv.className = 'error-message';
+                        warningDiv.style.display = 'block';
+                        warningDiv.style.marginTop = '15px';
+                        warningDiv.style.textAlign = 'center';
+                        warningDiv.style.padding = '10px';
+                        warningDiv.style.backgroundColor = 'rgba(255, 152, 0, 0.1)';
+                        warningDiv.style.borderRadius = '8px';
+                        warningDiv.style.color = 'var(--accent-orange)';
+                        warningDiv.textContent = 'Por favor complete todas las preguntas obligatorias antes de continuar';
+                        
+                        // Agregar a la tarjeta
+                        childCard.appendChild(warningDiv);
+                        
+                        // Eliminar después de 3 segundos
+                        setTimeout(() => {
+                            warningDiv.remove();
+                        }, 3000);
+                    }
+                });
+                
+                childrenGridContainer.appendChild(childCard);
+            });
+        }
+
+        // Generar plan nutricional
+        function generateNutritionalPlan() {
+            // Verificar si todos los niños tienen el cuestionario completado
+            const allCompleted = childrenData.every(child => child.completed);
+            
+            if (!allCompleted) {
+                // Mostrar mensaje de error
+                const errorDiv = document.createElement('div');
+                errorDiv.className = 'error-message';
+                errorDiv.style.display = 'block';
+                errorDiv.style.marginTop = '15px';
+                errorDiv.style.textAlign = 'center';
+                errorDiv.style.padding = '10px';
+                errorDiv.style.backgroundColor = 'rgba(220, 53, 69, 0.1)';
+                errorDiv.style.borderRadius = '8px';
+                errorDiv.textContent = 'Todos los niños deben completar el cuestionario antes de generar el plan nutricional';
+                
+                completionScreen.appendChild(errorDiv);
+                
+                // Eliminar después de 3 segundos
+                setTimeout(() => {
+                    errorDiv.remove();
+                }, 3000);
+                
+                return;
+            }
+            
+            // Redirigir a la página de planes nutricionales general
+            window.location.href = 'yachay.html';
+        }
+    </script>
+</body>
+</html>

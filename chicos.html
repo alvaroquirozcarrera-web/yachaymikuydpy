@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil del Niño - Yachay Mikuy</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-blue: #2c5aa0;
+            --light-blue: #5d8cc4;
+            --dark-blue: #1a3a6e;
+            --success-green: #28a745;
+            --success-green-dark: #218838;
+            --accent-orange: #ff9800;
+            --accent-orange-dark: #e08e0b;
+            --accent-purple: #6f42c1;
+            --accent-purple-dark: #5a32a3;
+            --accent-teal: #20c997;
+            --accent-teal-dark: #1aa27d;
+            --accent-pink: #d63384;
+            --accent-pink-dark: #b02a6e;
+            --accent-cyan: #0dcaf0;
+            --accent-cyan-dark: #0baccc;
+            --gray: #6c757d;
+            --light-gray: #f8f9fa;
+            --white: #ffffff;
+            --shadow-color: rgba(40, 50, 70, 0.1);
+            --danger-red: #dc3545;
+            --danger-red-dark: #c82333;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        body {
+            background-image: linear-gradient(120deg, #f5f9ff 0%, #e6f0fa 100%);
+            color: #333;
+            line-height: 1.6;
+            position: relative;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 30px;
+        }
+
+        .profile-header {
+            background: var(--white);
+            border-radius: 20px;
+            box-shadow: 0 8px 30px var(--shadow-color);
+            padding: 30px 40px;
+            margin-bottom: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-left: 8px solid var(--primary-blue);
+        }
+
+        .profile-left {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .child-avatar {
+            width: 90px;
+            height: 90px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--light-blue));
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--white);
+            font-size: 3rem;
+            flex-shrink: 0;
+            box-shadow: 0 4px 15px rgba(44, 90, 160, 0.4);
+            animation: pulse 2.5s infinite ease-in-out;
+        }
+
+        .child-details h1 {
+            color: var(--dark-blue);
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin: 0;
+        }
+
+        .child-details p {
+            color: var(--gray);
+            font-size: 1.2rem;
+            margin: 0;
+            font-weight: 500;
+        }
+
+        .btn-exit {
+            padding: 12px 25px;
+            background: linear-gradient(45deg, var(--danger-red), #e85d75);
+            color: var(--white);
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 15px rgba(220, 53, 69, 0.3);
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .btn-exit:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(220, 53, 69, 0.4);
+            background: linear-gradient(45deg, var(--danger-red-dark), var(--danger-red));
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .dashboard-card {
+            background-color: var(--white);
+            border-radius: 20px;
+            box-shadow: 0 8px 30px var(--shadow-color);
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s ease-in-out;
+            border-top: 5px solid transparent;
+            animation: fadeIn 0.5s ease-out forwards;
+            opacity: 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .dashboard-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100px;
+            height: 100px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transform: translate(30px, -30px);
+        }
+        
+        .dashboard-card:nth-child(1) { animation-delay: 0.1s; }
+        .dashboard-card:nth-child(2) { animation-delay: 0.2s; }
+        .dashboard-card:nth-child(3) { animation-delay: 0.3s; }
+        .dashboard-card:nth-child(4) { animation-delay: 0.4s; }
+        .dashboard-card:nth-child(5) { animation-delay: 0.5s; }
+        .dashboard-card:nth-child(6) { animation-delay: 0.6s; }
+
+        .dashboard-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 40px rgba(40, 50, 70, 0.15);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .card-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--white);
+            font-size: 1.8rem;
+            flex-shrink: 0;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--dark-blue);
+        }
+
+        .card-description {
+            color: var(--gray);
+            font-weight: 400;
+            margin-bottom: 25px;
+            flex-grow: 1;
+            position: relative;
+            z-index: 1;
+        }
+
+        .card-content {
+            margin-top: auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .region-selector, .btn-action {
+            width: 100%;
+            padding: 15px;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .region-selector {
+            border: 2px solid #ddd;
+            background-color: var(--light-gray);
+            color: var(--dark-blue);
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 0.75rem center;
+            background-size: 16px 12px;
+            margin-bottom: 15px;
+        }
+
+        .region-selector:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 3px rgba(44, 90, 160, 0.2);
+        }
+
+        .btn-action {
+            border: none;
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .btn-action:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+        }
+        
+        /* --- Card-specific colors & gradients --- */
+        .card-pantry { border-top-color: var(--success-green); }
+        .card-pantry .card-icon { background: linear-gradient(45deg, var(--success-green), #58c271); }
+        .card-pantry .btn-action { background: linear-gradient(45deg, var(--success-green), #58c271); }
+        .card-pantry .btn-action:hover { background: linear-gradient(45deg, var(--success-green-dark), var(--success-green)); }
+
+        .card-region { border-top-color: var(--accent-orange); }
+        .card-region .card-icon { background: linear-gradient(45deg, var(--accent-orange), #ffb74d); }
+        .card-region .btn-action { background: linear-gradient(45deg, var(--accent-orange), #ffb74d); }
+        .card-region .btn-action:hover { background: linear-gradient(45deg, var(--accent-orange-dark), var(--accent-orange)); }
+        
+        .card-wellness { border-top-color: var(--accent-purple); }
+        .card-wellness .card-icon { background: linear-gradient(45deg, var(--accent-purple), #9575cd); }
+        .card-wellness .btn-action { background: linear-gradient(45deg, var(--accent-purple), #9575cd); }
+        .card-wellness .btn-action:hover { background: linear-gradient(45deg, var(--accent-purple-dark), var(--accent-purple)); }
+
+        .card-academic { border-top-color: var(--accent-teal); }
+        .card-academic .card-icon { background: linear-gradient(45deg, var(--accent-teal), #4dd9b4); }
+        .card-academic .btn-action { background: linear-gradient(45deg, var(--accent-teal), #4dd9b4); }
+        .card-academic .btn-action:hover { background: linear-gradient(45deg, var(--accent-teal-dark), var(--accent-teal)); }
+        
+        .card-games { border-top-color: var(--accent-pink); }
+        .card-games .card-icon { background: linear-gradient(45deg, var(--accent-pink), #f06292); }
+        .card-games .btn-action { background: linear-gradient(45deg, var(--accent-pink), #f06292); }
+        .card-games .btn-action:hover { background: linear-gradient(45deg, var(--accent-pink-dark), var(--accent-pink)); }
+
+        .card-daily { border-top-color: var(--accent-cyan); }
+        .card-daily .card-icon { background: linear-gradient(45deg, var(--accent-cyan), #4dd0e1); }
+        .card-daily .btn-action { background: linear-gradient(45deg, var(--accent-cyan), #4dd0e1); }
+        .card-daily .btn-action:hover { background: linear-gradient(45deg, var(--accent-cyan-dark), var(--accent-cyan)); }
+        
+        .back-button-container {
+            margin-top: 40px;
+            text-align: center;
+        }
+        
+        .btn-back {
+            padding: 14px 35px;
+            border: 2px solid var(--gray);
+            color: var(--gray);
+            background-color: transparent;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .btn-back:hover {
+            background-color: var(--gray);
+            color: var(--white);
+            transform: scale(1.05);
+        }
+
+        .profile-indicator {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(44, 90, 160, 0.1);
+            color: var(--primary-blue);
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            .profile-header {
+                flex-direction: column;
+                text-align: center;
+                gap: 15px;
+                padding: 25px;
+            }
+            .profile-left {
+                flex-direction: column;
+                text-align: center;
+            }
+            .child-details h1 {
+                font-size: 2rem;
+            }
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+            .btn-exit {
+                align-self: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="profile-header">
+            <div class="profile-left">
+                <div class="child-avatar">
+                    <i class="fas fa-child"></i>
+                </div>
+                <div class="child-details">
+                    <h1 id="childName">Cargando perfil...</h1>
+                    <p>Edad: <span id="childAge">-</span> años</p>
+                </div>
+            </div>
+            <a href="index.html" class="btn-exit">
+                <i class="fas fa-sign-out-alt"></i> Salir
+            </a>
+        </header>
+
+        <main class="dashboard-grid">
+            <div class="dashboard-card card-pantry">
+                <div class="profile-indicator">
+                    <i class="fas fa-user-circle"></i> Perfil específico
+                </div>
+                <div class="card-header">
+                    <div class="card-icon"><i class="fas fa-shopping-basket"></i></div>
+                    <h2 class="card-title">Comida con Despensa</h2>
+                </div>
+                <p class="card-description">Genera un plan de comidas nutritivas utilizando los ingredientes que ya tienes en casa. Optimiza tus recursos.</p>
+                <div class="card-content">
+                    <a href="#" id="pantryLink" class="btn-action">
+                        <i class="fas fa-utensils"></i> Empezar
+                    </a>
+                </div>
+            </div>
+
+            <div class="dashboard-card card-region">
+                <div class="profile-indicator">
+                    <i class="fas fa-user-circle"></i> Perfil específico
+                </div>
+                <div class="card-header">
+                    <div class="card-icon"><i class="fas fa-map-marked-alt"></i></div>
+                    <h2 class="card-title">Comida por Región</h2>
+                </div>
+                <p class="card-description">Descubre platos basados en alimentos típicos de cada departamento del Perú. Selecciona una región.</p>
+                <div class="card-content">
+                    <select id="regionSelector" class="region-selector" name="departamento">
+                        <option value="">Selecciona un departamento</option>
+                    </select>
+                    <button id="regionButton" class="btn-action">
+                        <i class="fas fa-search-location"></i> Generar
+                    </button>
+                </div>
+            </div>
+
+            <div class="dashboard-card card-wellness">
+                <div class="profile-indicator">
+                    <i class="fas fa-user-circle"></i> Perfil específico
+                </div>
+                <div class="card-header">
+                    <div class="card-icon"><i class="fas fa-brain"></i></div>
+                    <h2 class="card-title">Bienestar Psicológico</h2>
+                </div>
+                <p class="card-description">Accede a consejos y actividades para fomentar el desarrollo emocional y psicológico de tu hijo.</p>
+                <div class="card-content">
+                    <a href="#" id="wellnessLink" class="btn-action">
+                        <i class="fas fa-lightbulb"></i> Ver Recomendaciones
+                    </a>
+                </div>
+            </div>
+
+            <div class="dashboard-card card-academic">
+                <div class="profile-indicator">
+                    <i class="fas fa-user-circle"></i> Perfil específico
+                </div>
+                <div class="card-header">
+                    <div class="card-icon"><i class="fas fa-book-reader"></i></div>
+                    <h2 class="card-title">Apoyo Académico</h2>
+                </div>
+                <p class="card-description">Encuentra estrategias para potenciar el rendimiento académico y la concentración del niño.</p>
+                <div class="card-content">
+                    <a href="#" id="academicLink" class="btn-action">
+                        <i class="fas fa-graduation-cap"></i> Explorar Estrategias
+                    </a>
+                </div>
+            </div>
+            
+            <div class="dashboard-card card-games">
+                <div class="profile-indicator">
+                    <i class="fas fa-user-circle"></i> Perfil específico
+                </div>
+                <div class="card-header">
+                    <div class="card-icon"><i class="fas fa-puzzle-piece"></i></div>
+                    <h2 class="card-title">Jugando es Divertido</h2>
+                </div>
+                <p class="card-description">Descubre una selección de juegos educativos diseñados para estimular la mente y creatividad de tu hijo.</p>
+                <div class="card-content">
+                    <a href="#" id="gamesLink" class="btn-action">
+                        <i class="fas fa-gamepad"></i> Ver Juegos
+                    </a>
+                </div>
+            </div>
+            
+            <div class="dashboard-card card-daily">
+                <div class="profile-indicator">
+                    <i class="fas fa-user-circle"></i> Perfil específico
+                </div>
+                <div class="card-header">
+                    <div class="card-icon"><i class="fas fa-plate-wheat"></i></div>
+                    <h2 class="card-title">Platos del Día</h2>
+                </div>
+                <p class="card-description">Recibe recomendaciones diarias de platos balanceados y deliciosos para asegurar su correcta nutrición.</p>
+                <div class="card-content">
+                    <a href="#" id="dailyLink" class="btn-action">
+                        <i class="fas fa-calendar-day"></i> Consultar
+                    </a>
+                </div>
+            </div>
+
+        </main>
+        
+        <div class="back-button-container">
+            <a href="#" id="backToDashboardBtn" class="btn-back">
+                <i class="fas fa-arrow-left"></i> Volver al panel de niños
+            </a>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const childId = urlParams.get('childId');
+
+            if (!childId) {
+                document.body.innerHTML = '<h1>Error: No se ha seleccionado un perfil. Redirigiendo...</h1>';
+                setTimeout(() => { window.location.href = 'index.html'; }, 3000);
+                return;
+            }
+
+            const storedData = localStorage.getItem('yachayMikuyChildren');
+            if (!storedData) {
+                document.body.innerHTML = '<h1>Error: No se encontraron datos. Redirigiendo...</h1>';
+                 setTimeout(() => { window.location.href = 'index.html'; }, 3000);
+                return;
+            }
+            
+            const childrenData = JSON.parse(storedData);
+            const currentChild = childrenData.find(child => child.id === childId);
+
+            if (!currentChild) {
+                document.body.innerHTML = `<h1>Error: Perfil con ID ${childId} no encontrado. Redirigiendo...</h1>`;
+                setTimeout(() => { window.location.href = 'index.html'; }, 3000);
+                return;
+            }
+
+            document.getElementById('childName').textContent = currentChild.name;
+            document.getElementById('childAge').textContent = currentChild.age;
+            document.title = `${currentChild.name} - Perfil - Yachay Mikuy`;
+
+            // Configurar los enlaces de TODOS los tableros
+            document.getElementById('pantryLink').href = `chicos1.html?childId=${childId}`;
+            document.getElementById('wellnessLink').href = `chicos3.html?childId=${childId}`;
+            document.getElementById('academicLink').href = `chicos4.html?childId=${childId}`;
+            document.getElementById('gamesLink').href = `chicos5.html?childId=${childId}`;
+            document.getElementById('dailyLink').href = `chicos6.html?childId=${childId}`;
+            
+            // --- CAMBIO IMPORTANTE ---
+            // El botón de volver ahora apunta a la pantalla de finalización de yachaymikuy.html
+            const totalQuestionsInYachay = 55; // El número total de preguntas en el cuestionario
+            const backButton = document.getElementById('backToDashboardBtn');
+            backButton.href = `yachaymikuy.html?childId=${childId}&edit=true&question=${totalQuestionsInYachay}`;
+            
+            const departments = [
+                "Amazonas", "Áncash", "Apurímac", "Arequipa", "Ayacucho", "Cajamarca", 
+                "Callao", "Cusco", "Huancavelica", "Huánuco", "Ica", "Junín", 
+                "La Libertad", "Lambayeque", "Lima", "Loreto", "Madre de Dios", 
+                "Moquegua", "Pasco", "Piura", "Puno", "San Martín", "Tacna", 
+                "Tumbes", "Ucayali"
+            ];
+            
+            const regionSelector = document.getElementById('regionSelector');
+            departments.forEach(dept => {
+                const option = document.createElement('option');
+                option.value = dept.toLowerCase().replace(/á/g, 'a').replace(/\s+/g, '-');
+                option.textContent = dept;
+                regionSelector.appendChild(option);
+            });
+
+            const regionButton = document.getElementById('regionButton');
+            regionButton.addEventListener('click', function() {
+                const selectedDepartment = regionSelector.value;
+                if (selectedDepartment) {
+                    window.location.href = `chicos2.html?childId=${childId}&departamento=${selectedDepartment}`;
+                } else {
+                    alert('Por favor, selecciona un departamento antes de generar.');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

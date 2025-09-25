@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apoyo Académico - YachayMikuy</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2196F3;
+            --secondary-color: #00BCD4;
+            --accent-color: #FF9800;
+            --light-color: #F9F9F9;
+            --dark-color: #333;
+            --danger-color: #F44336;
+            --warning-color: #FFC107;
+            --success-color: #4CAF50;
+            --info-color: #03A9F4;
+            --pastel-blue: #BBDEFB;
+            --pastel-green: #C8E6C9;
+            --pastel-yellow: #FFF9C4;
+            --pastel-purple: #E1BEE7;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: var(--dark-color);
+            line-height: 1.6;
+            background-image: linear-gradient(135deg, rgba(235, 245, 255, 0.5), rgba(232, 245, 233, 0.5));
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background-color: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .header h1 {
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.8rem;
+        }
+
+        .header h1 i {
+            font-size: 1.8rem;
+        }
+
+        .header-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn-secondary {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+
+        .btn-danger {
+            background-color: var(--danger-color);
+            color: white;
+        }
+
+        .btn-warning {
+            background-color: var(--warning-color);
+            color: white;
+        }
+
+        .btn-success {
+            background-color: var(--success-color);
+            color: white;
+        }
+
+        .btn-info {
+            background-color: var(--info-color);
+            color: white;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .interaction-section {
+            background-color: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .interaction-section h2 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            text-align: center;
+        }
+
+        .challenge-input {
+            margin-bottom: 20px;
+        }
+
+        .challenge-input textarea {
+            width: 100%;
+            min-height: 150px;
+            padding: 15px;
+            border: 2px solid var(--pastel-blue);
+            border-radius: 10px;
+            font-size: 1rem;
+            resize: vertical;
+            font-family: inherit;
+            transition: border-color 0.3s ease;
+        }
+
+        .challenge-input textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .subject-filter {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .subject-filter label {
+            margin-right: 10px;
+            font-weight: bold;
+            color: var(--dark-color);
+        }
+
+        .subject-filter select {
+            padding: 8px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            background-color: white;
+        }
+
+        .generate-btn-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .generate-btn {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border: none;
+            border-radius: 30px;
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(33, 150, 243, 0.3);
+        }
+
+        .generate-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(33, 150, 243, 0.4);
+        }
+
+        .strategies-section {
+            margin-top: 30px;
+        }
+
+        .strategies-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .strategy-card {
+            background-color: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            animation: fadeIn 0.5s;
+        }
+
+        .strategy-card.removing {
+            animation: fadeOut 0.5s forwards;
+        }
+
+        .strategy-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background-color: var(--primary-color);
+        }
+
+        .strategy-card.math::before {
+            background-color: var(--primary-color);
+        }
+
+        .strategy-card.language::before {
+            background-color: var(--secondary-color);
+        }
+
+        .strategy-card.science::before {
+            background-color: var(--success-color);
+        }
+
+        .strategy-card.social::before {
+            background-color: var(--warning-color);
+        }
+
+        .strategy-card.art::before {
+            background-color: var(--accent-color);
+        }
+
+        .strategy-card.general::before {
+            background-color: var(--info-color);
+        }
+
+        .strategy-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+            padding-left: 10px;
+        }
+
+        .strategy-card p {
+            color: var(--dark-color);
+            line-height: 1.6;
+            padding-left: 10px;
+        }
+
+        .subject-tag {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 20px;
+            padding: 3px 10px;
+            font-size: 0.8rem;
+        }
+
+        .subject-tag.math {
+            background-color: var(--primary-color);
+        }
+
+        .subject-tag.language {
+            background-color: var(--secondary-color);
+        }
+
+        .subject-tag.science {
+            background-color: var(--success-color);
+        }
+
+        .subject-tag.social {
+            background-color: var(--warning-color);
+        }
+
+        .subject-tag.art {
+            background-color: var(--accent-color);
+        }
+
+        .subject-tag.general {
+            background-color: var(--info-color);
+        }
+
+        .copy-strategy-btn {
+            background-color: var(--info-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 5px 10px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            margin-top: 15px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .resource-links {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px dashed #ddd;
+        }
+
+        .resource-links h4 {
+            color: var(--primary-color);
+            margin-bottom: 8px;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .resource-links ul {
+            list-style-type: none;
+            margin-left: 5px;
+        }
+
+        .resource-links li {
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .resource-links a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .resource-links a:hover {
+            color: var(--secondary-color);
+            text-decoration: underline;
+        }
+
+        .loader {
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid var(--primary-color);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+            display: none;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeOut {
+            from { opacity: 1; transform: translateY(0); }
+            to { opacity: 0; transform: translateY(-10px); }
+        }
+
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            color: white;
+            z-index: 1000;
+            animation: fadeIn 0.5s;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .development-message {
+            background-color: #fff3cd;
+            border: 1px solid #ffeeba;
+            color: #856404;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .header-buttons {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .strategies-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-graduation-cap"></i> Apoyo Académico</h1>
+            <div class="header-buttons">
+                <a href="#" id="backToProfile" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Volver al Perfil</a>
+                <a href="index.html" class="btn btn-danger"><i class="fas fa-sign-out-alt"></i> Salir</a>
+            </div>
+        </div>
+
+        <div class="interaction-section">
+            <h2>¿Qué desafío académico enfrenta tu hijo?</h2>
+            <div class="challenge-input">
+                <textarea id="challenge-description" placeholder="Le cuesta mucho concentrarse en las tareas de matemáticas..."></textarea>
+            </div>
+            <div class="subject-filter">
+                <label for="subject-select">Filtrar por materia:</label>
+                <select id="subject-select">
+                    <option value="all">Todas las materias</option>
+                    <option value="math">Matemáticas</option>
+                    <option value="language">Lenguaje</option>
+                    <option value="science">Ciencias</option>
+                    <option value="social">Estudios Sociales</option>
+                    <option value="art">Arte</option>
+                </select>
+            </div>
+            <div class="generate-btn-container">
+                <button id="generate-strategies" class="generate-btn">
+                    <i class="fas fa-lightbulb"></i> Generar Estrategias
+                </button>
+            </div>
+        </div>
+
+        <div class="loader" id="loader"></div>
+
+        <div class="strategies-section">
+            <div class="strategies-container" id="strategies-container"></div>
+        </div>
+    </div>
+
+    <script>
+        // Datos de ejemplo para estrategias iniciales
+        const sampleStrategies = [
+            {
+                titulo: "El Método Pomodoro para Niños",
+                descripcion: "Adapta el método Pomodoro para tu hijo: trabaja por 15 minutos y luego toma un descanso de 5 minutos. Usa un temporizador visual o una aplicación infantil. Después de cuatro 'pomodoros', concede un descanso más largo de 15-20 minutos. Esta técnica ayuda a mejorar la concentración y previene el agotamiento mental.",
+                subject: "general",
+                recursos: [
+                    { nombre: "Pomodoro Timer for Kids", url: "#" },
+                    { nombre: "Visual Timer App", url: "#" }
+                ]
+            },
+            {
+                titulo: "Mapas Mentales para la Comprensión",
+                descripcion: "Enseña a tu hijo a crear mapas mentales para organizar información. Comienza con un concepto central en el medio y añade ramas con ideas relacionadas. Usa colores, dibujos y palabras clave. Esta técnica visual ayuda a conectar conceptos y mejora la retención de información.",
+                subject: "general",
+                recursos: [
+                    { nombre: "SimpleMind for Kids", url: "#" },
+                    { nombre: "Cómo crear mapas mentales", url: "#" }
+                ]
+            },
+            {
+                titulo: "Juegos de Matemáticas en la Vida Diaria",
+                descripcion: "Integra las matemáticas en actividades cotidianas: cocina juntos midiendo ingredientes, juega con monedas y billetes, cuenta objetos mientras caminan, o resuelve problemas simples mientras hacen compras. Esto demuestra la utilidad práctica de las matemáticas y reduce la ansiedad hacia ellas.",
+                subject: "math",
+                recursos: [
+                    { nombre: "Juegos matemáticos para casa", url: "#" },
+                    { nombre: "Math Playground", url: "#" }
+                ]
+            },
+            {
+                titulo: "Lectura Dialogada",
+                descripcion: "Practica la lectura dialogada: lee un párrafo y haz que tu hijo lea el siguiente. Detente a discutir lo que han leído, hacer predicciones o conectar con experiencias personales. Haz preguntas abiertas como '¿Qué crees que pasará después?' o '¿Cómo se siente el personaje?'. Esto mejora la comprensión lectora y el interés por la lectura.",
+                subject: "language",
+                recursos: [
+                    { nombre: "Reading Rockets", url: "#" },
+                    { nombre: "Libros recomendados por edad", url: "#" }
+                ]
+            },
+            {
+                titulo: "Experimentos Científicos Caseros",
+                descripcion: "Realiza experimentos científicos simples en casa con materiales cotidianos: crear un volcán con bicarbonato y vinagre, plantas que crecen en diferentes condiciones, o observar cómo se disuelven diferentes sustancias en agua. Documenten los resultados con dibujos o fotos. Esto desarrolla el pensamiento científico y la curiosidad natural.",
+                subject: "science",
+                recursos: [
+                    { nombre: "Science Kids", url: "#" },
+                    { nombre: "Experimentos caseros", url: "#" }
+                ]
+            },
+            {
+                titulo: "Líneas de Tiempo Interactivas",
+                descripcion: "Crea líneas de tiempo interactivas para eventos históricos o procesos científicos. Usa papel largo o aplicaciones digitales. Añade dibujos, fotos o recortes. Para hacerla más interactiva, usa notas adhesivas que puedan moverse o tarjetas con información que puedan ordenar. Esto ayuda a visualizar secuencias y relaciones causales.",
+                subject: "social",
+                recursos: [
+                    { nombre: "Timeline JS", url: "#" },
+                    { nombre: "Plantillas de líneas de tiempo", url: "#" }
+                ]
+            }
+        ];
+
+        // Variables globales
+        let childId = "";
+        let childData = {};
+        let strategies = [];
+
+        // Función para obtener el childId de la URL
+        function getChildIdFromUrl() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get('childId');
+        }
+
+        // Función para cargar los datos del niño desde localStorage
+        function loadChildData() {
+            const childrenData = localStorage.getItem('yachayMikuyChildren');
+            if (childrenData) {
+                const childrenArray = JSON.parse(childrenData);
+                const child = childrenArray.find(c => c.id === childId);
+                if (child) {
+                    childData = child;
+                    updateHeaderWithChildName();
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        // Función para actualizar el encabezado con el nombre del niño
+        function updateHeaderWithChildName() {
+            const headerTitle = document.querySelector('.header h1');
+            headerTitle.innerHTML = `<i class="fas fa-graduation-cap"></i> Apoyo Académico para ${childData.name}`;
+            
+            // Actualizar enlace de volver al perfil
+            const backToProfileLink = document.getElementById('backToProfile');
+            backToProfileLink.href = `chicos.html?childId=${childId}`;
+        }
+
+        // Función para mostrar notificaciones
+        function showNotification(message, type) {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            
+            if (type === 'success') {
+                notification.style.backgroundColor = 'var(--success-color)';
+            } else if (type === 'error') {
+                notification.style.backgroundColor = 'var(--danger-color)';
+            } else if (type === 'info') {
+                notification.style.backgroundColor = 'var(--info-color)';
+            }
+            
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.animation = 'fadeOut 0.5s';
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 500);
+            }, 3000);
+        }
+
+        // Función para generar estrategias académicas
+        function generateStrategies() {
+            // Mostrar mensaje de desarrollo
+            showDevelopmentMessage();
+        }
+
+        // Función para mostrar mensaje de desarrollo
+        function showDevelopmentMessage() {
+            const existingMessage = document.querySelector('.development-message');
+            if (existingMessage) {
+                existingMessage.remove();
+            }
+            
+            const message = document.createElement('div');
+            message.className = 'development-message';
+            message.textContent = 'Funcionalidad en desarrollo. Próximamente podrás generar estrategias académicas personalizadas con IA.';
+            
+            const strategiesContainer = document.getElementById('strategies-container');
+            strategiesContainer.parentNode.insertBefore(message, strategiesContainer);
+            
+            setTimeout(() => {
+                message.style.animation = 'fadeOut 0.5s';
+                setTimeout(() => {
+                    if (message.parentNode) {
+                        message.parentNode.removeChild(message);
+                    }
+                }, 500);
+            }, 5000);
+        }
+
+        // Función para actualizar las estrategias
+        function updateStrategies(newStrategies) {
+            // Eliminar las estrategias existentes con animación
+            const existingCards = document.querySelectorAll('.strategy-card');
+            existingCards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.classList.add('removing');
+                }, index * 100);
+            });
+            
+            // Añadir las nuevas estrategias después de que se completen las animaciones
+            setTimeout(() => {
+                strategies = newStrategies;
+                renderStrategies();
+            }, existingCards.length * 100 + 500);
+        }
+
+        // Función para renderizar las estrategias
+        function renderStrategies() {
+            const strategiesContainer = document.getElementById('strategies-container');
+            strategiesContainer.innerHTML = '';
+            
+            strategies.forEach((strategy, index) => {
+                const card = document.createElement('div');
+                card.className = `strategy-card ${strategy.subject}`;
+                
+                // Etiqueta de materia
+                const subjectNames = {
+                    math: "Matemáticas",
+                    language: "Lenguaje",
+                    science: "Ciencias",
+                    social: "Estudios Sociales",
+                    art: "Arte",
+                    general: "General"
+                };
+                
+                // Generar HTML para recursos
+                const resourcesHtml = strategy.recursos && strategy.recursos.length > 0 ? `
+                    <div class="resource-links">
+                        <h4><i class="fas fa-link"></i> Recursos Educativos</h4>
+                        <ul>
+                            ${strategy.recursos.map(recurso => `
+                                <li><i class="fas fa-external-link-alt"></i> <a href="${recurso.url}" target="_blank">${recurso.nombre}</a></li>
+                            `).join('')}
+                        </ul>
+                    </div>
+                ` : '';
+                
+                card.innerHTML = `
+                    <span class="subject-tag ${strategy.subject}">${subjectNames[strategy.subject]}</span>
+                    <h3>${strategy.titulo}</h3>
+                    <p>${strategy.descripcion}</p>
+                    ${resourcesHtml}
+                    <button class="copy-strategy-btn" data-index="${index}">
+                        <i class="fas fa-copy"></i> Copiar Estrategia
+                    </button>
+                `;
+                
+                strategiesContainer.appendChild(card);
+            });
+            
+            // Añadir event listeners a los botones de copiar
+            document.querySelectorAll('.copy-strategy-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const index = parseInt(this.getAttribute('data-index'));
+                    copyStrategy(index);
+                });
+            });
+        }
+
+        // Función para copiar una estrategia al portapapeles
+        function copyStrategy(index) {
+            const strategy = strategies[index];
+            
+            let textToCopy = `${strategy.titulo}\n\n${strategy.descripcion}`;
+            
+            if (strategy.recursos && strategy.recursos.length > 0) {
+                textToCopy += '\n\nRecursos Educativos:\n';
+                strategy.recursos.forEach(recurso => {
+                    textToCopy += `- ${recurso.nombre}: ${recurso.url}\n`;
+                });
+            }
+            
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                showNotification('Estrategia copiada al portapapeles', 'success');
+            }).catch(err => {
+                showNotification('Error al copiar la estrategia', 'error');
+                console.error('Error al copiar: ', err);
+            });
+        }
+
+        // Función para inicializar las estrategias de ejemplo
+        function initializeSampleStrategies() {
+            strategies = [...sampleStrategies];
+            renderStrategies();
+        }
+
+        // Función de inicialización
+        function init() {
+            // Obtener el childId de la URL
+            childId = getChildIdFromUrl();
+            
+            if (!childId) {
+                showNotification('No se encontró el ID del niño', 'error');
+                return;
+            }
+            
+            // Cargar los datos del niño
+            if (!loadChildData()) {
+                showNotification('No se encontraron datos del niño', 'error');
+                return;
+            }
+            
+            // Inicializar estrategias de ejemplo
+            initializeSampleStrategies();
+            
+            // Event listeners
+            document.getElementById('generate-strategies').addEventListener('click', generateStrategies);
+            document.getElementById('subject-select').addEventListener('change', function() {
+                const selectedSubject = this.value;
+                if (selectedSubject !== 'all') {
+                    const filteredStrategies = strategies.filter(strategy => strategy.subject === selectedSubject);
+                    renderStrategies();
+                } else {
+                    renderStrategies();
+                }
+            });
+        }
+
+        // Ejecutar la inicialización cuando el DOM esté cargado
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>

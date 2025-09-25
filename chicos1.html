@@ -1,0 +1,1171 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comida con Despensa - YachayMikuy</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #4CAF50;
+            --secondary-color: #FFC107;
+            --accent-color: #FF5722;
+            --light-color: #F9F9F9;
+            --dark-color: #333;
+            --danger-color: #F44336;
+            --warning-color: #FF9800;
+            --success-color: #8BC34A;
+            --info-color: #03A9F4;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: var(--dark-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .header h1 {
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .header h1 i {
+            font-size: 1.5rem;
+        }
+
+        .header-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn-secondary {
+            background-color: var(--secondary-color);
+            color: var(--dark-color);
+        }
+
+        .btn-danger {
+            background-color: var(--danger-color);
+            color: white;
+        }
+
+        .btn-warning {
+            background-color: var(--warning-color);
+            color: white;
+        }
+
+        .btn-success {
+            background-color: var(--success-color);
+            color: white;
+        }
+
+        .btn-info {
+            background-color: var(--info-color);
+            color: white;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .instructions {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .collapsible {
+            background-color: var(--primary-color);
+            color: white;
+            cursor: pointer;
+            padding: 10px 15px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 1rem;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .collapsible:hover {
+            background-color: #45a049;
+        }
+
+        .collapsible-content {
+            padding: 0 15px;
+            max-height: 500px;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            background-color: white;
+            border-radius: 0 0 5px 5px;
+        }
+
+        .collapsible-content.active {
+            padding: 15px;
+        }
+
+        .step {
+            display: flex;
+            margin-bottom: 10px;
+            align-items: flex-start;
+        }
+
+        .step-number {
+            background-color: var(--primary-color);
+            color: white;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 10px;
+            flex-shrink: 0;
+        }
+
+        .food-input {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .tabs {
+            display: flex;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            background-color: #f1f1f1;
+            border: 1px solid #ddd;
+            border-bottom: none;
+            border-radius: 5px 5px 0 0;
+            margin-right: 5px;
+        }
+
+        .tab.active {
+            background-color: white;
+            border-bottom: 1px solid white;
+            margin-bottom: -1px;
+        }
+
+        .tab-content {
+            display: none;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 0 0 5px 5px;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .input-group {
+            display: flex;
+            margin-bottom: 15px;
+            gap: 10px;
+        }
+
+        .input-group input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .food-list {
+            margin-top: 20px;
+        }
+
+        .food-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeOut {
+            from { opacity: 1; transform: translateY(0); }
+            to { opacity: 0; transform: translateY(-10px); }
+        }
+
+        .food-item.removing {
+            animation: fadeOut 0.5s forwards;
+        }
+
+        .remove-btn {
+            background-color: var(--danger-color);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .file-upload {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .file-upload input[type=file] {
+            position: absolute;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+
+        .file-upload-btn {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            padding: 40px 20px;
+            background-color: #f1f1f1;
+            border: 2px dashed #ddd;
+            border-radius: 5px;
+            text-align: center;
+            color: var(--dark-color);
+            font-size: 1.2rem;
+            gap: 10px;
+        }
+
+        .file-upload-btn i {
+            font-size: 2rem;
+            color: var(--primary-color);
+        }
+
+        .recipe-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .recipe-buttons .btn {
+            flex: 1;
+            min-width: 200px;
+            justify-content: center;
+        }
+
+        .recipes-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .recipe-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 0.5s;
+        }
+
+        .recipe-card.removing {
+            animation: fadeOut 0.5s forwards;
+        }
+
+        .recipe-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .recipe-card h4 {
+            margin-top: 15px;
+            margin-bottom: 10px;
+            color: var(--dark-color);
+            font-size: 1.1rem;
+        }
+
+        .recipe-card ul, .recipe-card ol {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        .recipe-card li {
+            margin-bottom: 5px;
+        }
+
+        .recipe-tip {
+            background-color: #f0f7ff;
+            border-left: 4px solid var(--info-color);
+            padding: 10px;
+            margin: 15px 0;
+            border-radius: 0 5px 5px 0;
+        }
+
+        .recipe-benefit {
+            background-color: #f0fff4;
+            border-left: 4px solid var(--success-color);
+            padding: 10px;
+            margin: 15px 0;
+            border-radius: 0 5px 5px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .recipe-alert {
+            background-color: #fff8f0;
+            border-left: 4px solid var(--warning-color);
+            padding: 10px;
+            margin: 15px 0;
+            border-radius: 0 5px 5px 0;
+        }
+
+        .copy-btn {
+            background-color: var(--info-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 5px 10px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .loader {
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid var(--primary-color);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+            display: none;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .autocomplete {
+            position: relative;
+        }
+
+        .autocomplete-items {
+            position: absolute;
+            border: 1px solid #d4d4d4;
+            border-bottom: none;
+            border-top: none;
+            z-index: 99;
+            top: 100%;
+            left: 0;
+            right: 0;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .autocomplete-items div {
+            padding: 10px;
+            cursor: pointer;
+            background-color: #fff;
+            border-bottom: 1px solid #d4d4d4;
+        }
+
+        .autocomplete-items div:hover {
+            background-color: #e9e9e9;
+        }
+
+        .autocomplete-active {
+            background-color: var(--primary-color) !important;
+            color: #ffffff;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 500px;
+            border-radius: 10px;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .close {
+            color: #aaa;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover {
+            color: black;
+        }
+
+        .modal-footer {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .development-message {
+            background-color: #fff3cd;
+            border: 1px solid #ffeeba;
+            color: #856404;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .header-buttons {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .recipe-buttons .btn {
+                min-width: 100%;
+            }
+
+            .recipes-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-shopping-basket"></i> Comida con Despensa</h1>
+            <div class="header-buttons">
+                <a href="#" id="backToProfile" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Volver al Perfil</a>
+                <a href="index.html" class="btn btn-danger"><i class="fas fa-sign-out-alt"></i> Salir</a>
+            </div>
+        </div>
+
+        <div class="instructions">
+            <button class="collapsible">
+                <span>Instrucciones para usar Comida con Despensa</span>
+                <i class="fas fa-chevron-down"></i>
+            </button>
+            <div class="collapsible-content active">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div>Agrega tus ingredientes (manual o por foto).</div>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div>Guarda tu despensa.</div>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div>Genera tus recetas personalizadas.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="food-input">
+            <div class="tabs">
+                <div class="tab active" data-tab="manual">Entrada Manual</div>
+                <div class="tab" data-tab="photo">Carga por Foto</div>
+            </div>
+
+            <div class="tab-content active" id="manual-tab">
+                <div class="input-group">
+                    <div class="autocomplete">
+                        <input type="text" id="ingredient-input" placeholder="Añade un ingrediente...">
+                    </div>
+                    <button id="add-ingredient" class="btn btn-primary"><i class="fas fa-plus"></i> Agregar</button>
+                </div>
+                <div class="food-list" id="ingredients-list"></div>
+            </div>
+
+            <div class="tab-content" id="photo-tab">
+                <div class="file-upload">
+                    <input type="file" id="photo-upload" accept="image/*">
+                    <div class="file-upload-btn">
+                        <i class="fas fa-camera"></i>
+                        <div>
+                            <strong>Subir foto de mi despensa</strong>
+                            <div>Haz clic o arrastra una imagen aquí</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top: 20px; text-align: center;">
+                <button id="save-pantry" class="btn btn-success"><i class="fas fa-save"></i> Guardar mi Despensa</button>
+            </div>
+        </div>
+
+        <div class="recipe-buttons">
+            <button class="btn btn-primary" data-meal="desayuno"><i class="fas fa-coffee"></i> Generar Desayuno</button>
+            <button class="btn btn-warning" data-meal="almuerzo"><i class="fas fa-utensils"></i> Generar Almuerzo</button>
+            <button class="btn btn-info" data-meal="cena"><i class="fas fa-moon"></i> Generar Cena</button>
+            <button class="btn btn-secondary" data-meal="postre"><i class="fas fa-ice-cream"></i> Generar Postre</button>
+        </div>
+
+        <div class="loader" id="loader"></div>
+
+        <div class="recipes-container" id="recipes-container"></div>
+    </div>
+
+    <!-- Modal de confirmación -->
+    <div id="confirm-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Confirmar acción</h3>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <p id="confirm-message">¿Estás seguro de que quieres realizar esta acción?</p>
+            </div>
+            <div class="modal-footer">
+                <button id="confirm-cancel" class="btn btn-secondary">Cancelar</button>
+                <button id="confirm-ok" class="btn btn-danger">Confirmar</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Lista de alimentos comunes ricos en hierro para autocompletado
+        const ironRichFoods = [
+            "Espinacas", "Acelgas", "Lentejas", "Garbanzos", "Frijoles", "Carne de res", "Pollo", "Pescado", 
+            "Hígado", "Huevo", "Tofu", "Quinoa", "Avena", "Cereales fortificados", "Pipas de calabaza", 
+            "Sésamo", "Almendras", "Nueces", "Pistachos", "Pasas", "Ciruelas pasas", "Higos secos", 
+            "Remolacha", "Brócoli", "Col rizada", "Perejil", "Algas marinas", "Moluscos", "Ostras", 
+            "Sardinas", "Atún", "Salmón", "Tofu", "Tempeh", "Edamame", "Soja", "Chocolate negro", 
+            "Tamarindo", "Cacao en polvo", "Espirulina", "Chlorella", "Moringa", "Maca", "Cañihua", "Kiwicha"
+        ];
+
+        // Datos de ejemplo para recetas iniciales
+        const sampleRecipes = [
+            {
+                nombreReceta: "Tortilla de Espinacas",
+                ingredientes: ["3 huevos", "1 taza de espinacas frescas", "1/2 cebolla", "1 diente de ajo", "Aceite de oliva", "Sal y pimienta"],
+                preparacion: ["Picar finamente la cebolla y el ajo.", "Sofreír en una sartén con aceite de oliva.", "Añadir las espinacas y cocinar hasta que se marchiten.", "Batir los huevos con sal y pimienta.", "Verter los huevos sobre las espinacas y cocinar a fuego medio.", "Voltear cuando esté cuajada por abajo."],
+                consejosDespensa: "Las espinacas son ricas en hierro no hemo, que se absorbe mejor con vitamina C. Acompaña con un vaso de jugo de naranja.",
+                beneficiosNiño: "Aporta hierro esencial para prevenir la anemia y fortalece el sistema inmunológico.",
+                alertaAlergenos: "Contiene huevo. No recomendado para alérgicos al huevo."
+            },
+            {
+                nombreReceta: "Lentejas con Verduras",
+                ingredientes: ["1 taza de lentejas", "2 zanahorias", "1 pimiento verde", "1 tomate", "1 cebolla", "2 dientes de ajo", "1 hoja de laurel", "Aceite de oliva", "Sal"],
+                preparacion: ["Poner las lentejas en remojo durante 2 horas.", "Cortar todas las verduras en trozos pequeños.", "Sofreír la cebolla y el ajo en una olla con aceite.", "Añadir el resto de verduras y cocinar 5 minutos.", "Agregar las lentejas escurridas y cubrir con agua.", "Añadir la hoja de laurel y sal. Cocinar a fuego lento 30-40 minutos."],
+                consejosDespensa: "Las lentejas son una excelente fuente de hierro vegetal. Combínalas con alimentos ricos en vitamina C para mejorar su absorción.",
+                beneficiosNiño: "Aporta hierro, fibra y proteínas vegetales, esenciales para el desarrollo y prevención de la anemia.",
+                alertaAlergenos: "Sin alérgenos comunes. Apto para la mayoría de las dietas."
+            },
+            {
+                nombreReceta: "Salmón al Horno con Espárragos",
+                ingredientes: ["2 filetes de salmón", "1 manojo de espárragos", "1 limón", "2 dientes de ajo", "Aceite de oliva", "Sal", "Pimienta", "Eneldo fresco"],
+                preparacion: ["Precalentar el horno a 200°C.", "Lavar y cortar los espárragos.", "Colocar los filetes de salmón y los espárragos en una bandeja para horno.", "Rociar con aceite de oliva, sal, pimienta y ajo picado.", "Exprimir el jugo de medio limón sobre todo.", "Hornear durante 15-20 minutos.", "Servir decorado con eneldo fresco y rodajas de limón."],
+                consejosDespensa: "El salmón es rico en hierro hemo de fácil absorción y también aporta omega-3, beneficioso para el desarrollo cerebral.",
+                beneficiosNiño: "Proporciona ácidos grasos omega-3, proteínas de alta calidad y hierro, fundamentales para el desarrollo cognitivo y físico.",
+                alertaAlergenos: "Contiene pescado. No recomendado para alérgicos al pescado o mariscos."
+            },
+            {
+                nombreReceta: "Ensalada de Quinoa con Remolacha",
+                ingredientes: ["1 taza de quinoa", "2 remolachas medianas", "1 pepino", "1/4 taza de nueces", "2 cucharadas de aceite de oliva", "1 cucharada de vinagre de manzana", "Sal", "Pimienta"],
+                preparacion: ["Cocinar la quinoa según las instrucciones del paquete y dejar enfriar.", "Cocer las remolachas hasta que estén tiernas, pelar y cortar en cubos.", "Cortar el pepino en dados pequeños.", "Triturar ligeramente las nueces.", "Mezclar la quinoa cocida con las remolachas y el pepino.", "Aliñar con aceite, vinagre, sal y pimienta.", "Espolvorear con las nueces trituradas antes de servir."],
+                consejosDespensa: "La quinoa y la remolacha son excelentes fuentes de hierro. Añade perejil fresco para un extra de vitamina C.",
+                beneficiosNiño: "Aporta hierro, fibra, antioxidantes y proteínas completas, apoyando el crecimiento y la prevención de la anemia.",
+                alertaAlergenos: "Contiene frutos secos (nueces). No recomendado para alérgicos a frutos secos."
+            },
+            {
+                nombreReceta: "Hígado de Pollo en Salsa",
+                ingredientes: ["400g de hígado de pollo", "1 cebolla", "2 dientes de ajo", "1 tomate", "1/2 taza de caldo de pollo", "1 cucharada de harina", "Aceite de oliva", "Sal", "Pimienta", "Perejil fresco"],
+                preparacion: ["Limpiar y cortar el hígado en trozos medianos.", "Picar finamente la cebolla y el ajo.", "Sofreír la cebolla y el ajo en una sartén con aceite.", "Añadir el hígado y cocinar hasta que esté dorado por fuera.", "Incorporar el tomate picado y cocinar unos minutos.", "Espolvorear la harina y remover bien.", "Añadir el caldo de pollo y cocinar a fuego lento 10 minutos.", "Sazonar con sal y pimienta, y espolvorear con perejil fresco picado."],
+                consejosDespensa: "El hígado es una de las mejores fuentes de hierro hemo. Acompaña con una ensalada de vegetales frescos para añadir vitamina C.",
+                beneficiosNiño: "Extremadamente rico en hierro de alta absorción y vitamina A, esencial para prevenir la anemia y apoyar la visión.",
+                alertaAlergenos: "Contiene hígado de pollo. No recomendado para personas con hiperuricemia o gota."
+            },
+            {
+                nombreReceta: "Batido de Frutas Rojas",
+                ingredientes: ["1 taza de fresas", "1/2 taza de frambuesas", "1/2 taza de arándanos", "1 plátano", "1 taza de leche o bebida vegetal fortificada", "1 cucharada de semillas de chía", "Miel al gusto"],
+                preparacion: ["Lavar bien todas las frutas.", "Cortar las fresas y el plátano en trozos.", "Colocar todas las frutas en la licuadora.", "Añadir la leche o bebida vegetal.", "Incorporar las semillas de chía y la miel.", "Licuar hasta obtener una mezcla homogénea.", "Servir frío."],
+                consejosDespensa: "Las frutas rojas aportan vitamina C que mejora la absorción del hierro. Las semillas de chía añaden hierro extra.",
+                beneficiosNiño: "Proporciona antioxidantes, vitamina C y hierro, fortaleciendo el sistema inmunológico y ayudando a prevenir la anemia.",
+                alertaAlergenos: "Contiene lácteos (si se usa leche). Para opción vegana, usar bebida vegetal."
+            }
+        ];
+
+        // Variables globales
+        let childId = "";
+        let childData = {};
+        let ingredients = [];
+        let recipes = [];
+
+        // Función para obtener el childId de la URL
+        function getChildIdFromUrl() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get('childId');
+        }
+
+        // Función para cargar los datos del niño desde localStorage
+        function loadChildData() {
+            const childrenData = localStorage.getItem('yachayMikuyChildren');
+            if (childrenData) {
+                const childrenArray = JSON.parse(childrenData);
+                const child = childrenArray.find(c => c.id === childId);
+                if (child) {
+                    childData = child;
+                    updateHeaderWithChildName();
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        // Función para actualizar el encabezado con el nombre del niño
+        function updateHeaderWithChildName() {
+            const headerTitle = document.querySelector('.header h1');
+            headerTitle.innerHTML = `<i class="fas fa-shopping-basket"></i> Comida con Despensa para ${childData.name}`;
+            
+            // Actualizar enlace de volver al perfil
+            const backToProfileLink = document.getElementById('backToProfile');
+            backToProfileLink.href = `chicos.html?childId=${childId}`;
+        }
+
+        // Función para cargar los ingredientes guardados
+        function loadSavedIngredients() {
+            const savedIngredients = localStorage.getItem(`pantry_${childId}`);
+            if (savedIngredients) {
+                ingredients = JSON.parse(savedIngredients);
+                renderIngredients();
+            }
+        }
+
+        // Función para renderizar los ingredientes
+        function renderIngredients() {
+            const ingredientsList = document.getElementById('ingredients-list');
+            ingredientsList.innerHTML = '';
+            
+            ingredients.forEach((ingredient, index) => {
+                const item = document.createElement('div');
+                item.className = 'food-item';
+                item.innerHTML = `
+                    <span>${ingredient}</span>
+                    <button class="remove-btn" data-index="${index}"><i class="fas fa-times"></i></button>
+                `;
+                ingredientsList.appendChild(item);
+            });
+            
+            // Añadir event listeners a los botones de eliminar
+            document.querySelectorAll('.remove-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const index = parseInt(this.getAttribute('data-index'));
+                    removeIngredient(index);
+                });
+            });
+        }
+
+        // Función para agregar un ingrediente
+        function addIngredient() {
+            const input = document.getElementById('ingredient-input');
+            const ingredient = input.value.trim();
+            
+            if (ingredient && !ingredients.includes(ingredient)) {
+                ingredients.push(ingredient);
+                renderIngredients();
+                input.value = '';
+                closeAllLists();
+            }
+        }
+
+        // Función para eliminar un ingrediente
+        function removeIngredient(index) {
+            const item = document.querySelectorAll('.food-item')[index];
+            item.classList.add('removing');
+            
+            setTimeout(() => {
+                ingredients.splice(index, 1);
+                renderIngredients();
+            }, 500);
+        }
+
+        // Función para guardar la despensa
+        function savePantry() {
+            localStorage.setItem(`pantry_${childId}`, JSON.stringify(ingredients));
+            
+            // Mostrar mensaje de confirmación
+            showNotification('Despensa guardada correctamente', 'success');
+        }
+
+        // Función para mostrar notificaciones
+        function showNotification(message, type) {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.style.position = 'fixed';
+            notification.style.bottom = '20px';
+            notification.style.right = '20px';
+            notification.style.padding = '15px';
+            notification.style.borderRadius = '5px';
+            notification.style.color = 'white';
+            notification.style.zIndex = '1000';
+            notification.style.animation = 'fadeIn 0.5s';
+            
+            if (type === 'success') {
+                notification.style.backgroundColor = 'var(--success-color)';
+            } else if (type === 'error') {
+                notification.style.backgroundColor = 'var(--danger-color)';
+            } else if (type === 'info') {
+                notification.style.backgroundColor = 'var(--info-color)';
+            }
+            
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.animation = 'fadeOut 0.5s';
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 500);
+            }, 3000);
+        }
+
+        // Función para generar recetas
+        function generateRecipe(mealType) {
+            // Mostrar mensaje de desarrollo
+            showDevelopmentMessage();
+        }
+
+        // Función para mostrar mensaje de desarrollo
+        function showDevelopmentMessage() {
+            const existingMessage = document.querySelector('.development-message');
+            if (existingMessage) {
+                existingMessage.remove();
+            }
+            
+            const message = document.createElement('div');
+            message.className = 'development-message';
+            message.textContent = 'Funcionalidad en desarrollo. Próximamente podrás generar recetas personalizadas con IA.';
+            
+            const recipesContainer = document.getElementById('recipes-container');
+            recipesContainer.parentNode.insertBefore(message, recipesContainer);
+            
+            setTimeout(() => {
+                message.style.animation = 'fadeOut 0.5s';
+                setTimeout(() => {
+                    if (message.parentNode) {
+                        message.parentNode.removeChild(message);
+                    }
+                }, 500);
+            }, 5000);
+        }
+
+        // Función para agregar una receta a la lista
+        function addRecipe(recipe) {
+            // Si ya hay 6 recetas, eliminar la más antigua
+            if (recipes.length >= 6) {
+                const oldestRecipe = document.querySelector('.recipe-card');
+                if (oldestRecipe) {
+                    oldestRecipe.classList.add('removing');
+                    setTimeout(() => {
+                        recipes.shift();
+                        renderRecipes();
+                    }, 500);
+                }
+            }
+            
+            recipes.push(recipe);
+            renderRecipes();
+        }
+
+        // Función para renderizar las recetas
+        function renderRecipes() {
+            const recipesContainer = document.getElementById('recipes-container');
+            recipesContainer.innerHTML = '';
+            
+            recipes.forEach((recipe, index) => {
+                const card = document.createElement('div');
+                card.className = 'recipe-card';
+                
+                // Generar HTML para ingredientes
+                const ingredientsHtml = recipe.ingredientes.map(ing => `<li>${ing}</li>`).join('');
+                
+                // Generar HTML para preparación
+                const preparationHtml = recipe.preparacion.map(step => `<li>${step}</li>`).join('');
+                
+                card.innerHTML = `
+                    <h3>${recipe.nombreReceta}</h3>
+                    
+                    <h4>Ingredientes:</h4>
+                    <ul>${ingredientsHtml}</ul>
+                    
+                    <h4>Preparación:</h4>
+                    <ol>${preparationHtml}</ol>
+                    
+                    <div class="recipe-tip">
+                        <strong>Consejos para tu Despensa:</strong> ${recipe.consejosDespensa}
+                    </div>
+                    
+                    <div class="recipe-benefit">
+                        <i class="fas fa-heartbeat"></i>
+                        <div>
+                            <strong>Beneficios para el Niño:</strong> ${recipe.beneficiosNiño}
+                        </div>
+                    </div>
+                    
+                    ${recipe.alertaAlergenos ? `
+                    <div class="recipe-alert">
+                        <strong>Alerta de Alérgenos:</strong> ${recipe.alertaAlergenos}
+                    </div>
+                    ` : ''}
+                    
+                    <button class="copy-btn" data-recipe-index="${index}">
+                        <i class="fas fa-copy"></i> Copiar Receta
+                    </button>
+                `;
+                
+                recipesContainer.appendChild(card);
+            });
+            
+            // Añadir event listeners a los botones de copiar
+            document.querySelectorAll('.copy-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const index = parseInt(this.getAttribute('data-recipe-index'));
+                    copyRecipe(index);
+                });
+            });
+        }
+
+        // Función para copiar una receta al portapapeles
+        function copyRecipe(index) {
+            const recipe = recipes[index];
+            
+            let textToCopy = `${recipe.nombreReceta}\n\n`;
+            textToCopy += `Ingredientes:\n`;
+            recipe.ingredientes.forEach(ing => {
+                textToCopy += `- ${ing}\n`;
+            });
+            
+            textToCopy += `\nPreparación:\n`;
+            recipe.preparacion.forEach((step, i) => {
+                textToCopy += `${i + 1}. ${step}\n`;
+            });
+            
+            textToCopy += `\nConsejos para tu Despensa: ${recipe.consejosDespensa}\n`;
+            textToCopy += `Beneficios para el Niño: ${recipe.beneficiosNiño}\n`;
+            
+            if (recipe.alertaAlergenos) {
+                textToCopy += `Alerta de Alérgenos: ${recipe.alertaAlergenos}\n`;
+            }
+            
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                showNotification('Receta copiada al portapapeles', 'success');
+            }).catch(err => {
+                showNotification('Error al copiar la receta', 'error');
+                console.error('Error al copiar: ', err);
+            });
+        }
+
+        // Función para inicializar las recetas de ejemplo
+        function initializeSampleRecipes() {
+            recipes = [...sampleRecipes];
+            renderRecipes();
+        }
+
+        // Función para inicializar el autocompletado
+        function initAutocomplete() {
+            const input = document.getElementById('ingredient-input');
+            
+            input.addEventListener('input', function() {
+                closeAllLists();
+                const val = this.value;
+                
+                if (!val) return false;
+                
+                const autocompleteList = document.createElement('div');
+                autocompleteList.setAttribute('id', this.id + 'autocomplete-list');
+                autocompleteList.setAttribute('class', 'autocomplete-items');
+                this.parentNode.appendChild(autocompleteList);
+                
+                const filteredFoods = ironRichFoods.filter(food => 
+                    food.toLowerCase().includes(val.toLowerCase())
+                );
+                
+                filteredFoods.slice(0, 5).forEach(food => {
+                    const item = document.createElement('div');
+                    item.innerHTML = '<strong>' + food.substr(0, val.length) + '</strong>' + food.substr(val.length);
+                    item.innerHTML += "<input type='hidden' value='" + food + "'>";
+                    
+                    item.addEventListener('click', function() {
+                        input.value = this.getElementsByTagName('input')[0].value;
+                        closeAllLists();
+                    });
+                    
+                    autocompleteList.appendChild(item);
+                });
+            });
+            
+            // Cerrar la lista si se hace clic fuera
+            document.addEventListener('click', function(e) {
+                if (e.target !== input) {
+                    closeAllLists();
+                }
+            });
+        }
+
+        // Función para cerrar todas las listas de autocompletado
+        function closeAllLists(elmnt) {
+            const items = document.getElementsByClassName('autocomplete-items');
+            for (let i = 0; i < items.length; i++) {
+                if (elmnt !== items[i] && elmnt !== document.getElementById('ingredient-input')) {
+                    items[i].parentNode.removeChild(items[i]);
+                }
+            }
+        }
+
+        // Función para inicializar las pestañas
+        function initTabs() {
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const tabId = this.getAttribute('data-tab');
+                    
+                    // Desactivar todas las pestañas
+                    tabs.forEach(t => t.classList.remove('active'));
+                    document.querySelectorAll('.tab-content').forEach(content => {
+                        content.classList.remove('active');
+                    });
+                    
+                    // Activar la pestaña seleccionada
+                    this.classList.add('active');
+                    document.getElementById(tabId + '-tab').classList.add('active');
+                });
+            });
+        }
+
+        // Función para inicializar el colapsable
+        function initCollapsible() {
+            const coll = document.querySelector('.collapsible');
+            coll.addEventListener('click', function() {
+                this.classList.toggle('active');
+                const content = this.nextElementSibling;
+                content.classList.toggle('active');
+                
+                const icon = this.querySelector('i');
+                if (content.classList.contains('active')) {
+                    icon.classList.remove('fa-chevron-down');
+                    icon.classList.add('fa-chevron-up');
+                } else {
+                    icon.classList.remove('fa-chevron-up');
+                    icon.classList.add('fa-chevron-down');
+                }
+            });
+        }
+
+        // Función para inicializar el modal de confirmación
+        function initModal() {
+            const modal = document.getElementById('confirm-modal');
+            const closeBtn = document.querySelector('.close');
+            const cancelBtn = document.getElementById('confirm-cancel');
+            
+            closeBtn.addEventListener('click', function() {
+                modal.style.display = 'none';
+            });
+            
+            cancelBtn.addEventListener('click', function() {
+                modal.style.display = 'none';
+            });
+            
+            window.addEventListener('click', function(event) {
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+        }
+
+        // Función para mostrar el modal de confirmación
+        function showConfirmModal(message, onConfirm) {
+            const modal = document.getElementById('confirm-modal');
+            const messageEl = document.getElementById('confirm-message');
+            const confirmBtn = document.getElementById('confirm-ok');
+            
+            messageEl.textContent = message;
+            modal.style.display = 'block';
+            
+            // Eliminar event listeners previos
+            const newConfirmBtn = confirmBtn.cloneNode(true);
+            confirmBtn.parentNode.replaceChild(newConfirmBtn, confirmBtn);
+            
+            // Añadir nuevo event listener
+            newConfirmBtn.addEventListener('click', function() {
+                modal.style.display = 'none';
+                if (onConfirm) onConfirm();
+            });
+        }
+
+        // Función para inicializar la carga de fotos
+        function initPhotoUpload() {
+            const photoInput = document.getElementById('photo-upload');
+            const fileUploadBtn = document.querySelector('.file-upload-btn');
+            
+            photoInput.addEventListener('change', function() {
+                if (this.files && this.files[0]) {
+                    const fileName = this.files[0].name;
+                    fileUploadBtn.innerHTML = `
+                        <i class="fas fa-check-circle" style="color: var(--success-color);"></i>
+                        <div>
+                            <strong>Imagen cargada</strong>
+                            <div>${fileName}</div>
+                        </div>
+                    `;
+                    
+                    // En una implementación real, aquí se procesaría la imagen
+                    // Por ahora, solo mostramos un mensaje
+                    showNotification('Imagen cargada correctamente. Próximamente procesaremos tus ingredientes automáticamente.', 'info');
+                }
+            });
+        }
+
+        // Función de inicialización
+        function init() {
+            // Obtener el childId de la URL
+            childId = getChildIdFromUrl();
+            
+            if (!childId) {
+                showNotification('No se encontró el ID del niño', 'error');
+                return;
+            }
+            
+            // Cargar los datos del niño
+            if (!loadChildData()) {
+                showNotification('No se encontraron datos del niño', 'error');
+                return;
+            }
+            
+            // Cargar ingredientes guardados
+            loadSavedIngredients();
+            
+            // Inicializar componentes
+            initAutocomplete();
+            initTabs();
+            initCollapsible();
+            initModal();
+            initPhotoUpload();
+            
+            // Inicializar recetas de ejemplo
+            initializeSampleRecipes();
+            
+            // Event listeners
+            document.getElementById('add-ingredient').addEventListener('click', addIngredient);
+            document.getElementById('ingredient-input').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    addIngredient();
+                }
+            });
+            
+            document.getElementById('save-pantry').addEventListener('click', savePantry);
+            
+            // Botones de generación de recetas
+            document.querySelectorAll('[data-meal]').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const mealType = this.getAttribute('data-meal');
+                    generateRecipe(mealType);
+                });
+            });
+        }
+
+        // Ejecutar la inicialización cuando el DOM esté cargado
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>
