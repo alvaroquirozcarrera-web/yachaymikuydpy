@@ -3,111 +3,182 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yachay Mikuy - Nutrición Infantil</title>
+    <title>Yachay Mikuy - Nutrición Inteligente</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --primary-blue: #1a4b8c;
-            --light-blue: #3d7dd6;
-            --very-light-blue: #e6f0fa;
-            --dark-blue: #0a2a5e;
-            --success-green: #28a745;
-            --warning-red: #dc3545;
-            --gray: #6c757d;
-            --light-gray: #f8f9fa;
-            --medium-gray: #e9ecef;
-            --accent-green: #4caf50;
-            --accent-orange: #ff9800;
-            --progress-yellow: #ffc107;
-            --avatar-bg: #f0f7ff;
-            --avatar-border: #d1e5ff;
-            --gradient-blue: linear-gradient(135deg, #1a4b8c, #3d7dd6);
-            --gradient-light: linear-gradient(120deg, #f5f9ff 0%, #e6f0fa 100%);
-            --shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-            --shadow-hover: 0 15px 30px rgba(0, 0, 0, 0.15);
-            --border-radius: 12px;
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Montserrat', sans-serif;
+        }
+
+        :root {
+            --primary: #1a4b8c; /* Azul */
+            --primary-dark: #0d3b66;
+            --secondary: #e63946; /* Rojo */
+            --secondary-dark: #d62828;
+            --light: #ffffff; /* Blanco */
+            --dark: #212529;
+            --gray: #6c757d;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.15);
+            --radius: 20px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --whatsapp-green: #128C7E;
+            --whatsapp-light-green: #25D366;
+            --whatsapp-blue: #34B7F1;
+            --chat-background: #ECE5DD;
+            --message-sent: #DCF8C6;
+            --message-received: #FFFFFF;
         }
 
         body {
-            background-color: #f5f9ff;
-            color: #333;
-            line-height: 1.6;
-            background-image: var(--gradient-light);
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--light);
             min-height: 100vh;
-            position: relative;
+            color: var(--dark);
+            overflow-x: hidden;
         }
 
-        /* Fondo decorativo */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                radial-gradient(circle at 10% 20%, rgba(26, 75, 140, 0.05) 0%, transparent 20%),
-                radial-gradient(circle at 90% 80%, rgba(61, 125, 214, 0.07) 0%, transparent 20%),
-                radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
-            z-index: -1;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        header {
-            background-color: white;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
-            padding: 25px 30px;
-            margin-bottom: 30px;
+        /* Barra superior */
+        .top-bar {
+            background-color: var(--primary);
+            color: white;
+            padding: 1rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            position: relative;
-            overflow: hidden;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo {
+            width: 50px;
+            height: 50px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 1.5rem;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
             transition: var(--transition);
         }
 
-        header:hover {
-            box-shadow: var(--shadow-hover);
+        .nav-links a:hover {
+            color: var(--light);
         }
 
-        header::before {
+        /* Botón Regresar */
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: var(--secondary);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 0.8rem 1.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            z-index: 10;
+        }
+
+        .back-button:hover {
+            background: var(--secondary-dark);
+            transform: translateY(-2px);
+        }
+
+        /* Contenedor principal */
+        .main-container {
+            min-height: calc(100vh - 120px);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        /* Sección de Introducción */
+        .intro-section {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            animation: fadeIn 0.8s ease-out;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: calc(100vh - 120px);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .intro-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: var(--radius);
+            padding: 3rem;
+            max-width: 800px;
+            width: 100%;
+            box-shadow: var(--shadow-lg);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .intro-card::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
-            width: 8px;
-            height: 100%;
-            background: var(--gradient-blue);
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
         }
 
-        .logo {
+        .intro-logo {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            border-radius: 50%;
             display: flex;
             align-items: center;
-        }
-
-        .logo i {
-            color: var(--primary-blue);
-            font-size: 2.8rem;
-            margin-right: 15px;
-            background: var(--gradient-blue);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
+            justify-content: center;
+            margin: 0 auto 2rem;
+            font-size: 3rem;
+            color: white;
+            box-shadow: 0 10px 30px rgba(26, 75, 140, 0.3);
             animation: pulse 2s infinite;
         }
 
@@ -117,351 +188,669 @@
             100% { transform: scale(1); }
         }
 
-        .logo h1 {
-            color: var(--primary-blue);
-            font-size: 2.2rem;
-            font-weight: 700;
-            letter-spacing: -0.5px;
+        .intro-card h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        .slogan {
-            color: var(--dark-blue);
-            font-style: italic;
-            font-size: 1.1rem;
-            margin-top: 5px;
-            opacity: 0.9;
+        .intro-card p {
+            font-size: 1.2rem;
+            color: var(--gray);
+            margin-bottom: 2rem;
+            line-height: 1.8;
         }
 
-        .auth-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 70vh;
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
         }
 
-        .auth-box {
-            background-color: white;
-            border-radius: var(--border-radius);
+        .stat-item {
+            background: var(--light);
+            padding: 1.5rem;
+            border-radius: 15px;
+            transition: var(--transition);
+            border: 2px solid transparent;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-5px);
             box-shadow: var(--shadow);
-            padding: 35px;
-            width: 100%;
-            max-width: 450px;
+            border-color: var(--primary);
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            box-shadow: 0 10px 30px rgba(26, 75, 140, 0.3);
+            transition: var(--transition);
             position: relative;
             overflow: hidden;
-            transition: var(--transition);
         }
 
-        .auth-box::before {
+        .cta-button::before {
             content: '';
             position: absolute;
             top: 0;
-            right: 0;
-            width: 150px;
-            height: 150px;
-            background: radial-gradient(circle, rgba(61, 125, 214, 0.1) 0%, transparent 70%);
-            border-radius: 50%;
-            transform: translate(30px, -30px);
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            transition: left 0.5s;
         }
 
-        .auth-box:hover {
-            box-shadow: var(--shadow-hover);
+        .cta-button:hover::before {
+            left: 100%;
         }
 
-        .auth-title {
-            color: var(--dark-blue);
-            font-size: 1.9rem;
-            margin-bottom: 25px;
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(26, 75, 140, 0.4);
+        }
+
+        /* Nueva Sección Informativa */
+        .info-section {
+            padding: 4rem 2rem;
+            background-color: white;
+            display: none;
+            position: relative;
+            min-height: calc(100vh - 120px);
+        }
+
+        .info-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            color: var(--primary);
+        }
+
+        .info-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .info-card {
+            background: var(--light);
+            border-radius: var(--radius);
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
             text-align: center;
             position: relative;
-            z-index: 1;
+            overflow: hidden;
+            border: 2px solid transparent;
+        }
+
+        .info-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+        }
+
+        .info-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--secondary);
+        }
+
+        .info-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .info-card h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .info-card p {
+            color: var(--gray);
+            line-height: 1.6;
+        }
+
+        .process-container {
+            margin-top: 3rem;
+        }
+
+        .process-title {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            color: var(--primary);
+        }
+
+        .process-steps {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .process-step {
+            flex: 1;
+            min-width: 200px;
+            background: white;
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            text-align: center;
+            position: relative;
+            border: 2px solid transparent;
+            transition: var(--transition);
+        }
+
+        .process-step:hover {
+            border-color: var(--primary);
+            transform: translateY(-5px);
+        }
+
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background: var(--secondary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0 auto 1rem;
+        }
+
+        .process-step h4 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        .process-step p {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .info-cta {
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .info-cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--secondary-dark) 100%);
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            box-shadow: 0 10px 30px rgba(230, 57, 70, 0.3);
+            transition: var(--transition);
+        }
+
+        .info-cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(230, 57, 70, 0.4);
+        }
+
+        /* Sección de Autenticación */
+        .auth-section {
+            flex: 1;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            background-color: white;
+            min-height: calc(100vh - 120px);
+            position: relative;
+        }
+
+        .auth-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: var(--radius);
+            padding: 3rem;
+            width: 100%;
+            max-width: 450px;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            overflow: hidden;
+            border: 2px solid transparent;
+            transition: var(--transition);
+        }
+
+        .auth-container:hover {
+            border-color: var(--primary);
+        }
+
+        .auth-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+        }
+
+        .auth-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .auth-header h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .auth-header p {
+            color: var(--gray);
+            font-size: 0.9rem;
         }
 
         .form-group {
-            margin-bottom: 22px;
-            position: relative;
+            margin-bottom: 1.5rem;
         }
 
         .form-label {
             display: block;
-            margin-bottom: 8px;
+            margin-bottom: 0.5rem;
             font-weight: 500;
-            color: var(--dark-blue);
-            font-size: 0.95rem;
+            color: var(--dark);
+            font-size: 0.9rem;
         }
 
         .form-input {
             width: 100%;
-            padding: 14px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
+            padding: 1rem 1.5rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
             font-size: 1rem;
             transition: var(--transition);
-            background-color: #f9fbff;
+            background: #f8f9fa;
         }
 
         .form-input:focus {
             outline: none;
-            border-color: var(--primary-blue);
-            box-shadow: 0 0 0 3px rgba(26, 75, 140, 0.15);
-            background-color: white;
+            border-color: var(--primary);
+            background: white;
+            box-shadow: 0 0 0 4px rgba(26, 75, 140, 0.1);
         }
 
-        /* Contenedor de contraseña con ojito */
         .password-container {
             position: relative;
         }
 
         .password-toggle {
             position: absolute;
-            right: 14px;
+            right: 1rem;
             top: 50%;
             transform: translateY(-50%);
             background: none;
             border: none;
-            cursor: pointer;
             color: var(--gray);
+            cursor: pointer;
             font-size: 1.1rem;
             transition: var(--transition);
-            z-index: 2;
         }
 
         .password-toggle:hover {
-            color: var(--primary-blue);
-        }
-
-        .password-toggle:focus {
-            outline: none;
-        }
-
-        .password-requirements {
-            font-size: 0.8rem;
-            color: var(--gray);
-            margin-top: 8px;
-            padding-left: 2px;
+            color: var(--primary);
         }
 
         .btn {
-            display: block;
             width: 100%;
-            padding: 14px;
+            padding: 1rem;
             border: none;
-            border-radius: 8px;
-            cursor: pointer;
+            border-radius: 10px;
             font-size: 1rem;
             font-weight: 600;
+            cursor: pointer;
             transition: var(--transition);
-            margin-bottom: 18px;
+            margin-bottom: 1rem;
             position: relative;
             overflow: hidden;
-            z-index: 1;
-        }
-
-        .btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.2);
-            transform: translateX(-100%);
-            transition: transform 0.3s ease;
-            z-index: -1;
-        }
-
-        .btn:hover::before {
-            transform: translateX(0);
         }
 
         .btn-primary {
-            background: var(--gradient-blue);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
             color: white;
-            box-shadow: 0 4px 10px rgba(26, 75, 140, 0.3);
+            box-shadow: 0 10px 30px rgba(26, 75, 140, 0.3);
         }
 
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 15px rgba(26, 75, 140, 0.4);
+            box-shadow: 0 15px 40px rgba(26, 75, 140, 0.4);
         }
 
         .btn-secondary {
-            background-color: transparent;
-            color: var(--primary-blue);
-            border: 1px solid var(--primary-blue);
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
         }
 
         .btn-secondary:hover {
-            background-color: var(--very-light-blue);
-            transform: translateY(-2px);
+            background: var(--primary);
+            color: white;
         }
 
         .auth-links {
             text-align: center;
-            margin-top: 25px;
+            margin-top: 1.5rem;
         }
 
         .auth-links a {
-            color: var(--primary-blue);
+            color: var(--primary);
             text-decoration: none;
             font-weight: 500;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+
+        .auth-links a:hover {
+            text-decoration: underline;
+        }
+
+        /* Sección Dashboard */
+        .dashboard-section {
+            flex: 1;
+            display: none;
+            padding: 2rem;
+            background-color: white;
+            min-height: calc(100vh - 120px);
+            position: relative;
+        }
+
+        .dashboard-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .dashboard-header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: var(--radius);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            border: 2px solid transparent;
+            transition: var(--transition);
+        }
+
+        .dashboard-header:hover {
+            border-color: var(--primary);
+        }
+
+        .welcome-info h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .welcome-info p {
+            color: var(--gray);
+        }
+
+        .logout-btn {
+            background: var(--secondary);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logout-btn:hover {
+            background: var(--secondary-dark);
+            transform: translateY(-2px);
+        }
+
+        .dashboard-tabs {
+            display: flex;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .tab-button {
+            background: none;
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--gray);
+            cursor: pointer;
             transition: var(--transition);
             position: relative;
         }
 
-        .auth-links a::after {
+        .tab-button.active {
+            color: var(--primary);
+        }
+
+        .tab-button.active::after {
             content: '';
             position: absolute;
             bottom: -2px;
             left: 0;
-            width: 0;
-            height: 2px;
-            background-color: var(--primary-blue);
-            transition: width 0.3s ease;
-        }
-
-        .auth-links a:hover::after {
             width: 100%;
+            height: 3px;
+            background: var(--primary);
         }
 
-        .error-message {
-            color: var(--warning-red);
-            font-size: 0.85rem;
-            margin-top: 6px;
-            display: none;
-            padding-left: 2px;
+        .tab-button:hover {
+            color: var(--primary);
         }
 
-        .dashboard {
+        .tab-content {
             display: none;
         }
 
-        .dashboard-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 35px;
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease-out;
         }
 
-        .welcome-message {
-            font-size: 1.7rem;
-            color: var(--dark-blue);
-            font-weight: 600;
-        }
-
-        .logout-btn {
-            background-color: var(--warning-red);
-            color: white;
-            border: none;
-            padding: 12px 22px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 1rem;
-            font-weight: 500;
-            transition: var(--transition);
-            box-shadow: 0 4px 8px rgba(220, 53, 69, 0.2);
-        }
-
-        .logout-btn:hover {
-            background-color: #c82333;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(220, 53, 69, 0.3);
-        }
-
-        .children-section {
-            background-color: white;
-            border-radius: var(--border-radius);
+        /* Perfiles de hijos */
+        .children-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: var(--radius);
+            padding: 2rem;
             box-shadow: var(--shadow);
-            padding: 30px;
-            margin-bottom: 30px;
+            border: 2px solid transparent;
             transition: var(--transition);
+            position: relative;
+            overflow: hidden;
         }
 
-        .children-section:hover {
-            box-shadow: var(--shadow-hover);
+        .children-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+        }
+
+        .children-container:hover {
+            border-color: var(--primary);
         }
 
         .section-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 25px;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
         }
 
         .section-title {
-            font-size: 1.7rem;
-            color: var(--dark-blue);
-            font-weight: 600;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            position: relative;
+            display: inline-block;
         }
 
-        .section-actions {
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--secondary);
+        }
+
+        .action-buttons {
             display: flex;
-            gap: 12px;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .action-btn {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
         }
 
         .add-child-btn {
-            background: var(--gradient-blue);
+            background: var(--secondary);
             color: white;
-            border: none;
-            padding: 12px 20px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 1rem;
-            font-weight: 500;
-            transition: var(--transition);
-            display: flex;
-            align-items: center;
-            box-shadow: 0 4px 10px rgba(26, 75, 140, 0.3);
-        }
-
-        .add-child-btn i {
-            margin-right: 8px;
         }
 
         .add-child-btn:hover {
+            background: var(--secondary-dark);
             transform: translateY(-2px);
-            box-shadow: 0 6px 15px rgba(26, 75, 140, 0.4);
         }
 
         .view-boards-btn {
-            background-color: var(--success-green);
+            background: var(--primary);
             color: white;
-            border: none;
-            padding: 12px 20px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 1rem;
-            font-weight: 500;
-            transition: var(--transition);
-            display: flex;
-            align-items: center;
-            box-shadow: 0 4px 10px rgba(40, 167, 69, 0.3);
-        }
-
-        .view-boards-btn i {
-            margin-right: 8px;
         }
 
         .view-boards-btn:hover {
-            background-color: #218838;
+            background: var(--primary-dark);
             transform: translateY(-2px);
-            box-shadow: 0 6px 15px rgba(40, 167, 69, 0.4);
         }
 
         .children-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 25px;
+            gap: 1.5rem;
+            justify-content: center;
         }
 
         .child-card {
-            border-radius: var(--border-radius);
-            padding: 25px;
-            cursor: pointer;
+            background: var(--light);
+            border-radius: 15px;
+            padding: 1.5rem;
             transition: var(--transition);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            cursor: pointer;
             position: relative;
             overflow: hidden;
-            background-color: white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            border: 2px solid transparent;
+            animation: slideUp 0.5s ease-out forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        @keyframes slideUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .child-card:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .child-card:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .child-card:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+
+        .child-card:nth-child(4) {
+            animation-delay: 0.4s;
+        }
+
+        .child-card:nth-child(5) {
+            animation-delay: 0.5s;
+        }
+
+        .child-card:nth-child(6) {
+            animation-delay: 0.6s;
         }
 
         .child-card::before {
@@ -470,150 +859,854 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 6px;
-        }
-
-        .child-card.not-started {
-            border: 2px solid var(--gray);
-        }
-
-        .child-card.not-started::before {
-            background-color: var(--gray);
-        }
-
-        .child-card.in-progress {
-            border: 2px solid var(--progress-yellow);
-        }
-
-        .child-card.in-progress::before {
-            background-color: var(--progress-yellow);
-        }
-
-        .child-card.completed {
-            border: 2px solid var(--success-green);
-        }
-
-        .child-card.completed::before {
-            background-color: var(--success-green);
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
         }
 
         .child-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.12);
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--secondary);
         }
 
         .child-header {
             display: flex;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 1rem;
         }
 
         .child-avatar {
             width: 60px;
             height: 60px;
-            background: var(--gradient-blue);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             border-radius: 50%;
             display: flex;
-            justify-content: center;
             align-items: center;
-            margin-right: 15px;
-            box-shadow: 0 4px 8px rgba(26, 75, 140, 0.2);
-        }
-
-        .child-avatar i {
+            justify-content: center;
+            margin-right: 1rem;
             color: white;
-            font-size: 1.8rem;
+            font-size: 1.5rem;
+            animation: rotate 10s linear infinite;
         }
 
-        .child-name {
-            font-size: 1.3rem;
-            font-weight: bold;
-            color: var(--dark-blue);
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
 
-        .child-age {
-            font-size: 0.95rem;
+        .child-info h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 0.2rem;
+        }
+
+        .child-info p {
             color: var(--gray);
-        }
-
-        .progress-container {
-            margin-top: 20px;
-        }
-
-        .progress-label {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 8px;
             font-size: 0.9rem;
         }
 
+        .child-status {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .status-not-started {
+            background: var(--gray);
+            color: white;
+        }
+
+        .status-in-progress {
+            background: var(--warning);
+            color: white;
+        }
+
+        .status-completed {
+            background: var(--secondary);
+            color: white;
+        }
+
+        .progress-container {
+            margin-top: 1rem;
+        }
+
         .progress-bar {
-            height: 12px;
-            background-color: #e9ecef;
-            border-radius: 6px;
+            height: 8px;
+            background: #e0e0e0;
+            border-radius: 4px;
             overflow: hidden;
         }
 
         .progress-fill {
             height: 100%;
-            border-radius: 6px;
-            width: 0%;
-            transition: width 0.7s ease;
+            background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+            border-radius: 4px;
+            transition: width 0.5s ease;
         }
 
-        .child-card.in-progress .progress-fill {
-            background: linear-gradient(90deg, var(--progress-yellow), #ffb300);
+        .progress-text {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--gray);
         }
 
-        .child-card.completed .progress-fill {
-            background: linear-gradient(90deg, var(--success-green), #2eb82e);
+        .empty-state {
+            text-align: center;
+            padding: 3rem;
+            color: var(--gray);
+            animation: fadeIn 0.8s ease-out;
         }
 
-        .child-status {
+        .empty-state i {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .empty-state h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        /* Comunidad */
+        .community-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: var(--radius);
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            border: 2px solid transparent;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .community-container::before {
+            content: '';
             position: absolute;
-            top: 18px;
-            right: 18px;
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
         }
 
-        .child-card.not-started .child-status {
-            background-color: var(--gray);
-            color: white;
+        .community-container:hover {
+            border-color: var(--primary);
         }
 
-        .child-card.in-progress .child-status {
-            background-color: var(--progress-yellow);
-            color: var(--dark-blue);
+        .community-subtabs {
+            display: flex;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid #f0f0f0;
         }
 
-        .child-card.completed .child-status {
-            background-color: var(--success-green);
-            color: white;
-        }
-
-        .delete-child-btn {
-            position: absolute;
-            top: 18px;
-            right: 18px;
+        .community-subtab {
             background: none;
             border: none;
-            color: var(--warning-red);
-            font-size: 1.2rem;
+            padding: 0.8rem 1.5rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--gray);
             cursor: pointer;
             transition: var(--transition);
-            z-index: 2;
+            position: relative;
         }
 
-        .delete-child-btn:hover {
-            color: #c82333;
+        .community-subtab.active {
+            color: var(--primary);
+        }
+
+        .community-subtab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--primary);
+        }
+
+        .community-subtab:hover {
+            color: var(--primary);
+        }
+
+        .community-subtab-content {
+            display: none;
+        }
+
+        .community-subtab-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .department-selector {
+            margin-bottom: 2rem;
+        }
+
+        .department-selector label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .department-select {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1rem;
+            background: white;
+            transition: var(--transition);
+        }
+
+        .department-select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(26, 75, 140, 0.1);
+        }
+
+        .post-form {
+            background: var(--light);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+            border: 2px solid transparent;
+            transition: var(--transition);
+        }
+
+        .post-form:hover {
+            border-color: var(--primary);
+        }
+
+        .post-form textarea {
+            width: 100%;
+            min-height: 100px;
+            padding: 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            resize: vertical;
+            transition: var(--transition);
+        }
+
+        .post-form textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(26, 75, 140, 0.1);
+        }
+
+        .post-form-actions {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 1rem;
+        }
+
+        .posts-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .post {
+            background: var(--light);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            border: 2px solid transparent;
+            transition: var(--transition);
+            animation: slideUp 0.5s ease-out forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .post:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .post:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .post:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+
+        .post:nth-child(4) {
+            animation-delay: 0.4s;
+        }
+
+        .post:nth-child(5) {
+            animation-delay: 0.5s;
+        }
+
+        .post:hover {
+            border-color: var(--secondary);
+            transform: translateY(-5px);
+        }
+
+        .post-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .post-avatar {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .post-info h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 0.2rem;
+        }
+
+        .post-info p {
+            color: var(--gray);
+            font-size: 0.85rem;
+        }
+
+        .post-content {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+            color: var(--dark);
+        }
+
+        .post-actions {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .post-action {
+            background: none;
+            border: none;
+            color: var(--gray);
+            cursor: pointer;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: var(--transition);
+        }
+
+        .post-action:hover {
+            color: var(--primary);
+        }
+
+        .post-action.active {
+            color: var(--secondary);
+        }
+
+        .comments-section {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .comment-form {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .comment-form input {
+            flex: 1;
+            padding: 0.8rem 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+
+        .comment-form input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(26, 75, 140, 0.1);
+        }
+
+        .comment-form button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 0.8rem 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .comment-form button:hover {
+            background: var(--primary-dark);
+        }
+
+        .comments-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .comment {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .comment-avatar {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1rem;
+            flex-shrink: 0;
+        }
+
+        .comment-content {
+            flex: 1;
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 1rem;
+            position: relative;
+        }
+
+        .comment-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+
+        .comment-author {
+            font-weight: 600;
+            color: var(--dark);
+            font-size: 0.9rem;
+        }
+
+        .comment-time {
+            color: var(--gray);
+            font-size: 0.8rem;
+        }
+
+        .comment-text {
+            color: var(--dark);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .delete-comment-btn {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: none;
+            border: none;
+            color: var(--secondary);
+            cursor: pointer;
+            font-size: 0.8rem;
+            opacity: 0.7;
+            transition: var(--transition);
+        }
+
+        .delete-comment-btn:hover {
+            opacity: 1;
+        }
+
+        /* Mensajería - Estilo WhatsApp */
+        .messaging-container {
+            display: flex;
+            height: 600px;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            border: 2px solid transparent;
+            transition: var(--transition);
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+        }
+
+        .messaging-container:hover {
+            border-color: var(--primary);
+        }
+
+        .conversations-list {
+            width: 35%;
+            background: var(--whatsapp-green);
+            border-right: 1px solid #e0e0e0;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .conversations-header {
+            background: var(--whatsapp-green);
+            color: white;
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .conversations-header h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .search-conversations {
+            padding: 0.8rem 1rem;
+            background: rgba(255,255,255,0.1);
+        }
+
+        .search-conversations input {
+            width: 100%;
+            padding: 0.6rem 1rem;
+            border: none;
+            border-radius: 20px;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            font-size: 0.9rem;
+        }
+
+        .search-conversations input::placeholder {
+            color: rgba(255,255,255,0.7);
+        }
+
+        .conversations-body {
+            flex: 1;
+            overflow-y: auto;
+            background: var(--whatsapp-green);
+        }
+
+        .conversation-item {
+            padding: 1rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: white;
+        }
+
+        .conversation-item:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        .conversation-item.active {
+            background: rgba(255,255,255,0.2);
+        }
+
+        .conversation-avatar {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .conversation-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .conversation-info h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.2rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .conversation-info p {
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.8);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .conversation-time {
+            font-size: 0.75rem;
+            color: rgba(255,255,255,0.7);
+            align-self: flex-start;
+        }
+
+        .chat-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background: var(--chat-background);
+            height: 600px;
+        }
+
+        .chat-header {
+            background: #f0f0f0;
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            border-bottom: 1px solid #ddd;
+        }
+
+        .chat-header-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .chat-header-avatar {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1rem;
+        }
+
+        .chat-header-info h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.1rem;
+        }
+
+        .chat-header-info p {
+            font-size: 0.8rem;
+            color: var(--gray);
+        }
+
+        .chat-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .chat-action-btn {
+            background: none;
+            border: none;
+            color: var(--whatsapp-green);
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: var(--transition);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .chat-action-btn:hover {
+            background: rgba(0,0,0,0.05);
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 1rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><rect width="20" height="20" fill="%23e9ebeb"/><path d="M0 0h10v10H0zM10 10h10v10H10z" fill="%23d1d1d1" opacity="0.3"/></svg>');
+            background-repeat: repeat;
+        }
+
+        .message {
+            display: flex;
+            gap: 0.5rem;
+            max-width: 70%;
+            position: relative;
+            animation: messageSlide 0.3s ease-out;
+        }
+
+        @keyframes messageSlide {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .message.sent {
+            align-self: flex-end;
+            flex-direction: row-reverse;
+        }
+
+        .message.received {
+            align-self: flex-start;
+        }
+
+        .message-avatar {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.8rem;
+            flex-shrink: 0;
+        }
+
+        .message-content {
+            background: var(--message-received);
+            padding: 0.8rem 1rem;
+            border-radius: 10px;
+            position: relative;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+            word-wrap: break-word;
+        }
+
+        .message.sent .message-content {
+            background: var(--message-sent);
+            color: #000;
+        }
+
+        .message-time {
+            font-size: 0.7rem;
+            color: rgba(0, 0, 0, 0.5);
+            margin-top: 0.2rem;
+            text-align: right;
+        }
+
+        .message.sent .message-time {
+            color: rgba(0, 0, 0, 0.5);
+        }
+
+        .delete-message-btn {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--secondary);
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 0.7rem;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            transition: var(--transition);
+            opacity: 0;
+        }
+
+        .message:hover .delete-message-btn {
+            opacity: 1;
+        }
+
+        .delete-message-btn:hover {
             transform: scale(1.1);
         }
 
+        .chat-input {
+            padding: 1rem;
+            background: #f0f0f0;
+            border-top: 1px solid #ddd;
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .chat-input input {
+            flex: 1;
+            padding: 0.8rem 1rem;
+            border: none;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            background: white;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            transition: var(--transition);
+        }
+
+        .chat-input input:focus {
+            outline: none;
+            box-shadow: 0 1px 5px rgba(0,0,0,0.2);
+        }
+
+        .chat-input button {
+            background: var(--whatsapp-green);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .chat-input button:hover {
+            background: var(--whatsapp-light-green);
+            transform: scale(1.05);
+        }
+
+        .new-conversation-btn {
+            margin-top: 1rem;
+            background: var(--secondary);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 0.8rem 1.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .new-conversation-btn:hover {
+            background: var(--secondary-dark);
+            transform: translateY(-2px);
+        }
+
+        /* Modal */
         .modal {
             display: none;
             position: fixed;
@@ -621,7 +1714,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.6);
+            background: rgba(0, 0, 0, 0.6);
             z-index: 1000;
             justify-content: center;
             align-items: center;
@@ -629,17 +1722,21 @@
         }
 
         .modal-content {
-            background-color: white;
-            border-radius: var(--border-radius);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-            padding: 35px;
+            background: white;
+            border-radius: var(--radius);
+            padding: 2rem;
             width: 90%;
-            max-width: 520px;
-            position: relative;
-            animation: modalFadeIn 0.4s ease;
+            max-width: 500px;
+            box-shadow: var(--shadow-lg);
+            animation: modalSlideIn 0.3s ease-out;
+            border: 2px solid transparent;
         }
 
-        @keyframes modalFadeIn {
+        .modal-content:hover {
+            border-color: var(--primary);
+        }
+
+        @keyframes modalSlideIn {
             from {
                 opacity: 0;
                 transform: translateY(-30px);
@@ -654,331 +1751,427 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 25px;
+            margin-bottom: 1.5rem;
         }
 
         .modal-title {
-            font-size: 1.6rem;
-            color: var(--dark-blue);
+            font-size: 1.5rem;
             font-weight: 600;
+            color: var(--dark);
         }
 
         .close-btn {
             background: none;
             border: none;
-            font-size: 1.7rem;
+            font-size: 1.5rem;
             cursor: pointer;
             color: var(--gray);
-            transition: var(--transition);
-            width: 36px;
-            height: 36px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
+            transition: var(--transition);
         }
 
         .close-btn:hover {
-            color: var(--dark-blue);
-            background-color: #f1f1f1;
+            background: var(--light);
+            color: var(--dark);
         }
 
         .modal-footer {
             display: flex;
             justify-content: flex-end;
-            gap: 12px;
-            margin-top: 25px;
+            gap: 1rem;
+            margin-top: 1.5rem;
         }
 
         .btn-cancel {
-            background-color: transparent;
-            color: var(--gray);
-            border: 1px solid var(--gray);
+            background: var(--light);
+            color: var(--dark);
         }
 
         .btn-cancel:hover {
-            background-color: var(--light-gray);
+            background: #e0e0e0;
         }
 
-        .confirmation-dialog {
-            text-align: center;
-            padding: 25px;
-        }
-
-        .confirmation-icon {
-            font-size: 3.5rem;
-            color: var(--primary-blue);
-            margin-bottom: 20px;
-            animation: bounce 1.5s infinite;
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
-        }
-
-        .confirmation-message {
-            font-size: 1.3rem;
-            margin-bottom: 25px;
-            color: var(--dark-blue);
-            line-height: 1.5;
-        }
-
-        .delete-confirmation-input {
-            width: 100%;
-            padding: 14px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-size: 1rem;
-            margin-bottom: 20px;
-            text-align: center;
-            font-weight: 600;
-        }
-
-        .delete-confirmation-input:focus {
-            outline: none;
-            border-color: var(--warning-red);
-            box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.15);
-        }
-
+        /* Notificación */
         .notification {
             position: fixed;
-            top: 25px;
-            right: 25px;
-            background-color: white;
-            border-radius: var(--border-radius);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-            padding: 20px 25px;
-            max-width: 350px;
+            top: 20px;
+            right: 20px;
+            background: white;
+            padding: 1rem 1.5rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transform: translateX(400px);
+            transition: transform 0.3s ease;
             z-index: 2000;
-            transform: translateX(500px);
-            transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            border-left: 5px solid var(--primary-blue);
+            max-width: 350px;
+            border-left: 4px solid var(--primary);
         }
 
         .notification.show {
             transform: translateX(0);
         }
 
-        .notification-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 12px;
-        }
-
         .notification-icon {
-            margin-right: 12px;
-            font-size: 1.4rem;
+            font-size: 1.5rem;
         }
 
-        .notification-icon.success {
-            color: var(--success-green);
+        .notification-success .notification-icon {
+            color: var(--secondary);
         }
 
-        .notification-icon.error {
-            color: var(--warning-red);
+        .notification-error .notification-icon {
+            color: var(--primary);
         }
 
-        .notification-title {
+        .notification-content h4 {
+            font-size: 1rem;
             font-weight: 600;
-            color: var(--dark-blue);
-            font-size: 1.1rem;
+            margin-bottom: 0.2rem;
         }
 
-        .notification-message {
+        .notification-content p {
+            font-size: 0.9rem;
             color: var(--gray);
-            font-size: 0.95rem;
-            line-height: 1.5;
         }
 
-        .empty-state {
+        /* Footer */
+        .footer {
+            background-color: var(--primary);
+            color: white;
             text-align: center;
-            padding: 50px 20px;
-            color: var(--gray);
+            padding: 1.5rem;
+            margin-top: auto;
         }
 
-        .empty-state i {
-            font-size: 4.5rem;
-            margin-bottom: 25px;
-            color: var(--light-blue);
-            animation: float 3s ease-in-out infinite;
+        .footer p {
+            margin: 0;
+            font-size: 0.9rem;
+            opacity: 0.8;
         }
 
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-15px); }
-            100% { transform: translateY(0px); }
-        }
-
-        .empty-state h3 {
-            font-size: 1.6rem;
-            margin-bottom: 15px;
-            color: var(--dark-blue);
-        }
-
-        .empty-state p {
-            font-size: 1.1rem;
-            margin-bottom: 25px;
-            max-width: 500px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
+        /* Responsive */
         @media (max-width: 768px) {
-            .container {
-                padding: 15px;
-            }
-
-            header {
+            .top-bar {
                 flex-direction: column;
-                text-align: center;
-                padding: 20px;
+                padding: 1rem;
             }
 
-            .logo {
-                margin-bottom: 15px;
+            .nav-links {
+                margin-top: 1rem;
+                gap: 1rem;
             }
 
-            .slogan {
-                margin-top: 10px;
+            .intro-card {
+                padding: 2rem;
+            }
+
+            .intro-card h1 {
+                font-size: 2rem;
+            }
+
+            .stats-container {
+                grid-template-columns: repeat(2, 1fr);
             }
 
             .dashboard-header {
                 flex-direction: column;
-                gap: 15px;
                 text-align: center;
             }
 
             .section-header {
                 flex-direction: column;
-                gap: 15px;
+                align-items: center;
             }
 
-            .section-actions {
-                flex-direction: column;
+            .action-buttons {
                 width: 100%;
+                justify-content: center;
             }
 
             .children-grid {
                 grid-template-columns: 1fr;
             }
 
-            .auth-box {
-                padding: 25px;
-            }
-
-            .modal-content {
-                padding: 25px;
-            }
-
             .notification {
-                right: 15px;
-                left: 15px;
+                right: 10px;
+                left: 10px;
                 max-width: none;
+            }
+
+            .process-steps {
+                flex-direction: column;
+            }
+
+            .back-button {
+                top: 10px;
+                left: 10px;
+                padding: 0.6rem 1rem;
+                font-size: 0.9rem;
+            }
+
+            .dashboard-tabs {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .tab-button {
+                white-space: nowrap;
+            }
+
+            .community-subtabs {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .community-subtab {
+                white-space: nowrap;
+            }
+
+            .messaging-container {
+                flex-direction: column;
+                height: auto;
+                max-width: 100%;
+            }
+
+            .conversations-list {
+                width: 100%;
+                height: 200px;
+                border-right: none;
+                border-bottom: 1px solid #e0e0e0;
+            }
+
+            .chat-area {
+                height: 400px;
+            }
+
+            .admin-view .conversations-list {
+                width: 100%;
+            }
+
+            .admin-view .chat-area {
+                width: 100%;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
+    <!-- Barra superior -->
+    <div class="top-bar">
+        <div class="logo-container">
             <div class="logo">
                 <i class="fas fa-heartbeat"></i>
-                <div>
-                    <h1>Yachay Mikuy</h1>
-                    <div class="slogan">Nutrición Inteligente, Futuro Brillante</div>
+            </div>
+            <div class="logo-text">Yachay Mikuy</div>
+        </div>
+        <div class="nav-links">
+            <a href="#" id="homeLink">Inicio</a>
+            <a href="#" id="aboutLink">Acerca de</a>
+            <a href="#" id="contactLink">Contacto</a>
+        </div>
+    </div>
+
+    <div class="main-container">
+        <!-- Sección de Introducción -->
+        <section class="intro-section" id="introSection">
+            <div class="intro-card">
+                <div class="intro-logo">
+                    <i class="fas fa-heartbeat"></i>
+                </div>
+                <h1>Yachay Mikuy</h1>
+                <p>Nutrición Inteligente para un Futuro Brillante. Combatiendo la anemia infantil con tecnología de vanguardia y planes nutricionales personalizados.</p>
+                
+                <div class="stats-container">
+                    <div class="stat-item">
+                        <div class="stat-number">2M+</div>
+                        <div class="stat-label">Niños afectados</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">5x</div>
+                        <div class="stat-label">Recuperación más rápida</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">90%</div>
+                        <div class="stat-label">Mejora nutricional</div>
+                    </div>
+                </div>
+                
+                <a href="#" class="cta-button" id="startBtn">
+                    Conoce Más <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </section>
+
+        <!-- Nueva Sección Informativa -->
+        <section class="info-section" id="infoSection">
+            <button class="back-button" id="backToIntroBtn">
+                <i class="fas fa-arrow-left"></i> Regresar
+            </button>
+            
+            <div class="info-container">
+                <h2 class="section-title">¿Cómo funciona Yachay Mikuy?</h2>
+                
+                <div class="info-cards">
+                    <div class="info-card">
+                        <div class="info-icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <h3>Tecnología Inteligente</h3>
+                        <p>Utilizamos inteligencia artificial y big data para analizar las necesidades nutricionales específicas de cada niño.</p>
+                    </div>
+                    
+                    <div class="info-card">
+                        <div class="info-icon">
+                            <i class="fas fa-utensils"></i>
+                        </div>
+                        <h3>Planes Personalizados</h3>
+                        <p>Creamos planes de alimentación adaptados a las características individuales, cultura y recursos locales.</p>
+                    </div>
+                    
+                    <div class="info-card">
+                        <div class="info-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3>Resultados Comprobados</h3>
+                        <p>Hemos logrado reducir los tiempos de recuperación de la anemia hasta 5 veces más rápido que los métodos tradicionales.</p>
+                    </div>
+                </div>
+                
+                <div class="process-container">
+                    <h3 class="process-title">Nuestro Proceso</h3>
+                    
+                    <div class="process-steps">
+                        <div class="process-step">
+                            <div class="step-number">1</div>
+                            <h4>Evaluación</h4>
+                            <p>Recopilamos información sobre el niño, sus hábitos alimenticios y contexto familiar.</p>
+                        </div>
+                        
+                        <div class="process-step">
+                            <div class="step-number">2</div>
+                            <h4>Análisis</h4>
+                            <p>Nuestra IA procesa los datos para identificar deficiencias y oportunidades nutricionales.</p>
+                        </div>
+                        
+                        <div class="process-step">
+                            <div class="step-number">3</div>
+                            <h4>Planificación</h4>
+                            <p>Generamos un plan nutricional personalizado con alimentos accesibles y culturalmente apropiados.</p>
+                        </div>
+                        
+                        <div class="process-step">
+                            <div class="step-number">4</div>
+                            <h4>Seguimiento</h4>
+                            <p>Monitoreamos el progreso y ajustamos el plan según los resultados obtenidos.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="info-cta">
+                    <a href="#" class="info-cta-button" id="registerNowBtn">
+                        Regístrate Ahora <i class="fas fa-user-plus"></i>
+                    </a>
                 </div>
             </div>
-        </header>
+        </section>
 
-        <div class="auth-container" id="loginView">
-            <div class="auth-box">
-                <h2 class="auth-title">Iniciar Sesión</h2>
+        <!-- Sección de Autenticación -->
+        <section class="auth-section" id="authSection">
+            <button class="back-button" id="backToInfoBtn">
+                <i class="fas fa-arrow-left"></i> Regresar
+            </button>
+            
+            <!-- Vista de Inicio de Sesión -->
+            <div class="auth-container" id="loginView">
+                <div class="auth-header">
+                    <h2>Iniciar Sesión</h2>
+                    <p>Accede a tu cuenta para gestionar los perfiles</p>
+                </div>
                 <form id="loginForm">
                     <div class="form-group">
-                        <label class="form-label" for="loginEmail">Correo Electrónico</label>
-                        <input type="email" class="form-input" id="loginEmail" placeholder="Ingrese su correo" required>
-                        <div class="error-message" id="loginEmailError"></div>
+                        <label class="form-label">Correo Electrónico</label>
+                        <input type="email" class="form-input" id="loginEmail" placeholder="tu@correo.com" required>
                     </div>
                     <div class="form-group">
-                        <label class="form-label" for="loginPassword">Contraseña</label>
+                        <label class="form-label">Contraseña</label>
                         <div class="password-container">
-                            <input type="password" class="form-input" id="loginPassword" placeholder="Ingrese su contraseña" required>
+                            <input type="password" class="form-input" id="loginPassword" placeholder="••••••••" required>
                             <button type="button" class="password-toggle" data-target="loginPassword">
                                 <i class="fas fa-eye"></i>
                             </button>
                         </div>
-                        <div class="error-message" id="loginPasswordError"></div>
                     </div>
-                    <button type="submit" class="btn btn-primary">Ingresar</button>
+                    <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
                 </form>
                 <div class="auth-links">
                     <a href="#" id="forgotPasswordLink">¿Olvidaste tu contraseña?</a>
                 </div>
                 <div class="auth-links">
-                    <a href="#" id="registerLink">Crear una cuenta nueva</a>
+                    <a href="#" id="registerLink">¿No tienes cuenta? Regístrate</a>
                 </div>
             </div>
-        </div>
 
-        <div class="auth-container" id="registerView" style="display: none;">
-            <div class="auth-box">
-                <h2 class="auth-title">Crear Cuenta</h2>
+            <!-- Vista de Registro -->
+            <div class="auth-container" id="registerView" style="display: none;">
+                <div class="auth-header">
+                    <h2>Crear Cuenta</h2>
+                    <p>Únete a Yachay Mikuy y mejora la nutrición de tus hijos</p>
+                </div>
                 <form id="registerForm">
                     <div class="form-group">
-                        <label class="form-label" for="registerName">Nombre</label>
-                        <input type="text" class="form-input" id="registerName" placeholder="Ingrese su nombre" required>
-                        <div class="error-message" id="registerNameError"></div>
+                        <label class="form-label">Nombre</label>
+                        <input type="text" class="form-input" id="registerName" placeholder="Tu nombre" required>
                     </div>
                     <div class="form-group">
-                        <label class="form-label" for="registerLastName">Apellido</label>
-                        <input type="text" class="form-input" id="registerLastName" placeholder="Ingrese su apellido" required>
-                        <div class="error-message" id="registerLastNameError"></div>
+                        <label class="form-label">Apellido</label>
+                        <input type="text" class="form-input" id="registerLastName" placeholder="Tu apellido" required>
                     </div>
                     <div class="form-group">
-                        <label class="form-label" for="registerEmail">Correo Electrónico</label>
-                        <input type="email" class="form-input" id="registerEmail" placeholder="Ingrese su correo" required>
-                        <div class="error-message" id="registerEmailError"></div>
+                        <label class="form-label">Correo Electrónico</label>
+                        <input type="email" class="form-input" id="registerEmail" placeholder="tu@correo.com" required>
                     </div>
                     <div class="form-group">
-                        <label class="form-label" for="registerPassword">Contraseña</label>
+                        <label class="form-label">Contraseña</label>
                         <div class="password-container">
-                            <input type="password" class="form-input" id="registerPassword" placeholder="Cree una contraseña" required>
+                            <input type="password" class="form-input" id="registerPassword" placeholder="••••••••" required>
                             <button type="button" class="password-toggle" data-target="registerPassword">
                                 <i class="fas fa-eye"></i>
                             </button>
                         </div>
-                        <div class="password-requirements">
-                            Mínimo 8 caracteres, una mayúscula, una minúscula y un número
-                        </div>
-                        <div class="error-message" id="registerPasswordError"></div>
                     </div>
                     <div class="form-group">
-                        <label class="form-label" for="confirmPassword">Confirmar Contraseña</label>
+                        <label class="form-label">Confirmar Contraseña</label>
                         <div class="password-container">
-                            <input type="password" class="form-input" id="confirmPassword" placeholder="Confirme su contraseña" required>
+                            <input type="password" class="form-input" id="confirmPassword" placeholder="••••••••" required>
                             <button type="button" class="password-toggle" data-target="confirmPassword">
                                 <i class="fas fa-eye"></i>
                             </button>
                         </div>
-                        <div class="error-message" id="confirmPasswordError"></div>
                     </div>
                     <button type="submit" class="btn btn-primary">Crear Cuenta</button>
                 </form>
                 <div class="auth-links">
-                    <a href="#" id="backToLoginLink">Ya tengo una cuenta</a>
+                    <a href="#" id="backToLoginLink">¿Ya tienes cuenta? Inicia sesión</a>
                 </div>
             </div>
-        </div>
 
-        <div class="auth-container" id="forgotPasswordView" style="display: none;">
-            <div class="auth-box">
-                <h2 class="auth-title">Recuperar Contraseña</h2>
+            <!-- Vista de Recuperación de Contraseña -->
+            <div class="auth-container" id="forgotPasswordView" style="display: none;">
+                <div class="auth-header">
+                    <h2>Recuperar Contraseña</h2>
+                    <p>Te enviaremos instrucciones a tu correo</p>
+                </div>
                 <form id="forgotPasswordForm">
                     <div class="form-group">
-                        <label class="form-label" for="forgotEmail">Correo Electrónico</label>
-                        <input type="email" class="form-input" id="forgotEmail" placeholder="Ingrese su correo" required>
-                        <div class="error-message" id="forgotEmailError"></div>
+                        <label class="form-label">Correo Electrónico</label>
+                        <input type="email" class="form-input" id="forgotEmail" placeholder="tu@correo.com" required>
                     </div>
                     <button type="submit" class="btn btn-primary">Enviar Instrucciones</button>
                 </form>
@@ -986,130 +2179,300 @@
                     <a href="#" id="backToLoginFromForgotLink">Volver al inicio de sesión</a>
                 </div>
             </div>
-        </div>
+        </section>
 
-        <div class="dashboard" id="dashboardView">
-            <div class="dashboard-header">
-                <div class="welcome-message" id="welcomeMessage">Bienvenido/a, [Nombre]</div>
-                <button class="logout-btn" id="logoutBtn">Cerrar Sesión</button>
-            </div>
+        <!-- Sección Dashboard -->
+        <section class="dashboard-section" id="dashboardSection">
+            <button class="back-button" id="backToAuthBtn">
+                <i class="fas fa-arrow-left"></i> Regresar
+            </button>
+            
+            <div class="dashboard-container">
+                <div class="dashboard-header">
+                    <div class="welcome-info">
+                        <h1 id="welcomeMessage">Bienvenido/a, [Nombre]</h1>
+                        <p>Gestiona los perfiles nutricionales de tus hijos</p>
+                    </div>
+                    <button class="logout-btn" id="logoutBtn">
+                        <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+                    </button>
+                </div>
 
-            <div class="children-section">
-                <div class="section-header">
-                    <h2 class="section-title">Perfiles de tus hijos</h2>
-                    <div class="section-actions">
-                        <button class="view-boards-btn" id="viewBoardsBtn">
-                            <i class="fas fa-th-large"></i> Ver Tableros
-                        </button>
-                        <button class="add-child-btn" id="addChildBtn">
-                            <i class="fas fa-plus"></i> Agregar Niño
-                        </button>
+                <!-- Pestañas del Dashboard -->
+                <div class="dashboard-tabs">
+                    <button class="tab-button active" id="childrenTabBtn">Perfiles de tus hijos</button>
+                    <button class="tab-button" id="communityTabBtn">Comunidad</button>
+                </div>
+
+                <!-- Contenido de las pestañas -->
+                <div class="tab-content active" id="childrenTab">
+                    <div class="children-container">
+                        <div class="section-header">
+                            <h2 class="section-title">Perfiles de tus hijos</h2>
+                            <div class="action-buttons">
+                                <button class="action-btn view-boards-btn" id="viewBoardsBtn">
+                                    <i class="fas fa-th-large"></i> Ver Tableros
+                                </button>
+                                <button class="action-btn add-child-btn" id="addChildBtn">
+                                    <i class="fas fa-plus"></i> Agregar Niño
+                                </button>
+                            </div>
+                        </div>
+                        <div class="children-grid" id="childrenGrid">
+                        </div>
+                        <div class="empty-state" id="emptyState" style="display: none;">
+                            <i class="fas fa-child"></i>
+                            <h3>Aún no has agregado ningún niño</h3>
+                            <p>Haz clic en el botón "Agregar Niño" para comenzar</p>
+                        </div>
                     </div>
                 </div>
-                <div class="children-grid" id="childrenGrid">
+
+                <div class="tab-content" id="communityTab">
+                    <div class="community-container">
+                        <div class="section-header">
+                            <h2 class="section-title">Comunidad de Padres</h2>
+                        </div>
+                        
+                        <!-- Sub-pestañas de comunidad -->
+                        <div class="community-subtabs">
+                            <button class="community-subtab active" id="postsSubtabBtn">Publicaciones</button>
+                            <button class="community-subtab" id="messagingSubtabBtn">Mensajes</button>
+                        </div>
+                        
+                        <!-- Contenido de las sub-pestañas -->
+                        <div class="community-subtab-content active" id="postsSubtab">
+                            <!-- Selector de departamento -->
+                            <div class="department-selector">
+                                <label for="departmentSelect">Selecciona tu departamento:</label>
+                                <select id="departmentSelect" class="department-select">
+                                    <option value="all">Todos los departamentos</option>
+                                    <option value="lima">Lima</option>
+                                    <option value="arequipa">Arequipa</option>
+                                    <option value="cusco">Cusco</option>
+                                    <option value="piura">Piura</option>
+                                    <option value="lambayeque">Lambayeque</option>
+                                    <option value="cajamarca">Cajamarca</option>
+                                    <option value="junin">Junín</option>
+                                    <option value="huanuco">Huánuco</option>
+                                    <option value="ucayali">Ucayali</option>
+                                    <option value="sanmartin">San Martín</option>
+                                    <option value="amazonas">Amazonas</option>
+                                    <option value="loreto">Loreto</option>
+                                    <option value="madrededios">Madre de Dios</option>
+                                    <option value="puno">Puno</option>
+                                    <option value="tacna">Tacna</option>
+                                    <option value="moquegua">Moquegua</option>
+                                    <option value="ica">Ica</option>
+                                    <option value="huancavelica">Huancavelica</option>
+                                    <option value="ayacucho">Ayacucho</option>
+                                    <option value="apurimac">Apurímac</option>
+                                    <option value="pasco">Pasco</option>
+                                    <option value="tumbes">Tumbes</option>
+                                    <option value="ancash">Áncash</option>
+                                    <option value="callao">Callao</option>
+                                </select>
+                            </div>
+                            
+                            <!-- Formulario para crear publicación -->
+                            <div class="post-form">
+                                <textarea id="postContent" placeholder="Comparte tus ideas, experiencias o preguntas con otros padres..."></textarea>
+                                <div class="post-form-actions">
+                                    <button class="btn btn-primary" id="createPostBtn">Publicar</button>
+                                </div>
+                            </div>
+                            
+                            <!-- Contenedor de publicaciones -->
+                            <div class="posts-container" id="postsContainer">
+                                <!-- Las publicaciones se cargarán dinámicamente aquí -->
+                            </div>
+                            
+                            <div class="empty-state" id="communityEmptyState" style="display: none;">
+                                <i class="fas fa-comments"></i>
+                                <h3>Aún no hay publicaciones</h3>
+                                <p>Sé el primero en compartir algo con la comunidad</p>
+                            </div>
+                        </div>
+                        
+                        <div class="community-subtab-content" id="messagingSubtab">
+                            <div class="messaging-container">
+                                <div class="conversations-list">
+                                    <div class="conversations-header">
+                                        <h3>Mensajes</h3>
+                                        <button class="chat-action-btn" id="refreshConversationsBtn">
+                                            <i class="fas fa-sync-alt"></i>
+                                        </button>
+                                    </div>
+                                    <div class="search-conversations">
+                                        <input type="text" id="searchConversationsInput" placeholder="Buscar conversaciones...">
+                                    </div>
+                                    <div class="conversations-body" id="conversationsList">
+                                        <!-- Las conversaciones se cargarán dinámicamente aquí -->
+                                    </div>
+                                </div>
+                                <div class="chat-area">
+                                    <div class="chat-header" id="chatHeader">
+                                        <div class="chat-header-info">
+                                            <div class="chat-header-avatar">
+                                                <i class="fas fa-user"></i>
+                                            </div>
+                                            <div>
+                                                <h3>Selecciona una conversación</h3>
+                                                <p>Elige un contacto para empezar a chatear</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="chat-messages" id="chatMessages">
+                                        <!-- Los mensajes se cargarán dinámicamente aquí -->
+                                    </div>
+                                    <div class="chat-input" id="chatInputContainer" style="display: none;">
+                                        <input type="text" id="messageInput" placeholder="Escribe un mensaje...">
+                                        <button id="sendMessageBtn">
+                                            <i class="fas fa-paper-plane"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="new-conversation-btn" id="newConversationBtn" style="display: none;">
+                                <i class="fas fa-plus"></i> Nueva conversación
+                            </button>
+                        </div>
                     </div>
-                <div class="empty-state" id="emptyState" style="display: none;">
-                    <i class="fas fa-child"></i>
-                    <h3>Aún no has agregado ningún niño</h3>
-                    <p>Haz clic en el botón "Agregar Niño" para comenzar a registrar los perfiles de tus hijos.</p>
                 </div>
             </div>
-        </div>
-    </div>
+        </section>
 
-    <div class="modal" id="addChildModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 class="modal-title">Agregar Nuevo Niño</h3>
-                <button class="close-btn" id="closeModalBtn">&times;</button>
+        <!-- Modal Agregar Niño -->
+        <div class="modal" id="addChildModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title">Agregar Nuevo Niño</h3>
+                    <button class="close-btn" id="closeModalBtn">&times;</button>
+                </div>
+                <form id="addChildForm">
+                    <div class="form-group">
+                        <label class="form-label">Nombre del Niño</label>
+                        <input type="text" class="form-input" id="childName" placeholder="Nombre del niño" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Fecha de Nacimiento</label>
+                        <input type="date" class="form-input" id="childBirthDate" required>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-cancel" id="cancelAddChildBtn">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </div>
+                </form>
             </div>
-            <form id="addChildForm">
+        </div>
+
+        <!-- Modal Nueva Conversación -->
+        <div class="modal" id="newConversationModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title">Nueva Conversación</h3>
+                    <button class="close-btn" id="closeNewConversationModalBtn">&times;</button>
+                </div>
                 <div class="form-group">
-                    <label class="form-label" for="childName">Nombre del Niño</label>
-                    <input type="text" class="form-input" id="childName" placeholder="Ingrese el nombre" required>
-                    <div class="error-message" id="childNameError"></div>
-                </div>
-                <div class="form-group">
-                    <label class="form-label" for="childBirthDate">Fecha de Nacimiento</label>
-                    <input type="date" class="form-input" id="childBirthDate" required>
-                    <div class="error-message" id="childBirthDateError"></div>
+                    <label class="form-label">Buscar usuario</label>
+                    <input type="text" class="form-input" id="userSearchInput" placeholder="Nombre o correo electrónico">
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-cancel" id="cancelAddChildBtn">Cancelar</button>
-                    <button type="submit" class="btn btn-primary">Guardar</button>
+                    <button type="button" class="btn btn-cancel" id="cancelNewConversationBtn">Cancelar</button>
+                    <button type="button" class="btn btn-primary" id="startConversationBtn">Iniciar conversación</button>
                 </div>
-            </form>
+            </div>
         </div>
-    </div>
 
-    <div class="modal" id="confirmationModal">
-        <div class="modal-content">
-            <div class="confirmation-dialog">
-                <div class="confirmation-icon">
-                    <i class="fas fa-question-circle"></i>
-                </div>
-                <div class="confirmation-message" id="confirmationMessage">
-                    ¿Deseas revisar o editar las respuestas?
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-cancel" id="cancelConfirmationBtn">Cancelar</button>
-                    <button type="button" class="btn btn-primary" id="confirmActionBtn">Confirmar</button>
-                </div>
+        <!-- Notificación -->
+        <div class="notification" id="notification">
+            <div class="notification-icon" id="notificationIcon"></div>
+            <div class="notification-content">
+                <h4 id="notificationTitle"></h4>
+                <p id="notificationMessage"></p>
             </div>
         </div>
     </div>
 
-    <div class="modal" id="deleteConfirmationModal">
-        <div class="modal-content">
-            <div class="confirmation-dialog">
-                <div class="confirmation-icon" style="color: var(--warning-red);">
-                    <i class="fas fa-exclamation-triangle"></i>
-                </div>
-                <div class="confirmation-message" id="deleteConfirmationMessage">
-                    ¿Estás seguro que deseas eliminar este perfil? Esta acción no se puede deshacer.
-                </div>
-                <input type="text" class="delete-confirmation-input" id="deleteConfirmationInput" placeholder="Escribe 'Eliminar' para confirmar">
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-cancel" id="cancelDeleteBtn">Cancelar</button>
-                    <button type="button" class="btn" style="background-color: var(--warning-red);" id="confirmDeleteBtn">Eliminar</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="notification" id="notification">
-        <div class="notification-header">
-            <i class="notification-icon" id="notificationIcon"></i>
-            <div class="notification-title" id="notificationTitle"></div>
-        </div>
-        <div class="notification-message" id="notificationMessage"></div>
-    </div>
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2023 Yachay Mikuy - Nutrición Inteligente, Futuro Brillante. Todos los derechos reservados.</p>
+    </footer>
 
     <script>
+        // Constante para el correo del administrador
+        const ADMIN_EMAIL = 'alvaro.quiroz@alum.udep.edu.pe';
+        
         // Variables globales
         let currentUser = null;
         let users = [];
         let children = [];
-        let selectedChildForConfirmation = null;
-        let selectedChildForDeletion = null;
+        let posts = {};
+        let conversations = [];
+        let currentDepartment = 'all';
+        let activeConversation = null;
 
         // Elementos del DOM
+        const introSection = document.getElementById('introSection');
+        const infoSection = document.getElementById('infoSection');
+        const authSection = document.getElementById('authSection');
+        const dashboardSection = document.getElementById('dashboardSection');
+        const startBtn = document.getElementById('startBtn');
+        const registerNowBtn = document.getElementById('registerNowBtn');
+        const homeLink = document.getElementById('homeLink');
+        const aboutLink = document.getElementById('aboutLink');
+        const contactLink = document.getElementById('contactLink');
+        const backToIntroBtn = document.getElementById('backToIntroBtn');
+        const backToInfoBtn = document.getElementById('backToInfoBtn');
+        const backToAuthBtn = document.getElementById('backToAuthBtn');
         const loginView = document.getElementById('loginView');
         const registerView = document.getElementById('registerView');
         const forgotPasswordView = document.getElementById('forgotPasswordView');
-        const dashboardView = document.getElementById('dashboardView');
         const loginForm = document.getElementById('loginForm');
         const registerForm = document.getElementById('registerForm');
         const forgotPasswordForm = document.getElementById('forgotPasswordForm');
-        const addChildForm = document.getElementById('addChildForm');
         const addChildModal = document.getElementById('addChildModal');
-        const confirmationModal = document.getElementById('confirmationModal');
-        const deleteConfirmationModal = document.getElementById('deleteConfirmationModal');
+        const addChildForm = document.getElementById('addChildForm');
         const childrenGrid = document.getElementById('childrenGrid');
         const emptyState = document.getElementById('emptyState');
         const welcomeMessage = document.getElementById('welcomeMessage');
         const notification = document.getElementById('notification');
         const viewBoardsBtn = document.getElementById('viewBoardsBtn');
+        
+        // Elementos de pestañas
+        const childrenTabBtn = document.getElementById('childrenTabBtn');
+        const communityTabBtn = document.getElementById('communityTabBtn');
+        const childrenTab = document.getElementById('childrenTab');
+        const communityTab = document.getElementById('communityTab');
+        
+        // Elementos de sub-pestañas de comunidad
+        const postsSubtabBtn = document.getElementById('postsSubtabBtn');
+        const messagingSubtabBtn = document.getElementById('messagingSubtabBtn');
+        const postsSubtab = document.getElementById('postsSubtab');
+        const messagingSubtab = document.getElementById('messagingSubtab');
+        
+        // Elementos de publicaciones
+        const departmentSelect = document.getElementById('departmentSelect');
+        const postContent = document.getElementById('postContent');
+        const createPostBtn = document.getElementById('createPostBtn');
+        const postsContainer = document.getElementById('postsContainer');
+        const communityEmptyState = document.getElementById('communityEmptyState');
+        
+        // Elementos de mensajería
+        const conversationsList = document.getElementById('conversationsList');
+        const chatHeader = document.getElementById('chatHeader');
+        const chatMessages = document.getElementById('chatMessages');
+        const chatInputContainer = document.getElementById('chatInputContainer');
+        const messageInput = document.getElementById('messageInput');
+        const sendMessageBtn = document.getElementById('sendMessageBtn');
+        const newConversationBtn = document.getElementById('newConversationBtn');
+        const newConversationModal = document.getElementById('newConversationModal');
+        const userSearchInput = document.getElementById('userSearchInput');
+        const startConversationBtn = document.getElementById('startConversationBtn');
+        const closeNewConversationModalBtn = document.getElementById('closeNewConversationModalBtn');
+        const cancelNewConversationBtn = document.getElementById('cancelNewConversationBtn');
+        const refreshConversationsBtn = document.getElementById('refreshConversationsBtn');
+        const searchConversationsInput = document.getElementById('searchConversationsInput');
 
         // Event Listeners
         document.addEventListener('DOMContentLoaded', function() {
@@ -1119,51 +2482,138 @@
             // Verificar si hay un usuario autenticado
             checkAuthenticatedUser();
             
-            // Configurar event listeners para los formularios
+            // Configurar event listeners
+            startBtn.addEventListener('click', showInfoSection);
+            registerNowBtn.addEventListener('click', showAuthSection);
+            homeLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                if (currentUser) {
+                    showDashboard();
+                } else {
+                    showIntro();
+                }
+            });
+            aboutLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                showInfoSection();
+            });
+            contactLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                showNotification('info', 'Contacto', 'Email: contacto@yachaymikuy.com | Tel: +51 929 177 801');
+            });
+            
+            // Botones de regreso
+            backToIntroBtn.addEventListener('click', showIntro);
+            backToInfoBtn.addEventListener('click', showInfoSection);
+            backToAuthBtn.addEventListener('click', showAuthSection);
+            
+            // Pestañas
+            childrenTabBtn.addEventListener('click', function() {
+                childrenTabBtn.classList.add('active');
+                communityTabBtn.classList.remove('active');
+                childrenTab.classList.add('active');
+                communityTab.classList.remove('active');
+            });
+            
+            communityTabBtn.addEventListener('click', function() {
+                communityTabBtn.classList.add('active');
+                childrenTabBtn.classList.remove('active');
+                communityTab.classList.add('active');
+                childrenTab.classList.remove('active');
+                loadPosts();
+            });
+            
+            // Sub-pestañas de comunidad
+            postsSubtabBtn.addEventListener('click', function() {
+                postsSubtabBtn.classList.add('active');
+                messagingSubtabBtn.classList.remove('active');
+                postsSubtab.classList.add('active');
+                messagingSubtab.classList.remove('active');
+                loadPosts();
+            });
+            
+            messagingSubtabBtn.addEventListener('click', function() {
+                messagingSubtabBtn.classList.add('active');
+                postsSubtabBtn.classList.remove('active');
+                messagingSubtab.classList.add('active');
+                postsSubtab.classList.remove('active');
+                loadConversations();
+            });
+            
+            // Selector de departamento
+            departmentSelect.addEventListener('change', function() {
+                currentDepartment = this.value;
+                loadPosts();
+            });
+            
+            // Comunidad
+            createPostBtn.addEventListener('click', createPost);
+            
+            // Mensajería
+            sendMessageBtn.addEventListener('click', sendMessage);
+            messageInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    sendMessage();
+                }
+            });
+            
+            newConversationBtn.addEventListener('click', function() {
+                newConversationModal.style.display = 'flex';
+                userSearchInput.focus();
+            });
+            
+            closeNewConversationModalBtn.addEventListener('click', function() {
+                newConversationModal.style.display = 'none';
+                userSearchInput.value = '';
+            });
+            
+            cancelNewConversationBtn.addEventListener('click', function() {
+                newConversationModal.style.display = 'none';
+                userSearchInput.value = '';
+            });
+            
+            startConversationBtn.addEventListener('click', startNewConversation);
+            userSearchInput.addEventListener('input', searchUsers);
+            
+            refreshConversationsBtn.addEventListener('click', function() {
+                loadConversations();
+                showNotification('success', 'Actualizado', 'Lista de conversaciones actualizada');
+            });
+            
+            searchConversationsInput.addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase();
+                filterConversations(searchTerm);
+            });
+            
             loginForm.addEventListener('submit', handleLogin);
             registerForm.addEventListener('submit', handleRegister);
             forgotPasswordForm.addEventListener('submit', handleForgotPassword);
             addChildForm.addEventListener('submit', handleAddChild);
             
-            // Configurar event listeners para los enlaces
+            // Navegación entre vistas de autenticación
             document.getElementById('registerLink').addEventListener('click', showRegisterView);
             document.getElementById('backToLoginLink').addEventListener('click', showLoginView);
             document.getElementById('forgotPasswordLink').addEventListener('click', showForgotPasswordView);
             document.getElementById('backToLoginFromForgotLink').addEventListener('click', showLoginView);
+            
+            // Dashboard
             document.getElementById('logoutBtn').addEventListener('click', handleLogout);
             document.getElementById('addChildBtn').addEventListener('click', showAddChildModal);
             document.getElementById('closeModalBtn').addEventListener('click', hideAddChildModal);
             document.getElementById('cancelAddChildBtn').addEventListener('click', hideAddChildModal);
-            document.getElementById('cancelConfirmationBtn').addEventListener('click', hideConfirmationModal);
-            document.getElementById('confirmActionBtn').addEventListener('click', handleConfirmationAction);
             
-            // Event listeners para el modal de eliminación
-            document.getElementById('cancelDeleteBtn').addEventListener('click', hideDeleteConfirmationModal);
-            document.getElementById('confirmDeleteBtn').addEventListener('click', handleDeleteChild);
-            
-            // [INICIO] LÓGICA ACTUALIZADA PARA EL BOTÓN "VER TABLEROS"
-            // Configurar event listener para el botón de ver tableros
+            // Botón ver tableros
             viewBoardsBtn.addEventListener('click', function() {
                 const userChildren = children.filter(child => child.parentId === currentUser.id);
-
                 if (userChildren.length > 0) {
-                    // Para ir directamente a la pantalla de finalización (el "tablero"),
-                    // redirigimos al cuestionario con parámetros especiales que la lógica
-                    // existente en yachaymikuy.html puede interpretar para saltar al final.
-                    // `edit=true` activa la lectura del parámetro `question`.
-                    // Un número de pregunta igual o mayor al total de preguntas (55)
-                    // hará que se muestre la pantalla de "¡Datos guardados con éxito!".
                     const firstChildId = userChildren[0].id;
-                    const totalQuestions = 55; // El cuestionario tiene 55 preguntas.
-                    window.location.href = `yachaymikuy.html?childId=${firstChildId}&edit=true&question=${totalQuestions}`;
+                    window.location.href = `yachaymikuy.html?childId=${firstChildId}&edit=true&question=55`;
                 } else {
-                    // Si no hay niños, no se puede ver el tablero.
                     showNotification('error', 'Sin perfiles', 'Primero debe agregar un niño para ver los tableros.');
                 }
             });
-            // [FIN] LÓGICA ACTUALIZADA
-
-            // Configurar event listeners para los botones de mostrar/ocultar contraseña
+            
+            // Toggle contraseña
             document.querySelectorAll('.password-toggle').forEach(button => {
                 button.addEventListener('click', togglePassword);
             });
@@ -1190,19 +2640,25 @@
         // Cargar datos desde localStorage
         function loadDataFromStorage() {
             const storedUsers = localStorage.getItem('yachayMikuyUsers');
-            if (storedUsers) {
-                users = JSON.parse(storedUsers);
-            }
+            if (storedUsers) users = JSON.parse(storedUsers);
             
             const storedChildren = localStorage.getItem('yachayMikuyChildren');
-            if (storedChildren) {
-                children = JSON.parse(storedChildren);
-            }
+            if (storedChildren) children = JSON.parse(storedChildren);
             
             const storedCurrentUser = localStorage.getItem('yachayMikuyCurrentUser');
-            if (storedCurrentUser) {
-                currentUser = JSON.parse(storedCurrentUser);
+            if (storedCurrentUser) currentUser = JSON.parse(storedCurrentUser);
+            
+            const storedPosts = localStorage.getItem('yachayMikuyPosts');
+            if (storedPosts) posts = JSON.parse(storedPosts);
+            
+            const storedCurrentDepartment = localStorage.getItem('yachayMikuyCurrentDepartment');
+            if (storedCurrentDepartment) {
+                currentDepartment = storedCurrentDepartment;
+                departmentSelect.value = currentDepartment;
             }
+            
+            const storedConversations = localStorage.getItem('yachayMikuyConversations');
+            if (storedConversations) conversations = JSON.parse(storedConversations);
         }
 
         // Guardar datos en localStorage
@@ -1210,53 +2666,88 @@
             localStorage.setItem('yachayMikuyUsers', JSON.stringify(users));
             localStorage.setItem('yachayMikuyChildren', JSON.stringify(children));
             localStorage.setItem('yachayMikuyCurrentUser', JSON.stringify(currentUser));
+            localStorage.setItem('yachayMikuyPosts', JSON.stringify(posts));
+            localStorage.setItem('yachayMikuyCurrentDepartment', currentDepartment);
+            localStorage.setItem('yachayMikuyConversations', JSON.stringify(conversations));
         }
 
         // Verificar si hay un usuario autenticado
         function checkAuthenticatedUser() {
             if (currentUser) {
-                showDashboardView();
+                showDashboard();
             } else {
-                showLoginView();
+                showIntro();
             }
+        }
+
+        // Mostrar sección introductoria
+        function showIntro() {
+            introSection.style.display = 'flex';
+            infoSection.style.display = 'none';
+            authSection.style.display = 'none';
+            dashboardSection.style.display = 'none';
+        }
+
+        // Mostrar sección informativa
+        function showInfoSection() {
+            introSection.style.display = 'none';
+            infoSection.style.display = 'block';
+            authSection.style.display = 'none';
+            dashboardSection.style.display = 'none';
+        }
+
+        // Mostrar sección de autenticación
+        function showAuthSection() {
+            introSection.style.display = 'none';
+            infoSection.style.display = 'none';
+            authSection.style.display = 'flex';
+            dashboardSection.style.display = 'none';
+            showLoginView();
         }
 
         // Mostrar vista de inicio de sesión
         function showLoginView() {
-            loginView.style.display = 'flex';
+            loginView.style.display = 'block';
             registerView.style.display = 'none';
             forgotPasswordView.style.display = 'none';
-            dashboardView.style.display = 'none';
         }
 
         // Mostrar vista de registro
         function showRegisterView() {
             loginView.style.display = 'none';
-            registerView.style.display = 'flex';
+            registerView.style.display = 'block';
             forgotPasswordView.style.display = 'none';
-            dashboardView.style.display = 'none';
         }
 
         // Mostrar vista de recuperación de contraseña
         function showForgotPasswordView() {
             loginView.style.display = 'none';
             registerView.style.display = 'none';
-            forgotPasswordView.style.display = 'flex';
-            dashboardView.style.display = 'none';
+            forgotPasswordView.style.display = 'block';
         }
 
-        // Mostrar vista del dashboard
-        function showDashboardView() {
-            loginView.style.display = 'none';
-            registerView.style.display = 'none';
-            forgotPasswordView.style.display = 'none';
-            dashboardView.style.display = 'block';
+        // Mostrar dashboard
+        function showDashboard() {
+            introSection.style.display = 'none';
+            infoSection.style.display = 'none';
+            authSection.style.display = 'none';
+            dashboardSection.style.display = 'flex';
             
-            // Actualizar mensaje de bienvenida
             welcomeMessage.textContent = `Bienvenido/a, ${currentUser.name}`;
-            
-            // Cargar los hijos del usuario actual
             loadChildren();
+            
+            // Asegurar que la pestaña activa sea "Perfiles de tus hijos"
+            childrenTabBtn.classList.add('active');
+            communityTabBtn.classList.remove('active');
+            childrenTab.classList.add('active');
+            communityTab.classList.remove('active');
+            
+            // Si el usuario es el administrador, mostrar el botón de nueva conversación
+            if (currentUser.email === ADMIN_EMAIL) {
+                newConversationBtn.style.display = 'flex';
+            } else {
+                newConversationBtn.style.display = 'none';
+            }
         }
 
         // Manejar inicio de sesión
@@ -1266,46 +2757,17 @@
             const email = document.getElementById('loginEmail').value;
             const password = document.getElementById('loginPassword').value;
             
-            // Validar campos
-            let isValid = true;
-            
-            if (!email) {
-                showError('loginEmailError', 'Por favor ingrese su correo electrónico');
-                isValid = false;
-            } else {
-                hideError('loginEmailError');
-            }
-            
-            if (!password) {
-                showError('loginPasswordError', 'Por favor ingrese su contraseña');
-                isValid = false;
-            } else {
-                hideError('loginPasswordError');
-            }
-            
-            if (!isValid) return;
-            
-            // Verificar credenciales
             const user = users.find(u => u.email === email && u.password === password);
             
             if (user) {
                 currentUser = user;
                 saveDataToStorage();
                 
-                // Verificar si hay niños con cuestionarios incompletos
-                const userChildren = children.filter(child => child.parentId === currentUser.id);
-                const incompleteChild = userChildren.find(child => !child.completed);
-                
-                if (incompleteChild) {
-                    // Redirigir al cuestionario del primer niño incompleto
-                    window.location.href = `yachaymikuy.html?childId=${incompleteChild.id}`;
-                } else {
-                    // Mostrar dashboard
-                    showDashboardView();
-                    showNotification('success', 'Inicio de sesión exitoso', 'Bienvenido de nuevo');
-                }
+                // Siempre mostrar el dashboard después de iniciar sesión
+                showDashboard();
+                showNotification('success', '¡Bienvenido!', 'Has iniciado sesión correctamente');
             } else {
-                showError('loginPasswordError', 'Correo o contraseña incorrectos');
+                showNotification('error', 'Error', 'Correo o contraseña incorrectos');
             }
         }
 
@@ -1319,79 +2781,22 @@
             const password = document.getElementById('registerPassword').value;
             const confirmPassword = document.getElementById('confirmPassword').value;
             
-            // Validar campos
-            let isValid = true;
-            
-            // Validar nombre (solo letras)
-            if (!name) {
-                showError('registerNameError', 'Por favor ingrese su nombre');
-                isValid = false;
-            } else if (!/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/.test(name)) {
-                showError('registerNameError', 'El nombre solo debe contener letras');
-                isValid = false;
-            } else {
-                hideError('registerNameError');
+            // Validaciones básicas
+            if (!name || !lastName || !email || !password) {
+                showNotification('error', 'Error', 'Por favor completa todos los campos');
+                return;
             }
             
-            // Validar apellido (solo letras)
-            if (!lastName) {
-                showError('registerLastNameError', 'Por favor ingrese su apellido');
-                isValid = false;
-            } else if (!/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/.test(lastName)) {
-                showError('registerLastNameError', 'El apellido solo debe contener letras');
-                isValid = false;
-            } else {
-                hideError('registerLastNameError');
+            if (password !== confirmPassword) {
+                showNotification('error', 'Error', 'Las contraseñas no coinciden');
+                return;
             }
             
-            // Validar correo electrónico
-            if (!email) {
-                showError('registerEmailError', 'Por favor ingrese su correo electrónico');
-                isValid = false;
-            } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-                showError('registerEmailError', 'Por favor ingrese un correo electrónico válido');
-                isValid = false;
-            } else if (users.some(u => u.email === email)) {
-                showError('registerEmailError', 'Este correo electrónico ya está registrado');
-                isValid = false;
-            } else {
-                hideError('registerEmailError');
+            if (users.some(u => u.email === email)) {
+                showNotification('error', 'Error', 'Este correo ya está registrado');
+                return;
             }
             
-            // Validar contraseña
-            if (!password) {
-                showError('registerPasswordError', 'Por favor ingrese una contraseña');
-                isValid = false;
-            } else if (password.length < 8) {
-                showError('registerPasswordError', 'La contraseña debe tener al menos 8 caracteres');
-                isValid = false;
-            } else if (!/[A-Z]/.test(password)) {
-                showError('registerPasswordError', 'La contraseña debe tener al menos una mayúscula');
-                isValid = false;
-            } else if (!/[a-z]/.test(password)) {
-                showError('registerPasswordError', 'La contraseña debe tener al menos una minúscula');
-                isValid = false;
-            } else if (!/[0-9]/.test(password)) {
-                showError('registerPasswordError', 'La contraseña debe tener al menos un número');
-                isValid = false;
-            } else {
-                hideError('registerPasswordError');
-            }
-            
-            // Validar confirmación de contraseña
-            if (!confirmPassword) {
-                showError('confirmPasswordError', 'Por favor confirme su contraseña');
-                isValid = false;
-            } else if (password !== confirmPassword) {
-                showError('confirmPasswordError', 'Las contraseñas no coinciden');
-                isValid = false;
-            } else {
-                hideError('confirmPasswordError');
-            }
-            
-            if (!isValid) return;
-            
-            // Crear nuevo usuario
             const newUser = {
                 id: Date.now().toString(),
                 name,
@@ -1403,13 +2808,8 @@
             users.push(newUser);
             saveDataToStorage();
             
-            // Mostrar mensaje de éxito
-            showNotification('success', 'Registro exitoso', 'Tu cuenta ha sido creada correctamente');
+            showNotification('success', '¡Cuenta creada!', 'Tu cuenta ha sido creada exitosamente');
             
-            // Limpiar formulario
-            registerForm.reset();
-            
-            // Redirigir al inicio de sesión
             setTimeout(() => {
                 showLoginView();
             }, 1500);
@@ -1421,33 +2821,20 @@
             
             const email = document.getElementById('forgotEmail').value;
             
-            // Validar campo
             if (!email) {
-                showError('forgotEmailError', 'Por favor ingrese su correo electrónico');
+                showNotification('error', 'Error', 'Por favor ingresa tu correo');
                 return;
-            } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-                showError('forgotEmailError', 'Por favor ingrese un correo electrónico válido');
-                return;
-            } else {
-                hideError('forgotEmailError');
             }
             
-            // Verificar si el correo existe
             const userExists = users.some(u => u.email === email);
             
             if (userExists) {
-                // Simular envío de correo de recuperación
-                showNotification('success', 'Correo enviado', 'Hemos enviado instrucciones a tu correo');
-                
-                // Limpiar formulario
-                forgotPasswordForm.reset();
-                
-                // Redirigir al inicio de sesión después de un tiempo
+                showNotification('success', '¡Correo enviado!', 'Hemos enviado instrucciones a tu correo');
                 setTimeout(() => {
                     showLoginView();
                 }, 2000);
             } else {
-                showError('forgotEmailError', 'Este correo electrónico no está registrado');
+                showNotification('error', 'Error', 'Este correo no está registrado');
             }
         }
 
@@ -1455,8 +2842,8 @@
         function handleLogout() {
             currentUser = null;
             saveDataToStorage();
-            showLoginView();
-            showNotification('success', 'Sesión cerrada', 'Has cerrado tu sesión correctamente');
+            showIntro();
+            showNotification('success', '¡Hasta pronto!', 'Has cerrado tu sesión correctamente');
         }
 
         // Mostrar modal para agregar niño
@@ -1477,24 +2864,10 @@
             const name = document.getElementById('childName').value;
             const birthDate = document.getElementById('childBirthDate').value;
             
-            // Validar campos
-            let isValid = true;
-            
-            if (!name) {
-                showError('childNameError', 'Por favor ingrese el nombre del niño');
-                isValid = false;
-            } else {
-                hideError('childNameError');
+            if (!name || !birthDate) {
+                showNotification('error', 'Error', 'Por favor completa todos los campos');
+                return;
             }
-            
-            if (!birthDate) {
-                showError('childBirthDateError', 'Por favor ingrese la fecha de nacimiento');
-                isValid = false;
-            } else {
-                hideError('childBirthDateError');
-            }
-            
-            if (!isValid) return;
             
             // Calcular edad
             const today = new Date();
@@ -1506,13 +2879,11 @@
                 age--;
             }
             
-            // Validar rango de edad (1-13 años)
             if (age < 1 || age > 13) {
-                showError('childBirthDateError', 'El niño debe tener entre 1 y 13 años');
+                showNotification('error', 'Error', 'El niño debe tener entre 1 y 13 años');
                 return;
             }
             
-            // Crear nuevo niño
             const newChild = {
                 id: Date.now().toString(),
                 name,
@@ -1528,22 +2899,16 @@
             children.push(newChild);
             saveDataToStorage();
             
-            // Actualizar la lista de niños
             loadChildren();
-            
-            // Cerrar modal
             hideAddChildModal();
             
-            // Mostrar notificación
-            showNotification('success', 'Niño agregado', `${name} ha sido agregado correctamente`);
+            showNotification('success', '¡Niño agregado!', `${name} ha sido agregado correctamente`);
         }
 
         // Cargar los hijos del usuario actual
         function loadChildren() {
-            // Limpiar grid
             childrenGrid.innerHTML = '';
             
-            // Obtener hijos del usuario actual
             const userChildren = children.filter(child => child.parentId === currentUser.id);
             
             if (userChildren.length === 0) {
@@ -1555,181 +2920,890 @@
             childrenGrid.style.display = 'grid';
             emptyState.style.display = 'none';
             
-            // Crear tarjetas para cada hijo
-            userChildren.forEach(child => {
+            userChildren.forEach((child, index) => {
                 const childCard = document.createElement('div');
                 
-                // Determinar estado de la tarjeta
-                let cardClass = 'child-card ';
-                if (child.progress === 0 && child.lastQuestionIndex === 0) {
-                    cardClass += 'not-started';
-                } else if (child.completed) {
-                    cardClass += 'completed';
-                } else {
-                    cardClass += 'in-progress';
+                let statusClass = 'status-not-started';
+                let statusText = 'No iniciado';
+                let progressWidth = 0;
+                
+                if (child.completed) {
+                    statusClass = 'status-completed';
+                    statusText = 'Completado';
+                    progressWidth = 100;
+                } else if (child.lastQuestionIndex > 0) {
+                    statusClass = 'status-in-progress';
+                    statusText = 'En progreso';
+                    progressWidth = Math.round((child.lastQuestionIndex / 44) * 100);
                 }
                 
-                childCard.className = cardClass;
-                
-                // Calcular progreso
-                const progressPercentage = child.completed ? 100 : Math.round((child.lastQuestionIndex / 44) * 100);
-                
-                // Contenido de la tarjeta
+                childCard.className = 'child-card';
+                childCard.style.animationDelay = `${index * 0.1}s`;
                 childCard.innerHTML = `
-                    <div class="child-status">${child.completed ? 'Completado' : (child.lastQuestionIndex > 0 ? 'En progreso' : 'No iniciado')}</div>
-                    <button class="delete-child-btn" data-child-id="${child.id}">
-                        <i class="fas fa-trash-alt"></i>
-                    </button>
+                    <div class="child-status ${statusClass}">${statusText}</div>
                     <div class="child-header">
                         <div class="child-avatar">
                             <i class="fas fa-child"></i>
                         </div>
-                        <div>
-                            <div class="child-name">${child.name}</div>
-                            <div class="child-age">${child.age} años</div>
+                        <div class="child-info">
+                            <h3>${child.name}</h3>
+                            <p>${child.age} años</p>
                         </div>
                     </div>
                     <div class="progress-container">
-                        <div class="progress-label">
-                            <span>Progreso del cuestionario</span>
-                            <span>${progressPercentage}%</span>
-                        </div>
                         <div class="progress-bar">
-                            <div class="progress-fill" style="width: ${progressPercentage}%"></div>
+                            <div class="progress-fill" style="width: ${progressWidth}%"></div>
+                        </div>
+                        <div class="progress-text">
+                            <span>Progreso</span>
+                            <span>${progressWidth}%</span>
                         </div>
                     </div>
                 `;
                 
-                // Event listener para clic en la tarjeta
-                childCard.addEventListener('click', function(e) {
-                    // Si se hizo clic en el botón de eliminar, no activar el evento de la tarjeta
-                    if (e.target.closest('.delete-child-btn')) {
-                        return;
+                childCard.addEventListener('click', function() {
+                    if (child.completed) {
+                        showNotification('info', 'Cuestionario completo', 'El cuestionario ya está completo. Puedes revisar las respuestas.');
+                    } else {
+                        window.location.href = `yachaymikuy.html?childId=${child.id}`;
                     }
-                    handleChildCardClick(child);
-                });
-                
-                // Event listener para el botón de eliminar
-                const deleteBtn = childCard.querySelector('.delete-child-btn');
-                deleteBtn.addEventListener('click', function(e) {
-                    e.stopPropagation(); // Evitar que se active el evento de la tarjeta
-                    showDeleteConfirmationModal(child);
                 });
                 
                 childrenGrid.appendChild(childCard);
             });
         }
 
-        // Manejar clic en tarjeta de niño
-        function handleChildCardClick(child) {
-            if (child.completed) {
-                // Mostrar modal de confirmación
-                selectedChildForConfirmation = child;
-                document.getElementById('confirmationMessage').textContent = `El cuestionario de ${child.name} ya está completo. ¿Deseas revisar o editar las respuestas?`;
-                confirmationModal.style.display = 'flex';
-            } else {
-                // Redirigir al cuestionario
-                window.location.href = `yachaymikuy.html?childId=${child.id}`;
-            }
-        }
-
-        // Ocultar modal de confirmación
-        function hideConfirmationModal() {
-            confirmationModal.style.display = 'none';
-            selectedChildForConfirmation = null;
-        }
-
-        // Manejar acción de confirmación - MEJORADO
-        function handleConfirmationAction() {
-            if (selectedChildForConfirmation) {
-                // Redirigir al cuestionario en modo edición, comenzando desde la primera pregunta
-                window.location.href = `yachaymikuy.html?childId=${selectedChildForConfirmation.id}&edit=true&question=0`;
-            }
-        }
-
-        // Mostrar modal de confirmación de eliminación
-        function showDeleteConfirmationModal(child) {
-            selectedChildForDeletion = child;
-            document.getElementById('deleteConfirmationMessage').textContent = 
-                `¿Estás seguro que deseas eliminar el perfil de ${child.name}? Esta acción no se puede deshacer y borrará toda la información del niño.`;
-            document.getElementById('deleteConfirmationInput').value = '';
-            deleteConfirmationModal.style.display = 'flex';
-        }
-
-        // Ocultar modal de confirmación de eliminación
-        function hideDeleteConfirmationModal() {
-            deleteConfirmationModal.style.display = 'none';
-            selectedChildForDeletion = null;
-        }
-
-        // Manejar eliminación de niño
-        function handleDeleteChild() {
-            const confirmationInput = document.getElementById('deleteConfirmationInput').value.trim();
+        // Funciones de la comunidad
+        function createPost() {
+            const content = postContent.value.trim();
             
-            if (confirmationInput.toLowerCase() === 'eliminar') {
-                // Eliminar el niño del array
-                children = children.filter(child => child.id !== selectedChildForDeletion.id);
+            if (!content) {
+                showNotification('error', 'Error', 'El contenido de la publicación no puede estar vacío');
+                return;
+            }
+            
+            // Inicializar el departamento si no existe
+            if (!posts[currentDepartment]) {
+                posts[currentDepartment] = [];
+            }
+            
+            const newPost = {
+                id: Date.now().toString(),
+                authorId: currentUser.id,
+                authorName: currentUser.name,
+                content: content,
+                timestamp: new Date().toISOString(),
+                likes: 0,
+                likedBy: [],
+                comments: []
+            };
+            
+            posts[currentDepartment].unshift(newPost); // Agregar al principio del array
+            saveDataToStorage();
+            
+            postContent.value = '';
+            loadPosts();
+            
+            showNotification('success', '¡Publicación creada!', 'Tu publicación ha sido compartida con la comunidad');
+        }
+
+        function loadPosts() {
+            postsContainer.innerHTML = '';
+            
+            // Obtener publicaciones del departamento actual
+            let departmentPosts = [];
+            
+            if (currentDepartment === 'all') {
+                // Mostrar publicaciones de todos los departamentos
+                Object.keys(posts).forEach(dept => {
+                    departmentPosts = departmentPosts.concat(posts[dept]);
+                });
+                // Ordenar por fecha (más recientes primero)
+                departmentPosts.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+            } else {
+                departmentPosts = posts[currentDepartment] || [];
+            }
+            
+            if (departmentPosts.length === 0) {
+                postsContainer.style.display = 'none';
+                communityEmptyState.style.display = 'block';
+                return;
+            }
+            
+            postsContainer.style.display = 'flex';
+            communityEmptyState.style.display = 'none';
+            
+            departmentPosts.forEach((post, index) => {
+                const postElement = document.createElement('div');
+                postElement.className = 'post';
+                postElement.style.animationDelay = `${index * 0.1}s`;
+                
+                // Formatear fecha
+                const postDate = new Date(post.timestamp);
+                const formattedDate = formatDate(postDate);
+                
+                // Verificar si el usuario actual ya dio like
+                const userLiked = post.likedBy.includes(currentUser.id);
+                
+                postElement.innerHTML = `
+                    <div class="post-header">
+                        <div class="post-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="post-info">
+                            <h4>${post.authorName}</h4>
+                            <p>${formattedDate}</p>
+                        </div>
+                    </div>
+                    <div class="post-content">${post.content}</div>
+                    <div class="post-actions">
+                        <button class="post-action like-btn ${userLiked ? 'active' : ''}" data-post-id="${post.id}">
+                            <i class="fas fa-heart"></i> <span class="like-count">${post.likes}</span>
+                        </button>
+                        <button class="post-action comment-btn" data-post-id="${post.id}">
+                            <i class="fas fa-comment"></i> <span class="comment-count">${post.comments.length}</span>
+                        </button>
+                    </div>
+                    <div class="comments-section" id="comments-${post.id}">
+                        <div class="comment-form">
+                            <input type="text" class="comment-input" placeholder="Escribe un comentario..." data-post-id="${post.id}">
+                            <button class="comment-submit-btn" data-post-id="${post.id}">Enviar</button>
+                        </div>
+                        <div class="comments-list">
+                            ${renderComments(post.comments)}
+                        </div>
+                    </div>
+                `;
+                
+                postsContainer.appendChild(postElement);
+            });
+            
+            // Agregar event listeners para los botones de like y comentario
+            document.querySelectorAll('.like-btn').forEach(button => {
+                button.addEventListener('click', handleLike);
+            });
+            
+            document.querySelectorAll('.comment-submit-btn').forEach(button => {
+                button.addEventListener('click', handleComment);
+            });
+            
+            document.querySelectorAll('.comment-input').forEach(input => {
+                input.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        handleComment(e);
+                    }
+                });
+            });
+            
+            // Agregar event listeners para los botones de eliminar comentario
+            document.querySelectorAll('.delete-comment-btn').forEach(button => {
+                button.addEventListener('click', handleDeleteComment);
+            });
+        }
+
+        function renderComments(comments) {
+            if (comments.length === 0) {
+                return '<p style="color: var(--gray); text-align: center; padding: 1rem;">Aún no hay comentarios</p>';
+            }
+            
+            return comments.map(comment => {
+                const commentDate = new Date(comment.timestamp);
+                const formattedDate = formatDate(commentDate);
+                
+                // Verificar si el comentario pertenece al usuario actual
+                const isOwnComment = comment.authorId === currentUser.id;
+                
+                return `
+                    <div class="comment">
+                        <div class="comment-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="comment-content">
+                            <div class="comment-header">
+                                <span class="comment-author">${comment.authorName}</span>
+                                <span class="comment-time">${formattedDate}</span>
+                                ${isOwnComment ? `
+                                    <button class="delete-comment-btn" data-comment-id="${comment.id}">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                ` : ''}
+                            </div>
+                            <div class="comment-text">${comment.content}</div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function handleLike(e) {
+            const button = e.currentTarget;
+            const postId = button.getAttribute('data-post-id');
+            
+            // Buscar la publicación en todos los departamentos
+            let post = null;
+            let postDepartment = null;
+            
+            Object.keys(posts).forEach(dept => {
+                const foundPost = posts[dept].find(p => p.id === postId);
+                if (foundPost) {
+                    post = foundPost;
+                    postDepartment = dept;
+                }
+            });
+            
+            if (!post) return;
+            
+            const userLiked = post.likedBy.includes(currentUser.id);
+            
+            if (userLiked) {
+                // Quitar like
+                post.likes--;
+                post.likedBy = post.likedBy.filter(id => id !== currentUser.id);
+                button.classList.remove('active');
+            } else {
+                // Agregar like
+                post.likes++;
+                post.likedBy.push(currentUser.id);
+                button.classList.add('active');
+            }
+            
+            // Actualizar contador
+            const likeCount = button.querySelector('.like-count');
+            likeCount.textContent = post.likes;
+            
+            saveDataToStorage();
+        }
+
+        function handleComment(e) {
+            const button = e.currentTarget;
+            const postId = button.getAttribute('data-post-id');
+            const input = document.querySelector(`.comment-input[data-post-id="${postId}"]`);
+            const content = input.value.trim();
+            
+            if (!content) {
+                showNotification('error', 'Error', 'El comentario no puede estar vacío');
+                return;
+            }
+            
+            // Buscar la publicación en todos los departamentos
+            let post = null;
+            let postDepartment = null;
+            
+            Object.keys(posts).forEach(dept => {
+                const foundPost = posts[dept].find(p => p.id === postId);
+                if (foundPost) {
+                    post = foundPost;
+                    postDepartment = dept;
+                }
+            });
+            
+            if (!post) return;
+            
+            const newComment = {
+                id: Date.now().toString(),
+                authorId: currentUser.id,
+                authorName: currentUser.name,
+                content: content,
+                timestamp: new Date().toISOString()
+            };
+            
+            post.comments.push(newComment);
+            saveDataToStorage();
+            
+            // Actualizar contador de comentarios
+            const commentBtn = document.querySelector(`.comment-btn[data-post-id="${postId}"]`);
+            const commentCount = commentBtn.querySelector('.comment-count');
+            commentCount.textContent = post.comments.length;
+            
+            // Recargar los comentarios de esta publicación
+            const commentsSection = document.getElementById(`comments-${postId}`);
+            const commentsList = commentsSection.querySelector('.comments-list');
+            commentsList.innerHTML = renderComments(post.comments);
+            
+            // Limpiar input
+            input.value = '';
+            
+            showNotification('success', '¡Comentario agregado!', 'Tu comentario ha sido publicado');
+        }
+
+        // Función para eliminar comentarios
+        function handleDeleteComment(e) {
+            const button = e.currentTarget;
+            const commentId = button.getAttribute('data-comment-id');
+            const postId = button.closest('.comments-section').id.replace('comments-', '');
+            
+            // Buscar la publicación en todos los departamentos
+            let post = null;
+            let postDepartment = null;
+            
+            Object.keys(posts).forEach(dept => {
+                const foundPost = posts[dept].find(p => p.id === postId);
+                if (foundPost) {
+                    post = foundPost;
+                    postDepartment = dept;
+                }
+            });
+            
+            if (!post) return;
+            
+            // Eliminar el comentario
+            post.comments = post.comments.filter(comment => comment.id !== commentId);
+            
+            saveDataToStorage();
+            
+            // Recargar los comentarios de esta publicación
+            const commentsSection = document.getElementById(`comments-${postId}`);
+            const commentsList = commentsSection.querySelector('.comments-list');
+            commentsList.innerHTML = renderComments(post.comments);
+            
+            // Actualizar contador de comentarios
+            const commentBtn = document.querySelector(`.comment-btn[data-post-id="${postId}"]`);
+            const commentCount = commentBtn.querySelector('.comment-count');
+            commentCount.textContent = post.comments.length;
+            
+            showNotification('success', '¡Comentario eliminado!', 'El comentario ha sido eliminado correctamente');
+        }
+
+        // Funciones de mensajería
+        function loadConversations() {
+            conversationsList.innerHTML = '';
+            
+            // Buscar al administrador
+            const admin = users.find(u => u.email === ADMIN_EMAIL);
+            if (!admin) {
+                conversationsList.innerHTML = `
+                    <div style="padding: 1rem; text-align: center; color: white;">
+                        <p>El administrador no está disponible en este momento</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            // Si el usuario actual es el administrador
+            if (currentUser.email === ADMIN_EMAIL) {
+                // Mostrar todas las conversaciones con otros usuarios
+                const adminConversations = conversations.filter(conv => 
+                    conv.participants.includes(currentUser.id) && 
+                    !conv.deletedBy || !conv.deletedBy.includes(currentUser.id)
+                );
+                
+                if (adminConversations.length === 0) {
+                    conversationsList.innerHTML = `
+                        <div style="padding: 1rem; text-align: center; color: white;">
+                            <p>No tienes conversaciones con usuarios</p>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                adminConversations.forEach(conversation => {
+                    // Obtener el otro participante
+                    const otherParticipantId = conversation.participants.find(id => id !== currentUser.id);
+                    const otherParticipant = users.find(u => u.id === otherParticipantId);
+                    
+                    if (!otherParticipant) return;
+                    
+                    // Obtener el último mensaje no eliminado
+                    const visibleMessages = conversation.messages.filter(msg => 
+                        !msg.deletedBy || !msg.deletedBy.includes(currentUser.id)
+                    );
+                    const lastMessage = visibleMessages.length > 0 ? visibleMessages[visibleMessages.length - 1] : null;
+                    
+                    const conversationElement = document.createElement('div');
+                    conversationElement.className = 'conversation-item';
+                    if (activeConversation && activeConversation.id === conversation.id) {
+                        conversationElement.classList.add('active');
+                    }
+                    
+                    conversationElement.innerHTML = `
+                        <div class="conversation-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="conversation-info">
+                            <h4>${otherParticipant.name}</h4>
+                            <p>${lastMessage ? lastMessage.content : 'No hay mensajes'}</p>
+                        </div>
+                        <div class="conversation-time">${lastMessage ? formatTime(new Date(lastMessage.timestamp)) : ''}</div>
+                    `;
+                    
+                    conversationElement.addEventListener('click', function() {
+                        openConversation(conversation);
+                    });
+                    
+                    conversationsList.appendChild(conversationElement);
+                });
+            } else {
+                // Si el usuario no es administrador, mostrar solo la conversación con el admin
+                let adminConversation = conversations.find(conv => 
+                    conv.participants.includes(currentUser.id) && 
+                    conv.participants.includes(admin.id) &&
+                    (!conv.deletedBy || !conv.deletedBy.includes(currentUser.id))
+                );
+                
+                if (!adminConversation) {
+                    // Crear una nueva conversación con el admin
+                    adminConversation = {
+                        id: Date.now().toString(),
+                        participants: [currentUser.id, admin.id],
+                        messages: [],
+                        deletedBy: []
+                    };
+                    conversations.push(adminConversation);
+                    saveDataToStorage();
+                }
+                
+                // Obtener el último mensaje no eliminado
+                const visibleMessages = adminConversation.messages.filter(msg => 
+                    !msg.deletedBy || !msg.deletedBy.includes(currentUser.id)
+                );
+                const lastMessage = visibleMessages.length > 0 ? visibleMessages[visibleMessages.length - 1] : null;
+                
+                const conversationElement = document.createElement('div');
+                conversationElement.className = 'conversation-item active';
+                
+                conversationElement.innerHTML = `
+                    <div class="conversation-avatar">
+                        <i class="fas fa-user-shield"></i>
+                    </div>
+                    <div class="conversation-info">
+                        <h4>Soporte Yachay Mikuy</h4>
+                        <p>${lastMessage ? lastMessage.content : 'No hay mensajes'}</p>
+                    </div>
+                    <div class="conversation-time">${lastMessage ? formatTime(new Date(lastMessage.timestamp)) : ''}</div>
+                `;
+                
+                conversationElement.addEventListener('click', function() {
+                    openConversation(adminConversation);
+                });
+                
+                conversationsList.appendChild(conversationElement);
+                
+                // Abrir automáticamente la conversación con el admin
+                if (!activeConversation) {
+                    openConversation(adminConversation);
+                }
+            }
+        }
+
+        function filterConversations(searchTerm) {
+            const conversationItems = document.querySelectorAll('.conversation-item');
+            
+            conversationItems.forEach(item => {
+                const name = item.querySelector('h4').textContent.toLowerCase();
+                const content = item.querySelector('p').textContent.toLowerCase();
+                
+                if (name.includes(searchTerm) || content.includes(searchTerm)) {
+                    item.style.display = 'flex';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+
+        function openConversation(conversation) {
+            activeConversation = conversation;
+            
+            // Actualizar la lista de conversaciones
+            document.querySelectorAll('.conversation-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // Marcar la conversación actual como activa
+            const conversationItems = document.querySelectorAll('.conversation-item');
+            conversationItems.forEach(item => {
+                const otherParticipantId = conversation.participants.find(id => id !== currentUser.id);
+                const otherParticipant = users.find(u => u.id === otherParticipantId);
+                if (otherParticipant && item.querySelector('h4').textContent === otherParticipant.name) {
+                    item.classList.add('active');
+                }
+            });
+            
+            // Obtener el otro participante
+            const otherParticipantId = conversation.participants.find(id => id !== currentUser.id);
+            const otherParticipant = users.find(u => u.id === otherParticipantId);
+            
+            if (!otherParticipant) {
+                showNotification('error', 'Error', 'No se encontró información del usuario');
+                return;
+            }
+            
+            // Actualizar el encabezado del chat
+            chatHeader.innerHTML = `
+                <div class="chat-header-info">
+                    <div class="chat-header-avatar">
+                        <i class="fas ${currentUser.email === ADMIN_EMAIL ? 'fa-user' : 'fa-user-shield'}"></i>
+                    </div>
+                    <div>
+                        <h3>${currentUser.email === ADMIN_EMAIL ? otherParticipant.name : 'Soporte Yachay Mikuy'}</h3>
+                        <p>En línea</p>
+                    </div>
+                </div>
+                <div class="chat-actions">
+                    <button class="chat-action-btn" id="deleteConversationBtn" title="Eliminar conversación">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+            `;
+            
+            // Mostrar el input de mensaje
+            chatInputContainer.style.display = 'flex';
+            
+            // Cargar los mensajes
+            loadMessages();
+            
+            // Enfocar el input de mensaje
+            setTimeout(() => {
+                messageInput.focus();
+            }, 300);
+            
+            // Agregar event listener para borrar conversación
+            document.getElementById('deleteConversationBtn').addEventListener('click', deleteConversation);
+        }
+
+        // Función para borrar toda la conversación (solo para el usuario actual)
+        function deleteConversation() {
+            if (!activeConversation) return;
+            
+            if (confirm('¿Estás seguro de que quieres eliminar esta conversación? Esta acción solo borrará los mensajes en tu pantalla.')) {
+                // Marcar la conversación como eliminada por el usuario actual
+                if (!activeConversation.deletedBy) {
+                    activeConversation.deletedBy = [];
+                }
+                activeConversation.deletedBy.push(currentUser.id);
                 
                 // Guardar cambios
                 saveDataToStorage();
                 
-                // Actualizar la vista
-                loadChildren();
+                // Cerrar la conversación
+                activeConversation = null;
                 
-                // Cerrar modal
-                hideDeleteConfirmationModal();
+                // Recargar la lista de conversaciones
+                loadConversations();
                 
-                // Mostrar notificación
-                showNotification('success', 'Perfil eliminado', `El perfil de ${selectedChildForDeletion.name} ha sido eliminado correctamente`);
-            } else {
-                // Mostrar error si no escribió "eliminar"
-                document.getElementById('deleteConfirmationInput').style.borderColor = 'var(--warning-red)';
-                document.getElementById('deleteConfirmationInput').style.boxShadow = '0 0 0 3px rgba(220, 53, 69, 0.15)';
+                // Limpiar el área de chat
+                chatHeader.innerHTML = `
+                    <div class="chat-header-info">
+                        <div class="chat-header-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div>
+                            <h3>Selecciona una conversación</h3>
+                            <p>Elige un contacto para empezar a chatear</p>
+                        </div>
+                    </div>
+                `;
                 
-                setTimeout(() => {
-                    document.getElementById('deleteConfirmationInput').style.borderColor = '#ddd';
-                    document.getElementById('deleteConfirmationInput').style.boxShadow = 'none';
-                }, 2000);
+                chatMessages.innerHTML = '';
+                chatInputContainer.style.display = 'none';
+                
+                showNotification('success', 'Conversación eliminada', 'La conversación ha sido eliminada de tu pantalla');
             }
         }
 
-        // Mostrar error
-        function showError(elementId, message) {
-            const errorElement = document.getElementById(elementId);
-            errorElement.textContent = message;
-            errorElement.style.display = 'block';
+        function loadMessages() {
+            chatMessages.innerHTML = '';
+            
+            if (!activeConversation) {
+                chatMessages.innerHTML = `
+                    <div style="padding: 1rem; text-align: center; color: var(--gray);">
+                        <p>Selecciona una conversación para ver los mensajes</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            // Filtrar mensajes no eliminados por el usuario actual
+            const visibleMessages = activeConversation.messages.filter(msg => 
+                !msg.deletedBy || !msg.deletedBy.includes(currentUser.id)
+            );
+            
+            if (visibleMessages.length === 0) {
+                chatMessages.innerHTML = `
+                    <div style="padding: 1rem; text-align: center; color: var(--gray);">
+                        <p>No hay mensajes en esta conversación</p>
+                        <p>Envía el primer mensaje para empezar</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            visibleMessages.forEach(message => {
+                const messageElement = document.createElement('div');
+                messageElement.className = `message ${message.senderId === currentUser.id ? 'sent' : 'received'}`;
+                
+                const messageDate = new Date(message.timestamp);
+                const formattedTime = formatTime(messageDate);
+                
+                // Verificar si el mensaje es del usuario actual
+                const isOwnMessage = message.senderId === currentUser.id;
+                
+                messageElement.innerHTML = `
+                    <div class="message-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="message-content">
+                        ${message.content}
+                        <div class="message-time">${formattedTime}</div>
+                        ${isOwnMessage ? `
+                            <button class="delete-message-btn" data-message-id="${message.id}" title="Eliminar mensaje">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        ` : ''}
+                    </div>
+                `;
+                
+                chatMessages.appendChild(messageElement);
+            });
+            
+            // Agregar event listeners para los botones de eliminar mensaje
+            document.querySelectorAll('.delete-message-btn').forEach(button => {
+                button.addEventListener('click', handleDeleteMessage);
+            });
+            
+            // Scroll al final
+            chatMessages.scrollTop = chatMessages.scrollHeight;
         }
 
-        // Ocultar error
-        function hideError(elementId) {
-            const errorElement = document.getElementById(elementId);
-            errorElement.style.display = 'none';
+        function sendMessage() {
+            const content = messageInput.value.trim();
+            
+            if (!content) {
+                showNotification('error', 'Error', 'El mensaje no puede estar vacío');
+                return;
+            }
+            
+            if (!activeConversation) {
+                showNotification('error', 'Error', 'No hay una conversación activa. Selecciona o crea una conversación primero.');
+                return;
+            }
+            
+            const newMessage = {
+                id: Date.now().toString(),
+                senderId: currentUser.id,
+                content: content,
+                timestamp: new Date().toISOString(),
+                deletedBy: []
+            };
+            
+            // Agregar el mensaje a la conversación activa
+            activeConversation.messages.push(newMessage);
+            
+            // Actualizar la conversación en el array de conversaciones
+            const conversationIndex = conversations.findIndex(conv => conv.id === activeConversation.id);
+            if (conversationIndex !== -1) {
+                conversations[conversationIndex] = activeConversation;
+            }
+            
+            saveDataToStorage();
+            
+            // Limpiar el input
+            messageInput.value = '';
+            
+            // Recargar los mensajes
+            loadMessages();
+            
+            // Actualizar la lista de conversaciones
+            loadConversations();
+            
+            showNotification('success', '¡Mensaje enviado!', 'Tu mensaje ha sido enviado correctamente');
+        }
+
+        // Función para eliminar mensajes (solo para el usuario actual)
+        function handleDeleteMessage(e) {
+            const button = e.currentTarget;
+            const messageId = button.getAttribute('data-message-id');
+            
+            if (!activeConversation) return;
+            
+            // Encontrar el mensaje
+            const message = activeConversation.messages.find(msg => msg.id === messageId);
+            if (!message) return;
+            
+            // Verificar que el mensaje pertenezca al usuario actual
+            if (message.senderId !== currentUser.id) {
+                showNotification('error', 'Error', 'Solo puedes eliminar tus propios mensajes');
+                return;
+            }
+            
+            // Marcar el mensaje como eliminado por el usuario actual
+            if (!message.deletedBy) {
+                message.deletedBy = [];
+            }
+            message.deletedBy.push(currentUser.id);
+            
+            // Actualizar la conversación en el array de conversaciones
+            const conversationIndex = conversations.findIndex(conv => conv.id === activeConversation.id);
+            if (conversationIndex !== -1) {
+                conversations[conversationIndex] = activeConversation;
+            }
+            
+            saveDataToStorage();
+            
+            // Recargar los mensajes
+            loadMessages();
+            
+            // Actualizar la lista de conversaciones
+            loadConversations();
+            
+            showNotification('success', '¡Mensaje eliminado!', 'El mensaje ha sido eliminado de tu pantalla');
+        }
+
+        function searchUsers() {
+            const searchTerm = userSearchInput.value.toLowerCase().trim();
+            
+            if (!searchTerm) {
+                startConversationBtn.disabled = true;
+                startConversationBtn.removeAttribute('data-user-id');
+                return;
+            }
+            
+            // Buscar usuarios que coincidan con el término de búsqueda
+            const foundUsers = users.filter(user => {
+                if (user.id === currentUser.id) return false; // Excluir al usuario actual
+                return user.name.toLowerCase().includes(searchTerm) || 
+                       user.email.toLowerCase().includes(searchTerm);
+            });
+            
+            if (foundUsers.length > 0) {
+                startConversationBtn.disabled = false;
+                startConversationBtn.setAttribute('data-user-id', foundUsers[0].id);
+                
+                // Mostrar información del usuario encontrado
+                const userInfo = document.createElement('div');
+                userInfo.className = 'user-found-info';
+                userInfo.textContent = `Usuario encontrado: ${foundUsers[0].name} (${foundUsers[0].email})`;
+                
+                // Eliminar información anterior si existe
+                const existingInfo = document.querySelector('.user-found-info');
+                if (existingInfo) {
+                    existingInfo.remove();
+                }
+                
+                // Agregar la nueva información
+                userSearchInput.parentNode.appendChild(userInfo);
+            } else {
+                startConversationBtn.disabled = true;
+                startConversationBtn.removeAttribute('data-user-id');
+                
+                // Mostrar mensaje de no encontrado
+                const noInfo = document.createElement('div');
+                noInfo.className = 'user-found-info';
+                noInfo.textContent = 'No se encontraron usuarios con ese nombre o correo';
+                noInfo.style.color = 'var(--secondary)';
+                
+                // Eliminar información anterior si existe
+                const existingInfo = document.querySelector('.user-found-info');
+                if (existingInfo) {
+                    existingInfo.remove();
+                }
+                
+                // Agregar el nuevo mensaje
+                userSearchInput.parentNode.appendChild(noInfo);
+            }
+        }
+
+        function startNewConversation() {
+            // Si el usuario es el administrador, puede iniciar conversaciones con cualquier usuario
+            if (currentUser.email === ADMIN_EMAIL) {
+                const userId = startConversationBtn.getAttribute('data-user-id');
+                
+                if (!userId) {
+                    showNotification('error', 'Error', 'Selecciona un usuario para iniciar la conversación');
+                    return;
+                }
+                
+                // Verificar si ya existe una conversación con este usuario
+                let existingConversation = conversations.find(conv => 
+                    conv.participants.includes(currentUser.id) && conv.participants.includes(userId)
+                );
+                
+                if (!existingConversation) {
+                    // Crear nueva conversación
+                    existingConversation = {
+                        id: Date.now().toString(),
+                        participants: [currentUser.id, userId],
+                        messages: [],
+                        deletedBy: []
+                    };
+                    
+                    conversations.push(existingConversation);
+                    saveDataToStorage();
+                }
+                
+                // Cerrar el modal
+                newConversationModal.style.display = 'none';
+                userSearchInput.value = '';
+                
+                // Cambiar a la pestaña de mensajería
+                messagingSubtabBtn.click();
+                
+                // Abrir la conversación
+                openConversation(existingConversation);
+                
+                // Actualizar la lista de conversaciones
+                loadConversations();
+            } else {
+                // Si el usuario no es administrador, no puede iniciar conversaciones con otros usuarios
+                showNotification('error', 'Acceso denegado', 'Solo puedes comunicarte con el administrador');
+                newConversationModal.style.display = 'none';
+            }
+        }
+
+        function formatDate(date) {
+            const now = new Date();
+            const diffMs = now - date;
+            const diffMins = Math.floor(diffMs / 60000);
+            const diffHours = Math.floor(diffMs / 3600000);
+            const diffDays = Math.floor(diffMs / 86400000);
+            
+            if (diffMins < 1) {
+                return 'Ahora mismo';
+            } else if (diffMins < 60) {
+                return `Hace ${diffMins} minuto${diffMins !== 1 ? 's' : ''}`;
+            } else if (diffHours < 24) {
+                return `Hace ${diffHours} hora${diffHours !== 1 ? 's' : ''}`;
+            } else if (diffDays < 7) {
+                return `Hace ${diffDays} día${diffDays !== 1 ? 's' : ''}`;
+            } else {
+                return date.toLocaleDateString('es-ES', {
+                    day: 'numeric',
+                    month: 'long',
+                    year: 'numeric'
+                });
+            }
+        }
+
+        function formatTime(date) {
+            return date.toLocaleTimeString('es-ES', {
+                hour: '2-digit',
+                minute: '2-digit'
+            });
         }
 
         // Mostrar notificación
         function showNotification(type, title, message) {
-            const notificationIcon = document.getElementById('notificationIcon');
-            const notificationTitle = document.getElementById('notificationTitle');
-            const notificationMessage = document.getElementById('notificationMessage');
+            const notificationEl = document.getElementById('notification');
+            const iconEl = document.getElementById('notificationIcon');
+            const titleEl = document.getElementById('notificationTitle');
+            const messageEl = document.getElementById('notificationMessage');
             
-            // Configurar icono según tipo
-            notificationIcon.className = `notification-icon ${type}`;
+            notificationEl.className = `notification notification-${type}`;
+            
             if (type === 'success') {
-                notificationIcon.innerHTML = '<i class="fas fa-check-circle"></i>';
+                iconEl.innerHTML = '<i class="fas fa-check-circle"></i>';
             } else if (type === 'error') {
-                notificationIcon.innerHTML = '<i class="fas fa-exclamation-circle"></i>';
+                iconEl.innerHTML = '<i class="fas fa-exclamation-circle"></i>';
+            } else if (type === 'info') {
+                iconEl.innerHTML = '<i class="fas fa-info-circle"></i>';
             }
             
-            // Configurar texto
-            notificationTitle.textContent = title;
-            notificationMessage.textContent = message;
+            titleEl.textContent = title;
+            messageEl.textContent = message;
             
-            // Mostrar notificación
-            notification.classList.add('show');
+            notificationEl.classList.add('show');
             
-            // Ocultar después de 3 segundos
             setTimeout(() => {
-                notification.classList.remove('show');
+                notificationEl.classList.remove('show');
             }, 3000);
         }
     </script>
