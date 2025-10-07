@@ -711,6 +711,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 startQuestion = child.lastQuestionIndex;
             }
             
+            // Guardar los datos actuales en el almacenamiento local antes de redirigir
+            storage.set('yachayMikuyChildren', state.children);
+            storage.set('yachayMikuyCurrentUser', state.currentUser);
+            
+            // Redirigir a yachaymikuy.html con los parámetros correctos
             window.location.href = `yachaymikuy.html?childId=${id}&continue=true&question=${startQuestion}`;
         },
         editChild: (id) => {
