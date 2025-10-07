@@ -591,7 +591,6 @@
             display: flex;
             gap: 1rem;
             margin-top: 1rem;
-            align-items: center;
         }
         
         .community-post-action {
@@ -602,13 +601,10 @@
             cursor: pointer;
             transition: var(--transition);
             font-size: 0.9rem;
-            padding: 0.25rem 0.5rem;
-            border-radius: 4px;
         }
         
         .community-post-action:hover {
             color: var(--primary-blue);
-            background-color: #f0f0f0;
         }
         
         .community-comments {
@@ -634,7 +630,6 @@
             font-weight: 600;
             margin-right: 0.75rem;
             font-size: 0.8rem;
-            flex-shrink: 0;
         }
         
         .community-comment-content {
@@ -658,11 +653,11 @@
         .community-comment-form {
             display: flex;
             margin-top: 1rem;
-            gap: 0.5rem;
         }
         
         .community-comment-form input {
             flex: 1;
+            margin-right: 0.5rem;
         }
         
         /* --- PANEL DE MENSAJES --- */
@@ -680,7 +675,6 @@
             border-right: 1px solid var(--medium-gray);
             display: flex;
             flex-direction: column;
-            background-color: #fcfdff;
         }
         
         .sidebar-header {
@@ -696,7 +690,6 @@
         .chat-list-item {
             display: flex;
             align-items: center;
-            justify-content: space-between;
             gap: 1rem;
             padding: 1rem;
             cursor: pointer;
@@ -709,16 +702,10 @@
         }
         
         .unread-indicator {
-            width: 22px;
-            height: 22px;
+            width: 10px;
+            height: 10px;
             background: var(--accent-red);
             border-radius: 50%;
-            color: white;
-            font-size: 0.75rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
         }
         
         .chat-window {
@@ -734,7 +721,6 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background-color: #f8f9fa;
         }
         
         .chat-messages {
@@ -744,7 +730,6 @@
             display: flex;
             flex-direction: column;
             gap: 0.75rem;
-            background-color: #e5effc;
         }
         
         .message-bubble {
@@ -758,22 +743,18 @@
             background: var(--primary-blue);
             color: var(--white);
             align-self: flex-end;
-            border-bottom-right-radius: 4px;
         }
         
         .message-bubble.received {
-            background: #ffffff;
+            background: #e9ecef;
             color: var(--text-dark);
             align-self: flex-start;
-            border-bottom-left-radius: 4px;
-            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
         }
         
         .chat-input-form {
             display: flex;
             padding: 1rem;
             border-top: 1px solid var(--medium-gray);
-            background-color: #f8f9fa;
         }
         
         /* --- MODALES --- */
@@ -1083,13 +1064,14 @@
             <div class="logo-text">Yachay Mikuy</div>
         </div>
         <nav class="nav-links">
-            <a href="#" data-modal="about">Acerca de</a>
-            <a href="#" data-modal="services">Servicios</a>
-            <a href="#" data-modal="faq">Preguntas</a>
+            <a href="#" id="homeLink">Inicio</a>
+            <a href="#" id="aboutLink">Acerca de</a>
+            <a href="#" id="contactLink">Contacto</a>
         </nav>
     </header>
 
     <main class="main-container">
+        <!-- Vista Introducción -->
         <div class="view active" id="introView">
             <div class="intro-container">
                 <h1>Nutrición Inteligente para un Futuro Brillante</h1>
@@ -1103,10 +1085,12 @@
             </div>
         </div>
         
+        <!-- Vista Autenticación -->
         <div class="view" id="authView">
             <div class="auth-container" id="authForms"></div>
         </div>
         
+        <!-- Vista Dashboard -->
         <div class="view" id="dashboardView">
             <div class="dashboard-layout">
                 <header class="dashboard-header">
@@ -1128,10 +1112,13 @@
         </div>
     </main>
 
+    <!-- Contenedor para modales -->
     <div id="action-modal-container"></div>
     
+    <!-- Notificación -->
     <div class="notification" id="notification"></div>
     
+    <!-- Footer -->
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-section">
@@ -1163,11 +1150,11 @@
             <div class="footer-section">
                 <h3>Enlaces Útiles</h3>
                 <ul class="footer-links">
-                    <li><a href="#" data-modal="about"><i class="fas fa-info-circle"></i> Acerca de Nosotros</a></li>
-                    <li><a href="#" data-modal="services"><i class="fas fa-concierge-bell"></i> Servicios</a></li>
-                    <li><a href="#" data-modal="faq"><i class="fas fa-question-circle"></i> Preguntas Frecuentes</a></li>
-                    <li><a href="#" data-modal="privacy"><i class="fas fa-shield-alt"></i> Política de Privacidad</a></li>
-                    <li><a href="#" data-modal="terms"><i class="fas fa-file-contract"></i> Términos y Condiciones</a></li>
+                    <li><a href="#" id="aboutFooterLink"><i class="fas fa-info-circle"></i> Acerca de Nosotros</a></li>
+                    <li><a href="#" id="servicesFooterLink"><i class="fas fa-concierge-bell"></i> Servicios</a></li>
+                    <li><a href="#" id="faqFooterLink"><i class="fas fa-question-circle"></i> Preguntas Frecuentes</a></li>
+                    <li><a href="#" id="privacyFooterLink"><i class="fas fa-shield-alt"></i> Política de Privacidad</a></li>
+                    <li><a href="#" id="termsFooterLink"><i class="fas fa-file-contract"></i> Términos y Condiciones</a></li>
                 </ul>
             </div>
         </div>
@@ -1179,8 +1166,7 @@
             // --- CONFIGURACIÓN Y ESTADO ---
             const ADMIN_EMAIL = 'alvaro.quiroz@alum.udep.edu.pe';
             const DEPARTMENTS = ["General", "Amazonas", "Áncash", "Apurímac", "Arequipa", "Ayacucho", "Cajamarca", "Callao", "Cusco", "Huancavelica", "Huánuco", "Ica", "Junín", "La Libertad", "Lambayeque", "Lima", "Loreto", "Madre de Dios", "Moquegua", "Pasco", "Piura", "Puno", "San Martín", "Tacna", "Tumbes", "Ucayali"];
-            const TOTAL_QUESTIONS = 55; // Constante para el total de preguntas en yachaymikuy.html
-
+            
             let state = {
                 currentUser: null,
                 users: [],
@@ -1209,11 +1195,11 @@
                     <form id="loginForm">
                         <div class="form-group">
                             <label for="loginEmail">Correo electrónico</label>
-                            <input type="email" class="form-input" id="loginEmail" name="email" placeholder="tucorreo@ejemplo.com" required>
+                            <input type="email" class="form-input" id="loginEmail" name="email" placeholder="Correo electrónico" required>
                         </div>
                         <div class="form-group">
                             <label for="loginPassword">Contraseña</label>
-                            <input type="password" class="form-input" id="loginPassword" name="password" placeholder="Tu contraseña" required>
+                            <input type="password" class="form-input" id="loginPassword" name="password" placeholder="Contraseña" required>
                         </div>
                         <div class="form-checkbox">
                             <input type="checkbox" id="rememberMe" name="rememberMe">
@@ -1233,23 +1219,23 @@
                     <form id="registerForm">
                         <div class="form-group">
                             <label for="registerName">Nombre completo</label>
-                            <input type="text" class="form-input" id="registerName" name="name" placeholder="Tu nombre completo" required>
+                            <input type="text" class="form-input" id="registerName" name="name" placeholder="Nombre completo" required>
                         </div>
                         <div class="form-group">
                             <label for="registerEmail">Correo electrónico</label>
-                            <input type="email" class="form-input" id="registerEmail" name="email" placeholder="tucorreo@ejemplo.com" required>
+                            <input type="email" class="form-input" id="registerEmail" name="email" placeholder="Correo electrónico" required>
                         </div>
                         <div class="form-group">
                             <label for="registerPassword">Contraseña</label>
-                            <input type="password" class="form-input" id="registerPassword" name="password" placeholder="Mínimo 6 caracteres" required>
+                            <input type="password" class="form-input" id="registerPassword" name="password" placeholder="Contraseña" required>
                         </div>
                         <div class="form-group">
                             <label for="confirmPassword">Confirmar contraseña</label>
-                            <input type="password" class="form-input" id="confirmPassword" name="confirmPassword" placeholder="Repite la contraseña" required>
+                            <input type="password" class="form-input" id="confirmPassword" name="confirmPassword" placeholder="Confirmar contraseña" required>
                         </div>
                         <div class="form-checkbox">
                             <input type="checkbox" id="acceptTerms" name="terms" required>
-                            <label for="acceptTerms">Acepto los <a href="#" data-modal="terms" style="color:var(--primary-blue);">Términos</a> y la <a href="#" data-modal="privacy" style="color:var(--primary-blue);">Política de Privacidad</a></label>
+                            <label for="acceptTerms">Acepto los <a href="#" id="termsLink" style="color:var(--primary-blue);">Términos y Condiciones</a> y la <a href="#" id="privacyLink" style="color:var(--primary-blue);">Política de Privacidad</a></label>
                         </div>
                         <button type="submit" class="btn btn-primary" style="width:100%;">Registrarme</button>
                     </form>
@@ -1259,11 +1245,11 @@
                 forgotPassword: () => `
                     <h2>Recuperar Contraseña</h2>
                     <hr style="margin:1rem 0; border:0; border-top:1px solid #eee;">
-                    <p style="margin-bottom:1.5rem; color:var(--dark-gray);">Ingresa tu correo y te enviaremos instrucciones para restablecer tu contraseña.</p>
+                    <p style="margin-bottom:1.5rem; color:var(--dark-gray);">Ingresa tu correo electrónico y te enviaremos instrucciones para restablecer tu contraseña.</p>
                     <form id="forgotPasswordForm">
                         <div class="form-group">
                             <label for="forgotEmail">Correo electrónico</label>
-                            <input type="email" class="form-input" id="forgotEmail" name="email" placeholder="tucorreo@ejemplo.com" required>
+                            <input type="email" class="form-input" id="forgotEmail" name="email" placeholder="Correo electrónico" required>
                         </div>
                         <button type="submit" class="btn btn-primary" style="width:100%;">Enviar Instrucciones</button>
                     </form>
@@ -1281,11 +1267,11 @@
                                 <form id="addChildForm">
                                     <div class="form-group">
                                         <label for="childName">Nombre del niño</label>
-                                        <input type="text" class="form-input" id="childName" name="name" placeholder="Ej: Juan Pérez" required>
+                                        <input type="text" class="form-input" id="childName" name="name" placeholder="Nombre del niño" required>
                                     </div>
                                     <div class="form-group">
                                         <label for="childBirthDate">Fecha de nacimiento</label>
-                                        <input type="date" class="form-input" id="childBirthDate" name="birthDate" max="${new Date().toISOString().split('T')[0]}" required>
+                                        <input type="date" class="form-input" id="childBirthDate" name="birthDate" required>
                                     </div>
                                     <div class="form-group">
                                         <label for="childDepartment">Departamento</label>
@@ -1315,7 +1301,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="editChildBirthDate">Fecha de nacimiento</label>
-                                        <input type="date" class="form-input" id="editChildBirthDate" name="birthDate" value="${child.birthDate}" max="${new Date().toISOString().split('T')[0]}" required>
+                                        <input type="date" class="form-input" id="editChildBirthDate" name="birthDate" value="${child.birthDate}" required>
                                     </div>
                                     <div class="form-group">
                                         <label for="editChildDepartment">Departamento</label>
@@ -1332,52 +1318,339 @@
                             </div>
                         </div>
                     </div>`,
-                infoModal: (type) => {
-                    const content = {
-                        about: {
-                            title: 'Acerca de Yachay Mikuy',
-                            body: `
-                                <p><strong>Yachay Mikuy</strong> es una plataforma digital dedicada a combatir la anemia y la malnutrición infantil en Perú. Nuestra misión es ofrecer planes de alimentación personalizados, culturalmente adaptados y accesibles para todas las familias.</p>
-                                <p>Combinamos tecnología, nutrición y educación para empoderar a los padres y cuidadores, asegurando un futuro más saludable para las nuevas generaciones.</p>`
-                        },
-                        services: {
-                            title: 'Nuestros Servicios',
-                            body: `
-                                <ul>
-                                    <li><strong>Planes de Alimentación Personalizados:</strong> Dietas balanceadas según la edad, necesidades y alimentos locales.</li>
-                                    <li><strong>Seguimiento Nutricional:</strong> Monitoreo del progreso y ajuste de planes.</li>
-                                    <li><strong>Educación Nutricional:</strong> Artículos, recetas y consejos prácticos.</li>
-                                    <li><strong>Comunidad de Apoyo:</strong> Un espacio para compartir experiencias y recibir apoyo.</li>
-                                </ul>`
-                        },
-                        faq: {
-                            title: 'Preguntas Frecuentes',
-                            body: `
-                                <p><strong>¿Para qué edades es la plataforma?</strong><br>Está diseñada para niños de 0 a 13 años.</p>
-                                <p><strong>¿Tiene algún costo?</strong><br>Ofrecemos un modelo freemium con planes básicos gratuitos y opciones premium.</p>
-                                <p><strong>¿Mis datos están seguros?</strong><br>Sí, cumplimos con estrictas políticas de privacidad para proteger tu información y la de tus hijos.</p>`
-                        },
-                        privacy: {
-                            title: 'Política de Privacidad',
-                            body: `<p>Nos tomamos muy en serio tu privacidad. Recopilamos datos únicamente para personalizar los planes nutricionales y mejorar nuestros servicios. No compartimos tu información personal con terceros sin tu consentimiento explícito. Puedes solicitar la eliminación de tus datos en cualquier momento.</p>`
-                        },
-                        terms: {
-                            title: 'Términos y Condiciones',
-                            body: `<p>Al usar Yachay Mikuy, aceptas proporcionar información veraz para el bienestar de tus hijos. Las recomendaciones de la plataforma son un complemento y no reemplazan la consulta con un profesional de la salud. Eres responsable del uso de la información proporcionada.</p>`
-                        }
-                    };
-                    const data = content[type] || { title: 'Información', body: 'Contenido no encontrado.' };
-                    return `
+                aboutModal: () => `
                     <div class="modal active">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h2>${data.title}</h2>
+                                <h2>Acerca de Yachay Mikuy</h2>
                                 <button class="close-modal">&times;</button>
                             </div>
-                            <div class="modal-body">${data.body}</div>
+                            <div class="modal-body">
+                                <div class="content-section">
+                                    <h3><i class="fas fa-bullseye"></i> Nuestra Misión</h3>
+                                    <p>Reducir la prevalencia de anemia y malnutrición en niños de 0 a 13 años mediante planes de alimentación personalizados, adaptados culturalmente y económicamente a la realidad de las familias peruanas.</p>
+                                </div>
+                                <div class="content-section">
+                                    <h3><i class="fas fa-eye"></i> Nuestra Visión</h3>
+                                    <p>Convertirnos en la plataforma digital líder en nutrición infantil en Perú, contribuyendo al desarrollo humano y social del país a través de hábitos alimentarios saludables.</p>
+                                </div>
+                                <div class="content-section">
+                                    <h3><i class="fas fa-users"></i> Nuestro Equipo</h3>
+                                    <p>Contamos con un equipo multidisciplinario de profesionales de la salud, nutricionistas, desarrolladores de software y expertos en educación, comprometidos con mejorar la nutrición infantil en el país.</p>
+                                </div>
+                                <div class="content-section">
+                                    <h3><i class="fas fa-chart-line"></i> Impacto</h3>
+                                    <p>Según estudios del INEI (2023), la anemia infantil afecta a más del 40% de niños menores de 3 años en algunas regiones del Perú. Nuestro proyecto busca reducir esta cifra mediante intervenciones personalizadas y seguimiento continuo.</p>
+                                </div>
+                                <div class="highlight-box">
+                                    <h3 style="margin-top:0;"><i class="fas fa-award"></i> Reconocimientos</h3>
+                                    <p>Proyecto seleccionado por la Universidad de Piura como iniciativa de impacto social en el programa de Ingeniería Industrial y de Sistemas.</p>
+                                </div>
+                            </div>
                         </div>
-                    </div>`;
-                }
+                    </div>`,
+                servicesModal: () => `
+                    <div class="modal active">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h2>Nuestros Servicios</h2>
+                                <button class="close-modal">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="content-section">
+                                    <h3><i class="fas fa-utensils"></i> Planes de Alimentación Personalizados</h3>
+                                    <p>Desarrollamos planes nutricionales adaptados a las necesidades específicas de cada niño, considerando:</p>
+                                    <ul>
+                                        <li>Edad y estado de salud</li>
+                                        <li>Disponibilidad de alimentos locales</li>
+                                        <li>Hábitos culturales y preferencias familiares</li>
+                                        <li>Capacidad económica del hogar</li>
+                                    </ul>
+                                </div>
+                                <div class="content-section">
+                                    <h3><i class="fas fa-chart-line"></i> Seguimiento Nutricional</h3>
+                                    <p>Monitoreamos el progreso de cada niño a través de:</p>
+                                    <ul>
+                                        <li>Registro diario de consumo alimentario</li>
+                                        <li>Evaluación periódica de indicadores de salud</li>
+                                        <li>Ajustes automáticos según resultados obtenidos</li>
+                                        <li>Reportes mensuales para padres y tutores</li>
+                                    </ul>
+                                </div>
+                                <div class="content-section">
+                                    <h3><i class="fas fa-graduation-cap"></i> Educación Nutricional</h3>
+                                    <p>Ofrecemos material educativo en múltiples formatos:</p>
+                                    <ul>
+                                        <li>Recetas prácticas con ingredientes locales</li>
+                                        <li>Videos tutoriales de preparación</li>
+                                        <li>Guías informativas sobre nutrientes esenciales</li>
+                                        <li>Consejos para mejorar hábitos alimentarios</li>
+                                    </ul>
+                                </div>
+                                <div class="content-section">
+                                    <h3><i class="fas fa-users"></i> Comunidad de Apoyo</h3>
+                                    <p>Conectamos a las familias con:</p>
+                                    <ul>
+                                        <li>Nutricionistas y profesionales de la salud</li>
+                                        <li>Otras familias que comparten experiencias</li>
+                                        <li>Foros de discusión y consejos prácticos</li>
+                                        <li>Eventos virtuales de capacitación</li>
+                                    </ul>
+                                </div>
+                                <div class="highlight-box">
+                                    <h3 style="margin-top:0;"><i class="fas fa-mobile-alt"></i> Accesibilidad</h3>
+                                    <p>Nuestra plataforma funciona en modo offline y cuenta con versión ligera para zonas con conectividad limitada.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>`,
+                faqModal: () => `
+                    <div class="modal active">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h2>Preguntas Frecuentes</h2>
+                                <button class="close-modal">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="content-section">
+                                    <h3><i class="fas fa-question-circle"></i> ¿Qué es Yachay Mikuy?</h3>
+                                    <p>Yachay Mikuy es una plataforma digital que ofrece planes de alimentación personalizados para combatir la anemia infantil en Perú, combinando tecnología, educación y nutrición culturalmente adaptada.</p>
+                                </div>
+                                <div class="content-section">
+                                    <h3><i class="fas fa-child"></i> ¿Para qué edades está diseñada la plataforma?</h3>
+                                    <p>Nuestra plataforma está diseñada para niños de 0 a 13 años, etapa crucial en el desarrollo donde los hábitos alimentarios se consolidan y se pueden prevenir deficiencias nutricionales a largo plazo.</p>
+                                </div>
+                                <div class="content-section">
+                                    <h3><i class="fas fa-user-plus"></i> ¿Cómo puedo registrarme?</h3>
+                                    <p>Puedes registrarte haciendo clic en el botón "Comenzar Ahora" en nuestra página principal y completando el formulario con tus datos personales. El proceso es rápido y seguro.</p>
+                                </div>
+                                <div class="content-section">
+                                    <h3><i class="fas fa-shield-alt"></i> ¿Es seguro compartir los datos de mis hijos?</h3>
+                                    <p>Sí, implementamos medidas avanzadas de protección de datos:</p>
+                                    <ul>
+                                        <li>Cifrado de extremo a extremo</li>
+                                        <li>Consentimiento parental explícito</li>
+                                        <li>Cumplimiento con normativas de protección de datos</li>
+                                        <li>Acceso restringido solo a personal autorizado</li>
+                                    </ul>
+                                </div>
+                                <div class="content-section">
+                                    <h3><i class="fas fa-heartbeat"></i> ¿Cómo funciona el seguimiento nutricional?</h3>
+                                    <p>A través de nuestra aplicación, puedes registrar el consumo alimentario de tus hijos y nosotros monitoreamos su progreso. El sistema genera alertas y recomendaciones automáticas según los resultados obtenidos.</p>
+                                </div>
+                                <div class="content-section">
+                                    <h3><i class="fas fa-dollar-sign"></i> ¿Qué costo tiene el servicio?</h3>
+                                    <p>Ofrecemos diferentes planes de suscripción:</p>
+                                    <ul>
+                                        <li>Plan básico: S/10-15 mensuales</li>
+                                        <li>Plan premium con atención personalizada</li>
+                                        <li>Subsidios para familias vulnerables mediante alianzas</li>
+                                        <li>Acceso gratuito en centros educativos convenidos</li>
+                                    </ul>
+                                </div>
+                                <div class="content-section">
+                                    <h3><i class="fas fa-wifi"></i> ¿Funciona sin internet?</h3>
+                                    <p>Sí, contamos con modo offline que permite:</p>
+                                    <ul>
+                                        <li>Acceso a recetas y guías descargadas</li>
+                                        <li>Registro de consumo para sincronizar después</li>
+                                        <li>Notificaciones vía SMS para zonas rurales</li>
+                                    </ul>
+                                </div>
+                                <div class="content-section">
+                                    <h3><i class="fas fa-hands-helping"></i> ¿Cómo obtengo ayuda si tengo problemas?</h3>
+                                    <p>Puedes contactarnos a través de:</p>
+                                    <ul>
+                                        <li>Chat en vivo en la aplicación</li>
+                                        <li>Correo electrónico: yachay.mikuy@gmail.com</li>
+                                        <li>Teléfono: +51 918 072 862</li>
+                                        <li>WhatsApp: +51 918 072 862</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>`,
+                privacyModal: () => `
+                    <div class="modal active">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h2>Política de Privacidad</h2>
+                                <button class="close-modal">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="content-section">
+                                    <h3><i class="fas fa-info-circle"></i> Información que Recopilamos</h3>
+                                    <p>Recopilamos información personal y de salud de manera responsable:</p>
+                                    <ul>
+                                        <li><strong>Datos personales:</strong> Nombre, correo electrónico, teléfono, departamento de residencia</li>
+                                        <li><strong>Datos de los niños:</strong> Nombre, fecha de nacimiento, peso, altura, historial médico relevante</li>
+                                        <li><strong>Datos de uso:</strong> Interacciones con la plataforma, preferencias alimentarias, progreso nutricional</li>
+                                        <li><strong>Datos técnicos:</strong> Dirección IP, tipo de dispositivo, navegador utilizado</li>
+                                    </ul>
+                                </div>
+                                <div class="content-section">
+                                    <h3><i class="fas fa-cogs"></i> Uso de la Información</h3>
+                                    <p>Utilizamos tu información para:</p>
+                                    <ul>
+                                        <li>Proporcionar planes de alimentación personalizados</li>
+                                        <li>Realizar seguimiento nutricional efectivo</li>
+                                        <li>Mejorar continuamente nuestros servicios</li>
+                                        <li>Comunicarnos contigo sobre actualizaciones relevantes</li>
+                                        <li>Generar reportes estadísticos anonimizados</li>
+                                    </ul>
+                                </div>
+                                <div class="content-section">
+                                    <h3><i class="fas fa-lock"></i> Protección de Datos</h3>
+                                    <p>Implementamos medidas de seguridad robustas:</p>
+                                    <ul>
+                                        <li>Cifrado SSL/TLS para todas las transmisiones</li>
+                                        <li>Almacenamiento cifrado en servidores seguros</li>
+                                        <li>Autenticación de dos factores para accesos críticos</li>
+                                        <li>Auditorías de seguridad periódicas</li>
+                                        <li>Backups automáticos y recovery plan</li>
+                                    </ul>
+                                </div>
+                                <div class="content-section">
+                                    <h3><i class="fas fa-user-shield"></i> Derechos de los Usuarios</h3>
+                                    <p>Tienes derecho a:</p>
+                                    <ul>
+                                        <li><strong>Acceder:</strong> Solicitar una copia de tus datos personales</li>
+                                        <li><strong>Rectificar:</strong> Corregir información inexacta o incompleta</li>
+                                        <li><strong>Cancelar:</strong> Solicitar la eliminación de tus datos</li>
+                                        <li><strong>Oponerse:</strong> Restringir el procesamiento de tus datos</li>
+                                        <li><strong>Portabilidad:</strong> Transferir tus datos a otro servicio</li>
+                                    </ul>
+                                    <p>Para ejercer estos derechos, contacta a yachay.mikuy@gmail.com</p>
+                                </div>
+                                <div class="content-section">
+                                    <h3><i class="fas fa-user-friends"></i> Consentimiento Parental</h3>
+                                    <p>Para el tratamiento de datos de menores:</p>
+                                    <ul>
+                                        <li>Requerimos consentimiento explícito de padres o tutores</li>
+                                        <li>Los padres son responsables de la veracidad de los datos</li>
+                                        <li>Podemos solicitar documentación adicional si es necesario</li>
+                                        <li>Los padres pueden revocar el consentimiento en cualquier momento</li>
+                                    </ul>
+                                </div>
+                                <div class="content-section">
+                                    <h3><i class="fas fa-clock"></i> Retención de Datos</h3>
+                                    <p>Conservamos los datos según los siguientes criterios:</p>
+                                    <ul>
+                                        <li>Datos de cuenta: mientras la cuenta esté activa</li>
+                                        <li>Datos de salud: mínimo 5 años después del último uso</li>
+                                        <li>Datos financieros: 7 años según normativa fiscal</li>
+                                        <li>Datos anonimizados: indefinidamente para estadísticas</li>
+                                    </ul>
+                                </div>
+                                <div class="highlight-box">
+                                    <h3 style="margin-top:0;"><i class="fas fa-exclamation-triangle"></i> Importante</h3>
+                                    <p>Esta política se actualiza periódicamente. Te notificaremos cualquier cambio significativo a través de tu correo electrónico registrado.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>`,
+                termsModal: () => `
+                    <div class="modal active">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h2>Términos y Condiciones</h2>
+                                <button class="close-modal">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="content-section">
+                                    <h3><i class="fas fa-check-circle"></i> Aceptación de los Términos</h3>
+                                    <p>Al utilizar la plataforma Yachay Mikuy, aceptas estos términos y condiciones en su totalidad. Si no estás de acuerdo con alguno de estos términos, no debes utilizar nuestros servicios.</p>
+                                    <p>El uso continuado de la plataforma después de cualquier modificación constituye aceptación de los nuevos términos.</p>
+                                </div>
+                                <div class="content-section">
+                                    <h3><i class="fas fa-cube"></i> Descripción del Servicio</h3>
+                                    <p>Yachay Mikuy es una plataforma digital que ofrece:</p>
+                                    <ul>
+                                        <li>Planes de alimentación personalizados para niños de 0 a 13 años</li>
+                                        <li>Seguimiento nutricional continuo</li>
+                                        <li>Educación nutricional adaptada culturalmente</li>
+                                        <li>Comunidad de apoyo para padres y cuidadores</li>
+                                        <li>Acceso a profesionales de la salud</li>
+                                    </ul>
+                                </div>
+                                <div class="content-section">
+                                    <h3><i class="fas fa-user-check"></i> Responsabilidades del Usuario</h3>
+                                    <p>Como usuario, te comprometes a:</p>
+                                    <ul>
+                                        <li>Proporcionar información veraz y actualizada</li>
+                                        <li>Mantener la confidencialidad de tus credenciales de acceso</li>
+                                        <li>Seguir las recomendaciones nutricionales de manera responsable</li>
+                                        <li>No compartir contenido inapropiado u ofensivo</li>
+                                        <li>Respetar los derechos de otros usuarios</li>
+                                        <li>Reportar cualquier problema o incidencia</li>
+                                    </ul>
+                                </div>
+                                <div class="content-section">
+                                    <h3><i class="fas fa-ban"></i> Uso Prohibido</h3>
+                                    <p>Está estrictamente prohibido:</p>
+                                    <ul>
+                                        <li>Utilizar la plataforma para fines comerciales no autorizados</li>
+                                        <li>Intentar acceder a cuentas de otros usuarios</li>
+                                        <li>Distribuir malware o software malicioso</li>
+                                        <li>Violentar la propiedad intelectual de Yachay Mikuy</li>
+                                        <li>Proporcionar información médica falsa o engañosa</li>
+                                        <li>Acosar o intimidar a otros usuarios</li>
+                                    </ul>
+                                </div>
+                                <div class="content-section">
+                                    <h3><i class="fas fa-copyright"></i> Propiedad Intelectual</h3>
+                                    <p>Todo el contenido de la plataforma está protegido por derechos de autor:</p>
+                                    <ul>
+                                        <li>Textos, imágenes, diseños, logotipos y software</li>
+                                        <li>Algoritmos de recomendación nutricional</li>
+                                        <li>Base de datos de recetas y alimentos</li>
+                                        <li>Material educativo y formatos originales</li>
+                                    </ul>
+                                    <p>Queda prohibida la reproducción total o parcial sin autorización expresa.</p>
+                                </div>
+                                <div class="content-section">
+                                    <h3><i class="fas fa-heart"></i> Información Médica</h3>
+                                    <p>Importante considerar:</p>
+                                    <ul>
+                                        <li>Yachay Mikuy no reemplaza la consulta médica profesional</li>
+                                        <li>Las recomendaciones son complementarias al tratamiento médico</li>
+                                        <li>Ante cualquier emergencia médica, contacta a servicios de salud</li>
+                                        <li>Los planes nutricionales deben ser supervisados por profesionales</li>
+                                    </ul>
+                                </div>
+                                <div class="content-section">
+                                    <h3><i class="fas fa-exclamation-triangle"></i> Limitación de Responsabilidad</h3>
+                                    <p>Yachay Mikuy no se responsabiliza por:</p>
+                                    <ul>
+                                        <li>El uso indebido de la plataforma por parte de los usuarios</li>
+                                        <li>Consecuencias derivadas de no seguir adecuadamente las recomendaciones</li>
+                                        <li>Problemas técnicos fuera de nuestro control</li>
+                                        <li>Contenido proporcionado por terceros</li>
+                                        <li>Daños indirectos, incidentales o consecuentes</li>
+                                    </ul>
+                                </div>
+                                <div class="content-section">
+                                    <h3><i class="fas fa-sync-alt"></i> Modificaciones de los Términos</h3>
+                                    <p>Yachay Mikuy se reserva el derecho de:</p>
+                                    <ul>
+                                        <li>Modificar estos términos y condiciones en cualquier momento</li>
+                                        <li>Actualizar las políticas de privacidad y uso de datos</li>
+                                        <li>Cambiar las características y funcionalidades del servicio</li>
+                                        <li>Suspender o terminar servicios por razones justificadas</li>
+                                    </ul>
+                                    <p>Las modificaciones entrarán en vigor desde su publicación en la plataforma.</p>
+                                </div>
+                                <div class="content-section">
+                                    <h3><i class="fas fa-gavel"></i> Ley Aplicable y Jurisdicción</h3>
+                                    <p>Estos términos se rigen por las leyes de la República del Perú. Cualquier disputa será resuelta en los tribunales de Lima, Perú.</p>
+                                </div>
+                                <div class="highlight-box">
+                                    <h3 style="margin-top:0;"><i class="fas fa-calendar-alt"></i> Vigencia</h3>
+                                    <p>Estos términos y condiciones entran en vigor a partir del 1 de enero de 2025 y permanecerán vigentes hasta su modificación.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>`
             };
             
             // --- LÓGICA DE DATOS ---
@@ -1390,8 +1663,13 @@
                     state.communityPosts = storage.get('yachayMikuyPosts') || [];
                     state.directMessages = storage.get('yachayMikuyMessages') || [];
                     
+                    // Verificar si hay sesión recordada
                     const rememberedUser = storage.get('yachayMikuyRememberedUser');
-                    state.currentUser = rememberedUser || storage.get('yachayMikuyCurrentUser') || null;
+                    if (rememberedUser) {
+                        state.currentUser = rememberedUser;
+                    } else {
+                        state.currentUser = storage.get('yachayMikuyCurrentUser') || null;
+                    }
                 }
             };
 
@@ -1399,14 +1677,13 @@
             const render = {
                 auth: (isLogin = true) => DOMElements.authForms.innerHTML = isLogin ? templates.login() : templates.register(),
                 children: () => {
-                    if (!state.currentUser) return;
                     const userChildren = state.children.filter(c => c.parentId === state.currentUser.id);
                     DOMElements.childrenPanel.innerHTML = `
                         <div class="panel-header">
                             <h2 class="panel-title">Perfiles de tus Hijos</h2>
                             <div>
                                 <button class="btn btn-outline" id="viewBoardsBtn">
-                                    <i class="fas fa-th-large"></i> Ver Tablero
+                                    <i class="fas fa-th-large"></i> Ver Tableros
                                 </button>
                                 <button class="btn btn-primary" id="addChildBtn" style="margin-left: 0.5rem;">
                                     <i class="fas fa-plus"></i> Agregar Perfil
@@ -1414,9 +1691,9 @@
                             </div>
                         </div>
                         <div class="children-grid">
-                            ${userChildren.length === 0 ? '<p style="text-align:center; color:var(--dark-gray); grid-column:1/-1;">Aún no tienes perfiles. ¡Agrega uno para comenzar!</p>' :
+                            ${userChildren.length === 0 ? '<p style="text-align:center; color:var(--dark-gray); grid-column:1/-1;">Aún no tienes perfiles. ¡Agrega uno!</p>' :
                             userChildren.map(child => {
-                                const progress = child.lastQuestionIndex ? Math.round((child.lastQuestionIndex / TOTAL_QUESTIONS) * 100) : 0;
+                                const progress = child.lastQuestionIndex ? Math.round((child.lastQuestionIndex / 55) * 100) : 0;
                                 return `
                                 <div class="child-card">
                                     <div class="child-header">
@@ -1431,7 +1708,7 @@
                                     </div>
                                     <div class="progress-container">
                                         <div class="progress-label">
-                                            <span>Progreso del cuestionario</span>
+                                            <span>Progreso</span>
                                             <span>${progress}%</span>
                                         </div>
                                         <div class="progress-bar">
@@ -1466,7 +1743,6 @@
                 },
                 communityFeed: () => {
                     const feedList = document.getElementById('community-feed-list');
-                    if (!feedList) return;
                     const posts = state.communityPosts.sort((a,b) => new Date(b.date) - new Date(a.date));
                     
                     if (posts.length === 0) {
@@ -1477,10 +1753,8 @@
                     feedList.innerHTML = posts.map(post => {
                         const isAuthor = post.authorEmail === state.currentUser.email;
                         const isAdmin = state.currentUser.email === ADMIN_EMAIL;
-                        const isUnder2Minutes = (new Date() - new Date(post.date)) < 120000;
-
-                        const canEdit = (isAuthor && isUnder2Minutes) || isAdmin;
-                        const canDelete = (isAuthor && isUnder2Minutes) || isAdmin;
+                        const canEdit = isAuthor || (isAdmin && (new Date() - new Date(post.date)) < 120000); // 2 minutos
+                        const canDelete = isAuthor || isAdmin;
                         
                         return `
                         <div class="community-post-card" data-post-id="${post.id}">
@@ -1489,33 +1763,42 @@
                                 <div class="community-post-info">
                                     <div class="community-post-author">${post.authorName}</div>
                                     <div class="community-post-meta">
-                                        <span><i class="fas fa-calendar"></i> ${new Date(post.date).toLocaleString()}</span>
-                                        ${post.department ? `<span><i class="fas fa-map-marker-alt"></i> ${post.department}</span>` : ''}
+                                        <span><i class="fas fa-calendar"></i> ${new Date(post.date).toLocaleDateString()}</span>
+                                        <span><i class="fas fa-map-marker-alt"></i> ${post.department}</span>
                                     </div>
                                 </div>
                             </div>
-                            <div class="community-post-content">${post.content.replace(/\n/g, '<br>')}</div>
+                            <div class="community-post-content">${post.content}</div>
                             <div class="community-post-actions">
                                 <div class="community-post-action">
                                     <i class="fas fa-comment"></i>
-                                    <span>${post.comments?.length || 0}</span>
+                                    <span>${post.comments?.length || 0} Comentarios</span>
                                 </div>
-                                ${canEdit ? `<button class="btn btn-outline edit-post-btn" data-id="${post.id}" style="padding: 0.2rem 0.6rem; font-size: 0.8rem;"><i class="fas fa-edit"></i> Editar</button>` : ''}
-                                ${canDelete ? `<button class="btn btn-accent delete-post-btn" data-id="${post.id}" style="padding: 0.2rem 0.6rem; font-size: 0.8rem;"><i class="fas fa-trash"></i> Eliminar</button>` : ''}
+                                ${canEdit ? `
+                                <div class="community-post-action edit-post-btn" data-id="${post.id}">
+                                    <i class="fas fa-edit"></i>
+                                    <span>Editar</span>
+                                </div>` : ''}
+                                ${canDelete ? `
+                                <div class="community-post-action delete-post-btn" data-id="${post.id}">
+                                    <i class="fas fa-trash"></i>
+                                    <span>Eliminar</span>
+                                </div>` : ''}
                             </div>
                             <div class="community-comments">
+                                <h4 style="margin-bottom:1rem;">Comentarios (${post.comments?.length || 0})</h4>
                                 ${(post.comments || []).map(c => `
                                 <div class="community-comment">
                                     <div class="community-comment-avatar">${c.authorName.charAt(0).toUpperCase()}</div>
                                     <div class="community-comment-content">
                                         <div class="community-comment-author">${c.authorName}</div>
-                                        <div class="community-comment-text">${c.content.replace(/\n/g, '<br>')}</div>
+                                        <div class="community-comment-text">${c.content}</div>
                                     </div>
                                 </div>
                                 `).join('')}
                                 <form class="community-comment-form" id="communityReplyForm" data-post-id="${post.id}">
-                                    <input type="text" name="reply" class="form-input" placeholder="Escribe un comentario..." required autocomplete="off">
-                                    <button type="submit" class="btn btn-primary" style="padding: 0.5rem 1rem;"><i class="fas fa-paper-plane"></i></button>
+                                    <input type="text" name="reply" class="form-input" placeholder="Escribe una respuesta..." required autocomplete="off">
+                                    <button type="submit" class="btn btn-primary"><i class="fas fa-paper-plane"></i></button>
                                 </form>
                             </div>
                         </div>`;
@@ -1542,42 +1825,51 @@
                     } else {
                         DOMElements.messagesPanel.innerHTML = `
                         <div class="messages-layout" style="max-width:800px; margin:0 auto;">
-                            <div class="chat-window" id="user-chat-window"></div>
+                            <div class="chat-window" id="user-chat-window">
+                                <div style="margin:auto; text-align:center; color:var(--dark-gray); padding:2rem;">
+                                    <i class="fas fa-comments" style="font-size:3rem; margin-bottom:1rem; opacity:0.5;"></i>
+                                    <p>Chatea con el administrador</p>
+                                    <button class="btn btn-primary" id="startChatBtn" style="margin-top:1rem;">
+                                        <i class="fas fa-comment-dots"></i> Iniciar conversación
+                                    </button>
+                                </div>
+                            </div>
                         </div>`;
-                        render.userChatWindow({ email: ADMIN_EMAIL, name: 'Soporte Yachay Mikuy' });
                     }
                 },
                 adminChatList: () => {
                     const list = document.getElementById('admin-chat-list');
-                    if (!list) return;
                     const searchTerm = document.getElementById('userSearchInput')?.value.toLowerCase() || '';
-                    const usersWithMessages = [...new Set(state.directMessages.map(m => m.from).concat(state.directMessages.map(m => m.to)))]
-                        .filter(email => email !== ADMIN_EMAIL)
-                        .map(email => state.users.find(u => u.email === email))
-                        .filter(user => user && user.name.toLowerCase().includes(searchTerm));
+                    const users = state.users.filter(u => u.email !== ADMIN_EMAIL && u.name.toLowerCase().includes(searchTerm));
                     
-                    list.innerHTML = usersWithMessages.map(u => {
-                        const unreadCount = state.directMessages.filter(m => m.from === u.email && !m.read).length;
+                    list.innerHTML = users.map(u => {
+                        const unreadCount = state.directMessages.filter(m => 
+                            m.from === u.email && m.to === ADMIN_EMAIL && !m.read
+                        ).length;
+                        
                         return `
-                        <div class="chat-list-item" data-email="${u.email}" data-name="${u.name}">
-                            <span>${u.name}</span>
-                            ${unreadCount > 0 ? `<span class="unread-indicator">${unreadCount}</span>` : ''}
+                        <div class="chat-list-item ${unreadCount > 0 ? 'unread' : ''}" data-email="${u.email}" data-name="${u.name}">
+                            ${u.name}
+                            ${unreadCount > 0 ? `<span class="unread-indicator" title="${unreadCount} mensajes no leídos"></span>` : ''}
                         </div>`;
-                    }).join('') || '<p style="text-align:center; padding:1rem; color:var(--dark-gray);">No hay conversaciones.</p>';
+                    }).join('');
                 },
-                userChatWindow: (withUser) => {
-                    const container = document.getElementById('admin-chat-window') || document.getElementById('user-chat-window');
-                    if (!container) return;
-
+                userChatWindow: (withUser = {email: ADMIN_EMAIL, name: 'Administrador'}) => {
+                    const container = state.currentUser.email === ADMIN_EMAIL ? 
+                        document.getElementById('admin-chat-window') : 
+                        document.getElementById('user-chat-window');
+                    
                     container.innerHTML = `
                         <div class="chat-window-header">
-                            <div>
+                            <div style="flex:1;">
                                 <h3 style="margin:0;">${withUser.name}</h3>
-                                ${state.currentUser.email === ADMIN_EMAIL ? `<small style="color:var(--dark-gray);">${withUser.email}</small>` : ''}
+                                <small style="color:var(--dark-gray);">${withUser.email}</small>
                             </div>
-                            <button class="btn btn-outline" id="clearChatBtn" title="Eliminar conversación para ambos">
-                                <i class="fas fa-trash"></i>
-                            </button>
+                            <div>
+                                <button class="btn btn-outline" id="clearChatBtn" title="Eliminar chat">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
                         </div>
                         <div class="chat-messages" id="chat-messages-area"></div>
                         <form class="chat-input-form" id="directMessageForm" data-recipient-email="${withUser.email}">
@@ -1590,41 +1882,38 @@
                 },
                 chatMessages: (otherUserEmail) => {
                     const area = document.getElementById('chat-messages-area');
-                    if (!area) return;
-                    const conversation = state.directMessages.filter(m => 
+                    const messages = state.directMessages.filter(m => 
                         (m.from === state.currentUser.email && m.to === otherUserEmail) || 
                         (m.from === otherUserEmail && m.to === state.currentUser.email)
                     );
                     
-                    area.innerHTML = conversation.map(m => `
+                    area.innerHTML = messages.map(m => `
                         <div class="message-bubble ${m.from === state.currentUser.email ? 'sent' : 'received'}">
                             ${m.content}
-                            <div style="font-size:0.7rem; opacity:0.7; margin-top:0.25rem; text-align:right;">
+                            <div style="font-size:0.7rem; opacity:0.7; margin-top:0.25rem;">
                                 ${new Date(m.timestamp).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}
                             </div>
                         </div>
                     `).join('');
                     area.scrollTop = area.scrollHeight;
                     
+                    // Marcar mensajes como leídos si es el administrador
                     if (state.currentUser.email === ADMIN_EMAIL) {
-                        state.directMessages.forEach(m => {
-                            if (m.from === otherUserEmail && m.to === ADMIN_EMAIL && !m.read) m.read = true;
+                        messages.forEach(m => {
+                            if (m.from === otherUserEmail && !m.read) {
+                                m.read = true;
+                            }
                         });
                         storage.set('yachayMikuyMessages', state.directMessages);
-                        render.adminChatList();
                     }
                 },
                 updateView: () => {
                     storage.load();
                     if (state.currentUser) {
-                        document.body.classList.remove('logged-out');
-                        document.body.classList.add('logged-in');
                         DOMElements.views.forEach(v => v.classList.remove('active'));
                         document.getElementById('dashboardView').classList.add('active');
                         actions.switchTab(state.activeTab);
                     } else {
-                        document.body.classList.remove('logged-in');
-                        document.body.classList.add('logged-out');
                         DOMElements.views.forEach(v => v.classList.remove('active'));
                         document.getElementById('introView').classList.add('active');
                     }
@@ -1634,14 +1923,22 @@
             // --- LÓGICA DE ACCIONES ---
             const actions = {
                 login: (form) => {
-                    const user = state.users.find(u => u.email === form.email.value && u.password === form.password.value);
+                    const user = state.users.find(u => 
+                        u.email === form.email.value && u.password === form.password.value
+                    );
+                    
                     if (user) {
-                        storage.set(form.rememberMe.checked ? 'yachayMikuyRememberedUser' : 'yachayMikuyCurrentUser', user);
-                        if (!form.rememberMe.checked) storage.set('yachayMikuyRememberedUser', null);
+                        if (form.rememberMe.checked) {
+                            storage.set('yachayMikuyRememberedUser', user);
+                        } else {
+                            storage.set('yachayMikuyCurrentUser', user);
+                        }
+                        
+                        state.currentUser = user;
                         render.updateView();
                         ui.showNotification('¡Sesión iniciada correctamente!', 'success');
                     } else {
-                        ui.showNotification('Credenciales incorrectas.', 'error');
+                        ui.showNotification('Credenciales incorrectas. Por favor, inténtalo de nuevo.', 'error');
                     }
                 },
                 register: (form) => {
@@ -1649,143 +1946,260 @@
                         ui.showNotification('El correo ya está registrado.', 'error');
                         return;
                     }
+                    
                     if (form.password.value !== form.confirmPassword.value) {
                         ui.showNotification('Las contraseñas no coinciden.', 'error');
                         return;
                     }
-                    if(form.password.value.length < 6) {
-                        ui.showNotification('La contraseña debe tener al menos 6 caracteres.', 'error');
-                        return;
-                    }
                     
-                    const newUser = { id: Date.now(), name: form.name.value, email: form.email.value, password: form.password.value };
+                    const newUser = {
+                        id: Date.now(),
+                        name: form.name.value,
+                        email: form.email.value,
+                        password: form.password.value,
+                        createdAt: new Date().toISOString()
+                    };
+                    
                     state.users.push(newUser);
                     storage.set('yachayMikuyUsers', state.users);
+                    
                     ui.showNotification('¡Registro exitoso! Ahora puedes iniciar sesión.', 'success');
                     render.auth(true);
                 },
                 forgotPassword: (form) => {
-                    const user = state.users.find(u => u.email === form.email.value);
+                    const email = form.email.value;
+                    const user = state.users.find(u => u.email === email);
+                    
                     if (user) {
-                        ui.showNotification(`Instrucciones enviadas a ${form.email.value}`, 'success');
+                        ui.showNotification('Se han enviado instrucciones a tu correo electrónico', 'success');
                         render.auth(true);
                     } else {
-                        ui.showNotification('El correo no está registrado.', 'error');
+                        ui.showNotification('El correo electrónico no está registrado', 'error');
                     }
                 },
                 logout: () => {
                     storage.set('yachayMikuyCurrentUser', null);
                     storage.set('yachayMikuyRememberedUser', null);
+                    state.currentUser = null;
                     render.updateView();
-                    ui.showNotification('Has cerrado sesión.', 'success');
+                    ui.showNotification('Has cerrado sesión correctamente', 'success');
                 },
                 explore: () => {
-                    // Crea niños de ejemplo si no existen para el modo invitado
-                    const guestChildrenExist = state.children.some(c => c.isGuest);
-                    if (!guestChildrenExist) {
+                    // Crear niños de ejemplo si no existen
+                    if (!state.children.some(c => c.isGuest)) {
                         const guestChildren = [
-                            { id: 'guest-1', name: 'Alvaro', birthDate: '2018-05-15', age: 7, gender: 'male', department: 'Piura', parentId: 'guest', isGuest: true, completed: true, lastQuestionIndex: TOTAL_QUESTIONS, answers: {} },
-                            { id: 'guest-2', name: 'Luz', birthDate: '2019-08-20', age: 6, gender: 'female', department: 'Lima', parentId: 'guest', isGuest: true, completed: true, lastQuestionIndex: TOTAL_QUESTIONS, answers: {} }
+                            {
+                                id: 'guest-child-1',
+                                name: 'Alvaro',
+                                birthDate: '2018-05-15',
+                                age: 5,
+                                gender: 'male',
+                                department: 'Lima',
+                                parentId: 'guest',
+                                isGuest: true,
+                                progress: 100,
+                                completed: true,
+                                lastQuestionIndex: 55,
+                                answers: {
+                                    weight: { value: "Peso normal", text: "20.5" },
+                                    height: { value: "Estatura normal", text: "110" },
+                                    hemoglobin: { noExam: true, text: "No se ha realizado examen" },
+                                    // ... más respuestas predefinidas
+                                }
+                            },
+                            {
+                                id: 'guest-child-2',
+                                name: 'Luz',
+                                birthDate: '2019-08-20',
+                                age: 4,
+                                gender: 'female',
+                                department: 'Lima',
+                                parentId: 'guest',
+                                isGuest: true,
+                                progress: 100,
+                                completed: true,
+                                lastQuestionIndex: 55,
+                                answers: {
+                                    weight: { value: "Peso normal", text: "18.2" },
+                                    height: { value: "Estatura normal", text: "102" },
+                                    hemoglobin: { fileName: "examen_hemoglobina.pdf", fileType: "application/pdf", text: "Hemoglobina: 12.5 g/dL" },
+                                    // ... más respuestas predefinidas
+                                }
+                            }
                         ];
+                        
                         state.children.push(...guestChildren);
                         storage.set('yachayMikuyChildren', state.children);
                     }
+                    
+                    // Redirigir a yachaymikuy.html en modo invitado
                     window.location.href = 'yachaymikuy.html?guest=true&showCompletion=true';
                 },
                 switchTab: (tabId) => {
                     state.activeTab = tabId;
-                    document.querySelectorAll('.tab-button').forEach(b => b.classList.toggle('active', b.dataset.tab === tabId));
-                    document.querySelectorAll('.tab-content-panel').forEach(p => p.classList.toggle('active', p.id === `${tabId}-panel`));
-                    if (render[tabId]) render[tabId]();
+                    document.querySelectorAll('.tab-button').forEach(b => 
+                        b.classList.toggle('active', b.dataset.tab === tabId)
+                    );
+                    document.querySelectorAll('.tab-content-panel').forEach(p => 
+                        p.classList.toggle('active', p.id === `${tabId}-panel`)
+                    );
+                    render[tabId]();
                 },
                 addChild: (form) => {
                     const birthDate = new Date(form.birthDate.value);
                     const age = new Date(Date.now() - birthDate.getTime()).getUTCFullYear() - 1970;
                     
                     if (age < 0 || age > 13) {
-                        ui.showNotification('La edad del niño debe estar entre 0 y 13 años.', 'error');
+                        ui.showNotification('La edad del niño debe estar entre 0 y 13 años', 'error');
                         return;
                     }
                     
-                    const newChild = { id: Date.now(), name: form.name.value, birthDate: form.birthDate.value, age, department: form.department.value, gender: Math.random() > 0.5 ? 'male' : 'female', parentId: state.currentUser.id, lastQuestionIndex: 0, completed: false, answers: {} };
+                    const newChild = {
+                        id: Date.now(),
+                        name: form.name.value,
+                        birthDate: form.birthDate.value,
+                        age: age,
+                        department: form.department.value,
+                        gender: Math.random() > 0.5 ? 'male' : 'female',
+                        parentId: state.currentUser.id,
+                        lastQuestionIndex: 0,
+                        completed: false,
+                        answers: {}
+                    };
+                    
                     state.children.push(newChild);
                     storage.set('yachayMikuyChildren', state.children);
                     render.children();
                     ui.closeModal();
-                    ui.showNotification('Perfil agregado correctamente.', 'success');
+                    ui.showNotification('Perfil agregado correctamente', 'success');
                 },
                 continueChild: (id) => {
                     const child = state.children.find(c => c.id == id);
                     if (!child) return;
-                    let startQuestion = (child.completed || !child.lastQuestionIndex) ? 0 : child.lastQuestionIndex;
-                    window.location.href = `yachaymikuy.html?childId=${id}&edit=true&question=${startQuestion}`;
+                    
+                    let startQuestion = 0;
+                    
+                    if (child.completed) {
+                        startQuestion = 0;
+                    } else if (child.lastQuestionIndex === 0 || !child.lastQuestionIndex) {
+                        startQuestion = 0;
+                    } else {
+                        startQuestion = child.lastQuestionIndex;
+                    }
+                    
+                    // Guardar los datos actuales en el almacenamiento local antes de redirigir
+                    storage.set('yachayMikuyChildren', state.children);
+                    storage.set('yachayMikuyCurrentUser', state.currentUser);
+                    
+                    // Redirigir a yachaymikuy.html con los parámetros correctos
+                    window.location.href = `yachaymikuy.html?childId=${id}&continue=true&question=${startQuestion}`;
                 },
                 editChild: (id) => {
                     const child = state.children.find(c => c.id == id);
-                    if (child) ui.openModal(templates.editChildModal(child));
+                    if (child) {
+                        ui.openModal(templates.editChildModal(child));
+                    }
                 },
                 updateChild: (form) => {
                     const id = parseInt(form.id.value);
+                    const birthDate = new Date(form.birthDate.value);
+                    const age = new Date(Date.now() - birthDate.getTime()).getUTCFullYear() - 1970;
+                    
+                    if (age < 0 || age > 13) {
+                        ui.showNotification('La edad del niño debe estar entre 0 y 13 años', 'error');
+                        return;
+                    }
+                    
                     const childIndex = state.children.findIndex(c => c.id === id);
                     if (childIndex !== -1) {
-                        const birthDate = new Date(form.birthDate.value);
-                        const age = new Date(Date.now() - birthDate.getTime()).getUTCFullYear() - 1970;
-                        if (age < 0 || age > 13) {
-                            ui.showNotification('La edad del niño debe estar entre 0 y 13 años.', 'error');
-                            return;
-                        }
-                        state.children[childIndex] = { ...state.children[childIndex], name: form.name.value, age, birthDate: form.birthDate.value, department: form.department.value };
+                        state.children[childIndex] = {
+                            ...state.children[childIndex],
+                            name: form.name.value,
+                            age: age,
+                            department: form.department.value,
+                            birthDate: form.birthDate.value
+                        };
                         storage.set('yachayMikuyChildren', state.children);
                         render.children();
                         ui.closeModal();
-                        ui.showNotification('Perfil actualizado.', 'success');
+                        ui.showNotification('Perfil actualizado correctamente', 'success');
                     }
                 },
                 deleteChild: (id, name) => {
-                    if (confirm(`¿Seguro que deseas eliminar el perfil de ${name}? Esta acción no se puede deshacer.`)) {
+                    if (confirm(`¿Estás seguro de que deseas eliminar el perfil de ${name}? Esta acción no se puede deshacer.`)) {
                         state.children = state.children.filter(c => c.id !== parseInt(id));
                         storage.set('yachayMikuyChildren', state.children);
                         render.children();
-                        ui.showNotification('Perfil eliminado.', 'success');
+                        ui.showNotification('Perfil eliminado correctamente', 'success');
                     }
                 },
                 viewBoards: () => { 
                     window.location.href = `yachaymikuy.html?showCompletion=true&userId=${state.currentUser.id}`;
                 },
                 newPost: (form) => {
-                    const newPost = { id: Date.now(), authorEmail: state.currentUser.email, authorName: state.currentUser.name, date: new Date().toISOString(), department: state.children.find(c => c.parentId === state.currentUser.id)?.department || 'General', content: form.content.value.trim(), comments: [] };
+                    const content = form.content.value.trim();
+                    if (!content) return;
+                    
+                    // Obtener el departamento del usuario actual (del primer hijo o usar "General" como fallback)
+                    const userChildren = state.children.filter(c => c.parentId === state.currentUser.id);
+                    const department = userChildren.length > 0 ? userChildren[0].department : "General";
+                    
+                    const newPost = {
+                        id: Date.now(),
+                        authorEmail: state.currentUser.email,
+                        authorName: state.currentUser.name,
+                        date: new Date().toISOString(),
+                        department: department,
+                        content: content,
+                        comments: []
+                    };
+                    
                     state.communityPosts.push(newPost);
                     storage.set('yachayMikuyPosts', state.communityPosts);
                     render.communityFeed();
-                    ui.closeModal();
-                    ui.showNotification('Publicación creada.', 'success');
+                    form.reset();
+                    ui.showNotification('Publicación creada correctamente', 'success');
                 },
                 editPost: (postId, newContent) => {
                     const post = state.communityPosts.find(p => p.id == postId);
                     if (post) {
                         post.content = newContent;
+                        post.edited = true;
+                        post.editedDate = new Date().toISOString();
                         storage.set('yachayMikuyPosts', state.communityPosts);
                         render.communityFeed();
-                        ui.closeModal();
-                        ui.showNotification('Publicación actualizada.', 'success');
+                        ui.showNotification('Publicación actualizada correctamente', 'success');
                     }
                 },
                 deletePost: (postId) => {
-                    if (confirm('¿Seguro que deseas eliminar esta publicación y todos sus comentarios?')) {
+                    if (confirm('¿Estás seguro de que deseas eliminar esta publicación? Esta acción no se puede deshacer.')) {
                         state.communityPosts = state.communityPosts.filter(p => p.id != postId);
                         storage.set('yachayMikuyPosts', state.communityPosts);
                         render.communityFeed();
-                        ui.showNotification('Publicación eliminada.', 'success');
+                        ui.showNotification('Publicación eliminada correctamente', 'success');
                     }
                 },
                 replyToPost: (form) => {
-                    const post = state.communityPosts.find(p => p.id == form.dataset.postId);
+                    const content = form.reply.value.trim();
+                    const postId = form.dataset.postId;
+                    if (!content || !postId) return;
+                    
+                    const post = state.communityPosts.find(p => p.id == postId);
                     if (post) {
-                        const newComment = { id: Date.now(), authorEmail: state.currentUser.email, authorName: state.currentUser.name, date: new Date().toISOString(), content: form.reply.value.trim() };
+                        const newComment = {
+                            id: Date.now(),
+                            authorEmail: state.currentUser.email,
+                            authorName: state.currentUser.name,
+                            date: new Date().toISOString(),
+                            content: content
+                        };
+                        
                         if (!post.comments) post.comments = [];
                         post.comments.push(newComment);
                         storage.set('yachayMikuyPosts', state.communityPosts);
                         render.communityFeed();
+                        form.reset();
+                        ui.showNotification('Comentario agregado correctamente', 'success');
                     }
                 },
                 sendDirectMessage: (form) => {
@@ -1793,23 +2207,43 @@
                     const recipient = form.dataset.recipientEmail;
                     if (!content || !recipient) return;
                     
-                    const newMessage = { id: Date.now(), from: state.currentUser.email, to: recipient, content, timestamp: new Date().toISOString(), read: false };
+                    const newMessage = {
+                        id: Date.now(),
+                        from: state.currentUser.email,
+                        to: recipient,
+                        content: content,
+                        timestamp: new Date().toISOString(),
+                        read: false
+                    };
+                    
                     state.directMessages.push(newMessage);
                     storage.set('yachayMikuyMessages', state.directMessages);
                     render.chatMessages(recipient);
-                    form.message.value = '';
-                    form.message.focus();
+                    form.reset();
                 },
                 clearChat: (otherUserEmail) => {
-                    if (confirm('¿Seguro que deseas eliminar esta conversación? La acción eliminará el chat para AMBOS usuarios y no se puede deshacer.')) {
-                        state.directMessages = state.directMessages.filter(m => !( (m.from === state.currentUser.email && m.to === otherUserEmail) || (m.from === otherUserEmail && m.to === state.currentUser.email) ));
+                    if (confirm('¿Estás seguro de que deseas eliminar esta conversación? Esta acción no se puede deshacer.')) {
+                        state.directMessages = state.directMessages.filter(m => 
+                            !(m.from === state.currentUser.email && m.to === otherUserEmail) && 
+                            !(m.from === otherUserEmail && m.to === state.currentUser.email)
+                        );
                         storage.set('yachayMikuyMessages', state.directMessages);
-                        if (state.currentUser.email === ADMIN_EMAIL) {
-                            render.userChatWindow({ email: otherUserEmail, name: state.users.find(u => u.email === otherUserEmail)?.name || 'Usuario' });
-                        } else {
-                             render.userChatWindow({ email: ADMIN_EMAIL, name: 'Soporte Yachay Mikuy' });
-                        }
-                        ui.showNotification('Conversación eliminada.', 'success');
+                        
+                        // Mostrar ventana vacía
+                        const container = state.currentUser.email === ADMIN_EMAIL ? 
+                            document.getElementById('admin-chat-window') : 
+                            document.getElementById('user-chat-window');
+                        
+                        container.innerHTML = `
+                            <div style="margin:auto; text-align:center; color:var(--dark-gray); padding:2rem;">
+                                <i class="fas fa-trash" style="font-size:3rem; margin-bottom:1rem; opacity:0.5;"></i>
+                                <p>Conversación eliminada</p>
+                                <button class="btn btn-primary" id="restartChatBtn" style="margin-top:1rem;">
+                                    <i class="fas fa-redo"></i> Iniciar nueva conversación
+                                </button>
+                            </div>`;
+                        
+                        ui.showNotification('Conversación eliminada correctamente', 'success');
                     }
                 }
             };
@@ -1817,7 +2251,10 @@
             // --- MANEJO DE UI ---
             const ui = {
                 showNotification: (message, type = 'success') => {
-                    DOMElements.notification.innerHTML = `<i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'exclamation-triangle'}"></i><span>${message}</span>`;
+                    DOMElements.notification.innerHTML = `
+                        <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'exclamation-triangle'}"></i>
+                        <span>${message}</span>
+                    `;
                     DOMElements.notification.className = `notification show ${type}`;
                     setTimeout(() => DOMElements.notification.classList.remove('show'), 3000);
                 },
@@ -1826,90 +2263,236 @@
             };
 
             // --- EVENT LISTENERS ---
+            document.getElementById('startBtn').addEventListener('click', () => {
+                document.getElementById('introView').classList.remove('active');
+                document.getElementById('authView').classList.add('active');
+                render.auth(true);
+            });
+            
+            document.getElementById('exploreBtn').addEventListener('click', actions.explore);
+            
             document.body.addEventListener('click', (e) => {
-                const target = e.target;
-
-                // Modales informativos
-                const modalKey = target.closest('[data-modal]')?.dataset.modal;
-                if (modalKey) {
+                // Auth switching
+                if (e.target.matches('.switch-auth')) { 
+                    e.preventDefault(); 
+                    const isLogin = DOMElements.authForms.querySelector('#loginForm') !== null;
+                    render.auth(!isLogin); 
+                }
+                
+                // Forgot password
+                if (e.target.matches('#forgotPasswordLink')) { 
+                    e.preventDefault(); 
+                    render.auth(false); 
+                    DOMElements.authForms.innerHTML = templates.forgotPassword();
+                }
+                
+                // Footer links
+                if (e.target.matches('#aboutLink')) { 
+                    e.preventDefault(); 
+                    ui.openModal(templates.aboutModal()); 
+                }
+                
+                if (e.target.matches('#servicesLink')) { 
+                    e.preventDefault(); 
+                    ui.openModal(templates.servicesModal()); 
+                }
+                
+                if (e.target.matches('#faqLink')) { 
+                    e.preventDefault(); 
+                    ui.openModal(templates.faqModal()); 
+                }
+                
+                if (e.target.matches('#privacyLink') || e.target.matches('#privacyFooterLink')) { 
+                    e.preventDefault(); 
+                    ui.openModal(templates.privacyModal()); 
+                }
+                
+                if (e.target.matches('#termsLink') || e.target.matches('#termsFooterLink')) { 
+                    e.preventDefault(); 
+                    ui.openModal(templates.termsModal()); 
+                }
+                
+                if (e.target.matches('#aboutFooterLink')) { 
+                    e.preventDefault(); 
+                    ui.openModal(templates.aboutModal()); 
+                }
+                
+                if (e.target.matches('#servicesFooterLink')) { 
+                    e.preventDefault(); 
+                    ui.openModal(templates.servicesModal()); 
+                }
+                
+                if (e.target.matches('#faqFooterLink')) { 
+                    e.preventDefault(); 
+                    ui.openModal(templates.faqModal()); 
+                }
+                
+                // Logout
+                if (e.target.matches('#logoutBtn')) { actions.logout(); }
+                
+                // Tab switching
+                if (e.target.matches('.tab-button')) { actions.switchTab(e.target.dataset.tab); }
+                
+                // Modals
+                if (e.target.matches('#addChildBtn')) { ui.openModal(templates.childModal()); }
+                
+                if (e.target.matches('.modal') || e.target.matches('.close-modal')) { 
+                    ui.closeModal(); 
+                }
+                
+                // Children Actions
+                if (e.target.matches('.continue-child-btn')) { 
                     e.preventDefault();
-                    ui.openModal(templates.infoModal(modalKey));
+                    actions.continueChild(e.target.dataset.id); 
                 }
-
-                if (target.matches('#startBtn')) {
-                    document.getElementById('introView').classList.remove('active');
-                    document.getElementById('authView').classList.add('active');
-                    render.auth(true);
+                
+                if (e.target.matches('.edit-child-btn')) { 
+                    e.preventDefault();
+                    actions.editChild(e.target.dataset.id); 
                 }
-                if (target.matches('#exploreBtn')) actions.explore();
-                if (target.matches('.switch-auth')) { e.preventDefault(); render.auth(!DOMElements.authForms.querySelector('#loginForm')); }
-                if (target.matches('#forgotPasswordLink')) { e.preventDefault(); DOMElements.authForms.innerHTML = templates.forgotPassword(); }
-                if (target.matches('#logoutBtn')) actions.logout();
-                if (target.matches('.tab-button')) actions.switchTab(target.dataset.tab);
-                if (target.matches('#addChildBtn')) ui.openModal(templates.childModal());
-                if (target.matches('.modal') || target.matches('.close-modal')) ui.closeModal();
-                if (target.closest('.continue-child-btn')) actions.continueChild(target.closest('.continue-child-btn').dataset.id);
-                if (target.closest('.edit-child-btn')) actions.editChild(target.closest('.edit-child-btn').dataset.id);
-                if (target.closest('.delete-child-btn')) actions.deleteChild(target.closest('.delete-child-btn').dataset.id, target.closest('.delete-child-btn').dataset.name);
-                if (target.matches('#viewBoardsBtn')) actions.viewBoards();
+                
+                if (e.target.matches('.delete-child-btn')) { 
+                    e.preventDefault();
+                    actions.deleteChild(e.target.dataset.id, e.target.dataset.name); 
+                }
+                
+                if (e.target.matches('#viewBoardsBtn')) { 
+                    e.preventDefault();
+                    actions.viewBoards(); 
+                }
                 
                 // Community Actions
-                if (target.matches('#newPostBtn')) {
+                if (e.target.matches('#newPostBtn')) {
                     ui.openModal(`
-                        <div class="modal active"><div class="modal-content">
-                            <div class="modal-header"><h2>Nueva Publicación</h2><button class="close-modal">&times;</button></div>
-                            <div class="modal-body">
-                                <form id="quickPostForm">
-                                    <textarea name="content" class="form-input" rows="5" placeholder="¿Qué quieres compartir?" required></textarea>
-                                    <button type="submit" class="btn btn-primary" style="width:100%; margin-top:1rem;">Publicar</button>
-                                </form>
+                        <div class="modal active">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h2>Nueva Publicación</h2>
+                                    <button class="close-modal">&times;</button>
+                                </div>
+                                <div class="modal-body">
+                                    <form id="quickPostForm">
+                                        <div class="form-group">
+                                            <label for="postContent">¿Qué quieres compartir con la comunidad?</label>
+                                            <textarea id="postContent" name="content" class="form-input" rows="4" placeholder="Escribe aquí..." required></textarea>
+                                        </div>
+                                        <div class="form-actions">
+                                            <button type="button" class="btn btn-outline close-modal">Cancelar</button>
+                                            <button type="submit" class="btn btn-primary">Publicar</button>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
-                        </div></div>`);
+                        </div>
+                    `);
                 }
-                if (target.closest('.edit-post-btn')) {
-                    const post = state.communityPosts.find(p => p.id == target.closest('.edit-post-btn').dataset.id);
-                    if(post) ui.openModal(`
-                        <div class="modal active"><div class="modal-content">
-                            <div class="modal-header"><h2>Editar Publicación</h2><button class="close-modal">&times;</button></div>
-                            <div class="modal-body">
-                                <form id="editPostForm" data-post-id="${post.id}">
-                                    <textarea name="content" class="form-input" rows="5" required>${post.content}</textarea>
-                                    <button type="submit" class="btn btn-primary" style="width:100%; margin-top:1rem;">Guardar Cambios</button>
-                                </form>
+                
+                if (e.target.matches('.edit-post-btn')) {
+                    const postId = e.target.closest('.edit-post-btn').dataset.id;
+                    const post = state.communityPosts.find(p => p.id == postId);
+                    
+                    if (post) {
+                        ui.openModal(`
+                            <div class="modal active">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h2>Editar Publicación</h2>
+                                        <button class="close-modal">&times;</button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form id="editPostForm" data-post-id="${postId}">
+                                            <div class="form-group">
+                                                <label for="editPostContent">Contenido</label>
+                                                <textarea id="editPostContent" name="content" class="form-input" rows="4" required>${post.content}</textarea>
+                                            </div>
+                                            <div class="form-actions">
+                                                <button type="button" class="btn btn-outline close-modal">Cancelar</button>
+                                                <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
                             </div>
-                        </div></div>`);
+                        `);
+                    }
                 }
-                if (target.closest('.delete-post-btn')) actions.deletePost(target.closest('.delete-post-btn').dataset.id);
-
+                
+                if (e.target.matches('.delete-post-btn')) {
+                    const postId = e.target.closest('.delete-post-btn').dataset.id;
+                    actions.deletePost(postId);
+                }
+                
                 // Messages Actions
-                if (target.closest('.chat-list-item')) {
-                    const item = target.closest('.chat-list-item');
-                    document.querySelectorAll('.chat-list-item.active').forEach(i => i.classList.remove('active'));
-                    item.classList.add('active');
-                    render.userChatWindow({ email: item.dataset.email, name: item.dataset.name });
+                if (e.target.matches('#startChatBtn')) {
+                    render.userChatWindow();
                 }
-                if(target.matches('#clearChatBtn')) {
+                
+                if (e.target.matches('#restartChatBtn')) {
+                    render.userChatWindow();
+                }
+                
+                if (e.target.matches('#clearChatBtn')) {
                     const recipientEmail = document.querySelector('#directMessageForm').dataset.recipientEmail;
                     actions.clearChat(recipientEmail);
+                }
+                
+                if (e.target.closest('.chat-list-item')) {
+                    const item = e.target.closest('.chat-list-item');
+                    document.querySelectorAll('.chat-list-item').forEach(i => i.classList.remove('active'));
+                    item.classList.add('active');
+                    render.userChatWindow({
+                        email: item.dataset.email, 
+                        name: item.dataset.name
+                    });
                 }
             });
 
             document.body.addEventListener('submit', (e) => {
                 e.preventDefault();
-                const form = e.target;
-                if (form.matches('#loginForm')) actions.login(form.elements);
-                if (form.matches('#registerForm')) actions.register(form.elements);
-                if (form.matches('#forgotPasswordForm')) actions.forgotPassword(form.elements);
-                if (form.matches('#addChildForm')) actions.addChild(form.elements);
-                if (form.matches('#editChildForm')) actions.updateChild(form.elements);
-                if (form.matches('#quickPostForm')) actions.newPost(form.elements);
-                if (form.matches('#editPostForm')) actions.editPost(form.dataset.postId, form.elements.content.value);
-                if (form.matches('#communityReplyForm')) { actions.replyToPost(form); form.reset(); }
-                if (form.matches('#directMessageForm')) actions.sendDirectMessage(form);
+                
+                if (e.target.matches('#loginForm')) {
+                    actions.login(e.target.elements);
+                }
+                
+                if (e.target.matches('#registerForm')) {
+                    actions.register(e.target.elements);
+                }
+                
+                if (e.target.matches('#forgotPasswordForm')) {
+                    actions.forgotPassword(e.target.elements);
+                }
+                
+                if (e.target.matches('#addChildForm')) {
+                    actions.addChild(e.target.elements);
+                }
+                
+                if (e.target.matches('#editChildForm')) {
+                    actions.updateChild(e.target.elements);
+                }
+                
+                if (e.target.matches('#quickPostForm')) {
+                    actions.newPost(e.target);
+                }
+                
+                if (e.target.matches('#editPostForm')) {
+                    const postId = e.target.dataset.postId;
+                    const content = e.target.elements.content.value.trim();
+                    actions.editPost(postId, content);
+                }
+                
+                if (e.target.matches('#communityReplyForm')) {
+                    actions.replyToPost(e.target);
+                }
+                
+                if (e.target.matches('#directMessageForm')) {
+                    actions.sendDirectMessage(e.target);
+                }
             });
 
             document.body.addEventListener('input', e => {
-                if (e.target.matches('#userSearchInput')) render.adminChatList();
+                if (e.target.matches('#userSearchInput')) { 
+                    render.adminChatList(); 
+                }
             });
 
             // --- INICIALIZACIÓN ---
