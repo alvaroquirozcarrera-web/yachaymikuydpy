@@ -1436,12 +1436,12 @@
             
             if (childId) {
                 // Buscar el niño en los datos cargados
-                currentChild = childrenData.find(child => child.id === childId);
+                currentChild = childrenData.find(child => child.id == childId);
                 
                 // Si no se encuentra el niño, intentar recargar los datos
                 if (!currentChild) {
                     loadDataFromStorage(); // Recargar datos
-                    currentChild = childrenData.find(child => child.id === childId);
+                    currentChild = childrenData.find(child => child.id == childId);
                 }
                 
                 if (currentChild) {
@@ -2520,8 +2520,8 @@
                     
                     // Event listener para seleccionar otro niño
                     childCard.addEventListener('click', function() {
-                        // Redirigir a chicos.html con el ID del niño
-                        window.location.href = `chicos.html?childId=${child.id}&guest=true`;
+                        // Redirigir a yachaymikuy.html con el ID del niño
+                        window.location.href = `yachaymikuy.html?childId=${child.id}&guest=true`;
                     });
                     
                     childrenGridContainer.appendChild(childCard);
@@ -2607,8 +2607,8 @@
                     childCard.addEventListener('click', function() {
                         // Permitir acceder solo si está completado al 100%
                         if (cardStatus === 'completed') {
-                            // Redirigir a chicos.html con el ID del niño
-                            window.location.href = `chicos.html?childId=${child.id}`;
+                            // Redirigir a yachaymikuy.html con el ID del niño
+                            window.location.href = `yachaymikuy.html?childId=${child.id}`;
                         } else {
                             // Mostrar mensaje estético
                             const warningDiv = document.createElement('div');
