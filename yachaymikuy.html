@@ -1316,11 +1316,11 @@
             <div class="footer-section">
                 <h3>Enlaces Útiles</h3>
                 <ul class="footer-links">
-                    <li><a href="#" id="aboutLink"><i class="fas fa-info-circle"></i> Acerca de Nosotros</a></li>
-                    <li><a href="#" id="servicesLink"><i class="fas fa-concierge-bell"></i> Servicios</a></li>
-                    <li><a href="#" id="faqLink"><i class="fas fa-question-circle"></i> Preguntas Frecuentes</a></li>
-                    <li><a href="#" id="privacyLink"><i class="fas fa-shield-alt"></i> Política de Privacidad</a></li>
-                    <li><a href="#" id="termsLink"><i class="fas fa-file-contract"></i> Términos y Condiciones</a></li>
+                    <li><a href="#" id="aboutFooterLink"><i class="fas fa-info-circle"></i> Acerca de Nosotros</a></li>
+                    <li><a href="#" id="servicesFooterLink"><i class="fas fa-concierge-bell"></i> Servicios</a></li>
+                    <li><a href="#" id="faqFooterLink"><i class="fas fa-question-circle"></i> Preguntas Frecuentes</a></li>
+                    <li><a href="#" id="privacyFooterLink"><i class="fas fa-shield-alt"></i> Política de Privacidad</a></li>
+                    <li><a href="#" id="termsFooterLink"><i class="fas fa-file-contract"></i> Términos y Condiciones</a></li>
                 </ul>
             </div>
         </div>
@@ -3658,11 +3658,11 @@
                 }
                 
                 // Abrir modales según el ID del enlace clickeado
-                if (e.target.matches('#aboutLink')) { ui.openModal(templates.aboutModal()); }
-                if (e.target.matches('#servicesLink')) { ui.openModal(templates.servicesModal()); }
-                if (e.target.matches('#faqLink')) { ui.openModal(templates.faqModal()); }
-                if (e.target.matches('#privacyLink')) { ui.openModal(templates.privacyModal()); }
-                if (e.target.matches('#termsLink')) { ui.openModal(templates.termsModal()); }
+                if (e.target.matches('#aboutFooterLink')) { ui.openModal(templates.aboutModal()); }
+                if (e.target.matches('#servicesFooterLink')) { ui.openModal(templates.servicesModal()); }
+                if (e.target.matches('#faqFooterLink')) { ui.openModal(templates.faqModal()); }
+                if (e.target.matches('#privacyFooterLink')) { ui.openModal(templates.privacyModal()); }
+                if (e.target.matches('#termsFooterLink')) { ui.openModal(templates.termsModal()); }
                 
                 // Cerrar el modal si se hace clic en el fondo o en el botón de cerrar
                 if (e.target.matches('.modal') || e.target.matches('.close-modal')) { 
