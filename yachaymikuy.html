@@ -2088,7 +2088,15 @@
             }
             
             if (childId) {
+                // Buscar el niño en los datos cargados
                 currentChild = childrenData.find(child => child.id === childId);
+                
+                // Si no se encuentra el niño, intentar recargar los datos
+                if (!currentChild) {
+                    loadDataFromStorage(); // Recargar datos
+                    currentChild = childrenData.find(child => child.id === childId);
+                }
+                
                 if (currentChild) {
                     childNameDisplay.textContent = currentChild.name;
                     childAgeDisplay.textContent = currentChild.age;
@@ -2117,8 +2125,14 @@
                     // Mostrar mensaje de ánimo
                     showEncouragementMessage();
                 } else {
-                    // Si no se encuentra el niño, redirigir a la página principal
-                    window.location.href = 'index.html';
+                    // Si no se encuentra el niño, mostrar un mensaje de error
+                    console.error('No se encontró el niño con ID:', childId);
+                    showNotification('error', 'Error', 'No se encontró el perfil del niño. Por favor, inténtalo de nuevo.');
+                    
+                    // Redirigir a la página principal después de un breve retraso
+                    setTimeout(() => {
+                        window.location.href = 'index.html';
+                    }, 3000);
                 }
             } else if (isGuestMode) {
                 // Modo invitado, crear niños de ejemplo si no existen
@@ -2387,6 +2401,12 @@
             const storedData = localStorage.getItem('yachayMikuyChildren');
             if (storedData) {
                 childrenData = JSON.parse(storedData);
+            }
+            
+            // También cargar el usuario actual
+            const currentUserData = localStorage.getItem('yachayMikuyCurrentUser');
+            if (currentUserData) {
+                currentUser = JSON.parse(currentUserData);
             }
         }
 
@@ -3372,7 +3392,7 @@
                     // Event listener para seleccionar otro niño
                     childCard.addEventListener('click', function() {
                         // Redirigir a chicos.html con el ID del niño
-                        window.location.href = `chicos.html?childId=${child.id}&guest=true`;
+                        window.location.href = `yachaymikuy.html?childId=${child.id}&guest=true`;
                     });
                     
                     childrenGridContainer.appendChild(childCard);
@@ -3459,7 +3479,7 @@
                         // Permitir acceder solo si está completado al 100%
                         if (cardStatus === 'completed') {
                             // Redirigir a chicos.html con el ID del niño
-                            window.location.href = `chicos.html?childId=${child.id}`;
+                            window.location.href = `yachaymikuy.html?childId=${child.id}`;
                         } else {
                             // Mostrar mensaje estético
                             const warningDiv = document.createElement('div');
