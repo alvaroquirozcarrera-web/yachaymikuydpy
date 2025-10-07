@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+      <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -6,9 +6,10 @@
     <title>Yachay Mikuy - Cuestionario de Salud Infantil</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-blue: #2c5aa0;
+            --primary-blue: #1a4b8c;
             --light-blue: #5d8cc4;
             --very-light-blue: #e6f0fa;
             --dark-blue: #1a3a6e;
@@ -28,6 +29,13 @@
             --robot-dark: #2c3e50;
             --required-color: #e74c3c;
             --pulse-color: #ff6b6b;
+            --info: #17a2b8;
+            
+            /* Variables para el nuevo footer */
+            --text-dark: #212529;
+            --shadow: 0 8px 24px rgba(0, 0, 0, 0.08); 
+            --radius: 12px;
+            --transition: all 0.3s ease-in-out;
         }
 
         * {
@@ -45,6 +53,77 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+        }
+
+        /* Barra superior azul */
+        .top-bar {
+            background-color: var(--primary-blue);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            width: 100%;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .logo {
+            width: 40px;
+            height: 40px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-blue);
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: rotate(15deg) scale(1.1);
+        }
+
+        .logo-text {
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: white;
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
         }
 
         .container {
@@ -181,6 +260,7 @@
             font-weight: 500;
             transition: all 0.3s ease;
             position: relative;
+            cursor: pointer;
         }
 
         .section-item::after {
@@ -197,11 +277,16 @@
 
         .section-item.active {
             color: var(--primary-blue);
-            background-color: rgba(44, 90, 160, 0.1);
+            background-color: rgba(26, 75, 140, 0.1);
         }
 
         .section-item.active::after {
             width: 60%;
+        }
+
+        .section-item:hover {
+            color: var(--primary-blue);
+            background-color: rgba(26, 75, 140, 0.05);
         }
 
         .question-container {
@@ -291,7 +376,7 @@
         .text-input:focus {
             outline: none;
             border-color: var(--primary-blue);
-            box-shadow: 0 0 0 3px rgba(44, 90, 160, 0.2);
+            box-shadow: 0 0 0 3px rgba(26, 75, 140, 0.2);
         }
 
         .input-group {
@@ -905,91 +990,140 @@
             font-weight: 500;
         }
 
-        /* Pie de página */
-        footer {
-            background-color: white;
-            border-top: 1px solid #e9ecef;
-            padding: 30px 0;
-            margin-top: 50px;
-            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.05);
+        /* Footer azul - Actualizado con 3 niveles */
+        .footer { 
+            background-color: var(--primary-blue); 
+            color: rgba(255,255,255,0.8); 
+            padding: 3rem 5%; 
+            margin-top: auto;
+        }
+        .footer-content { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
+            gap: 2.5rem; 
+            max-width: 1200px; 
+            margin: 0 auto; 
+        }
+        .footer-section { 
+            display: flex; 
+            flex-direction: column; 
+        }
+        .footer-section h3 { 
+            color: var(--white); 
+            margin-bottom: 1.5rem; 
+            font-size: 1.2rem; 
+            position: relative; 
+            padding-bottom: 0.5rem; 
+            font-family: 'Poppins', sans-serif;
+        }
+        .footer-section h3::after { 
+            content: ''; 
+            position: absolute; 
+            bottom: 0; 
+            left: 0; 
+            width: 40px; 
+            height: 2px; 
+            background: var(--accent-red); 
+        }
+        .footer-links { list-style: none; padding: 0; margin: 0; }
+        .footer-links li { margin-bottom: 0.8rem; }
+        .footer-links a { 
+            color: rgba(255,255,255,0.8); 
+            text-decoration: none; 
+            transition: var(--transition); 
+            display: flex; 
+            align-items: center; 
+            gap: 0.5rem; 
+        }
+        .footer-links a:hover { color: var(--white); transform: translateX(5px); }
+        .footer-links a i { width: 20px; text-align: center; }
+        .footer-section p { margin-bottom: 0.8rem; display: flex; align-items: center; gap: 0.5rem; }
+        .social-links { display: flex; gap: 1rem; margin-top: 1rem; }
+        .social-links a { 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            width: 40px; 
+            height: 40px; 
+            background: rgba(255,255,255,0.1); 
+            border-radius: 50%; 
+            transition: var(--transition); 
+        }
+        .social-links a:hover { background: var(--accent-red); transform: translateY(-3px); }
+        .footer-bottom { 
+            text-align: center; 
+            margin-top: 2.5rem; 
+            padding-top: 1.5rem; 
+            border-top: 1px solid rgba(255,255,255,0.2); 
+            font-size: 0.9rem; 
         }
 
-        .footer-container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 0 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+        /* --- ESTILOS PARA MODALES --- */
+        .modal { 
+            display: none; 
+            position: fixed; 
+            z-index: 1000; 
+            left: 0; top: 0; 
+            width: 100%; height: 100%; 
+            background-color: rgba(0,0,0,0.5); 
+            justify-content: center; 
+            align-items: center; 
+            padding: 1rem; 
         }
-
-        .footer-logo {
-            display: flex;
-            align-items: center;
-            margin-bottom: 20px;
+        .modal.active { display: flex; }
+        @keyframes modalSlideIn { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        .modal-content { 
+            background-color: var(--white); 
+            border-radius: var(--radius); 
+            width: 100%; 
+            max-width: 600px; 
+            max-height: 90vh; 
+            position: relative; 
+            animation: modalSlideIn 0.4s; 
+            display: flex; flex-direction: column; 
         }
-
-        .footer-logo i {
-            color: var(--primary-blue);
-            font-size: 2rem;
-            margin-right: 10px;
+        .modal-header { 
+            padding: 1.5rem; 
+            border-bottom: 1px solid var(--medium-gray); 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
         }
-
-        .footer-logo h3 {
-            color: var(--primary-blue);
-            font-size: 1.5rem;
-            font-weight: 700;
+        .modal-header h2 { margin: 0; color: var(--primary-blue); }
+        .modal-body { padding: 1.5rem; overflow-y: auto; flex: 1; }
+        .modal-body::-webkit-scrollbar { width: 8px; }
+        .modal-body::-webkit-scrollbar-track { background: var(--light-gray); border-radius: 4px; }
+        .modal-body::-webkit-scrollbar-thumb { background: var(--primary-blue); border-radius: 4px; }
+        .modal-body::-webkit-scrollbar-thumb:hover { background: var(--accent-red); }
+        .close-modal { 
+            background: none; 
+            border: none; 
+            font-size: 1.5rem; 
+            cursor: pointer; 
+            color: var(--dark-gray); 
+            transition: var(--transition); 
         }
-
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
+        .close-modal:hover { color: var(--accent-red); transform: rotate(90deg); }
+        
+        /* --- ESTILOS PARA CONTENIDO DE MODALES --- */
+        .content-section { margin-bottom: 1.5rem; }
+        .content-section h3 { 
+            color: var(--primary-blue); 
+            margin-bottom: 0.8rem; 
+            font-size: 1.1rem; 
+            display: flex; 
+            align-items: center; 
+            gap: 0.5rem; 
         }
-
-        .footer-links a {
-            color: var(--gray);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s ease;
-        }
-
-        .footer-links a:hover {
-            color: var(--primary-blue);
-        }
-
-        .footer-social {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-
-        .footer-social a {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background-color: var(--very-light-blue);
-            color: var(--primary-blue);
-            border-radius: 50%;
-            transition: all 0.3s ease;
-        }
-
-        .footer-social a:hover {
-            background-color: var(--primary-blue);
-            color: white;
-            transform: translateY(-3px);
-        }
-
-        .footer-copyright {
-            text-align: center;
-            color: var(--gray);
-            font-size: 0.9rem;
-            margin-top: 10px;
+        .content-section p { line-height: 1.6; color: var(--text-dark); }
+        .content-section ul { margin-left: 1.5rem; margin-top: 0.5rem; }
+        .content-section li { margin-bottom: 0.5rem; line-height: 1.5; }
+        .highlight-box { 
+            background: var(--light-gray); 
+            padding: 1rem; 
+            border-radius: 8px; 
+            border-left: 4px solid var(--accent-red); 
+            margin: 1rem 0; 
         }
 
         /* Responsive adjustments */
@@ -1055,65 +1189,29 @@
                 padding: 12px;
                 font-size: 0.8rem;
             }
-            
-            .footer-links {
-                gap: 15px;
-            }
-        }
 
-        @media (max-width: 480px) {
-            .logo h1 {
-                font-size: 1.5rem;
-            }
-            
-            .logo i {
-                font-size: 2rem;
-            }
-            
-            .child-name {
-                font-size: 1.2rem;
-            }
-            
-            .question-title {
-                font-size: 1.1rem;
-            }
-            
-            .section-item {
-                font-size: 0.8rem;
-                padding: 8px 5px;
-            }
-            
-            .image-option {
-                width: 100px;
-                height: 100px;
-            }
-            
-            .weight-figure, .height-figure {
-                font-size: 4rem;
-            }
-            
-            .completion-title {
-                font-size: 2rem;
-            }
-            
-            .completion-message {
-                font-size: 1.1rem;
-            }
-            
-            .footer-links {
-                flex-direction: column;
-                align-items: center;
-                gap: 10px;
-            }
-            
-            .avatar {
-                width: 120px;
-                height: 170px;
+            .footer-content {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
+    <!-- Barra superior azul -->
+    <div class="top-bar">
+        <div class="logo-container">
+            <div class="logo">
+                <i class="fas fa-heartbeat"></i>
+            </div>
+            <div class="logo-text">Yachay Mikuy</div>
+        </div>
+        <div class="nav-links">
+            <a href="#" id="homeLink">Inicio</a>
+            <a href="#" id="aboutLink">Acerca de</a>
+            <a href="#" id="contactLink">Contacto</a>
+        </div>
+    </div>
+
     <div class="container">
         <header>
             <div class="logo">
@@ -1126,7 +1224,7 @@
             </div>
         </header>
 
-        <div class="progress-container">
+        <div class="progress-container" id="progressContainer">
             <div class="progress-header">
                 <div class="progress-title">Progreso del cuestionario</div>
                 <div class="progress-percentage" id="progressText">0%</div>
@@ -1135,15 +1233,15 @@
                 <div class="progress-fill" id="progressFill"></div>
             </div>
             <div class="section-indicator">
-                <div class="section-item active" id="section1">Datos Generales</div>
-                <div class="section-item" id="section2">Nutricionales</div>
-                <div class="section-item" id="section3">Cognitivos</div>
-                <div class="section-item" id="section4">Psicológicos</div>
+                <div class="section-item active" id="section1" data-section="1">Datos Generales</div>
+                <div class="section-item" id="section2" data-section="2">Nutricionales</div>
+                <div class="section-item" id="section3" data-section="3">Cognitivos</div>
+                <div class="section-item" id="section4" data-section="4">Psicológicos</div>
             </div>
         </div>
 
         <div class="question-container" id="questionContainer">
-            </div>
+        </div>
 
         <div class="navigation-buttons">
             <button class="btn btn-danger" id="exitBtn">
@@ -1170,11 +1268,11 @@
             <div class="children-dashboard">
                 <h3 class="dashboard-title">Panel de Control de Niños</h3>
                 <div class="children-grid" id="childrenGridContainer">
-                    </div>
+                </div>
             </div>
             
             <div class="actions-container">
-                <button class="btn btn-primary" id="selectAnotherChildBtn">
+                <button class="btn btn-primary" id="selectAnotherChildBtn" style="display: none;">
                     <i class="fas fa-child"></i> Seleccionar otro niño
                 </button>
                 <button class="btn btn-success" id="generatePlanBtn">
@@ -1194,29 +1292,40 @@
         <div class="avatar" id="avatarRobot"></div>
     </div>
 
-    <footer>
-        <div class="footer-container">
-            <div class="footer-logo">
-                <i class="fas fa-heartbeat"></i>
-                <h3>Yachay Mikuy</h3>
+    <!-- Footer azul - Actualizado con 3 niveles -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Redes Sociales</h3>
+                <div class="social-links">
+                    <a href="https://facebook.com/yachaymikuy" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://twitter.com/yachaymikuy" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="https://instagram.com/yachaymikuy" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="https://youtube.com/channel/yachaymikuy" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a>
+                    <a href="https://wa.me/51929177801" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                </div>
             </div>
-            <div class="footer-links">
-                <a href="#">Acerca de nosotros</a>
-                <a href="#">Términos y condiciones</a>
-                <a href="#">Política de privacidad</a>
-                <a href="#">Contacto</a>
+            <div class="footer-section">
+                <h3>Contacto</h3>
+                <p><i class="fas fa-envelope"></i> contacto@yachaymikuy.com</p>
+                <p><i class="fas fa-phone"></i> +51 929 177 801</p>
+                <p><i class="fas fa-map-marker-alt"></i> Av. Principal 123, Lima, Perú</p>
             </div>
-            <div class="footer-social">
-                <a href="#"><i class="fab fa-facebook-f"></i></a>
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
-                <a href="#"><i class="fab fa-whatsapp"></i></a>
-            </div>
-            <div class="footer-copyright">
-                © 2023 Yachay Mikuy. Todos los derechos reservados.
+            <div class="footer-section">
+                <h3>Enlaces Útiles</h3>
+                <ul class="footer-links">
+                    <li><a href="#" id="aboutLink"><i class="fas fa-info-circle"></i> Acerca de Nosotros</a></li>
+                    <li><a href="#" id="servicesLink"><i class="fas fa-concierge-bell"></i> Servicios</a></li>
+                    <li><a href="#" id="faqLink"><i class="fas fa-question-circle"></i> Preguntas Frecuentes</a></li>
+                    <li><a href="#" id="privacyLink"><i class="fas fa-shield-alt"></i> Política de Privacidad</a></li>
+                    <li><a href="#" id="termsLink"><i class="fas fa-file-contract"></i> Términos y Condiciones</a></li>
+                </ul>
             </div>
         </div>
+        <div class="footer-bottom">&copy; 2023 Yachay Mikuy - Nutrición Inteligente, Futuro Brillante. Todos los derechos reservados.</div>
     </footer>
+
+    <div id="action-modal-container"></div>
 
     <script>
         // Base de datos de preguntas
@@ -1917,9 +2026,13 @@
         let isEditMode = false;
         let currentMessageIndex = 0;
         let incompleteQuestions = [];
+        let isGuestMode = false;
+        let showCompletionDirectly = false;
+        let currentUser = null;
 
         // Elementos del DOM
         const questionContainer = document.getElementById('questionContainer');
+        const progressContainer = document.getElementById('progressContainer');
         const progressFill = document.getElementById('progressFill');
         const progressText = document.getElementById('progressText');
         const nextBtn = document.getElementById('nextBtn');
@@ -1936,6 +2049,10 @@
         const messageBubble = document.getElementById('messageBubble');
         const messageText = document.getElementById('messageText');
         const avatarRobot = document.getElementById('avatarRobot');
+        const homeLink = document.getElementById('homeLink');
+        const aboutLink = document.getElementById('aboutLink');
+        const contactLink = document.getElementById('contactLink');
+        const actionModalContainer = document.getElementById('action-modal-container');
 
         // Inicialización
         document.addEventListener('DOMContentLoaded', function() {
@@ -1947,9 +2064,26 @@
             const childId = urlParams.get('childId');
             const editMode = urlParams.get('edit');
             const startQuestion = urlParams.get('question');
+            const guestMode = urlParams.get('guest');
+            const showCompletion = urlParams.get('showCompletion');
+            const userId = urlParams.get('userId');
             
             // Verificar si estamos en modo edición
             isEditMode = editMode === 'true';
+            isGuestMode = guestMode === 'true';
+            showCompletionDirectly = showCompletion === 'true';
+            
+            // Si se solicita mostrar la pantalla de finalización directamente
+            if (showCompletionDirectly) {
+                showCompletionScreenDirectly(userId);
+                return;
+            }
+            
+            // Verificar si el usuario ha iniciado sesión
+            currentUser = localStorage.getItem('yachayMikuyCurrentUser');
+            if (currentUser) {
+                currentUser = JSON.parse(currentUser);
+            }
             
             if (childId) {
                 currentChild = childrenData.find(child => child.id === childId);
@@ -1984,6 +2118,33 @@
                     // Si no se encuentra el niño, redirigir a la página principal
                     window.location.href = 'index.html';
                 }
+            } else if (isGuestMode) {
+                // Modo invitado, crear niños de ejemplo si no existen
+                if (!childrenData.some(child => child.isGuest)) {
+                    createGuestChildren();
+                }
+                
+                // Seleccionar el primer niño de ejemplo
+                const guestChild = childrenData.find(child => child.isGuest);
+                if (guestChild) {
+                    currentChild = guestChild;
+                    childNameDisplay.textContent = currentChild.name;
+                    childAgeDisplay.textContent = currentChild.age;
+                    
+                    // Cargar respuestas guardadas si existen
+                    if (currentChild.answers) {
+                        answers = {...currentChild.answers};
+                    }
+                    
+                    // Mostrar el botón de dashboard
+                    dashboardBtn.classList.remove('hidden');
+                    
+                    // Mostrar la pregunta actual
+                    displayQuestion();
+                    
+                    // Mostrar mensaje de ánimo
+                    showEncouragementMessage();
+                }
             } else {
                 // Si no hay ID de niño en la URL, redirigir a la página principal
                 window.location.href = 'index.html';
@@ -1996,13 +2157,193 @@
             exitBtnFinal.addEventListener('click', exitQuestionnaire);
             dashboardBtn.addEventListener('click', showCompletionScreenDirectly);
             selectAnotherChildBtn.addEventListener('click', () => {
-                window.location.href = 'index.html';
+                if (isGuestMode) {
+                    window.location.href = 'index.html?guest=true#profiles';
+                } else {
+                    window.location.href = 'index.html#profiles';
+                }
             });
             generatePlanBtn.addEventListener('click', generateNutritionalPlan);
             
             // Event listener para el robot - hacer que muestre mensajes al hacer clic
             avatarRobot.addEventListener('click', showRandomMessage);
+            
+            // Event listeners para los enlaces de navegación
+            homeLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                if (isGuestMode) {
+                    window.location.href = 'index.html?guest=true';
+                } else {
+                    window.location.href = 'index.html';
+                }
+            });
+            
+            aboutLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                showNotification('info', 'Acerca de', 'Yachay Mikuy es una plataforma para combatir la anemia infantil con planes nutricionales personalizados.');
+            });
+            
+            contactLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                showNotification('info', 'Contacto', 'Email: contacto@yachaymikuy.com | Tel: +51 929 177 801');
+            });
+            
+            // Event listeners para los indicadores de sección
+            document.querySelectorAll('.section-item').forEach(item => {
+                item.addEventListener('click', function() {
+                    const section = parseInt(this.getAttribute('data-section'));
+                    goToSection(section);
+                });
+            });
+            
+            // Configurar modales del footer
+            setupFooterModals();
         });
+
+        // Crear niños de ejemplo para el modo invitado
+        function createGuestChildren() {
+            const guestChildren = [
+                {
+                    id: 'guest-child-1',
+                    name: 'Alvaro',
+                    birthDate: '2018-05-15',
+                    age: 5,
+                    parentId: 'guest',
+                    isGuest: true,
+                    progress: 100,
+                    completed: true,
+                    lastQuestionIndex: 55,
+                    answers: {
+                        weight: { value: "Peso normal", text: "20.5" },
+                        height: { value: "Estatura normal", text: "110" },
+                        hemoglobin: { noExam: true, text: "No se ha realizado examen" },
+                        skinTone: "Normal, sin cambios",
+                        eyelids: "No, se ven normales",
+                        energyLevel: "Normal, adecuado para su edad",
+                        bleeding: "Nunca o rara vez",
+                        familyHistory: "No que yo sepa",
+                        medicalCondition: "No, no tiene condiciones médicas diagnosticadas",
+                        medication: "No, no toma ningún medicamento o suplemento",
+                        ironRichFood: "Adecuado, consume regularmente",
+                        mealsPerDay: "3 comidas",
+                        redMeat: "1-2 veces por semana",
+                        greenVegetables: "Ocasionalmente",
+                        legumes: "1-2 veces por semana",
+                        appetite: "Bueno, come adecuadamente",
+                        pica: "Nunca",
+                        dairy: "2-3 vasos o porciones al día",
+                        beverages: "Nunca",
+                        processedFood: "Ocasionalmente",
+                        fortifiedCereals: "Ocasionalmente",
+                        vitaminC: "Diariamente",
+                        ironCookware: "Rara vez",
+                        allergies: { noExam: true, text: "No se han detectado alergias" },
+                        variedDiet: "Moderadamente variada, come de varios grupos",
+                        concentration: "Buena, se concentra la mayor parte del tiempo",
+                        headaches: "Nunca o rara vez",
+                        distracted: "Rara vez",
+                        schoolPerformance: "No, ha sido consistente",
+                        memory: "Buena, recuerda la mayoría de las cosas",
+                        curiosity: "Bastante interés, muestra curiosidad",
+                        motorSkills: "No, su desarrollo motor es adecuado",
+                        followingInstructions: "Sí, generalmente sigue bien las instrucciones",
+                        organization: "Bastante organizado/a",
+                        problemSolving: "La mayoría de las veces",
+                        reactionTime: "Sí, adecuado para su edad",
+                        copyingSkills: "Buena, copia con pocos errores",
+                        alertness: "Alerta, atento/a la mayor parte del tiempo",
+                        earRinging: "Nunca",
+                        balance: "No, su equilibrio y coordinación son buenos",
+                        physicalExertion: "Nunca, tiene buena resistencia",
+                        mood: "Bueno, generalmente contento/a",
+                        interestLoss: "No, mantiene el mismo interés",
+                        socialEnergy: "Bueno, disfruta jugar y socializar",
+                        sadness: "Nunca o rara vez",
+                        coldSensitivity: "Nunca",
+                        sleepPatterns: "Buenos, generalmente duerme bien",
+                        behaviorChanges: "No, su comportamiento ha sido consistente",
+                        dizziness: "Nunca",
+                        physicalStrength: "Fuerte/a, adecuado para su edad",
+                        socialSkills: "Bastante fácil, le gusta socializar",
+                        isolation: "Nunca, siempre quiere estar con otros",
+                        frustration: "Bien, generalmente se calma solo/a",
+                        pains: "Nunca",
+                        sensitivity: "No, no muestra sensibilidad especial"
+                    }
+                },
+                {
+                    id: 'guest-child-2',
+                    name: 'Luz',
+                    birthDate: '2019-08-20',
+                    age: 4,
+                    parentId: 'guest',
+                    isGuest: true,
+                    progress: 100,
+                    completed: true,
+                    lastQuestionIndex: 55,
+                    answers: {
+                        weight: { value: "Peso normal", text: "18.2" },
+                        height: { value: "Estatura normal", text: "102" },
+                        hemoglobin: { fileName: "examen_hemoglobina.pdf", fileType: "application/pdf", text: "Hemoglobina: 12.5 g/dL" },
+                        skinTone: "Normal, sin cambios",
+                        eyelids: "No, se ven normales",
+                        energyLevel: "Muy alto, siempre activo",
+                        bleeding: "Nunca o rara vez",
+                        familyHistory: "No que yo sepa",
+                        medicalCondition: "No, no tiene condiciones médicas diagnosticadas",
+                        medication: "Sí, vitaminas o suplementos",
+                        ironRichFood: "Moderado, consume ocasionalmente",
+                        mealsPerDay: "3 comidas",
+                        redMeat: "1-2 veces por semana",
+                        greenVegetables: "Ocasionalmente",
+                        legumes: "1-2 veces por semana",
+                        appetite: "Muy bueno, come bien",
+                        pica: "Nunca",
+                        dairy: "2-3 vasos o porciones al día",
+                        beverages: "Rara vez",
+                        processedFood: "Rara vez",
+                        fortifiedCereals: "Frecuentemente",
+                        vitaminC: "Diariamente",
+                        ironCookware: "Ocasionalmente",
+                        allergies: { fileName: "alergias.pdf", fileType: "application/pdf", text: "Alergia al maní" },
+                        variedDiet: "Muy variada, come de todos los grupos alimenticios",
+                        concentration: "Muy buena, se concentra fácilmente",
+                        headaches: "Nunca o rara vez",
+                        distracted: "Nunca, mantiene la atención",
+                        schoolPerformance: "Sí, ha mejorado",
+                        memory: "Muy buena, recuerda con facilidad",
+                        curiosity: "Mucho interés, siempre pregunta",
+                        motorSkills: "No, su desarrollo motor es adecuado",
+                        followingInstructions: "Sí, sigue instrucciones complejas sin problemas",
+                        organization: "Muy organizado/a, todo en su lugar",
+                        problemSolving: "Siempre, es muy independiente",
+                        reactionTime: "Sí, muy rápido/a",
+                        copyingSkills: "Muy buena, copia con precisión",
+                        alertness: "Muy alerta, siempre atento/a",
+                        earRinging: "Nunca",
+                        balance: "No, su equilibrio y coordinación son buenos",
+                        physicalExertion: "Nunca, tiene buena resistencia",
+                        mood: "Muy positivo, alegre y entusiasta",
+                        interestLoss: "No, mantiene el mismo interés",
+                        socialEnergy: "Muy alto, siempre quiere jugar con otros",
+                        sadness: "Nunca o rara vez",
+                        coldSensitivity: "Nunca",
+                        sleepPatterns: "Muy buenos, duerme bien toda la noche",
+                        behaviorChanges: "No, su comportamiento ha sido consistente",
+                        dizziness: "Nunca",
+                        physicalStrength: "Muy fuerte/a para su edad",
+                        socialSkills: "Muy fácil, hace amigos rápidamente",
+                        isolation: "Nunca, siempre quiere estar con otros",
+                        frustration: "Muy bien, maneja la frustración adecuadamente",
+                        pains: "Nunca",
+                        sensitivity: "No, no muestra sensibilidad especial"
+                    }
+                }
+            ];
+            
+            childrenData.push(...guestChildren);
+            saveDataToStorage();
+        }
 
         // Mostrar mensaje de ánimo del robot
         function showEncouragementMessage() {
@@ -2052,18 +2393,84 @@
             localStorage.setItem('yachayMikuyChildren', JSON.stringify(childrenData));
         }
 
+        // Guardar respuesta actual
+        function saveCurrentAnswer() {
+            const currentQuestion = questions[currentQuestionIndex];
+            if (!currentQuestion) return;
+            
+            let answer = null;
+            
+            switch (currentQuestion.type) {
+                case 'radio':
+                    const selectedOption = document.querySelector(`input[name="${currentQuestion.id}"]:checked`);
+                    if (selectedOption) {
+                        answer = selectedOption.value;
+                    }
+                    break;
+                    
+                case 'text':
+                    const textInput = document.getElementById(currentQuestion.id);
+                    if (textInput && textInput.value.trim()) {
+                        answer = textInput.value.trim();
+                    }
+                    break;
+                    
+                case 'file':
+                    const fileAnswer = answers[currentQuestion.id];
+                    if (fileAnswer) {
+                        answer = fileAnswer;
+                    }
+                    break;
+                    
+                case 'image':
+                    const selectedImage = document.querySelector('.image-option.selected');
+                    if (selectedImage) {
+                        answer = selectedImage.querySelector('img').alt;
+                        
+                        // Si requiere información adicional, guardarla también
+                        if (currentQuestion.requiresAdditionalInfo) {
+                            const textInput = document.getElementById(`${currentQuestion.id}-text`);
+                            if (textInput && textInput.value.trim()) {
+                                if (!answer) answer = {};
+                                if (typeof answer === 'string') answer = { value: answer };
+                                answer.text = textInput.value.trim();
+                            }
+                            
+                            // Guardar archivo si existe
+                            const fileInput = document.getElementById(`${currentQuestion.id}-file`);
+                            if (fileInput && fileInput.files.length > 0) {
+                                if (!answer) answer = {};
+                                if (typeof answer === 'string') answer = { value: answer };
+                                answer.file = {
+                                    fileName: fileInput.files[0].name,
+                                    fileType: fileInput.files[0].type
+                                };
+                            }
+                        }
+                    }
+                    break;
+            }
+            
+            // Guardar respuesta si existe
+            if (answer) {
+                answers[currentQuestion.id] = answer;
+            }
+        }
+
         // Mostrar la pantalla de finalización directamente
-        function showCompletionScreenDirectly() {
+        function showCompletionScreenDirectly(userId) {
             // Ocultar contenedor de preguntas y botones de navegación
             questionContainer.style.display = 'none';
             document.querySelector('.navigation-buttons').style.display = 'none';
-            document.querySelector('.progress-container').style.display = 'none';
+            progressContainer.style.display = 'none';
             
             // Mostrar pantalla de finalización
             completionScreen.style.display = 'block';
             
-            // Cargar lista de niños
-            loadChildrenList();
+            // Cargar lista de niños con un pequeño retraso para asegurar que se muestren
+            setTimeout(() => {
+                loadChildrenList(userId);
+            }, 100);
         }
 
         // Mostrar la pregunta actual
@@ -2369,11 +2776,83 @@
                                 textInput.placeholder = 'Describa aquí...';
                             }
                             
+                            // Validar que solo acepte números para peso y talla
+                            if (question.id === 'weight' || question.id === 'height') {
+                                textInput.addEventListener('input', function() {
+                                    // Solo permitir números y punto decimal
+                                    this.value = this.value.replace(/[^0-9.]/g, '');
+                                    
+                                    // Validar rangos según la edad del niño
+                                    const value = parseFloat(this.value);
+                                    if (!isNaN(value)) {
+                                        if (question.id === 'weight') {
+                                            // Validar peso según edad (ejemplo para un niño de 13 años)
+                                            if (currentChild && currentChild.age) {
+                                                const age = parseInt(currentChild.age);
+                                                let minWeight, maxWeight;
+                                                
+                                                if (age <= 2) {
+                                                    minWeight = 5;
+                                                    maxWeight = 15;
+                                                } else if (age <= 5) {
+                                                    minWeight = 10;
+                                                    maxWeight = 25;
+                                                } else if (age <= 10) {
+                                                    minWeight = 15;
+                                                    maxWeight = 45;
+                                                } else if (age <= 13) {
+                                                    minWeight = 25;
+                                                    maxWeight = 65;
+                                                } else {
+                                                    minWeight = 30;
+                                                    maxWeight = 80;
+                                                }
+                                                
+                                                if (value < minWeight || value > maxWeight) {
+                                                    this.setCustomValidity(`El peso debe estar entre ${minWeight} y ${maxWeight} kg para un niño de ${age} años`);
+                                                } else {
+                                                    this.setCustomValidity('');
+                                                }
+                                            }
+                                        } else if (question.id === 'height') {
+                                            // Validar talla según edad
+                                            if (currentChild && currentChild.age) {
+                                                const age = parseInt(currentChild.age);
+                                                let minHeight, maxHeight;
+                                                
+                                                if (age <= 2) {
+                                                    minHeight = 50;
+                                                    maxHeight = 90;
+                                                } else if (age <= 5) {
+                                                    minHeight = 80;
+                                                    maxHeight = 120;
+                                                } else if (age <= 10) {
+                                                    minHeight = 100;
+                                                    maxHeight = 150;
+                                                } else if (age <= 13) {
+                                                    minHeight = 120;
+                                                    maxHeight = 170;
+                                                } else {
+                                                    minHeight = 130;
+                                                    maxHeight = 190;
+                                                }
+                                                
+                                                if (value < minHeight || value > maxHeight) {
+                                                    this.setCustomValidity(`La talla debe estar entre ${minHeight} y ${maxHeight} cm para un niño de ${age} años`);
+                                                } else {
+                                                    this.setCustomValidity('');
+                                                }
+                                            }
+                                        }
+                                    }
+                                });
+                            }
+                            
                             textGroup.appendChild(textLabel);
                             textGroup.appendChild(textInput);
                             additionalInputs.appendChild(textGroup);
                             
-                            // Para preguntas de peso y talla, agregar visualización
+                            // Para preguntas de peso y talla, agregar visualización sin el icono de persona
                             if (question.id === 'weight' || question.id === 'height') {
                                 const visualContainer = document.createElement('div');
                                 visualContainer.className = 'weight-height-container';
@@ -2382,9 +2861,12 @@
                                 const figureContainer = document.createElement('div');
                                 figureContainer.className = question.id === 'weight' ? 'weight-input-container' : 'height-input-container';
                                 
+                                // Usar un indicador numérico en lugar del icono de persona
                                 const figure = document.createElement('div');
                                 figure.className = question.id === 'weight' ? 'weight-figure' : 'height-figure';
-                                figure.textContent = '🧍';
+                                figure.style.fontSize = '4rem';
+                                figure.style.color = 'var(--primary-blue)';
+                                figure.textContent = question.id === 'weight' ? '⚖️' : '📏';
                                 
                                 const valueDisplay = document.createElement('div');
                                 valueDisplay.className = question.id === 'weight' ? 'weight-value' : 'height-value';
@@ -2403,28 +2885,66 @@
                                         // Actualizar el valor mostrado
                                         valueDisplay.textContent = question.id === 'weight' ? `${value} kg` : `${value} cm`;
                                         
-                                        // Actualizar la figura según el valor
+                                        // Cambiar color según el valor
                                         if (question.id === 'weight') {
-                                            if (value < 15) {
-                                                figure.textContent = '🧍'; // Figura delgada
-                                                figure.style.transform = 'scale(0.8)';
-                                            } else if (value < 30) {
-                                                figure.textContent = '🧍'; // Figura normal
-                                                figure.style.transform = 'scale(1)';
-                                            } else {
-                                                figure.textContent = '🧍'; // Figura robusta
-                                                figure.style.transform = 'scale(1.2)';
+                                            if (currentChild && currentChild.age) {
+                                                const age = parseInt(currentChild.age);
+                                                let minWeight, maxWeight;
+                                                
+                                                if (age <= 2) {
+                                                    minWeight = 5;
+                                                    maxWeight = 15;
+                                                } else if (age <= 5) {
+                                                    minWeight = 10;
+                                                    maxWeight = 25;
+                                                } else if (age <= 10) {
+                                                    minWeight = 15;
+                                                    maxWeight = 45;
+                                                } else if (age <= 13) {
+                                                    minWeight = 25;
+                                                    maxWeight = 65;
+                                                } else {
+                                                    minWeight = 30;
+                                                    maxWeight = 80;
+                                                }
+                                                
+                                                if (value < minWeight) {
+                                                    figure.style.color = 'var(--warning-red)';
+                                                } else if (value > maxWeight) {
+                                                    figure.style.color = 'var(--warning-red)';
+                                                } else {
+                                                    figure.style.color = 'var(--success-green)';
+                                                }
                                             }
-                                        } else { // height
-                                            if (value < 100) {
-                                                figure.textContent = '🧍'; // Figura pequeña
-                                                figure.style.transform = 'scale(0.7)';
-                                            } else if (value < 130) {
-                                                figure.textContent = '🧍'; // Figura mediana
-                                                figure.style.transform = 'scale(0.9)';
-                                            } else {
-                                                figure.textContent = '🧍'; // Figura alta
-                                                figure.style.transform = 'scale(1.1)';
+                                        } else if (question.id === 'height') {
+                                            if (currentChild && currentChild.age) {
+                                                const age = parseInt(currentChild.age);
+                                                let minHeight, maxHeight;
+                                                
+                                                if (age <= 2) {
+                                                    minHeight = 50;
+                                                    maxHeight = 90;
+                                                } else if (age <= 5) {
+                                                    minHeight = 80;
+                                                    maxHeight = 120;
+                                                } else if (age <= 10) {
+                                                    minHeight = 100;
+                                                    maxHeight = 150;
+                                                } else if (age <= 13) {
+                                                    minHeight = 120;
+                                                    maxHeight = 170;
+                                                } else {
+                                                    minHeight = 130;
+                                                    maxHeight = 190;
+                                                }
+                                                
+                                                if (value < minHeight) {
+                                                    figure.style.color = 'var(--warning-red)';
+                                                } else if (value > maxHeight) {
+                                                    figure.style.color = 'var(--warning-red)';
+                                                } else {
+                                                    figure.style.color = 'var(--success-green)';
+                                                }
                                             }
                                         }
                                     }
@@ -2569,7 +3089,12 @@
                     break;
                     
                 case 'image':
-                    const selectedImageOption = document.querySelector(`.image-option img[alt="${answer}"]`);
+                    let selectedValue = answer;
+                    if (typeof answer === 'object' && answer.value) {
+                        selectedValue = answer.value;
+                    }
+                    
+                    const selectedImageOption = document.querySelector(`.image-option img[alt="${selectedValue}"]`);
                     if (selectedImageOption) {
                         selectedImageOption.closest('.image-option').classList.add('selected');
                         const question = questions.find(q => q.id === questionId);
@@ -2587,7 +3112,7 @@
                                     }
                                 }
                                 if (answer && answer.file) {
-                                    const fileLabel = document.querySelector(`label[for="${questionId}-file"]`);
+                                    const fileLabel = document.querySelector(`label[for="${question.id}-file"]`);
                                     if (fileLabel) fileLabel.innerHTML = `<i class="fas fa-file"></i> ${answer.file.fileName}`;
                                 }
                             }
@@ -2615,8 +3140,25 @@
             document.getElementById(`section${section}`).classList.add('active');
         }
 
+        // Ir a una sección específica
+        function goToSection(section) {
+            // Encontrar la primera pregunta de la sección
+            const firstQuestionIndex = questions.findIndex(q => q.section === section);
+            if (firstQuestionIndex !== -1) {
+                // Guardar respuesta actual
+                saveCurrentAnswer();
+                
+                // Cambiar a la pregunta seleccionada
+                currentQuestionIndex = firstQuestionIndex;
+                displayQuestion();
+            }
+        }
+
         // Ir a la siguiente pregunta
         function nextQuestion() {
+            // Guardar respuesta actual
+            saveCurrentAnswer();
+            
             const currentQuestion = questions[currentQuestionIndex];
             
             // Validar respuesta actual
@@ -2637,6 +3179,9 @@
 
         // Volver a la pregunta anterior
         function previousQuestion() {
+            // Guardar respuesta actual
+            saveCurrentAnswer();
+            
             if (currentQuestionIndex > 0) {
                 currentQuestionIndex--;
                 displayQuestion();
@@ -2768,7 +3313,7 @@
             // Ocultar contenedor de preguntas y botones de navegación
             questionContainer.style.display = 'none';
             document.querySelector('.navigation-buttons').style.display = 'none';
-            document.querySelector('.progress-container').style.display = 'none';
+            progressContainer.style.display = 'none';
             
             // Mostrar pantalla de finalización
             completionScreen.style.display = 'block';
@@ -2778,125 +3323,350 @@
         }
 
         // Cargar lista de niños
-        function loadChildrenList() {
+        function loadChildrenList(userId) {
             childrenGridContainer.innerHTML = '';
             
-            childrenData.forEach(child => {
-                const childCard = document.createElement('div');
+            // Si estamos en modo invitado, mostrar solo los perfiles de invitado
+            if (isGuestMode) {
+                const guestChildren = childrenData.filter(child => child.isGuest);
                 
-                // Determinar estado de la tarjeta
-                let cardStatus = 'not-started';
-                let progressPercentage = 0;
-                
-                if (child.lastQuestionIndex > 0) {
-                    progressPercentage = Math.round((child.lastQuestionIndex / questions.length) * 100);
-                    
-                    if (child.completed) {
-                        cardStatus = 'completed';
-                    } else if (child.incompleteQuestions && child.incompleteQuestions.length > 0) {
-                        cardStatus = 'incomplete';
-                    } else {
-                        cardStatus = 'in-progress';
-                    }
+                if (guestChildren.length === 0) {
+                    childrenGridContainer.innerHTML = '<p style="text-align: center; color: var(--gray);">No hay perfiles disponibles.</p>';
+                    return;
                 }
                 
-                childCard.className = `child-card ${cardStatus}`;
-                
-                // Contenido de la tarjeta
-                childCard.innerHTML = `
-                    <div class="child-status">${
-                        cardStatus === 'completed' ? 'Completado' : 
-                        cardStatus === 'incomplete' ? 'Incompleto' :
-                        cardStatus === 'in-progress' ? 'En progreso' : 'No iniciado'
-                    }</div>
-                    <div class="child-header">
-                        <div class="child-avatar">
-                            <i class="fas fa-child"></i>
+                guestChildren.forEach(child => {
+                    const childCard = document.createElement('div');
+                    
+                    // Determinar estado de la tarjeta
+                    let cardStatus = 'completed';
+                    let progressPercentage = 100;
+                    
+                    childCard.className = `child-card ${cardStatus}`;
+                    
+                    // Contenido de la tarjeta
+                    childCard.innerHTML = `
+                        <div class="child-status">Completado</div>
+                        <div class="child-header">
+                            <div class="child-avatar">
+                                <i class="fas fa-child"></i>
+                            </div>
+                            <div>
+                                <div class="child-name">${child.name}</div>
+                                <div class="child-age">${child.age} años</div>
+                            </div>
                         </div>
-                        <div>
-                            <div class="child-name">${child.name}</div>
-                            <div class="child-age">${child.age} años</div>
+                        <div class="progress-container-card">
+                            <div class="progress-label">
+                                <span>Progreso del cuestionario</span>
+                                <span>${progressPercentage}%</span>
+                            </div>
+                            <div class="progress-bar-card">
+                                <div class="progress-fill-card" style="width: ${progressPercentage}%"></div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="progress-container-card">
-                        <div class="progress-label">
-                            <span>Progreso del cuestionario</span>
-                            <span>${progressPercentage}%</span>
-                        </div>
-                        <div class="progress-bar-card">
-                            <div class="progress-fill-card" style="width: ${progressPercentage}%"></div>
-                        </div>
-                    </div>
-                    <div class="child-warning">
-                        ${cardStatus === 'incomplete' ? 
-                            'Le falta llenar datos obligatorios' : 
-                            cardStatus === 'not-started' ? 
-                            'No ha iniciado el cuestionario' : ''}
-                    </div>
-                `;
-                
-                // Event listener para seleccionar otro niño
-                childCard.addEventListener('click', function() {
-                    // Permitir acceder solo si está completado al 100%
-                    if (cardStatus === 'completed') {
+                    `;
+                    
+                    // Event listener para seleccionar otro niño
+                    childCard.addEventListener('click', function() {
                         // Redirigir a chicos.html con el ID del niño
-                        window.location.href = `chicos.html?childId=${child.id}`;
-                    } else {
-                        // Mostrar mensaje estético
-                        const warningDiv = document.createElement('div');
-                        warningDiv.className = 'error-message';
-                        warningDiv.style.display = 'block';
-                        warningDiv.style.marginTop = '15px';
-                        warningDiv.style.textAlign = 'center';
-                        warningDiv.style.padding = '10px';
-                        warningDiv.style.backgroundColor = 'rgba(255, 152, 0, 0.1)';
-                        warningDiv.style.borderRadius = '8px';
-                        warningDiv.style.color = 'var(--accent-orange)';
-                        warningDiv.textContent = 'Por favor complete todas las preguntas obligatorias antes de continuar';
-                        
-                        // Agregar a la tarjeta
-                        childCard.appendChild(warningDiv);
-                        
-                        // Eliminar después de 3 segundos
-                        setTimeout(() => {
-                            warningDiv.remove();
-                        }, 3000);
-                    }
+                        window.location.href = `chicos.html?childId=${child.id}&guest=true`;
+                    });
+                    
+                    childrenGridContainer.appendChild(childCard);
                 });
                 
-                childrenGridContainer.appendChild(childCard);
-            });
+                // Ocultar el botón "Seleccionar otro niño" en modo invitado
+                selectAnotherChildBtn.style.display = 'none';
+            } else {
+                // Modo con cuenta, mostrar los hijos del usuario actual
+                const urlParams = new URLSearchParams(window.location.search);
+                const userIdParam = userId || urlParams.get('userId');
+                
+                // Si no hay userId, usar el parentId del niño actual
+                const parentId = userIdParam || (currentChild ? currentChild.parentId : null);
+                
+                if (!parentId) {
+                    childrenGridContainer.innerHTML = '<p style="text-align: center; color: var(--gray);">No hay perfiles disponibles.</p>';
+                    return;
+                }
+                
+                const userChildren = childrenData.filter(child => child.parentId === parentId && !child.isGuest);
+                
+                if (userChildren.length === 0) {
+                    childrenGridContainer.innerHTML = '<p style="text-align: center; color: var(--gray);">No hay perfiles disponibles.</p>';
+                    return;
+                }
+                
+                userChildren.forEach(child => {
+                    const childCard = document.createElement('div');
+                    
+                    // Determinar estado de la tarjeta
+                    let cardStatus = 'not-started';
+                    let progressPercentage = 0;
+                    
+                    if (child.lastQuestionIndex > 0) {
+                        progressPercentage = Math.round((child.lastQuestionIndex / questions.length) * 100);
+                        
+                        if (child.completed) {
+                            cardStatus = 'completed';
+                        } else if (child.incompleteQuestions && child.incompleteQuestions.length > 0) {
+                            cardStatus = 'incomplete';
+                        } else {
+                            cardStatus = 'in-progress';
+                        }
+                    }
+                    
+                    childCard.className = `child-card ${cardStatus}`;
+                    
+                    // Contenido de la tarjeta
+                    childCard.innerHTML = `
+                        <div class="child-status">${
+                            cardStatus === 'completed' ? 'Completado' : 
+                            cardStatus === 'incomplete' ? 'Incompleto' :
+                            cardStatus === 'in-progress' ? 'En progreso' : 'No iniciado'
+                        }</div>
+                        <div class="child-header">
+                            <div class="child-avatar">
+                                <i class="fas fa-child"></i>
+                            </div>
+                            <div>
+                                <div class="child-name">${child.name}</div>
+                                <div class="child-age">${child.age} años</div>
+                            </div>
+                        </div>
+                        <div class="progress-container-card">
+                            <div class="progress-label">
+                                <span>Progreso del cuestionario</span>
+                                <span>${progressPercentage}%</span>
+                            </div>
+                            <div class="progress-bar-card">
+                                <div class="progress-fill-card" style="width: ${progressPercentage}%"></div>
+                            </div>
+                        </div>
+                        <div class="child-warning">
+                            ${cardStatus === 'incomplete' ? 
+                                'Le falta llenar datos obligatorios' : 
+                                cardStatus === 'not-started' ? 
+                                'No ha iniciado el cuestionario' : ''}
+                        </div>
+                    `;
+                    
+                    // Event listener para seleccionar otro niño
+                    childCard.addEventListener('click', function() {
+                        // Permitir acceder solo si está completado al 100%
+                        if (cardStatus === 'completed') {
+                            // Redirigir a chicos.html con el ID del niño
+                            window.location.href = `chicos.html?childId=${child.id}`;
+                        } else {
+                            // Mostrar mensaje estético
+                            const warningDiv = document.createElement('div');
+                            warningDiv.className = 'error-message';
+                            warningDiv.style.display = 'block';
+                            warningDiv.style.marginTop = '15px';
+                            warningDiv.style.textAlign = 'center';
+                            warningDiv.style.padding = '10px';
+                            warningDiv.style.backgroundColor = 'rgba(255, 152, 0, 0.1)';
+                            warningDiv.style.borderRadius = '8px';
+                            warningDiv.style.color = 'var(--accent-orange)';
+                            warningDiv.textContent = 'Por favor complete todas las preguntas obligatorias antes de continuar';
+                            
+                            // Agregar a la tarjeta
+                            childCard.appendChild(warningDiv);
+                            
+                            // Eliminar después de 3 segundos
+                            setTimeout(() => {
+                                warningDiv.remove();
+                            }, 3000);
+                        }
+                    });
+                    
+                    childrenGridContainer.appendChild(childCard);
+                });
+                
+                // Mostrar el botón "Seleccionar otro niño" en modo con cuenta
+                selectAnotherChildBtn.style.display = 'inline-flex';
+            }
         }
 
         // Generar plan nutricional
         function generateNutritionalPlan() {
-            // Verificar si todos los niños tienen el cuestionario completado
-            const allCompleted = childrenData.every(child => child.completed);
+            // Verificar si hay niños completos al 100%
+            let completedChildren = [];
             
-            if (!allCompleted) {
-                // Mostrar mensaje de error
-                const errorDiv = document.createElement('div');
-                errorDiv.className = 'error-message';
-                errorDiv.style.display = 'block';
-                errorDiv.style.marginTop = '15px';
-                errorDiv.style.textAlign = 'center';
-                errorDiv.style.padding = '10px';
-                errorDiv.style.backgroundColor = 'rgba(220, 53, 69, 0.1)';
-                errorDiv.style.borderRadius = '8px';
-                errorDiv.textContent = 'Todos los niños deben completar el cuestionario antes de generar el plan nutricional';
-                
-                completionScreen.appendChild(errorDiv);
-                
-                // Eliminar después de 3 segundos
-                setTimeout(() => {
-                    errorDiv.remove();
-                }, 3000);
-                
+            if (isGuestMode) {
+                completedChildren = childrenData.filter(child => child.isGuest && child.completed);
+            } else {
+                const parentId = currentChild ? currentChild.parentId : null;
+                if (parentId) {
+                    completedChildren = childrenData.filter(child => 
+                        child.parentId === parentId && !child.isGuest && child.completed
+                    );
+                }
+            }
+            
+            if (completedChildren.length === 0) {
+                showNotification('warning', 'No hay datos completos', 'No hay niños con cuestionarios completos al 100%. Por favor complete todos los datos antes de generar un plan nutricional.');
                 return;
             }
             
-            // Redirigir a la página de planes nutricionales general
-            window.location.href = 'yachay.html';
+            // Redirigir a la página de planes nutricionales
+            const params = new URLSearchParams();
+            
+            if (isGuestMode) {
+                params.append('guest', 'true');
+            } else if (currentUser) {
+                params.append('userId', currentUser.id);
+            }
+            
+            window.location.href = `yachay.html?${params.toString()}`;
+        }
+
+        // Mostrar notificación
+        function showNotification(type, title, message) {
+            // Crear elemento de notificación
+            const notificationDiv = document.createElement('div');
+            notificationDiv.className = 'notification';
+            notificationDiv.style.position = 'fixed';
+            notificationDiv.style.top = '20px';
+            notificationDiv.style.right = '20px';
+            notificationDiv.style.backgroundColor = 'white';
+            notificationDiv.style.padding = '15px';
+            notificationDiv.style.borderRadius = '10px';
+            notificationDiv.style.boxShadow = '0 4px 12px rgba(0,0,0,0.15)';
+            notificationDiv.style.zIndex = '1000';
+            notificationDiv.style.maxWidth = '300px';
+            notificationDiv.style.display = 'flex';
+            notificationDiv.style.alignItems = 'center';
+            notificationDiv.style.gap = '10px';
+            notificationDiv.style.transform = 'translateX(400px)';
+            notificationDiv.style.transition = 'transform 0.3s ease';
+            
+            // Icono según el tipo
+            let iconHtml = '';
+            if (type === 'success') {
+                iconHtml = '<i class="fas fa-check-circle" style="color: #28a745;"></i>';
+            } else if (type === 'error') {
+                iconHtml = '<i class="fas fa-exclamation-circle" style="color: #dc3545;"></i>';
+            } else if (type === 'warning') {
+                iconHtml = '<i class="fas fa-exclamation-triangle" style="color: #ffc107;"></i>';
+            } else {
+                iconHtml = '<i class="fas fa-info-circle" style="color: #17a2b8;"></i>';
+            }
+            
+            notificationDiv.innerHTML = `
+                ${iconHtml}
+                <div>
+                    <h4 style="margin: 0 0 5px 0; font-size: 16px; font-weight: 600;">${title}</h4>
+                    <p style="margin: 0; font-size: 14px; color: #6c757d;">${message}</p>
+                </div>
+            `;
+            
+            // Agregar al body
+            document.body.appendChild(notificationDiv);
+            
+            // Mostrar con animación
+            setTimeout(() => {
+                notificationDiv.style.transform = 'translateX(0)';
+            }, 100);
+            
+            // Ocultar después de 3 segundos
+            setTimeout(() => {
+                notificationDiv.style.transform = 'translateX(400px)';
+                setTimeout(() => {
+                    document.body.removeChild(notificationDiv);
+                }, 300);
+            }, 3000);
+        }
+
+        // Configurar modales del footer
+        function setupFooterModals() {
+            // Objeto con las plantillas HTML para cada modal
+            const templates = {
+                aboutModal: () => `
+                    <div class="modal active">
+                        <div class="modal-content">
+                            <div class="modal-header"><h2>Acerca de Yachay Mikuy</h2><button class="close-modal">&times;</button></div>
+                            <div class="modal-body">
+                                <div class="content-section"><h3><i class="fas fa-bullseye"></i> Nuestra Misión</h3><p>Reducir la prevalencia de anemia y malnutrición en niños de 6 a 13 años mediante planes de alimentación personalizados, adaptados culturalmente y económicamente a la realidad de las familias peruanas.</p></div>
+                                <div class="content-section"><h3><i class="fas fa-eye"></i> Nuestra Visión</h3><p>Convertirnos en la plataforma digital líder en nutrición infantil en Perú, contribuyendo al desarrollo humano y social del país a través de hábitos alimentarios saludables.</p></div>
+                                <div class="highlight-box"><h3 style="margin-top:0;"><i class="fas fa-award"></i> Reconocimientos</h3><p>Proyecto seleccionado por la Universidad de Piura como iniciativa de impacto social en el programa de Ingeniería Industrial y de Sistemas.</p></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>`,
+                servicesModal: () => `
+                    <div class="modal active">
+                        <div class="modal-content">
+                            <div class="modal-header"><h2>Nuestros Servicios</h2><button class="close-modal">&times;</button></div>
+                            <div class="modal-body">
+                                <div class="content-section"><h3><i class="fas fa-utensils"></i> Planes de Alimentación Personalizados</h3><p>Desarrollamos planes nutricionales adaptados a las necesidades específicas de cada niño.</p></div>
+                                <div class="content-section"><h3><i class="fas fa-chart-line"></i> Seguimiento Nutricional</h3><p>Monitoreamos el progreso de cada niño a través de nuestra plataforma.</p></div>
+                                <div class="content-section"><h3><i class="fas fa-graduation-cap"></i> Educación Nutricional</h3><p>Ofrecemos material educativo como recetas y guías informativas.</p></div>
+                                <div class="content-section"><h3><i class="fas fa-users"></i> Comunidad de Apoyo</h3><p>Conectamos a las familias con nutricionistas y otras familias para compartir experiencias.</p></div>
+                            </div>
+                        </div>
+                    </div>`,
+                faqModal: () => `
+                    <div class="modal active">
+                        <div class="modal-content">
+                            <div class="modal-header"><h2>Preguntas Frecuentes</h2><button class="close-modal">&times;</button></div>
+                            <div class="modal-body">
+                                <div class="content-section"><h3><i class="fas fa-child"></i> ¿Para qué edades está diseñada la plataforma?</h3><p>Nuestra plataforma está diseñada para niños de 0 a 13 años.</p></div>
+                                <div class="content-section"><h3><i class="fas fa-shield-alt"></i> ¿Es seguro compartir los datos de mis hijos?</h3><p>Sí, implementamos medidas avanzadas de protección de datos, incluyendo cifrado y consentimiento parental explícito.</p></div>
+                                <div class="content-section"><h3><i class="fas fa-wifi"></i> ¿Funciona sin internet?</h3><p>Sí, contamos con un modo offline que permite acceso a contenido descargado y registro de consumo para sincronizar después.</p></div>
+                            </div>
+                        </div>
+                    </div>`,
+                privacyModal: () => `
+                    <div class="modal active">
+                        <div class="modal-content">
+                            <div class="modal-header"><h2>Política de Privacidad</h2><button class="close-modal">&times;</button></div>
+                            <div class="modal-body">
+                                <div class="content-section"><h3><i class="fas fa-info-circle"></i> Información que Recopilamos</h3><p>Recopilamos datos personales y de salud de manera responsable para personalizar los planes nutricionales.</p></div>
+                                <div class="content-section"><h3><i class="fas fa-lock"></i> Protección de Datos</h3><p>Implementamos medidas de seguridad robustas como cifrado SSL/TLS y almacenamiento seguro para proteger tu información.</p></div>
+                                <div class="content-section"><h3><i class="fas fa-user-shield"></i> Derechos de los Usuarios</h3><p>Tienes derecho a acceder, rectificar, cancelar y oponerte al tratamiento de tus datos personales en cualquier momento.</p></div>
+                            </div>
+                        </div>
+                    </div>`,
+                termsModal: () => `
+                    <div class="modal active">
+                        <div class="modal-content">
+                            <div class="modal-header"><h2>Términos y Condiciones</h2><button class="close-modal">&times;</button></div>
+                            <div class="modal-body">
+                                <div class="content-section"><h3><i class="fas fa-check-circle"></i> Aceptación de los Términos</h3><p>Al utilizar la plataforma Yachay Mikuy, aceptas estos términos y condiciones en su totalidad.</p></div>
+                                <div class="content-section"><h3><i class="fas fa-user-check"></i> Responsabilidades del Usuario</h3><p>Como usuario, te comprometes a proporcionar información veraz y a mantener la confidencialidad de tu cuenta.</p></div>
+                                <div class="content-section"><h3><i class="fas fa-heart"></i> Información Médica</h3><p>Yachay Mikuy es una herramienta de apoyo y no reemplaza la consulta médica profesional. Siempre consulta a un doctor para diagnósticos y tratamientos.</p></div>
+                            </div>
+                        </div>
+                    </div>`
+            };
+
+            // Funciones para abrir y cerrar el modal
+            const ui = {
+                openModal: (content) => { actionModalContainer.innerHTML = content; },
+                closeModal: () => { actionModalContainer.innerHTML = ''; }
+            };
+
+            // Listener de clics para todo el documento
+            document.body.addEventListener('click', (e) => {
+                // Prevenir la acción por defecto si es un enlace
+                if (e.target.closest('a')) {
+                     e.preventDefault();
+                }
+                
+                // Abrir modales según el ID del enlace clickeado
+                if (e.target.matches('#aboutLink')) { ui.openModal(templates.aboutModal()); }
+                if (e.target.matches('#servicesLink')) { ui.openModal(templates.servicesModal()); }
+                if (e.target.matches('#faqLink')) { ui.openModal(templates.faqModal()); }
+                if (e.target.matches('#privacyLink')) { ui.openModal(templates.privacyModal()); }
+                if (e.target.matches('#termsLink')) { ui.openModal(templates.termsModal()); }
+                
+                // Cerrar el modal si se hace clic en el fondo o en el botón de cerrar
+                if (e.target.matches('.modal') || e.target.matches('.close-modal')) { 
+                    ui.closeModal(); 
+                }
+            });
         }
     </script>
 </body>
