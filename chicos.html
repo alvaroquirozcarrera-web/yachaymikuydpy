@@ -6,6 +6,7 @@
     <title>Perfil del Niño - Yachay Mikuy</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary-blue: #2c5aa0;
@@ -29,6 +30,13 @@
             --shadow-color: rgba(40, 50, 70, 0.1);
             --danger-red: #dc3545;
             --danger-red-dark: #c82333;
+            
+            /* Variables para el footer */
+            --text-dark: #212529;
+            --shadow: 0 8px 24px rgba(0, 0, 0, 0.08); 
+            --radius: 12px;
+            --transition: all 0.3s ease-in-out;
+            --accent-red: #e63946;
         }
 
         @keyframes fadeIn {
@@ -60,12 +68,16 @@
             color: #333;
             line-height: 1.6;
             position: relative;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 30px;
+            flex: 1;
         }
 
         .profile-header {
@@ -341,6 +353,183 @@
             gap: 5px;
         }
 
+        /* --- ESTILOS DEL FOOTER --- */
+        .footer {
+            background-color: var(--primary-blue);
+            color: var(--white);
+            padding: 40px 20px 10px;
+            margin-top: auto;
+        }
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-bottom: 20px;
+        }
+        .footer-section h3 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+            border-bottom: 2px solid var(--accent-red);
+            padding-bottom: 5px;
+            display: inline-block;
+        }
+        .social-links a {
+            color: var(--white);
+            font-size: 1.5rem;
+            margin-right: 15px;
+            transition: var(--transition);
+        }
+        .social-links a:hover {
+            color: var(--accent-red);
+            transform: scale(1.1);
+        }
+        .footer-section p {
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+        }
+        .footer-section p i {
+            margin-right: 10px;
+            color: var(--accent-red);
+        }
+        .footer-links {
+            list-style: none;
+        }
+        .footer-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: var(--transition);
+            display: block; 
+        }
+        .footer-links a:hover {
+            color: var(--accent-red);
+            padding-left: 5px;
+        }
+        .footer-links a i {
+            margin-right: 10px;
+        }
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 15px 0 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.85rem;
+            font-weight: 300;
+        }
+        
+        /* --- ESTILOS DEL MODAL (FLOTANTE Y CENTRADO) --- */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7); /* Fondo semi-transparente negro */
+            display: flex;
+            justify-content: center;
+            align-items: center; /* Centrado vertical y horizontal */
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        .modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Contenido Central del Modal (Fondo Blanco) */
+        .modal-content {
+            background-color: var(--white); 
+            color: var(--text-dark);
+            padding: 30px;
+            border-radius: var(--radius);
+            max-width: 800px;
+            width: 90%;
+            max-height: 95vh; /* Limita la altura de la caja blanca para que siempre quepa */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transform: translateY(-50px);
+            transition: transform 0.3s ease;
+            margin: 20px auto; /* Centrado horizontal y margen vertical */
+            display: flex;
+            flex-direction: column;
+        }
+        .modal.active .modal-content {
+            transform: translateY(0);
+        }
+
+        .modal-header {
+            /* Se mantiene fijo */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--dark-gray);
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+            flex-shrink: 0; /* Asegura que no se encoja cuando el body haga scroll */
+        }
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--dark-gray);
+            transition: var(--transition);
+        }
+        .close-modal:hover {
+            color: var(--accent-red);
+            transform: rotate(90deg);
+        }
+        
+        /* Contenedor de Contenido con Deslizador (La clave para la estética) */
+        .modal-body {
+            line-height: 1.6;
+            font-size: 0.95rem;
+            max-height: 70vh; /* Altura máxima para el contenido con scroll */
+            overflow-y: auto; /* **ACTIVA EL SCROLL VERTICAL** */
+            padding-right: 15px; /* Espacio para el deslizador */
+            margin-right: -15px; /* Compensa el padding para que el contenido quede centrado */
+            flex-grow: 1; /* Permite que ocupe el espacio restante */
+        }
+
+        /* Estilos internos del contenido */
+        .modal-body h3 {
+            color: var(--primary-blue);
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-weight: 600;
+            font-size: 1.2rem;
+        }
+        .modal-body i {
+            margin-right: 8px;
+            color: var(--accent-red);
+        }
+        .content-section {
+            margin-bottom: 20px;
+            padding: 15px;
+            border-left: 3px solid var(--accent-red);
+            background-color: var(--light-gray);
+            border-radius: 0 5px 5px 0;
+        }
+        .content-section ul {
+            padding-left: 20px;
+        }
+        .content-section li {
+            list-style: disc;
+            margin-bottom: 5px;
+        }
+        .highlight-box {
+            background-color: #ffe5e8;
+            padding: 15px;
+            border-radius: var(--radius);
+            border: 1px solid var(--accent-red);
+            margin-top: 30px;
+        }
+
         @media (max-width: 768px) {
             .container {
                 padding: 20px;
@@ -493,73 +682,610 @@
         </div>
     </div>
 
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Redes Sociales</h3>
+                <div class="social-links">
+                    <a href="https://facebook.com/yachaymikuy" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://twitter.com/yachaymikuy" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="https://instagram.com/yachaymikuy" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="https://youtube.com/channel/yachaymikuy" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a>
+                    <a href="https://wa.me/51918072862" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Contacto</h3>
+                <p><i class="fas fa-envelope"></i> yachay.mikuy@gmail.com</p>
+                <p><i class="fas fa-phone"></i> +51 918 072 862</p>
+                <p><i class="fas fa-map-marker-alt"></i> Lima - Perú</p>
+            </div>
+            <div class="footer-section">
+                <h3>Enlaces Útiles</h3>
+                <ul class="footer-links">
+                    <li><a href="#" id="aboutLink"><i class="fas fa-info-circle"></i> Acerca de Nosotros</a></li>
+                    <li><a href="#" id="servicesLink"><i class="fas fa-concierge-bell"></i> Servicios</a></li>
+                    <li><a href="#" id="faqLink"><i class="fas fa-question-circle"></i> Preguntas Frecuentes</a></li>
+                    <li><a href="#" id="privacyLink"><i class="fas fa-shield-alt"></i> Política de Privacidad</a></li>
+                    <li><a href="#" id="termsLink"><i class="fas fa-file-contract"></i> Términos y Condiciones</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">&copy; 2025 Yachay Mikuy. Todos los derechos reservados.</div>
+    </footer>
+
+    <div id="actionModalContainer"></div>
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const urlParams = new URLSearchParams(window.location.search);
             const childId = urlParams.get('childId');
+            const guestMode = urlParams.get('guest') === 'true';
 
+            // Verificar si estamos en modo invitado o con cuenta
+            const currentUser = localStorage.getItem('yachayMikuyCurrentUser');
+            let isGuestMode = guestMode || !currentUser;
+
+            // Si no hay childId, verificar si estamos en modo invitado
             if (!childId) {
-                document.body.innerHTML = '<h1>Error: No se ha seleccionado un perfil. Redirigiendo...</h1>';
-                setTimeout(() => { window.location.href = 'index.html'; }, 3000);
-                return;
-            }
-
-            const storedData = localStorage.getItem('yachayMikuyChildren');
-            if (!storedData) {
-                document.body.innerHTML = '<h1>Error: No se encontraron datos. Redirigiendo...</h1>';
-                 setTimeout(() => { window.location.href = 'index.html'; }, 3000);
-                return;
-            }
-            
-            const childrenData = JSON.parse(storedData);
-            const currentChild = childrenData.find(child => child.id === childId);
-
-            if (!currentChild) {
-                document.body.innerHTML = `<h1>Error: Perfil con ID ${childId} no encontrado. Redirigiendo...</h1>`;
-                setTimeout(() => { window.location.href = 'index.html'; }, 3000);
-                return;
-            }
-
-            document.getElementById('childName').textContent = currentChild.name;
-            document.getElementById('childAge').textContent = currentChild.age;
-            document.title = `${currentChild.name} - Perfil - Yachay Mikuy`;
-
-            // Configurar los enlaces de TODOS los tableros
-            document.getElementById('pantryLink').href = `chicos1.html?childId=${childId}`;
-            document.getElementById('wellnessLink').href = `chicos3.html?childId=${childId}`;
-            document.getElementById('academicLink').href = `chicos4.html?childId=${childId}`;
-            document.getElementById('gamesLink').href = `chicos5.html?childId=${childId}`;
-            document.getElementById('dailyLink').href = `chicos6.html?childId=${childId}`;
-            
-            // --- CAMBIO IMPORTANTE ---
-            // El botón de volver ahora apunta a la pantalla de finalización de yachaymikuy.html
-            const totalQuestionsInYachay = 55; // El número total de preguntas en el cuestionario
-            const backButton = document.getElementById('backToDashboardBtn');
-            backButton.href = `yachaymikuy.html?childId=${childId}&edit=true&question=${totalQuestionsInYachay}`;
-            
-            const departments = [
-                "Amazonas", "Áncash", "Apurímac", "Arequipa", "Ayacucho", "Cajamarca", 
-                "Callao", "Cusco", "Huancavelica", "Huánuco", "Ica", "Junín", 
-                "La Libertad", "Lambayeque", "Lima", "Loreto", "Madre de Dios", 
-                "Moquegua", "Pasco", "Piura", "Puno", "San Martín", "Tacna", 
-                "Tumbes", "Ucayali"
-            ];
-            
-            const regionSelector = document.getElementById('regionSelector');
-            departments.forEach(dept => {
-                const option = document.createElement('option');
-                option.value = dept.toLowerCase().replace(/á/g, 'a').replace(/\s+/g, '-');
-                option.textContent = dept;
-                regionSelector.appendChild(option);
-            });
-
-            const regionButton = document.getElementById('regionButton');
-            regionButton.addEventListener('click', function() {
-                const selectedDepartment = regionSelector.value;
-                if (selectedDepartment) {
-                    window.location.href = `chicos2.html?childId=${childId}&departamento=${selectedDepartment}`;
+                if (isGuestMode) {
+                    // Crear niños de ejemplo si no existen
+                    createGuestChildrenIfNotExists();
+                    // Seleccionar el primer niño de ejemplo (Alvaro)
+                    const guestChildren = getGuestChildren();
+                    if (guestChildren.length > 0) {
+                        loadChildProfile(guestChildren[0]);
+                    } else {
+                        document.body.innerHTML = '<h1>Error: No se encontraron datos. Redirigiendo...</h1>';
+                        setTimeout(() => { window.location.href = 'index.html'; }, 3000);
+                    }
                 } else {
-                    alert('Por favor, selecciona un departamento antes de generar.');
+                    document.body.innerHTML = '<h1>Error: No se ha seleccionado un perfil. Redirigiendo...</h1>';
+                    setTimeout(() => { window.location.href = 'index.html'; }, 3000);
+                }
+                return;
+            }
+
+            // Si hay childId, cargar el perfil del niño
+            if (isGuestMode) {
+                // Modo invitado
+                const guestChildren = getGuestChildren();
+                const currentChild = guestChildren.find(child => child.id === childId);
+                
+                if (currentChild) {
+                    loadChildProfile(currentChild);
+                } else {
+                    document.body.innerHTML = `<h1>Error: Perfil con ID ${childId} no encontrado. Redirigiendo...</h1>`;
+                    setTimeout(() => { window.location.href = 'index.html'; }, 3000);
+                }
+            } else {
+                // Modo con cuenta
+                const storedData = localStorage.getItem('yachayMikuyChildren');
+                if (!storedData) {
+                    document.body.innerHTML = '<h1>Error: No se encontraron datos. Redirigiendo...</h1>';
+                    setTimeout(() => { window.location.href = 'index.html'; }, 3000);
+                    return;
+                }
+                
+                const childrenData = JSON.parse(storedData);
+                const currentChild = childrenData.find(child => child.id === childId);
+
+                if (!currentChild) {
+                    document.body.innerHTML = `<h1>Error: Perfil con ID ${childId} no encontrado. Redirigiendo...</h1>`;
+                    setTimeout(() => { window.location.href = 'index.html'; }, 3000);
+                    return;
+                }
+
+                loadChildProfile(currentChild);
+            }
+
+            // Función para cargar el perfil del niño
+            function loadChildProfile(currentChild) {
+                document.getElementById('childName').textContent = currentChild.name;
+                document.getElementById('childAge').textContent = currentChild.age;
+                document.title = `${currentChild.name} - Perfil - Yachay Mikuy`;
+
+                // Configurar los enlaces de TODOS los tableros
+                document.getElementById('pantryLink').href = `chicos1.html?childId=${currentChild.id}${isGuestMode ? '&guest=true' : ''}`;
+                document.getElementById('wellnessLink').href = `chicos3.html?childId=${currentChild.id}${isGuestMode ? '&guest=true' : ''}`;
+                document.getElementById('academicLink').href = `chicos4.html?childId=${currentChild.id}${isGuestMode ? '&guest=true' : ''}`;
+                document.getElementById('gamesLink').href = `chicos5.html?childId=${currentChild.id}${isGuestMode ? '&guest=true' : ''}`;
+                document.getElementById('dailyLink').href = `chicos6.html?childId=${currentChild.id}${isGuestMode ? '&guest=true' : ''}`;
+                
+                // El botón de volver apunta a la pantalla de finalización de yachaymikuy.html
+                const totalQuestionsInYachay = 55; // El número total de preguntas en el cuestionario
+                const backButton = document.getElementById('backToDashboardBtn');
+                
+                if (isGuestMode) {
+                    backButton.href = `yachaymikuy.html?guest=true&showCompletion=true`;
+                } else {
+                    backButton.href = `yachaymikuy.html?childId=${currentChild.id}&edit=true&question=${totalQuestionsInYachay}`;
+                }
+                
+                const departments = [
+                    "Amazonas", "Áncash", "Apurímac", "Arequipa", "Ayacucho", "Cajamarca", 
+                    "Callao", "Cusco", "Huancavelica", "Huánuco", "Ica", "Junín", 
+                    "La Libertad", "Lambayeque", "Lima", "Loreto", "Madre de Dios", 
+                    "Moquegua", "Pasco", "Piura", "Puno", "San Martín", "Tacna", 
+                    "Tumbes", "Ucayali"
+                ];
+                
+                const regionSelector = document.getElementById('regionSelector');
+                departments.forEach(dept => {
+                    const option = document.createElement('option');
+                    option.value = dept.toLowerCase().replace(/á/g, 'a').replace(/\s+/g, '-');
+                    option.textContent = dept;
+                    regionSelector.appendChild(option);
+                });
+
+                const regionButton = document.getElementById('regionButton');
+                regionButton.addEventListener('click', function() {
+                    const selectedDepartment = regionSelector.value;
+                    if (selectedDepartment) {
+                        window.location.href = `chicos2.html?childId=${currentChild.id}&departamento=${selectedDepartment}${isGuestMode ? '&guest=true' : ''}`;
+                    } else {
+                        alert('Por favor, selecciona un departamento antes de generar.');
+                    }
+                });
+            }
+
+            // Función para obtener niños de ejemplo
+            function getGuestChildren() {
+                const guestChildren = [
+                    {
+                        id: 'guest-child-1',
+                        name: 'Alvaro',
+                        age: 5,
+                        isGuest: true,
+                        completed: true,
+                        lastQuestionIndex: 55
+                    },
+                    {
+                        id: 'guest-child-2',
+                        name: 'Luz',
+                        age: 4,
+                        isGuest: true,
+                        completed: true,
+                        lastQuestionIndex: 55
+                    }
+                ];
+                return guestChildren;
+            }
+
+            // Función para crear niños de ejemplo si no existen
+            function createGuestChildrenIfNotExists() {
+                // Esta función crea los niños de ejemplo en el localStorage si no existen
+                const storedData = localStorage.getItem('yachayMikuyChildren');
+                let childrenData = storedData ? JSON.parse(storedData) : [];
+                
+                // Verificar si ya existen los niños de ejemplo
+                const hasAlvaro = childrenData.some(child => child.id === 'guest-child-1');
+                const hasLuz = childrenData.some(child => child.id === 'guest-child-2');
+                
+                if (!hasAlvaro) {
+                    childrenData.push({
+                        id: 'guest-child-1',
+                        name: 'Alvaro',
+                        age: 5,
+                        isGuest: true,
+                        completed: true,
+                        lastQuestionIndex: 55,
+                        parentId: 'guest'
+                    });
+                }
+                
+                if (!hasLuz) {
+                    childrenData.push({
+                        id: 'guest-child-2',
+                        name: 'Luz',
+                        age: 4,
+                        isGuest: true,
+                        completed: true,
+                        lastQuestionIndex: 55,
+                        parentId: 'guest'
+                    });
+                }
+                
+                localStorage.setItem('yachayMikuyChildren', JSON.stringify(childrenData));
+            }
+        });
+
+        // Configuración de modales del footer
+        document.addEventListener('DOMContentLoaded', function() {
+            // Referencia al contenedor donde se inyectarán los modales
+            const actionModalContainer = document.getElementById('actionModalContainer');
+
+            // Funciones para manejo de UI (abrir/cerrar modal)
+            const ui = {
+                openModal: (content) => { 
+                    actionModalContainer.innerHTML = content;
+                    const modal = actionModalContainer.querySelector('.modal');
+                    if (modal) {
+                        // Muestra el modal con una pequeña demora para la animación
+                        setTimeout(() => modal.classList.add('active'), 10);
+                    }
+                },
+                closeModal: () => { 
+                    const modal = actionModalContainer.querySelector('.modal');
+                    if (modal) {
+                        modal.classList.remove('active');
+                        // Espera a que termine la animación (0.3s) antes de vaciar el HTML
+                        setTimeout(() => actionModalContainer.innerHTML = '', 300);
+                    }
+                }
+            };
+
+            // Plantillas HTML para el contenido de los modales
+            const templates = {
+                /* Contenido del Modal "Acerca de Nosotros" */
+                aboutModal: () => `
+                    <div class="modal">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h2>Acerca de Yachay Mikuy</h2>
+                                <button class="close-modal">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="content-section">
+                                    <h3><i class="fas fa-bullseye"></i> Nuestra Misión</h3>
+                                    <p>Reducir la prevalencia de anemia y malnutrición en niños de 6 a 13 años mediante planes de alimentación personalizados, adaptados culturalmente y económicamente a la realidad de las familias peruanas.</p>
+                                </div>
+                                <div class="content-section">
+                                    <h3><i class="fas fa-eye"></i> Nuestra Visión</h3>
+                                    <p>Convertirnos en la plataforma digital líder en nutrición infantil en Perú, contribuyendo al desarrollo humano y social del país a través de hábitos alimentarios saludables.</p>
+                                </div>
+                                <div class="content-section">
+                                    <h3><i class="fas fa-users"></i> Nuestro Equipo</h3>
+                                    <p>Contamos con un equipo multidisciplinario de profesionales de la salud, nutricionistas, desarrolladores de software y expertos en educación, comprometidos con mejorar la nutrición infantil en el país.</p>
+                                </div>
+                                <div class="content-section">
+                                    <h3><i class="fas fa-chart-line"></i> Impacto</h3>
+                                    <p>Según estudios del INEI (2023), la anemia infantil afecta a más del 40% de niños menores de 3 años en algunas regiones del Perú. Nuestro proyecto busca reducir esta cifra mediante intervenciones personalizadas y seguimiento continuo.</p>
+                                </div>
+                                <div class="highlight-box">
+                                    <h3 style="margin-top:0;"><i class="fas fa-award"></i> Reconocimientos</h3>
+                                    <p>Proyecto seleccionado por la Universidad de Piura como iniciativa de impacto social en el programa de Ingeniería Industrial y de Sistemas.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>`,
+                
+                /* Contenido del Modal "Servicios" */
+                servicesModal: () => `
+                    <div class="modal">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h2>Nuestros Servicios</h2>
+                                <button class="close-modal">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="content-section">
+                                    <h3><i class="fas fa-utensils"></i> Planes de Alimentación Personalizados</h3>
+                                    <p>Desarrollamos planes nutricionales adaptados a las necesidades específicas de cada niño, considerando:</p>
+                                    <ul>
+                                        <li>Edad y estado de salud</li>
+                                        <li>Disponibilidad de alimentos locales</li>
+                                        <li>Hábitos culturales y preferencias familiares</li>
+                                        <li>Capacidad económica del hogar</li>
+                                    </ul>
+                                </div>
+                                <div class="content-section">
+                                    <h3><i class="fas fa-chart-line"></i> Seguimiento Nutricional</h3>
+                                    <p>Monitoreamos el progreso de cada niño a través de:</p>
+                                    <ul>
+                                        <li>Registro diario de consumo alimentario</li>
+                                        <li>Evaluación periódica de indicadores de salud</li>
+                                        <li>Ajustes automáticos según resultados obtenidos</li>
+                                        <li>Reportes mensuales para padres y tutores</li>
+                                    </ul>
+                                </div>
+                                <div class="content-section">
+                                    <h3><i class="fas fa-graduation-cap"></i> Educación Nutricional</h3>
+                                    <p>Ofrecemos material educativo en múltiples formatos:</p>
+                                    <ul>
+                                        <li>Recetas prácticas con ingredientes locales</li>
+                                        <li>Videos tutoriales de preparación</li>
+                                        <li>Guías informativas sobre nutrientes esenciales</li>
+                                        <li>Consejos para mejorar hábitos alimentarios</li>
+                                    </ul>
+                                </div>
+                                <div class="content-section">
+                                    <h3><i class="fas fa-users"></i> Comunidad de Apoyo</h3>
+                                    <p>Conectamos a las familias con:</p>
+                                    <ul>
+                                        <li>Nutricionistas y profesionales de la salud</li>
+                                        <li>Otras familias que comparten experiencias</li>
+                                        <li>Foros de discusión y consejos prácticos</li>
+                                        <li>Eventos virtuales de capacitación</li>
+                                    </ul>
+                                </div>
+                                <div class="highlight-box">
+                                    <h3 style="margin-top:0;"><i class="fas fa-mobile-alt"></i> Accesibilidad</h3>
+                                    <p>Nuestra plataforma funciona en modo offline y cuenta con versión ligera para zonas con conectividad limitada.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>`,
+
+                /* Contenido del Modal "Preguntas Frecuentes" */
+                faqModal: () => `
+                    <div class="modal">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h2>Preguntas Frecuentes</h2>
+                                <button class="close-modal">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="content-section">
+                                    <h3><i class="fas fa-question-circle"></i> ¿Qué es Yachay Mikuy?</h3>
+                                    <p>Yachay Mikuy es una plataforma digital que ofrece planes de alimentación personalizados para combatir la anemia infantil en Perú, combinando tecnología, educación y nutrición culturalmente adaptada.</p>
+                                </div>
+                                <div class="content-section">
+                                    <h3><i class="fas fa-child"></i> ¿Para qué edades está diseñada la plataforma?</h3>
+                                    <p>Nuestra plataforma está diseñada para niños de 0 a 13 años, etapa crucial en el desarrollo donde los hábitos alimentarios se consolidan y se pueden prevenir deficiencias nutricionales a largo plazo.</p>
+                                </div>
+                                <div class="content-section">
+                                    <h3><i class="fas fa-user-plus"></i> ¿Cómo puedo registrarme?</h3>
+                                    <p>Puedes registrarte haciendo clic en el botón "Comenzar Ahora" en nuestra página principal y completando el formulario con tus datos personales. El proceso es rápido y seguro.</p>
+                                </div>
+                                <div class="content-section">
+                                    <h3><i class="fas fa-shield-alt"></i> ¿Es seguro compartir los datos de mis hijos?</h3>
+                                    <p>Sí, implementamos medidas avanzadas de protección de datos:</p>
+                                    <ul>
+                                        <li>Cifrado de extremo a extremo</li>
+                                        <li>Consentimiento parental explícito</li>
+                                        <li>Cumplimiento con normativas de protección de datos</li>
+                                        <li>Acceso restringido solo a personal autorizado</li>
+                                    </ul>
+                                </div>
+                                <div class="content-section">
+                                    <h3><i class="fas fa-heartbeat"></i> ¿Cómo funciona el seguimiento nutricional?</h3>
+                                    <p>A través de nuestra aplicación, puedes registrar el consumo alimentario de tus hijos y nosotros monitoreamos su progreso. El sistema genera alertas y recomendaciones automáticas según los resultados obtenidos.</p>
+                                </div>
+                                <div class="content-section">
+                                    <h3><i class="fas fa-dollar-sign"></i> ¿Qué costo tiene el servicio?</h3>
+                                    <p>Ofrecemos diferentes planes de suscripción:</p>
+                                    <ul>
+                                        <li>Plan básico: S/10-15 mensuales</li>
+                                        <li>Plan premium con atención personalizada</li>
+                                        <li>Subsidios para familias vulnerables mediante alianzas</li>
+                                        <li>Acceso gratuito en centros educativos convenidos</li>
+                                    </ul>
+                                </div>
+                                <div class="content-section">
+                                    <h3><i class="fas fa-wifi"></i> ¿Funciona sin internet?</h3>
+                                    <p>Sí, contamos con modo offline que permite:</p>
+                                    <ul>
+                                        <li>Acceso a recetas y guías descargadas</li>
+                                        <li>Registro de consumo para sincronizar después</li>
+                                        <li>Notificaciones vía SMS para zonas rurales</li>
+                                    </ul>
+                                </div>
+                                <div class="content-section">
+                                    <h3><i class="fas fa-hands-helping"></i> ¿Cómo obtengo ayuda si tengo problemas?</h3>
+                                    <p>Puedes contactarnos a través de:</p>
+                                    <ul>
+                                        <li>Chat en vivo en la aplicación</li>
+                                        <li>Correo electrónico: yachay.mikuy@gmail.com</li>
+                                        <li>Teléfono: +51 918 072 862</li>
+                                        <li>WhatsApp: +51 918 072 862</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>`,
+
+                /* Contenido del Modal "Política de Privacidad" */
+                privacyModal: () => `
+                    <div class="modal">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h2>Política de Privacidad</h2>
+                                <button class="close-modal">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="content-section">
+                                    <h3><i class="fas fa-info-circle"></i> Información que Recopilamos</h3>
+                                    <p>Recopilamos información personal y de salud de manera responsable:</p>
+                                    <ul>
+                                        <li><strong>Datos personales:</strong> Nombre, correo electrónico, teléfono, departamento de residencia</li>
+                                        <li><strong>Datos de los niños:</strong> Nombre, fecha de nacimiento, peso, altura, historial médico relevante</li>
+                                        <li><strong>Datos de uso:</strong> Interacciones con la plataforma, preferencias alimentarias, progreso nutricional</li>
+                                        <li><strong>Datos técnicos:</strong> Dirección IP, tipo de dispositivo, navegador utilizado</li>
+                                    </ul>
+                                </div>
+                                <div class="content-section">
+                                    <h3><i class="fas fa-cogs"></i> Uso de la Información</h3>
+                                    <p>Utilizamos tu información para:</p>
+                                    <ul>
+                                        <li>Proporcionar planes de alimentación personalizados</li>
+                                        <li>Realizar seguimiento nutricional efectivo</li>
+                                        <li>Mejorar continuamente nuestros servicios</li>
+                                        <li>Comunicarnos contigo sobre actualizaciones relevantes</li>
+                                        <li>Generar reportes estadísticos anonimizados</li>
+                                    </ul>
+                                </div>
+                                <div class="content-section">
+                                    <h3><i class="fas fa-lock"></i> Protección de Datos</h3>
+                                    <p>Implementamos medidas de seguridad robustas:</p>
+                                    <ul>
+                                        <li>Cifrado SSL/TLS para todas las transmisiones</li>
+                                        <li>Almacenamiento cifrado en servidores seguros</li>
+                                        <li>Autenticación de dos factores para accesos críticos</li>
+                                        <li>Auditorías de seguridad periódicas</li>
+                                        <li>Backups automáticos y recovery plan</li>
+                                    </ul>
+                                </div>
+                                <div class="content-section">
+                                    <h3><i class="fas fa-user-shield"></i> Derechos de los Usuarios</h3>
+                                    <p>Tienes derecho a:</p>
+                                    <ul>
+                                        <li><strong>Acceder:</strong> Solicitar una copia de tus datos personales</li>
+                                        <li><strong>Rectificar:</strong> Corregir información inexacta o incompleta</li>
+                                        <li><strong>Cancelar:</strong> Solicitar la eliminación de tus datos</li>
+                                        <li><strong>Oponerse:</strong> Restringir el procesamiento de tus datos</li>
+                                        <li><strong>Portabilidad:</strong> Transferir tus datos a otro servicio</li>
+                                    </ul>
+                                    <p>Para ejercer estos derechos, contacta a yachay.mikuy@gmail.com</p>
+                                </div>
+                                <div class="content-section">
+                                    <h3><i class="fas fa-user-friends"></i> Consentimiento Parental</h3>
+                                    <p>Para el tratamiento de datos de menores:</p>
+                                    <ul>
+                                        <li>Requerimos consentimiento explícito de padres o tutores</li>
+                                        <li>Los padres son responsables de la veracidad de los datos</li>
+                                        <li>Podemos solicitar documentación adicional si es necesario</li>
+                                        <li>Los padres pueden revocar el consentimiento en cualquier momento</li>
+                                    </ul>
+                                </div>
+                                <div class="content-section">
+                                    <h3><i class="fas fa-clock"></i> Retención de Datos</h3>
+                                    <p>Conservamos los datos según los siguientes criterios:</p>
+                                    <ul>
+                                        <li>Datos de cuenta: mientras la cuenta esté activa</li>
+                                        <li>Datos de salud: mínimo 5 años después del último uso</li>
+                                        <li>Datos financieros: 7 años según normativa fiscal</li>
+                                        <li>Datos anonimizados: indefinidamente para estadísticas</li>
+                                    </ul>
+                                </div>
+                                <div class="highlight-box">
+                                    <h3 style="margin-top:0;"><i class="fas fa-exclamation-triangle"></i> Importante</h3>
+                                    <p>Esta política se actualiza periódicamente. Te notificaremos cualquier cambio significativo a través de tu correo electrónico registrado.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>`,
+
+                /* Contenido del Modal "Términos y Condiciones" */
+                termsModal: () => `
+                    <div class="modal">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h2>Términos y Condiciones</h2>
+                                <button class="close-modal">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="content-section">
+                                    <h3><i class="fas fa-check-circle"></i> Aceptación de los Términos</h3>
+                                    <p>Al utilizar la plataforma Yachay Mikuy, aceptas estos términos y condiciones en su totalidad. Si no estás de acuerdo con alguno de estos términos, no debes utilizar nuestros servicios.</p>
+                                    <p>El uso continuado de la plataforma después de cualquier modificación constituye aceptación de los nuevos términos.</p>
+                                </div>
+                                <div class="content-section">
+                                    <h3><i class="fas fa-cube"></i> Descripción del Servicio</h3>
+                                    <p>Yachay Mikuy es una plataforma digital que ofrece:</p>
+                                    <ul>
+                                        <li>Planes de alimentación personalizados para niños de 0 a 13 años</li>
+                                        <li>Seguimiento nutricional continuo</li>
+                                        <li>Educación nutricional adaptada culturalmente</li>
+                                        <li>Comunidad de apoyo para padres y cuidadores</li>
+                                        <li>Acceso a profesionales de la salud</li>
+                                    </ul>
+                                </div>
+                                <div class="content-section">
+                                    <h3><i class="fas fa-user-check"></i> Responsabilidades del Usuario</h3>
+                                    <p>Como usuario, te comprometes a:</p>
+                                    <ul>
+                                        <li>Proporcionar información veraz y actualizada</li>
+                                        <li>Mantener la confidencialidad de tus credenciales de acceso</li>
+                                        <li>Seguir las recomendaciones nutricionales de manera responsable</li>
+                                        <li>No compartir contenido inapropiado u ofensivo</li>
+                                        <li>Respetar los derechos de otros usuarios</li>
+                                        <li>Reportar cualquier problema o incidencia</li>
+                                    </ul>
+                                </div>
+                                <div class="content-section">
+                                    <h3><i class="fas fa-ban"></i> Uso Prohibido</h3>
+                                    <p>Está estrictamente prohibido:</p>
+                                    <ul>
+                                        <li>Utilizar la plataforma para fines comerciales no autorizados</li>
+                                        <li>Intentar acceder a cuentas de otros usuarios</li>
+                                        <li>Distribuir malware o software malicioso</li>
+                                        <li>Violentar la propiedad intelectual de Yachay Mikuy</li>
+                                        <li>Proporcionar información médica falsa o engañosa</li>
+                                        <li>Acosar o intimidar a otros usuarios</li>
+                                    </ul>
+                                </div>
+                                <div class="content-section">
+                                    <h3><i class="fas fa-copyright"></i> Propiedad Intelectual</h3>
+                                    <p>Todo el contenido de la plataforma está protegido por derechos de autor:</p>
+                                    <ul>
+                                        <li>Textos, imágenes, diseños, logotipos y software</li>
+                                        <li>Algoritmos de recomendación nutricional</li>
+                                        <li>Base de datos de recetas y alimentos</li>
+                                        <li>Material educativo y formatos originales</li>
+                                    </ul>
+                                    <p>Queda prohibida la reproducción total o parcial sin autorización expresa.</p>
+                                </div>
+                                <div class="content-section">
+                                    <h3><i class="fas fa-heart"></i> Información Médica</h3>
+                                    <p>Importante considerar:</p>
+                                    <ul>
+                                        <li>Yachay Mikuy no reemplaza la consulta médica profesional</li>
+                                        <li>Las recomendaciones son complementarias al tratamiento médico</li>
+                                        <li>Ante cualquier emergencia médica, contacta a servicios de salud</li>
+                                        <li>Los planes nutricionales deben ser supervisados por profesionales</li>
+                                    </ul>
+                                </div>
+                                <div class="content-section">
+                                    <h3><i class="fas fa-exclamation-triangle"></i> Limitación de Responsabilidad</h3>
+                                    <p>Yachay Mikuy no se responsabiliza por:</p>
+                                    <ul>
+                                        <li>El uso indebido de la plataforma por parte de los usuarios</li>
+                                        <li>Consecuencias derivadas de no seguir adecuadamente las recomendaciones</li>
+                                        <li>Problemas técnicos fuera de nuestro control</li>
+                                        <li>Contenido proporcionado por terceros</li>
+                                        <li>Daños indirectos, incidentales o consecuentes</li>
+                                    </ul>
+                                </div>
+                                <div class="content-section">
+                                    <h3><i class="fas fa-sync-alt"></i> Modificaciones de los Términos</h3>
+                                    <p>Yachay Mikuy se reserva el derecho de:</p>
+                                    <ul>
+                                        <li>Modificar estos términos y condiciones en cualquier momento</li>
+                                        <li>Actualizar las políticas de privacidad y uso de datos</li>
+                                        <li>Cambiar las características y funcionalidades del servicio</li>
+                                        <li>Suspender o terminar servicios por razones justificadas</li>
+                                    </ul>
+                                    <p>Las modificaciones entrarán en vigor desde su publicación en la plataforma.</p>
+                                </div>
+                                <div class="content-section">
+                                    <h3><i class="fas fa-gavel"></i> Ley Aplicable y Jurisdicción</h3>
+                                    <p>Estos términos se rigen por las leyes de la República del Perú. Cualquier disputa será resuelta en los tribunales de Lima, Perú.</p>
+                                </div>
+                                <div class="highlight-box">
+                                    <h3 style="margin-top:0;"><i class="fas fa-calendar-alt"></i> Vigencia</h3>
+                                    <p>Estos términos y condiciones entran en vigor a partir del 1 de enero de 2025 y permanecerán vigentes hasta su modificación.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>`,
+            };
+
+            // Escucha global de clics para manejar la apertura y cierre de modales
+            document.body.addEventListener('click', (e) => {
+                // Lógica para ABRIR el modal según el ID del enlace del footer
+                if (e.target.matches('#aboutLink')) { 
+                    e.preventDefault(); 
+                    ui.openModal(templates.aboutModal()); 
+                } else if (e.target.matches('#servicesLink')) { 
+                    e.preventDefault(); 
+                    ui.openModal(templates.servicesModal()); 
+                } else if (e.target.matches('#faqLink')) { 
+                    e.preventDefault(); 
+                    ui.openModal(templates.faqModal()); 
+                } else if (e.target.matches('#privacyLink')) { 
+                    e.preventDefault(); 
+                    ui.openModal(templates.privacyModal()); 
+                } else if (e.target.matches('#termsLink')) { 
+                    e.preventDefault(); 
+                    ui.openModal(templates.termsModal()); 
+                }
+
+                // Lógica para CERRAR el modal:
+                // Si el clic es en el fondo negro (.modal) o en el botón de cerrar (.close-modal)
+                if (e.target.matches('.modal') || e.target.matches('.close-modal')) { 
+                    ui.closeModal(); 
                 }
             });
         });
