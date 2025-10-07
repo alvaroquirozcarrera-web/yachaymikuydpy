@@ -3585,64 +3585,340 @@
         function setupFooterModals() {
             // Objeto con las plantillas HTML para cada modal
             const templates = {
-                aboutModal: () => `
-                    <div class="modal active">
-                        <div class="modal-content">
-                            <div class="modal-header"><h2>Acerca de Yachay Mikuy</h2><button class="close-modal">&times;</button></div>
-                            <div class="modal-body">
-                                <div class="content-section"><h3><i class="fas fa-bullseye"></i> Nuestra Misión</h3><p>Reducir la prevalencia de anemia y malnutrición en niños de 6 a 13 años mediante planes de alimentación personalizados, adaptados culturalmente y económicamente a la realidad de las familias peruanas.</p></div>
-                                <div class="content-section"><h3><i class="fas fa-eye"></i> Nuestra Visión</h3><p>Convertirnos en la plataforma digital líder en nutrición infantil en Perú, contribuyendo al desarrollo humano y social del país a través de hábitos alimentarios saludables.</p></div>
-                                <div class="highlight-box"><h3 style="margin-top:0;"><i class="fas fa-award"></i> Reconocimientos</h3><p>Proyecto seleccionado por la Universidad de Piura como iniciativa de impacto social en el programa de Ingeniería Industrial y de Sistemas.</p></div>
-                            </div>
+        aboutModal: () => `
+            <div class="modal active">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2>Acerca de Yachay Mikuy</h2>
+                        <button class="close-modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="content-section">
+                            <h3><i class="fas fa-bullseye"></i> Nuestra Misión</h3>
+                            <p>Reducir la prevalencia de anemia y malnutrición en niños de 6 a 13 años mediante planes de alimentación personalizados, adaptados culturalmente y económicamente a la realidad de las familias peruanas.</p>
+                        </div>
+                        <div class="content-section">
+                            <h3><i class="fas fa-eye"></i> Nuestra Visión</h3>
+                            <p>Convertirnos en la plataforma digital líder en nutrición infantil en Perú, contribuyendo al desarrollo humano y social del país a través de hábitos alimentarios saludables.</p>
+                        </div>
+                        <div class="content-section">
+                            <h3><i class="fas fa-users"></i> Nuestro Equipo</h3>
+                            <p>Contamos con un equipo multidisciplinario de profesionales de la salud, nutricionistas, desarrolladores de software y expertos en educación, comprometidos con mejorar la nutrición infantil en el país.</p>
+                        </div>
+                        <div class="content-section">
+                            <h3><i class="fas fa-chart-line"></i> Impacto</h3>
+                            <p>Según estudios del INEI (2023), la anemia infantil afecta a más del 40% de niños menores de 3 años en algunas regiones del Perú. Nuestro proyecto busca reducir esta cifra mediante intervenciones personalizadas y seguimiento continuo.</p>
+                        </div>
+                        <div class="highlight-box">
+                            <h3 style="margin-top:0;"><i class="fas fa-award"></i> Reconocimientos</h3>
+                            <p>Proyecto seleccionado por la Universidad de Piura como iniciativa de impacto social en el programa de Ingeniería Industrial y de Sistemas.</p>
                         </div>
                     </div>
-                </div>`,
-                servicesModal: () => `
-                    <div class="modal active">
-                        <div class="modal-content">
-                            <div class="modal-header"><h2>Nuestros Servicios</h2><button class="close-modal">&times;</button></div>
-                            <div class="modal-body">
-                                <div class="content-section"><h3><i class="fas fa-utensils"></i> Planes de Alimentación Personalizados</h3><p>Desarrollamos planes nutricionales adaptados a las necesidades específicas de cada niño.</p></div>
-                                <div class="content-section"><h3><i class="fas fa-chart-line"></i> Seguimiento Nutricional</h3><p>Monitoreamos el progreso de cada niño a través de nuestra plataforma.</p></div>
-                                <div class="content-section"><h3><i class="fas fa-graduation-cap"></i> Educación Nutricional</h3><p>Ofrecemos material educativo como recetas y guías informativas.</p></div>
-                                <div class="content-section"><h3><i class="fas fa-users"></i> Comunidad de Apoyo</h3><p>Conectamos a las familias con nutricionistas y otras familias para compartir experiencias.</p></div>
-                            </div>
+                </div>
+            </div>`,
+        servicesModal: () => `
+            <div class="modal active">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2>Nuestros Servicios</h2>
+                        <button class="close-modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="content-section">
+                            <h3><i class="fas fa-utensils"></i> Planes de Alimentación Personalizados</h3>
+                            <p>Desarrollamos planes nutricionales adaptados a las necesidades específicas de cada niño, considerando:</p>
+                            <ul>
+                                <li>Edad y estado de salud</li>
+                                <li>Disponibilidad de alimentos locales</li>
+                                <li>Hábitos culturales y preferencias familiares</li>
+                                <li>Capacidad económica del hogar</li>
+                            </ul>
                         </div>
-                    </div>`,
-                faqModal: () => `
-                    <div class="modal active">
-                        <div class="modal-content">
-                            <div class="modal-header"><h2>Preguntas Frecuentes</h2><button class="close-modal">&times;</button></div>
-                            <div class="modal-body">
-                                <div class="content-section"><h3><i class="fas fa-child"></i> ¿Para qué edades está diseñada la plataforma?</h3><p>Nuestra plataforma está diseñada para niños de 0 a 13 años.</p></div>
-                                <div class="content-section"><h3><i class="fas fa-shield-alt"></i> ¿Es seguro compartir los datos de mis hijos?</h3><p>Sí, implementamos medidas avanzadas de protección de datos, incluyendo cifrado y consentimiento parental explícito.</p></div>
-                                <div class="content-section"><h3><i class="fas fa-wifi"></i> ¿Funciona sin internet?</h3><p>Sí, contamos con un modo offline que permite acceso a contenido descargado y registro de consumo para sincronizar después.</p></div>
-                            </div>
+                        <div class="content-section">
+                            <h3><i class="fas fa-chart-line"></i> Seguimiento Nutricional</h3>
+                            <p>Monitoreamos el progreso de cada niño a través de:</p>
+                            <ul>
+                                <li>Registro diario de consumo alimentario</li>
+                                <li>Evaluación periódica de indicadores de salud</li>
+                                <li>Ajustes automáticos según resultados obtenidos</li>
+                                <li>Reportes mensuales para padres y tutores</li>
+                            </ul>
                         </div>
-                    </div>`,
-                privacyModal: () => `
-                    <div class="modal active">
-                        <div class="modal-content">
-                            <div class="modal-header"><h2>Política de Privacidad</h2><button class="close-modal">&times;</button></div>
-                            <div class="modal-body">
-                                <div class="content-section"><h3><i class="fas fa-info-circle"></i> Información que Recopilamos</h3><p>Recopilamos datos personales y de salud de manera responsable para personalizar los planes nutricionales.</p></div>
-                                <div class="content-section"><h3><i class="fas fa-lock"></i> Protección de Datos</h3><p>Implementamos medidas de seguridad robustas como cifrado SSL/TLS y almacenamiento seguro para proteger tu información.</p></div>
-                                <div class="content-section"><h3><i class="fas fa-user-shield"></i> Derechos de los Usuarios</h3><p>Tienes derecho a acceder, rectificar, cancelar y oponerte al tratamiento de tus datos personales en cualquier momento.</p></div>
-                            </div>
+                        <div class="content-section">
+                            <h3><i class="fas fa-graduation-cap"></i> Educación Nutricional</h3>
+                            <p>Ofrecemos material educativo en múltiples formatos:</p>
+                            <ul>
+                                <li>Recetas prácticas con ingredientes locales</li>
+                                <li>Videos tutoriales de preparación</li>
+                                <li>Guías informativas sobre nutrientes esenciales</li>
+                                <li>Consejos para mejorar hábitos alimentarios</li>
+                            </ul>
                         </div>
-                    </div>`,
-                termsModal: () => `
-                    <div class="modal active">
-                        <div class="modal-content">
-                            <div class="modal-header"><h2>Términos y Condiciones</h2><button class="close-modal">&times;</button></div>
-                            <div class="modal-body">
-                                <div class="content-section"><h3><i class="fas fa-check-circle"></i> Aceptación de los Términos</h3><p>Al utilizar la plataforma Yachay Mikuy, aceptas estos términos y condiciones en su totalidad.</p></div>
-                                <div class="content-section"><h3><i class="fas fa-user-check"></i> Responsabilidades del Usuario</h3><p>Como usuario, te comprometes a proporcionar información veraz y a mantener la confidencialidad de tu cuenta.</p></div>
-                                <div class="content-section"><h3><i class="fas fa-heart"></i> Información Médica</h3><p>Yachay Mikuy es una herramienta de apoyo y no reemplaza la consulta médica profesional. Siempre consulta a un doctor para diagnósticos y tratamientos.</p></div>
-                            </div>
+                        <div class="content-section">
+                            <h3><i class="fas fa-users"></i> Comunidad de Apoyo</h3>
+                            <p>Conectamos a las familias con:</p>
+                            <ul>
+                                <li>Nutricionistas y profesionales de la salud</li>
+                                <li>Otras familias que comparten experiencias</li>
+                                <li>Foros de discusión y consejos prácticos</li>
+                                <li>Eventos virtuales de capacitación</li>
+                            </ul>
                         </div>
-                    </div>`
-            };
+                        <div class="highlight-box">
+                            <h3 style="margin-top:0;"><i class="fas fa-mobile-alt"></i> Accesibilidad</h3>
+                            <p>Nuestra plataforma funciona en modo offline y cuenta con versión ligera para zonas con conectividad limitada.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>`,
+        faqModal: () => `
+            <div class="modal active">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2>Preguntas Frecuentes</h2>
+                        <button class="close-modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="content-section">
+                            <h3><i class="fas fa-question-circle"></i> ¿Qué es Yachay Mikuy?</h3>
+                            <p>Yachay Mikuy es una plataforma digital que ofrece planes de alimentación personalizados para combatir la anemia infantil en Perú, combinando tecnología, educación y nutrición culturalmente adaptada.</p>
+                        </div>
+                        <div class="content-section">
+                            <h3><i class="fas fa-child"></i> ¿Para qué edades está diseñada la plataforma?</h3>
+                            <p>Nuestra plataforma está diseñada para niños de 0 a 13 años, etapa crucial en el desarrollo donde los hábitos alimentarios se consolidan y se pueden prevenir deficiencias nutricionales a largo plazo.</p>
+                        </div>
+                        <div class="content-section">
+                            <h3><i class="fas fa-user-plus"></i> ¿Cómo puedo registrarme?</h3>
+                            <p>Puedes registrarte haciendo clic en el botón "Comenzar Ahora" en nuestra página principal y completando el formulario con tus datos personales. El proceso es rápido y seguro.</p>
+                        </div>
+                        <div class="content-section">
+                            <h3><i class="fas fa-shield-alt"></i> ¿Es seguro compartir los datos de mis hijos?</h3>
+                            <p>Sí, implementamos medidas avanzadas de protección de datos:</p>
+                            <ul>
+                                <li>Cifrado de extremo a extremo</li>
+                                <li>Consentimiento parental explícito</li>
+                                <li>Cumplimiento con normativas de protección de datos</li>
+                                <li>Acceso restringido solo a personal autorizado</li>
+                            </ul>
+                        </div>
+                        <div class="content-section">
+                            <h3><i class="fas fa-heartbeat"></i> ¿Cómo funciona el seguimiento nutricional?</h3>
+                            <p>A través de nuestra aplicación, puedes registrar el consumo alimentario de tus hijos y nosotros monitoreamos su progreso. El sistema genera alertas y recomendaciones automáticas según los resultados obtenidos.</p>
+                        </div>
+                        <div class="content-section">
+                            <h3><i class="fas fa-dollar-sign"></i> ¿Qué costo tiene el servicio?</h3>
+                            <p>Ofrecemos diferentes planes de suscripción:</p>
+                            <ul>
+                                <li>Plan básico: S/10-15 mensuales</li>
+                                <li>Plan premium con atención personalizada</li>
+                                <li>Subsidios para familias vulnerables mediante alianzas</li>
+                                <li>Acceso gratuito en centros educativos convenidos</li>
+                            </ul>
+                        </div>
+                        <div class="content-section">
+                            <h3><i class="fas fa-wifi"></i> ¿Funciona sin internet?</h3>
+                            <p>Sí, contamos con modo offline que permite:</p>
+                            <ul>
+                                <li>Acceso a recetas y guías descargadas</li>
+                                <li>Registro de consumo para sincronizar después</li>
+                                <li>Notificaciones vía SMS para zonas rurales</li>
+                            </ul>
+                        </div>
+                        <div class="content-section">
+                            <h3><i class="fas fa-hands-helping"></i> ¿Cómo obtengo ayuda si tengo problemas?</h3>
+                            <p>Puedes contactarnos a través de:</p>
+                            <ul>
+                                <li>Chat en vivo en la aplicación</li>
+                                <li>Correo electrónico: yachay.mikuy@gmail.com</li>
+                                <li>Teléfono: +51 918 072 862</li>
+                                <li>WhatsApp: +51 918 072 862</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>`,
+        privacyModal: () => `
+            <div class="modal active">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2>Política de Privacidad</h2>
+                        <button class="close-modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="content-section">
+                            <h3><i class="fas fa-info-circle"></i> Información que Recopilamos</h3>
+                            <p>Recopilamos información personal y de salud de manera responsable:</p>
+                            <ul>
+                                <li><strong>Datos personales:</strong> Nombre, correo electrónico, teléfono, departamento de residencia</li>
+                                <li><strong>Datos de los niños:</strong> Nombre, fecha de nacimiento, peso, altura, historial médico relevante</li>
+                                <li><strong>Datos de uso:</strong> Interacciones con la plataforma, preferencias alimentarias, progreso nutricional</li>
+                                <li><strong>Datos técnicos:</strong> Dirección IP, tipo de dispositivo, navegador utilizado</li>
+                            </ul>
+                        </div>
+                        <div class="content-section">
+                            <h3><i class="fas fa-cogs"></i> Uso de la Información</h3>
+                            <p>Utilizamos tu información para:</p>
+                            <ul>
+                                <li>Proporcionar planes de alimentación personalizados</li>
+                                <li>Realizar seguimiento nutricional efectivo</li>
+                                <li>Mejorar continuamente nuestros servicios</li>
+                                <li>Comunicarnos contigo sobre actualizaciones relevantes</li>
+                                <li>Generar reportes estadísticos anonimizados</li>
+                            </ul>
+                        </div>
+                        <div class="content-section">
+                            <h3><i class="fas fa-lock"></i> Protección de Datos</h3>
+                            <p>Implementamos medidas de seguridad robustas:</p>
+                            <ul>
+                                <li>Cifrado SSL/TLS para todas las transmisiones</li>
+                                <li>Almacenamiento cifrado en servidores seguros</li>
+                                <li>Autenticación de dos factores para accesos críticos</li>
+                                <li>Auditorías de seguridad periódicas</li>
+                                <li>Backups automáticos y recovery plan</li>
+                            </ul>
+                        </div>
+                        <div class="content-section">
+                            <h3><i class="fas fa-user-shield"></i> Derechos de los Usuarios</h3>
+                            <p>Tienes derecho a:</p>
+                            <ul>
+                                <li><strong>Acceder:</strong> Solicitar una copia de tus datos personales</li>
+                                <li><strong>Rectificar:</strong> Corregir información inexacta o incompleta</li>
+                                <li><strong>Cancelar:</strong> Solicitar la eliminación de tus datos</li>
+                                <li><strong>Oponerse:</strong> Restringir el procesamiento de tus datos</li>
+                                <li><strong>Portabilidad:</strong> Transferir tus datos a otro servicio</li>
+                            </ul>
+                            <p>Para ejercer estos derechos, contacta a yachay.mikuy@gmail.com</p>
+                        </div>
+                        <div class="content-section">
+                            <h3><i class="fas fa-user-friends"></i> Consentimiento Parental</h3>
+                            <p>Para el tratamiento de datos de menores:</p>
+                            <ul>
+                                <li>Requerimos consentimiento explícito de padres o tutores</li>
+                                <li>Los padres son responsables de la veracidad de los datos</li>
+                                <li>Podemos solicitar documentación adicional si es necesario</li>
+                                <li>Los padres pueden revocar el consentimiento en cualquier momento</li>
+                            </ul>
+                        </div>
+                        <div class="content-section">
+                            <h3><i class="fas fa-clock"></i> Retención de Datos</h3>
+                            <p>Conservamos los datos según los siguientes criterios:</p>
+                            <ul>
+                                <li>Datos de cuenta: mientras la cuenta esté activa</li>
+                                <li>Datos de salud: mínimo 5 años después del último uso</li>
+                                <li>Datos financieros: 7 años según normativa fiscal</li>
+                                <li>Datos anonimizados: indefinidamente para estadísticas</li>
+                            </ul>
+                        </div>
+                        <div class="highlight-box">
+                            <h3 style="margin-top:0;"><i class="fas fa-exclamation-triangle"></i> Importante</h3>
+                            <p>Esta política se actualiza periódicamente. Te notificaremos cualquier cambio significativo a través de tu correo electrónico registrado.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>`,
+        termsModal: () => `
+            <div class="modal active">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2>Términos y Condiciones</h2>
+                        <button class="close-modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="content-section">
+                            <h3><i class="fas fa-check-circle"></i> Aceptación de los Términos</h3>
+                            <p>Al utilizar la plataforma Yachay Mikuy, aceptas estos términos y condiciones en su totalidad. Si no estás de acuerdo con alguno de estos términos, no debes utilizar nuestros servicios.</p>
+                            <p>El uso continuado de la plataforma después de cualquier modificación constituye aceptación de los nuevos términos.</p>
+                        </div>
+                        <div class="content-section">
+                            <h3><i class="fas fa-cube"></i> Descripción del Servicio</h3>
+                            <p>Yachay Mikuy es una plataforma digital que ofrece:</p>
+                            <ul>
+                                <li>Planes de alimentación personalizados para niños de 0 a 13 años</li>
+                                <li>Seguimiento nutricional continuo</li>
+                                <li>Educación nutricional adaptada culturalmente</li>
+                                <li>Comunidad de apoyo para padres y cuidadores</li>
+                                <li>Acceso a profesionales de la salud</li>
+                            </ul>
+                        </div>
+                        <div class="content-section">
+                            <h3><i class="fas fa-user-check"></i> Responsabilidades del Usuario</h3>
+                            <p>Como usuario, te comprometes a:</p>
+                            <ul>
+                                <li>Proporcionar información veraz y actualizada</li>
+                                <li>Mantener la confidencialidad de tus credenciales de acceso</li>
+                                <li>Seguir las recomendaciones nutricionales de manera responsable</li>
+                                <li>No compartir contenido inapropiado u ofensivo</li>
+                                <li>Respetar los derechos de otros usuarios</li>
+                                <li>Reportar cualquier problema o incidencia</li>
+                            </ul>
+                        </div>
+                        <div class="content-section">
+                            <h3><i class="fas fa-ban"></i> Uso Prohibido</h3>
+                            <p>Está estrictamente prohibido:</p>
+                            <ul>
+                                <li>Utilizar la plataforma para fines comerciales no autorizados</li>
+                                <li>Intentar acceder a cuentas de otros usuarios</li>
+                                <li>Distribuir malware o software malicioso</li>
+                                <li>Violentar la propiedad intelectual de Yachay Mikuy</li>
+                                <li>Proporcionar información médica falsa o engañosa</li>
+                                <li>Acosar o intimidar a otros usuarios</li>
+                            </ul>
+                        </div>
+                        <div class="content-section">
+                            <h3><i class="fas fa-copyright"></i> Propiedad Intelectual</h3>
+                            <p>Todo el contenido de la plataforma está protegido por derechos de autor:</p>
+                            <ul>
+                                <li>Textos, imágenes, diseños, logotipos y software</li>
+                                <li>Algoritmos de recomendación nutricional</li>
+                                <li>Base de datos de recetas y alimentos</li>
+                                <li>Material educativo y formatos originales</li>
+                            </ul>
+                            <p>Queda prohibida la reproducción total o parcial sin autorización expresa.</p>
+                        </div>
+                        <div class="content-section">
+                            <h3><i class="fas fa-heart"></i> Información Médica</h3>
+                            <p>Importante considerar:</p>
+                            <ul>
+                                <li>Yachay Mikuy no reemplaza la consulta médica profesional</li>
+                                <li>Las recomendaciones son complementarias al tratamiento médico</li>
+                                <li>Ante cualquier emergencia médica, contacta a servicios de salud</li>
+                                <li>Los planes nutricionales deben ser supervisados por profesionales</li>
+                            </ul>
+                        </div>
+                        <div class="content-section">
+                            <h3><i class="fas fa-exclamation-triangle"></i> Limitación de Responsabilidad</h3>
+                            <p>Yachay Mikuy no se responsabiliza por:</p>
+                            <ul>
+                                <li>El uso indebido de la plataforma por parte de los usuarios</li>
+                                <li>Consecuencias derivadas de no seguir adecuadamente las recomendaciones</li>
+                                <li>Problemas técnicos fuera de nuestro control</li>
+                                <li>Contenido proporcionado por terceros</li>
+                                <li>Daños indirectos, incidentales o consecuentes</li>
+                            </ul>
+                        </div>
+                        <div class="content-section">
+                            <h3><i class="fas fa-sync-alt"></i> Modificaciones de los Términos</h3>
+                            <p>Yachay Mikuy se reserva el derecho de:</p>
+                            <ul>
+                                <li>Modificar estos términos y condiciones en cualquier momento</li>
+                                <li>Actualizar las políticas de privacidad y uso de datos</li>
+                                <li>Cambiar las características y funcionalidades del servicio</li>
+                                <li>Suspender o terminar servicios por razones justificadas</li>
+                            </ul>
+                            <p>Las modificaciones entrarán en vigor desde su publicación en la plataforma.</p>
+                        </div>
+                        <div class="content-section">
+                            <h3><i class="fas fa-gavel"></i> Ley Aplicable y Jurisdicción</h3>
+                            <p>Estos términos se rigen por las leyes de la República del Perú. Cualquier disputa será resuelta en los tribunales de Lima, Perú.</p>
+                        </div>
+                        <div class="highlight-box">
+                            <h3 style="margin-top:0;"><i class="fas fa-calendar-alt"></i> Vigencia</h3>
+                            <p>Estos términos y condiciones entran en vigor a partir del 1 de enero de 2025 y permanecerán vigentes hasta su modificación.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>`
+    };
 
             // Funciones para abrir y cerrar el modal
             const ui = {
