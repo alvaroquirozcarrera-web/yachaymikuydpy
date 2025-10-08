@@ -718,14 +718,82 @@
     <div id="actionModalContainer"></div>
 
     <script>
+        // Storage Adapter - Para facilitar migración a backend
+        const storageAdapter = {
+            // Users
+            getUsers: function() {
+                const users = localStorage.getItem('yachay_users');
+                return users ? JSON.parse(users) : [];
+            },
+            saveUsers: function(users) {
+                localStorage.setItem('yachay_users', JSON.stringify(users));
+            },
+            
+            // Children
+            getChildren: function() {
+                const children = localStorage.getItem('yachay_children');
+                return children ? JSON.parse(children) : [];
+            },
+            saveChildren: function(children) {
+                localStorage.setItem('yachay_children', JSON.stringify(children));
+            },
+            
+            // Responses
+            getResponses: function() {
+                const responses = localStorage.getItem('yachay_responses');
+                return responses ? JSON.parse(responses) : {};
+            },
+            saveResponses: function(responses) {
+                localStorage.setItem('yachay_responses', JSON.stringify(responses));
+            },
+            
+            // Session
+            getSession: function() {
+                const session = localStorage.getItem('yachay_session');
+                return session ? JSON.parse(session) : { currentUserId: null, exploringAsGuest: false, lastActiveAt: null };
+            },
+            saveSession: function(session) {
+                localStorage.setItem('yachay_session', JSON.stringify(session));
+            },
+            
+            // Audit Log
+            getAuditLog: function() {
+                const auditLog = localStorage.getItem('yachay_auditLog');
+                return auditLog ? JSON.parse(auditLog) : [];
+            },
+            saveAuditLog: function(auditLog) {
+                localStorage.setItem('yachay_auditLog', JSON.stringify(auditLog));
+            }
+        };
+
+        // Función para calcular la edad a partir de la fecha de nacimiento
+        function calculateAge(dob) {
+            const birthDate = new Date(dob);
+            const today = new Date();
+            let age = today.getFullYear() - birthDate.getFullYear();
+            const monthDiff = today.getMonth() - birthDate.getMonth();
+            
+            if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+                age--;
+            }
+            
+            return age;
+        }
+
+        // Función para obtener parámetros de la URL
+        function getURLParameter(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
+
         document.addEventListener('DOMContentLoaded', function() {
             const urlParams = new URLSearchParams(window.location.search);
             const childId = urlParams.get('childId');
             const guestMode = urlParams.get('guest') === 'true';
 
             // Verificar si estamos en modo invitado o con cuenta
-            const currentUser = localStorage.getItem('yachayMikuyCurrentUser');
-            let isGuestMode = guestMode || !currentUser;
+            const session = storageAdapter.getSession();
+            let isGuestMode = guestMode || session.exploringAsGuest;
 
             // Si no hay childId, verificar si estamos en modo invitado
             if (!childId) {
@@ -761,14 +829,7 @@
                 }
             } else {
                 // Modo con cuenta
-                const storedData = localStorage.getItem('yachayMikuyChildren');
-                if (!storedData) {
-                    document.body.innerHTML = '<h1>Error: No se encontraron datos. Redirigiendo...</h1>';
-                    setTimeout(() => { window.location.href = 'index.html'; }, 3000);
-                    return;
-                }
-                
-                const childrenData = JSON.parse(storedData);
+                const childrenData = storageAdapter.getChildren();
                 const currentChild = childrenData.find(child => child.id === childId);
 
                 if (!currentChild) {
@@ -783,7 +844,7 @@
             // Función para cargar el perfil del niño
             function loadChildProfile(currentChild) {
                 document.getElementById('childName').textContent = currentChild.name;
-                document.getElementById('childAge').textContent = currentChild.age;
+                document.getElementById('childAge').textContent = calculateAge(currentChild.dob);
                 document.title = `${currentChild.name} - Perfil - Yachay Mikuy`;
 
                 // Configurar los enlaces de TODOS los tableros
@@ -832,62 +893,85 @@
 
             // Función para obtener niños de ejemplo
             function getGuestChildren() {
-                const guestChildren = [
-                    {
-                        id: 'guest-child-1',
-                        name: 'Alvaro',
-                        age: 5,
-                        isGuest: true,
-                        completed: true,
-                        lastQuestionIndex: 55
-                    },
-                    {
-                        id: 'guest-child-2',
-                        name: 'Luz',
-                        age: 4,
-                        isGuest: true,
-                        completed: true,
-                        lastQuestionIndex: 55
-                    }
-                ];
-                return guestChildren;
+                const children = storageAdapter.getChildren();
+                return children.filter(child => child.ownerId === null && child.progressPercent === 100);
             }
 
             // Función para crear niños de ejemplo si no existen
             function createGuestChildrenIfNotExists() {
-                // Esta función crea los niños de ejemplo en el localStorage si no existen
-                const storedData = localStorage.getItem('yachayMikuyChildren');
-                let childrenData = storedData ? JSON.parse(storedData) : [];
+                const children = storageAdapter.getChildren();
                 
                 // Verificar si ya existen los niños de ejemplo
-                const hasAlvaro = childrenData.some(child => child.id === 'guest-child-1');
-                const hasLuz = childrenData.some(child => child.id === 'guest-child-2');
+                const hasAlvaro = children.some(child => child.name === 'Alvaro');
+                const hasLuz = children.some(child => child.name === 'Luz');
                 
                 if (!hasAlvaro) {
-                    childrenData.push({
-                        id: 'guest-child-1',
+                    children.push({
+                        id: 'alvaro-' + Date.now(),
                         name: 'Alvaro',
-                        age: 5,
-                        isGuest: true,
-                        completed: true,
-                        lastQuestionIndex: 55,
-                        parentId: 'guest'
+                        dob: '2017-08-10',
+                        sex: 'male',
+                        avatarCustomization: '1',
+                        theme: 'default',
+                        ownerId: null,
+                        createdAt: new Date().toISOString(),
+                        updatedAt: new Date().toISOString(),
+                        progressPercent: 100,
+                        deletedAt: null,
+                        version: 1
                     });
                 }
                 
                 if (!hasLuz) {
-                    childrenData.push({
-                        id: 'guest-child-2',
+                    children.push({
+                        id: 'luz-' + Date.now(),
                         name: 'Luz',
-                        age: 4,
-                        isGuest: true,
-                        completed: true,
-                        lastQuestionIndex: 55,
-                        parentId: 'guest'
+                        dob: '2019-12-05',
+                        sex: 'female',
+                        avatarCustomization: '2',
+                        theme: 'default',
+                        ownerId: null,
+                        createdAt: new Date().toISOString(),
+                        updatedAt: new Date().toISOString(),
+                        progressPercent: 100,
+                        deletedAt: null,
+                        version: 1
                     });
                 }
                 
-                localStorage.setItem('yachayMikuyChildren', JSON.stringify(childrenData));
+                storageAdapter.saveChildren(children);
+                
+                // Crear respuestas para los perfiles predefinidos
+                const responses = storageAdapter.getResponses();
+                
+                const alvaroId = children.find(child => child.name === 'Alvaro').id;
+                const luzId = children.find(child => child.name === 'Luz').id;
+                
+                if (!responses[alvaroId]) {
+                    responses[alvaroId] = {};
+                    for (let i = 1; i <= 50; i++) {
+                        responses[alvaroId][`q${i}`] = {
+                            type: 'select',
+                            value: i % 5 === 0 ? 'Opción 5' : `Opción ${i % 5}`,
+                            timestamp: new Date().toISOString(),
+                            version: 1
+                        };
+                    }
+                }
+                
+                if (!responses[luzId]) {
+                    responses[luzId] = {};
+                    for (let i = 1; i <= 50; i++) {
+                        responses[luzId][`q${i}`] = {
+                            type: 'select',
+                            value: i % 5 === 0 ? 'Opción 5' : `Opción ${i % 5}`,
+                            timestamp: new Date().toISOString(),
+                            version: 1
+                        };
+                    }
+                }
+                
+                storageAdapter.saveResponses(responses);
             }
         });
 
