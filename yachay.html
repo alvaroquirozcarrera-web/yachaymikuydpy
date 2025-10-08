@@ -693,6 +693,74 @@
     <div id="actionModalContainer"></div>
 
     <script>
+        // Storage Adapter - Para facilitar migración a backend
+        const storageAdapter = {
+            // Users
+            getUsers: function() {
+                const users = localStorage.getItem('yachay_users');
+                return users ? JSON.parse(users) : [];
+            },
+            saveUsers: function(users) {
+                localStorage.setItem('yachay_users', JSON.stringify(users));
+            },
+            
+            // Children
+            getChildren: function() {
+                const children = localStorage.getItem('yachay_children');
+                return children ? JSON.parse(children) : [];
+            },
+            saveChildren: function(children) {
+                localStorage.setItem('yachay_children', JSON.stringify(children));
+            },
+            
+            // Responses
+            getResponses: function() {
+                const responses = localStorage.getItem('yachay_responses');
+                return responses ? JSON.parse(responses) : {};
+            },
+            saveResponses: function(responses) {
+                localStorage.setItem('yachay_responses', JSON.stringify(responses));
+            },
+            
+            // Session
+            getSession: function() {
+                const session = localStorage.getItem('yachay_session');
+                return session ? JSON.parse(session) : { currentUserId: null, exploringAsGuest: false, lastActiveAt: null };
+            },
+            saveSession: function(session) {
+                localStorage.setItem('yachay_session', JSON.stringify(session));
+            },
+            
+            // Audit Log
+            getAuditLog: function() {
+                const auditLog = localStorage.getItem('yachay_auditLog');
+                return auditLog ? JSON.parse(auditLog) : [];
+            },
+            saveAuditLog: function(auditLog) {
+                localStorage.setItem('yachay_auditLog', JSON.stringify(auditLog));
+            }
+        };
+
+        // Función para calcular la edad a partir de la fecha de nacimiento
+        function calculateAge(dob) {
+            const birthDate = new Date(dob);
+            const today = new Date();
+            let age = today.getFullYear() - birthDate.getFullYear();
+            const monthDiff = today.getMonth() - birthDate.getMonth();
+            
+            if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+                age--;
+            }
+            
+            return age;
+        }
+
+        // Función para obtener parámetros de la URL
+        function getURLParameter(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
+
         document.addEventListener('DOMContentLoaded', function() {
             const urlParams = new URLSearchParams(window.location.search);
             const guestMode = urlParams.get('guest') === 'true';
@@ -700,43 +768,34 @@
             const userId = urlParams.get('userId');
 
             // Verificar si estamos en modo invitado o con cuenta
-            const currentUser = localStorage.getItem('yachayMikuyCurrentUser');
-            let isGuestMode = guestMode || !currentUser;
+            const session = storageAdapter.getSession();
+            let isGuestMode = guestMode || session.exploringAsGuest;
 
             // Cargar los datos de TODOS los niños desde localStorage
-            let storedData = localStorage.getItem('yachayMikuyChildren');
+            let allChildrenData = storageAdapter.getChildren();
             
-            if (!storedData) {
+            if (!allChildrenData || allChildrenData.length === 0) {
                 // Si no hay datos, crear los niños de ejemplo si estamos en modo invitado
                 if (isGuestMode) {
                     createGuestChildrenIfNotExists();
-                    storedData = localStorage.getItem('yachayMikuyChildren');
+                    allChildrenData = storageAdapter.getChildren();
                 } else {
                     document.body.innerHTML = '<h1>Error: No se encontraron datos de niños. Por favor, complete al menos un cuestionario.</h1>';
                     return;
                 }
             }
             
-            const allChildrenData = JSON.parse(storedData);
-            
             // Filtrar para usar solo los perfiles que han completado el cuestionario
             let completedChildren;
             
             if (isGuestMode) {
-                // Modo invitado: mostrar solo los perfiles de invitado
-                completedChildren = allChildrenData.filter(child => child.isGuest && child.completed);
+                // Modo invitado: mostrar solo los perfiles de invitado (Alvaro y Luz)
+                completedChildren = allChildrenData.filter(child => child.ownerId === null && child.progressPercent === 100);
             } else {
                 // Modo con cuenta: mostrar los perfiles del usuario actual
-                const userObj = currentUser ? JSON.parse(currentUser) : null;
-                if (userObj && userId) {
-                    // Si se proporciona un userId, filtrar por ese ID
+                if (session.currentUserId) {
                     completedChildren = allChildrenData.filter(child => 
-                        child.parentId === userId && child.completed && !child.isGuest
-                    );
-                } else if (userObj) {
-                    // Si no hay userId pero hay un usuario actual, filtrar por el parentId del usuario actual
-                    completedChildren = allChildrenData.filter(child => 
-                        child.parentId === userObj.id && child.completed && !child.isGuest
+                        child.ownerId === session.currentUserId && child.progressPercent === 100
                     );
                 } else {
                     completedChildren = [];
@@ -758,7 +817,7 @@
             });
             
             // Configurar los enlaces de los tableros
-            const guestParam = isGuestMode ? '&guest=true' : '';
+            const guestParam = isGuestMode ? '?guest=true' : '';
             document.getElementById('pantryLink').href = `nino1.html${guestParam}`;
             document.getElementById('wellnessLink').href = `nino3.html${guestParam}`;
             document.getElementById('academicLink').href = `nino4.html${guestParam}`;
@@ -809,37 +868,76 @@
 
             // Función para crear niños de ejemplo si no existen
             function createGuestChildrenIfNotExists() {
-                let childrenData = storedData ? JSON.parse(storedData) : [];
+                let childrenData = storageAdapter.getChildren();
                 
                 // Verificar si ya existen los niños de ejemplo
-                const hasAlvaro = childrenData.some(child => child.id === 'guest-child-1');
-                const hasLuz = childrenData.some(child => child.id === 'guest-child-2');
+                const hasAlvaro = childrenData.some(child => child.name === 'Alvaro');
+                const hasLuz = childrenData.some(child => child.name === 'Luz');
                 
                 if (!hasAlvaro) {
                     childrenData.push({
-                        id: 'guest-child-1',
+                        id: 'alvaro-' + Date.now(),
                         name: 'Alvaro',
-                        age: 5,
-                        isGuest: true,
-                        completed: true,
-                        lastQuestionIndex: 55,
-                        parentId: 'guest'
+                        dob: '2017-08-10',
+                        sex: 'male',
+                        avatarCustomization: '1',
+                        theme: 'default',
+                        ownerId: null,
+                        createdAt: new Date().toISOString(),
+                        updatedAt: new Date().toISOString(),
+                        progressPercent: 100,
+                        deletedAt: null,
+                        version: 1
                     });
                 }
                 
                 if (!hasLuz) {
                     childrenData.push({
-                        id: 'guest-child-2',
+                        id: 'luz-' + Date.now(),
                         name: 'Luz',
-                        age: 4,
-                        isGuest: true,
-                        completed: true,
-                        lastQuestionIndex: 55,
-                        parentId: 'guest'
+                        dob: '2019-12-05',
+                        sex: 'female',
+                        avatarCustomization: '2',
+                        theme: 'default',
+                        ownerId: null,
+                        createdAt: new Date().toISOString(),
+                        updatedAt: new Date().toISOString(),
+                        progressPercent: 100,
+                        deletedAt: null,
+                        version: 1
                     });
                 }
                 
-                localStorage.setItem('yachayMikuyChildren', JSON.stringify(childrenData));
+                storageAdapter.saveChildren(childrenData);
+                
+                // Crear respuestas para los perfiles predefinidos
+                const responses = storageAdapter.getResponses();
+                
+                if (!responses['alvaro-' + Date.now()]) {
+                    responses['alvaro-' + Date.now()] = {};
+                    for (let i = 1; i <= 50; i++) {
+                        responses['alvaro-' + Date.now()][`q${i}`] = {
+                            type: 'select',
+                            value: i % 5 === 0 ? 'Opción 5' : `Opción ${i % 5}`,
+                            timestamp: new Date().toISOString(),
+                            version: 1
+                        };
+                    }
+                }
+                
+                if (!responses['luz-' + Date.now()]) {
+                    responses['luz-' + Date.now()] = {};
+                    for (let i = 1; i <= 50; i++) {
+                        responses['luz-' + Date.now()][`q${i}`] = {
+                            type: 'select',
+                            value: i % 5 === 0 ? 'Opción 5' : `Opción ${i % 5}`,
+                            timestamp: new Date().toISOString(),
+                            version: 1
+                        };
+                    }
+                }
+                
+                storageAdapter.saveResponses(responses);
             }
         });
 
