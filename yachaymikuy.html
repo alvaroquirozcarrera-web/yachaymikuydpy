@@ -29,12 +29,18 @@
             --required-color: #e74c3c;
             --pulse-color: #ff6b6b;
             --info: #17a2b8;
+            
+            /* Variables para el footer - IGUALES a index.html */
             --text-dark: #212529;
             --shadow: 0 8px 24px rgba(0, 0, 0, 0.08); 
             --radius: 12px;
             --transition: all 0.3s ease-in-out;
             --accent-red: #e63946;
             --white: #ffffff;
+            --child-blue: #5d8cc4;
+            --child-green: #81c784;
+            --child-yellow: #ffb74d;
+            --child-purple: #ba68c8;
         }
 
         * {
@@ -160,18 +166,18 @@
             background: linear-gradient(to bottom, var(--primary-blue), var(--light-blue));
         }
 
-        .header-logo {
+        .logo {
             display: flex;
             align-items: center;
         }
 
-        .header-logo i {
+        .logo i {
             color: var(--primary-blue);
             font-size: 2.5rem;
             margin-right: 1rem;
         }
 
-        .header-logo h1 {
+        .logo h1 {
             color: var(--primary-blue);
             font-size: 2rem;
             font-weight: 700;
@@ -238,6 +244,18 @@
             border-radius: 10px;
             width: 0%;
             transition: width 0.7s ease;
+            position: relative;
+        }
+
+        .progress-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            background: linear-gradient(to right, rgba(255,255,255,0.3), transparent);
+            border-radius: 10px;
         }
 
         .section-indicator {
@@ -294,8 +312,6 @@
             min-height: 400px;
             position: relative;
             overflow: hidden;
-            display: flex;
-            flex-direction: column;
         }
 
         .question-container::before {
@@ -321,11 +337,17 @@
             color: var(--required-color);
             font-weight: bold;
             margin-left: 5px;
+            animation: pulse 2s infinite;
         }
-        
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
         .answer-options {
             margin-bottom: 1.5rem;
-            flex-grow: 1;
         }
 
         .option {
@@ -345,7 +367,7 @@
             transform: translateX(5px);
         }
 
-        .option input[type="radio"], .option input[type="checkbox"] {
+        .option input[type="radio"] {
             margin-right: 1rem;
             transform: scale(1.3);
             accent-color: var(--primary-blue);
@@ -418,8 +440,32 @@
             color: var(--warning-red);
             font-size: 0.9rem;
             margin-top: 0.5rem;
+            display: none;
             font-weight: 500;
+        }
+
+        .weight-height-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            margin: 2rem 0;
+        }
+
+        .weight-figure, .height-figure {
+            font-size: 5rem;
+            transition: var(--transition);
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+        }
+
+        .weight-input-container, .height-input-container {
             text-align: center;
+        }
+
+        .weight-value, .height-value {
+            font-size: 1.3rem;
+            margin-top: 1rem;
+            font-weight: 600;
+            color: var(--primary-blue);
         }
 
         /* --- BOTONES DE NAVEGACIÓN --- */
@@ -445,6 +491,10 @@
             font-family: 'Poppins', sans-serif;
         }
 
+        .btn i {
+            margin-right: 0.5rem;
+        }
+
         .btn-primary {
             background-color: var(--primary-blue);
             color: white;
@@ -465,7 +515,17 @@
             background-color: #5a6268;
             transform: translateY(-2px);
         }
-        
+
+        .btn-danger {
+            background-color: var(--warning-red);
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background-color: #c82333;
+            transform: translateY(-2px);
+        }
+
         .btn-success {
             background-color: var(--success-green);
             color: white;
@@ -555,27 +615,69 @@
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
             position: relative;
             overflow: hidden;
-            border: 2px solid transparent;
         }
-        
-        .child-card.completed { background-color: #e8f5e9; border-color: var(--success-green); }
-        .child-card.in-progress { background-color: #fff8e1; border-color: var(--progress-yellow); }
-        .child-card.not-started { background-color: #f5f5f5; border-color: var(--gray); }
+
+        .child-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 6px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--primary-blue), var(--light-blue));
+        }
+
+        .child-card.not-started {
+            background-color: var(--light-gray);
+            border: 2px solid var(--gray);
+        }
+
+        .child-card.not-started::before {
+            background-color: var(--gray);
+        }
+
+        .child-card.in-progress {
+            background-color: #fff8e1;
+            border: 2px solid var(--progress-yellow);
+        }
+
+        .child-card.in-progress::before {
+            background-color: var(--progress-yellow);
+        }
+
+        .child-card.incomplete {
+            background-color: #ffe0b2;
+            border: 2px solid var(--accent-orange);
+        }
+
+        .child-card.incomplete::before {
+            background-color: var(--accent-orange);
+        }
+
+        .child-card.completed {
+            background-color: #e8f5e9;
+            border: 2px solid var(--success-green);
+        }
+
+        .child-card.completed::before {
+            background-color: var(--success-green);
+        }
 
         .child-card:hover {
             transform: translateY(-8px);
             box-shadow: var(--shadow);
         }
-        
-        .child-card-header {
+
+        .child-header {
             display: flex;
             align-items: center;
             margin-bottom: 1.5rem;
         }
 
-        .child-card-avatar {
-            width: 50px;
-            height: 50px;
+        .child-avatar {
+            width: 60px;
+            height: 60px;
+            background-color: var(--light-blue);
             border-radius: 50%;
             display: flex;
             justify-content: center;
@@ -583,19 +685,38 @@
             margin-right: 1rem;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             color: white;
-            font-size: 1.5rem;
-            flex-shrink: 0;
+            font-size: 1.8rem;
         }
 
-        .child-card-info .child-name { font-size: 1.2rem; }
-        .child-card-info .child-age { font-size: 0.9rem; margin-top: 0; }
-        
+        .child-name {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--dark-blue);
+        }
+
+        .child-age {
+            font-size: 1rem;
+            color: var(--gray);
+            margin-top: 0.2rem;
+        }
+
+        .progress-container-card {
+            margin-top: 1.5rem;
+        }
+
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
         .progress-bar-card {
             height: 10px;
             background-color: #e0e0e0;
             border-radius: 8px;
             overflow: hidden;
-            margin-top: 0.5rem;
         }
 
         .progress-fill-card {
@@ -605,9 +726,62 @@
             transition: width 0.7s ease;
         }
 
-        .child-card.completed .progress-fill-card { background-color: var(--success-green); }
-        .child-card.in-progress .progress-fill-card { background-color: var(--progress-yellow); }
-        .child-card.not-started .progress-fill-card { background-color: var(--gray); }
+        .child-card.in-progress .progress-fill-card {
+            background-color: var(--progress-yellow);
+        }
+
+        .child-card.incomplete .progress-fill-card {
+            background-color: var(--accent-orange);
+        }
+
+        .child-card.completed .progress-fill-card {
+            background-color: var(--success-green);
+        }
+
+        .child-status {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .child-card.not-started .child-status {
+            background-color: var(--gray);
+            color: white;
+        }
+
+        .child-card.in-progress .child-status {
+            background-color: var(--progress-yellow);
+            color: var(--dark-blue);
+        }
+
+        .child-card.incomplete .child-status {
+            background-color: var(--accent-orange);
+            color: white;
+        }
+
+        .child-card.completed .child-status {
+            background-color: var(--success-green);
+            color: white;
+        }
+
+        .child-warning {
+            font-size: 0.85rem;
+            color: var(--warning-red);
+            margin-top: 1rem;
+            padding: 0.8rem;
+            background-color: rgba(220, 53, 69, 0.1);
+            border-radius: 8px;
+            display: none;
+        }
+
+        .child-card.incomplete .child-warning {
+            display: block;
+        }
 
         .actions-container {
             display: flex;
@@ -617,9 +791,229 @@
             flex-wrap: wrap;
         }
 
-        .hidden { display: none !important; }
+        .hidden {
+            display: none !important;
+        }
 
-        /* --- FOOTER (IDÉNTICO A INDEX.HTML) --- */
+        /* --- PREGUNTAS CON IMÁGENES --- */
+        .image-question {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            margin: 1.5rem 0;
+        }
+
+        .image-option {
+            width: 120px;
+            height: 120px;
+            border-radius: 10px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: var(--transition);
+            border: 3px solid transparent;
+            position: relative;
+        }
+
+        .image-option:hover {
+            transform: scale(1.05);
+        }
+
+        .image-option.selected {
+            border-image: linear-gradient(45deg, var(--primary-blue), var(--success-green)) 1;
+            box-shadow: 0 0 15px rgba(44, 160, 90, 0.4);
+            transform: scale(1.05);
+        }
+
+        .image-option img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .image-option .checkmark {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background-color: var(--primary-blue);
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .image-option.selected .checkmark {
+            opacity: 1;
+        }
+
+        .image-option .image-title {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 5px;
+            font-size: 0.8rem;
+            text-align: center;
+        }
+
+        /* --- OPCIÓN "NO TENGO EXAMEN" --- */
+        .no-exam-option {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--light-gray);
+            border-radius: 10px;
+            padding: 1rem;
+            margin-top: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            border: 2px solid transparent;
+        }
+
+        .no-exam-option:hover {
+            background-color: var(--very-light-blue);
+            border-color: var(--primary-blue);
+        }
+
+        .no-exam-option.selected {
+            background-color: var(--very-light-blue);
+            border-color: var(--primary-blue);
+        }
+
+        .no-exam-option input {
+            margin-right: 1rem;
+            transform: scale(1.2);
+            accent-color: var(--primary-blue);
+        }
+
+        /* --- CAMPOS ADICIONALES --- */
+        .additional-inputs {
+            background-color: rgba(255, 152, 0, 0.1);
+            border: 2px dashed var(--accent-orange);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+            display: none;
+        }
+
+        .additional-inputs.visible {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .additional-inputs-title {
+            font-weight: 600;
+            color: var(--accent-orange);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .additional-inputs-title i {
+            margin-right: 0.5rem;
+        }
+
+        /* --- CONTADOR DE PALABRAS --- */
+        .word-count-container {
+            text-align: right;
+            font-size: 0.8rem;
+            color: var(--gray);
+            margin-top: -0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* --- AVATAR DEL ROBOT --- */
+        .avatar-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 100;
+            display: flex;
+            align-items: flex-end;
+            flex-direction: column;
+        }
+
+        .avatar {
+            width: 150px;
+            height: 200px;
+            border-radius: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            position: relative;
+            z-index: 2;
+            overflow: hidden;
+            cursor: pointer;
+            transition: var(--transition);
+            animation: float 3s ease-in-out infinite;
+            background-image: url('dpy.png');
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-color: transparent;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .avatar:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .message-bubble {
+            background-color: var(--bubble-color);
+            border-radius: 20px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 8px var(--bubble-shadow);
+            max-width: 250px;
+            position: relative;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
+        }
+
+        .message-bubble.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .message-bubble::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            right: 30px;
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-top: 10px solid var(--bubble-color);
+        }
+
+        .message-text {
+            font-size: 0.9rem;
+            color: var(--dark-blue);
+            font-weight: 500;
+        }
+
+        /* --- FOOTER (IGUAL A INDEX.HTML) --- */
         .footer { 
             background-color: var(--primary-blue); 
             color: rgba(255,255,255,0.8); 
@@ -687,43 +1081,112 @@
             font-size: 0.9rem; 
         }
 
-        /* --- RESPONSIVE --- */
+        /* --- ESTILOS RESPONSIVOS --- */
         @media (max-width: 768px) {
-            .container { padding: 1rem; }
-            .top-bar { padding: 0.8rem 2%; }
-            .logo-text { font-size: 1.2rem; }
-            .nav-links { display: none; }
-            header { flex-direction: column; text-align: center; padding: 1.5rem; }
-            .child-info { margin-top: 1rem; text-align: center; }
-            .question-container { padding: 1.5rem; min-height: 350px; }
-            .question-title { font-size: 1.3rem; }
-            .navigation-buttons { flex-direction: column; gap: 1rem; }
-            .btn { width: 100%; }
-            .actions-container { flex-direction: column; }
-            .children-grid { grid-template-columns: 1fr; }
-            .footer-content { grid-template-columns: 1fr; }
+            .container {
+                padding: 1rem;
+            }
+            
+            .top-bar {
+                padding: 0.8rem 2%;
+            }
+            
+            .logo-text {
+                font-size: 1.2rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            header {
+                flex-direction: column;
+                text-align: center;
+                padding: 1.5rem;
+            }
+            
+            .child-info {
+                margin-top: 1rem;
+                text-align: center;
+            }
+            
+            .question-container {
+                padding: 1.5rem;
+                min-height: 350px;
+            }
+            
+            .question-title {
+                font-size: 1.3rem;
+            }
+            
+            .navigation-buttons {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+            
+            .actions-container {
+                flex-direction: column;
+            }
+            
+            .children-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .weight-height-container {
+                flex-direction: column;
+                gap: 2rem;
+            }
+            
+            .avatar-container {
+                bottom: 10px;
+                right: 10px;
+            }
+            
+            .avatar {
+                width: 120px;
+                height: 160px;
+            }
+            
+            .message-bubble {
+                max-width: 200px;
+                padding: 0.8rem;
+                font-size: 0.8rem;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Barra superior -->
     <div class="top-bar">
         <div class="logo-container">
-            <div class="logo"><i class="fas fa-heartbeat"></i></div>
+            <div class="logo">
+                <i class="fas fa-heartbeat"></i>
+            </div>
             <div class="logo-text">Yachay Mikuy</div>
         </div>
         <div class="nav-links">
-            <a href="index.html">Inicio</a>
+            <a href="#" id="homeLink">Inicio</a>
+            <a href="#" id="aboutLink">Acerca de</a>
+            <a href="#" id="contactLink">Contacto</a>
         </div>
     </div>
 
     <div class="container">
         <header>
-            <div class="header-logo">
+            <div class="logo">
                 <i class="fas fa-heartbeat"></i>
                 <h1>Yachay Mikuy</h1>
             </div>
             <div class="child-info">
-                <div class="child-name" id="childNameDisplay">Cargando...</div>
+                <div class="child-name" id="childNameDisplay">Nombre del Niño</div>
                 <div class="child-age">Edad: <span id="childAgeDisplay">-</span> años</div>
             </div>
         </header>
@@ -737,48 +1200,86 @@
                 <div class="progress-fill" id="progressFill"></div>
             </div>
             <div class="section-indicator">
-                <div class="section-item active" data-section="1">Generales</div>
-                <div class="section-item" data-section="2">Nutrición</div>
-                <div class="section-item" data-section="3">Cognitivo</div>
-                <div class="section-item" data-section="4">Psicológico</div>
+                <div class="section-item active" id="section1" data-section="1">Datos Generales</div>
+                <div class="section-item" id="section2" data-section="2">Nutricionales</div>
+                <div class="section-item" id="section3" data-section="3">Cognitivos</div>
+                <div class="section-item" id="section4" data-section="4">Psicológicos</div>
             </div>
         </div>
 
-        <div class="question-container" id="questionContainer"></div>
+        <div class="question-container" id="questionContainer">
+        </div>
 
-        <div class="navigation-buttons" id="navigationButtons">
-            <button class="btn btn-outline" id="exitBtn"><i class="fas fa-save"></i> Guardar y Salir</button>
-            <button class="btn btn-secondary hidden" id="backBtn"><i class="fas fa-arrow-left"></i> Anterior</button>
-            <button class="btn btn-primary" id="nextBtn">Siguiente <i class="fas fa-arrow-right"></i></button>
+        <div class="navigation-buttons">
+            <button class="btn btn-danger" id="exitBtn">
+                <i class="fas fa-sign-out-alt"></i> Salir
+            </button>
+            <button class="btn btn-outline hidden" id="dashboardBtn">
+                <i class="fas fa-th-large"></i> Ver Tablero
+            </button>
+            <button class="btn btn-secondary hidden" id="backBtn">
+                <i class="fas fa-arrow-left"></i> Regresar
+            </button>
+            <button class="btn btn-primary" id="nextBtn">
+                Siguiente <i class="fas fa-arrow-right"></i>
+            </button>
         </div>
 
         <div class="completion-screen" id="completionScreen">
-            <div class="completion-icon"><i class="fas fa-check-circle"></i></div>
+            <div class="completion-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
             <h2 class="completion-title">¡Datos guardados con éxito!</h2>
-            <p class="completion-message">Ahora puedes revisar el estado de todos los perfiles o generar un plan nutricional para los que estén completos.</p>
+            <p class="completion-message">La información del cuestionario ha sido guardada correctamente. Ahora puedes revisar el estado de todos tus hijos.</p>
             
             <div class="children-dashboard">
-                <h3 class="dashboard-title">Panel de Control de Perfiles</h3>
-                <div class="children-grid" id="childrenGridContainer"></div>
+                <h3 class="dashboard-title">Panel de Control de Niños</h3>
+                <div class="children-grid" id="childrenGridContainer">
+                </div>
             </div>
             
             <div class="actions-container">
-                <button class="btn btn-primary hidden" id="selectAnotherChildBtn"><i class="fas fa-child"></i> Volver a Mis Hijos</button>
-                <button class="btn btn-success" id="generatePlanBtn"><i class="fas fa-utensils"></i> Generar plan nutricional</button>
+                <button class="btn btn-primary hidden" id="selectAnotherChildBtn">
+                    <i class="fas fa-child"></i> Seleccionar otro niño
+                </button>
+                <button class="btn btn-success" id="generatePlanBtn">
+                    <i class="fas fa-utensils"></i> Generar plan nutricional
+                </button>
+                <button class="btn btn-danger" id="exitBtnFinal">
+                    <i class="fas fa-sign-out-alt"></i> Salir
+                </button>
             </div>
         </div>
     </div>
-    
+
+    <div class="avatar-container">
+        <div class="message-bubble" id="messageBubble">
+            <p class="message-text" id="messageText">¡Vamos a comenzar! Tu participación es clave para la salud de tu hijo.</p>
+        </div>
+        <div class="avatar" id="avatarRobot"></div>
+    </div>
+
+    <!-- Footer (igual a index.html) -->
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-section">
                 <h3>Redes Sociales</h3>
                 <div class="social-links">
-                    <a href="https://facebook.com/yachaymikuy" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
-                    <a href="https://twitter.com/yachaymikuy" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a>
-                    <a href="https://instagram.com/yachaymikuy" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
-                    <a href="https://youtube.com/channel/yachaymikuy" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a>
-                    <a href="https://wa.me/51918072862" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://facebook.com/yachaymikuy" target="_blank" title="Facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="https://twitter.com/yachaymikuy" target="_blank" title="Twitter">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="https://instagram.com/yachaymikuy" target="_blank" title="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://youtube.com/channel/yachaymikuy" target="_blank" title="YouTube">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                    <a href="https://wa.me/51918072862" target="_blank" title="WhatsApp">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
                 </div>
             </div>
             <div class="footer-section">
@@ -790,11 +1291,11 @@
             <div class="footer-section">
                 <h3>Enlaces Útiles</h3>
                 <ul class="footer-links">
-                    <li><a href="index.html"><i class="fas fa-info-circle"></i> Acerca de Nosotros</a></li>
-                    <li><a href="index.html"><i class="fas fa-concierge-bell"></i> Servicios</a></li>
-                    <li><a href="index.html"><i class="fas fa-question-circle"></i> Preguntas Frecuentes</a></li>
-                    <li><a href="index.html"><i class="fas fa-shield-alt"></i> Política de Privacidad</a></li>
-                    <li><a href="index.html"><i class="fas fa-file-contract"></i> Términos y Condiciones</a></li>
+                    <li><a href="#" id="aboutFooterLink"><i class="fas fa-info-circle"></i> Acerca de Nosotros</a></li>
+                    <li><a href="#" id="servicesFooterLink"><i class="fas fa-concierge-bell"></i> Servicios</a></li>
+                    <li><a href="#" id="faqFooterLink"><i class="fas fa-question-circle"></i> Preguntas Frecuentes</a></li>
+                    <li><a href="#" id="privacyFooterLink"><i class="fas fa-shield-alt"></i> Política de Privacidad</a></li>
+                    <li><a href="#" id="termsFooterLink"><i class="fas fa-file-contract"></i> Términos y Condiciones</a></li>
                 </ul>
             </div>
         </div>
@@ -802,385 +1303,1828 @@
     </footer>
 
     <script>
+        // Base de datos de preguntas completa
         const questions = [
-            // Sección 1: Datos Generales y de Salud (15 preguntas)
-            { id: "weight", question: "¿Cuál es el peso actual del niño/a en kg?", type: "text", section: 1, required: true, placeholder: "Ej: 15.5" },
-            { id: "height", question: "¿Cuál es la talla actual del niño/a en cm?", type: "text", section: 1, required: true, placeholder: "Ej: 110" },
-            { id: "hemoglobin", question: "Si tiene un examen de hemoglobina reciente (últimos 6 meses), ingrese el valor (g/dL):", type: "text", section: 1, placeholder: "Ej: 12.5 (Opcional)" },
-            { id: "allergies", question: "¿El niño/a tiene alguna alergia alimentaria conocida?", type: "radio", section: 1, required: true, options: ["Sí", "No", "No estoy seguro/a"] },
-            { id: "allergies_details", question: "Si respondió 'Sí', por favor especifique a qué alimentos es alérgico:", type: "text", section: 1, condition: { id: "allergies", value: "Sí" } },
-            { id: "medical_conditions", question: "¿Tiene alguna condición médica crónica (asma, diabetes, etc.)?", type: "radio", section: 1, required: true, options: ["Sí", "No"] },
-            { id: "medical_conditions_details", question: "Si respondió 'Sí', especifique la condición:", type: "text", section: 1, condition: { id: "medical_conditions", value: "Sí" } },
-            { id: "medications", question: "¿Toma algún medicamento o suplemento de forma regular?", type: "radio", section: 1, required: true, options: ["Sí", "No"] },
-            { id: "medications_details", question: "Si respondió 'Sí', especifique cuáles:", type: "text", section: 1, condition: { id: "medications", value: "Sí" } },
-            { id: "vaccinations", question: "¿Están sus vacunas al día según el esquema nacional?", type: "radio", section: 1, required: true, options: ["Sí, todas", "Le faltan algunas", "No estoy seguro/a"] },
-            { id: "birth_type", question: "¿Cómo fue el nacimiento?", type: "radio", section: 1, options: ["Parto natural", "Cesárea", "No recuerdo"] },
-            { id: "birth_weight", question: "¿Cuál fue su peso al nacer (en kg)?", type: "text", section: 1, placeholder: "Ej: 3.2 (Opcional)" },
-            { id: "physical_activity_freq", question: "¿Cuántos días a la semana realiza actividad física intensa (correr, jugar, deportes) por al menos 60 minutos?", type: "radio", section: 1, required: true, options: ["0-1 días", "2-3 días", "4-5 días", "6-7 días"] },
-            { id: "screen_time", question: "¿Cuántas horas al día pasa frente a pantallas (TV, tablet, celular) fuera del horario escolar?", type: "radio", section: 1, required: true, options: ["Menos de 1 hora", "1-2 horas", "3-4 horas", "Más de 4 horas"] },
-            { id: "sleep_hours", question: "¿Cuántas horas duerme por la noche habitualmente?", type: "radio", section: 1, required: true, options: ["Menos de 8 horas", "8-10 horas", "10-12 horas", "Más de 12 horas"] },
-
-            // Sección 2: Hábitos Nutricionales (15 preguntas)
-            { id: "main_meals", question: "¿Cuántas comidas principales (desayuno, almuerzo, cena) consume al día?", type: "radio", section: 2, required: true, options: ["1", "2", "3"] },
-            { id: "snacks", question: "¿Cuántos refrigerios o snacks consume entre comidas?", type: "radio", section: 2, required: true, options: ["0", "1-2", "3 o más"] },
-            { id: "fruits_freq", question: "¿Con qué frecuencia consume frutas frescas?", type: "radio", section: 2, required: true, options: ["Diariamente", "3-5 veces por semana", "1-2 veces por semana", "Casi nunca"] },
-            { id: "vegetables_freq", question: "¿Con qué frecuencia consume verduras (cocidas o crudas)?", type: "radio", section: 2, required: true, options: ["En cada comida principal", "Una vez al día", "Algunas veces por semana", "Casi nunca"] },
-            { id: "water_intake", question: "¿Cuántos vasos de agua pura bebe al día?", type: "radio", section: 2, required: true, options: ["0-1 vasos", "2-4 vasos", "5-6 vasos", "Más de 6 vasos"] },
-            { id: "sugary_drinks_freq", question: "¿Con qué frecuencia consume bebidas azucaradas (gaseosas, jugos envasados, etc.)?", type: "radio", section: 2, required: true, options: ["Diariamente", "Varias veces por semana", "Una vez por semana", "Casi nunca"] },
-            { id: "dairy_freq", question: "¿Consume productos lácteos (leche, yogur, queso) diariamente?", type: "radio", section: 2, required: true, options: ["Sí", "No"] },
-            { id: "red_meat_freq", question: "¿Con qué frecuencia consume carnes rojas (res, cordero, etc.)?", type: "radio", section: 2, required: true, options: ["Varias veces por semana", "Una vez por semana", "Ocasionalmente", "Casi nunca"] },
-            { id: "fish_freq", question: "¿Con qué frecuencia consume pescado?", type: "radio", section: 2, required: true, options: ["2 o más veces por semana", "Una vez por semana", "Ocasionalmente", "Casi nunca"] },
-            { id: "legumes_freq", question: "¿Con qué frecuencia consume menestras (lentejas, frijoles, etc.)?", type: "radio", section: 2, required: true, options: ["2 o más veces por semana", "Una vez por semana", "Ocasionalmente", "Casi nunca"] },
-            { id: "processed_food_freq", question: "¿Con qué frecuencia consume alimentos procesados (snacks de bolsa, embutidos, comida rápida)?", type: "radio", section: 2, required: true, options: ["Diariamente", "Varias veces por semana", "Ocasionalmente", "Casi nunca"] },
-            { id: "eats_alone", question: "¿Suele comer solo/a o acompañado/a por la familia?", type: "radio", section: 2, options: ["Generalmente solo/a", "Generalmente en familia", "Ambos por igual"] },
-            { id: "picky_eater", question: "¿Se considera un niño/a 'selectivo' o 'difícil' para comer?", type: "radio", section: 2, required: true, options: ["Sí, mucho", "A veces", "No, come de todo"] },
-            { id: "family_food_source", question: "¿De dónde provienen principalmente los alimentos del hogar?", type: "radio", section: 2, options: ["Mercado local", "Supermercado", "Bodega/tienda", "Producción propia"] },
-            { id: "breakfast_habit", question: "¿Toma desayuno todos los días antes de ir al colegio?", type: "radio", section: 2, required: true, options: ["Sí, siempre", "La mayoría de días", "Rara vez o nunca"] },
+            // SECCIÓN 1: DATOS GENERALES Y DE SALUD
+            {
+                id: "weight",
+                question: "¿Cuál es el peso del niño/niña?",
+                type: "image",
+                section: 1,
+                requiresAdditionalInfo: true,
+                options: [
+                    { value: "Muy bajo peso", image: "https://picsum.photos/seed/weight1/120/120.jpg", title: "Muy bajo" },
+                    { value: "Bajo peso", image: "https://picsum.photos/seed/weight2/120/120.jpg", title: "Bajo" },
+                    { value: "Peso normal", image: "https://picsum.photos/seed/weight3/120/120.jpg", title: "Normal" },
+                    { value: "Sobrepeso", image: "https://picsum.photos/seed/weight4/120/120.jpg", title: "Sobrepeso" },
+                    { value: "Obesidad", image: "https://picsum.photos/seed/weight5/120/120.jpg", title: "Obesidad" }
+                ]
+            },
+            {
+                id: "height",
+                question: "¿Cuál es la talla del niño/niña?",
+                type: "image",
+                section: 1,
+                requiresAdditionalInfo: true,
+                options: [
+                    { value: "Muy baja estatura", image: "https://picsum.photos/seed/height1/120/120.jpg", title: "Muy baja" },
+                    { value: "Baja estatura", image: "https://picsum.photos/seed/height2/120/120.jpg", title: "Baja" },
+                    { value: "Estatura normal", image: "https://picsum.photos/seed/height3/120/120.jpg", title: "Normal" },
+                    { value: "Alta estatura", image: "https://picsum.photos/seed/height4/120/120.jpg", title: "Alta" },
+                    { value: "Muy alta estatura", image: "https://picsum.photos/seed/height5/120/120.jpg", title: "Muy alta" }
+                ]
+            },
+            {
+                id: "hemoglobin",
+                question: "Si tiene un examen de hemoglobina reciente, puede subirlo aquí.",
+                type: "file",
+                section: 1,
+                requiresAdditionalInfo: true
+            },
+            {
+                id: "anemia_history",
+                question: "¿El niño/niña ha tenido anemia en el pasado?",
+                type: "radio",
+                section: 1,
+                options: ["Sí", "No", "No sé"]
+            },
+            {
+                id: "anemia_treatment",
+                question: "¿Recibió tratamiento para la anemia?",
+                type: "radio",
+                section: 1,
+                options: ["Sí, tratamiento completo", "Sí, tratamiento incompleto", "No recibió tratamiento", "No aplica"]
+            },
+            {
+                id: "birth_weight",
+                question: "¿Cuál fue el peso al nacer?",
+                type: "radio",
+                section: 1,
+                options: ["Menos de 2.5 kg (bajo peso)", "2.5 - 4.0 kg (normal)", "Más de 4.0 kg (macrosómico)", "No sé"]
+            },
+            {
+                id: "birth_complications",
+                question: "¿Hubo complicaciones durante el parto?",
+                type: "radio",
+                section: 1,
+                options: ["Sí, complicaciones graves", "Sí, complicaciones leves", "No, parto normal", "No sé"]
+            },
+            {
+                id: "vaccinations",
+                question: "¿Está al día con sus vacunas?",
+                type: "radio",
+                section: 1,
+                options: ["Sí, completamente", "Parcialmente", "No", "No sé"]
+            },
+            {
+                id: "illnesses_last_year",
+                question: "¿Cuántas veces ha estado enfermo en el último año?",
+                type: "radio",
+                section: 1,
+                options: ["0-2 veces", "3-5 veces", "6-8 veces", "Más de 8 veces"]
+            },
+            {
+                id: "hospitalizations",
+                question: "¿Ha sido hospitalizado en el último año?",
+                type: "radio",
+                section: 1,
+                options: ["Sí, una vez", "Sí, más de una vez", "No", "No sé"]
+            },
+            {
+                id: "chronic_diseases",
+                question: "¿Tiene alguna enfermedad crónica?",
+                type: "radio",
+                section: 1,
+                options: ["Sí", "No", "En estudio", "No sé"]
+            },
+            {
+                id: "medications",
+                question: "¿Toma algún medicamento regularmente?",
+                type: "radio",
+                section: 1,
+                options: ["Sí, medicamentos recetados", "Sí, suplementos", "Sí, ambos", "No"]
+            },
+            {
+                id: "allergies",
+                question: "¿Tiene alergias conocidas?",
+                type: "file",
+                section: 1,
+                requiresAdditionalInfo: true
+            },
+            {
+                id: "medical_appointments",
+                question: "¿Con qué frecuencia visita al médico?",
+                type: "radio",
+                section: 1,
+                options: ["Mensualmente", "Cada 3 meses", "Cada 6 meses", "Anualmente", "Solo cuando está enfermo"]
+            },
             
-            // Sección 3: Desarrollo Cognitivo y Rendimiento Escolar (15 preguntas)
-            { id: "concentration", question: "¿Cómo calificaría su capacidad de concentración en tareas escolares?", type: "radio", section: 3, required: true, options: ["Muy buena", "Buena", "Regular", "Mala"] },
-            { id: "memory", question: "¿Con qué facilidad recuerda lo que aprende en el colegio?", type: "radio", section: 3, required: true, options: ["Muy fácilmente", "Con algo de esfuerzo", "Con dificultad"] },
-            { id: "school_performance", question: "¿Cómo describiría su rendimiento académico general?", type: "radio", section: 3, required: true, options: ["Excelente", "Bueno", "Promedio", "Necesita mejorar"] },
-            { id: "homework_attitude", question: "¿Cuál es su actitud hacia las tareas escolares?", type: "radio", section: 3, options: ["Las hace con entusiasmo", "Las hace sin problemas", "Se queja o las evita"] },
-            { id: "reading_habit", question: "¿Lee por placer fuera de las obligaciones escolares?", type: "radio", section: 3, options: ["Sí, frecuentemente", "Sí, a veces", "No, casi nunca"] },
-            { id: "problem_solving", question: "Cuando se enfrenta a un problema o reto, ¿cómo reacciona?", type: "radio", section: 3, options: ["Busca soluciones creativas", "Pide ayuda después de intentar", "Se frustra fácilmente"] },
-            { id: "learning_new_things", question: "¿Muestra curiosidad o interés por aprender cosas nuevas?", type: "radio", section: 3, required: true, options: ["Mucha curiosidad", "A veces", "Poco interés"] },
-            { id: "school_attendance", question: "¿Ha faltado al colegio por motivos de salud en el último mes?", type: "radio", section: 3, options: ["No ha faltado", "1-2 días", "3-5 días", "Más de 5 días"] },
-            { id: "fatigue_school", question: "¿Se queja de cansancio o sueño durante el horario escolar?", type: "radio", section: 3, required: true, options: ["Frecuentemente", "A veces", "Casi nunca"] },
-            { id: "favorite_subject", question: "¿Tiene alguna materia favorita en el colegio?", type: "radio", section: 3, options: ["Sí", "No"] },
-            { id: "least_favorite_subject", question: "¿Hay alguna materia que le cueste más trabajo?", type: "radio", section: 3, options: ["Sí", "No"] },
-            { id: "teacher_feedback", question: "¿Qué comentarios ha recibido de sus maestros sobre su participación en clase?", type: "text", section: 3, placeholder: "Ej: Es muy participativo, le cuesta concentrarse... (Opcional)" },
-            { id: "learning_style", question: "¿Cómo cree que aprende mejor?", type: "radio", section: 3, options: ["Viendo (visual)", "Escuchando (auditivo)", "Haciendo (kinestésico)", "No estoy seguro/a"] },
-            { id: "language_skills", question: "¿Cómo describiría su habilidad para expresarse verbalmente?", type: "radio", section: 3, options: ["Muy buena, es hablador/a", "Normal para su edad", "Es tímido/a o le cuesta"] },
-            { id: "extracurricular_activities", question: "¿Participa en alguna actividad extracurricular (deportes, artes, etc.)?", type: "radio", section: 3, options: ["Sí", "No"] },
+            // SECCIÓN 2: DATOS NUTRICIONALES
+            {
+                id: "breastfeeding_duration",
+                question: "¿Cuánto tiempo recibió lactancia materna?",
+                type: "radio",
+                section: 2,
+                options: ["Nunca", "Menos de 6 meses", "6-12 meses", "Más de 12 meses", "Todavía en lactancia"]
+            },
+            {
+                id: "feeding_difficulties",
+                question: "¿Ha tenido dificultades para alimentarse?",
+                type: "radio",
+                section: 2,
+                options: ["Sí, frecuentemente", "Ocasionalmente", "Rara vez", "Nunca"]
+            },
+            {
+                id: "appetite",
+                question: "¿Cómo describiría su apetito?",
+                type: "radio",
+                section: 2,
+                options: ["Muy bueno", "Bueno", "Regular", "Pobre", "Muy pobre"]
+            },
+            {
+                id: "food_preferences",
+                question: "¿Es selectivo con la comida?",
+                type: "radio",
+                section: 2,
+                options: ["Muy selectivo", "Algo selectivo", "Poco selectivo", "Come de todo"]
+            },
+            {
+                id: "meals_frequency",
+                question: "¿Cuántas comidas hace al día?",
+                type: "radio",
+                section: 2,
+                options: ["2 comidas", "3 comidas", "4 comidas", "5 o más comidas"]
+            },
+            {
+                id: "snacks",
+                question: "¿Come snacks entre comidas?",
+                type: "radio",
+                section: 2,
+                options: ["Nunca", "Rara vez", "A veces", "Frecuentemente", "Siempre"]
+            },
+            {
+                id: "water_consumption",
+                question: "¿Cuánta agua bebe al día?",
+                type: "radio",
+                section: 2,
+                options: ["Menos de 4 vasos", "4-6 vasos", "7-9 vasos", "Más de 9 vasos"]
+            },
+            {
+                id: "sweet_drinks",
+                question: "¿Con qué frecuencia consume bebidas azucaradas?",
+                type: "radio",
+                section: 2,
+                options: ["Nunca", "Ocasionalmente", "1-2 veces por semana", "3-5 veces por semana", "Diariamente"]
+            },
+            {
+                id: "fruits_vegetables",
+                question: "¿Con qué frecuencia come frutas y verduras?",
+                type: "radio",
+                section: 2,
+                options: ["Nunca", "Rara vez", "A veces", "Frecuentemente", "Diariamente"]
+            },
+            {
+                id: "protein_sources",
+                question: "¿Consume suficientes fuentes de proteína?",
+                type: "radio",
+                section: 2,
+                options: ["Sí, variadas y frecuentes", "Adecuadamente", "Limitadamente", "Insuficientemente"]
+            },
+            {
+                id: "iron_rich_foods",
+                question: "¿Consume alimentos ricos en hierro?",
+                type: "radio",
+                section: 2,
+                options: ["Diariamente", "3-5 veces por semana", "1-2 veces por semana", "Rara vez", "Nunca"]
+            },
+            {
+                id: "vitamin_supplements",
+                question: "¿Toma suplementos vitamínicos?",
+                type: "radio",
+                section: 2,
+                options: ["Sí, multivitamínicos", "Sí, hierro", "Sí, vitamina D", "Sí, otros", "No toma suplementos"]
+            },
+            {
+                id: "breakfast",
+                question: "¿Desayuna regularmente?",
+                type: "radio",
+                section: 2,
+                options: ["Siempre", "Casi siempre", "A veces", "Rara vez", "Nunca"]
+            },
+            {
+                id: "school_meals",
+                question: "¿Come en el colegio/centro educativo?",
+                type: "radio",
+                section: 2,
+                options: ["Siempre", "A veces", "Rara vez", "Nunca", "No aplica"]
+            },
+            {
+                id: "family_meals",
+                question: "¿Comen juntos en familia?",
+                type: "radio",
+                section: 2,
+                options: ["Siempre", "Casi siempre", "A veces", "Rara vez", "Nunca"]
+            },
             
-            // Sección 4: Aspectos Psicológicos y Emocionales (10 preguntas)
-            { id: "mood", question: "En general, ¿cómo describiría el estado de ánimo del niño/a?", type: "radio", section: 4, required: true, options: ["Alegre y enérgico", "Tranquilo y calmado", "Variable, con altibajos", "A menudo irritable o triste"] },
-            { id: "social_interaction", question: "¿Cómo se relaciona con otros niños de su edad?", type: "radio", section: 4, required: true, options: ["Se integra fácilmente, tiene amigos", "Es selectivo con sus amigos", "Prefiere jugar solo", "Le cuesta hacer amigos"] },
-            { id: "self_esteem", question: "¿Cómo percibe su propia confianza y autoestima?", type: "radio", section: 4, options: ["Parece seguro/a de sí mismo/a", "A veces duda de sus capacidades", "Es inseguro/a o muy autocrítico/a"] },
-            { id: "emotional_expression", question: "¿Expresa abiertamente sus emociones (alegría, tristeza, enojo)?", type: "radio", section: 4, options: ["Sí, con facilidad", "A veces, le cuesta un poco", "No, tiende a guardarse las cosas"] },
-            { id: "stress_management", question: "¿Cómo maneja la frustración o el estrés?", type: "radio", section: 4, options: ["Lo habla y busca calmarse", "Llora o se enoja intensamente", "Se aísla o se queda callado/a"] },
-            { id: "anxiety_signs", question: "¿Muestra signos de ansiedad (preocupación excesiva, miedos, etc.)?", type: "radio", section: 4, options: ["Frecuentemente", "A veces", "Casi nunca"] },
-            { id: "parent_relationship", question: "¿Cómo es su relación con los padres o cuidadores principales?", type: "radio", section: 4, options: ["Muy cercana y de confianza", "Buena, pero a veces conflictiva", "Distante o conflictiva"] },
-            { id: "independence", question: "¿Qué tan independiente es en sus actividades diarias (vestirse, comer, etc.)?", type: "radio", section: 4, options: ["Muy independiente para su edad", "Normal, a veces necesita ayuda", "Depende mucho de los demás"] },
-            { id: "appetite_changes", question: "¿Ha notado cambios drásticos en su apetito relacionados con su estado de ánimo?", type: "radio", section: 4, options: ["Sí, come más o menos si está triste/estresado", "No, su apetito es estable"] },
-            { id: "life_changes", question: "¿Ha habido algún cambio importante en su vida recientemente (mudanza, nuevo hermano, etc.)?", type: "radio", section: 4, options: ["Sí", "No"] }
+            // SECCIÓN 3: DATOS COGNITIVOS
+            {
+                id: "attention_span",
+                question: "¿Cómo es su capacidad de atención?",
+                type: "radio",
+                section: 3,
+                options: ["Muy buena", "Buena", "Regular", "Pobre", "Muy pobre"]
+            },
+            {
+                id: "concentration",
+                question: "¿Se concentra bien en las tareas?",
+                type: "radio",
+                section: 3,
+                options: ["Siempre", "Casi siempre", "A veces", "Rara vez", "Nunca"]
+            },
+            {
+                id: "memory",
+                question: "¿Cómo es su memoria?",
+                type: "radio",
+                section: 3,
+                options: ["Excelente", "Buena", "Regular", "Pobre", "Muy pobre"]
+            },
+            {
+                id: "learning_ability",
+                question: "¿Aprende nuevas cosas fácilmente?",
+                type: "radio",
+                section: 3,
+                options: ["Muy fácilmente", "Fácilmente", "Normalmente", "Con dificultad", "Con mucha dificultad"]
+            },
+            {
+                id: "problem_solving",
+                question: "¿Resuelve problemas por sí mismo?",
+                type: "radio",
+                section: 3,
+                options: ["Siempre", "Casi siempre", "A veces", "Rara vez", "Nunca"]
+            },
+            {
+                id: "language_development",
+                question: "¿Cómo es su desarrollo del lenguaje?",
+                type: "radio",
+                section: 3,
+                options: ["Muy avanzado", "Avanzado", "Acorde a su edad", "Un poco retrasado", "Muy retrasado"]
+            },
+            {
+                id: "communication",
+                question: "¿Se comunica bien con otros?",
+                type: "radio",
+                section: 3,
+                options: ["Excelente", "Buena", "Regular", "Pobre", "Muy pobre"]
+            },
+            {
+                id: "reading_interest",
+                question: "¿Le interesa leer?",
+                type: "radio",
+                section: 3,
+                options: ["Mucho", "Bastante", "Regular", "Poco", "Nada"]
+            },
+            {
+                id: "math_skills",
+                question: "¿Cómo es su habilidad con los números?",
+                type: "radio",
+                section: 3,
+                options: ["Excelente", "Buena", "Regular", "Pobre", "Muy pobre"]
+            },
+            {
+                id: "creativity",
+                question: "¿Es creativo/a?",
+                type: "radio",
+                section: 3,
+                options: ["Muy creativo", "Creativo", "Algo creativo", "Poco creativo", "Nada creativo"]
+            },
+            {
+                id: "curiosity",
+                question: "¿Es curioso/a y hace preguntas?",
+                type: "radio",
+                section: 3,
+                options: ["Extremadamente curioso", "Muy curioso", "Normalmente curioso", "Poco curioso", "Nada curioso"]
+            },
+            {
+                id: "school_performance",
+                question: "¿Cómo es su rendimiento escolar?",
+                type: "radio",
+                section: 3,
+                options: ["Excelente", "Bueno", "Regular", "Pobre", "Muy pobre"]
+            },
+            {
+                id: "homework",
+                question: "¿Hace sus tareas escolares?",
+                type: "radio",
+                section: 3,
+                options: ["Siempre sin ayuda", "Siempre con ayuda", "Casi siempre", "A veces", "Rara vez"]
+            },
+            {
+                id: "screen_time",
+                question: "¿Cuánto tiempo pasa frente a pantallas?",
+                type: "radio",
+                section: 3,
+                options: ["Menos de 1 hora", "1-2 horas", "3-4 horas", "Más de 4 horas"]
+            },
+            {
+                id: "educational_activities",
+                question: "¿Participa en actividades educativas extraescolares?",
+                type: "radio",
+                section: 3,
+                options: ["Varias actividades", "Alguna actividad", "Ocasionalmente", "Rara vez", "Nunca"]
+            },
+            
+            // SECCIÓN 4: DATOS PSICOLÓGICOS
+            {
+                id: "mood_general",
+                question: "¿Cómo es su estado de ánimo general?",
+                type: "radio",
+                section: 4,
+                options: ["Siempre feliz", "Generalmente feliz", "Variable", "Generalmente triste", "Siempre triste"]
+            },
+            {
+                id: "anxiety",
+                question: "¿Muestra signos de ansiedad?",
+                type: "radio",
+                section: 4,
+                options: ["Nunca", "Rara vez", "A veces", "Frecuentemente", "Siempre"]
+            },
+            {
+                id: "stress",
+                question: "¿Parece estresado/a?",
+                type: "radio",
+                section: 4,
+                options: ["Nunca", "Rara vez", "A veces", "Frecuentemente", "Siempre"]
+            },
+            {
+                id: "social_interaction",
+                question: "¿Cómo interactúa socialmente?",
+                type: "radio",
+                section: 4,
+                options: ["Excelente, muy sociable", "Bueno, sociable", "Normal", "Tímido/a", "Muy reservado/a"]
+            },
+            {
+                id: "friendships",
+                question: "¿Tiene amigos/as?",
+                type: "radio",
+                section: 4,
+                options: ["Muchos amigos", "Varios amigos", "Algunos amigos", "Pocos amigos", "No tiene amigos"]
+            },
+            {
+                id: "behavior",
+                question: "¿Cómo es su comportamiento general?",
+                type: "radio",
+                section: 4,
+                options: ["Siempre bueno", "Generalmente bueno", "Variable", "A veces problemático", "Frecuentemente problemático"]
+            },
+            {
+                id: "temper",
+                question: "¿Cómo controla sus emociones?",
+                type: "radio",
+                section: 4,
+                options: ["Excelente control", "Buen control", "Control regular", "Poco control", "Ningún control"]
+            },
+            {
+                id: "sleep_patterns",
+                question: "¿Cómo duerme?",
+                type: "radio",
+                section: 4,
+                options: ["Excelente", "Bueno", "Regular", "Pobre", "Muy pobre"]
+            },
+            {
+                id: "independence",
+                question: "¿Es independiente para su edad?",
+                type: "radio",
+                section: 4,
+                options: ["Muy independiente", "Bastante independiente", "Normalmente independiente", "Poco independiente", "Dependiente"]
+            },
+            {
+                id: "self_esteem",
+                question: "¿Cómo es su autoestima?",
+                type: "radio",
+                section: 4,
+                options: ["Muy alta", "Alta", "Normal", "Baja", "Muy baja"]
+            },
+            {
+                id: "play_activities",
+                question: "¿Disfruta de actividades lúdicas?",
+                type: "radio",
+                section: 4,
+                options: ["Mucho", "Bastante", "Normalmente", "Poco", "Nada"]
+            },
+            {
+                id: "family_relationship",
+                question: "¿Cómo es su relación con la familia?",
+                type: "radio",
+                section: 4,
+                options: ["Excelente", "Buena", "Regular", "Pobre", "Muy pobre"]
+            },
+            {
+                id: "fears",
+                question: "¿Tiene miedos o fobias?",
+                type: "radio",
+                section: 4,
+                options: ["No tiene miedos", "Miedos normales", "Algunos miedos", "Varios miedos", "Muchos miedos"]
+            },
+            {
+                id: "discipline_response",
+                question: "¿Cómo responde a la disciplina?",
+                type: "radio",
+                section: 4,
+                options: ["Siempre positivo", "Generalmente positivo", "Variable", "Generalmente negativo", "Siempre negativo"]
+            },
+            {
+                id: "special_needs",
+                question: "¿Tiene necesidades educativas especiales?",
+                type: "radio",
+                section: 4,
+                options: ["Sí, con diagnóstico", "Sí, en estudio", "Posiblemente", "Probablemente no", "Definitivamente no"]
+            }
         ];
 
+        // Mensajes de ánimo para el robot
+        const encouragementMessages = [
+            "¡Excelente trabajo! Cada respuesta ayuda a mejorar la salud de tu hijo.",
+            "¡Sigue así! Estás contribuyendo al bienestar de tu familia.",
+            "¡Tus respuestas son muy valiosas! Gracias por tu dedicación.",
+            "¡Lo estás haciendo genial! La nutrición es fundamental para el desarrollo.",
+            "¡Continúa adelante! Estás construyendo un futuro más saludable.",
+            "¡Fantástico! Tu compromiso con la salud de tu hijo es admirable.",
+            "¡Sigue adelante! Cada pregunta respondida es un paso importante.",
+            "¡Qué bien! La información que proporcionas es muy útil.",
+            "¡Excelente! Estás ayudando a prevenir problemas de salud.",
+            "¡Adelante! Tu esfuerzo marcará una gran diferencia.",
+            "¡Hola! Soy tu asistente de salud infantil. ¡Estoy aquí para ayudarte!",
+            "¿Necesitas ayuda? ¡Estoy a tu disposición!",
+            "¡Tus respuestas son importantes para el desarrollo de tu hijo!",
+            "¡Juntos podemos mejorar la salud infantil!",
+            "¡La nutrición adecuada es clave para el crecimiento!",
+            "¡Cada pregunta contestada es un paso hacia un futuro saludable!",
+            "¡Gracias por tu tiempo y dedicación!",
+            "¡La información que proporcionas es muy valiosa!",
+            "¡Estoy aquí para apoyarte en este proceso!",
+            "¡Tu participación es fundamental para el bienestar de tu familia!"
+        ];
+
+        // Variables globales
         let currentQuestionIndex = 0;
         let currentChild = null;
         let childrenData = [];
         let answers = {};
+        let isEditMode = false;
+        let currentMessageIndex = 0;
+        let incompleteQuestions = [];
         let isGuestMode = false;
+        let showCompletionDirectly = false;
+        let currentUser = null;
 
+        // Elementos del DOM
+        const questionContainer = document.getElementById('questionContainer');
+        const progressContainer = document.getElementById('progressContainer');
+        const progressFill = document.getElementById('progressFill');
+        const progressText = document.getElementById('progressText');
+        const nextBtn = document.getElementById('nextBtn');
+        const backBtn = document.getElementById('backBtn');
+        const exitBtn = document.getElementById('exitBtn');
+        const exitBtnFinal = document.getElementById('exitBtnFinal');
+        const dashboardBtn = document.getElementById('dashboardBtn');
+        const completionScreen = document.getElementById('completionScreen');
+        const selectAnotherChildBtn = document.getElementById('selectAnotherChildBtn');
+        const generatePlanBtn = document.getElementById('generatePlanBtn');
+        const childNameDisplay = document.getElementById('childNameDisplay');
+        const childAgeDisplay = document.getElementById('childAgeDisplay');
+        const childrenGridContainer = document.getElementById('childrenGridContainer');
+        const messageBubble = document.getElementById('messageBubble');
+        const messageText = document.getElementById('messageText');
+        const avatarRobot = document.getElementById('avatarRobot');
+        const homeLink = document.getElementById('homeLink');
+        const aboutLink = document.getElementById('aboutLink');
+        const contactLink = document.getElementById('contactLink');
+
+        // Inicialización
         document.addEventListener('DOMContentLoaded', function() {
+            // Cargar datos del almacenamiento local
+            loadDataFromStorage();
+            
+            // Obtener parámetros de la URL
             const urlParams = new URLSearchParams(window.location.search);
             const childId = urlParams.get('childId');
-            isGuestMode = urlParams.get('guest') === 'true';
+            const editMode = urlParams.get('edit');
+            const startQuestion = urlParams.get('question');
+            const guestMode = urlParams.get('guest');
+            const showCompletion = urlParams.get('showCompletion');
+            const userId = urlParams.get('userId');
             
-            loadDataFromStorage();
-
-            if (urlParams.get('showCompletion') === 'true') {
-                showView('completion');
-                loadChildrenList(urlParams.get('userId'));
+            // Verificar si estamos en modo edición
+            isEditMode = editMode === 'true';
+            isGuestMode = guestMode === 'true';
+            showCompletionDirectly = showCompletion === 'true';
+            
+            // Si se solicita mostrar la pantalla de finalización directamente
+            if (showCompletionDirectly) {
+                showCompletionScreenDirectly(userId);
                 return;
             }
             
-            if (!isGuestMode && !localStorage.getItem('yachayMikuyCurrentUser') && !localStorage.getItem('yachayMikuyRememberedUser')) {
-                handleError("Acceso denegado. Debes iniciar sesión.", 'index.html');
-                return;
+            // Verificar si el usuario ha iniciado sesión
+            currentUser = localStorage.getItem('yachayMikuyCurrentUser');
+            if (currentUser) {
+                currentUser = JSON.parse(currentUser);
             }
-
+            
             if (childId) {
-                currentChild = childrenData.find(c => String(c.id) === childId || String(c.id) === String(childId)); // Comparación más flexible
+                // Buscar el niño en los datos cargados
+                currentChild = childrenData.find(child => child.id == childId);
+                
+                // Si no se encuentra el niño, intentar recargar los datos
+                if (!currentChild) {
+                    loadDataFromStorage(); // Recargar datos
+                    currentChild = childrenData.find(child => child.id == childId);
+                }
+                
                 if (currentChild) {
-                    answers = currentChild.answers || {};
-                    const startQuestion = parseInt(urlParams.get('question')) || currentChild.lastQuestionIndex || 0;
-                    currentQuestionIndex = (startQuestion >= questions.length) ? 0 : startQuestion;
-                    updateChildInfo();
+                    childNameDisplay.textContent = currentChild.name;
+                    childAgeDisplay.textContent = currentChild.age;
+                    
+                    // Cargar respuestas guardadas si existen
+                    if (currentChild.answers) {
+                        answers = {...currentChild.answers};
+                    }
+                    
+                    // Si estamos en modo edición y se especificó una pregunta inicial
+                    if (isEditMode && startQuestion !== null) {
+                        currentQuestionIndex = parseInt(startQuestion);
+                    } else {
+                        // Si no, cargar el último índice de pregunta guardado
+                        currentQuestionIndex = currentChild.lastQuestionIndex || 0;
+                    }
+                    
+                    // Mostrar el botón de dashboard si hay respuestas guardadas
+                    if (currentQuestionIndex > 0) {
+                        dashboardBtn.classList.remove('hidden');
+                    }
+                    
+                    // Mostrar la pregunta actual
                     displayQuestion();
-                    showView('questionnaire');
+                    
+                    // Mostrar mensaje de ánimo
+                    showEncouragementMessage();
                 } else {
-                    handleError("Perfil de niño no encontrado. Redirigiendo...", 'index.html');
+                    // Si no se encuentra el niño, mostrar un mensaje de error
+                    console.error('No se encontró el niño con ID:', childId);
+                    showNotification('error', 'Error', 'No se encontró el perfil del niño. Por favor, inténtalo de nuevo.');
+                    
+                    // Redirigir a la página principal después de un breve retraso
+                    setTimeout(() => {
+                        window.location.href = 'index.html';
+                    }, 3000);
                 }
             } else if (isGuestMode) {
-                 showView('completion');
-                 loadChildrenList('guest');
+                // Modo invitado, crear niños de ejemplo si no existen
+                if (!childrenData.some(child => child.isGuest)) {
+                    createGuestChildren();
+                }
+                
+                // Seleccionar el primer niño de ejemplo
+                const guestChild = childrenData.find(child => child.isGuest);
+                if (guestChild) {
+                    currentChild = guestChild;
+                    childNameDisplay.textContent = currentChild.name;
+                    childAgeDisplay.textContent = currentChild.age;
+                    
+                    // Cargar respuestas guardadas si existen
+                    if (currentChild.answers) {
+                        answers = {...currentChild.answers};
+                    }
+                    
+                    // Mostrar el botón de dashboard
+                    dashboardBtn.classList.remove('hidden');
+                    
+                    // Mostrar la pregunta actual
+                    displayQuestion();
+                    
+                    // Mostrar mensaje de ánimo
+                    showEncouragementMessage();
+                }
             } else {
-                handleError("No se especificó un perfil. Redirigiendo...", 'index.html');
+                // Si no hay ID de niño en la URL, redirigir a la página principal
+                window.location.href = 'index.html';
             }
-
-            setupEventListeners();
+            
+            // Configurar event listeners
+            nextBtn.addEventListener('click', nextQuestion);
+            backBtn.addEventListener('click', previousQuestion);
+            exitBtn.addEventListener('click', exitQuestionnaire);
+            exitBtnFinal.addEventListener('click', exitQuestionnaire);
+            dashboardBtn.addEventListener('click', showCompletionScreenDirectly);
+            selectAnotherChildBtn.addEventListener('click', () => {
+                if (isGuestMode) {
+                    window.location.href = 'index.html?guest=true#profiles';
+                } else {
+                    window.location.href = 'index.html#profiles';
+                }
+            });
+            generatePlanBtn.addEventListener('click', generateNutritionalPlan);
+            
+            // Event listener para el robot - hacer que muestre mensajes al hacer clic
+            avatarRobot.addEventListener('click', showRandomMessage);
+            
+            // Event listeners para los enlaces de navegación
+            homeLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                if (isGuestMode) {
+                    window.location.href = 'index.html?guest=true';
+                } else {
+                    window.location.href = 'index.html';
+                }
+            });
+            
+            aboutLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                showNotification('info', 'Acerca de', 'Yachay Mikuy es una plataforma para combatir la anemia infantil con planes nutricionales personalizados.');
+            });
+            
+            contactLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                showNotification('info', 'Contacto', 'Email: contacto@yachaymikuy.com | Tel: +51 929 177 801');
+            });
+            
+            // Event listeners para los indicadores de sección
+            document.querySelectorAll('.section-item').forEach(item => {
+                item.addEventListener('click', function() {
+                    const section = parseInt(this.getAttribute('data-section'));
+                    goToSection(section);
+                });
+            });
         });
 
-        function setupEventListeners() {
-            document.getElementById('nextBtn').addEventListener('click', nextQuestion);
-            document.getElementById('backBtn').addEventListener('click', previousQuestion);
-            document.getElementById('exitBtn').addEventListener('click', exitQuestionnaire);
-            document.getElementById('selectAnotherChildBtn').addEventListener('click', () => window.location.href = 'index.html');
-            document.getElementById('generatePlanBtn').addEventListener('click', generateNutritionalPlan);
-            document.querySelectorAll('.section-item').forEach(item => {
-                item.addEventListener('click', () => goToSection(parseInt(item.dataset.section)));
-            });
-        }
-        
-        function loadDataFromStorage() {
-            childrenData = JSON.parse(localStorage.getItem('yachayMikuyChildren')) || [];
-        }
-
-        function saveDataToStorage() {
-            if (currentChild && !isGuestMode) {
-                currentChild.answers = answers;
-                currentChild.lastQuestionIndex = currentQuestionIndex;
-                currentChild.completed = currentQuestionIndex >= questions.length;
-
-                const index = childrenData.findIndex(c => c.id === currentChild.id);
-                if (index !== -1) {
-                    childrenData[index] = currentChild;
-                } else {
-                    // Si es un niño nuevo que no estaba en la lista, añadirlo (improbable pero seguro)
-                    childrenData.push(currentChild);
+        // Crear niños de ejemplo para el modo invitado
+        function createGuestChildren() {
+            const guestChildren = [
+                {
+                    id: 'guest-child-1',
+                    name: 'Alvaro',
+                    birthDate: '2018-05-15',
+                    age: 5,
+                    gender: 'male',
+                    department: 'Lima',
+                    parentId: 'guest',
+                    isGuest: true,
+                    progress: 100,
+                    completed: true,
+                    lastQuestionIndex: questions.length,
+                    answers: {
+                        weight: { value: "Peso normal", text: "20.5" },
+                        height: { value: "Estatura normal", text: "110" },
+                        hemoglobin: { noExam: true, text: "No se ha realizado examen" },
+                        // ... más respuestas predefinidas
+                    }
+                },
+                {
+                    id: 'guest-child-2',
+                    name: 'Luz',
+                    birthDate: '2019-08-20',
+                    age: 4,
+                    gender: 'female',
+                    department: 'Lima',
+                    parentId: 'guest',
+                    isGuest: true,
+                    progress: 100,
+                    completed: true,
+                    lastQuestionIndex: questions.length,
+                    answers: {
+                        weight: { value: "Peso normal", text: "18.2" },
+                        height: { value: "Estatura normal", text: "102" },
+                        hemoglobin: { fileName: "examen_hemoglobina.pdf", fileType: "application/pdf", text: "Hemoglobina: 12.5 g/dL" },
+                        // ... más respuestas predefinidas
+                    }
                 }
-                localStorage.setItem('yachayMikuyChildren', JSON.stringify(childrenData));
+            ];
+            
+            childrenData.push(...guestChildren);
+            saveDataToStorage();
+        }
+
+        // Mostrar mensaje de ánimo del robot
+        function showEncouragementMessage() {
+            // Seleccionar un mensaje aleatorio
+            const randomIndex = Math.floor(Math.random() * encouragementMessages.length);
+            messageText.textContent = encouragementMessages[randomIndex];
+            
+            // Mostrar la burbuja con animación
+            messageBubble.classList.add('show');
+            
+            // Ocultar después de 5 segundos
+            setTimeout(() => {
+                messageBubble.classList.remove('show');
+            }, 5000);
+        }
+
+        // Mostrar un mensaje aleatorio al hacer clic en el robot
+        function showRandomMessage() {
+            // Seleccionar un mensaje aleatorio diferente al actual
+            let randomIndex;
+            do {
+                randomIndex = Math.floor(Math.random() * encouragementMessages.length);
+            } while (randomIndex === currentMessageIndex && encouragementMessages.length > 1);
+            
+            currentMessageIndex = randomIndex;
+            messageText.textContent = encouragementMessages[randomIndex];
+            
+            // Mostrar la burbuja con animación
+            messageBubble.classList.add('show');
+            
+            // Ocultar después de 5 segundos
+            setTimeout(() => {
+                messageBubble.classList.remove('show');
+            }, 5000);
+        }
+
+        // Cargar datos desde el almacenamiento local
+        function loadDataFromStorage() {
+            const storedData = localStorage.getItem('yachayMikuyChildren');
+            if (storedData) {
+                childrenData = JSON.parse(storedData);
+            }
+            
+            // También cargar el usuario actual
+            const currentUserData = localStorage.getItem('yachayMikuyCurrentUser');
+            if (currentUserData) {
+                currentUser = JSON.parse(currentUserData);
             }
         }
 
+        // Guardar datos en el almacenamiento local
+        function saveDataToStorage() {
+            localStorage.setItem('yachayMikuyChildren', JSON.stringify(childrenData));
+        }
+
+        // Guardar respuesta actual
+        function saveCurrentAnswer() {
+            const currentQuestion = questions[currentQuestionIndex];
+            if (!currentQuestion) return;
+            
+            let answer = null;
+            
+            switch (currentQuestion.type) {
+                case 'radio':
+                    const selectedOption = document.querySelector(`input[name="${currentQuestion.id}"]:checked`);
+                    if (selectedOption) {
+                        answer = selectedOption.value;
+                    }
+                    break;
+                    
+                case 'text':
+                    const textInput = document.getElementById(currentQuestion.id);
+                    if (textInput && textInput.value.trim()) {
+                        answer = textInput.value.trim();
+                    }
+                    break;
+                    
+                case 'file':
+                    const fileAnswer = answers[currentQuestion.id];
+                    if (fileAnswer) {
+                        answer = fileAnswer;
+                    }
+                    break;
+                    
+                case 'image':
+                    const selectedImage = document.querySelector('.image-option.selected');
+                    if (selectedImage) {
+                        answer = selectedImage.querySelector('img').alt;
+                        
+                        // Si requiere información adicional, guardarla también
+                        if (currentQuestion.requiresAdditionalInfo) {
+                            const textInput = document.getElementById(`${currentQuestion.id}-text`);
+                            if (textInput && textInput.value.trim()) {
+                                if (!answer) answer = {};
+                                if (typeof answer === 'string') answer = { value: answer };
+                                answer.text = textInput.value.trim();
+                            }
+                            
+                            // Guardar archivo si existe
+                            const fileInput = document.getElementById(`${currentQuestion.id}-file`);
+                            if (fileInput && fileInput.files.length > 0) {
+                                if (!answer) answer = {};
+                                if (typeof answer === 'string') answer = { value: answer };
+                                answer.file = {
+                                    fileName: fileInput.files[0].name,
+                                    fileType: fileInput.files[0].type
+                                };
+                            }
+                        }
+                    }
+                    break;
+            }
+            
+            // Guardar respuesta si existe
+            if (answer) {
+                answers[currentQuestion.id] = answer;
+            }
+        }
+
+        // Mostrar la pantalla de finalización directamente
+        function showCompletionScreenDirectly(userId) {
+            // Ocultar contenedor de preguntas y botones de navegación
+            questionContainer.style.display = 'none';
+            document.querySelector('.navigation-buttons').style.display = 'none';
+            progressContainer.style.display = 'none';
+            
+            // Mostrar pantalla de finalización
+            completionScreen.style.display = 'block';
+            
+            // Cargar lista de niños con un pequeño retraso para asegurar que se muestren
+            setTimeout(() => {
+                loadChildrenList(userId);
+            }, 100);
+        }
+
+        // Mostrar la pregunta actual
         function displayQuestion() {
             if (currentQuestionIndex >= questions.length) {
-                finishQuestionnaire();
+                showCompletionScreen();
                 return;
             }
             
             const question = questions[currentQuestionIndex];
-            const container = document.getElementById('questionContainer');
-            let conditionalFieldHtml = '';
-
-            // Lógica para campos condicionales
-            const dependentQuestion = questions.find(q => q.condition && q.condition.id === question.id);
-            if (dependentQuestion) {
-                 const conditionMet = answers[question.id] === dependentQuestion.condition.value;
-                 conditionalFieldHtml = `
-                    <div id="conditional-field-${dependentQuestion.id}" style="display:${conditionMet ? 'block' : 'none'}; margin-top: 1.5rem; padding: 1rem; background: #f9f9f9; border-radius: 8px;">
-                        <label for="${dependentQuestion.id}" class="input-label">${dependentQuestion.question}</label>
-                        <input type="text" id="${dependentQuestion.id}" name="${dependentQuestion.id}" class="text-input" placeholder="${dependentQuestion.placeholder || ''}" value="${answers[dependentQuestion.id] || ''}">
-                    </div>
-                 `;
+            updateProgressBar();
+            updateSectionIndicator(question.section);
+            
+            // Actualizar botones de navegación
+            backBtn.classList.toggle('hidden', currentQuestionIndex === 0);
+            
+            // Mostrar el botón de dashboard si hay respuestas guardadas
+            if (currentQuestionIndex > 0) {
+                dashboardBtn.classList.remove('hidden');
+            } else {
+                dashboardBtn.classList.add('hidden');
             }
-
-            let questionHTML = `<h2 class="question-title">${question.question} ${question.required ? '<span class="required-indicator">*</span>' : ''}</h2><div class="answer-options">`;
-
+            
+            // Limpiar el contenedor de preguntas
+            questionContainer.innerHTML = '';
+            
+            // Crear el título de la pregunta
+            const questionTitle = document.createElement('h2');
+            questionTitle.className = 'question-title';
+            questionTitle.innerHTML = question.question + '<span class="required-indicator">*</span>';
+            questionContainer.appendChild(questionTitle);
+            
+            // Crear el contenedor de respuestas
+            const answerOptions = document.createElement('div');
+            answerOptions.className = 'answer-options';
+            questionContainer.appendChild(answerOptions);
+            
+            // Mostrar el tipo de pregunta correspondiente
             switch (question.type) {
                 case 'radio':
-                    question.options.forEach(opt => {
-                        const isChecked = answers[question.id] === opt ? 'checked' : '';
-                        questionHTML += `<label class="option ${isChecked ? 'selected' : ''}"><input type="radio" name="${question.id}" value="${opt}" ${isChecked}> ${opt}</label>`;
-                    });
-                    questionHTML += conditionalFieldHtml;
+                    displayRadioQuestion(question, answerOptions);
                     break;
                 case 'text':
-                    questionHTML += `<input type="text" class="text-input" id="${question.id}" name="${question.id}" placeholder="${question.placeholder || 'Escriba su respuesta...'}" value="${answers[question.id] || ''}">`;
+                    displayTextQuestion(question, answerOptions);
+                    break;
+                case 'file':
+                    displayFileQuestion(question, answerOptions);
+                    break;
+                case 'image':
+                    displayImageQuestion(question, answerOptions);
                     break;
             }
-
-            questionHTML += '</div><div class="error-message" id="error-message"></div>';
-            container.innerHTML = questionHTML;
-
-            updateUI();
             
-            container.querySelectorAll('input').forEach(input => {
-                input.addEventListener('input', saveCurrentAnswer);
-                if (input.type === 'radio') {
-                    input.addEventListener('change', () => {
-                        document.querySelectorAll(`label:has(input[name="${question.id}"])`).forEach(lbl => lbl.classList.remove('selected'));
-                        if (input.checked) {
-                            input.closest('label').classList.add('selected');
-                        }
-                        handleConditionalField(question.id);
+            // Restaurar respuesta guardada si existe
+            if (answers[question.id]) {
+                restoreAnswer(question.id, question.type);
+            }
+        }
+
+        // Mostrar pregunta de opción múltiple
+        function displayRadioQuestion(question, container) {
+            question.options.forEach((option, index) => {
+                const optionDiv = document.createElement('div');
+                optionDiv.className = 'option';
+                
+                const input = document.createElement('input');
+                input.type = 'radio';
+                input.id = `option-${index}`;
+                input.name = question.id;
+                input.value = option;
+                
+                const label = document.createElement('label');
+                label.htmlFor = `option-${index}`;
+                label.textContent = option;
+                
+                optionDiv.appendChild(input);
+                optionDiv.appendChild(label);
+                container.appendChild(optionDiv);
+                
+                // Event listener para selección
+                optionDiv.addEventListener('click', function() {
+                    input.checked = true;
+                    document.querySelectorAll(`.option`).forEach(opt => {
+                        opt.classList.remove('selected');
                     });
-                }
+                    optionDiv.classList.add('selected');
+                    
+                    // Guardar respuesta
+                    answers[question.id] = option;
+                });
+            });
+        }
+
+        // Mostrar pregunta de texto
+        function displayTextQuestion(question, container) {
+            const inputGroup = document.createElement('div');
+            inputGroup.className = 'input-group';
+            
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.className = 'text-input';
+            input.id = question.id;
+            input.placeholder = 'Escriba su respuesta aquí...';
+            
+            inputGroup.appendChild(input);
+            container.appendChild(inputGroup);
+            
+            // Event listener para guardar respuesta
+            input.addEventListener('input', function() {
+                answers[question.id] = input.value;
             });
         }
         
-        function handleConditionalField(questionId) {
-            const dependentQuestion = questions.find(q => q.condition && q.condition.id === questionId);
-            if(dependentQuestion) {
-                const container = document.getElementById(`conditional-field-${dependentQuestion.id}`);
-                const conditionMet = answers[questionId] === dependentQuestion.condition.value;
-                container.style.display = conditionMet ? 'block' : 'none';
-                if (!conditionMet) {
-                    delete answers[dependentQuestion.id];
-                    const input = container.querySelector('input');
-                    if(input) input.value = '';
-                }
-            }
-        }
-        
-        function saveCurrentAnswer(event) {
-            if (!event || !event.target) return;
-            const input = event.target;
-            const questionId = input.name || input.id;
-            answers[questionId] = input.value.trim();
-        }
-        
-        function validateAnswer() {
-            const question = questions[currentQuestionIndex];
-            const errorMessageDiv = document.getElementById('error-message');
-            errorMessageDiv.textContent = '';
+        // Mostrar pregunta de carga de archivo
+        function displayFileQuestion(question, container) {
+            // Opción de subir archivo
+            const fileUploadDiv = document.createElement('div');
+            fileUploadDiv.className = 'file-upload';
+            const fileInput = document.createElement('input');
+            fileInput.type = 'file';
+            fileInput.id = question.id;
+            fileInput.accept = '.pdf,.jpg,.jpeg,.png';
+            const fileLabel = document.createElement('label');
+            fileLabel.className = 'file-upload-label';
+            fileLabel.htmlFor = question.id;
+            fileLabel.innerHTML = '<i class="fas fa-cloud-upload-alt"></i> Haga clic para subir un archivo o arrástrelo aquí';
+            fileUploadDiv.appendChild(fileInput);
+            fileUploadDiv.appendChild(fileLabel);
+            container.appendChild(fileUploadDiv);
+
+            // Opción "No tengo"
+            const noExamOption = document.createElement('div');
+            noExamOption.className = 'no-exam-option';
+            const noExamInput = document.createElement('input');
+            noExamInput.type = 'radio';
+            noExamInput.id = `no-exam-${question.id}`;
+            noExamInput.name = question.id;
+            noExamInput.value = 'no-exam';
+            const noExamLabel = document.createElement('label');
+            noExamLabel.htmlFor = `no-exam-${question.id}`;
+            noExamLabel.textContent = `No tengo ${question.id === 'hemoglobin' ? 'examen de hemoglobina' : 'alergias conocidas'}`;
+            noExamOption.appendChild(noExamInput);
+            noExamOption.appendChild(noExamLabel);
+            container.appendChild(noExamOption);
+
+            // Campo de texto para descripción
+            const textGroup = document.createElement('div');
+            textGroup.className = 'input-group';
+            textGroup.style.marginTop = '20px';
+            const textLabel = document.createElement('label');
+            textLabel.className = 'input-label';
+            textLabel.textContent = 'Opcional: Añada una breve descripción';
+            const textInput = document.createElement('textarea');
+            textInput.className = 'text-input';
+            textInput.id = `${question.id}-text`;
+            textInput.rows = 3;
+            textInput.placeholder = 'Describa aquí...';
+            const wordCountContainer = document.createElement('div');
+            wordCountContainer.className = 'word-count-container';
+            wordCountContainer.id = `${question.id}-word-count`;
+            wordCountContainer.textContent = '0/50 palabras';
             
-            if (!question.required) return true;
+            textGroup.appendChild(textLabel);
+            textGroup.appendChild(textInput);
+            textGroup.appendChild(wordCountContainer);
+            container.appendChild(textGroup);
             
-            const answer = answers[question.id];
-            if (answer === undefined || answer === '') {
-                 errorMessageDiv.textContent = 'Esta pregunta es obligatoria.';
-                 return false;
-            }
-
-            const dependentQuestion = questions.find(q => q.condition && q.condition.id === question.id);
-            if(dependentQuestion && answers[question.id] === dependentQuestion.condition.value) {
-                const dependentAnswer = answers[dependentQuestion.id];
-                if(dependentAnswer === undefined || dependentAnswer === '') {
-                    errorMessageDiv.textContent = 'Por favor, complete el detalle requerido.';
-                    return false;
+            // Event listeners
+            fileInput.addEventListener('change', function() {
+                if (fileInput.files.length > 0) {
+                    fileLabel.innerHTML = `<i class="fas fa-file"></i> ${fileInput.files[0].name}`;
+                    noExamInput.checked = false;
+                    noExamOption.classList.remove('selected');
+                    // Guardar respuesta
+                    if (!answers[question.id]) {
+                        answers[question.id] = {};
+                    }
+                    answers[question.id].fileName = fileInput.files[0].name;
+                    answers[question.id].fileType = fileInput.files[0].type;
+                    answers[question.id].noExam = false;
                 }
-            }
-            return true;
+            });
+
+            noExamOption.addEventListener('click', function() {
+                noExamInput.checked = true;
+                noExamOption.classList.add('selected');
+                fileInput.value = '';
+                fileLabel.innerHTML = '<i class="fas fa-cloud-upload-alt"></i> Haga clic para subir un archivo o arrástrelo aquí';
+                // Guardar respuesta
+                if (!answers[question.id]) {
+                    answers[question.id] = {};
+                }
+                answers[question.id].noExam = true;
+            });
+
+            textInput.addEventListener('input', function() {
+                limitWords(textInput, wordCountContainer, 50);
+                // Guardar respuesta
+                if (!answers[question.id]) {
+                    answers[question.id] = {};
+                }
+                answers[question.id].text = textInput.value;
+            });
         }
 
-        function nextQuestion() {
-            if (!validateAnswer()) return;
+        // Mostrar pregunta con imágenes
+        function displayImageQuestion(question, container) {
+            const imageContainer = document.createElement('div');
+            imageContainer.className = 'image-question';
+            
+            question.options.forEach((option, index) => {
+                const imageOption = document.createElement('div');
+                imageOption.className = 'image-option';
+                
+                const img = document.createElement('img');
+                img.src = option.image;
+                img.alt = option.value;
+                
+                const checkmark = document.createElement('div');
+                checkmark.className = 'checkmark';
+                checkmark.innerHTML = '<i class="fas fa-check"></i>';
+                
+                const imageTitle = document.createElement('div');
+                imageTitle.className = 'image-title';
+                imageTitle.textContent = option.title;
+                
+                imageOption.appendChild(img);
+                imageOption.appendChild(checkmark);
+                imageOption.appendChild(imageTitle);
+                imageContainer.appendChild(imageOption);
+                
+                // Event listener para selección
+                imageOption.addEventListener('click', function() {
+                    document.querySelectorAll('.image-option').forEach(opt => {
+                        opt.classList.remove('selected');
+                    });
+                    imageOption.classList.add('selected');
+                    
+                    // Guardar respuesta
+                    answers[question.id] = option.value;
+                    
+                    // Si la pregunta requiere información adicional, mostrar campos
+                    if (question.requiresAdditionalInfo) {
+                        // Verificar si ya existe el contenedor de campos adicionales
+                        let additionalInputs = document.getElementById(`${question.id}-additional`);
+                        
+                        if (!additionalInputs) {
+                            // Crear contenedor para campos adicionales
+                            additionalInputs = document.createElement('div');
+                            additionalInputs.className = 'additional-inputs';
+                            additionalInputs.id = `${question.id}-additional`;
+                            
+                            const additionalTitle = document.createElement('div');
+                            additionalTitle.className = 'additional-inputs-title';
+                            additionalTitle.innerHTML = '<i class="fas fa-exclamation-circle"></i> Información adicional';
+                            additionalInputs.appendChild(additionalTitle);
+                            
+                            // Campo de texto para información adicional
+                            const textGroup = document.createElement('div');
+                            textGroup.className = 'input-group';
+                            
+                            const textLabel = document.createElement('label');
+                            textLabel.className = 'input-label';
+                            
+                            // Personalizar etiqueta según el tipo de pregunta
+                            if (question.id === 'weight') {
+                                textLabel.textContent = 'Ingrese el peso exacto (kg):';
+                            } else if (question.id === 'height') {
+                                textLabel.textContent = 'Ingrese la talla exacta (cm):';
+                            } else {
+                                textLabel.textContent = 'Por favor, proporcione más detalles:';
+                            }
+                            
+                            const textInput = document.createElement('input');
+                            textInput.type = 'text';
+                            textInput.className = 'text-input';
+                            textInput.id = `${question.id}-text`;
+                            
+                            // Personalizar placeholder según el tipo de pregunta
+                            if (question.id === 'weight') {
+                                textInput.placeholder = 'Ej: 25.5';
+                            } else if (question.id === 'height') {
+                                textInput.placeholder = 'Ej: 120';
+                            } else {
+                                textInput.placeholder = 'Describa aquí...';
+                            }
+                            
+                            textGroup.appendChild(textLabel);
+                            textGroup.appendChild(textInput);
+                            additionalInputs.appendChild(textGroup);
+                            
+                            // Para preguntas de peso y talla, agregar visualización
+                            if (question.id === 'weight' || question.id === 'height') {
+                                const visualContainer = document.createElement('div');
+                                visualContainer.className = 'weight-height-container';
+                                visualContainer.style.marginTop = '20px';
+                                
+                                const figureContainer = document.createElement('div');
+                                figureContainer.className = question.id === 'weight' ? 'weight-input-container' : 'height-input-container';
+                                
+                                const figure = document.createElement('div');
+                                figure.className = question.id === 'weight' ? 'weight-figure' : 'height-figure';
+                                figure.style.fontSize = '4rem';
+                                figure.style.color = 'var(--primary-blue)';
+                                figure.textContent = question.id === 'weight' ? '⚖️' : '📏';
+                                
+                                const valueDisplay = document.createElement('div');
+                                valueDisplay.className = question.id === 'weight' ? 'weight-value' : 'height-value';
+                                valueDisplay.textContent = question.id === 'weight' ? '0 kg' : '0 cm';
+                                
+                                figureContainer.appendChild(figure);
+                                figureContainer.appendChild(valueDisplay);
+                                visualContainer.appendChild(figureContainer);
+                                additionalInputs.appendChild(visualContainer);
+                                
+                                // Event listener para actualizar la visualización
+                                textInput.addEventListener('input', function() {
+                                    const value = parseFloat(textInput.value);
+                                    
+                                    if (!isNaN(value)) {
+                                        // Actualizar el valor mostrado
+                                        valueDisplay.textContent = question.id === 'weight' ? `${value} kg` : `${value} cm`;
+                                        
+                                        // Cambiar color según el valor
+                                        if (question.id === 'weight') {
+                                            if (currentChild && currentChild.age) {
+                                                const age = parseInt(currentChild.age);
+                                                let minWeight, maxWeight;
+                                                
+                                                if (age <= 2) {
+                                                    minWeight = 5;
+                                                    maxWeight = 15;
+                                                } else if (age <= 5) {
+                                                    minWeight = 10;
+                                                    maxWeight = 25;
+                                                } else if (age <= 10) {
+                                                    minWeight = 15;
+                                                    maxWeight = 45;
+                                                } else if (age <= 13) {
+                                                    minWeight = 25;
+                                                    maxWeight = 65;
+                                                } else {
+                                                    minWeight = 30;
+                                                    maxWeight = 80;
+                                                }
+                                                
+                                                if (value < minWeight) {
+                                                    figure.style.color = 'var(--warning-red)';
+                                                } else if (value > maxWeight) {
+                                                    figure.style.color = 'var(--warning-red)';
+                                                } else {
+                                                    figure.style.color = 'var(--success-green)';
+                                                }
+                                            }
+                                        } else if (question.id === 'height') {
+                                            if (currentChild && currentChild.age) {
+                                                const age = parseInt(currentChild.age);
+                                                let minHeight, maxHeight;
+                                                
+                                                if (age <= 2) {
+                                                    minHeight = 50;
+                                                    maxHeight = 90;
+                                                } else if (age <= 5) {
+                                                    minHeight = 80;
+                                                    maxHeight = 120;
+                                                } else if (age <= 10) {
+                                                    minHeight = 100;
+                                                    maxHeight = 150;
+                                                } else if (age <= 13) {
+                                                    minHeight = 120;
+                                                    maxHeight = 170;
+                                                } else {
+                                                    minHeight = 130;
+                                                    maxHeight = 190;
+                                                }
+                                                
+                                                if (value < minHeight) {
+                                                    figure.style.color = 'var(--warning-red)';
+                                                } else if (value > maxHeight) {
+                                                    figure.style.color = 'var(--warning-red)';
+                                                } else {
+                                                    figure.style.color = 'var(--success-green)';
+                                                }
+                                            }
+                                        }
+                                    }
+                                });
+                            }
+                            
+                            // Opción para subir archivo (excepto para peso y talla)
+                            if (question.id !== 'weight' && question.id !== 'height') {
+                                const fileGroup = document.createElement('div');
+                                fileGroup.className = 'input-group';
+                                
+                                const fileLabel = document.createElement('label');
+                                fileLabel.className = 'input-label';
+                                fileLabel.textContent = 'O puede subir un archivo:';
+                                
+                                const fileUploadDiv = document.createElement('div');
+                                fileUploadDiv.className = 'file-upload';
+                                
+                                const fileInput = document.createElement('input');
+                                fileInput.type = 'file';
+                                fileInput.id = `${question.id}-file`;
+                                fileInput.accept = '.pdf,.jpg,.jpeg,.png';
+                                
+                                const fileUploadLabel = document.createElement('label');
+                                fileUploadLabel.className = 'file-upload-label';
+                                fileUploadLabel.htmlFor = `${question.id}-file`;
+                                fileUploadLabel.innerHTML = '<i class="fas fa-cloud-upload-alt"></i> Haga clic para subir un archivo';
+                                
+                                fileUploadDiv.appendChild(fileInput);
+                                fileUploadDiv.appendChild(fileUploadLabel);
+                                fileGroup.appendChild(fileLabel);
+                                fileGroup.appendChild(fileUploadDiv);
+                                additionalInputs.appendChild(fileGroup);
+                                
+                                // Event listener para el archivo
+                                fileInput.addEventListener('change', function() {
+                                    if (fileInput.files.length > 0) {
+                                        fileUploadLabel.innerHTML = `<i class="fas fa-file"></i> ${fileInput.files[0].name}`;
+                                        if (!answers[question.id]) {
+                                            answers[question.id] = {};
+                                        }
+                                        answers[question.id].file = {
+                                            fileName: fileInput.files[0].name,
+                                            fileType: fileInput.files[0].type
+                                        };
+                                    }
+                                });
+                            }
+                            
+                            // Agregar al contenedor principal
+                            container.appendChild(additionalInputs);
+                        }
+                        
+                        // Mostrar campos adicionales con animación
+                        additionalInputs.classList.add('visible');
+                    }
+                });
+            });
+            
+            container.appendChild(imageContainer);
+        }
 
-            if (currentQuestionIndex < questions.length - 1) {
-                currentQuestionIndex++;
+        // Función para limitar palabras en textarea
+        function limitWords(textarea, wordCountDisplay, maxWords) {
+            const text = textarea.value;
+            const words = text.split(/\s+/).filter(word => word.length > 0);
+            
+            if (words.length > maxWords) {
+                const trimmedText = words.slice(0, maxWords).join(' ');
+                textarea.value = trimmedText;
+            }
+            
+            wordCountDisplay.textContent = `${words.length > maxWords ? maxWords : words.length}/${maxWords} palabras`;
+        }
+
+        // Restaurar respuesta guardada
+        function restoreAnswer(questionId, questionType) {
+            const answer = answers[questionId];
+
+            switch (questionType) {
+                case 'radio':
+                    const selectedOption = document.querySelector(`input[name="${questionId}"][value="${answer}"]`);
+                    if (selectedOption) {
+                        selectedOption.checked = true;
+                        selectedOption.closest('.option').classList.add('selected');
+                    }
+                    break;
+                
+                case 'text':
+                    const textInputText = document.getElementById(questionId);
+                    if (textInputText) textInputText.value = answer;
+                    break;
+                    
+                case 'file':
+                    if (answer) {
+                        if (answer.fileName) {
+                            const fileLabel = document.querySelector(`label[for="${questionId}"]`);
+                            if (fileLabel) fileLabel.innerHTML = `<i class="fas fa-file"></i> ${answer.fileName}`;
+                        }
+                        if (answer.noExam) {
+                            const noExamInput = document.getElementById(`no-exam-${questionId}`);
+                            if (noExamInput) {
+                                noExamInput.checked = true;
+                                noExamInput.closest('.no-exam-option').classList.add('selected');
+                            }
+                        }
+                        if (answer.text) {
+                            const textInputFile = document.getElementById(`${questionId}-text`);
+                            const wordCountContainer = document.getElementById(`${questionId}-word-count`);
+                            if (textInputFile && wordCountContainer) {
+                                textInputFile.value = answer.text;
+                                limitWords(textInputFile, wordCountContainer, 50);
+                            }
+                        }
+                    }
+                    break;
+                    
+                case 'image':
+                    let selectedValue = answer;
+                    if (typeof answer === 'object' && answer.value) {
+                        selectedValue = answer.value;
+                    }
+                    
+                    const selectedImageOption = document.querySelector(`.image-option img[alt="${selectedValue}"]`);
+                    if (selectedImageOption) {
+                        selectedImageOption.closest('.image-option').classList.add('selected');
+                        const question = questions.find(q => q.id === questionId);
+                        if (question && question.requiresAdditionalInfo) {
+                            const additionalInputs = document.getElementById(`${questionId}-additional`);
+                            if (additionalInputs) {
+                                additionalInputs.classList.add('visible');
+                                if (answer && answer.text) {
+                                    const textInputImage = document.getElementById(`${questionId}-text`);
+                                    if (textInputImage) {
+                                        textInputImage.value = answer.text;
+                                        if (questionId === 'weight' || questionId === 'height') {
+                                            textInputImage.dispatchEvent(new Event('input'));
+                                        }
+                                    }
+                                }
+                                if (answer && answer.file) {
+                                    const fileLabel = document.querySelector(`label[for="${question.id}-file"]`);
+                                    if (fileLabel) fileLabel.innerHTML = `<i class="fas fa-file"></i> ${answer.file.fileName}`;
+                                }
+                            }
+                        }
+                    }
+                    break;
+            }
+        }
+
+        // Actualizar la barra de progreso
+        function updateProgressBar() {
+            const progress = (currentQuestionIndex / questions.length) * 100;
+            progressFill.style.width = `${progress}%`;
+            progressText.textContent = `${Math.round(progress)}%`;
+        }
+
+        // Actualizar el indicador de sección
+        function updateSectionIndicator(section) {
+            // Resetear todas las secciones
+            for (let i = 1; i <= 4; i++) {
+                document.getElementById(`section${i}`).classList.remove('active');
+            }
+            
+            // Activar la sección actual
+            document.getElementById(`section${section}`).classList.add('active');
+        }
+
+        // Ir a una sección específica
+        function goToSection(section) {
+            // Encontrar la primera pregunta de la sección
+            const firstQuestionIndex = questions.findIndex(q => q.section === section);
+            if (firstQuestionIndex !== -1) {
+                // Guardar respuesta actual
+                saveCurrentAnswer();
+                
+                // Cambiar a la pregunta seleccionada
+                currentQuestionIndex = firstQuestionIndex;
                 displayQuestion();
-                saveDataToStorage();
-            } else {
-                finishQuestionnaire();
             }
         }
-        
-        function finishQuestionnaire() {
-            currentQuestionIndex = questions.length;
-            saveDataToStorage();
-            showView('completion');
-            loadChildrenList(currentChild.parentId);
+
+        // Ir a la siguiente pregunta
+        function nextQuestion() {
+            // Guardar respuesta actual
+            saveCurrentAnswer();
+            
+            const currentQuestion = questions[currentQuestionIndex];
+            
+            // Validar respuesta actual
+            if (!validateAnswer(currentQuestion)) {
+                return;
+            }
+            
+            // Guardar progreso
+            saveProgress();
+            
+            // Avanzar a la siguiente pregunta
+            currentQuestionIndex++;
+            displayQuestion();
+            
+            // Mostrar mensaje de ánimo
+            showEncouragementMessage();
         }
 
+        // Volver a la pregunta anterior
         function previousQuestion() {
+            // Guardar respuesta actual
+            saveCurrentAnswer();
+            
             if (currentQuestionIndex > 0) {
                 currentQuestionIndex--;
                 displayQuestion();
             }
         }
-        
+
+        // Validar respuesta actual
+        function validateAnswer(question) {
+            let isValid = true;
+            let errorMessage = '';
+            
+            switch (question.type) {
+                case 'radio':
+                    const selectedOption = document.querySelector(`input[name="${question.id}"]:checked`);
+                    if (!selectedOption) {
+                        isValid = false;
+                        errorMessage = 'Por favor seleccione una opción';
+                    }
+                    break;
+                    
+                case 'text':
+                    const textInput = document.getElementById(question.id);
+                    if (!textInput || !textInput.value.trim()) {
+                        isValid = false;
+                        errorMessage = 'Por favor complete este campo';
+                    }
+                    break;
+                    
+                case 'file':
+                    const answer = answers[question.id];
+                    let hasFile = false;
+                    let hasNoExam = false;
+                    let hasText = false;
+
+                    if (answer) {
+                        hasFile = !!answer.fileName;
+                        hasNoExam = !!answer.noExam;
+                        hasText = !!(answer.text && answer.text.trim() !== '');
+                    }
+
+                    if (!hasFile && !hasNoExam && !hasText) {
+                        isValid = false;
+                        errorMessage = 'Por favor suba un archivo, marque "No tengo" o escriba una descripción';
+                    }
+                    break;
+                    
+                case 'image':
+                    const selectedImage = document.querySelector(`.image-option.selected`);
+                    if (!selectedImage) {
+                        isValid = false;
+                        errorMessage = 'Por favor seleccione una opción';
+                    } else if (question.requiresAdditionalInfo) {
+                        // Verificar si hay información adicional
+                        const textInput = document.getElementById(`${question.id}-text`);
+                        
+                        if (!textInput || !textInput.value.trim()) {
+                            isValid = false;
+                            errorMessage = 'Por favor proporcione la información adicional requerida';
+                        }
+                    }
+                    break;
+            }
+            
+            if (!isValid) {
+                showErrorMessage(errorMessage);
+            }
+            
+            return isValid;
+        }
+
+        // Mostrar mensaje de error
+        function showErrorMessage(message) {
+            // Crear elemento de mensaje de error
+            const errorDiv = document.createElement('div');
+            errorDiv.className = 'error-message';
+            errorDiv.style.display = 'block';
+            errorDiv.style.marginTop = '15px';
+            errorDiv.style.textAlign = 'center';
+            errorDiv.style.padding = '10px';
+            errorDiv.style.backgroundColor = 'rgba(220, 53, 69, 0.1)';
+            errorDiv.style.borderRadius = '8px';
+            errorDiv.textContent = message;
+            
+            // Agregar al contenedor de preguntas
+            questionContainer.appendChild(errorDiv);
+            
+            // Eliminar después de 3 segundos
+            setTimeout(() => {
+                errorDiv.remove();
+            }, 3000);
+        }
+
+        // Guardar progreso
+        function saveProgress() {
+            // Actualizar datos del niño actual
+            if (currentChild) {
+                currentChild.answers = {...answers};
+                currentChild.lastQuestionIndex = currentQuestionIndex;
+                currentChild.completed = currentQuestionIndex >= questions.length;
+                currentChild.incompleteQuestions = [...incompleteQuestions];
+                
+                // Actualizar en el array de niños
+                const index = childrenData.findIndex(child => child.id === currentChild.id);
+                if (index !== -1) {
+                    childrenData[index] = currentChild;
+                }
+                
+                // Guardar en almacenamiento local
+                saveDataToStorage();
+            }
+        }
+
+        // Salir del cuestionario
         function exitQuestionnaire() {
-            saveDataToStorage();
+            // Guardar progreso actual
+            saveProgress();
+            
+            // Redirigir a la página principal
             window.location.href = 'index.html';
         }
 
-        function generateNutritionalPlan() {
+        // Mostrar pantalla de finalización
+        function showCompletionScreen() {
+            // Marcar el cuestionario como completado
+            currentChild.completed = true;
+            currentChild.lastQuestionIndex = questions.length;
+            saveProgress();
+            
+            // Ocultar contenedor de preguntas y botones de navegación
+            questionContainer.style.display = 'none';
+            document.querySelector('.navigation-buttons').style.display = 'none';
+            progressContainer.style.display = 'none';
+            
+            // Mostrar pantalla de finalización
+            completionScreen.style.display = 'block';
+            
+            // Cargar lista de niños
+            loadChildrenList();
+        }
+
+        // Cargar lista de niños
+        function loadChildrenList(userId) {
+            childrenGridContainer.innerHTML = '';
+            
+            // Si estamos en modo invitado, mostrar solo los perfiles de invitado
             if (isGuestMode) {
-                window.location.href = 'yachay.html?guest=true';
-                return;
-            }
-
-            const parentChildren = childrenData.filter(c => c.parentId === currentChild.parentId && !c.isGuest);
-            const completedChild = parentChildren.find(c => c.completed);
-
-            if (completedChild) {
-                window.location.href = `yachay.html?userId=${currentChild.parentId}`;
+                const guestChildren = childrenData.filter(child => child.isGuest);
+                
+                if (guestChildren.length === 0) {
+                    childrenGridContainer.innerHTML = '<p style="text-align: center; color: var(--gray);">No hay perfiles disponibles.</p>';
+                    return;
+                }
+                
+                guestChildren.forEach(child => {
+                    const childCard = document.createElement('div');
+                    
+                    // Determinar estado de la tarjeta
+                    let cardStatus = 'completed';
+                    let progressPercentage = 100;
+                    
+                    childCard.className = `child-card ${cardStatus}`;
+                    
+                    // Contenido de la tarjeta
+                    childCard.innerHTML = `
+                        <div class="child-status">Completado</div>
+                        <div class="child-header">
+                            <div class="child-avatar" style="background: ${child.gender === 'male' ? 'var(--child-blue)' : 'var(--child-purple)'}">
+                                <i class="fas fa-child"></i>
+                            </div>
+                            <div>
+                                <div class="child-name">${child.name}</div>
+                                <div class="child-age">${child.age} años</div>
+                            </div>
+                        </div>
+                        <div class="progress-container-card">
+                            <div class="progress-label">
+                                <span>Progreso del cuestionario</span>
+                                <span>${progressPercentage}%</span>
+                            </div>
+                            <div class="progress-bar-card">
+                                <div class="progress-fill-card" style="width: ${progressPercentage}%"></div>
+                            </div>
+                        </div>
+                    `;
+                    
+                    // Event listener para seleccionar otro niño
+                    childCard.addEventListener('click', function() {
+                        // Redirigir a yachaymikuy.html con el ID del niño
+                        window.location.href = `yachaymikuy.html?childId=${child.id}&guest=true`;
+                    });
+                    
+                    childrenGridContainer.appendChild(childCard);
+                });
+                
+                // Ocultar el botón "Seleccionar otro niño" en modo invitado
+                selectAnotherChildBtn.classList.add('hidden');
             } else {
-                alert("Debes completar al menos un perfil al 100% para generar un plan nutricional.");
+                // Modo con cuenta, mostrar los hijos del usuario actual
+                const urlParams = new URLSearchParams(window.location.search);
+                const userIdParam = userId || urlParams.get('userId');
+                
+                // Si no hay userId, usar el parentId del niño actual
+                const parentId = userIdParam || (currentChild ? currentChild.parentId : null);
+                
+                if (!parentId) {
+                    childrenGridContainer.innerHTML = '<p style="text-align: center; color: var(--gray);">No hay perfiles disponibles.</p>';
+                    return;
+                }
+                
+                const userChildren = childrenData.filter(child => child.parentId === parentId && !child.isGuest);
+                
+                if (userChildren.length === 0) {
+                    childrenGridContainer.innerHTML = '<p style="text-align: center; color: var(--gray);">No hay perfiles disponibles.</p>';
+                    return;
+                }
+                
+                userChildren.forEach(child => {
+                    const childCard = document.createElement('div');
+                    
+                    // Determinar estado de la tarjeta
+                    let cardStatus = 'not-started';
+                    let progressPercentage = 0;
+                    
+                    if (child.lastQuestionIndex > 0) {
+                        progressPercentage = Math.round((child.lastQuestionIndex / questions.length) * 100);
+                        
+                        if (child.completed) {
+                            cardStatus = 'completed';
+                        } else if (child.incompleteQuestions && child.incompleteQuestions.length > 0) {
+                            cardStatus = 'incomplete';
+                        } else {
+                            cardStatus = 'in-progress';
+                        }
+                    }
+                    
+                    childCard.className = `child-card ${cardStatus}`;
+                    
+                    // Contenido de la tarjeta
+                    childCard.innerHTML = `
+                        <div class="child-status">${
+                            cardStatus === 'completed' ? 'Completado' : 
+                            cardStatus === 'incomplete' ? 'Incompleto' :
+                            cardStatus === 'in-progress' ? 'En progreso' : 'No iniciado'
+                        }</div>
+                        <div class="child-header">
+                            <div class="child-avatar" style="background: ${child.gender === 'male' ? 'var(--child-blue)' : 'var(--child-purple)'}">
+                                <i class="fas fa-child"></i>
+                            </div>
+                            <div>
+                                <div class="child-name">${child.name}</div>
+                                <div class="child-age">${child.age} años</div>
+                            </div>
+                        </div>
+                        <div class="progress-container-card">
+                            <div class="progress-label">
+                                <span>Progreso del cuestionario</span>
+                                <span>${progressPercentage}%</span>
+                            </div>
+                            <div class="progress-bar-card">
+                                <div class="progress-fill-card" style="width: ${progressPercentage}%"></div>
+                            </div>
+                        </div>
+                        <div class="child-warning">
+                            ${cardStatus === 'incomplete' ? 
+                                'Le falta llenar datos obligatorios' : 
+                                cardStatus === 'not-started' ? 
+                                'No ha iniciado el cuestionario' : ''}
+                        </div>
+                    `;
+                    
+                    // Event listener para seleccionar otro niño
+                    childCard.addEventListener('click', function() {
+                        // Permitir acceder solo si está completado al 100%
+                        if (cardStatus === 'completed') {
+                            // Redirigir a yachaymikuy.html con el ID del niño
+                            window.location.href = `yachaymikuy.html?childId=${child.id}`;
+                        } else {
+                            // Mostrar mensaje estético
+                            const warningDiv = document.createElement('div');
+                            warningDiv.className = 'error-message';
+                            warningDiv.style.display = 'block';
+                            warningDiv.style.marginTop = '15px';
+                            warningDiv.style.textAlign = 'center';
+                            warningDiv.style.padding = '10px';
+                            warningDiv.style.backgroundColor = 'rgba(255, 152, 0, 0.1)';
+                            warningDiv.style.borderRadius = '8px';
+                            warningDiv.style.color = 'var(--accent-orange)';
+                            warningDiv.textContent = 'Por favor complete todas las preguntas obligatorias antes de continuar';
+                            
+                            // Agregar a la tarjeta
+                            childCard.appendChild(warningDiv);
+                            
+                            // Eliminar después de 3 segundos
+                            setTimeout(() => {
+                                warningDiv.remove();
+                            }, 3000);
+                        }
+                    });
+                    
+                    childrenGridContainer.appendChild(childCard);
+                });
+                
+                // Mostrar el botón "Seleccionar otro niño" en modo con cuenta
+                selectAnotherChildBtn.classList.remove('hidden');
             }
         }
-        
-        function goToSection(section) {
-            const firstQuestionOfSection = questions.findIndex(q => q.section === section);
-            if (firstQuestionOfSection !== -1) {
-                if (validateAnswer()) {
-                    currentQuestionIndex = firstQuestionOfSection;
-                    displayQuestion();
+
+        // Generar plan nutricional
+        function generateNutritionalPlan() {
+            // Verificar si hay niños completos al 100%
+            let completedChildren = [];
+            
+            if (isGuestMode) {
+                completedChildren = childrenData.filter(child => child.isGuest && child.completed);
+            } else {
+                const parentId = currentChild ? currentChild.parentId : null;
+                if (parentId) {
+                    completedChildren = childrenData.filter(child => 
+                        child.parentId === parentId && !child.isGuest && child.completed
+                    );
                 }
             }
-        }
-        
-        function loadChildrenList(userId) {
-            const container = document.getElementById('childrenGridContainer');
-            container.innerHTML = '';
             
-            const childrenToShow = isGuestMode 
-                ? childrenData.filter(c => c.isGuest)
-                : childrenData.filter(c => String(c.parentId) === String(userId) && !c.isGuest);
-
-            if (childrenToShow.length === 0) {
-                 container.innerHTML = '<p>No se encontraron perfiles.</p>';
-                 return;
+            if (completedChildren.length === 0) {
+                showNotification('warning', 'No hay datos completos', 'No hay niños con cuestionarios completos al 100%. Por favor complete todos los datos antes de generar un plan nutricional.');
+                return;
             }
-
-            childrenToShow.forEach(child => {
-                const progress = Math.min(100, Math.round(((child.lastQuestionIndex || 0) / questions.length) * 100));
-                const status = child.completed ? 'completed' : progress > 0 ? 'in-progress' : 'not-started';
-                const card = document.createElement('div');
-                card.className = `child-card ${status}`;
-                card.innerHTML = `
-                    <div class="child-card-header">
-                        <div class="child-card-avatar" style="background-color: ${child.gender === 'male' ? '#5d8cc4' : '#ba68c8'};"><i class="fas fa-child"></i></div>
-                        <div class="child-card-info">
-                            <div class="child-name" style="font-size: 1.2rem; color: var(--dark-blue); font-weight: 600;">${child.name}</div>
-                            <div class="child-age" style="font-size: 0.9rem; color: var(--gray);">${child.age} años</div>
-                        </div>
-                    </div>
-                    <div>Progreso: ${progress}%</div>
-                    <div class="progress-bar-card"><div class="progress-fill-card" style="width: ${progress}%"></div></div>
-                `;
-                card.addEventListener('click', () => {
-                    if (isGuestMode) {
-                         window.location.href = `chicos.html?childId=${child.id}&guest=true`;
-                         return;
-                    }
-                    if (!child.completed) {
-                        alert(`El perfil de ${child.name} no está completo. Por favor, finalice el cuestionario para ver su plan.`);
-                        return;
-                    }
-                    window.location.href = `chicos.html?childId=${child.id}`;
-                });
-                container.appendChild(card);
-            });
-            document.getElementById('selectAnotherChildBtn').classList.toggle('hidden', isGuestMode);
-        }
-        
-        function updateUI() {
-            const progress = Math.round((currentQuestionIndex / questions.length) * 100);
-            document.getElementById('progressFill').style.width = `${progress}%`;
-            document.getElementById('progressText').textContent = `${progress}%`;
             
-            const currentSection = questions[currentQuestionIndex].section;
-            document.querySelectorAll('.section-item').forEach(el => el.classList.remove('active'));
-            document.querySelector(`.section-item[data-section="${currentSection}"]`).classList.add('active');
+            // Redirigir a la página de planes nutricionales
+            const params = new URLSearchParams();
             
-            document.getElementById('backBtn').classList.toggle('hidden', currentQuestionIndex === 0);
-            document.getElementById('nextBtn').innerHTML = (currentQuestionIndex === questions.length - 1) 
-                ? 'Finalizar <i class="fas fa-check-circle"></i>' 
-                : 'Siguiente <i class="fas fa-arrow-right"></i>';
-        }
-
-        function updateChildInfo() {
-            if (currentChild) {
-                document.getElementById('childNameDisplay').textContent = currentChild.name;
-                document.getElementById('childAgeDisplay').textContent = currentChild.age;
+            if (isGuestMode) {
+                params.append('guest', 'true');
+            } else if (currentUser) {
+                params.append('userId', currentUser.id);
             }
-        }
-        
-        function showView(view) {
-            document.getElementById('progressContainer').style.display = view === 'questionnaire' ? 'block' : 'none';
-            document.getElementById('questionContainer').style.display = view === 'questionnaire' ? 'flex' : 'none';
-            document.getElementById('navigationButtons').style.display = view === 'questionnaire' ? 'flex' : 'none';
-            document.getElementById('completionScreen').style.display = view === 'completion' ? 'block' : 'none';
+            
+            window.location.href = `yachay.html?${params.toString()}`;
         }
 
-        function handleError(message, redirectTo = 'index.html') {
-            console.error(message);
-            alert(message);
-            setTimeout(() => window.location.href = redirectTo, 1500);
+        // Mostrar notificación
+        function showNotification(type, title, message) {
+            // Crear elemento de notificación
+            const notificationDiv = document.createElement('div');
+            notificationDiv.className = 'notification';
+            notificationDiv.style.position = 'fixed';
+            notificationDiv.style.top = '20px';
+            notificationDiv.style.right = '20px';
+            notificationDiv.style.backgroundColor = 'white';
+            notificationDiv.style.padding = '15px';
+            notificationDiv.style.borderRadius = '10px';
+            notificationDiv.style.boxShadow = '0 4px 12px rgba(0,0,0,0.15)';
+            notificationDiv.style.zIndex = '1000';
+            notificationDiv.style.maxWidth = '300px';
+            notificationDiv.style.display = 'flex';
+            notificationDiv.style.alignItems = 'center';
+            notificationDiv.style.gap = '10px';
+            notificationDiv.style.transform = 'translateX(400px)';
+            notificationDiv.style.transition = 'transform 0.3s ease';
+            
+            // Icono según el tipo
+            let iconHtml = '';
+            if (type === 'success') {
+                iconHtml = '<i class="fas fa-check-circle" style="color: #28a745;"></i>';
+            } else if (type === 'error') {
+                iconHtml = '<i class="fas fa-exclamation-circle" style="color: #dc3545;"></i>';
+            } else if (type === 'warning') {
+                iconHtml = '<i class="fas fa-exclamation-triangle" style="color: #ffc107;"></i>';
+            } else {
+                iconHtml = '<i class="fas fa-info-circle" style="color: #17a2b8;"></i>';
+            }
+            
+            notificationDiv.innerHTML = `
+                ${iconHtml}
+                <div>
+                    <h4 style="margin: 0 0 5px 0; font-size: 16px; font-weight: 600;">${title}</h4>
+                    <p style="margin: 0; font-size: 14px; color: #6c757d;">${message}</p>
+                </div>
+            `;
+            
+            // Agregar al body
+            document.body.appendChild(notificationDiv);
+            
+            // Mostrar con animación
+            setTimeout(() => {
+                notificationDiv.style.transform = 'translateX(0)';
+            }, 100);
+            
+            // Ocultar después de 3 segundos
+            setTimeout(() => {
+                notificationDiv.style.transform = 'translateX(400px)';
+                setTimeout(() => {
+                    document.body.removeChild(notificationDiv);
+                }, 300);
+            }, 3000);
         }
     </script>
 </body>
