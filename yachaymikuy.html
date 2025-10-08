@@ -626,7 +626,7 @@
                     </div>
                 </div>
                 <div class="col-md-6 text-md-end">
-                    <a href="index.html" class="btn btn-light btn-sm">
+                    <a href="index.html#profiles" class="btn btn-light btn-sm">
                         <i class="fas fa-arrow-left"></i> Volver al inicio
                     </a>
                 </div>
@@ -906,7 +906,7 @@
                 title: '¿Cuál es el peso actual del niño/niña?',
                 help: 'Selecciona el rango de peso aproximado del niño/niña.',
                 type: 'select',
-                options: ['10-15 kg', '15-20 kg', '20-25 kg', '25-30 kg', '30-35 kg']
+                options: ['10-15 kg', '15-20 kg', '20-25 kg', '25-30 kg', '30-35 kg', 'No tengo']
             },
             q2: {
                 group: 1,
@@ -914,55 +914,55 @@
                 title: '¿Cuál es su estatura/talla hoy?',
                 help: 'Selecciona el rango de estatura aproximado del niño/niña.',
                 type: 'select',
-                options: ['80-90 cm', '90-100 cm', '100-110 cm', '110-120 cm', '120-130 cm']
+                options: ['80-90 cm', '90-100 cm', '100-110 cm', '110-120 cm', '120-130 cm', 'No tengo']
             },
             q3: {
                 group: 1,
                 icon: 'fas fa-calendar-alt',
                 title: '¿Cuál es su fecha de nacimiento?',
                 help: 'Selecciona la fecha exacta de nacimiento del niño/niña.',
-                type: 'date',
-                placeholder: ''
+                type: 'select',
+                options: ['Enero - Marzo', 'Abril - Junio', 'Julio - Septiembre', 'Octubre - Diciembre', 'No recuerdo exactamente', 'No tengo']
             },
             q4: {
                 group: 1,
                 icon: 'fas fa-chart-line',
                 title: '¿Conoces su índice de masa corporal (IMC)?',
-                help: 'Ingresa el valor del IMC si lo conoces, o selecciona una opción aproximada.',
-                type: 'text',
-                placeholder: 'Ej: 17.3'
+                help: 'Selecciona el rango del IMC si lo conoces.',
+                type: 'select',
+                options: ['Menos de 15', '15-18', '18-22', '22-25', 'Más de 25', 'No tengo']
             },
             q5: {
                 group: 1,
                 icon: 'fas fa-file-medical',
-                title: 'Sube una foto del carné de crecimiento (si tienes).',
-                help: 'Sube una foto clara del carné de crecimiento.',
-                type: 'file',
-                placeholder: ''
+                title: '¿Tienes acceso al carné de crecimiento?',
+                help: 'Selecciona si tienes acceso al carné de crecimiento.',
+                type: 'select',
+                options: ['Sí, lo tengo a mano', 'Sí, pero en casa', 'Sí, pero en el centro de salud', 'No, lo perdí', 'Nunca tuvimos carné', 'No tengo']
             },
             q6: {
                 group: 1,
                 icon: 'fas fa-dna',
                 title: '¿Hay antecedentes familiares de problemas nutricionales?',
-                help: 'Describe brevemente si hay antecedentes familiares como obesidad, diabetes, desnutrición, etc.',
-                type: 'text',
-                placeholder: 'Ej: Abuelos con diabetes'
+                help: 'Selecciona si hay antecedentes familiares como obesidad, diabetes, desnutrición, etc.',
+                type: 'select',
+                options: ['Sí, obesidad', 'Sí, diabetes', 'Sí, desnutrición', 'Sí, otros problemas', 'No hay antecedentes', 'No tengo']
             },
             q7: {
                 group: 1,
                 icon: 'fas fa-procedures',
                 title: '¿Ha tenido enfermedades importantes en el último año?',
-                help: 'Describe brevemente si ha tenido enfermedades importantes en el último año.',
-                type: 'text',
-                placeholder: 'Ej: Resfriados comunes'
+                help: 'Selecciona si ha tenido enfermedades importantes en el último año.',
+                type: 'select',
+                options: ['Sí, enfermedades respiratorias frecuentes', 'Sí, enfermedades digestivas', 'Sí, enfermedades de la piel', 'Sí, otras enfermedades', 'No ha tenido enfermedades importantes', 'No tengo']
             },
             q8: {
                 group: 1,
                 icon: 'fas fa-stethoscope',
                 title: '¿Cuándo fue su última consulta médica?',
-                help: 'Ingresa la fecha de la última consulta médica.',
-                type: 'date',
-                placeholder: ''
+                help: 'Selecciona cuándo fue su última consulta médica.',
+                type: 'select',
+                options: ['Menos de 1 mes', '1-3 meses', '3-6 meses', '6-12 meses', 'Más de 1 año', 'No tengo']
             },
             q9: {
                 group: 1,
@@ -970,7 +970,7 @@
                 title: '¿Está al día con sus vacunas?',
                 help: 'Selecciona si está al día con sus vacunas.',
                 type: 'select',
-                options: ['Sí, completamente al día', 'Sí, pero con algunas pendientes', 'No, varias pendientes', 'No, casi ninguna al día', 'No sé']
+                options: ['Sí, completamente al día', 'Sí, pero con algunas pendientes', 'No, varias pendientes', 'No, casi ninguna al día', 'No sé', 'No tengo']
             },
             q10: {
                 group: 1,
@@ -978,57 +978,57 @@
                 title: '¿Fue amamantado exclusivamente hasta 6 meses?',
                 help: 'Selecciona si fue amamantado exclusivamente hasta los 6 meses.',
                 type: 'select',
-                options: ['Sí, exclusivamente hasta 6 meses', 'Sí, pero con otros alimentos antes de 6 meses', 'Parcialmente amamantado', 'No fue amamantado', 'No sé']
+                options: ['Sí, exclusivamente hasta 6 meses', 'Sí, pero con otros alimentos antes de 6 meses', 'Parcialmente amamantado', 'No fue amamantado', 'No sé', 'No tengo']
             },
             q11: {
                 group: 1,
                 icon: 'fas fa-vial',
                 title: '¿Se le hicieron análisis de laboratorio en el último año?',
-                help: 'Sube una foto de los resultados de laboratorio si los tienes.',
-                type: 'file',
-                placeholder: ''
+                help: 'Selecciona si se le hicieron análisis de laboratorio en el último año.',
+                type: 'select',
+                options: ['Sí, análisis de sangre completos', 'Sí, análisis de orina', 'Sí, análisis de heces', 'Sí, otros análisis', 'No se le hicieron análisis', 'No tengo']
             },
             q12: {
                 group: 1,
                 icon: 'fas fa-notes-medical',
-                title: 'Describe brevemente su estado general de salud.',
-                help: 'Describe brevemente cómo es el estado general de salud.',
-                type: 'text',
-                placeholder: 'Ej: Buen estado de salud general'
+                title: '¿Cómo es su estado general de salud?',
+                help: 'Selecciona cómo es su estado general de salud.',
+                type: 'select',
+                options: ['Excelente', 'Bueno', 'Regular', 'Necesita mejorar', 'Malo', 'No tengo']
             },
             
             // Grupo 2 — Alimentación y hábitos (15 preguntas)
             q13: {
                 group: 2,
                 icon: 'fas fa-utensils',
-                title: 'Describe su desayuno habitual.',
-                help: 'Describe qué suele comer en el desayuno.',
-                type: 'text',
-                placeholder: 'Ej: Cereal con leche y fruta'
+                title: '¿Qué suele comer en el desayuno?',
+                help: 'Selecciona qué suele comer en el desayuno.',
+                type: 'select',
+                options: ['Cereales con leche', 'Pan con mantequilla/mermelada', 'Frutas', 'Huevos', 'Té/leche con pan', 'No tengo']
             },
             q14: {
                 group: 2,
                 icon: 'fas fa-image',
-                title: 'Sube una foto del desayuno de hoy o típico.',
-                help: 'Sube una foto del desayuno de hoy o un desayuno típico.',
-                type: 'file',
-                placeholder: ''
+                title: '¿Tienes fotos del desayuno de tu hijo/a?',
+                help: 'Selecciona si tienes fotos del desayuno de tu hijo/a.',
+                type: 'select',
+                options: ['Sí, fotos recientes', 'Sí, pero antiguas', 'Sí, en el celular', 'Sí, en la computadora', 'No tengo fotos', 'No tengo']
             },
             q15: {
                 group: 2,
                 icon: 'fas fa-utensils',
-                title: 'Describe su almuerzo habitual.',
-                help: 'Describe qué suele comer en el almuerzo.',
-                type: 'text',
-                placeholder: 'Ej: Sopa de verduras, pollo y arroz'
+                title: '¿Qué suele comer en el almuerzo?',
+                help: 'Selecciona qué suele comer en el almuerzo.',
+                type: 'select',
+                options: ['Sopa y segundo', 'Solo segundo', 'Ensalada', 'Sándwich', 'Comida rápida', 'No tengo']
             },
             q16: {
                 group: 2,
                 icon: 'fas fa-image',
-                title: 'Sube una foto del almuerzo favorito.',
-                help: 'Sube una foto de su almuerzo favorito.',
-                type: 'file',
-                placeholder: ''
+                title: '¿Tienes fotos del almuerzo de tu hijo/a?',
+                help: 'Selecciona si tienes fotos del almuerzo de tu hijo/a.',
+                type: 'select',
+                options: ['Sí, fotos recientes', 'Sí, pero antiguas', 'Sí, en el celular', 'Sí, en la computadora', 'No tengo fotos', 'No tengo']
             },
             q17: {
                 group: 2,
@@ -1036,7 +1036,7 @@
                 title: '¿Cuántas porciones de fruta consume al día?',
                 help: 'Selecciona cuántas porciones de fruta consume al día.',
                 type: 'select',
-                options: ['Menos de 1 porción', '1 porción', '2 porciones', '3 porciones', '4 o más porciones']
+                options: ['Menos de 1 porción', '1 porción', '2 porciones', '3 porciones', '4 o más porciones', 'No tengo']
             },
             q18: {
                 group: 2,
@@ -1044,7 +1044,7 @@
                 title: '¿Cuántas porciones de verduras consume por semana?',
                 help: 'Selecciona cuántas porciones de verduras consume por semana.',
                 type: 'select',
-                options: ['Menos de 3 porciones', '3-5 porciones', '6-8 porciones', '9-11 porciones', '12 o más porciones']
+                options: ['Menos de 3 porciones', '3-5 porciones', '6-8 porciones', '9-11 porciones', '12 o más porciones', 'No tengo']
             },
             q19: {
                 group: 2,
@@ -1052,7 +1052,7 @@
                 title: '¿Consume cereales integrales con frecuencia?',
                 help: 'Selecciona con qué frecuencia consume cereales integrales.',
                 type: 'select',
-                options: ['Diariamente', '3-5 veces por semana', '1-2 veces por semana', 'Ocasionalmente', 'Nunca']
+                options: ['Diariamente', '3-5 veces por semana', '1-2 veces por semana', 'Ocasionalmente', 'Nunca', 'No tengo']
             },
             q20: {
                 group: 2,
@@ -1060,7 +1060,7 @@
                 title: '¿Con qué frecuencia come dulces o snacks?',
                 help: 'Selecciona con qué frecuencia come dulces o snacks.',
                 type: 'select',
-                options: ['Diariamente', '3-5 veces por semana', '1-2 veces por semana', 'Ocasionalmente', 'Rara vez o nunca']
+                options: ['Diariamente', '3-5 veces por semana', '1-2 veces por semana', 'Ocasionalmente', 'Rara vez o nunca', 'No tengo']
             },
             q21: {
                 group: 2,
@@ -1068,7 +1068,7 @@
                 title: '¿Cuánta agua bebe al día?',
                 help: 'Selecciona cuánta agua bebe al día.',
                 type: 'select',
-                options: ['Menos de 2 vasos', '2-3 vasos', '4-5 vasos', '6-7 vasos', '8 o más vasos']
+                options: ['Menos de 2 vasos', '2-3 vasos', '4-5 vasos', '6-7 vasos', '8 o más vasos', 'No tengo']
             },
             q22: {
                 group: 2,
@@ -1076,7 +1076,7 @@
                 title: '¿Consume bebidas azucaradas?',
                 help: 'Selecciona con qué frecuencia consume bebidas azucaradas.',
                 type: 'select',
-                options: ['Diariamente', '3-5 veces por semana', '1-2 veces por semana', 'Ocasionalmente', 'Rara vez o nunca']
+                options: ['Diariamente', '3-5 veces por semana', '1-2 veces por semana', 'Ocasionalmente', 'Rara vez o nunca', 'No tengo']
             },
             q23: {
                 group: 2,
@@ -1084,7 +1084,7 @@
                 title: '¿Consume leche o lácteos?',
                 help: 'Selecciona con qué frecuencia consume leche o lácteos.',
                 type: 'select',
-                options: ['Diariamente', '3-5 veces por semana', '1-2 veces por semana', 'Ocasionalmente', 'Rara vez o nunca']
+                options: ['Diariamente', '3-5 veces por semana', '1-2 veces por semana', 'Ocasionalmente', 'Rara vez o nunca', 'No tengo']
             },
             q24: {
                 group: 2,
@@ -1092,7 +1092,7 @@
                 title: '¿Incluye proteína animal en su dieta?',
                 help: 'Selecciona con qué frecuencia incluye proteína animal en su dieta.',
                 type: 'select',
-                options: ['Diariamente', '3-5 veces por semana', '1-2 veces por semana', 'Ocasionalmente', 'Rara vez o nunca']
+                options: ['Diariamente', '3-5 veces por semana', '1-2 veces por semana', 'Ocasionalmente', 'Rara vez o nunca', 'No tengo']
             },
             q25: {
                 group: 2,
@@ -1100,7 +1100,7 @@
                 title: '¿Incluye proteína vegetal en su dieta?',
                 help: 'Selecciona con qué frecuencia incluye proteína vegetal en su dieta.',
                 type: 'select',
-                options: ['Diariamente', '3-5 veces por semana', '1-2 veces por semana', 'Ocasionalmente', 'Rara vez o nunca']
+                options: ['Diariamente', '3-5 veces por semana', '1-2 veces por semana', 'Ocasionalmente', 'Rara vez o nunca', 'No tengo']
             },
             q26: {
                 group: 2,
@@ -1108,7 +1108,7 @@
                 title: '¿Se agrega sal extra a sus comidas?',
                 help: 'Selecciona si se agrega sal extra a sus comidas.',
                 type: 'select',
-                options: ['Siempre', 'Frecuentemente', 'A veces', 'Rara vez', 'Nunca']
+                options: ['Siempre', 'Frecuentemente', 'A veces', 'Rara vez', 'Nunca', 'No tengo']
             },
             q27: {
                 group: 2,
@@ -1116,7 +1116,7 @@
                 title: '¿Recibe suplementos vitamínicos?',
                 help: 'Selecciona si recibe suplementos vitamínicos.',
                 type: 'select',
-                options: ['Diariamente', '3-5 veces por semana', '1-2 veces por semana', 'Ocasionalmente', 'Nunca']
+                options: ['Diariamente', '3-5 veces por semana', '1-2 veces por semana', 'Ocasionalmente', 'Nunca', 'No tengo']
             },
             
             // Grupo 3 — Actividad física y estilo de vida (11 preguntas)
@@ -1126,7 +1126,7 @@
                 title: '¿Realiza actividad física regularmente?',
                 help: 'Selecciona si realiza actividad física regularmente.',
                 type: 'select',
-                options: ['Diariamente', '3-5 veces por semana', '1-2 veces por semana', 'Ocasionalmente', 'Nunca']
+                options: ['Diariamente', '3-5 veces por semana', '1-2 veces por semana', 'Ocasionalmente', 'Nunca', 'No tengo']
             },
             q29: {
                 group: 3,
@@ -1134,7 +1134,7 @@
                 title: '¿Cuál es su actividad física favorita?',
                 help: 'Selecciona cuál es su actividad física favorita.',
                 type: 'select',
-                options: ['Fútbol', 'Natación', 'Bicicleta', 'Baile', 'Correr']
+                options: ['Fútbol', 'Natación', 'Bicicleta', 'Baile', 'Correr', 'No tengo']
             },
             q30: {
                 group: 3,
@@ -1142,7 +1142,7 @@
                 title: '¿Cuántos días a la semana realiza actividad física?',
                 help: 'Selecciona cuántos días a la semana realiza actividad física.',
                 type: 'select',
-                options: ['1 día', '2 días', '3 días', '4 días', '5 o más días']
+                options: ['1 día', '2 días', '3 días', '4 días', '5 o más días', 'No tengo']
             },
             q31: {
                 group: 3,
@@ -1150,7 +1150,7 @@
                 title: '¿Cuánto dura cada sesión de actividad física?',
                 help: 'Selecciona cuánto dura cada sesión de actividad física.',
                 type: 'select',
-                options: ['Menos de 30 minutos', '30-60 minutos', '1-2 horas', '2-3 horas', 'Más de 3 horas']
+                options: ['Menos de 30 minutos', '30-60 minutos', '1-2 horas', '2-3 horas', 'Más de 3 horas', 'No tengo']
             },
             q32: {
                 group: 3,
@@ -1158,7 +1158,7 @@
                 title: '¿Participa en juegos al aire libre?',
                 help: 'Selecciona si participa en juegos al aire libre.',
                 type: 'select',
-                options: ['Diariamente', '3-5 veces por semana', '1-2 veces por semana', 'Ocasionalmente', 'Nunca']
+                options: ['Diariamente', '3-5 veces por semana', '1-2 veces por semana', 'Ocasionalmente', 'Nunca', 'No tengo']
             },
             q33: {
                 group: 3,
@@ -1166,7 +1166,7 @@
                 title: '¿Cuántas horas al día pasa frente a pantallas?',
                 help: 'Selecciona cuántas horas al día pasa frente a pantallas.',
                 type: 'select',
-                options: ['Menos de 1 hora', '1-2 horas', '2-3 horas', '3-4 horas', 'Más de 4 horas']
+                options: ['Menos de 1 hora', '1-2 horas', '2-3 horas', '3-4 horas', 'Más de 4 horas', 'No tengo']
             },
             q34: {
                 group: 3,
@@ -1174,7 +1174,7 @@
                 title: '¿Cuántas horas duerme por noche?',
                 help: 'Selecciona cuántas horas duerme por noche.',
                 type: 'select',
-                options: ['Menos de 6 horas', '6-8 horas', '8-10 horas', '10-12 horas', 'Más de 12 horas']
+                options: ['Menos de 6 horas', '6-8 horas', '8-10 horas', '10-12 horas', 'Más de 12 horas', 'No tengo']
             },
             q35: {
                 group: 3,
@@ -1182,7 +1182,7 @@
                 title: '¿Tiene rutinas antes de dormir?',
                 help: 'Selecciona si tiene rutinas antes de dormir.',
                 type: 'select',
-                options: ['Cuentos', 'Baño', 'Música suave', 'Meditación', 'No tiene rutinas específicas']
+                options: ['Cuentos', 'Baño', 'Música suave', 'Meditación', 'No tiene rutinas específicas', 'No tengo']
             },
             q36: {
                 group: 3,
@@ -1190,7 +1190,7 @@
                 title: '¿Ayuda en tareas del hogar?',
                 help: 'Selecciona si ayuda en tareas del hogar.',
                 type: 'select',
-                options: ['Diariamente', 'Frecuentemente', 'Ocasionalmente', 'Rara vez', 'Nunca']
+                options: ['Diariamente', 'Frecuentemente', 'Ocasionalmente', 'Rara vez', 'Nunca', 'No tengo']
             },
             q37: {
                 group: 3,
@@ -1198,25 +1198,25 @@
                 title: '¿Interactúa regularmente con otros niños?',
                 help: 'Selecciona si interactúa regularmente con otros niños.',
                 type: 'select',
-                options: ['Diariamente', 'Frecuentemente', 'Ocasionalmente', 'Rara vez', 'Nunca']
+                options: ['Diariamente', 'Frecuentemente', 'Ocasionalmente', 'Rara vez', 'Nunca', 'No tengo']
             },
             q38: {
                 group: 3,
                 icon: 'fas fa-clipboard-list',
-                title: 'Describe un día típico desde que se despierta hasta que duerme.',
-                help: 'Describe brevemente un día típico desde que se despierta hasta que duerme.',
-                type: 'text',
-                placeholder: 'Ej: Desayuno, escuela, almuerzo, siesta, juegos, cena, dormir'
+                title: '¿Cómo es un día típico desde que se despierta hasta que duerme?',
+                help: 'Selecciona cómo es un día típico desde que se despierta hasta que duerme.',
+                type: 'select',
+                options: ['Muy activo', 'Activo', 'Equilibrado', 'Sedentario', 'Muy sedentario', 'No tengo']
             },
             
             // Grupo 4 — Entorno, bienestar y contexto familiar (12 preguntas)
             q39: {
                 group: 4,
                 icon: 'fas fa-home',
-                title: 'Describe el entorno familiar donde vive el niño.',
-                help: 'Describe brevemente el entorno familiar donde vive el niño.',
-                type: 'text',
-                placeholder: 'Ej: Vive con padres y hermana'
+                title: '¿Cómo es el entorno familiar donde vive el niño?',
+                help: 'Selecciona cómo es el entorno familiar donde vive el niño.',
+                type: 'select',
+                options: ['Muy estable', 'Estable', 'Normal', 'Algunas dificultades', 'Muchas dificultades', 'No tengo']
             },
             q40: {
                 group: 4,
@@ -1224,7 +1224,7 @@
                 title: '¿Con quién vive el niño?',
                 help: 'Selecciona con quién vive el niño.',
                 type: 'select',
-                options: ['Padres', 'Padres y hermanos', 'Padres y abuelos', 'Solo con la madre', 'Solo con el padre']
+                options: ['Padres', 'Padres y hermanos', 'Padres y abuelos', 'Solo con la madre', 'Solo con el padre', 'No tengo']
             },
             q41: {
                 group: 4,
@@ -1232,7 +1232,7 @@
                 title: '¿Cuenta con acceso a agua potable en casa?',
                 help: 'Selecciona si cuenta con acceso a agua potable en casa.',
                 type: 'select',
-                options: ['Sí, agua potable de calidad', 'Sí, agua potable pero no siempre', 'A veces', 'No siempre', 'No']
+                options: ['Sí, agua potable de calidad', 'Sí, agua potable pero no siempre', 'A veces', 'No siempre', 'No', 'No tengo']
             },
             q42: {
                 group: 4,
@@ -1240,7 +1240,7 @@
                 title: '¿Qué tipo de vivienda es?',
                 help: 'Selecciona qué tipo de vivienda es.',
                 type: 'select',
-                options: ['Casa propia', 'Departamento propio', 'Casa alquilada', 'Departamento alquilado', 'Otro tipo de vivienda']
+                options: ['Casa propia', 'Departamento propio', 'Casa alquilada', 'Departamento alquilado', 'Otro tipo de vivienda', 'No tengo']
             },
             q43: {
                 group: 4,
@@ -1248,7 +1248,7 @@
                 title: '¿Tiene acceso regular a servicios de salud?',
                 help: 'Selecciona si tiene acceso regular a servicios de salud.',
                 type: 'select',
-                options: ['Sí, seguro médico privado', 'Sí, seguro público', 'Sí, posta médica', 'Solo en emergencias', 'No tiene acceso']
+                options: ['Sí, seguro médico privado', 'Sí, seguro público', 'Sí, posta médica', 'Solo en emergencias', 'No tiene acceso', 'No tengo']
             },
             q44: {
                 group: 4,
@@ -1256,7 +1256,7 @@
                 title: '¿Asiste a colegio o centro educativo?',
                 help: 'Selecciona si asiste a colegio o centro educativo.',
                 type: 'select',
-                options: ['Sí, colegio privado', 'Sí, colegio público', 'Sí, jardín', 'No asiste a centro educativo', 'Educación en casa']
+                options: ['Sí, colegio privado', 'Sí, colegio público', 'Sí, jardín', 'No asiste a centro educativo', 'Educación en casa', 'No tengo']
             },
             q45: {
                 group: 4,
@@ -1264,7 +1264,7 @@
                 title: '¿Recibe educación sobre alimentación en la escuela?',
                 help: 'Selecciona si recibe educación sobre alimentación en la escuela.',
                 type: 'select',
-                options: ['Sí, regularmente', 'Sí, ocasionalmente', 'Poco', 'No', 'No sé']
+                options: ['Sí, regularmente', 'Sí, ocasionalmente', 'Poco', 'No', 'No sé', 'No tengo']
             },
             q46: {
                 group: 4,
@@ -1272,23 +1272,23 @@
                 title: '¿Recibe alimentos por programas escolares?',
                 help: 'Selecciona si recibe alimentos por programas escolares.',
                 type: 'select',
-                options: ['Sí, diariamente', 'Sí, algunos días', 'Ocasionalmente', 'Rara vez', 'No']
+                options: ['Sí, diariamente', 'Sí, algunos días', 'Ocasionalmente', 'Rara vez', 'No', 'No tengo']
             },
             q47: {
                 group: 4,
                 icon: 'fas fa-money-bill',
                 title: '¿Hay limitaciones económicas que afecten su alimentación?',
-                help: 'Describe si hay limitaciones económicas que afecten su alimentación.',
-                type: 'text',
-                placeholder: 'Ej: Limitaciones para comprar alimentos frescos'
+                help: 'Selecciona si hay limitaciones económicas que afecten su alimentación.',
+                type: 'select',
+                options: ['No, ninguna limitación', 'Limitaciones leves', 'Limitaciones moderadas', 'Limitaciones importantes', 'Limitaciones severas', 'No tengo']
             },
             q48: {
                 group: 4,
                 icon: 'fas fa-heart',
-                title: 'Describe su estado emocional general.',
-                help: 'Describe brevemente su estado emocional general.',
-                type: 'text',
-                placeholder: 'Ej: Feliz y activo'
+                title: '¿Cómo es su estado emocional general?',
+                help: 'Selecciona cómo es su estado emocional general.',
+                type: 'select',
+                options: ['Muy feliz', 'Feliz', 'Normal', 'Algo triste', 'Muy triste', 'No tengo']
             },
             q49: {
                 group: 4,
@@ -1296,15 +1296,15 @@
                 title: '¿Cuenta con apoyo profesional?',
                 help: 'Selecciona si cuenta con apoyo profesional.',
                 type: 'select',
-                options: ['Pediatra regularmente', 'Nutricionista', 'Psicólogo', 'Varios profesionales', 'No tiene apoyo profesional']
+                options: ['Pediatra regularmente', 'Nutricionista', 'Psicólogo', 'Varios profesionales', 'No tiene apoyo profesional', 'No tengo']
             },
             q50: {
                 group: 4,
                 icon: 'fas fa-clipboard-check',
                 title: '¿Qué cambios te gustaría ver en sus hábitos?',
-                help: 'Describe qué cambios te gustaría ver en sus hábitos.',
-                type: 'text',
-                placeholder: 'Ej: Más verduras y menos dulces'
+                help: 'Selecciona qué cambios te gustaría ver en sus hábitos.',
+                type: 'select',
+                options: ['Más actividad física', 'Mejor alimentación', 'Más horas de sueño', 'Menos tiempo en pantallas', 'Todos los anteriores', 'No tengo']
             }
         };
         
@@ -1480,7 +1480,7 @@
             if (!childId) {
                 showToast('No se ha especificado un perfil de niño', 'error');
                 setTimeout(() => {
-                    window.location.href = 'index.html';
+                    window.location.href = 'index.html#profiles';
                 }, 2000);
                 return null;
             }
@@ -1491,7 +1491,7 @@
             if (!child) {
                 showToast('Perfil de niño no encontrado', 'error');
                 setTimeout(() => {
-                    window.location.href = 'index.html';
+                    window.location.href = 'index.html#profiles';
                 }, 2000);
                 return null;
             }
@@ -1549,7 +1549,7 @@
             for (let i = 1; i <= 50; i++) {
                 responses[childId][`q${i}`] = {
                     type: questionsDB[`q${i}`].type,
-                    value: i % 5 === 0 ? questionsDB[`q${i}`].options[4] : questionsDB[`q${i}`].options[i % 5],
+                    value: i % 6 === 0 ? questionsDB[`q${i}`].options[5] : questionsDB[`q${i}`].options[i % 5],
                     timestamp: new Date().toISOString(),
                     version: 1
                 };
@@ -1612,57 +1612,6 @@
                         </select>
                     </div>
                 `;
-            } else if (currentQuestion.type === 'date') {
-                answerSection.innerHTML = `
-                    <div class="answer-option">
-                        <input type="date" class="form-control" id="answerDate" value="${existingResponse ? existingResponse.value : ''}">
-                    </div>
-                `;
-            } else if (currentQuestion.type === 'text') {
-                answerSection.innerHTML = `
-                    <div class="answer-option">
-                        <textarea class="form-control" id="answerText" rows="3" placeholder="${currentQuestion.placeholder}">${existingResponse ? existingResponse.value : ''}</textarea>
-                    </div>
-                `;
-            } else if (currentQuestion.type === 'file') {
-                let previewHtml = '';
-                
-                if (existingResponse && existingResponse.type === 'file') {
-                    if (existingResponse.filename.match(/\.(jpg|jpeg|png|gif)$/i)) {
-                        previewHtml = `
-                            <div class="file-preview">
-                                <img src="https://picsum.photos/seed/${existingResponse.filename}/400/300.jpg" alt="Vista previa">
-                                <div class="file-info">${existingResponse.filename}</div>
-                            </div>
-                        `;
-                    } else {
-                        previewHtml = `
-                            <div class="file-preview">
-                                <i class="fas fa-file" style="font-size: 3rem; color: #6c757d;"></i>
-                                <div class="file-info">${existingResponse.filename}</div>
-                            </div>
-                        `;
-                    }
-                }
-                
-                answerSection.innerHTML = `
-                    <div class="answer-option">
-                        <div class="file-upload">
-                            <input type="file" id="answerFile" accept="image/*,.pdf">
-                            <label for="answerFile" class="file-upload-label">
-                                <i class="fas fa-cloud-upload-alt" style="font-size: 2rem; margin-bottom: 10px;"></i>
-                                <p>Haz clic para subir un archivo o arrastra aquí</p>
-                                <small>Formatos aceptados: JPG, PNG, PDF (Máximo 5MB)</small>
-                            </label>
-                        </div>
-                        ${previewHtml}
-                    </div>
-                `;
-                
-                // Event listener para el cambio de archivo
-                setTimeout(() => {
-                    document.getElementById('answerFile').addEventListener('change', handleFileUpload);
-                }, 100);
             }
             
             // Actualizar estado de los botones
@@ -1672,65 +1621,9 @@
             showAvatarMessage(progressPercent);
         }
         
-        function handleFileUpload(event) {
-            const file = event.target.files[0];
-            
-            if (!file) {
-                return;
-            }
-            
-            // Validar tamaño del archivo (máximo 5MB)
-            if (file.size > 5 * 1024 * 1024) {
-                showToast('El archivo es demasiado grande. El tamaño máximo es 5MB.', 'error');
-                event.target.value = '';
-                return;
-            }
-            
-            // Validar tipo de archivo
-            const validTypes = ['image/jpeg', 'image/png', 'image/gif', 'application/pdf'];
-            if (!validTypes.includes(file.type)) {
-                showToast('Tipo de archivo no válido. Solo se aceptan imágenes (JPG, PNG, GIF) y PDF.', 'error');
-                event.target.value = '';
-                return;
-            }
-            
-            // Mostrar vista previa
-            const filePreview = document.querySelector('.file-preview');
-            
-            if (file.type.match(/^image\//)) {
-                const reader = new FileReader();
-                
-                reader.onload = function(e) {
-                    filePreview.innerHTML = `
-                        <img src="${e.target.result}" alt="Vista previa">
-                        <div class="file-info">${file.name}</div>
-                    `;
-                };
-                
-                reader.readAsDataURL(file);
-            } else {
-                filePreview.innerHTML = `
-                    <i class="fas fa-file" style="font-size: 3rem; color: #6c757d;"></i>
-                    <div class="file-info">${file.name}</div>
-                `;
-            }
-            
-            // Actualizar estado de los botones
-            updateButtonState();
-        }
-        
         function getCurrentAnswer() {
             if (currentQuestion.type === 'select') {
                 return document.getElementById('answerSelect').value;
-            } else if (currentQuestion.type === 'date') {
-                return document.getElementById('answerDate').value;
-            } else if (currentQuestion.type === 'text') {
-                return document.getElementById('answerText').value.trim();
-            } else if (currentQuestion.type === 'file') {
-                const fileInput = document.getElementById('answerFile');
-                if (fileInput.files.length > 0) {
-                    return fileInput.files[0];
-                }
             }
             
             return '';
@@ -1761,24 +1654,11 @@
                 return false;
             }
             
-            let response;
-            
-            if (currentQuestion.type === 'file' && answer !== 'No tengo') {
-                // En un entorno real, aquí subiríamos el archivo a un servidor
-                // Para este demo, simplemente guardamos el nombre del archivo
-                response = {
-                    type: 'file',
-                    value: 'uploaded_file',
-                    filename: answer.name,
-                    timestamp: new Date().toISOString()
-                };
-            } else {
-                response = {
-                    type: currentQuestion.type,
-                    value: answer,
-                    timestamp: new Date().toISOString()
-                };
-            }
+            const response = {
+                type: currentQuestion.type,
+                value: answer,
+                timestamp: new Date().toISOString()
+            };
             
             saveResponse(currentChildId, currentQuestionId, response);
             showToast('Respuesta guardada', 'success');
@@ -1822,7 +1702,7 @@
             }
             
             // Redirigir a la página de perfiles
-            window.location.href = 'index.html';
+            window.location.href = 'index.html#profiles';
         }
         
         function showCompletionSection() {
@@ -1894,7 +1774,7 @@
             if (!session.currentUserId && !session.exploringAsGuest) {
                 showToast('Debes iniciar sesión para acceder a esta página', 'error');
                 setTimeout(() => {
-                    window.location.href = 'index.html';
+                    window.location.href = 'index.html#profiles';
                 }, 2000);
                 return;
             }
@@ -1942,7 +1822,7 @@
             });
             
             document.getElementById('backToProfileBtn').addEventListener('click', function() {
-                window.location.href = 'index.html';
+                window.location.href = 'index.html#profiles';
             });
             
             // Configurar modales del footer
