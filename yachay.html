@@ -877,12 +877,12 @@
             
             if (isGuestMode) {
                 // Modo invitado: mostrar solo los perfiles de invitado (Alvaro y Luz)
-                completedChildren = allChildrenData.filter(child => child.ownerId === null && child.progressPercent === 100);
+                completedChildren = allChildrenData.filter(child => child.ownerId === null);
             } else {
                 // Modo con cuenta: mostrar los perfiles del usuario actual
                 if (session.currentUserId) {
                     completedChildren = allChildrenData.filter(child => 
-                        child.ownerId === session.currentUserId && child.progressPercent === 100
+                        child.ownerId === session.currentUserId
                     );
                 } else {
                     completedChildren = [];
