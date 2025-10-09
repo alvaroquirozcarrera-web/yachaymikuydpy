@@ -842,6 +842,29 @@
             }
         };
 
+        // --- INICIO DE FUNCIONES DE SINCRONIZACIÓN ---
+        
+        // Función para sincronizar la eliminación/restauración entre páginas
+        function syncChildDeletionAcrossPages(childId, action) {
+            // action puede ser 'soft-delete', 'restore' o 'permanent-delete'
+            const syncData = {
+                childId: childId,
+                action: action,
+                timestamp: new Date().toISOString()
+            };
+            
+            // Guardar en localStorage para que otras páginas puedan detectar cambios
+            localStorage.setItem('yachay_sync_action', JSON.stringify(syncData));
+            
+            // Notificar a otras pestañas abiertas usando BroadcastChannel
+            if ('BroadcastChannel' in window) {
+                const channel = new BroadcastChannel('yachay_sync');
+                channel.postMessage(syncData);
+            }
+        }
+
+        // --- FIN DE FUNCIONES DE SINCRONIZACIÓN ---
+
         // Función para calcular la edad a partir de la fecha de nacimiento
         function calculateAge(dob) {
             const birthDate = new Date(dob);
@@ -863,6 +886,49 @@
         }
 
         document.addEventListener('DOMContentLoaded', function() {
+            // --- INICIO DE VERIFICACIÓN DE SINCRONIZACIÓN AL CARGAR ---
+            // Verificar si hay acciones de sincronización pendientes de otras pestañas
+            const syncAction = localStorage.getItem('yachay_sync_action');
+            if (syncAction) {
+                const syncData = JSON.parse(syncAction);
+                // Si la acción es reciente (menos de 5 segundos), la procesamos
+                const actionTime = new Date(syncData.timestamp);
+                const now = new Date();
+                if ((now - actionTime) < 5000) {
+                    // Si la acción afecta al niño actual, redirigimos
+                    const currentChildId = getURLParameter('childId');
+                    if (currentChildId === syncData.childId) {
+                        if (syncData.action === 'soft-delete' || syncData.action === 'permanent-delete') {
+                            showToast('El perfil actual ha sido eliminado', 'info');
+                            setTimeout(() => {
+                                window.location.href = 'index.html#perfiles-de-tus-hijos';
+                            }, 2000);
+                        }
+                    }
+                }
+                // Limpiamos la acción para no procesarla de nuevo
+                localStorage.removeItem('yachay_sync_action');
+            }
+
+            // Configurar listener para sincronización en tiempo real con otras pestañas
+            if ('BroadcastChannel' in window) {
+                const channel = new BroadcastChannel('yachay_sync');
+                channel.onmessage = function(event) {
+                    const syncData = event.data;
+                    // Si recibimos un mensaje de sincronización, verificamos si afecta al niño actual
+                    const currentChildId = getURLParameter('childId');
+                    if (currentChildId === syncData.childId) {
+                        if (syncData.action === 'soft-delete' || syncData.action === 'permanent-delete') {
+                            showToast('El perfil actual ha sido eliminado', 'info');
+                            setTimeout(() => {
+                                window.location.href = 'index.html#perfiles-de-tus-hijos';
+                            }, 2000);
+                        }
+                    }
+                };
+            }
+            // --- FIN DE VERIFICACIÓN DE SINCRONIZACIÓN AL CARGAR ---
+
             const urlParams = new URLSearchParams(window.location.search);
             const childId = urlParams.get('childId');
             const guestMode = urlParams.get('guest') === 'true';
@@ -1070,6 +1136,43 @@
                 storageAdapter.saveResponses(responses);
             }
         });
+
+        // Función para mostrar notificaciones toast
+        function showToast(message, type = 'info') {
+            // Crear contenedor de toast si no existe
+            let toastContainer = document.getElementById('toastContainer');
+            if (!toastContainer) {
+                toastContainer = document.createElement('div');
+                toastContainer.id = 'toastContainer';
+                toastContainer.style.position = 'fixed';
+                toastContainer.style.top = '20px';
+                toastContainer.style.right = '20px';
+                toastContainer.style.zIndex = '1050';
+                document.body.appendChild(toastContainer);
+            }
+            
+            const toastId = 'toast-' + Date.now();
+            
+            const toastHtml = `
+                <div id="${toastId}" class="custom-toast toast-${type}">
+                    <div class="me-2">
+                        ${type === 'success' ? '<i class="fas fa-check-circle text-success"></i>' : 
+                          type === 'error' ? '<i class="fas fa-exclamation-circle text-danger"></i>' : 
+                          '<i class="fas fa-info-circle text-info"></i>'}
+                    </div>
+                    <div class="flex-grow-1">${message}</div>
+                    <button type="button" class="btn-close ms-2" onclick="document.getElementById('${toastId}').remove()"></button>
+                </div>
+            `;
+            
+            toastContainer.insertAdjacentHTML('beforeend', toastHtml);
+            
+            // Auto remove after 5 seconds
+            setTimeout(() => {
+                const toast = document.getElementById(toastId);
+                if (toast) toast.remove();
+            }, 5000);
+        }
 
         // Configuración de modales del footer
         document.addEventListener('DOMContentLoaded', function() {
