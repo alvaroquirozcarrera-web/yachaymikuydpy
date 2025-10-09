@@ -20,6 +20,11 @@
             --pastel-green: #C8E6C9;
             --pastel-yellow: #FFF9C4;
             --pastel-purple: #E1BEE7;
+            --primary-blue: #2c5aa0;
+            --light-blue: #5d8cc4;
+            --dark-blue: #1a3a6e;
+            --iron-color: #B22222;
+            --vitamin-c-color: #FF8C00;
         }
 
         * {
@@ -33,8 +38,22 @@
             background-color: #f5f5f5;
             color: var(--dark-color);
             line-height: 1.6;
-            background-image: linear-gradient(135deg, rgba(235, 245, 255, 0.5), rgba(232, 245, 233, 0.5));
+            background-image: url('https://picsum.photos/seed/academic-learning/1600/900.jpg');
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
             min-height: 100vh;
+            padding-bottom: 60px;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.85);
+            z-index: -1;
         }
 
         .container {
@@ -43,16 +62,21 @@
             padding: 20px;
         }
 
+        /* Barra superior mejorada para móviles */
         .header {
             background-color: white;
             border-radius: 15px;
-            padding: 20px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 30px;
             flex-wrap: wrap;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border: 2px solid var(--primary-color);
         }
 
         .header h1 {
@@ -60,11 +84,12 @@
             display: flex;
             align-items: center;
             gap: 10px;
-            font-size: 1.8rem;
+            font-size: 1.5rem;
         }
 
         .header h1 i {
-            font-size: 1.8rem;
+            font-size: 1.5rem;
+            color: var(--primary-color);
         }
 
         .header-buttons {
@@ -83,6 +108,8 @@
             align-items: center;
             gap: 5px;
             transition: all 0.3s ease;
+            font-size: 0.9rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
 
         .btn-primary {
@@ -115,10 +142,187 @@
             color: white;
         }
 
+        .btn-iron {
+            background-color: var(--iron-color);
+            color: white;
+        }
+
+        .btn-vitamin-c {
+            background-color: var(--vitamin-c-color);
+            color: white;
+        }
+
         .btn:hover {
             opacity: 0.9;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Sección de Anemia y Rendimiento Académico */
+        .anemia-academic-section {
+            background-color: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border: 2px solid var(--iron-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .anemia-academic-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 10px;
+            height: 100%;
+            background-color: var(--iron-color);
+        }
+
+        .anemia-academic-title {
+            color: var(--iron-color);
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .anemia-academic-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .anemia-academic-text {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .anemia-academic-image {
+            flex: 1;
+            min-width: 250px;
+            max-width: 300px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .anemia-academic-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .impact-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .impact-card {
+            background-color: #fff9f9;
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .impact-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .impact-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .impact-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: var(--iron-color);
+        }
+
+        .impact-description {
+            font-size: 0.9rem;
+            color: var(--dark-color);
+        }
+
+        /* Sección de Consejos para la Anemia */
+        .anemia-tips-section {
+            background-color: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border: 2px solid var(--iron-color);
+        }
+
+        .anemia-tips-title {
+            color: var(--iron-color);
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .anemia-tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .anemia-tip-card {
+            background-color: #fff9f9;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .anemia-tip-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .anemia-tip-image {
+            height: 150px;
+            overflow: hidden;
+        }
+
+        .anemia-tip-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .anemia-tip-card:hover .anemia-tip-image img {
+            transform: scale(1.05);
+        }
+
+        .anemia-tip-content {
+            padding: 15px;
+        }
+
+        .anemia-tip-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: var(--iron-color);
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .anemia-tip-description {
+            font-size: 0.9rem;
+            color: var(--dark-color);
+            line-height: 1.5;
         }
 
         .interaction-section {
@@ -126,7 +330,8 @@
             border-radius: 15px;
             padding: 30px;
             margin-bottom: 30px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border: 2px solid var(--primary-color);
         }
 
         .interaction-section h2 {
@@ -134,6 +339,10 @@
             margin-bottom: 20px;
             font-size: 1.5rem;
             text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
         }
 
         .challenge-input {
@@ -170,10 +379,16 @@
 
         .subject-filter select {
             padding: 8px 15px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
+            border: 2px solid #ddd;
+            border-radius: 25px;
             font-size: 1rem;
             background-color: white;
+            transition: border-color 0.3s ease;
+        }
+
+        .subject-filter select:focus {
+            outline: none;
+            border-color: var(--primary-color);
         }
 
         .generate-btn-container {
@@ -207,23 +422,46 @@
 
         .strategies-container {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
         }
 
         .strategy-card {
             background-color: white;
             border-radius: 15px;
-            padding: 25px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
             position: relative;
-            overflow: hidden;
             animation: fadeIn 0.5s;
+        }
+
+        .strategy-card:hover {
+            transform: translateY(-5px);
         }
 
         .strategy-card.removing {
             animation: fadeOut 0.5s forwards;
+        }
+
+        .strategy-image {
+            height: 180px;
+            overflow: hidden;
+        }
+
+        .strategy-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .strategy-card:hover .strategy-image img {
+            transform: scale(1.05);
+        }
+
+        .strategy-content {
+            padding: 20px;
         }
 
         .strategy-card::before {
@@ -265,6 +503,9 @@
             margin-bottom: 15px;
             font-size: 1.3rem;
             padding-left: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         .strategy-card p {
@@ -280,8 +521,10 @@
             background-color: var(--primary-color);
             color: white;
             border-radius: 20px;
-            padding: 3px 10px;
+            padding: 5px 12px;
             font-size: 0.8rem;
+            font-weight: bold;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
         }
 
         .subject-tag.math {
@@ -312,14 +555,20 @@
             background-color: var(--info-color);
             color: white;
             border: none;
-            border-radius: 5px;
-            padding: 5px 10px;
+            border-radius: 25px;
+            padding: 8px 15px;
             cursor: pointer;
-            font-size: 0.8rem;
+            font-size: 0.9rem;
             margin-top: 15px;
             display: flex;
             align-items: center;
             gap: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .copy-strategy-btn:hover {
+            background-color: #0288d1;
+            transform: translateY(-2px);
         }
 
         .resource-links {
@@ -404,16 +653,101 @@
             border: 1px solid #ffeeba;
             color: #856404;
             padding: 15px;
-            border-radius: 5px;
+            border-radius: 10px;
             margin: 20px 0;
             text-align: center;
             font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        /* Toast container para notificaciones */
+        .toast-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1050;
+        }
+        
+        .custom-toast {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            padding: 15px 20px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            animation: slideIn 0.3s ease;
+        }
+        
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        .toast-success {
+            border-left: 5px solid var(--success-color);
+        }
+        
+        .toast-error {
+            border-left: 5px solid var(--danger-color);
+        }
+        
+        .toast-info {
+            border-left: 5px solid var(--info-color);
+        }
+
+        /* Footer para móviles */
+        .mobile-footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--primary-blue);
+            color: white;
+            padding: 10px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            z-index: 100;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+        }
+
+        .mobile-footer a {
+            color: white;
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 0.8rem;
+        }
+
+        .mobile-footer i {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
         }
 
         @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+
             .header {
                 flex-direction: column;
                 gap: 15px;
+                padding: 15px;
+            }
+
+            .header h1 {
+                font-size: 1.3rem;
             }
 
             .header-buttons {
@@ -424,10 +758,33 @@
             .strategies-container {
                 grid-template-columns: 1fr;
             }
+
+            .anemia-academic-content {
+                flex-direction: column;
+            }
+
+            .impact-cards {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+
+            .anemia-tips-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .mobile-footer {
+                display: flex;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .mobile-footer {
+                display: none;
+            }
         }
     </style>
 </head>
 <body>
+    <div class="overlay"></div>
     <div class="container">
         <div class="header">
             <h1><i class="fas fa-graduation-cap"></i> Apoyo Académico</h1>
@@ -437,8 +794,118 @@
             </div>
         </div>
 
+        <!-- Sección de Anemia y Rendimiento Académico -->
+        <div class="anemia-academic-section">
+            <h2 class="anemia-academic-title"><i class="fas fa-brain"></i> Anemia y Rendimiento Académico</h2>
+            <div class="anemia-academic-content">
+                <div class="anemia-academic-text">
+                    <p>La anemia puede afectar significativamente el rendimiento académico de los niños. La falta de hierro reduce el suministro de oxígeno al cerebro, lo que puede impactar:</p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li>Capacidad de concentración y atención</li>
+                        <li>Memoria a corto y largo plazo</li>
+                        <li>Rendimiento en tareas cognitivas complejas</li>
+                        <li>Nivel de energía y participación en clase</li>
+                    </ul>
+                    <p style="margin-top: 10px;">Una nutrición adecuada no solo combate la anemia, sino que también mejora las funciones cognitivas esenciales para el aprendizaje.</p>
+                    <div style="margin-top: 15px;">
+                        <span class="btn-iron" style="padding: 5px 10px; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 5px;">
+                            <i class="fas fa-tint"></i> Hierro
+                        </span>
+                        <span style="margin: 0 10px;">+</span>
+                        <span class="btn-vitamin-c" style="padding: 5px 10px; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 5px;">
+                            <i class="fas fa-lemon"></i> Vitamina C
+                        </span>
+                        <span style="margin: 0 10px;">=</span>
+                        <span class="btn-success" style="padding: 5px 10px; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 5px;">
+                            <i class="fas fa-graduation-cap"></i> Mejor Rendimiento
+                        </span>
+                    </div>
+                </div>
+                <div class="anemia-academic-image">
+                    <img src="https://picsum.photos/seed/child-learning/300/200.jpg" alt="Niño aprendiendo">
+                </div>
+            </div>
+            
+            <div class="impact-cards">
+                <div class="impact-card">
+                    <div class="impact-icon" style="color: var(--danger-color);">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <div class="impact-title">Concentración</div>
+                    <div class="impact-description">La falta de hierro reduce la capacidad de mantener la atención durante períodos prolongados</div>
+                </div>
+                <div class="impact-card">
+                    <div class="impact-icon" style="color: var(--warning-color);">
+                        <i class="fas fa-memory"></i>
+                    </div>
+                    <div class="impact-title">Memoria</div>
+                    <div class="impact-description">El oxígeno insuficiente afecta la capacidad de retener y recordar información</div>
+                </div>
+                <div class="impact-card">
+                    <div class="impact-icon" style="color: var(--info-color);">
+                        <i class="fas fa-battery-quarter"></i>
+                    </div>
+                    <div class="impact-title">Energía</div>
+                    <div class="impact-description">La fatiga dificulta la participación activa en actividades de aprendizaje</div>
+                </div>
+                <div class="impact-card">
+                    <div class="impact-icon" style="color: var(--success-color);">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="impact-title">Rendimiento</div>
+                    <div class="impact-description">La anemia puede afectar negativamente los resultados académicos generales</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sección de Consejos para la Anemia -->
+        <div class="anemia-tips-section">
+            <h2 class="anemia-tips-title"><i class="fas fa-lightbulb"></i> Estrategias para Mejorar el Rendimiento</h2>
+            <div class="anemia-tips-grid">
+                <div class="anemia-tip-card">
+                    <div class="anemia-tip-image">
+                        <img src="https://picsum.photos/seed/breakfast-learning/300/150.jpg" alt="Desayuno nutritivo">
+                    </div>
+                    <div class="anemia-tip-content">
+                        <div class="anemia-tip-title">
+                            <i class="fas fa-utensils"></i> Desayunos Inteligentes
+                        </div>
+                        <div class="anemia-tip-description">
+                            Inicia el día con un desayuno rico en hierro y vitamina C. Combina cereales fortificados con frutas cítricas o huevos con jugo de naranja para mejorar la absorción del hierro antes de clases.
+                        </div>
+                    </div>
+                </div>
+                <div class="anemia-tip-card">
+                    <div class="anemia-tip-image">
+                        <img src="https://picsum.photos/seed/study-snacks/300/150.jpg" alt="Snacks para estudiar">
+                    </div>
+                    <div class="anemia-tip-content">
+                        <div class="anemia-tip-title">
+                            <i class="fas fa-apple-alt"></i> Snacks para Estudiar
+                        </div>
+                        <div class="anemia-tip-description">
+                            Prepara snacks nutritivos para las sesiones de estudio: frutos secos, semillas de calabaza, chocolate negro o frutas deshidratadas. Estos aportan hierro y energía sostenida.
+                        </div>
+                    </div>
+                </div>
+                <div class="anemia-tip-card">
+                    <div class="anemia-tip-image">
+                        <img src="https://picsum.photos/seed/homework-schedule/300/150.jpg" alt="Horario de tareas">
+                    </div>
+                    <div class="anemia-tip-content">
+                        <div class="anemia-tip-title">
+                            <i class="fas fa-clock"></i> Horarios Inteligentes
+                        </div>
+                        <div class="anemia-tip-description">
+                            Programa las tareas más difíciles en momentos de mayor energía, generalmente después de comidas nutritivas. Incluye pausas activas para mantener el flujo sanguíneo y oxigenación cerebral.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="interaction-section">
-            <h2>¿Qué desafío académico enfrenta tu hijo?</h2>
+            <h2><i class="fas fa-question-circle"></i> ¿Qué desafío académico enfrenta tu hijo?</h2>
             <div class="challenge-input">
                 <textarea id="challenge-description" placeholder="Le cuesta mucho concentrarse en las tareas de matemáticas..."></textarea>
             </div>
@@ -467,6 +934,29 @@
         </div>
     </div>
 
+    <!-- Footer para móviles -->
+    <div class="mobile-footer">
+        <a href="#" id="mobileBackToProfile">
+            <i class="fas fa-arrow-left"></i>
+            <span>Volver</span>
+        </a>
+        <a href="#" id="mobileHome">
+            <i class="fas fa-home"></i>
+            <span>Inicio</span>
+        </a>
+        <a href="#" id="mobileProfile">
+            <i class="fas fa-user"></i>
+            <span>Perfil</span>
+        </a>
+        <a href="#" id="mobileExit">
+            <i class="fas fa-sign-out-alt"></i>
+            <span>Salir</span>
+        </a>
+    </div>
+
+    <!-- Toast container -->
+    <div class="toast-container" id="toastContainer"></div>
+
     <script>
         // Datos de ejemplo para estrategias iniciales
         const sampleStrategies = [
@@ -477,7 +967,8 @@
                 recursos: [
                     { nombre: "Pomodoro Timer for Kids", url: "#" },
                     { nombre: "Visual Timer App", url: "#" }
-                ]
+                ],
+                image: "https://picsum.photos/seed/pomodoro-technique/400/250.jpg"
             },
             {
                 titulo: "Mapas Mentales para la Comprensión",
@@ -486,7 +977,8 @@
                 recursos: [
                     { nombre: "SimpleMind for Kids", url: "#" },
                     { nombre: "Cómo crear mapas mentales", url: "#" }
-                ]
+                ],
+                image: "https://picsum.photos/seed/mind-mapping/400/250.jpg"
             },
             {
                 titulo: "Juegos de Matemáticas en la Vida Diaria",
@@ -495,7 +987,8 @@
                 recursos: [
                     { nombre: "Juegos matemáticos para casa", url: "#" },
                     { nombre: "Math Playground", url: "#" }
-                ]
+                ],
+                image: "https://picsum.photos/seed/math-games/400/250.jpg"
             },
             {
                 titulo: "Lectura Dialogada",
@@ -504,7 +997,8 @@
                 recursos: [
                     { nombre: "Reading Rockets", url: "#" },
                     { nombre: "Libros recomendados por edad", url: "#" }
-                ]
+                ],
+                image: "https://picsum.photos/seed/reading-together/400/250.jpg"
             },
             {
                 titulo: "Experimentos Científicos Caseros",
@@ -513,7 +1007,8 @@
                 recursos: [
                     { nombre: "Science Kids", url: "#" },
                     { nombre: "Experimentos caseros", url: "#" }
-                ]
+                ],
+                image: "https://picsum.photos/seed/science-experiment/400/250.jpg"
             },
             {
                 titulo: "Líneas de Tiempo Interactivas",
@@ -522,7 +1017,8 @@
                 recursos: [
                     { nombre: "Timeline JS", url: "#" },
                     { nombre: "Plantillas de líneas de tiempo", url: "#" }
-                ]
+                ],
+                image: "https://picsum.photos/seed/timeline-history/400/250.jpg"
             }
         ];
 
@@ -530,6 +1026,103 @@
         let childId = "";
         let childData = {};
         let strategies = [];
+
+        // Storage Adapter - Para facilitar migración a backend
+        const storageAdapter = {
+            // Users
+            getUsers: function() {
+                const users = localStorage.getItem('yachay_users');
+                return users ? JSON.parse(users) : [];
+            },
+            saveUsers: function(users) {
+                localStorage.setItem('yachay_users', JSON.stringify(users));
+            },
+            
+            // Children
+            getChildren: function() {
+                const children = localStorage.getItem('yachay_children');
+                return children ? JSON.parse(children) : [];
+            },
+            saveChildren: function(children) {
+                localStorage.setItem('yachay_children', JSON.stringify(children));
+            },
+            
+            // Responses
+            getResponses: function() {
+                const responses = localStorage.getItem('yachay_responses');
+                return responses ? JSON.parse(responses) : {};
+            },
+            saveResponses: function(responses) {
+                localStorage.setItem('yachay_responses', JSON.stringify(responses));
+            },
+            
+            // Session
+            getSession: function() {
+                const session = localStorage.getItem('yachay_session');
+                return session ? JSON.parse(session) : { currentUserId: null, exploringAsGuest: false, lastActiveAt: null };
+            },
+            saveSession: function(session) {
+                localStorage.setItem('yachay_session', JSON.stringify(session));
+            },
+            
+            // Audit Log
+            getAuditLog: function() {
+                const auditLog = localStorage.getItem('yachay_auditLog');
+                return auditLog ? JSON.parse(auditLog) : [];
+            },
+            saveAuditLog: function(auditLog) {
+                localStorage.setItem('yachay_auditLog', JSON.stringify(auditLog));
+            }
+        };
+
+        // --- INICIO DE FUNCIONES DE SINCRONIZACIÓN ---
+        
+        // Función para sincronizar la eliminación/restauración entre páginas
+        function syncChildDeletionAcrossPages(childId, action) {
+            // action puede ser 'soft-delete', 'restore' o 'permanent-delete'
+            const syncData = {
+                childId: childId,
+                action: action,
+                timestamp: new Date().toISOString()
+            };
+            
+            // Guardar en localStorage para que otras páginas puedan detectar cambios
+            localStorage.setItem('yachay_sync_action', JSON.stringify(syncData));
+            
+            // Notificar a otras pestañas abiertas usando BroadcastChannel
+            if ('BroadcastChannel' in window) {
+                const channel = new BroadcastChannel('yachay_sync');
+                channel.postMessage(syncData);
+            }
+        }
+
+        // --- FIN DE FUNCIONES DE SINCRONIZACIÓN ---
+
+        // Función para mostrar notificaciones toast mejoradas
+        function showToast(message, type = 'info') {
+            const toastContainer = document.getElementById('toastContainer');
+            const toastId = 'toast-' + Date.now();
+            
+            const toastHtml = `
+                <div id="${toastId}" class="custom-toast toast-${type}">
+                    <div class="me-2">
+                        ${type === 'success' ? '<i class="fas fa-check-circle text-success"></i>' : 
+                          type === 'error' ? '<i class="fas fa-exclamation-circle text-danger"></i>' : 
+                          '<i class="fas fa-info-circle text-info"></i>'}
+                    </div>
+                    <div class="flex-grow-1">${message}</div>
+                    <button type="button" class="btn-close ms-2" onclick="document.getElementById('${toastId}').remove()"></button>
+                </div>
+            `;
+            
+            toastContainer.insertAdjacentHTML('beforeend', toastHtml);
+            
+            // Auto remove after 5 seconds
+            setTimeout(() => {
+                const toast = document.getElementById(toastId);
+                if (toast) toast.remove();
+            }, 5000);
+        }
 
         // Función para obtener el childId de la URL
         function getChildIdFromUrl() {
@@ -539,15 +1132,12 @@
 
         // Función para cargar los datos del niño desde localStorage
         function loadChildData() {
-            const childrenData = localStorage.getItem('yachayMikuyChildren');
-            if (childrenData) {
-                const childrenArray = JSON.parse(childrenData);
-                const child = childrenArray.find(c => c.id === childId);
-                if (child) {
-                    childData = child;
-                    updateHeaderWithChildName();
-                    return true;
-                }
+            const childrenData = storageAdapter.getChildren();
+            const child = childrenData.find(c => c.id === childId);
+            if (child) {
+                childData = child;
+                updateHeaderWithChildName();
+                return true;
             }
             return false;
         }
@@ -560,30 +1150,18 @@
             // Actualizar enlace de volver al perfil
             const backToProfileLink = document.getElementById('backToProfile');
             backToProfileLink.href = `chicos.html?childId=${childId}`;
+            
+            // Actualizar enlaces del footer móvil
+            const mobileBackToProfile = document.getElementById('mobileBackToProfile');
+            const mobileProfile = document.getElementById('mobileProfile');
+            
+            mobileBackToProfile.href = `chicos.html?childId=${childId}`;
+            mobileProfile.href = `chicos.html?childId=${childId}`;
         }
 
-        // Función para mostrar notificaciones
+        // Función para mostrar notificaciones (mantenida por compatibilidad)
         function showNotification(message, type) {
-            const notification = document.createElement('div');
-            notification.className = `notification ${type}`;
-            
-            if (type === 'success') {
-                notification.style.backgroundColor = 'var(--success-color)';
-            } else if (type === 'error') {
-                notification.style.backgroundColor = 'var(--danger-color)';
-            } else if (type === 'info') {
-                notification.style.backgroundColor = 'var(--info-color)';
-            }
-            
-            notification.textContent = message;
-            document.body.appendChild(notification);
-            
-            setTimeout(() => {
-                notification.style.animation = 'fadeOut 0.5s';
-                setTimeout(() => {
-                    document.body.removeChild(notification);
-                }, 500);
-            }, 3000);
+            showToast(message, type);
         }
 
         // Función para generar estrategias académicas
@@ -601,7 +1179,7 @@
             
             const message = document.createElement('div');
             message.className = 'development-message';
-            message.textContent = 'Funcionalidad en desarrollo. Próximamente podrás generar estrategias académicas personalizadas con IA.';
+            message.innerHTML = '<i class="fas fa-tools"></i> Funcionalidad en desarrollo. Próximamente podrás generar estrategias académicas personalizadas con IA.';
             
             const strategiesContainer = document.getElementById('strategies-container');
             strategiesContainer.parentNode.insertBefore(message, strategiesContainer);
@@ -665,13 +1243,18 @@
                 ` : '';
                 
                 card.innerHTML = `
-                    <span class="subject-tag ${strategy.subject}">${subjectNames[strategy.subject]}</span>
-                    <h3>${strategy.titulo}</h3>
-                    <p>${strategy.descripcion}</p>
-                    ${resourcesHtml}
-                    <button class="copy-strategy-btn" data-index="${index}">
-                        <i class="fas fa-copy"></i> Copiar Estrategia
-                    </button>
+                    <div class="strategy-image">
+                        <img src="${strategy.image || 'https://picsum.photos/seed/strategy-' + index + '/400/250.jpg'}" alt="${strategy.titulo}">
+                    </div>
+                    <div class="strategy-content">
+                        <span class="subject-tag ${strategy.subject}">${subjectNames[strategy.subject]}</span>
+                        <h3>${strategy.titulo}</h3>
+                        <p>${strategy.descripcion}</p>
+                        ${resourcesHtml}
+                        <button class="copy-strategy-btn" data-index="${index}">
+                            <i class="fas fa-copy"></i> Copiar Estrategia
+                        </button>
+                    </div>
                 `;
                 
                 strategiesContainer.appendChild(card);
@@ -700,9 +1283,9 @@
             }
             
             navigator.clipboard.writeText(textToCopy).then(() => {
-                showNotification('Estrategia copiada al portapapeles', 'success');
+                showToast('Estrategia copiada al portapapeles', 'success');
             }).catch(err => {
-                showNotification('Error al copiar la estrategia', 'error');
+                showToast('Error al copiar la estrategia', 'error');
                 console.error('Error al copiar: ', err);
             });
         }
@@ -713,21 +1296,82 @@
             renderStrategies();
         }
 
+        // Función para inicializar el footer móvil
+        function initMobileFooter() {
+            // Enlace de inicio
+            document.getElementById('mobileHome').addEventListener('click', function(e) {
+                e.preventDefault();
+                window.location.href = 'index.html';
+            });
+            
+            // Enlace de salir
+            document.getElementById('mobileExit').addEventListener('click', function(e) {
+                e.preventDefault();
+                window.location.href = 'index.html';
+            });
+        }
+
         // Función de inicialización
         function init() {
+            // --- INICIO DE VERIFICACIÓN DE SINCRONIZACIÓN AL CARGAR ---
+            // Verificar si hay acciones de sincronización pendientes de otras pestañas
+            const syncAction = localStorage.getItem('yachay_sync_action');
+            if (syncAction) {
+                const syncData = JSON.parse(syncAction);
+                // Si la acción es reciente (menos de 5 segundos), la procesamos
+                const actionTime = new Date(syncData.timestamp);
+                const now = new Date();
+                if ((now - actionTime) < 5000) {
+                    // Si la acción afecta al niño actual, redirigimos
+                    const currentChildId = getChildIdFromUrl();
+                    if (currentChildId === syncData.childId) {
+                        if (syncData.action === 'soft-delete' || syncData.action === 'permanent-delete') {
+                            showToast('El perfil actual ha sido eliminado', 'info');
+                            setTimeout(() => {
+                                window.location.href = 'chicos.html';
+                            }, 2000);
+                        }
+                    }
+                }
+                // Limpiamos la acción para no procesarla de nuevo
+                localStorage.removeItem('yachay_sync_action');
+            }
+
+            // Configurar listener para sincronización en tiempo real con otras pestañas
+            if ('BroadcastChannel' in window) {
+                const channel = new BroadcastChannel('yachay_sync');
+                channel.onmessage = function(event) {
+                    const syncData = event.data;
+                    // Si recibimos un mensaje de sincronización, verificamos si afecta al niño actual
+                    const currentChildId = getChildIdFromUrl();
+                    if (currentChildId === syncData.childId) {
+                        if (syncData.action === 'soft-delete' || syncData.action === 'permanent-delete') {
+                            showToast('El perfil actual ha sido eliminado', 'info');
+                            setTimeout(() => {
+                                window.location.href = 'chicos.html';
+                            }, 2000);
+                        }
+                    }
+                };
+            }
+            // --- FIN DE VERIFICACIÓN DE SINCRONIZACIÓN AL CARGAR ---
+
             // Obtener el childId de la URL
             childId = getChildIdFromUrl();
             
             if (!childId) {
-                showNotification('No se encontró el ID del niño', 'error');
+                showToast('No se encontró el ID del niño', 'error');
                 return;
             }
             
             // Cargar los datos del niño
             if (!loadChildData()) {
-                showNotification('No se encontraron datos del niño', 'error');
+                showToast('No se encontraron datos del niño', 'error');
                 return;
             }
+            
+            // Inicializar componentes
+            initMobileFooter();
             
             // Inicializar estrategias de ejemplo
             initializeSampleStrategies();
