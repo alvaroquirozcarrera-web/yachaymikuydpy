@@ -931,7 +931,13 @@
                     key.startsWith('q') && !childResponses[key].optional
                 ).length;
                 
-                const progressPercent = Math.round((answeredQuestions / totalQuestions) * 100);
+                let progressPercent = Math.round((answeredQuestions / totalQuestions) * 100);
+                
+                // Si es un perfil predefinido (ownerId === null), asumir que está completado al 100%
+                // independientemente de las respuestas en localStorage
+                if (currentChild.ownerId === null) {
+                    progressPercent = 100;
+                }
                 
                 if (progressPercent < 100) {
                     // Mostrar advertencia de completado
@@ -941,6 +947,10 @@
                     // Configurar enlace para continuar con el cuestionario
                     const continueLink = document.getElementById('continueQuestionnaire');
                     continueLink.href = `yachaymikuy.html?childId=${currentChild.id}`;
+                } else {
+                    // Ocultar advertencia de completado
+                    const completionWarning = document.getElementById('completionWarning');
+                    completionWarning.classList.add('d-none');
                 }
 
                 // Configurar los enlaces de TODOS los tableros
@@ -980,7 +990,7 @@
             // Función para obtener niños de ejemplo
             function getGuestChildren() {
                 const children = storageAdapter.getChildren();
-                return children.filter(child => child.ownerId === null && child.progressPercent === 100);
+                return children.filter(child => child.ownerId === null);
             }
 
             // Función para crear niños de ejemplo si no existen
@@ -1429,7 +1439,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>`,
+                    </div>`
             };
 
             // Escucha global de clics para manejar la apertura y cierre de modales
