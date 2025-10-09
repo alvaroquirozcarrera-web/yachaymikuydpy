@@ -588,6 +588,48 @@
             color: var(--gray);
         }
 
+        /* Toast container */
+        .toast-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1050;
+        }
+        
+        .custom-toast {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            padding: 15px 20px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            animation: slideIn 0.3s ease;
+        }
+        
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        .toast-success {
+            border-left: 5px solid var(--success-green);
+        }
+        
+        .toast-error {
+            border-left: 5px solid var(--danger-red);
+        }
+        
+        .toast-info {
+            border-left: 5px solid var(--accent-cyan);
+        }
+
         @media (max-width: 768px) {
             .container { 
                 padding: 20px; 
@@ -778,6 +820,7 @@
     </footer>
 
     <div id="actionModalContainer"></div>
+    <div class="toast-container" id="toastContainer"></div>
 
     <script>
         // Storage Adapter - Para facilitar migración a backend
@@ -828,6 +871,55 @@
             }
         };
 
+        // --- INICIO DE FUNCIONES DE SINCRONIZACIÓN ---
+        
+        // Función para sincronizar la eliminación/restauración entre páginas
+        function syncChildDeletionAcrossPages(childId, action) {
+            // action puede ser 'soft-delete', 'restore' o 'permanent-delete'
+            const syncData = {
+                childId: childId,
+                action: action,
+                timestamp: new Date().toISOString()
+            };
+            
+            // Guardar en localStorage para que otras páginas puedan detectar cambios
+            localStorage.setItem('yachay_sync_action', JSON.stringify(syncData));
+            
+            // Notificar a otras pestañas abiertas usando BroadcastChannel
+            if ('BroadcastChannel' in window) {
+                const channel = new BroadcastChannel('yachay_sync');
+                channel.postMessage(syncData);
+            }
+        }
+
+        // --- FIN DE FUNCIONES DE SINCRONIZACIÓN ---
+
+        // Función para mostrar notificaciones toast
+        function showToast(message, type = 'info') {
+            const toastContainer = document.getElementById('toastContainer');
+            const toastId = 'toast-' + Date.now();
+            
+            const toastHtml = `
+                <div id="${toastId}" class="custom-toast toast-${type}">
+                    <div class="me-2">
+                        ${type === 'success' ? '<i class="fas fa-check-circle text-success"></i>' : 
+                          type === 'error' ? '<i class="fas fa-exclamation-circle text-danger"></i>' : 
+                          '<i class="fas fa-info-circle text-info"></i>'}
+                    </div>
+                    <div class="flex-grow-1">${message}</div>
+                    <button type="button" class="btn-close ms-2" onclick="document.getElementById('${toastId}').remove()"></button>
+                </div>
+            `;
+            
+            toastContainer.insertAdjacentHTML('beforeend', toastHtml);
+            
+            // Auto remove after 5 seconds
+            setTimeout(() => {
+                const toast = document.getElementById(toastId);
+                if (toast) toast.remove();
+            }, 5000);
+        }
+
         // Función para calcular la edad a partir de la fecha de nacimiento
         function calculateAge(dob) {
             const birthDate = new Date(dob);
@@ -849,6 +941,78 @@
         }
 
         document.addEventListener('DOMContentLoaded', function() {
+            // --- INICIO DE VERIFICACIÓN DE SINCRONIZACIÓN AL CARGAR ---
+            // Verificar si hay acciones de sincronización pendientes de otras pestañas
+            const syncAction = localStorage.getItem('yachay_sync_action');
+            if (syncAction) {
+                const syncData = JSON.parse(syncAction);
+                // Si la acción es reciente (menos de 5 segundos), la procesamos
+                const actionTime = new Date(syncData.timestamp);
+                const now = new Date();
+                if ((now - actionTime) < 5000) {
+                    // Si la acción afecta a algún niño mostrado, recargamos la página
+                    const session = storageAdapter.getSession();
+                    const guestMode = getURLParameter('guest') === 'true';
+                    
+                    let childrenToShow;
+                    if (guestMode || session.exploringAsGuest) {
+                        // Modo invitado: mostrar solo los perfiles de invitado
+                        childrenToShow = storageAdapter.getChildren().filter(child => child.ownerId === null);
+                    } else if (session.currentUserId) {
+                        // Modo con cuenta: mostrar los perfiles del usuario actual
+                        childrenToShow = storageAdapter.getChildren().filter(child => 
+                            child.ownerId === session.currentUserId
+                        );
+                    }
+                    
+                    // Verificar si el niño eliminado está en la lista de niños mostrados
+                    if (childrenToShow.some(child => child.id === syncData.childId)) {
+                        if (syncData.action === 'soft-delete' || syncData.action === 'permanent-delete') {
+                            showToast('Un perfil ha sido eliminado', 'info');
+                            // Recargar la página para actualizar la lista de niños
+                            setTimeout(() => {
+                                location.reload();
+                            }, 2000);
+                        }
+                    }
+                }
+                // Limpiamos la acción para no procesarla de nuevo
+                localStorage.removeItem('yachay_sync_action');
+            }
+
+            // Configurar listener para sincronización en tiempo real con otras pestañas
+            if ('BroadcastChannel' in window) {
+                const channel = new BroadcastChannel('yachay_sync');
+                channel.onmessage = function(event) {
+                    const syncData = event.data;
+                    const session = storageAdapter.getSession();
+                    const guestMode = getURLParameter('guest') === 'true';
+                    
+                    let childrenToShow;
+                    if (guestMode || session.exploringAsGuest) {
+                        // Modo invitado: mostrar solo los perfiles de invitado
+                        childrenToShow = storageAdapter.getChildren().filter(child => child.ownerId === null);
+                    } else if (session.currentUserId) {
+                        // Modo con cuenta: mostrar los perfiles del usuario actual
+                        childrenToShow = storageAdapter.getChildren().filter(child => 
+                            child.ownerId === session.currentUserId
+                        );
+                    }
+                    
+                    // Verificar si el niño eliminado está en la lista de niños mostrados
+                    if (childrenToShow.some(child => child.id === syncData.childId)) {
+                        if (syncData.action === 'soft-delete' || syncData.action === 'permanent-delete') {
+                            showToast('Un perfil ha sido eliminado', 'info');
+                            // Recargar la página para actualizar la lista de niños
+                            setTimeout(() => {
+                                location.reload();
+                            }, 2000);
+                        }
+                    }
+                };
+            }
+            // --- FIN DE VERIFICACIÓN DE SINCRONIZACIÓN AL CARGAR ---
+
             const urlParams = new URLSearchParams(window.location.search);
             const guestMode = urlParams.get('guest') === 'true';
             const showCompletion = urlParams.get('showCompletion') === 'true';
