@@ -1684,6 +1684,12 @@
         }
         
         function goToPreviousQuestion() {
+            // Guardar la respuesta actual antes de retroceder
+            const answer = getCurrentAnswer();
+            if (answer) {
+                saveCurrentAnswer();
+            }
+            
             const questionNumber = parseInt(currentQuestionId.substring(1));
             
             if (questionNumber <= 1) {
