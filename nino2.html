@@ -6,6 +6,7 @@
     <title>Comida por Región - Yachay Mikuy</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary-blue: #2c5aa0;
@@ -29,6 +30,10 @@
             --shadow-color: rgba(40, 50, 70, 0.1);
             --danger-red: #dc3545;
             --danger-red-dark: #c82333;
+            --iron-red: #e63946;
+            --iron-red-light: #f1a9a0;
+            --iron-yellow: #ffb703;
+            --iron-green: #2a9d8f;
         }
 
         @keyframes fadeIn {
@@ -36,16 +41,27 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        @keyframes fadeOut {
-            from { opacity: 1; transform: translateY(0); }
-            to { opacity: 0; transform: translateY(-20px); }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'Poppins', sans-serif;
         }
 
         body {
@@ -53,12 +69,62 @@
             color: #333;
             line-height: 1.6;
             min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Barra superior fija con logo y botón de volver */
+        .top-bar {
+            background: linear-gradient(135deg, var(--primary-blue), var(--light-blue));
+            color: var(--white);
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .top-bar .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+
+        .top-bar .logo i {
+            margin-right: 10px;
+            color: var(--accent-orange);
+        }
+
+        .btn-back-top {
+            padding: 10px 20px;
+            background-color: rgba(255, 255, 255, 0.2);
+            color: var(--white);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .btn-back-top:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
+            flex: 1;
         }
 
         /* Header Styles */
@@ -72,6 +138,7 @@
             justify-content: space-between;
             align-items: center;
             border-left: 8px solid var(--accent-orange);
+            animation: fadeIn 0.5s ease;
         }
 
         .header-content {
@@ -83,6 +150,7 @@
         .header-icon {
             font-size: 2.5rem;
             color: var(--accent-orange);
+            animation: float 3s ease-in-out infinite;
         }
 
         .header-title h1 {
@@ -156,6 +224,105 @@
             display: flex;
             align-items: center;
             gap: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .child-tag:hover {
+            background-color: rgba(93, 140, 196, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Anemia Info Section */
+        .anemia-info {
+            background: linear-gradient(135deg, rgba(230, 57, 70, 0.1), rgba(255, 183, 3, 0.1));
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 30px;
+            border-left: 8px solid var(--iron-red);
+            animation: fadeIn 0.7s ease;
+        }
+
+        .anemia-info-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--iron-red);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .anemia-info-content {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .anemia-stat {
+            flex: 1;
+            min-width: 200px;
+            background-color: var(--white);
+            border-radius: 15px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .anemia-stat:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .anemia-stat-number {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--iron-red);
+            margin-bottom: 5px;
+        }
+
+        .anemia-stat-label {
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+
+        .anemia-tips {
+            flex: 2;
+            min-width: 300px;
+            background-color: var(--white);
+            border-radius: 15px;
+            padding: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .anemia-tips-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--dark-blue);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .anemia-tips-list {
+            list-style: none;
+        }
+
+        .anemia-tips-list li {
+            margin-bottom: 8px;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .anemia-tips-list li:before {
+            content: '\f058';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            color: var(--success-green);
+            position: absolute;
+            left: 0;
         }
 
         /* Region Selection Section */
@@ -165,6 +332,7 @@
             box-shadow: 0 8px 30px var(--shadow-color);
             padding: 25px;
             margin-bottom: 30px;
+            animation: fadeIn 0.9s ease;
         }
 
         .section-title {
@@ -235,6 +403,7 @@
             text-align: center;
             border: 2px dashed rgba(255, 152, 0, 0.3);
             transition: all 0.5s ease;
+            animation: fadeIn 1.1s ease;
         }
 
         .regional-banner.active {
@@ -275,6 +444,7 @@
             border-radius: 20px;
             box-shadow: 0 8px 30px var(--shadow-color);
             padding: 25px;
+            animation: fadeIn 1.3s ease;
         }
 
         .recipe-grid {
@@ -404,6 +574,24 @@
             border-radius: 0 10px 10px 0;
         }
 
+        .iron-rich-box {
+            background-color: rgba(230, 57, 70, 0.1);
+            border-left: 4px solid var(--iron-red);
+            padding: 15px;
+            border-radius: 0 10px 10px 0;
+            margin-bottom: 20px;
+        }
+
+        .iron-rich-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--iron-red);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
         /* Loading Spinner */
         .spinner-container {
             display: none;
@@ -419,10 +607,6 @@
             border-radius: 50%;
             border-top-color: var(--accent-orange);
             animation: spin 1s ease-in-out infinite;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
         }
 
         /* Modal */
@@ -481,6 +665,81 @@
             gap: 15px;
         }
 
+        /* Toast container */
+        .toast-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1050;
+        }
+        
+        .custom-toast {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            padding: 15px 20px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            animation: slideIn 0.3s ease;
+        }
+        
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        .toast-success {
+            border-left: 5px solid var(--success-green);
+        }
+        
+        .toast-error {
+            border-left: 5px solid var(--danger-red);
+        }
+        
+        .toast-info {
+            border-left: 5px solid var(--accent-cyan);
+        }
+
+        /* Interactive Elements */
+        .interactive-element {
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .interactive-element:hover {
+            transform: scale(1.05);
+        }
+
+        .interactive-element .tooltip {
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--dark-blue);
+            color: var(--white);
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .interactive-element:hover .tooltip {
+            opacity: 1;
+            visibility: visible;
+        }
+
         /* Responsive Design */
         @media (max-width: 768px) {
             .container {
@@ -509,10 +768,29 @@
             .banner-title {
                 font-size: 1.5rem;
             }
+
+            .anemia-info-content {
+                flex-direction: column;
+            }
+
+            .anemia-stat {
+                min-width: 100%;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Barra superior con logo y botón de volver -->
+    <div class="top-bar">
+        <div class="logo">
+            <i class="fas fa-apple-alt"></i>
+            Yachay Mikuy
+        </div>
+        <a href="yachay.html" class="btn-back-top">
+            <i class="fas fa-arrow-left"></i> Volver
+        </a>
+    </div>
+
     <div class="container">
         <!-- Header -->
         <header class="header">
@@ -537,6 +815,35 @@
                 </a>
             </div>
         </header>
+
+        <!-- Anemia Info Section -->
+        <section class="anemia-info">
+            <h2 class="anemia-info-title">
+                <i class="fas fa-heartbeat"></i> Combatiendo la Anemia Infantil
+            </h2>
+            <div class="anemia-info-content">
+                <div class="anemia-stat">
+                    <div class="anemia-stat-number">40%</div>
+                    <div class="anemia-stat-label">de niños en Perú sufren de anemia</div>
+                </div>
+                <div class="anemia-stat">
+                    <div class="anemia-stat-number">6-35</div>
+                    <div class="anemia-stat-label">meses es la edad crítica para prevenir</div>
+                </div>
+                <div class="anemia-tips">
+                    <h3 class="anemia-tips-title">
+                        <i class="fas fa-lightbulb"></i> Consejos para prevenir la anemia
+                    </h3>
+                    <ul class="anemia-tips-list">
+                        <li>Incluir alimentos ricos en hierro como carnes rojas, vísceras y legumbres</li>
+                        <li>Consumir vitamina C (naranja, limón, fresas) para mejorar la absorción del hierro</li>
+                        <li>Evitar té o café junto con las comidas principales</li>
+                        <li>Cocinar en ollas de hierro para aumentar el contenido de este mineral</li>
+                        <li>Incluir sangrecita en la dieta al menos una vez por semana</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
 
         <!-- Region Selection Section -->
         <section class="region-selection">
@@ -566,7 +873,7 @@
         <!-- Recipe Display Section -->
         <section class="recipe-display">
             <h2 class="section-title">
-                <i class="fas fa-utensils"></i> Recetas Regionales
+                <i class="fas fa-utensils"></i> Recetas Regionales Ricas en Hierro
             </h2>
             
             <div class="spinner-container" id="spinnerContainer">
@@ -596,23 +903,215 @@
         </div>
     </div>
 
+    <div class="toast-container" id="toastContainer"></div>
+
     <script>
+        // Storage Adapter - Para facilitar migración a backend
+        const storageAdapter = {
+            // Users
+            getUsers: function() {
+                const users = localStorage.getItem('yachay_users');
+                return users ? JSON.parse(users) : [];
+            },
+            saveUsers: function(users) {
+                localStorage.setItem('yachay_users', JSON.stringify(users));
+            },
+            
+            // Children
+            getChildren: function() {
+                const children = localStorage.getItem('yachay_children');
+                return children ? JSON.parse(children) : [];
+            },
+            saveChildren: function(children) {
+                localStorage.setItem('yachay_children', JSON.stringify(children));
+            },
+            
+            // Responses
+            getResponses: function() {
+                const responses = localStorage.getItem('yachay_responses');
+                return responses ? JSON.parse(responses) : {};
+            },
+            saveResponses: function(responses) {
+                localStorage.setItem('yachay_responses', JSON.stringify(responses));
+            },
+            
+            // Session
+            getSession: function() {
+                const session = localStorage.getItem('yachay_session');
+                return session ? JSON.parse(session) : { currentUserId: null, exploringAsGuest: false, lastActiveAt: null };
+            },
+            saveSession: function(session) {
+                localStorage.setItem('yachay_session', JSON.stringify(session));
+            },
+            
+            // Audit Log
+            getAuditLog: function() {
+                const auditLog = localStorage.getItem('yachay_auditLog');
+                return auditLog ? JSON.parse(auditLog) : [];
+            },
+            saveAuditLog: function(auditLog) {
+                localStorage.setItem('yachay_auditLog', JSON.stringify(auditLog));
+            }
+        };
+
+        // --- INICIO DE FUNCIONES DE SINCRONIZACIÓN ---
+        
+        // Función para sincronizar la eliminación/restauración entre páginas
+        function syncChildDeletionAcrossPages(childId, action) {
+            // action puede ser 'soft-delete', 'restore' o 'permanent-delete'
+            const syncData = {
+                childId: childId,
+                action: action,
+                timestamp: new Date().toISOString()
+            };
+            
+            // Guardar en localStorage para que otras páginas puedan detectar cambios
+            localStorage.setItem('yachay_sync_action', JSON.stringify(syncData));
+            
+            // Notificar a otras pestañas abiertas usando BroadcastChannel
+            if ('BroadcastChannel' in window) {
+                const channel = new BroadcastChannel('yachay_sync');
+                channel.postMessage(syncData);
+            }
+        }
+
+        // --- FIN DE FUNCIONES DE SINCRONIZACIÓN ---
+
+        // Función para mostrar notificaciones toast
+        function showToast(message, type = 'info') {
+            const toastContainer = document.getElementById('toastContainer');
+            const toastId = 'toast-' + Date.now();
+            
+            const toastHtml = `
+                <div id="${toastId}" class="custom-toast toast-${type}">
+                    <div class="me-2">
+                        ${type === 'success' ? '<i class="fas fa-check-circle text-success"></i>' : 
+                          type === 'error' ? '<i class="fas fa-exclamation-circle text-danger"></i>' : 
+                          '<i class="fas fa-info-circle text-info"></i>'}
+                    </div>
+                    <div class="flex-grow-1">${message}</div>
+                    <button type="button" class="btn-close ms-2" onclick="document.getElementById('${toastId}').remove()"></button>
+                </div>
+            `;
+            
+            toastContainer.insertAdjacentHTML('beforeend', toastHtml);
+            
+            // Auto remove after 5 seconds
+            setTimeout(() => {
+                const toast = document.getElementById(toastId);
+                if (toast) toast.remove();
+            }, 5000);
+        }
+
         document.addEventListener('DOMContentLoaded', function() {
+            // --- INICIO DE VERIFICACIÓN DE SINCRONIZACIÓN AL CARGAR ---
+            // Verificar si hay acciones de sincronización pendientes de otras pestañas
+            const syncAction = localStorage.getItem('yachay_sync_action');
+            if (syncAction) {
+                const syncData = JSON.parse(syncAction);
+                // Si la acción es reciente (menos de 5 segundos), la procesamos
+                const actionTime = new Date(syncData.timestamp);
+                const now = new Date();
+                if ((now - actionTime) < 5000) {
+                    // Si la acción afecta a algún niño mostrado, recargamos la página
+                    const session = storageAdapter.getSession();
+                    const guestMode = getURLParameter('guest') === 'true';
+                    
+                    let childrenToShow;
+                    if (guestMode || session.exploringAsGuest) {
+                        // Modo invitado: mostrar solo los perfiles de invitado
+                        childrenToShow = storageAdapter.getChildren().filter(child => child.ownerId === null);
+                    } else if (session.currentUserId) {
+                        // Modo con cuenta: mostrar los perfiles del usuario actual
+                        childrenToShow = storageAdapter.getChildren().filter(child => 
+                            child.ownerId === session.currentUserId
+                        );
+                    }
+                    
+                    // Verificar si el niño eliminado está en la lista de niños mostrados
+                    if (childrenToShow.some(child => child.id === syncData.childId)) {
+                        if (syncData.action === 'soft-delete' || syncData.action === 'permanent-delete') {
+                            showToast('Un perfil ha sido eliminado', 'info');
+                            // Recargar la página para actualizar la lista de niños
+                            setTimeout(() => {
+                                location.reload();
+                            }, 2000);
+                        }
+                    }
+                }
+                // Limpiamos la acción para no procesarla de nuevo
+                localStorage.removeItem('yachay_sync_action');
+            }
+
+            // Configurar listener para sincronización en tiempo real con otras pestañas
+            if ('BroadcastChannel' in window) {
+                const channel = new BroadcastChannel('yachay_sync');
+                channel.onmessage = function(event) {
+                    const syncData = event.data;
+                    const session = storageAdapter.getSession();
+                    const guestMode = getURLParameter('guest') === 'true';
+                    
+                    let childrenToShow;
+                    if (guestMode || session.exploringAsGuest) {
+                        // Modo invitado: mostrar solo los perfiles de invitado
+                        childrenToShow = storageAdapter.getChildren().filter(child => child.ownerId === null);
+                    } else if (session.currentUserId) {
+                        // Modo con cuenta: mostrar los perfiles del usuario actual
+                        childrenToShow = storageAdapter.getChildren().filter(child => 
+                            child.ownerId === session.currentUserId
+                        );
+                    }
+                    
+                    // Verificar si el niño eliminado está en la lista de niños mostrados
+                    if (childrenToShow.some(child => child.id === syncData.childId)) {
+                        if (syncData.action === 'soft-delete' || syncData.action === 'permanent-delete') {
+                            showToast('Un perfil ha sido eliminado', 'info');
+                            // Recargar la página para actualizar la lista de niños
+                            setTimeout(() => {
+                                location.reload();
+                            }, 2000);
+                        }
+                    }
+                };
+            }
+            // --- FIN DE VERIFICACIÓN DE SINCRONIZACIÓN AL CARGAR ---
+
             // Obtener departamento de la URL
             const urlParams = new URLSearchParams(window.location.search);
             const departamento = urlParams.get('departamento');
+            const guestMode = urlParams.get('guest') === 'true';
             
             // Cargar datos de todos los niños desde localStorage
-            const storedData = localStorage.getItem('yachayMikuyChildren');
+            const allChildrenData = storageAdapter.getChildren();
             
-            if (!storedData) {
-                document.body.innerHTML = '<h1>Error: No se encontraron datos de niños.</h1>';
-                return;
+            if (!allChildrenData || allChildrenData.length === 0) {
+                // Si no hay datos, crear los niños de ejemplo si estamos en modo invitado
+                if (guestMode) {
+                    createGuestChildrenIfNotExists();
+                    allChildrenData = storageAdapter.getChildren();
+                } else {
+                    document.body.innerHTML = '<h1>Error: No se encontraron datos de niños. Por favor, complete al menos un cuestionario.</h1>';
+                    return;
+                }
             }
             
-            const allChildrenData = JSON.parse(storedData);
             // Filtrar para usar solo los perfiles que han completado el cuestionario
-            const completedChildren = allChildrenData.filter(child => child.completed);
+            let completedChildren;
+            
+            if (guestMode) {
+                // Modo invitado: mostrar solo los perfiles de invitado
+                completedChildren = allChildrenData.filter(child => child.ownerId === null);
+            } else {
+                // Modo con cuenta: mostrar los perfiles del usuario actual
+                const session = storageAdapter.getSession();
+                if (session.currentUserId) {
+                    completedChildren = allChildrenData.filter(child => 
+                        child.ownerId === session.currentUserId
+                    );
+                } else {
+                    completedChildren = [];
+                }
+            }
 
             if (completedChildren.length === 0) {
                 document.body.innerHTML = '<h1>No hay perfiles completados. Por favor, finalice al menos un cuestionario para continuar.</h1>';
@@ -625,6 +1124,7 @@
                 const childTag = document.createElement('span');
                 childTag.className = 'child-tag';
                 childTag.innerHTML = `<i class="fas fa-child"></i> ${child.name}`;
+                childTag.addEventListener('click', () => showChildDetails(child));
                 childrenTags.appendChild(childTag);
             });
             
@@ -660,10 +1160,10 @@
                 "pasco": "El pachamanca pasqueña, que incluye carne de cuy y olluco, es una variante regional de este plato.",
                 "piura": "El seco de chavelo, plato a base de plátano verde y carne seca, es originario de Piura.",
                 "puno": "La chairo, sopa thick con chuño, carne de llama y verduras, es ideal para el frío de Puno.",
-                "sanmartin": " El inchicapi, sopa de gallina con maní y yuca, es un plato tradicional de San Martín.",
+                "sanmartin": "El inchicapi, sopa de gallina con maní y yuca, es un plato tradicional de San Martín.",
                 "tacna": "El picante a la tacneña, preparado con papas, carne y ají panca, es el plato más representativo.",
-                "tumbes": " El ceviche de conchas negras, preparado con un molusco local, es una delicia tumbesina.",
-                "ucayali": " El timbuche, sopa de pescado con plátano y culantro, es típico de la región de Ucayali."
+                "tumbes": "El ceviche de conchas negras, preparado con un molusco local, es una delicia tumbesina.",
+                "ucayali": "El timbuche, sopa de pescado con plátano y culantro, es típico de la región de Ucayali."
             };
             
             // Poblar el selector de departamentos
@@ -694,14 +1194,15 @@
                 const selectedDepartment = regionSelector.value;
                 if (selectedDepartment) {
                     // Actualizar la URL con el departamento seleccionado
-                    const newUrl = `nino2.html?departamento=${selectedDepartment}`;
+                    const guestParam = guestMode ? '&guest=true' : '';
+                    const newUrl = `nino2.html?departamento=${selectedDepartment}${guestParam}`;
                     window.history.pushState({}, '', newUrl);
                     
                     // Mostrar banner y generar recetas
                     showRegionalBanner(selectedDepartment);
                     generateRegionalRecipes(selectedDepartment);
                 } else {
-                    alert('Por favor, selecciona un departamento antes de generar.');
+                    showToast('Por favor, selecciona un departamento antes de generar.', 'error');
                 }
             });
             
@@ -719,7 +1220,7 @@
                 ) || dept;
                 
                 bannerTitle.textContent = `Sabores de ${deptName} para tu Familia`;
-                bannerSubtitle.textContent = `Descubre las delicias culinarias de esta región peruana`;
+                bannerSubtitle.textContent = `Descubre las delicias culinarias de esta región peruana ricas en hierro`;
                 
                 // Mostrar dato curioso si existe
                 if (funFacts[dept]) {
@@ -755,6 +1256,8 @@
                     
                     // Renderizar recetas
                     renderRecipes(recipes);
+                    
+                    showToast('¡Recetas generadas con éxito!', 'success');
                 }, 2000);
             }
             
@@ -769,23 +1272,24 @@
                 const recipeTemplates = {
                     desayuno: {
                         ingredientes: [
-                            "Harina de trigo", "Huevos", "Leche", "Azúcar", "Mantequilla",
+                            "Harina de trigo fortificada con hierro", "Huevos", "Leche", "Azúcar", "Mantequilla",
                             "Frutas de temporada", "Miel", "Canela", "Nueces"
                         ],
                         preparacion: [
-                            "Mezclar la harina con los huevos y la leche.",
+                            "Mezclar la harina fortificada con los huevos y la leche.",
                             "Añadir azúcar y mantequilla derretida.",
                             "Cocinar a fuego medio hasta dorar por ambos lados.",
-                            "Servir con frutas frescas, miel y nueces.",
+                            "Servir con frutas frescas ricas en vitamina C, miel y nueces.",
                             "Espolvorear canela al gusto."
                         ],
                         consejosDespensa: `Utiliza productos locales de ${deptName} para dar un toque especial a esta receta.`,
-                        beneficiosNiño: "Este desayuno proporciona energía sostenida y nutrientes esenciales para el desarrollo.",
-                        alertaAlergenos: "Contiene gluten, lácteos y frutos secos. Asegúrate de que los niños no tengan alergias a estos ingredientes."
+                        beneficiosNiño: "Este desayuno proporciona energía sostenida y nutrientes esenciales para el desarrollo, incluyendo hierro para prevenir la anemia.",
+                        alertaAlergenos: "Contiene gluten, lácteos y frutos secos. Asegúrate de que los niños no tengan alergias a estos ingredientes.",
+                        contenidoHierro: "La harina fortificada y los huevos aportan aproximadamente 5mg de hierro por porción, cubriendo el 50% de las necesidades diarias de un niño."
                     },
                     almuerzo: {
                         ingredientes: [
-                            "Carne local", "Papas nativas", "Maíz", "Ají regional", "Hierbas aromáticas",
+                            "Carne roja magra (res o cordero)", "Papas nativas", "Maíz", "Ají regional", "Hierbas aromáticas",
                             "Limón", "Ajo", "Comino", "Aceite vegetal"
                         ],
                         preparacion: [
@@ -793,11 +1297,12 @@
                             "Cocinar las papas y el maíz por separado.",
                             "Dorar la carne en aceite vegetal.",
                             "Añadir las hierbas aromáticas y cocinar a fuego lento.",
-                            "Servir acompañado de papas y maíz, rociado con limón."
+                            "Servir acompañado de papas y maíz, rociado con limón para mejorar la absorción del hierro."
                         ],
                         consejosDespensa: `Las hierbas aromáticas de ${deptName} le darán un sabor único a este plato.`,
-                        beneficiosNiño: "Este plato es rico en proteínas y carbohidratos complejos, ideales para el crecimiento.",
-                        alertaAlergenos: "Verifica que los niños no tengan alergias a los ingredientes regionales utilizados."
+                        beneficiosNiño: "Este plato es rico en proteínas y carbohidratos complejos, ideales para el crecimiento. La carne roja es una excelente fuente de hierro hemínico.",
+                        alertaAlergenos: "Verifica que los niños no tengan alergias a los ingredientes regionales utilizados.",
+                        contenidoHierro: "La carne roja aporta aproximadamente 3mg de hierro por porción, que se absorbe eficientemente gracias a la vitamina C del limón."
                     },
                     cena: {
                         ingredientes: [
@@ -809,15 +1314,16 @@
                             "Cocinar los vegetales en caldo de pescado.",
                             "Añadir el pescado y cocinar hasta que esté tierno.",
                             "Sazonar con cilantro, limón, ajo, jengibre, pimienta y sal.",
-                            "Servir caliente con vegetales."
+                            "Servir caliente con vegetales y una porción de quinua."
                         ],
                         consejosDespensa: `El pescado fresco de ${deptName} es el ingrediente estrella de esta receta.`,
-                        beneficiosNiño: "El pescado es rico en omega-3, esencial para el desarrollo cerebral.",
-                        alertaAlergenos: "Contiene pescado. Si los niños son alérgicos, sustituir por pollo o tofu."
+                        beneficiosNiño: "El pescado es rico en omega-3, esencial para el desarrollo cerebral, y también aporta hierro de fácil absorción.",
+                        alertaAlergenos: "Contiene pescado. Si los niños son alérgicos, sustituir por pollo o tofu.",
+                        contenidoHierro: "El pescado aporta aproximadamente 1.5mg de hierro por porción, combinado con la quinua que añade 2mg adicionales."
                     },
                     postre: {
                         ingredientes: [
-                            "Frutas locales", "Leche condensada", "Galletas regionales", "Canela",
+                            "Frutas locales ricas en vitamina C", "Leche condensada", "Galletas regionales", "Canela",
                             "Clavo de olor", "Miel", "Nueces", "Coco rallado"
                         ],
                         preparacion: [
@@ -827,9 +1333,10 @@
                             "Espolvorear con canela, clavo de olor, nueces y coco rallado.",
                             "Refrigerar antes de servir."
                         ],
-                        consejosDespensa: `Utiliza frutas de temporada de ${deptName} para el mejor sabor.`,
-                        beneficiosNiño: "Este postre proporciona vitaminas y minerales esenciales de forma deliciosa.",
-                        alertaAlergenos: "Contiene lácteos y frutos secos. Verifica posibles alergias."
+                        consejosDespensa: `Utiliza frutas de temporada de ${deptName} para el mejor sabor y máximo contenido de vitamina C.`,
+                        beneficiosNiño: "Este postre proporciona vitaminas y minerales esenciales de forma deliciosa. La vitamina C ayuda a absorber el hierro de otras comidas.",
+                        alertaAlergenos: "Contiene lácteos y frutos secos. Verifica posibles alergias.",
+                        contenidoHierro: "Aunque no es una fuente directa de hierro, la vitamina C de las frutas mejora la absorción del hierro de otras comidas hasta en un 300%."
                     }
                 };
                 
@@ -847,7 +1354,7 @@
                     nombreReceta: `Bebida matutina tradicional de ${deptName}`,
                     tipoComida: "desayuno",
                     ingredientes: [
-                        "Quinua", "Frutas locales", "Miel", "Canela", "Leche",
+                        "Quinua", "Frutas locales ricas en vitamina C", "Miel", "Canela", "Leche",
                         "Nueces", "Cacao", "Vainilla", "Clavo de olor"
                     ],
                     preparacion: [
@@ -858,8 +1365,9 @@
                         "Servir frío o caliente, decorado con nueces."
                     ],
                     consejosDespensa: `La quinua de ${deptName} es especialmente nutritiva y le dará un toque especial.`,
-                    beneficiosNiño: "Esta bebida es rica en proteínas, vitaminas y minerales esenciales.",
-                    alertaAlergenos: "Contiene lácteos. Si los niños son alérgicos, usar leche vegetal."
+                    beneficiosNiño: "Esta bebida es rica en proteínas, vitaminas y minerales esenciales. La quinua contiene hierro no hemínico que se absorbe mejor gracias a la vitamina C de las frutas.",
+                    alertaAlergenos: "Contiene lácteos. Si los niños son alérgicos, usar leche vegetal.",
+                    contenidoHierro: "La quinua aporta aproximadamente 2.5mg de hierro por porción, combinado con la vitamina C de las frutas que mejora su absorción."
                 });
                 
                 // 2 almuerzos
@@ -873,19 +1381,20 @@
                     nombreReceta: `Sopa reconfortante de ${deptName}`,
                     tipoComida: "almuerzo",
                     ingredientes: [
-                        "Cereales locales", "Verduras de temporada", "Carne regional", "Papas",
+                        "Cereales locales fortificados", "Verduras de temporada", "Carne regional", "Papas",
                         "Hierbas aromáticas", "Caldo de carne", "Ajo", "Comino", "Ají regional"
                     ],
                     preparacion: [
-                        "Tostar ligeramente los cereales locales.",
+                        "Tostar ligeramente los cereales locales fortificados.",
                         "Cocinar las verduras y la carne en caldo.",
                         "Añadir las papas y cocinar hasta que estén tiernas.",
                         "Incorporar los cereales tostados y sazonar con hierbas, ajo, comino y ají.",
                         "Cocinar a fuego lento hasta que todos los ingredientes se integren."
                     ],
                     consejosDespensa: `Las hierbas aromáticas de ${deptName} son esenciales para el sabor auténtico.`,
-                    beneficiosNiño: "Esta sopa proporciona nutrientes variados y es fácil de digerir.",
-                    alertaAlergenos: "Verifica que los niños no tengan alergias a los ingredientes regionales."
+                    beneficiosNiño: "Esta sopa proporciona nutrientes variados y es fácil de digerir. Los cereales fortificados son una excelente fuente de hierro.",
+                    alertaAlergenos: "Verifica que los niños no tengan alergias a los ingredientes regionales.",
+                    contenidoHierro: "Los cereales fortificados aportan aproximadamente 4mg de hierro por porción, cubriendo el 40% de las necesidades diarias de un niño."
                 });
                 
                 // 1 cena
@@ -979,6 +1488,14 @@
                                 </ol>
                             </div>
                             <div class="recipe-section">
+                                <div class="iron-rich-box">
+                                    <h4 class="iron-rich-title">
+                                        <i class="fas fa-heartbeat"></i> Contenido de Hierro
+                                    </h4>
+                                    <p>${recipe.contenidoHierro}</p>
+                                </div>
+                            </div>
+                            <div class="recipe-section">
                                 <div class="tips-box">
                                     <h4 class="section-subtitle">
                                         <i class="fas fa-lightbulb"></i> Consejos para tu Despensa
@@ -1026,7 +1543,8 @@
                         recipe.preparacion.forEach((step, i) => {
                             textToCopy += `${i + 1}. ${step}\n`;
                         });
-                        textToCopy += `\n*Consejos para tu Despensa:*\n${recipe.consejosDespensa}\n\n`;
+                        textToCopy += `\n*Contenido de Hierro:*\n${recipe.contenidoHierro}\n\n`;
+                        textToCopy += `*Consejos para tu Despensa:*\n${recipe.consejosDespensa}\n\n`;
                         textToCopy += `*Beneficios para los Niños:*\n${recipe.beneficiosNiño}\n`;
                         if (recipe.alertaAlergenos) {
                             textToCopy += `\n*Alerta de Alérgenos:*\n${recipe.alertaAlergenos}`;
@@ -1048,9 +1566,11 @@
                                 document.getElementById('modalCancel').style.display = 'block';
                                 document.getElementById('modalConfirm').textContent = 'Confirmar';
                             };
+                            
+                            showToast('¡Receta copiada con éxito!', 'success');
                         }).catch(err => {
                             console.error('Error al copiar al portapapeles: ', err);
-                            alert('Error al copiar la receta. Por favor, inténtalo de nuevo.');
+                            showToast('Error al copiar la receta. Por favor, inténtalo de nuevo.', 'error');
                         });
                     });
                 });
@@ -1076,6 +1596,189 @@
                     modal.style.display = 'none';
                 }
             });
+
+            // Función para mostrar detalles del niño
+            function showChildDetails(child) {
+                const responses = storageAdapter.getResponses();
+                const childResponses = responses[child.id] || {};
+                
+                // Crear modal con detalles del niño
+                const modalHtml = `
+                    <div class="modal active child-details-modal">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h2>Detalles de ${child.name}</h2>
+                                <button class="modal-close">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="child-detail-item">
+                                    <span class="child-detail-label">Edad:</span>
+                                    <span class="child-detail-value">${calculateAge(child.dob)} años</span>
+                                </div>
+                                <div class="child-detail-item">
+                                    <span class="child-detail-label">Fecha de nacimiento:</span>
+                                    <span class="child-detail-value">${new Date(child.dob).toLocaleDateString()}</span>
+                                </div>
+                                <div class="child-detail-item">
+                                    <span class="child-detail-label">Sexo:</span>
+                                    <span class="child-detail-value">${child.sex === 'male' ? 'Masculino' : child.sex === 'female' ? 'Femenino' : 'Otro'}</span>
+                                </div>
+                                <div class="child-detail-item">
+                                    <span class="child-detail-label">Progreso del cuestionario:</span>
+                                    <span class="child-detail-value">${child.progressPercent}%</span>
+                                </div>
+                                
+                                <div class="responses-summary">
+                                    <h4>Resumen de respuestas importantes:</h4>
+                                    ${getImportantResponses(childResponses)}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                document.getElementById('confirmModal').innerHTML = modalHtml;
+                document.getElementById('confirmModal').style.display = 'flex';
+                
+                // Agregar event listener para cerrar el modal
+                document.querySelector('.modal-close').addEventListener('click', function() {
+                    document.getElementById('confirmModal').style.display = 'none';
+                });
+                
+                // Cerrar al hacer clic fuera del modal
+                document.querySelector('.modal').addEventListener('click', function(e) {
+                    if (e.target === this) {
+                        document.getElementById('confirmModal').style.display = 'none';
+                    }
+                });
+            }
+            
+            // Función para obtener respuestas importantes
+            function getImportantResponses(childResponses) {
+                const importantQuestions = {
+                    'q1': 'Peso actual',
+                    'q2': 'Estatura actual',
+                    'q13': 'Desayuno habitual',
+                    'q15': 'Almuerzo habitual',
+                    'q17': 'Porciones de fruta al día',
+                    'q21': 'Consumo de agua',
+                    'q28': 'Actividad física',
+                    'q34': 'Horas de sueño',
+                    'q48': 'Estado emocional'
+                };
+                
+                let html = '';
+                for (const [questionId, questionLabel] of Object.entries(importantQuestions)) {
+                    if (childResponses[questionId]) {
+                        html += `
+                            <div class="response-item">
+                                <div class="response-question">${questionLabel}:</div>
+                                <div class="response-answer">${childResponses[questionId].value}</div>
+                            </div>
+                        `;
+                    }
+                }
+                
+                if (html === '') {
+                    html = '<p>No hay respuestas registradas</p>';
+                }
+                
+                return html;
+            }
+
+            // Función para calcular la edad a partir de la fecha de nacimiento
+            function calculateAge(dob) {
+                const birthDate = new Date(dob);
+                const today = new Date();
+                let age = today.getFullYear() - birthDate.getFullYear();
+                const monthDiff = today.getMonth() - birthDate.getMonth();
+                
+                if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+                    age--;
+                }
+                
+                return age;
+            }
+
+            // Función para obtener parámetros de la URL
+            function getURLParameter(name) {
+                const urlParams = new URLSearchParams(window.location.search);
+                return urlParams.get(name);
+            }
+
+            // Función para crear niños de ejemplo si no existen
+            function createGuestChildrenIfNotExists() {
+                let childrenData = storageAdapter.getChildren();
+                
+                // Verificar si ya existen los niños de ejemplo
+                const hasAlvaro = childrenData.some(child => child.name === 'Alvaro');
+                const hasLuz = childrenData.some(child => child.name === 'Luz');
+                
+                if (!hasAlvaro) {
+                    childrenData.push({
+                        id: 'alvaro-' + Date.now(),
+                        name: 'Alvaro',
+                        dob: '2017-08-10',
+                        sex: 'male',
+                        avatarCustomization: '1',
+                        theme: 'default',
+                        ownerId: null,
+                        createdAt: new Date().toISOString(),
+                        updatedAt: new Date().toISOString(),
+                        progressPercent: 100,
+                        deletedAt: null,
+                        version: 1
+                    });
+                }
+                
+                if (!hasLuz) {
+                    childrenData.push({
+                        id: 'luz-' + Date.now(),
+                        name: 'Luz',
+                        dob: '2019-12-05',
+                        sex: 'female',
+                        avatarCustomization: '2',
+                        theme: 'default',
+                        ownerId: null,
+                        createdAt: new Date().toISOString(),
+                        updatedAt: new Date().toISOString(),
+                        progressPercent: 100,
+                        deletedAt: null,
+                        version: 1
+                    });
+                }
+                
+                storageAdapter.saveChildren(childrenData);
+                
+                // Crear respuestas para los perfiles predefinidos
+                const responses = storageAdapter.getResponses();
+                
+                if (!responses['alvaro-' + Date.now()]) {
+                    responses['alvaro-' + Date.now()] = {};
+                    for (let i = 1; i <= 50; i++) {
+                        responses['alvaro-' + Date.now()][`q${i}`] = {
+                            type: 'select',
+                            value: i % 5 === 0 ? 'Opción 5' : `Opción ${i % 5}`,
+                            timestamp: new Date().toISOString(),
+                            version: 1
+                        };
+                    }
+                }
+                
+                if (!responses['luz-' + Date.now()]) {
+                    responses['luz-' + Date.now()] = {};
+                    for (let i = 1; i <= 50; i++) {
+                        responses['luz-' + Date.now()][`q${i}`] = {
+                            type: 'select',
+                            value: i % 5 === 0 ? 'Opción 5' : `Opción ${i % 5}`,
+                            timestamp: new Date().toISOString(),
+                            version: 1
+                        };
+                    }
+                }
+                
+                storageAdapter.saveResponses(responses);
+            }
         });
     </script>
 </body>
