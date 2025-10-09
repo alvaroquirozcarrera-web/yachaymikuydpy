@@ -6,6 +6,7 @@
     <title>Apoyo Académico - Yachay Mikuy</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary-blue: #2c5aa0;
@@ -32,6 +33,10 @@
             --pastel-blue: #d7e9ff;
             --pastel-green: #d7ffe6;
             --pastel-yellow: #fff9d7;
+            --iron-red: #e63946;
+            --iron-red-light: #f1a9a0;
+            --iron-yellow: #ffb703;
+            --iron-green: #2a9d8f;
         }
 
         @keyframes fadeIn {
@@ -39,16 +44,38 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        @keyframes fadeOut {
-            from { opacity: 1; transform: translateY(0); }
-            to { opacity: 0; transform: translateY(-20px); }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'Poppins', sans-serif;
         }
 
         body {
@@ -56,12 +83,62 @@
             color: #333;
             line-height: 1.6;
             min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Barra superior fija con logo y botón de volver */
+        .top-bar {
+            background: linear-gradient(135deg, var(--primary-blue), var(--light-blue));
+            color: var(--white);
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .top-bar .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+
+        .top-bar .logo i {
+            margin-right: 10px;
+            color: var(--accent-orange);
+        }
+
+        .btn-back-top {
+            padding: 10px 20px;
+            background-color: rgba(255, 255, 255, 0.2);
+            color: var(--white);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .btn-back-top:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
+            flex: 1;
         }
 
         /* Header Styles */
@@ -75,6 +152,7 @@
             justify-content: space-between;
             align-items: center;
             border-left: 8px solid var(--accent-teal);
+            animation: fadeIn 0.5s ease;
         }
 
         .header-content {
@@ -86,6 +164,7 @@
         .header-icon {
             font-size: 2.5rem;
             color: var(--accent-teal);
+            animation: float 3s ease-in-out infinite;
         }
 
         .header-title h1 {
@@ -159,6 +238,105 @@
             display: flex;
             align-items: center;
             gap: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .child-tag:hover {
+            background-color: rgba(93, 140, 196, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Nutrition & Learning Section */
+        .nutrition-learning {
+            background: linear-gradient(135deg, rgba(230, 57, 70, 0.1), rgba(255, 183, 3, 0.1));
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 30px;
+            border-left: 8px solid var(--iron-red);
+            animation: fadeIn 0.7s ease;
+        }
+
+        .nutrition-learning-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--iron-red);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nutrition-learning-content {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .nutrition-stat {
+            flex: 1;
+            min-width: 200px;
+            background-color: var(--white);
+            border-radius: 15px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .nutrition-stat:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .nutrition-stat-number {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--iron-red);
+            margin-bottom: 5px;
+        }
+
+        .nutrition-stat-label {
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+
+        .nutrition-tips {
+            flex: 2;
+            min-width: 300px;
+            background-color: var(--white);
+            border-radius: 15px;
+            padding: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .nutrition-tips-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--dark-blue);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nutrition-tips-list {
+            list-style: none;
+        }
+
+        .nutrition-tips-list li {
+            margin-bottom: 8px;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .nutrition-tips-list li:before {
+            content: '\f058';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            color: var(--success-green);
+            position: absolute;
+            left: 0;
         }
 
         /* Challenge Input Section */
@@ -169,6 +347,7 @@
             padding: 25px;
             margin-bottom: 30px;
             background-color: var(--pastel-blue);
+            animation: fadeIn 0.9s ease;
         }
 
         .section-title {
@@ -192,7 +371,7 @@
             border: 2px solid #ddd;
             border-radius: 15px;
             font-size: 1rem;
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'Poppins', sans-serif;
             resize: vertical;
             transition: border-color 0.3s ease;
         }
@@ -258,6 +437,7 @@
             border-radius: 20px;
             box-shadow: 0 8px 30px var(--shadow-color);
             padding: 25px;
+            animation: fadeIn 1.1s ease;
         }
 
         .strategies-grid {
@@ -327,6 +507,24 @@
             margin-bottom: 15px;
         }
 
+        .strategy-nutrition {
+            background-color: rgba(230, 57, 70, 0.1);
+            border-left: 4px solid var(--iron-red);
+            padding: 15px;
+            border-radius: 0 10px 10px 0;
+            margin-bottom: 15px;
+        }
+
+        .nutrition-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--iron-red);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
         .strategy-resources {
             margin-top: 15px;
             padding-top: 15px;
@@ -379,10 +577,6 @@
             border-radius: 50%;
             border-top-color: var(--accent-teal);
             animation: spin 1s ease-in-out infinite;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
         }
 
         /* Modal */
@@ -441,6 +635,70 @@
             gap: 15px;
         }
 
+        /* Toast container */
+        .toast-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1050;
+        }
+        
+        .custom-toast {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            padding: 15px 20px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            animation: slideIn 0.3s ease;
+        }
+        
+        .toast-success {
+            border-left: 5px solid var(--success-green);
+        }
+        
+        .toast-error {
+            border-left: 5px solid var(--danger-red);
+        }
+        
+        .toast-info {
+            border-left: 5px solid var(--accent-cyan);
+        }
+
+        /* Interactive Elements */
+        .interactive-element {
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .interactive-element:hover {
+            transform: scale(1.05);
+        }
+
+        .interactive-element .tooltip {
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--dark-blue);
+            color: var(--white);
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .interactive-element:hover .tooltip {
+            opacity: 1;
+            visibility: visible;
+        }
+
         /* Responsive Design */
         @media (max-width: 768px) {
             .container {
@@ -465,10 +723,29 @@
             .subject-buttons {
                 justify-content: center;
             }
+
+            .nutrition-learning-content {
+                flex-direction: column;
+            }
+
+            .nutrition-stat {
+                min-width: 100%;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Barra superior con logo y botón de volver -->
+    <div class="top-bar">
+        <div class="logo">
+            <i class="fas fa-apple-alt"></i>
+            Yachay Mikuy
+        </div>
+        <a href="yachay.html" class="btn-back-top">
+            <i class="fas fa-arrow-left"></i> Volver
+        </a>
+    </div>
+
     <div class="container">
         <!-- Header -->
         <header class="header">
@@ -493,6 +770,35 @@
                 </a>
             </div>
         </header>
+
+        <!-- Nutrition & Learning Section -->
+        <section class="nutrition-learning">
+            <h2 class="nutrition-learning-title">
+                <i class="fas fa-brain"></i> Nutrición y Rendimiento Académico
+            </h2>
+            <div class="nutrition-learning-content">
+                <div class="nutrition-stat">
+                    <div class="nutrition-stat-number">76%</div>
+                    <div class="nutrition-stat-label">mejora en concentración con buena nutrición</div>
+                </div>
+                <div class="nutrition-stat">
+                    <div class="nutrition-stat-number">2x</div>
+                    <div class="nutrition-stat-label">más retención de información con hierro adecuado</div>
+                </div>
+                <div class="nutrition-tips">
+                    <h3 class="nutrition-tips-title">
+                        <i class="fas fa-lightbulb"></i> Consejos para potenciar el aprendizaje
+                    </h3>
+                    <ul class="nutrition-tips-list">
+                        <li>Incluir alimentos ricos en omega-3 como pescado y nueces para mejorar la memoria</li>
+                        <li>Asegurar un desayuno completo con proteínas y carbohidratos complejos</li>
+                        <li>Evitar alimentos procesados y azúcares antes de actividades académicas importantes</li>
+                        <li>Mantener una buena hidratación durante el día de estudio</li>
+                        <li>Incluir snacks ricos en hierro como frutos secos entre clases</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
 
         <!-- Challenge Input Section -->
         <section class="challenge-input">
@@ -525,7 +831,7 @@
         <!-- Strategies Display Section -->
         <section class="strategies-display">
             <h2 class="section-title">
-                <i class="fas fa-chalkboard-teacher"></i> Estrategias Académicas
+                <i class="fas fa-chalkboard-teacher"></i> Estrategias Académicas y Nutricionales
             </h2>
             
             <div class="spinner-container" id="spinnerContainer">
@@ -555,19 +861,213 @@
         </div>
     </div>
 
+    <div class="toast-container" id="toastContainer"></div>
+
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Cargar datos de todos los niños desde localStorage
-            const storedData = localStorage.getItem('yachayMikuyChildren');
+        // Storage Adapter - Para facilitar migración a backend
+        const storageAdapter = {
+            // Users
+            getUsers: function() {
+                const users = localStorage.getItem('yachay_users');
+                return users ? JSON.parse(users) : [];
+            },
+            saveUsers: function(users) {
+                localStorage.setItem('yachay_users', JSON.stringify(users));
+            },
             
-            if (!storedData) {
-                document.body.innerHTML = '<h1>Error: No se encontraron datos de niños.</h1>';
-                return;
+            // Children
+            getChildren: function() {
+                const children = localStorage.getItem('yachay_children');
+                return children ? JSON.parse(children) : [];
+            },
+            saveChildren: function(children) {
+                localStorage.setItem('yachay_children', JSON.stringify(children));
+            },
+            
+            // Responses
+            getResponses: function() {
+                const responses = localStorage.getItem('yachay_responses');
+                return responses ? JSON.parse(responses) : {};
+            },
+            saveResponses: function(responses) {
+                localStorage.setItem('yachay_responses', JSON.stringify(responses));
+            },
+            
+            // Session
+            getSession: function() {
+                const session = localStorage.getItem('yachay_session');
+                return session ? JSON.parse(session) : { currentUserId: null, exploringAsGuest: false, lastActiveAt: null };
+            },
+            saveSession: function(session) {
+                localStorage.setItem('yachay_session', JSON.stringify(session));
+            },
+            
+            // Audit Log
+            getAuditLog: function() {
+                const auditLog = localStorage.getItem('yachay_auditLog');
+                return auditLog ? JSON.parse(auditLog) : [];
+            },
+            saveAuditLog: function(auditLog) {
+                localStorage.setItem('yachay_auditLog', JSON.stringify(auditLog));
+            }
+        };
+
+        // --- INICIO DE FUNCIONES DE SINCRONIZACIÓN ---
+        
+        // Función para sincronizar la eliminación/restauración entre páginas
+        function syncChildDeletionAcrossPages(childId, action) {
+            // action puede ser 'soft-delete', 'restore' o 'permanent-delete'
+            const syncData = {
+                childId: childId,
+                action: action,
+                timestamp: new Date().toISOString()
+            };
+            
+            // Guardar en localStorage para que otras páginas puedan detectar cambios
+            localStorage.setItem('yachay_sync_action', JSON.stringify(syncData));
+            
+            // Notificar a otras pestañas abiertas usando BroadcastChannel
+            if ('BroadcastChannel' in window) {
+                const channel = new BroadcastChannel('yachay_sync');
+                channel.postMessage(syncData);
+            }
+        }
+
+        // --- FIN DE FUNCIONES DE SINCRONIZACIÓN ---
+
+        // Función para mostrar notificaciones toast
+        function showToast(message, type = 'info') {
+            const toastContainer = document.getElementById('toastContainer');
+            const toastId = 'toast-' + Date.now();
+            
+            const toastHtml = `
+                <div id="${toastId}" class="custom-toast toast-${type}">
+                    <div class="me-2">
+                        ${type === 'success' ? '<i class="fas fa-check-circle text-success"></i>' : 
+                          type === 'error' ? '<i class="fas fa-exclamation-circle text-danger"></i>' : 
+                          '<i class="fas fa-info-circle text-info"></i>'}
+                    </div>
+                    <div class="flex-grow-1">${message}</div>
+                    <button type="button" class="btn-close ms-2" onclick="document.getElementById('${toastId}').remove()"></button>
+                </div>
+            `;
+            
+            toastContainer.insertAdjacentHTML('beforeend', toastHtml);
+            
+            // Auto remove after 5 seconds
+            setTimeout(() => {
+                const toast = document.getElementById(toastId);
+                if (toast) toast.remove();
+            }, 5000);
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // --- INICIO DE VERIFICACIÓN DE SINCRONIZACIÓN AL CARGAR ---
+            // Verificar si hay acciones de sincronización pendientes de otras pestañas
+            const syncAction = localStorage.getItem('yachay_sync_action');
+            if (syncAction) {
+                const syncData = JSON.parse(syncAction);
+                // Si la acción es reciente (menos de 5 segundos), la procesamos
+                const actionTime = new Date(syncData.timestamp);
+                const now = new Date();
+                if ((now - actionTime) < 5000) {
+                    // Si la acción afecta a algún niño mostrado, recargamos la página
+                    const session = storageAdapter.getSession();
+                    const guestMode = getURLParameter('guest') === 'true';
+                    
+                    let childrenToShow;
+                    if (guestMode || session.exploringAsGuest) {
+                        // Modo invitado: mostrar solo los perfiles de invitado
+                        childrenToShow = storageAdapter.getChildren().filter(child => child.ownerId === null);
+                    } else if (session.currentUserId) {
+                        // Modo con cuenta: mostrar los perfiles del usuario actual
+                        childrenToShow = storageAdapter.getChildren().filter(child => 
+                            child.ownerId === session.currentUserId
+                        );
+                    }
+                    
+                    // Verificar si el niño eliminado está en la lista de niños mostrados
+                    if (childrenToShow.some(child => child.id === syncData.childId)) {
+                        if (syncData.action === 'soft-delete' || syncData.action === 'permanent-delete') {
+                            showToast('Un perfil ha sido eliminado', 'info');
+                            // Recargar la página para actualizar la lista de niños
+                            setTimeout(() => {
+                                location.reload();
+                            }, 2000);
+                        }
+                    }
+                }
+                // Limpiamos la acción para no procesarla de nuevo
+                localStorage.removeItem('yachay_sync_action');
+            }
+
+            // Configurar listener para sincronización en tiempo real con otras pestañas
+            if ('BroadcastChannel' in window) {
+                const channel = new BroadcastChannel('yachay_sync');
+                channel.onmessage = function(event) {
+                    const syncData = event.data;
+                    const session = storageAdapter.getSession();
+                    const guestMode = getURLParameter('guest') === 'true';
+                    
+                    let childrenToShow;
+                    if (guestMode || session.exploringAsGuest) {
+                        // Modo invitado: mostrar solo los perfiles de invitado
+                        childrenToShow = storageAdapter.getChildren().filter(child => child.ownerId === null);
+                    } else if (session.currentUserId) {
+                        // Modo con cuenta: mostrar los perfiles del usuario actual
+                        childrenToShow = storageAdapter.getChildren().filter(child => 
+                            child.ownerId === session.currentUserId
+                        );
+                    }
+                    
+                    // Verificar si el niño eliminado está en la lista de niños mostrados
+                    if (childrenToShow.some(child => child.id === syncData.childId)) {
+                        if (syncData.action === 'soft-delete' || syncData.action === 'permanent-delete') {
+                            showToast('Un perfil ha sido eliminado', 'info');
+                            // Recargar la página para actualizar la lista de niños
+                            setTimeout(() => {
+                                location.reload();
+                            }, 2000);
+                        }
+                    }
+                };
+            }
+            // --- FIN DE VERIFICACIÓN DE SINCRONIZACIÓN AL CARGAR ---
+
+            const urlParams = new URLSearchParams(window.location.search);
+            const guestMode = urlParams.get('guest') === 'true';
+            
+            // Cargar datos de todos los niños desde localStorage
+            const allChildrenData = storageAdapter.getChildren();
+            
+            if (!allChildrenData || allChildrenData.length === 0) {
+                // Si no hay datos, crear los niños de ejemplo si estamos en modo invitado
+                if (guestMode) {
+                    createGuestChildrenIfNotExists();
+                    allChildrenData = storageAdapter.getChildren();
+                } else {
+                    document.body.innerHTML = '<h1>Error: No se encontraron datos de niños. Por favor, complete al menos un cuestionario.</h1>';
+                    return;
+                }
             }
             
-            const allChildrenData = JSON.parse(storedData);
             // Filtrar para usar solo los perfiles que han completado el cuestionario
-            const completedChildren = allChildrenData.filter(child => child.completed);
+            let completedChildren;
+            
+            if (guestMode) {
+                // Modo invitado: mostrar solo los perfiles de invitado
+                completedChildren = allChildrenData.filter(child => child.ownerId === null);
+            } else {
+                // Modo con cuenta: mostrar los perfiles del usuario actual
+                const session = storageAdapter.getSession();
+                if (session.currentUserId) {
+                    completedChildren = allChildrenData.filter(child => 
+                        child.ownerId === session.currentUserId
+                    );
+                } else {
+                    completedChildren = [];
+                }
+            }
 
             if (completedChildren.length === 0) {
                 document.body.innerHTML = '<h1>No hay perfiles completados. Por favor, finalice al menos un cuestionario para continuar.</h1>';
@@ -580,6 +1080,7 @@
                 const childTag = document.createElement('span');
                 childTag.className = 'child-tag';
                 childTag.innerHTML = `<i class="fas fa-child"></i> ${child.name}`;
+                childTag.addEventListener('click', () => showChildDetails(child));
                 childrenTags.appendChild(childTag);
             });
             
@@ -619,7 +1120,7 @@
                 const challengeDescription = document.getElementById('challengeTextarea').value.trim();
                 
                 if (!challengeDescription) {
-                    alert('Por favor, describe el desafío académico antes de generar estrategias.');
+                    showToast('Por favor, describe el desafío académico antes de generar estrategias.', 'error');
                     return;
                 }
                 
@@ -649,6 +1150,8 @@
                     
                     // Renderizar estrategias
                     renderStrategies(newStrategies);
+                    
+                    showToast('¡Estrategias generadas con éxito!', 'success');
                 }, 2000);
             }
             
@@ -661,6 +1164,7 @@
                             titulo: "El Método Pomodoro para Matemáticas",
                             descripcion: "Divide el tiempo de estudio en intervalos de 25 minutos de concentración total seguidos de 5 minutos de descanso. Después de cuatro pomodoros, toma un descanso más largo de 15-30 minutos. Esta técnica ayuda a mantener la concentración y reduce la fatiga mental al resolver problemas matemáticos.",
                             materia: "Matemáticas",
+                            nutricion: "Para sesiones de matemáticas, recomienda snacks ricos en omega-3 como nueces o semillas de chía, que mejoran la función cognitiva y la concentración.",
                             recursos: [
                                 { nombre: "Calculadora visual", url: "#" },
                                 { nombre: "Juegos de lógica matemática", url: "#" },
@@ -671,6 +1175,7 @@
                             titulo: "Aprendizaje Basado en Problemas",
                             descripcion: "En lugar de memorizar fórmulas, enfócate en resolver problemas prácticos que requieran aplicar conceptos matemáticos. Esto ayuda a entender el 'porqué' detrás de las operaciones y desarrolla el pensamiento crítico.",
                             materia: "Matemáticas",
+                            nutricion: "El hierro es fundamental para el pensamiento lógico. Incluir alimentos como espinacas, lentejas o carnes rojas antes de sesiones de resolución de problemas mejora la capacidad de razonamiento.",
                             recursos: [
                                 { nombre: "Libros de problemas", url: "#" },
                                 { nombre: "Aplicaciones de resolución", url: "#" },
@@ -683,6 +1188,7 @@
                             titulo: "Técnica de Lectura SQ3R",
                             descripcion: "Enseña el método SQ3R (Survey, Question, Read, Recite, Review) para mejorar la comprensión lectora: 1) Explorar el texto, 2) Formular preguntas sobre él, 3) Leer activamente, 4) Recitar en voz lo comprendido, 5) Revisar lo aprendido. Esta técnica estructurada mejora significativamente la retención de información.",
                             materia: "Lenguaje",
+                            nutricion: "Para mejorar la comprensión lectora, asegúrate de que los niños consuman suficiente vitamina B12, presente en carnes, huevos y lácteos, que es esencial para la función cerebral y la memoria.",
                             recursos: [
                                 { nombre: "Guías de lectura comprensiva", url: "#" },
                                 { nombre: "Libros adaptados por edad", url: "#" },
@@ -693,6 +1199,7 @@
                             titulo: "Diario de Escritura Creativa",
                             descripcion: "Fomenta la escritura diaria sin preocuparse por la gramática perfecta. El objetivo es desarrollar la fluidez y el amor por la expresión escrita. Luego, juntos pueden revisar y mejorar los textos, enfocándose en un aspecto gramatical cada vez.",
                             materia: "Lenguaje",
+                            nutricion: "La creatividad se potencia con antioxidantes. Frutas como arándanos, fresas y frambuesas son excelentes para mejorar la función cerebral y la creatividad en la escritura.",
                             recursos: [
                                 { nombre: "Prompts de escritura", url: "#" },
                                 { nombre: "Herramientas de corrección", url: "#" },
@@ -705,6 +1212,7 @@
                             titulo: "Método Científico Simplificado",
                             descripcion: "Enseña el método científico a través de experimentos caseros sencillos: 1) Hacer una pregunta, 2) Investigar, 3) Formular una hipótesis, 4) Experimentar, 5) Analizar resultados, 6) Concluir. Esto desarrolla el pensamiento crítico y la curiosidad científica.",
                             materia: "Ciencias",
+                            nutricion: "Para el pensamiento científico y la curiosidad, los ácidos grasos omega-3 son fundamentales. Pescados como el salmón, sardinas o atún mejoran la función neuronal y la capacidad de aprendizaje.",
                             recursos: [
                                 { nombre: "Experimentos caseros", url: "#" },
                                 { nombre: "Videos de divulgación", url: "#" },
@@ -715,6 +1223,7 @@
                             titulo: "Mapas Conceptuales Visuales",
                             descripcion: "Utiliza mapas conceptuales para conectar ideas y conceptos científicos. Esta técnica visual ayuda a entender relaciones complejas y mejora la retención de información. Comienza con un concepto central y ramifica hacia ideas relacionadas.",
                             materia: "Ciencias",
+                            nutricion: "La memoria visual mejora con antioxidantes y flavonoides. Chocolate negro (con moderación), té verde y frutas coloridas como la granada o las moras ayudan a mejorar la retención visual.",
                             recursos: [
                                 { nombre: "Aplicaciones de mapas mentales", url: "#" },
                                 { nombre: "Diagramas interactivos", url: "#" },
@@ -727,6 +1236,7 @@
                             titulo: "Línea de Tiempo Interactiva",
                             descripcion: "Crea una línea de tiempo visual donde los niños puedan añadir eventos históricos con imágenes y descripciones breves. Esta técnica ayuda a contextualizar los hechos históricos y entender su secuencia cronológica.",
                             materia: "Historia",
+                            nutricion: "Para la memoria a largo plazo, necesaria en historia, los complejos de vitamina B son esenciales. Cereales integrales, legumbres y frutos secos proporcionan estos nutrientes fundamentales.",
                             recursos: [
                                 { nombre: "Plantillas de líneas de tiempo", url: "#" },
                                 { nombre: "Videos históricos documentales", url: "#" },
@@ -737,6 +1247,7 @@
                             titulo: "Dramatización Histórica",
                             descripcion: "Representa eventos históricos importantes mediante obras de teatro sencillas o role-playing. Esta técnica hace la historia más tangible y memorable, además de desarrollar habilidades de expresión oral y trabajo en equipo.",
                             materia: "Historia",
+                            nutricion: "La expresión oral y la memoria se benefician del consumo de colina, presente en huevos, legumbres y brócoli. Este nutriente es crucial para la función cerebral y la comunicación neuronal.",
                             recursos: [
                                 { nombre: "Guiones de obras históricas", url: "#" },
                                 { nombre: "Juegos de rol históricos", url: "#" },
@@ -749,6 +1260,7 @@
                             titulo: "Inmersión Lingüística en Casa",
                             descripcion: "Crea momentos del día en los que solo se hable inglés, como durante la cena o al jugar juegos de mesa. Comienza con frases simples y aumenta gradualmente la complejidad. La inmersión regular es más efectiva que largas sesiones de estudio.",
                             materia: "Inglés",
+                            nutricion: "Para el aprendizaje de idiomas, el magnesio es fundamental. Almendras, aguacates y plátanos son ricos en este mineral que mejora la plasticidad cerebral y la capacidad de adquirir nuevos conocimientos.",
                             recursos: [
                                 { nombre: "Canciones en inglés", url: "#" },
                                 { nombre: "Películas con doblaje", url: "#" },
@@ -759,6 +1271,7 @@
                             titulo: "Intercambio de Idiomas Virtual",
                             descripcion: "Organiza videollamadas con otros niños que hablen inglés como lengua materna. La práctica con hablantes nativos mejora la pronunciación y la fluidez de manera natural. Pueden comenzar con conversaciones simples sobre temas de interés común.",
                             materia: "Inglés",
+                            nutricion: "Para la fluidez verbal y la pronunciación, los aminoácidos esenciales son clave. Carnes magras, pescado, huevos y productos lácteos proporcionan los bloques de construcción para los neurotransmisores.",
                             recursos: [
                                 { nombre: "Plataformas de intercambio", url: "#" },
                                 { nombre: "Clubes de conversación", url: "#" },
@@ -774,6 +1287,7 @@
                         titulo: "Técnica Feynman de Aprendizaje",
                         descripcion: "Enseña a los niños a explicar conceptos con sus propias palabras como si se lo estuvieran enseñando a alguien más. Si no pueden explicarlo simplemente, significa que no lo han entendido lo suficiente. Esta técnica revela lagunas en el conocimiento y refuerza el aprendizaje.",
                         materia: "General",
+                        nutricion: "Para el aprendizaje efectivo, el cerebro necesita glucosa de calidad. Frutas, avena y granos integrales proporcionan energía sostenida que mejora la concentración y la capacidad de explicar conceptos.",
                         recursos: [
                             { nombre: "Guía del método Feynman", url: "#" },
                             { nombre: "Herramientas de enseñanza", url: "#" },
@@ -784,6 +1298,7 @@
                         titulo: "Espacio de Estudio Optimizado",
                         descripcion: "Crea un ambiente de estudio libre de distracciones con buena iluminación, todos los materiales necesarios a mano y un horario establecido. Un espacio dedicado al estudio ayuda a crear una rutina y señala al cerebro que es momento de concentrarse.",
                         materia: "General",
+                        nutricion: "La concentración prolongada requiere hidratación adecuada. Además de agua, infusiones de menta o jengibre pueden mejorar el estado de alerta sin los efectos negativos de la cafeína en los niños.",
                         recursos: [
                             { nombre: "Checklist de organización", url: "#" },
                             { nombre: "Técnicas de concentración", url: "#" },
@@ -849,6 +1364,12 @@
                         </div>
                         <div class="strategy-body">
                             <p class="strategy-description">${strategy.descripcion}</p>
+                            <div class="strategy-nutrition">
+                                <h4 class="nutrition-title">
+                                    <i class="fas fa-apple-alt"></i> Nutrición para el Aprendizaje
+                                </h4>
+                                <p>${strategy.nutricion}</p>
+                            </div>
                             <div class="strategy-resources">
                                 <h4 class="resources-title">
                                     <i class="fas fa-external-link-alt"></i> Recursos Educativos
@@ -877,6 +1398,7 @@
                         let textToCopy = `*${strategy.titulo}*\n\n`;
                         textToCopy += `*Materia:* ${strategy.materia}\n\n`;
                         textToCopy += `*Descripción:*\n${strategy.descripcion}\n\n`;
+                        textToCopy += `*Nutrición para el Aprendizaje:*\n${strategy.nutricion}\n\n`;
                         textToCopy += `*Recursos Educativos:*\n`;
                         strategy.recursos.forEach(recurso => {
                             textToCopy += `- ${recurso.nombre}: ${recurso.url}\n`;
@@ -898,9 +1420,11 @@
                                 document.getElementById('modalCancel').style.display = 'block';
                                 document.getElementById('modalConfirm').textContent = 'Confirmar';
                             };
+                            
+                            showToast('¡Estrategia copiada con éxito!', 'success');
                         }).catch(err => {
                             console.error('Error al copiar al portapapeles: ', err);
-                            alert('Error al copiar la estrategia. Por favor, inténtalo de nuevo.');
+                            showToast('Error al copiar la estrategia. Por favor, inténtalo de nuevo.', 'error');
                         });
                     });
                 });
@@ -926,6 +1450,189 @@
                     modal.style.display = 'none';
                 }
             });
+
+            // Función para mostrar detalles del niño
+            function showChildDetails(child) {
+                const responses = storageAdapter.getResponses();
+                const childResponses = responses[child.id] || {};
+                
+                // Crear modal con detalles del niño
+                const modalHtml = `
+                    <div class="modal active child-details-modal">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h2>Detalles de ${child.name}</h2>
+                                <button class="modal-close">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="child-detail-item">
+                                    <span class="child-detail-label">Edad:</span>
+                                    <span class="child-detail-value">${calculateAge(child.dob)} años</span>
+                                </div>
+                                <div class="child-detail-item">
+                                    <span class="child-detail-label">Fecha de nacimiento:</span>
+                                    <span class="child-detail-value">${new Date(child.dob).toLocaleDateString()}</span>
+                                </div>
+                                <div class="child-detail-item">
+                                    <span class="child-detail-label">Sexo:</span>
+                                    <span class="child-detail-value">${child.sex === 'male' ? 'Masculino' : child.sex === 'female' ? 'Femenino' : 'Otro'}</span>
+                                </div>
+                                <div class="child-detail-item">
+                                    <span class="child-detail-label">Progreso del cuestionario:</span>
+                                    <span class="child-detail-value">${child.progressPercent}%</span>
+                                </div>
+                                
+                                <div class="responses-summary">
+                                    <h4>Resumen de respuestas importantes:</h4>
+                                    ${getImportantResponses(childResponses)}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                document.getElementById('confirmModal').innerHTML = modalHtml;
+                document.getElementById('confirmModal').style.display = 'flex';
+                
+                // Agregar event listener para cerrar el modal
+                document.querySelector('.modal-close').addEventListener('click', function() {
+                    document.getElementById('confirmModal').style.display = 'none';
+                });
+                
+                // Cerrar al hacer clic fuera del modal
+                document.querySelector('.modal').addEventListener('click', function(e) {
+                    if (e.target === this) {
+                        document.getElementById('confirmModal').style.display = 'none';
+                    }
+                });
+            }
+            
+            // Función para obtener respuestas importantes
+            function getImportantResponses(childResponses) {
+                const importantQuestions = {
+                    'q1': 'Peso actual',
+                    'q2': 'Estatura actual',
+                    'q13': 'Desayuno habitual',
+                    'q15': 'Almuerzo habitual',
+                    'q17': 'Porciones de fruta al día',
+                    'q21': 'Consumo de agua',
+                    'q28': 'Actividad física',
+                    'q34': 'Horas de sueño',
+                    'q48': 'Estado emocional'
+                };
+                
+                let html = '';
+                for (const [questionId, questionLabel] of Object.entries(importantQuestions)) {
+                    if (childResponses[questionId]) {
+                        html += `
+                            <div class="response-item">
+                                <div class="response-question">${questionLabel}:</div>
+                                <div class="response-answer">${childResponses[questionId].value}</div>
+                            </div>
+                        `;
+                    }
+                }
+                
+                if (html === '') {
+                    html = '<p>No hay respuestas registradas</p>';
+                }
+                
+                return html;
+            }
+
+            // Función para calcular la edad a partir de la fecha de nacimiento
+            function calculateAge(dob) {
+                const birthDate = new Date(dob);
+                const today = new Date();
+                let age = today.getFullYear() - birthDate.getFullYear();
+                const monthDiff = today.getMonth() - birthDate.getMonth();
+                
+                if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+                    age--;
+                }
+                
+                return age;
+            }
+
+            // Función para obtener parámetros de la URL
+            function getURLParameter(name) {
+                const urlParams = new URLSearchParams(window.location.search);
+                return urlParams.get(name);
+            }
+
+            // Función para crear niños de ejemplo si no existen
+            function createGuestChildrenIfNotExists() {
+                let childrenData = storageAdapter.getChildren();
+                
+                // Verificar si ya existen los niños de ejemplo
+                const hasAlvaro = childrenData.some(child => child.name === 'Alvaro');
+                const hasLuz = childrenData.some(child => child.name === 'Luz');
+                
+                if (!hasAlvaro) {
+                    childrenData.push({
+                        id: 'alvaro-' + Date.now(),
+                        name: 'Alvaro',
+                        dob: '2017-08-10',
+                        sex: 'male',
+                        avatarCustomization: '1',
+                        theme: 'default',
+                        ownerId: null,
+                        createdAt: new Date().toISOString(),
+                        updatedAt: new Date().toISOString(),
+                        progressPercent: 100,
+                        deletedAt: null,
+                        version: 1
+                    });
+                }
+                
+                if (!hasLuz) {
+                    childrenData.push({
+                        id: 'luz-' + Date.now(),
+                        name: 'Luz',
+                        dob: '2019-12-05',
+                        sex: 'female',
+                        avatarCustomization: '2',
+                        theme: 'default',
+                        ownerId: null,
+                        createdAt: new Date().toISOString(),
+                        updatedAt: new Date().toISOString(),
+                        progressPercent: 100,
+                        deletedAt: null,
+                        version: 1
+                    });
+                }
+                
+                storageAdapter.saveChildren(childrenData);
+                
+                // Crear respuestas para los perfiles predefinidos
+                const responses = storageAdapter.getResponses();
+                
+                if (!responses['alvaro-' + Date.now()]) {
+                    responses['alvaro-' + Date.now()] = {};
+                    for (let i = 1; i <= 50; i++) {
+                        responses['alvaro-' + Date.now()][`q${i}`] = {
+                            type: 'select',
+                            value: i % 5 === 0 ? 'Opción 5' : `Opción ${i % 5}`,
+                            timestamp: new Date().toISOString(),
+                            version: 1
+                        };
+                    }
+                }
+                
+                if (!responses['luz-' + Date.now()]) {
+                    responses['luz-' + Date.now()] = {};
+                    for (let i = 1; i <= 50; i++) {
+                        responses['luz-' + Date.now()][`q${i}`] = {
+                            type: 'select',
+                            value: i % 5 === 0 ? 'Opción 5' : `Opción ${i % 5}`,
+                            timestamp: new Date().toISOString(),
+                            version: 1
+                        };
+                    }
+                }
+                
+                storageAdapter.saveResponses(responses);
+            }
         });
     </script>
 </body>
