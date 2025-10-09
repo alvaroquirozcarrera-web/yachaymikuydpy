@@ -19,6 +19,8 @@
             --primary-blue: #2c5aa0;
             --light-blue: #5d8cc4;
             --dark-blue: #1a3a6e;
+            --iron-color: #B22222;
+            --vitamin-c-color: #FF8C00;
         }
 
         * {
@@ -32,7 +34,21 @@
             background-color: #f5f5f5;
             color: var(--dark-color);
             line-height: 1.6;
-            padding-bottom: 60px; /* Espacio para el footer en móviles */
+            padding-bottom: 60px;
+            background-image: url('https://picsum.photos/seed/healthyfood/1600/900.jpg');
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.85);
+            z-index: -1;
         }
 
         .container {
@@ -44,9 +60,9 @@
         /* Barra superior mejorada para móviles */
         .header {
             background-color: white;
-            border-radius: 10px;
+            border-radius: 15px;
             padding: 15px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -55,6 +71,7 @@
             position: sticky;
             top: 0;
             z-index: 100;
+            border: 2px solid var(--primary-color);
         }
 
         .header h1 {
@@ -67,6 +84,7 @@
 
         .header h1 i {
             font-size: 1.5rem;
+            color: var(--primary-color);
         }
 
         .header-buttons {
@@ -77,7 +95,7 @@
         .btn {
             padding: 10px 15px;
             border: none;
-            border-radius: 5px;
+            border-radius: 25px;
             cursor: pointer;
             font-weight: bold;
             text-decoration: none;
@@ -86,6 +104,7 @@
             gap: 5px;
             transition: all 0.3s ease;
             font-size: 0.9rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
 
         .btn-primary {
@@ -118,35 +137,278 @@
             color: white;
         }
 
+        .btn-iron {
+            background-color: var(--iron-color);
+            color: white;
+        }
+
+        .btn-vitamin-c {
+            background-color: var(--vitamin-c-color);
+            color: white;
+        }
+
         .btn:hover {
             opacity: 0.9;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Sección de Anemia */
+        .anemia-section {
+            background-color: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border: 2px solid var(--iron-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .anemia-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 10px;
+            height: 100%;
+            background-color: var(--iron-color);
+        }
+
+        .anemia-title {
+            color: var(--iron-color);
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .anemia-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .anemia-text {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .anemia-image {
+            flex: 1;
+            min-width: 250px;
+            max-width: 300px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .anemia-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Sección de Alimentos Recomendados */
+        .recommended-foods {
+            background-color: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border: 2px solid var(--success-color);
+        }
+
+        .recommended-title {
+            color: var(--success-color);
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .food-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .food-card {
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .food-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .food-image {
+            height: 150px;
+            overflow: hidden;
+        }
+
+        .food-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .food-card:hover .food-image img {
+            transform: scale(1.1);
+        }
+
+        .food-info {
+            padding: 15px;
+        }
+
+        .food-name {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: var(--dark-color);
+        }
+
+        .food-benefit {
+            font-size: 0.9rem;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .iron-level {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .iron-bar {
+            flex: 1;
+            height: 8px;
+            background-color: #e0e0e0;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .iron-fill {
+            height: 100%;
+            background-color: var(--iron-color);
+        }
+
+        .iron-percentage {
+            margin-left: 10px;
+            font-weight: bold;
+            color: var(--iron-color);
+        }
+
+        /* Sección de Alimentos a Evitar */
+        .avoid-foods {
+            background-color: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border: 2px solid var(--danger-color);
+        }
+
+        .avoid-title {
+            color: var(--danger-color);
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .avoid-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .avoid-card {
+            background-color: #fff9f9;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            border: 1px solid #ffe0e0;
+        }
+
+        .avoid-image {
+            height: 150px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .avoid-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(50%);
+        }
+
+        .avoid-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: var(--danger-color);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .avoid-info {
+            padding: 15px;
+        }
+
+        .avoid-name {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: var(--dark-color);
+        }
+
+        .avoid-reason {
+            font-size: 0.9rem;
+            color: var(--danger-color);
+            display: flex;
+            align-items: center;
+            gap: 5px;
         }
 
         .instructions {
             background-color: white;
-            border-radius: 10px;
+            border-radius: 15px;
             padding: 20px;
             margin-bottom: 20px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border: 2px solid var(--primary-blue);
         }
 
         .collapsible {
             background-color: var(--primary-blue);
             color: white;
             cursor: pointer;
-            padding: 10px 15px;
+            padding: 15px;
             width: 100%;
             border: none;
             text-align: left;
             outline: none;
-            font-size: 1rem;
-            border-radius: 5px;
+            font-size: 1.1rem;
+            border-radius: 10px;
             margin-bottom: 10px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            transition: all 0.3s ease;
         }
 
         .collapsible:hover {
@@ -159,7 +421,7 @@
             overflow: hidden;
             transition: max-height 0.3s ease-out;
             background-color: white;
-            border-radius: 0 0 5px 5px;
+            border-radius: 0 0 10px 10px;
         }
 
         .collapsible-content.active {
@@ -168,60 +430,65 @@
 
         .step {
             display: flex;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
             align-items: flex-start;
         }
 
         .step-number {
             background-color: var(--primary-blue);
             color: white;
-            width: 25px;
-            height: 25px;
+            width: 30px;
+            height: 30px;
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-right: 10px;
+            margin-right: 15px;
             flex-shrink: 0;
+            font-weight: bold;
         }
 
         .food-input {
             background-color: white;
-            border-radius: 10px;
+            border-radius: 15px;
             padding: 20px;
             margin-bottom: 20px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border: 2px solid var(--secondary-color);
         }
 
         .tabs {
             display: flex;
             margin-bottom: 20px;
             border-bottom: 1px solid #ddd;
-            overflow-x: auto; /* Para móviles */
+            overflow-x: auto;
         }
 
         .tab {
-            padding: 10px 20px;
+            padding: 12px 20px;
             cursor: pointer;
             background-color: #f1f1f1;
             border: 1px solid #ddd;
             border-bottom: none;
-            border-radius: 5px 5px 0 0;
+            border-radius: 10px 10px 0 0;
             margin-right: 5px;
-            white-space: nowrap; /* Para móviles */
+            white-space: nowrap;
+            transition: all 0.3s ease;
         }
 
         .tab.active {
             background-color: white;
             border-bottom: 1px solid white;
             margin-bottom: -1px;
+            font-weight: bold;
+            color: var(--primary-blue);
         }
 
         .tab-content {
             display: none;
             padding: 20px;
             border: 1px solid #ddd;
-            border-radius: 0 0 5px 5px;
+            border-radius: 0 0 10px 10px;
         }
 
         .tab-content.active {
@@ -236,10 +503,16 @@
 
         .input-group input {
             flex: 1;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 25px;
             font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .input-group input:focus {
+            border-color: var(--primary-color);
+            outline: none;
         }
 
         .food-list {
@@ -250,11 +523,12 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 10px;
+            padding: 12px;
             background-color: #f9f9f9;
-            border-radius: 5px;
+            border-radius: 25px;
             margin-bottom: 10px;
             animation: fadeIn 0.5s;
+            border-left: 4px solid var(--primary-color);
         }
 
         @keyframes fadeIn {
@@ -276,12 +550,17 @@
             color: white;
             border: none;
             border-radius: 50%;
-            width: 25px;
-            height: 25px;
+            width: 30px;
+            height: 30px;
             cursor: pointer;
             display: flex;
             justify-content: center;
             align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .remove-btn:hover {
+            transform: rotate(90deg);
         }
 
         .file-upload {
@@ -307,11 +586,17 @@
             padding: 40px 20px;
             background-color: #f1f1f1;
             border: 2px dashed #ddd;
-            border-radius: 5px;
+            border-radius: 10px;
             text-align: center;
             color: var(--dark-color);
             font-size: 1.2rem;
             gap: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .file-upload-btn:hover {
+            background-color: #e9e9e9;
+            border-color: var(--primary-color);
         }
 
         .file-upload-btn i {
@@ -340,10 +625,22 @@
 
         .recipe-card {
             background-color: white;
-            border-radius: 10px;
+            border-radius: 15px;
             padding: 20px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             animation: fadeIn 0.5s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .recipe-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color), var(--info-color));
         }
 
         .recipe-card.removing {
@@ -354,6 +651,9 @@
             color: var(--primary-blue);
             margin-bottom: 15px;
             font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         .recipe-card h4 {
@@ -361,6 +661,9 @@
             margin-bottom: 10px;
             color: var(--dark-color);
             font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .recipe-card ul, .recipe-card ol {
@@ -369,48 +672,61 @@
         }
 
         .recipe-card li {
-            margin-bottom: 5px;
+            margin-bottom: 8px;
+            line-height: 1.5;
         }
 
         .recipe-tip {
             background-color: #f0f7ff;
             border-left: 4px solid var(--info-color);
-            padding: 10px;
+            padding: 12px;
             margin: 15px 0;
-            border-radius: 0 5px 5px 0;
+            border-radius: 0 10px 10px 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
         }
 
         .recipe-benefit {
             background-color: #f0fff4;
             border-left: 4px solid var(--success-color);
-            padding: 10px;
+            padding: 12px;
             margin: 15px 0;
-            border-radius: 0 5px 5px 0;
+            border-radius: 0 10px 10px 0;
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             gap: 10px;
         }
 
         .recipe-alert {
             background-color: #fff8f0;
             border-left: 4px solid var(--warning-color);
-            padding: 10px;
+            padding: 12px;
             margin: 15px 0;
-            border-radius: 0 5px 5px 0;
+            border-radius: 0 10px 10px 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
         }
 
         .copy-btn {
             background-color: var(--info-color);
             color: white;
             border: none;
-            border-radius: 5px;
-            padding: 5px 10px;
+            border-radius: 25px;
+            padding: 8px 15px;
             cursor: pointer;
-            font-size: 0.8rem;
+            font-size: 0.9rem;
             margin-top: 10px;
             display: flex;
             align-items: center;
             gap: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .copy-btn:hover {
+            background-color: #0288d1;
+            transform: translateY(-2px);
         }
 
         .loader {
@@ -444,6 +760,7 @@
             right: 0;
             max-height: 200px;
             overflow-y: auto;
+            border-radius: 0 0 10px 10px;
         }
 
         .autocomplete-items div {
@@ -481,7 +798,8 @@
             border: 1px solid #888;
             width: 80%;
             max-width: 500px;
-            border-radius: 10px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
         }
 
         .modal-header {
@@ -489,6 +807,8 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 15px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
         }
 
         .close {
@@ -496,6 +816,7 @@
             font-size: 28px;
             font-weight: bold;
             cursor: pointer;
+            transition: color 0.3s ease;
         }
 
         .close:hover {
@@ -507,6 +828,8 @@
             justify-content: flex-end;
             gap: 10px;
             margin-top: 20px;
+            border-top: 1px solid #eee;
+            padding-top: 15px;
         }
 
         .development-message {
@@ -514,10 +837,14 @@
             border: 1px solid #ffeeba;
             color: #856404;
             padding: 15px;
-            border-radius: 5px;
+            border-radius: 10px;
             margin: 20px 0;
             text-align: center;
             font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
         }
 
         /* Toast container para notificaciones */
@@ -592,6 +919,80 @@
             margin-bottom: 5px;
         }
 
+        /* Sección de Combos Recomendados */
+        .combos-section {
+            background-color: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border: 2px solid var(--vitamin-c-color);
+        }
+
+        .combos-title {
+            color: var(--vitamin-c-color);
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .combo-card {
+            display: flex;
+            background-color: #fff9f0;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 15px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .combo-image {
+            width: 120px;
+            height: 120px;
+            overflow: hidden;
+        }
+
+        .combo-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .combo-info {
+            flex: 1;
+            padding: 15px;
+        }
+
+        .combo-name {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: var(--dark-color);
+            font-size: 1.1rem;
+        }
+
+        .combo-description {
+            font-size: 0.9rem;
+            color: var(--dark-color);
+            margin-bottom: 10px;
+        }
+
+        .combo-benefits {
+            display: flex;
+            gap: 10px;
+        }
+
+        .combo-benefit {
+            background-color: var(--vitamin-c-color);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 3px;
+        }
+
         @media (max-width: 768px) {
             .container {
                 padding: 15px;
@@ -628,6 +1029,23 @@
             .mobile-footer {
                 display: flex;
             }
+
+            .anemia-content {
+                flex-direction: column;
+            }
+
+            .food-grid, .avoid-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+
+            .combo-card {
+                flex-direction: column;
+            }
+
+            .combo-image {
+                width: 100%;
+                height: 150px;
+            }
         }
 
         @media (min-width: 769px) {
@@ -638,12 +1056,269 @@
     </style>
 </head>
 <body>
+    <div class="overlay"></div>
     <div class="container">
         <div class="header">
             <h1><i class="fas fa-shopping-basket"></i> Comida con Despensa</h1>
             <div class="header-buttons">
                 <a href="#" id="backToProfile" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Volver al Perfil</a>
                 <a href="index.html" class="btn btn-danger"><i class="fas fa-sign-out-alt"></i> Salir</a>
+            </div>
+        </div>
+
+        <!-- Sección de Anemia -->
+        <div class="anemia-section">
+            <h2 class="anemia-title"><i class="fas fa-heartbeat"></i> ¿Qué es la Anemia y cómo prevenirla?</h2>
+            <div class="anemia-content">
+                <div class="anemia-text">
+                    <p>La anemia es una condición donde el cuerpo no tiene suficientes glóbulos rojos sanos para transportar oxígeno adecuadamente. En los niños, puede causar fatiga, debilidad y problemas de desarrollo.</p>
+                    <p>¡La buena noticia es que podemos prevenirla con una alimentación adecuada! Los alimentos ricos en hierro son nuestros mejores aliados.</p>
+                    <div style="margin-top: 15px;">
+                        <span class="btn-iron" style="padding: 5px 10px; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 5px;">
+                            <i class="fas fa-tint"></i> Hierro
+                        </span>
+                        <span style="margin: 0 10px;">+</span>
+                        <span class="btn-vitamin-c" style="padding: 5px 10px; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 5px;">
+                            <i class="fas fa-lemon"></i> Vitamina C
+                        </span>
+                        <span style="margin: 0 10px;">=</span>
+                        <span class="btn-success" style="padding: 5px 10px; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 5px;">
+                            <i class="fas fa-shield-alt"></i> Protección contra la Anemia
+                        </span>
+                    </div>
+                </div>
+                <div class="anemia-image">
+                    <img src="https://picsum.photos/seed/anemia-prevention/300/200.jpg" alt="Prevención de la anemia">
+                </div>
+            </div>
+        </div>
+
+        <!-- Sección de Alimentos Recomendados -->
+        <div class="recommended-foods">
+            <h2 class="recommended-title"><i class="fas fa-check-circle"></i> Alimentos Recomendados para Prevenir la Anemia</h2>
+            <div class="food-grid">
+                <div class="food-card">
+                    <div class="food-image">
+                        <img src="https://picsum.photos/seed/spinach/200/150.jpg" alt="Espinacas">
+                    </div>
+                    <div class="food-info">
+                        <div class="food-name">Espinacas</div>
+                        <div class="food-benefit">
+                            <i class="fas fa-leaf"></i> Rica en hierro y folato
+                        </div>
+                        <div class="iron-level">
+                            <div class="iron-bar">
+                                <div class="iron-fill" style="width: 85%;"></div>
+                            </div>
+                            <div class="iron-percentage">85%</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="food-card">
+                    <div class="food-image">
+                        <img src="https://picsum.photos/seed/lentils/200/150.jpg" alt="Lentejas">
+                    </div>
+                    <div class="food-info">
+                        <div class="food-name">Lentejas</div>
+                        <div class="food-benefit">
+                            <i class="fas fa-seedling"></i> Alta en hierro vegetal
+                        </div>
+                        <div class="iron-level">
+                            <div class="iron-bar">
+                                <div class="iron-fill" style="width: 90%;"></div>
+                            </div>
+                            <div class="iron-percentage">90%</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="food-card">
+                    <div class="food-image">
+                        <img src="https://picsum.photos/seed/red-meat/200/150.jpg" alt="Carne roja">
+                    </div>
+                    <div class="food-info">
+                        <div class="food-name">Carne roja</div>
+                        <div class="food-benefit">
+                            <i class="fas fa-drumstick-bite"></i> Hierro de fácil absorción
+                        </div>
+                        <div class="iron-level">
+                            <div class="iron-bar">
+                                <div class="iron-fill" style="width: 95%;"></div>
+                            </div>
+                            <div class="iron-percentage">95%</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="food-card">
+                    <div class="food-image">
+                        <img src="https://picsum.photos/seed/orange/200/150.jpg" alt="Naranja">
+                    </div>
+                    <div class="food-info">
+                        <div class="food-name">Naranja</div>
+                        <div class="food-benefit">
+                            <i class="fas fa-lemon"></i> Vitamina C para absorber hierro
+                        </div>
+                        <div class="iron-level">
+                            <div class="iron-bar">
+                                <div class="iron-fill" style="width: 40%;"></div>
+                            </div>
+                            <div class="iron-percentage">40%</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="food-card">
+                    <div class="food-image">
+                        <img src="https://picsum.photos/seed/eggs/200/150.jpg" alt="Huevos">
+                    </div>
+                    <div class="food-info">
+                        <div class="food-name">Huevos</div>
+                        <div class="food-benefit">
+                            <i class="fas fa-egg"></i> Hierro y proteínas
+                        </div>
+                        <div class="iron-level">
+                            <div class="iron-bar">
+                                <div class="iron-fill" style="width: 70%;"></div>
+                            </div>
+                            <div class="iron-percentage">70%</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="food-card">
+                    <div class="food-image">
+                        <img src="https://picsum.photos/seed/strawberry/200/150.jpg" alt="Fresas">
+                    </div>
+                    <div class="food-info">
+                        <div class="food-name">Fresas</div>
+                        <div class="food-benefit">
+                            <i class="fas fa-lemon"></i> Vitamina C y antioxidantes
+                        </div>
+                        <div class="iron-level">
+                            <div class="iron-bar">
+                                <div class="iron-fill" style="width: 35%;"></div>
+                            </div>
+                            <div class="iron-percentage">35%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sección de Alimentos a Evitar -->
+        <div class="avoid-foods">
+            <h2 class="avoid-title"><i class="fas fa-times-circle"></i> Alimentos a Limitar o Evitar</h2>
+            <div class="avoid-grid">
+                <div class="avoid-card">
+                    <div class="avoid-image">
+                        <img src="https://picsum.photos/seed/coffee/200/150.jpg" alt="Café">
+                        <div class="avoid-badge">Limitar</div>
+                    </div>
+                    <div class="avoid-info">
+                        <div class="avoid-name">Café y té</div>
+                        <div class="avoid-reason">
+                            <i class="fas fa-exclamation-triangle"></i> Dificulta la absorción de hierro
+                        </div>
+                    </div>
+                </div>
+                <div class="avoid-card">
+                    <div class="avoid-image">
+                        <img src="https://picsum.photos/seed/candy/200/150.jpg" alt="Dulces">
+                        <div class="avoid-badge">Evitar</div>
+                    </div>
+                    <div class="avoid-info">
+                        <div class="avoid-name">Dulces y azúcares</div>
+                        <div class="avoid-reason">
+                            <i class="fas fa-exclamation-triangle"></i> Poco valor nutricional
+                        </div>
+                    </div>
+                </div>
+                <div class="avoid-card">
+                    <div class="avoid-image">
+                        <img src="https://picsum.photos/seed/soda/200/150.jpg" alt="Refrescos">
+                        <div class="avoid-badge">Evitar</div>
+                    </div>
+                    <div class="avoid-info">
+                        <div class="avoid-name">Refrescos</div>
+                        <div class="avoid-reason">
+                            <i class="fas fa-exclamation-triangle"></i> Interfiere con la absorción de nutrientes
+                        </div>
+                    </div>
+                </div>
+                <div class="avoid-card">
+                    <div class="avoid-image">
+                        <img src="https://picsum.photos/seed/processed-food/200/150.jpg" alt="Comida procesada">
+                        <div class="avoid-badge">Limitar</div>
+                    </div>
+                    <div class="avoid-info">
+                        <div class="avoid-name">Comida procesada</div>
+                        <div class="avoid-reason">
+                            <i class="fas fa-exclamation-triangle"></i> Bajo contenido de hierro
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sección de Combos Recomendados -->
+        <div class="combos-section">
+            <h2 class="combos-title"><i class="fas fa-magic"></i> Combos Mágicos contra la Anemia</h2>
+            <div class="combo-card">
+                <div class="combo-image">
+                    <img src="https://picsum.photos/seed/lentil-salad/120/120.jpg" alt="Ensalada de lentejas">
+                </div>
+                <div class="combo-info">
+                    <div class="combo-name">Ensalada de Lentejas con Pimientos</div>
+                    <div class="combo-description">Lentejas ricas en hierro combinadas con pimientos rojos que aportan vitamina C.</div>
+                    <div class="combo-benefits">
+                        <div class="combo-benefit">
+                            <i class="fas fa-tint"></i> Hierro
+                        </div>
+                        <div class="combo-benefit">
+                            <i class="fas fa-lemon"></i> Vitamina C
+                        </div>
+                        <div class="combo-benefit">
+                            <i class="fas fa-heart"></i> Saludable
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="combo-card">
+                <div class="combo-image">
+                    <img src="https://picsum.photos/seed/spinach-omelette/120/120.jpg" alt="Tortilla de espinacas">
+                </div>
+                <div class="combo-info">
+                    <div class="combo-name">Tortilla de Espinacas con Tomate</div>
+                    <div class="combo-description">Huevos con espinacas y tomate fresco, una combinación perfecta de hierro y vitamina C.</div>
+                    <div class="combo-benefits">
+                        <div class="combo-benefit">
+                            <i class="fas fa-tint"></i> Hierro
+                        </div>
+                        <div class="combo-benefit">
+                            <i class="fas fa-lemon"></i> Vitamina C
+                        </div>
+                        <div class="combo-benefit">
+                            <i class="fas fa-egg"></i> Proteína
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="combo-card">
+                <div class="combo-image">
+                    <img src="https://picsum.photos/seed/beef-citrus/120/120.jpg" alt="Carne con cítricos">
+                </div>
+                <div class="combo-info">
+                    <div class="combo-name">Carne con Salsa de Naranja</div>
+                    <div class="combo-description">Carne roja (fuente de hierro hemo) con una salsa a base de naranja para maximizar la absorción.</div>
+                    <div class="combo-benefits">
+                        <div class="combo-benefit">
+                            <i class="fas fa-tint"></i> Hierro
+                        </div>
+                        <div class="combo-benefit">
+                            <i class="fas fa-lemon"></i> Vitamina C
+                        </div>
+                        <div class="combo-benefit">
+                            <i class="fas fa-drumstick-bite"></i> Hierro hemo
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -1035,7 +1710,7 @@
             
             const message = document.createElement('div');
             message.className = 'development-message';
-            message.textContent = 'Funcionalidad en desarrollo. Próximamente podrás generar recetas personalizadas con IA.';
+            message.innerHTML = '<i class="fas fa-tools"></i> Funcionalidad en desarrollo. Próximamente podrás generar recetas personalizadas con IA.';
             
             const recipesContainer = document.getElementById('recipes-container');
             recipesContainer.parentNode.insertBefore(message, recipesContainer);
@@ -1084,16 +1759,19 @@
                 const preparationHtml = recipe.preparacion.map(step => `<li>${step}</li>`).join('');
                 
                 card.innerHTML = `
-                    <h3>${recipe.nombreReceta}</h3>
+                    <h3><i class="fas fa-utensils"></i> ${recipe.nombreReceta}</h3>
                     
-                    <h4>Ingredientes:</h4>
+                    <h4><i class="fas fa-shopping-basket"></i> Ingredientes:</h4>
                     <ul>${ingredientsHtml}</ul>
                     
-                    <h4>Preparación:</h4>
+                    <h4><i class="fas fa-list-ol"></i> Preparación:</h4>
                     <ol>${preparationHtml}</ol>
                     
                     <div class="recipe-tip">
-                        <strong>Consejos para tu Despensa:</strong> ${recipe.consejosDespensa}
+                        <i class="fas fa-lightbulb"></i>
+                        <div>
+                            <strong>Consejos para tu Despensa:</strong> ${recipe.consejosDespensa}
+                        </div>
                     </div>
                     
                     <div class="recipe-benefit">
@@ -1105,7 +1783,10 @@
                     
                     ${recipe.alertaAlergenos ? `
                     <div class="recipe-alert">
-                        <strong>Alerta de Alérgenos:</strong> ${recipe.alertaAlergenos}
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <div>
+                            <strong>Alerta de Alérgenos:</strong> ${recipe.alertaAlergenos}
+                        </div>
                     </div>
                     ` : ''}
                     
