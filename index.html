@@ -34,8 +34,8 @@
             --transition: all 0.3s ease-in-out;
             --whatsapp-green: #25D366;
             --whatsapp-green-light: #DCF8C6;
-            --whatsapp-gray: #ECECEC;
-            --whatsapp-gray-dark: #222;
+            --whatsapp-gray: #E5DDD5;
+            --whatsapp-gray-dark: #8696A0;
         }
         
         * {
@@ -60,7 +60,6 @@
             padding: 20px 0;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             z-index: 100;
-            position: relative;
         }
         
         .logo {
@@ -126,21 +125,6 @@
         
         .btn-secondary:hover {
             background: #E68900;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        }
-        
-        .btn-info {
-            background: var(--info-color);
-            border: none;
-            border-radius: 50px;
-            padding: 10px 25px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-        
-        .btn-info:hover {
-            background: #0288D1;
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
@@ -485,27 +469,49 @@
             margin: 1rem 0; 
         }
         
-        /* Estilos específicos para la comunidad */
-        .community-container {
-            display: flex;
-            gap: 20px;
-            margin-top: 20px;
+        /* --- ESTILOS PARA COMUNIDAD --- */
+        .community-section {
+            display: none;
+            animation: fadeIn 0.5s ease;
         }
         
-        .community-section, .direct-messages-section {
-            flex: 1;
-            background: white;
-            border-radius: 15px;
-            padding: 20px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        .community-section.active {
+            display: block;
         }
         
-        .section-title {
-            color: var(--primary-blue);
-            margin-bottom: 20px;
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .community-header {
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .community-tabs {
+            display: flex;
+            border-bottom: 1px solid var(--medium-gray);
+            margin-bottom: 20px;
+        }
+        
+        .community-tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .community-tab:hover {
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+        
+        .community-tab.active {
+            border-bottom: 3px solid var(--primary-blue);
+            color: var(--primary-blue);
+            font-weight: 600;
         }
         
         .department-selector {
@@ -513,13 +519,13 @@
         }
         
         .conversation-card {
-            background: var(--light-gray);
+            background: white;
             border-radius: 10px;
             padding: 15px;
             margin-bottom: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
             transition: all 0.3s ease;
             cursor: pointer;
-            position: relative;
         }
         
         .conversation-card:hover {
@@ -530,67 +536,61 @@
         .conversation-title {
             font-weight: 600;
             margin-bottom: 5px;
-            color: var(--text-dark);
         }
         
         .conversation-description {
-            font-size: 0.9rem;
-            color: #6c757d;
+            color: var(--dark-color);
             margin-bottom: 10px;
+            font-size: 0.9rem;
         }
         
         .conversation-meta {
             display: flex;
             justify-content: space-between;
             font-size: 0.8rem;
-            color: #6c757d;
+            color: var(--dark-color);
         }
         
-        .conversation-actions {
-            display: flex;
-            gap: 10px;
-            margin-top: 10px;
+        .conversation-author {
+            font-weight: 500;
         }
         
-        .unread-badge {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: var(--danger-color);
-            color: white;
-            border-radius: 50%;
-            width: 20px;
-            height: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.7rem;
+        .conversation-date {
+            color: var(--dark-color);
         }
         
-        /* Chat flotante estilo WhatsApp - CORREGIDO */
+        .new-conversation-btn {
+            margin-bottom: 20px;
+        }
+        
+        /* --- ESTILOS PARA CHAT FLOTANTE --- */
         .chat-container {
             position: fixed;
             bottom: 20px;
             right: 20px;
             width: 400px;
-            height: 600px;
+            height: 500px; /* Reducido para asegurar que quepa en pantalla */
             background: white;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            border-radius: 10px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.2);
             display: none;
             flex-direction: column;
-            z-index: 9999; /* Aumentado z-index para asegurar que esté por encima de todo */
+            z-index: 1050;
             overflow: hidden;
-            animation: popIn 0.3s ease;
         }
         
-        @keyframes popIn {
-            0% {
-                transform: scale(0.8);
+        .chat-container.active {
+            display: flex;
+            animation: slideUp 0.3s ease;
+        }
+        
+        @keyframes slideUp {
+            from {
+                transform: translateY(100%);
                 opacity: 0;
             }
-            100% {
-                transform: scale(1);
+            to {
+                transform: translateY(0);
                 opacity: 1;
             }
         }
@@ -600,103 +600,15 @@
             color: white;
             padding: 15px;
             display: flex;
-            align-items: center;
             justify-content: space-between;
-            position: relative;
-            z-index: 10; /* Aseguramos que el header esté por encima del contenido */
-        }
-        
-        .chat-header h4 {
-            margin: 0;
-            font-size: 1rem;
-        }
-        
-        .chat-messages {
-            flex: 1;
-            padding: 15px;
-            overflow-y: auto;
-            background: var(--whatsapp-gray);
-        }
-        
-        .message {
-            margin-bottom: 15px;
-            display: flex;
-            flex-direction: column;
-            max-width: 80%;
-        }
-        
-        .message.sent {
-            align-self: flex-end;
-        }
-        
-        .message.received {
-            align-self: flex-start;
-        }
-        
-        .message-bubble {
-            padding: 10px 15px;
-            border-radius: 18px;
-            position: relative;
-            word-wrap: break-word;
-        }
-        
-        .message.sent .message-bubble {
-            background: var(--whatsapp-green-light);
-            border-top-right-radius: 5px;
-        }
-        
-        .message.received .message-bubble {
-            background: white;
-            border-top-left-radius: 5px;
-        }
-        
-        .message-info {
-            display: flex;
             align-items: center;
-            font-size: 0.7rem;
-            color: #6c757d;
-            margin-top: 3px;
         }
         
-        .message.sent .message-info {
-            justify-content: flex-end;
+        .chat-header-title {
+            font-weight: 600;
         }
         
-        .message-input-container {
-            padding: 15px;
-            background: white;
-            border-top: 1px solid var(--medium-gray);
-            display: flex;
-            gap: 10px;
-        }
-        
-        .message-input {
-            flex: 1;
-            border: 1px solid var(--medium-gray);
-            border-radius: 20px;
-            padding: 8px 15px;
-            outline: none;
-        }
-        
-        .send-button {
-            background: var(--whatsapp-green);
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-        
-        .send-button:hover {
-            background: #128C7E;
-        }
-        
-        .close-chat {
+        .chat-close {
             background: none;
             border: none;
             color: white;
@@ -704,86 +616,172 @@
             cursor: pointer;
             padding: 5px;
             border-radius: 50%;
-            transition: background-color 0.2s ease;
-            z-index: 20; /* Aseguramos que el botón esté por encima de todo */
+            width: 30px;
+            height: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
         }
         
-        .close-chat:hover {
+        .chat-close:hover {
             background-color: rgba(255, 255, 255, 0.2);
         }
         
-        .new-conversation-btn {
-            margin-bottom: 20px;
-        }
-        
-        .empty-state {
-            text-align: center;
-            padding: 40px 20px;
-            color: #6c757d;
-        }
-        
-        .empty-state i {
-            font-size: 64px;
-            margin-bottom: 20px;
-            color: #dee2e6;
-        }
-        
-        .direct-message-card {
-            background: var(--light-gray);
-            border-radius: 10px;
+        .chat-messages {
+            flex: 1;
             padding: 15px;
-            margin-bottom: 15px;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            position: relative;
+            overflow-y: auto;
+            background: var(--whatsapp-gray);
+            background-image: url('https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png');
         }
         
-        .direct-message-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        .chat-message {
+            margin-bottom: 10px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .chat-message.sent {
+            align-items: flex-end;
+        }
+        
+        .chat-message.received {
+            align-items: flex-start;
+        }
+        
+        .message-bubble {
+            max-width: 70%;
+            padding: 8px 12px;
+            border-radius: 10px;
+            word-wrap: break-word;
+        }
+        
+        .message-bubble.sent {
+            background-color: var(--whatsapp-green-light);
+            border-top-right-radius: 0;
+        }
+        
+        .message-bubble.received {
+            background-color: white;
+            border-top-left-radius: 0;
+        }
+        
+        .message-info {
+            font-size: 0.7rem;
+            color: var(--whatsapp-gray-dark);
+            margin-top: 3px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .message-info.sent {
+            justify-content: flex-end;
+        }
+        
+        .message-info.received {
+            justify-content: flex-start;
         }
         
         .message-status {
+            margin-left: 3px;
+        }
+        
+        .chat-input-container {
+            padding: 10px;
+            background: white;
+            border-top: 1px solid var(--medium-gray);
+            display: flex;
+        }
+        
+        .chat-input {
+            flex: 1;
+            border: 1px solid var(--medium-gray);
+            border-radius: 20px;
+            padding: 8px 15px;
+            margin-right: 10px;
+        }
+        
+        .chat-send-btn {
+            background: var(--whatsapp-green);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+        
+        .chat-send-btn:hover {
+            background: #128C7E;
+        }
+        
+        .unread-indicator {
+            background: var(--danger-color);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             font-size: 0.7rem;
-            color: #6c757d;
             margin-left: 5px;
         }
         
         .message-actions {
-            position: absolute;
-            top: 10px;
-            right: 10px;
             display: flex;
             gap: 5px;
+            margin-top: 5px;
         }
         
         .message-action-btn {
             background: none;
             border: none;
-            color: #6c757d;
-            cursor: pointer;
+            color: var(--whatsapp-gray-dark);
             font-size: 0.8rem;
-            transition: color 0.2s ease;
+            cursor: pointer;
+            padding: 2px 5px;
         }
         
         .message-action-btn:hover {
             color: var(--primary-blue);
         }
         
-        /* CORRECCIÓN: Evitar que los botones se cubran con elementos rojos */
+        .no-conversations {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--dark-color);
+        }
+        
+        .no-conversations i {
+            font-size: 48px;
+            margin-bottom: 15px;
+            color: var(--medium-gray);
+        }
+        
+        /* Ajustes para botones */
         .btn {
             position: relative;
             z-index: 1;
+            cursor: pointer;
         }
         
-        .btn:active {
-            transform: scale(0.98);
-        }
-        
-        /* CORRECCIÓN: Evitar que los botones de papelera se cubran */
-        .trash-item button {
-            position: relative;
+        .btn:hover {
             z-index: 2;
+        }
+        
+        .btn:focus {
+            outline: none;
+            box-shadow: 0 0 0 0.25rem rgba(26, 75, 140, 0.25);
+        }
+        
+        /* Evitar superposición de elementos */
+        .dropdown-menu {
+            z-index: 1060;
         }
         
         @media (max-width: 768px) {
@@ -807,16 +805,12 @@
                 font-size: 28px;
             }
             
-            .community-container {
-                flex-direction: column;
-            }
-            
             .chat-container {
                 width: 100%;
-                height: 500px;
-                right: 0;
+                height: 100%;
                 bottom: 0;
-                border-radius: 15px 15px 0 0;
+                right: 0;
+                border-radius: 0;
             }
         }
     </style>
@@ -973,86 +967,80 @@
                     </div>
                     <button id="closeTrashBtn" class="btn btn-secondary">Cerrar papelera</button>
                 </div>
+            </div>
+            
+            <!-- Community Section -->
+            <div id="communitySection" class="community-section">
+                <div class="community-header">
+                    <h2>Comunidad Yachay Mikuy</h2>
+                    <button id="backToDashboardBtn" class="btn btn-outline-secondary">
+                        <i class="fas fa-arrow-left"></i> Volver al panel
+                    </button>
+                </div>
                 
-                <!-- Comunidad Section -->
-                <div id="communitySection" class="d-none">
-                    <div class="row mb-4">
-                        <div class="col-12">
-                            <h2 class="mb-3">Comunidad Yachay Mikuy</h2>
-                            <p>Conecta con otros padres y comparte experiencias sobre nutrición infantil.</p>
-                            <button id="closeCommunityBtn" class="btn btn-secondary">
-                                <i class="fas fa-arrow-left"></i> Volver a perfiles
-                            </button>
-                        </div>
+                <div class="community-tabs">
+                    <div class="community-tab active" data-tab="conversations">
+                        <i class="fas fa-comments me-2"></i> Conversaciones
+                    </div>
+                    <div class="community-tab" data-tab="direct-messages">
+                        <i class="fas fa-envelope me-2"></i> Mensajes directos
+                    </div>
+                </div>
+                
+                <!-- Conversaciones Tab -->
+                <div id="conversationsTab" class="tab-content">
+                    <div class="department-selector">
+                        <label for="departmentSelect" class="form-label">Selecciona tu departamento:</label>
+                        <select class="form-select" id="departmentSelect">
+                            <option value="">Todos los departamentos</option>
+                            <option value="amazonas">Amazonas</option>
+                            <option value="ancash">Áncash</option>
+                            <option value="apurimac">Apurímac</option>
+                            <option value="arequipa">Arequipa</option>
+                            <option value="ayacucho">Ayacucho</option>
+                            <option value="cajamarca">Cajamarca</option>
+                            <option value="callao">Callao</option>
+                            <option value="cusco">Cusco</option>
+                            <option value="huancavelica">Huancavelica</option>
+                            <option value="huanuco">Huánuco</option>
+                            <option value="ica">Ica</option>
+                            <option value="junin">Junín</option>
+                            <option value="la-libertad">La Libertad</option>
+                            <option value="lambayeque">Lambayeque</option>
+                            <option value="lima">Lima</option>
+                            <option value="loreto">Loreto</option>
+                            <option value="madre-de-dios">Madre de Dios</option>
+                            <option value="moquegua">Moquegua</option>
+                            <option value="pasco">Pasco</option>
+                            <option value="piura">Piura</option>
+                            <option value="puno">Puno</option>
+                            <option value="san-martin">San Martín</option>
+                            <option value="tacna">Tacna</option>
+                            <option value="tumbes">Tumbes</option>
+                            <option value="ucayali">Ucayali</option>
+                        </select>
                     </div>
                     
-                    <div class="community-container">
-                        <!-- Sección de Comunidad -->
-                        <div class="community-section">
-                            <h3 class="section-title">
-                                <i class="fas fa-comments"></i> Conversaciones por Departamento
-                            </h3>
-                            
-                            <div class="department-selector">
-                                <select id="departmentSelect" class="form-select">
-                                    <option value="">Selecciona un departamento</option>
-                                    <option value="amazonas">Amazonas</option>
-                                    <option value="ancash">Áncash</option>
-                                    <option value="apurimac">Apurímac</option>
-                                    <option value="arequipa">Arequipa</option>
-                                    <option value="ayacucho">Ayacucho</option>
-                                    <option value="cajamarca">Cajamarca</option>
-                                    <option value="callao">Callao</option>
-                                    <option value="cusco">Cusco</option>
-                                    <option value="huancavelica">Huancavelica</option>
-                                    <option value="huanuco">Huánuco</option>
-                                    <option value="ica">Ica</option>
-                                    <option value="junin">Junín</option>
-                                    <option value="la-libertad">La Libertad</option>
-                                    <option value="lambayeque">Lambayeque</option>
-                                    <option value="lima">Lima</option>
-                                    <option value="loreto">Loreto</option>
-                                    <option value="madre-de-dios">Madre de Dios</option>
-                                    <option value="moquegua">Moquegua</option>
-                                    <option value="pasco">Pasco</option>
-                                    <option value="piura">Piura</option>
-                                    <option value="puno">Puno</option>
-                                    <option value="san-martin">San Martín</option>
-                                    <option value="tacna">Tacna</option>
-                                    <option value="tumbes">Tumbes</option>
-                                    <option value="ucayali">Ucayali</option>
-                                </select>
-                            </div>
-                            
-                            <button id="newConversationBtn" class="btn btn-primary new-conversation-btn">
-                                <i class="fas fa-plus-circle"></i> Nueva Conversación
-                            </button>
-                            
-                            <div id="conversationsContainer">
-                                <div class="empty-state">
-                                    <i class="fas fa-comments"></i>
-                                    <h4>Selecciona un departamento para ver las conversaciones</h4>
-                                    <p>Podrás ver y participar en conversaciones de tu región.</p>
-                                </div>
-                            </div>
+                    <button id="newConversationBtn" class="btn btn-primary new-conversation-btn">
+                        <i class="fas fa-plus-circle"></i> Nueva conversación
+                    </button>
+                    
+                    <div id="conversationsContainer">
+                        <!-- Conversations will be dynamically added here -->
+                    </div>
+                </div>
+                
+                <!-- Mensajes Directos Tab -->
+                <div id="directMessagesTab" class="tab-content d-none">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="mb-0">Mensajes directos con el administrador</h5>
                         </div>
-                        
-                        <!-- Sección de Mensajes Directos -->
-                        <div class="direct-messages-section">
-                            <h3 class="section-title">
-                                <i class="fas fa-envelope"></i> Mensajes Directos
-                            </h3>
-                            
-                            <div id="directMessagesContainer">
-                                <div class="empty-state">
-                                    <i class="fas fa-envelope"></i>
-                                    <h4>No tienes mensajes directos</h4>
-                                    <p>Puedes enviar un mensaje directo al administrador.</p>
-                                    <button id="newDirectMessageBtn" class="btn btn-primary">
-                                        <i class="fas fa-plus-circle"></i> Nuevo Mensaje Directo
-                                    </button>
-                                </div>
-                            </div>
+                        <div class="card-body">
+                            <p>Envía tus preguntas o inquietudes directamente al administrador de Yachay Mikuy.</p>
+                            <button id="startDirectMessageBtn" class="btn btn-primary">
+                                <i class="fas fa-envelope"></i> Enviar mensaje directo
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -1111,6 +1099,69 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                     <button type="button" id="saveChildBtn" class="btn btn-primary">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- New Conversation Modal -->
+    <div class="modal fade" id="newConversationModal" tabindex="-1" aria-labelledby="newConversationModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="newConversationModalLabel">Nueva Conversación</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="newConversationForm">
+                        <div class="mb-3">
+                            <label for="conversationTitle" class="form-label">Título de la conversación</label>
+                            <input type="text" class="form-control" id="conversationTitle" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="conversationDescription" class="form-label">Descripción</label>
+                            <textarea class="form-control" id="conversationDescription" rows="3" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="conversationDepartment" class="form-label">Departamento</label>
+                            <select class="form-select" id="conversationDepartment" required>
+                                <option value="">Selecciona un departamento</option>
+                                <option value="amazonas">Amazonas</option>
+                                <option value="ancash">Áncash</option>
+                                <option value="apurimac">Apurímac</option>
+                                <option value="arequipa">Arequipa</option>
+                                <option value="ayacucho">Ayacucho</option>
+                                <option value="cajamarca">Cajamarca</option>
+                                <option value="callao">Callao</option>
+                                <option value="cusco">Cusco</option>
+                                <option value="huancavelica">Huancavelica</option>
+                                <option value="huanuco">Huánuco</option>
+                                <option value="ica">Ica</option>
+                                <option value="junin">Junín</option>
+                                <option value="la-libertad">La Libertad</option>
+                                <option value="lambayeque">Lambayeque</option>
+                                <option value="lima">Lima</option>
+                                <option value="loreto">Loreto</option>
+                                <option value="madre-de-dios">Madre de Dios</option>
+                                <option value="moquegua">Moquegua</option>
+                                <option value="pasco">Pasco</option>
+                                <option value="piura">Piura</option>
+                                <option value="puno">Puno</option>
+                                <option value="san-martin">San Martín</option>
+                                <option value="tacna">Tacna</option>
+                                <option value="tumbes">Tumbes</option>
+                                <option value="ucayali">Ucayali</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="firstMessage" class="form-label">Primer mensaje</label>
+                            <textarea class="form-control" id="firstMessage" rows="3" required></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" id="createConversationBtn" class="btn btn-primary">Crear conversación</button>
                 </div>
             </div>
         </div>
@@ -1199,95 +1250,6 @@
         </div>
     </div>
     
-    <!-- Modal para Nueva Conversación -->
-    <div class="modal fade" id="newConversationModal" tabindex="-1" aria-labelledby="newConversationModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="newConversationModalLabel">Nueva Conversación</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form id="newConversationForm">
-                        <div class="mb-3">
-                            <label for="conversationTitle" class="form-label">Título</label>
-                            <input type="text" class="form-control" id="conversationTitle" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="conversationDescription" class="form-label">Descripción</label>
-                            <textarea class="form-control" id="conversationDescription" rows="3" required></textarea>
-                        </div>
-                        <div class="mb-3">
-                            <label for="conversationDepartment" class="form-label">Departamento</label>
-                            <select class="form-select" id="conversationDepartment" required>
-                                <option value="">Selecciona un departamento</option>
-                                <option value="amazonas">Amazonas</option>
-                                <option value="ancash">Áncash</option>
-                                <option value="apurimac">Apurímac</option>
-                                <option value="arequipa">Arequipa</option>
-                                <option value="ayacucho">Ayacucho</option>
-                                <option value="cajamarca">Cajamarca</option>
-                                <option value="callao">Callao</option>
-                                <option value="cusco">Cusco</option>
-                                <option value="huancavelica">Huancavelica</option>
-                                <option value="huanuco">Huánuco</option>
-                                <option value="ica">Ica</option>
-                                <option value="junin">Junín</option>
-                                <option value="la-libertad">La Libertad</option>
-                                <option value="lambayeque">Lambayeque</option>
-                                <option value="lima">Lima</option>
-                                <option value="loreto">Loreto</option>
-                                <option value="madre-de-dios">Madre de Dios</option>
-                                <option value="moquegua">Moquegua</option>
-                                <option value="pasco">Pasco</option>
-                                <option value="piura">Piura</option>
-                                <option value="puno">Puno</option>
-                                <option value="san-martin">San Martín</option>
-                                <option value="tacna">Tacna</option>
-                                <option value="tumbes">Tumbes</option>
-                                <option value="ucayali">Ucayali</option>
-                            </select>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="button" id="saveConversationBtn" class="btn btn-primary">Crear</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Modal para Nuevo Mensaje Directo -->
-    <div class="modal fade" id="newDirectMessageModal" tabindex="-1" aria-labelledby="newDirectMessageModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="newDirectMessageModalLabel">Nuevo Mensaje Directo</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form id="newDirectMessageForm">
-                        <div class="mb-3">
-                            <label for="directMessageRecipient" class="form-label">Destinatario</label>
-                            <select class="form-select" id="directMessageRecipient" required>
-                                <option value="admin">Administrador</option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="directMessageContent" class="form-label">Mensaje</label>
-                            <textarea class="form-control" id="directMessageContent" rows="4" required></textarea>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="button" id="sendDirectMessageBtn" class="btn btn-primary">Enviar</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    
     <!-- Loading Overlay -->
     <div id="loadingOverlay" class="loading-overlay d-none">
         <div class="spinner-border text-primary" role="status">
@@ -1301,20 +1263,20 @@
     <!-- Modal Container -->
     <div id="action-modal-container"></div>
     
-    <!-- Chat Flotante -->
+    <!-- Chat Container -->
     <div id="chatContainer" class="chat-container">
         <div class="chat-header">
-            <h4 id="chatTitle">Conversación</h4>
-            <button id="closeChatBtn" class="close-chat">
+            <div class="chat-header-title" id="chatTitle">Conversación</div>
+            <button class="chat-close" id="chatClose">
                 <i class="fas fa-times"></i>
             </button>
         </div>
-        <div id="chatMessages" class="chat-messages">
-            <!-- Los mensajes se cargarán aquí dinámicamente -->
+        <div class="chat-messages" id="chatMessages">
+            <!-- Messages will be dynamically added here -->
         </div>
-        <div class="message-input-container">
-            <input type="text" id="messageInput" class="message-input" placeholder="Escribe un mensaje...">
-            <button id="sendMessageBtn" class="send-button">
+        <div class="chat-input-container">
+            <input type="text" class="chat-input" id="chatInput" placeholder="Escribe un mensaje...">
+            <button class="chat-send-btn" id="chatSendBtn">
                 <i class="fas fa-paper-plane"></i>
             </button>
         </div>
@@ -1369,6 +1331,9 @@
          * - yachay_responses: Objeto con respuestas al cuestionario
          * - yachay_session: Datos de la sesión actual
          * - yachay_auditLog: Registro de acciones
+         * - yachay_conversations: Array de conversaciones de la comunidad
+         * - yachay_messages: Objeto con mensajes de cada conversación
+         * - yachay_directMessages: Array de mensajes directos al administrador
          * 
          * Integración con otros archivos:
          * - chicos.html: Muestra el perfil individual de un niño (childId)
@@ -1387,9 +1352,12 @@
          * - Perfiles predefinidos (Alvaro y Luz) con todas las preguntas respondidas al 100%
          * - Cualquier botón o texto que diga "Ver plan nutricional" lleva a chicos.html con la información del niño
          * - Botón "Generar plan nutricional" lleva a yachay.html con la información de todos los niños completados
-         * - Botón "Ver plan nutricional" individual redirigir a chicos.html
          * - Botón "Salir" en lugar de "Omitir" en el cuestionario
          * - Footer funcional con modales para información adicional
+         * - Funcionalidad de comunidad con conversaciones por departamento
+         * - Chat flotante tipo WhatsApp para interactuar en las conversaciones
+         * - Mensajes directos con el administrador
+         * - Permisos diferenciados para usuarios y administrador
          * 
          * Checklist de QA:
          * - Registro → login → crear 2 hijos → verificar solo esos hijos aparecen
@@ -1417,6 +1385,14 @@
          * - Cualquier texto que diga "Ver plan nutricional" redirige a chicos.html
          * - Botón "Salir" en lugar de "Omitir" en el cuestionario
          * - Footer funcional con modales para información adicional
+         * - Botón "Comunidad" abre la sección de comunidad
+         * - Selector de departamento filtra las conversaciones
+         * - Crear nueva conversación funciona correctamente
+         * - Chat flotante muestra los mensajes de la conversación
+         * - Mensajes enviados aparecen alineados a la derecha en verde claro
+         * - Mensajes recibidos aparecen alineados a la izquierda en blanco
+         * - Mensajes directos al administrador funcionan correctamente
+         * - Permisos de usuario y administrador funcionan correctamente
          */
         
         // Storage Adapter - Para facilitar migración a backend
@@ -1478,7 +1454,7 @@
             // Messages
             getMessages: function() {
                 const messages = localStorage.getItem('yachay_messages');
-                return messages ? JSON.parse(messages) : [];
+                return messages ? JSON.parse(messages) : {};
             },
             saveMessages: function(messages) {
                 localStorage.setItem('yachay_messages', JSON.stringify(messages));
@@ -1486,12 +1462,19 @@
             
             // Direct Messages
             getDirectMessages: function() {
-                const directMessages = localStorage.getItem('yachay_direct_messages');
+                const directMessages = localStorage.getItem('yachay_directMessages');
                 return directMessages ? JSON.parse(directMessages) : [];
             },
             saveDirectMessages: function(directMessages) {
-                localStorage.setItem('yachay_direct_messages', JSON.stringify(directMessages));
-            }
+                localStorage.setItem('yachay_directMessages', JSON.stringify(directMessages));
+            },
+            
+            // Para migración a backend, estas funciones se reemplazarían con llamadas API
+            // Ejemplo:
+            // async getUsers() {
+            //     const response = await fetch('/api/users');
+            //     return response.json();
+            // }
         };
         
         // Inicialización de datos mock
@@ -1505,7 +1488,7 @@
             const adminUser = {
                 id: 'admin-' + Date.now(),
                 name: 'Administrador',
-                email: 'admin@yachaymikuy.org',
+                email: 'alvaro.quiroz@alumno.ud.edu.pe',
                 passwordHash: btoa('admin123'), // En producción usar hash real
                 isAdmin: true,
                 createdAt: new Date().toISOString()
@@ -1718,6 +1701,131 @@
             
             storageAdapter.saveResponses(responses);
             
+            // Crear conversaciones de ejemplo
+            const conversations = [
+                {
+                    id: 'conv-' + Date.now(),
+                    title: 'Recetas para combatir la anemia',
+                    description: 'Compartamos recetas ricas en hierro para nuestros niños',
+                    authorId: demoUser.id,
+                    authorName: demoUser.name,
+                    department: 'lima',
+                    createdAt: new Date().toISOString(),
+                    updatedAt: new Date().toISOString()
+                },
+                {
+                    id: 'conv-' + (Date.now() + 1),
+                    title: 'Consejos para que los niños coman verduras',
+                    description: '¿Cómo logramos que nuestros hijos coman más verduras?',
+                    authorId: adminUser.id,
+                    authorName: adminUser.name,
+                    department: 'arequipa',
+                    createdAt: new Date(Date.now() - 86400000).toISOString(), // 1 día atrás
+                    updatedAt: new Date(Date.now() - 86400000).toISOString()
+                },
+                {
+                    id: 'conv-' + (Date.now() + 2),
+                    title: 'Snacks saludables para el colegio',
+                    description: 'Ideas de snacks nutritivos para la lonchera',
+                    authorId: demoUser.id,
+                    authorName: demoUser.name,
+                    department: 'piura',
+                    createdAt: new Date(Date.now() - 172800000).toISOString(), // 2 días atrás
+                    updatedAt: new Date(Date.now() - 172800000).toISOString()
+                }
+            ];
+            
+            storageAdapter.saveConversations(conversations);
+            
+            // Crear mensajes de ejemplo para las conversaciones
+            const messages = {};
+            
+            // Mensajes para la primera conversación
+            messages[conversations[0].id] = [
+                {
+                    id: 'msg-' + Date.now(),
+                    senderId: demoUser.id,
+                    senderName: demoUser.name,
+                    content: 'Hola a todos, quería compartir esta receta de lomo saltado que les encanta a mis hijos',
+                    timestamp: new Date(Date.now() - 3600000).toISOString(), // 1 hora atrás
+                    read: true
+                },
+                {
+                    id: 'msg-' + (Date.now() + 1),
+                    senderId: adminUser.id,
+                    senderName: adminUser.name,
+                    content: '¡Qué buena idea! El lomo saltado es excelente y los niños lo adoran. ¿Podrías compartir la receta completa?',
+                    timestamp: new Date(Date.now() - 3000000).toISOString(), // 50 minutos atrás
+                    read: true
+                },
+                {
+                    id: 'msg-' + (Date.now() + 2),
+                    senderId: demoUser.id,
+                    senderName: demoUser.name,
+                    content: 'Claro, necesitas 200g de lomo de res, cebolla, tomate, ají amarillo y un poco de sillao. Primero marinas el lomo con sillao y jengibre, luego salteas todo junto',
+                    timestamp: new Date(Date.now() - 2400000).toISOString(), // 40 minutos atrás
+                    read: true
+                }
+            ];
+            
+            // Mensajes para la segunda conversación
+            messages[conversations[1].id] = [
+                {
+                    id: 'msg-' + (Date.now() + 10),
+                    senderId: adminUser.id,
+                    senderName: adminUser.name,
+                    content: 'Uno de los trucos que más me ha funcionado es presentar las verduras de forma divertida, como caritas o animales',
+                    timestamp: new Date(Date.now() - 86400000).toISOString(), // 1 día atrás
+                    read: true
+                },
+                {
+                    id: 'msg-' + (Date.now() + 11),
+                    senderId: demoUser.id,
+                    senderName: demoUser.name,
+                    content: 'Eso es genial, voy a intentarlo. A mi hijo mayor le cuesta mucho comer brócoli',
+                    timestamp: new Date(Date.now() - 86000000).toISOString(), // 23 horas y 50 minutos atrás
+                    read: true
+                }
+            ];
+            
+            // Mensajes para la tercera conversación
+            messages[conversations[2].id] = [
+                {
+                    id: 'msg-' + (Date.now() + 20),
+                    senderId: demoUser.id,
+                    senderName: demoUser.name,
+                    content: 'Les recomiendo preparar mix de frutos secos con yogurt natural, mis hijos lo adoran',
+                    timestamp: new Date(Date.now() - 172800000).toISOString(), // 2 días atrás
+                    read: true
+                }
+            ];
+            
+            storageAdapter.saveMessages(messages);
+            
+            // Crear mensajes directos de ejemplo
+            const directMessages = [
+                {
+                    id: 'dm-' + Date.now(),
+                    senderId: demoUser.id,
+                    senderName: demoUser.name,
+                    content: 'Hola, tengo una duda sobre el plan nutricional de mi hijo',
+                    timestamp: new Date(Date.now() - 7200000).toISOString(), // 2 horas atrás
+                    read: true,
+                    reply: null
+                },
+                {
+                    id: 'dm-' + (Date.now() + 1),
+                    senderId: adminUser.id,
+                    senderName: adminUser.name,
+                    content: 'Hola, claro, ¿en qué puedo ayudarte?',
+                    timestamp: new Date(Date.now() - 7000000).toISOString(), // 1 hora y 55 minutos atrás
+                    read: true,
+                    reply: 'dm-' + Date.now()
+                }
+            ];
+            
+            storageAdapter.saveDirectMessages(directMessages);
+            
             // Inicializar audit log
             storageAdapter.saveAuditLog([
                 {
@@ -1730,62 +1838,6 @@
                     timestamp: new Date().toISOString()
                 }
             ]);
-            
-            // Inicializar conversaciones de ejemplo
-            const conversations = [
-                {
-                    id: 'conv-1',
-                    title: 'Recetas para combatir la anemia',
-                    description: 'Compartamos recetas ricas en hierro para nuestros niños',
-                    department: 'lima',
-                    createdBy: adminUser.id,
-                    createdAt: new Date().toISOString(),
-                    updatedAt: new Date().toISOString(),
-                    deletedAt: null,
-                    version: 1
-                },
-                {
-                    id: 'conv-2',
-                    title: 'Consejos para alimentar niños exigentes',
-                    description: '¿Cómo logramos que nuestros hijos coman de todo?',
-                    department: 'arequipa',
-                    createdBy: demoUser.id,
-                    createdAt: new Date().toISOString(),
-                    updatedAt: new Date().toISOString(),
-                    deletedAt: null,
-                    version: 1
-                }
-            ];
-            
-            storageAdapter.saveConversations(conversations);
-            
-            // Inicializar mensajes de ejemplo
-            const messages = [
-                {
-                    id: 'msg-1',
-                    conversationId: 'conv-1',
-                    content: 'Hola a todos, quería compartir una receta de lomo saltado que les encanta a mis hijos',
-                    createdBy: adminUser.id,
-                    createdAt: new Date().toISOString(),
-                    updatedAt: new Date().toISOString(),
-                    deletedAt: null,
-                    version: 1,
-                    readBy: []
-                },
-                {
-                    id: 'msg-2',
-                    conversationId: 'conv-1',
-                    content: '¡Qué buena idea! Yo preparo hígado de pollo con puré de papas y lo adoro',
-                    createdBy: demoUser.id,
-                    createdAt: new Date().toISOString(),
-                    updatedAt: new Date().toISOString(),
-                    deletedAt: null,
-                    version: 1,
-                    readBy: []
-                }
-            ];
-            
-            storageAdapter.saveMessages(messages);
         }
         
         // Funciones de utilidad
@@ -2199,364 +2251,325 @@
             return true;
         }
         
-        // Funciones de gestión de conversaciones
-        function createConversation(title, description, department, userId) {
+        // Funciones de gestión de comunidad
+        function createConversation(conversationData) {
             const conversations = storageAdapter.getConversations();
+            const session = storageAdapter.getSession();
+            
+            if (!session.currentUserId) {
+                throw new Error('Debes iniciar sesión para crear una conversación');
+            }
+            
+            const users = storageAdapter.getUsers();
+            const currentUser = users.find(u => u.id === session.currentUserId);
             
             const newConversation = {
                 id: 'conv-' + Date.now(),
-                title,
-                description,
-                department,
-                createdBy: userId,
+                title: conversationData.title,
+                description: conversationData.description,
+                authorId: session.currentUserId,
+                authorName: currentUser.name,
+                department: conversationData.department,
                 createdAt: new Date().toISOString(),
-                updatedAt: new Date().toISOString(),
-                deletedAt: null,
-                version: 1
+                updatedAt: new Date().toISOString()
             };
             
             conversations.push(newConversation);
             storageAdapter.saveConversations(conversations);
             
-            logAction(userId, 'create_conversation', 'conversation', newConversation.id, { title, department });
+            // Crear primer mensaje
+            const messages = storageAdapter.getMessages();
+            messages[newConversation.id] = [
+                {
+                    id: 'msg-' + Date.now(),
+                    senderId: session.currentUserId,
+                    senderName: currentUser.name,
+                    content: conversationData.firstMessage,
+                    timestamp: new Date().toISOString(),
+                    read: true
+                }
+            ];
+            storageAdapter.saveMessages(messages);
+            
+            logAction(session.currentUserId, 'create_conversation', 'conversation', newConversation.id, { 
+                title: newConversation.title 
+            });
             
             return newConversation;
         }
         
-        function updateConversation(conversationId, conversationData, userId) {
+        function getConversationsForDepartment(department) {
             const conversations = storageAdapter.getConversations();
-            const conversationIndex = conversations.findIndex(c => c.id === conversationId);
             
-            if (conversationIndex === -1) {
-                throw new Error('Conversación no encontrada');
+            if (!department) {
+                return conversations;
             }
             
-            const conversation = conversations[conversationIndex];
-            
-            // Verificar permisos
-            if (conversation.createdBy !== userId && !isAdmin(userId)) {
-                throw new Error('No tienes permisos para editar esta conversación');
-            }
-            
-            const oldConversation = { ...conversation };
-            conversations[conversationIndex] = {
-                ...conversation,
-                ...conversationData,
-                updatedAt: new Date().toISOString(),
-                version: conversation.version + 1
-            };
-            
-            storageAdapter.saveConversations(conversations);
-            
-            logAction(userId, 'update_conversation', 'conversation', conversationId, { 
-                oldData: oldConversation, 
-                newData: conversations[conversationIndex] 
-            });
-            
-            return conversations[conversationIndex];
+            return conversations.filter(conv => conv.department === department);
         }
         
-        function deleteConversation(conversationId, userId) {
-            const conversations = storageAdapter.getConversations();
-            const conversationIndex = conversations.findIndex(c => c.id === conversationId);
-            
-            if (conversationIndex === -1) {
-                throw new Error('Conversación no encontrada');
-            }
-            
-            const conversation = conversations[conversationIndex];
-            
-            // Verificar permisos
-            if (conversation.createdBy !== userId && !isAdmin(userId)) {
-                throw new Error('No tienes permisos para eliminar esta conversación');
-            }
-            
-            conversations[conversationIndex].deletedAt = new Date().toISOString();
-            conversations[conversationIndex].updatedAt = new Date().toISOString();
-            conversations[conversationIndex].version += 1;
-            
-            storageAdapter.saveConversations(conversations);
-            
-            logAction(userId, 'delete_conversation', 'conversation', conversationId);
-            
-            return conversations[conversationIndex];
-        }
-        
-        function getConversationsByDepartment(department) {
-            const conversations = storageAdapter.getConversations();
-            return conversations.filter(conv => 
-                conv.department === department && !conv.deletedAt
-            );
-        }
-        
-        // Funciones de gestión de mensajes
-        function createMessage(conversationId, content, userId) {
+        function getMessagesForConversation(conversationId) {
             const messages = storageAdapter.getMessages();
+            return messages[conversationId] || [];
+        }
+        
+        function sendMessage(conversationId, content) {
+            const session = storageAdapter.getSession();
+            
+            if (!session.currentUserId) {
+                throw new Error('Debes iniciar sesión para enviar un mensaje');
+            }
+            
+            const users = storageAdapter.getUsers();
+            const currentUser = users.find(u => u.id === session.currentUserId);
+            
+            const messages = storageAdapter.getMessages();
+            
+            if (!messages[conversationId]) {
+                messages[conversationId] = [];
+            }
             
             const newMessage = {
                 id: 'msg-' + Date.now(),
-                conversationId,
-                content,
-                createdBy: userId,
-                createdAt: new Date().toISOString(),
-                updatedAt: new Date().toISOString(),
-                deletedAt: null,
-                version: 1,
-                readBy: []
+                senderId: session.currentUserId,
+                senderName: currentUser.name,
+                content: content,
+                timestamp: new Date().toISOString(),
+                read: true
             };
             
-            messages.push(newMessage);
+            messages[conversationId].push(newMessage);
             storageAdapter.saveMessages(messages);
             
-            logAction(userId, 'create_message', 'message', newMessage.id, { conversationId });
+            logAction(session.currentUserId, 'send_message', 'message', newMessage.id, { 
+                conversationId: conversationId 
+            });
             
             return newMessage;
         }
         
-        function updateMessage(messageId, messageData, userId) {
+        function deleteMessage(conversationId, messageId) {
+            const session = storageAdapter.getSession();
             const messages = storageAdapter.getMessages();
-            const messageIndex = messages.findIndex(m => m.id === messageId);
+            
+            if (!messages[conversationId]) {
+                throw new Error('Conversación no encontrada');
+            }
+            
+            const messageIndex = messages[conversationId].findIndex(m => m.id === messageId);
             
             if (messageIndex === -1) {
                 throw new Error('Mensaje no encontrado');
             }
             
-            const message = messages[messageIndex];
+            const message = messages[conversationId][messageIndex];
             
             // Verificar permisos
-            if (message.createdBy !== userId && !isAdmin(userId)) {
-                throw new Error('No tienes permisos para editar este mensaje');
+            if (!isAdmin() && message.senderId !== session.currentUserId) {
+                throw new Error('No tienes permiso para eliminar este mensaje');
             }
             
-            const oldMessage = { ...message };
-            messages[messageIndex] = {
-                ...message,
-                ...messageData,
-                updatedAt: new Date().toISOString(),
-                version: message.version + 1
-            };
-            
+            messages[conversationId].splice(messageIndex, 1);
             storageAdapter.saveMessages(messages);
             
-            logAction(userId, 'update_message', 'message', messageId, { 
-                oldData: oldMessage, 
-                newData: messages[messageIndex] 
+            logAction(session.currentUserId, 'delete_message', 'message', messageId, { 
+                conversationId: conversationId 
             });
             
-            return messages[messageIndex];
+            return true;
         }
         
-        function deleteMessage(messageId, userId) {
+        function editMessage(conversationId, messageId, newContent) {
+            const session = storageAdapter.getSession();
             const messages = storageAdapter.getMessages();
-            const messageIndex = messages.findIndex(m => m.id === messageId);
+            
+            if (!messages[conversationId]) {
+                throw new Error('Conversación no encontrada');
+            }
+            
+            const messageIndex = messages[conversationId].findIndex(m => m.id === messageId);
             
             if (messageIndex === -1) {
                 throw new Error('Mensaje no encontrado');
             }
             
-            const message = messages[messageIndex];
+            const message = messages[conversationId][messageIndex];
             
             // Verificar permisos
-            if (message.createdBy !== userId && !isAdmin(userId)) {
-                throw new Error('No tienes permisos para eliminar este mensaje');
+            if (!isAdmin() && message.senderId !== session.currentUserId) {
+                throw new Error('No tienes permiso para editar este mensaje');
             }
             
-            messages[messageIndex].deletedAt = new Date().toISOString();
-            messages[messageIndex].updatedAt = new Date().toISOString();
-            messages[messageIndex].version += 1;
+            const oldContent = message.content;
+            message.content = newContent;
+            message.edited = true;
+            message.editedAt = new Date().toISOString();
             
             storageAdapter.saveMessages(messages);
             
-            logAction(userId, 'delete_message', 'message', messageId);
-            
-            return messages[messageIndex];
-        }
-        
-        function getMessagesByConversation(conversationId) {
-            const messages = storageAdapter.getMessages();
-            return messages.filter(msg => 
-                msg.conversationId === conversationId && !msg.deletedAt
-            ).sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
-        }
-        
-        function markMessageAsRead(messageId, userId) {
-            const messages = storageAdapter.getMessages();
-            const messageIndex = messages.findIndex(m => m.id === messageId);
-            
-            if (messageIndex === -1) {
-                throw new Error('Mensaje no encontrado');
-            }
-            
-            const message = messages[messageIndex];
-            
-            // Verificar si el usuario ya ha leído el mensaje
-            if (!message.readBy.includes(userId)) {
-                message.readBy.push(userId);
-                message.updatedAt = new Date().toISOString();
-                message.version += 1;
-                
-                storageAdapter.saveMessages(messages);
-            }
+            logAction(session.currentUserId, 'edit_message', 'message', messageId, { 
+                conversationId: conversationId,
+                oldContent: oldContent,
+                newContent: newContent
+            });
             
             return message;
         }
         
-        // Funciones de gestión de mensajes directos
-        function createDirectMessage(recipientId, content, senderId) {
-            const directMessages = storageAdapter.getDirectMessages();
+        function deleteConversation(conversationId) {
+            const session = storageAdapter.getSession();
+            const conversations = storageAdapter.getConversations();
             
-            const newDirectMessage = {
-                id: 'dmsg-' + Date.now(),
-                recipientId,
-                content,
-                createdBy: senderId,
-                createdAt: new Date().toISOString(),
-                updatedAt: new Date().toISOString(),
-                deletedAt: null,
-                version: 1,
-                readBy: []
-            };
+            const conversationIndex = conversations.findIndex(c => c.id === conversationId);
             
-            directMessages.push(newDirectMessage);
-            storageAdapter.saveDirectMessages(directMessages);
+            if (conversationIndex === -1) {
+                throw new Error('Conversación no encontrada');
+            }
             
-            logAction(senderId, 'create_direct_message', 'direct_message', newDirectMessage.id, { recipientId });
+            const conversation = conversations[conversationIndex];
             
-            return newDirectMessage;
+            // Verificar permisos
+            if (!isAdmin() && conversation.authorId !== session.currentUserId) {
+                throw new Error('No tienes permiso para eliminar esta conversación');
+            }
+            
+            conversations.splice(conversationIndex, 1);
+            storageAdapter.saveConversations(conversations);
+            
+            // Eliminar mensajes asociados
+            const messages = storageAdapter.getMessages();
+            delete messages[conversationId];
+            storageAdapter.saveMessages(messages);
+            
+            logAction(session.currentUserId, 'delete_conversation', 'conversation', conversationId);
+            
+            return true;
         }
         
-        function updateDirectMessage(messageId, messageData, userId) {
+        function sendDirectMessage(content) {
+            const session = storageAdapter.getSession();
+            
+            if (!session.currentUserId) {
+                throw new Error('Debes iniciar sesión para enviar un mensaje');
+            }
+            
+            const users = storageAdapter.getUsers();
+            const currentUser = users.find(u => u.id === session.currentUserId);
+            
+            const directMessages = storageAdapter.getDirectMessages();
+            
+            const newMessage = {
+                id: 'dm-' + Date.now(),
+                senderId: session.currentUserId,
+                senderName: currentUser.name,
+                content: content,
+                timestamp: new Date().toISOString(),
+                read: false,
+                reply: null
+            };
+            
+            directMessages.push(newMessage);
+            storageAdapter.saveDirectMessages(directMessages);
+            
+            logAction(session.currentUserId, 'send_direct_message', 'direct_message', newMessage.id);
+            
+            return newMessage;
+        }
+        
+        function replyToDirectMessage(messageId, replyContent) {
+            const session = storageAdapter.getSession();
+            
+            if (!isAdmin()) {
+                throw new Error('Solo el administrador puede responder mensajes directos');
+            }
+            
             const directMessages = storageAdapter.getDirectMessages();
             const messageIndex = directMessages.findIndex(m => m.id === messageId);
             
             if (messageIndex === -1) {
-                throw new Error('Mensaje directo no encontrado');
+                throw new Error('Mensaje no encontrado');
             }
             
             const message = directMessages[messageIndex];
             
-            // Verificar permisos
-            if (message.createdBy !== userId && !isAdmin(userId)) {
-                throw new Error('No tienes permisos para editar este mensaje');
-            }
-            
-            const oldMessage = { ...message };
-            directMessages[messageIndex] = {
-                ...message,
-                ...messageData,
-                updatedAt: new Date().toISOString(),
-                version: message.version + 1
+            const replyMessage = {
+                id: 'dm-reply-' + Date.now(),
+                senderId: session.currentUserId,
+                senderName: 'Administrador',
+                content: replyContent,
+                timestamp: new Date().toISOString(),
+                read: false,
+                reply: messageId
             };
             
+            directMessages.push(replyMessage);
             storageAdapter.saveDirectMessages(directMessages);
             
-            logAction(userId, 'update_direct_message', 'direct_message', messageId, { 
-                oldData: oldMessage, 
-                newData: directMessages[messageIndex] 
+            // Marcar el mensaje original como respondido
+            message.reply = replyMessage.id;
+            storageAdapter.saveDirectMessages(directMessages);
+            
+            logAction(session.currentUserId, 'reply_direct_message', 'direct_message', replyMessage.id, {
+                originalMessageId: messageId
             });
             
-            return directMessages[messageIndex];
+            return replyMessage;
         }
         
-        function deleteDirectMessage(messageId, userId) {
+        function getDirectMessages() {
+            const session = storageAdapter.getSession();
             const directMessages = storageAdapter.getDirectMessages();
-            const messageIndex = directMessages.findIndex(m => m.id === messageId);
             
-            if (messageIndex === -1) {
-                throw new Error('Mensaje directo no encontrado');
+            if (isAdmin()) {
+                // El administrador ve todos los mensajes
+                return directMessages;
+            } else if (session.currentUserId) {
+                // Los usuarios solo ven sus mensajes y las respuestas del administrador
+                return directMessages.filter(m => 
+                    m.senderId === session.currentUserId || 
+                    (m.reply && directMessages.find(dm => dm.id === m.reply)?.senderId === session.currentUserId)
+                );
             }
             
-            const message = directMessages[messageIndex];
+            return [];
+        }
+        
+        function isAdmin() {
+            const session = storageAdapter.getSession();
             
-            // Verificar permisos
-            if (message.createdBy !== userId && !isAdmin(userId)) {
-                throw new Error('No tienes permisos para eliminar este mensaje');
+            if (!session.currentUserId) {
+                return false;
             }
-            
-            directMessages[messageIndex].deletedAt = new Date().toISOString();
-            directMessages[messageIndex].updatedAt = new Date().toISOString();
-            directMessages[messageIndex].version += 1;
-            
-            storageAdapter.saveDirectMessages(directMessages);
-            
-            logAction(userId, 'delete_direct_message', 'direct_message', messageId);
-            
-            return directMessages[messageIndex];
-        }
-        
-        function getDirectMessagesByUser(userId) {
-            const directMessages = storageAdapter.getDirectMessages();
-            return directMessages.filter(msg => 
-                (msg.recipientId === userId || msg.createdBy === userId) && !msg.deletedAt
-            ).sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-        }
-        
-        // Funciones de utilidad
-        function isAdmin(userId) {
-            if (!userId) return false;
             
             const users = storageAdapter.getUsers();
-            const user = users.find(u => u.id === userId);
+            const currentUser = users.find(u => u.id === session.currentUserId);
             
-            return user && user.isAdmin;
+            return currentUser && currentUser.isAdmin;
         }
         
-        function formatDate(dateString) {
-            const date = new Date(dateString);
-            const now = new Date();
-            const diffTime = Math.abs(now - date);
-            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+        function getCurrentUser() {
+            const session = storageAdapter.getSession();
             
-            if (diffDays === 0) {
-                // Hoy
-                return date.toLocaleTimeString('es-PE', { hour: '2-digit', minute: '2-digit' });
-            } else if (diffDays === 1) {
-                // Ayer
-                return 'Ayer';
-            } else if (diffDays < 7) {
-                // Hace menos de una semana
-                return date.toLocaleDateString('es-PE', { weekday: 'short' });
-            } else {
-                // Más de una semana
-                return date.toLocaleDateString('es-PE', { day: 'numeric', month: 'short' });
+            if (!session.currentUserId) {
+                return null;
             }
-        }
-        
-        function getUserName(userId) {
-            if (userId === 'guest') return 'Invitado';
             
             const users = storageAdapter.getUsers();
-            const user = users.find(u => u.id === userId);
-            
-            return user ? user.name : 'Usuario desconocido';
-        }
-        
-        function getUnreadMessageCount(conversationId, userId) {
-            const messages = getMessagesByConversation(conversationId);
-            return messages.filter(msg => 
-                msg.createdBy !== userId && !msg.readBy.includes(userId)
-            ).length;
-        }
-        
-        function getUnreadDirectMessageCount(userId) {
-            const directMessages = getDirectMessagesByUser(userId);
-            return directMessages.filter(msg => 
-                msg.recipientId === userId && !msg.readBy.includes(userId)
-            ).length;
+            return users.find(u => u.id === session.currentUserId);
         }
         
         // Funciones de UI
         function showAuthSection() {
             document.getElementById('authSection').classList.remove('d-none');
             document.getElementById('dashboardSection').classList.add('d-none');
-            document.getElementById('communitySection').classList.add('d-none');
+            document.getElementById('communitySection').classList.remove('active');
             document.getElementById('userMenu').classList.add('d-none');
         }
         
         function showDashboardSection() {
             document.getElementById('authSection').classList.add('d-none');
             document.getElementById('dashboardSection').classList.remove('d-none');
-            document.getElementById('communitySection').classList.add('d-none');
+            document.getElementById('communitySection').classList.remove('active');
             
             const session = storageAdapter.getSession();
             if (session.currentUserId) {
@@ -2579,10 +2592,24 @@
         function showCommunitySection() {
             document.getElementById('authSection').classList.add('d-none');
             document.getElementById('dashboardSection').classList.add('d-none');
-            document.getElementById('communitySection').classList.remove('d-none');
+            document.getElementById('communitySection').classList.add('active');
+            
+            const session = storageAdapter.getSession();
+            if (session.currentUserId) {
+                const users = storageAdapter.getUsers();
+                const user = users.find(u => u.id === session.currentUserId);
+                
+                if (user) {
+                    document.getElementById('userName').textContent = user.name;
+                    document.getElementById('userMenu').classList.remove('d-none');
+                }
+            } else if (session.exploringAsGuest) {
+                document.getElementById('userName').textContent = 'Invitado';
+                document.getElementById('userMenu').classList.remove('d-none');
+                document.getElementById('logoutBtn').textContent = 'Salir de modo invitado';
+            }
             
             renderConversations();
-            renderDirectMessages();
         }
         
         function renderChildren() {
@@ -2714,63 +2741,49 @@
         
         function renderConversations() {
             const departmentSelect = document.getElementById('departmentSelect');
+            const selectedDepartment = departmentSelect.value;
+            const conversations = getConversationsForDepartment(selectedDepartment);
             const container = document.getElementById('conversationsContainer');
-            const department = departmentSelect.value;
-            
-            if (!department) {
-                container.innerHTML = `
-                    <div class="empty-state">
-                        <i class="fas fa-comments"></i>
-                        <h4>Selecciona un departamento para ver las conversaciones</h4>
-                        <p>Podrás ver y participar en conversaciones de tu región.</p>
-                    </div>
-                `;
-                return;
-            }
-            
-            const conversations = getConversationsByDepartment(department);
-            const currentUser = getCurrentUser();
-            
-            if (conversations.length === 0) {
-                container.innerHTML = `
-                    <div class="empty-state">
-                        <i class="fas fa-comments"></i>
-                        <h4>No hay conversaciones en ${department}</h4>
-                        <p>Sé el primero en crear una conversación en tu región.</p>
-                    </div>
-                `;
-                return;
-            }
             
             container.innerHTML = '';
             
+            if (conversations.length === 0) {
+                container.innerHTML = `
+                    <div class="no-conversations">
+                        <i class="fas fa-comments"></i>
+                        <h4>No hay conversaciones en este departamento</h4>
+                        <p>Sé el primero en crear una conversación en tu comunidad</p>
+                    </div>
+                `;
+                return;
+            }
+            
             conversations.forEach(conversation => {
-                const unreadCount = getUnreadMessageCount(conversation.id, currentUser.id);
-                const creatorName = getUserName(conversation.createdBy);
+                const messages = getMessagesForConversation(conversation.id);
+                const unreadCount = messages.filter(m => !m.read && m.senderId !== getCurrentUser()?.id).length;
                 
                 const conversationCard = document.createElement('div');
                 conversationCard.className = 'conversation-card';
+                conversationCard.setAttribute('data-conversation-id', conversation.id);
                 
                 conversationCard.innerHTML = `
-                    <div class="conversation-title">${conversation.title}</div>
+                    <div class="conversation-title">
+                        ${conversation.title}
+                        ${unreadCount > 0 ? `<span class="unread-indicator">${unreadCount}</span>` : ''}
+                    </div>
                     <div class="conversation-description">${conversation.description}</div>
                     <div class="conversation-meta">
-                        <span>Por ${creatorName}</span>
-                        <span>${formatDate(conversation.createdAt)}</span>
+                        <span class="conversation-author">Por: ${conversation.authorName}</span>
+                        <span class="conversation-date">${formatDate(conversation.createdAt)}</span>
                     </div>
-                    ${unreadCount > 0 ? `<div class="unread-badge">${unreadCount}</div>` : ''}
-                    <div class="conversation-actions">
+                    <div class="mt-2">
                         <button class="btn btn-sm btn-primary open-conversation-btn" data-conversation-id="${conversation.id}">
                             <i class="fas fa-comments"></i> Abrir conversación
                         </button>
-                        ${conversation.createdBy === currentUser.id || isAdmin(currentUser.id) ? `
-                            <button class="btn btn-sm btn-outline-secondary edit-conversation-btn" data-conversation-id="${conversation.id}">
-                                <i class="fas fa-edit"></i>
-                            </button>
-                            <button class="btn btn-sm btn-outline-danger delete-conversation-btn" data-conversation-id="${conversation.id}">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                        ` : ''}
+                        ${isAdmin() || conversation.authorId === getCurrentUser()?.id ? 
+                            `<button class="btn btn-sm btn-outline-danger delete-conversation-btn ms-2" data-conversation-id="${conversation.id}">
+                                <i class="fas fa-trash"></i> Eliminar
+                            </button>` : ''}
                     </div>
                 `;
                 
@@ -2785,19 +2798,12 @@
                 });
             });
             
-            document.querySelectorAll('.edit-conversation-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const conversationId = this.getAttribute('data-conversation-id');
-                    editConversation(conversationId);
-                });
-            });
-            
             document.querySelectorAll('.delete-conversation-btn').forEach(btn => {
                 btn.addEventListener('click', function() {
                     const conversationId = this.getAttribute('data-conversation-id');
-                    if (confirm('¿Estás seguro de que deseas eliminar esta conversación?')) {
+                    if (confirm('¿Estás seguro de que deseas eliminar esta conversación? Esta acción no se puede deshacer.')) {
                         try {
-                            deleteConversation(conversationId, getCurrentUser().id);
+                            deleteConversation(conversationId);
                             showToast('Conversación eliminada correctamente', 'success');
                             renderConversations();
                         } catch (error) {
@@ -2809,85 +2815,63 @@
         }
         
         function renderDirectMessages() {
+            const directMessages = getDirectMessages();
             const container = document.getElementById('directMessagesContainer');
-            const currentUser = getCurrentUser();
-            const directMessages = getDirectMessagesByUser(currentUser.id);
             
-            if (directMessages.length === 0) {
-                container.innerHTML = `
-                    <div class="empty-state">
-                        <i class="fas fa-envelope"></i>
-                        <h4>No tienes mensajes directos</h4>
-                        <p>Puedes enviar un mensaje directo al administrador.</p>
-                        <button id="newDirectMessageBtnEmpty" class="btn btn-primary">
-                            <i class="fas fa-plus-circle"></i> Nuevo Mensaje Directo
-                        </button>
-                    </div>
-                `;
-                
-                // Agregar event listener para el botón en el empty state
-                document.getElementById('newDirectMessageBtnEmpty').addEventListener('click', function() {
-                    const modal = new bootstrap.Modal(document.getElementById('newDirectMessageModal'));
-                    modal.show();
-                });
-                
+            if (!container) {
                 return;
             }
             
             container.innerHTML = '';
             
+            if (directMessages.length === 0) {
+                container.innerHTML = `
+                    <div class="no-conversations">
+                        <i class="fas fa-envelope"></i>
+                        <h4>No hay mensajes directos</h4>
+                        <p>Envía un mensaje directo al administrador para obtener ayuda</p>
+                    </div>
+                `;
+                return;
+            }
+            
             directMessages.forEach(message => {
-                const isRead = message.readBy.includes(currentUser.id);
-                const senderName = getUserName(message.createdBy);
-                const recipientName = getUserName(message.recipientId);
-                
                 const messageCard = document.createElement('div');
-                messageCard.className = `direct-message-card ${!isRead ? 'unread' : ''}`;
+                messageCard.className = 'conversation-card';
+                
+                const isReply = message.reply !== null;
+                const isFromCurrentUser = message.senderId === getCurrentUser()?.id;
                 
                 messageCard.innerHTML = `
-                    <div class="message-title">
-                        ${message.createdBy === currentUser.id ? `Para: ${recipientName}` : `De: ${senderName}`}
+                    <div class="conversation-title">
+                        ${isReply ? 'Respuesta del administrador' : `Mensaje de ${message.senderName}`}
                     </div>
-                    <div class="message-content">${message.content}</div>
-                    <div class="message-meta">
-                        <span>${formatDate(message.createdAt)}</span>
-                        ${!isRead ? '<span class="badge bg-primary ms-2">Nuevo</span>' : ''}
+                    <div class="conversation-description">${message.content}</div>
+                    <div class="conversation-meta">
+                        <span class="conversation-date">${formatDate(message.timestamp)}</span>
+                        ${!message.read ? '<span class="badge bg-primary ms-2">Nuevo</span>' : ''}
                     </div>
-                    ${message.createdBy === currentUser.id || isAdmin(currentUser.id) ? `
-                        <div class="message-actions">
-                            <button class="message-action-btn edit-direct-message-btn" data-message-id="${message.id}">
-                                <i class="fas fa-edit"></i>
+                    ${isAdmin() && !isReply ? 
+                        `<div class="mt-2">
+                            <button class="btn btn-sm btn-primary reply-direct-message-btn" data-message-id="${message.id}">
+                                <i class="fas fa-reply"></i> Responder
                             </button>
-                            <button class="message-action-btn delete-direct-message-btn" data-message-id="${message.id}">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                        </div>
-                    ` : ''}
+                        </div>` : ''}
                 `;
                 
                 container.appendChild(messageCard);
-                
-                // Marcar como leído si no lo está
-                if (!isRead && message.recipientId === currentUser.id) {
-                    markMessageAsRead(message.id, currentUser.id);
-                }
             });
             
             // Agregar event listeners
-            document.querySelectorAll('.edit-direct-message-btn').forEach(btn => {
+            document.querySelectorAll('.reply-direct-message-btn').forEach(btn => {
                 btn.addEventListener('click', function() {
                     const messageId = this.getAttribute('data-message-id');
-                    editDirectMessage(messageId);
-                });
-            });
-            
-            document.querySelectorAll('.delete-direct-message-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const messageId = this.getAttribute('data-message-id');
-                    if (confirm('¿Estás seguro de que deseas eliminar este mensaje?')) {
+                    const replyContent = prompt('Escribe tu respuesta:');
+                    
+                    if (replyContent) {
                         try {
-                            deleteDirectMessage(messageId, getCurrentUser().id);
-                            showToast('Mensaje eliminado correctamente', 'success');
+                            replyToDirectMessage(messageId, replyContent);
+                            showToast('Respuesta enviada correctamente', 'success');
                             renderDirectMessages();
                         } catch (error) {
                             showToast(error.message, 'error');
@@ -2898,12 +2882,6 @@
         }
         
         function openChat(conversationId) {
-            const chatContainer = document.getElementById('chatContainer');
-            const chatTitle = document.getElementById('chatTitle');
-            const chatMessages = document.getElementById('chatMessages');
-            const currentUser = getCurrentUser();
-            
-            // Obtener información de la conversación
             const conversations = storageAdapter.getConversations();
             const conversation = conversations.find(c => c.id === conversationId);
             
@@ -2912,212 +2890,268 @@
                 return;
             }
             
-            // Configurar título del chat
-            chatTitle.textContent = conversation.title;
+            const chatContainer = document.getElementById('chatContainer');
+            const chatTitle = document.getElementById('chatTitle');
+            const chatMessages = document.getElementById('chatMessages');
             
-            // Limpiar mensajes anteriores
+            chatTitle.textContent = conversation.title;
             chatMessages.innerHTML = '';
             
-            // Cargar mensajes
-            const messages = getMessagesByConversation(conversationId);
+            const messages = getMessagesForConversation(conversationId);
+            const currentUser = getCurrentUser();
             
             messages.forEach(message => {
-                const isOwnMessage = message.createdBy === currentUser.id;
-                const senderName = getUserName(message.createdBy);
-                
-                const messageElement = document.createElement('div');
-                messageElement.className = `message ${isOwnMessage ? 'sent' : 'received'}`;
-                
-                messageElement.innerHTML = `
-                    <div class="message-bubble">${message.content}</div>
-                    <div class="message-info">
-                        <span>${senderName}</span>
-                        <span>${formatDate(message.createdAt)}</span>
-                        ${isOwnMessage ? '<span class="message-status"><i class="fas fa-check-double"></i></span>' : ''}
-                    </div>
-                `;
-                
+                const messageElement = createMessageElement(message, currentUser);
                 chatMessages.appendChild(messageElement);
-                
-                // Marcar como leído si no es propio
-                if (!isOwnMessage) {
-                    markMessageAsRead(message.id, currentUser.id);
+            });
+            
+            // Marcar mensajes como leídos
+            messages.forEach(message => {
+                if (message.senderId !== currentUser?.id) {
+                    message.read = true;
                 }
             });
+            
+            const allMessages = storageAdapter.getMessages();
+            allMessages[conversationId] = messages;
+            storageAdapter.saveMessages(allMessages);
+            
+            // Mostrar el chat
+            chatContainer.classList.add('active');
             
             // Scroll al final
             chatMessages.scrollTop = chatMessages.scrollHeight;
             
-            // Mostrar chat
-            chatContainer.style.display = 'flex';
+            // Configurar el envío de mensajes
+            setupChatSendMessage(conversationId);
+        }
+        
+        function createMessageElement(message, currentUser) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `chat-message ${message.senderId === currentUser?.id ? 'sent' : 'received'}`;
+            messageDiv.setAttribute('data-message-id', message.id);
             
-            // Configurar botón de enviar
-            const messageInput = document.getElementById('messageInput');
-            const sendMessageBtn = document.getElementById('sendMessageBtn');
+            const messageBubble = document.createElement('div');
+            messageBubble.className = `message-bubble ${message.senderId === currentUser?.id ? 'sent' : 'received'}`;
+            messageBubble.textContent = message.content;
             
-            // Limpiar input anterior
-            messageInput.value = '';
+            const messageInfo = document.createElement('div');
+            messageInfo.className = `message-info ${message.senderId === currentUser?.id ? 'sent' : 'received'}`;
             
-            // Configurar evento de envío
-            sendMessageBtn.onclick = function() {
-                const content = messageInput.value.trim();
+            const time = new Date(message.timestamp);
+            const timeString = time.toLocaleTimeString('es-PE', { hour: '2-digit', minute: '2-digit' });
+            
+            messageInfo.innerHTML = `
+                <span>${message.senderName} - ${timeString}</span>
+                ${message.senderId === currentUser?.id ? 
+                    `<span class="message-status">
+                        ${message.read ? '<i class="fas fa-check-double text-primary"></i>' : '<i class="fas fa-check"></i>'}
+                    </span>` : ''}
+            `;
+            
+            messageDiv.appendChild(messageBubble);
+            messageDiv.appendChild(messageInfo);
+            
+            // Agregar acciones de mensaje si es del usuario actual o es admin
+            if (isAdmin() || message.senderId === currentUser?.id) {
+                const messageActions = document.createElement('div');
+                messageActions.className = 'message-actions';
+                
+                const editBtn = document.createElement('button');
+                editBtn.className = 'message-action-btn';
+                editBtn.innerHTML = '<i class="fas fa-edit"></i> Editar';
+                editBtn.addEventListener('click', function() {
+                    const newContent = prompt('Edita tu mensaje:', message.content);
+                    if (newContent && newContent !== message.content) {
+                        try {
+                            editMessage(conversationId, message.id, newContent);
+                            messageBubble.textContent = newContent;
+                            if (message.edited) {
+                                const editedIndicator = document.createElement('span');
+                                editedIndicator.className = 'text-muted ms-1';
+                                editedIndicator.textContent = '(editado)';
+                                messageInfo.appendChild(editedIndicator);
+                            }
+                            showToast('Mensaje editado correctamente', 'success');
+                        } catch (error) {
+                            showToast(error.message, 'error');
+                        }
+                    }
+                });
+                
+                const deleteBtn = document.createElement('button');
+                deleteBtn.className = 'message-action-btn';
+                deleteBtn.innerHTML = '<i class="fas fa-trash"></i> Eliminar';
+                deleteBtn.addEventListener('click', function() {
+                    if (confirm('¿Estás seguro de que deseas eliminar este mensaje?')) {
+                        try {
+                            deleteMessage(conversationId, message.id);
+                            messageDiv.remove();
+                            showToast('Mensaje eliminado correctamente', 'success');
+                        } catch (error) {
+                            showToast(error.message, 'error');
+                        }
+                    }
+                });
+                
+                messageActions.appendChild(editBtn);
+                messageActions.appendChild(deleteBtn);
+                messageDiv.appendChild(messageActions);
+            }
+            
+            return messageDiv;
+        }
+        
+        function setupChatSendMessage(conversationId) {
+            const chatInput = document.getElementById('chatInput');
+            const chatSendBtn = document.getElementById('chatSendBtn');
+            const chatMessages = document.getElementById('chatMessages');
+            
+            const sendMessage = function() {
+                const content = chatInput.value.trim();
                 
                 if (!content) {
                     return;
                 }
                 
                 try {
-                    createMessage(conversationId, content, currentUser.id);
-                    
-                    // Agregar mensaje a la UI
-                    const messageElement = document.createElement('div');
-                    messageElement.className = 'message sent';
-                    
-                    messageElement.innerHTML = `
-                        <div class="message-bubble">${content}</div>
-                        <div class="message-info">
-                            <span>${currentUser.name}</span>
-                            <span>Ahora</span>
-                            <span class="message-status"><i class="fas fa-check"></i></span>
-                        </div>
-                    `;
-                    
+                    const newMessage = sendMessage(conversationId, content);
+                    const currentUser = getCurrentUser();
+                    const messageElement = createMessageElement(newMessage, currentUser);
                     chatMessages.appendChild(messageElement);
                     
-                    // Limpiar input y scroll al final
-                    messageInput.value = '';
+                    // Limpiar el input
+                    chatInput.value = '';
+                    
+                    // Scroll al final
                     chatMessages.scrollTop = chatMessages.scrollHeight;
-                    
-                    // Simular envío y recepción
-                    setTimeout(() => {
-                        const statusElement = messageElement.querySelector('.message-status i');
-                        statusElement.className = 'fas fa-check-double';
-                    }, 1000);
                 } catch (error) {
                     showToast(error.message, 'error');
                 }
             };
             
-            // Enviar con Enter
-            messageInput.onkeypress = function(e) {
+            // Configurar el botón de enviar
+            chatSendBtn.onclick = sendMessage;
+            
+            // Configurar el envío con Enter
+            chatInput.onkeypress = function(e) {
                 if (e.key === 'Enter') {
-                    sendMessageBtn.click();
+                    sendMessage();
                 }
             };
         }
         
-        function closeChat() {
+        function openDirectMessageChat() {
             const chatContainer = document.getElementById('chatContainer');
-            chatContainer.style.display = 'none';
+            const chatTitle = document.getElementById('chatTitle');
+            const chatMessages = document.getElementById('chatMessages');
+            
+            chatTitle.textContent = 'Mensaje directo al administrador';
+            chatMessages.innerHTML = '';
+            
+            const directMessages = getDirectMessages();
+            const currentUser = getCurrentUser();
+            
+            directMessages.forEach(message => {
+                const messageElement = createDirectMessageElement(message, currentUser);
+                chatMessages.appendChild(messageElement);
+            });
+            
+            // Mostrar el chat
+            chatContainer.classList.add('active');
+            
+            // Scroll al final
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+            
+            // Configurar el envío de mensajes
+            setupDirectMessageChat();
         }
         
-        function editConversation(conversationId) {
-            const conversations = storageAdapter.getConversations();
-            const conversation = conversations.find(c => c.id === conversationId);
+        function createDirectMessageElement(message, currentUser) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `chat-message ${message.senderId === currentUser?.id ? 'sent' : 'received'}`;
+            messageDiv.setAttribute('data-message-id', message.id);
             
-            if (!conversation) {
-                showToast('Conversación no encontrada', 'error');
-                return;
-            }
+            const messageBubble = document.createElement('div');
+            messageBubble.className = `message-bubble ${message.senderId === currentUser?.id ? 'sent' : 'received'}`;
+            messageBubble.textContent = message.content;
             
-            // Llenar formulario con datos existentes
-            document.getElementById('conversationTitle').value = conversation.title;
-            document.getElementById('conversationDescription').value = conversation.description;
-            document.getElementById('conversationDepartment').value = conversation.department;
+            const messageInfo = document.createElement('div');
+            messageInfo.className = `message-info ${message.senderId === currentUser?.id ? 'sent' : 'received'}`;
             
-            // Cambiar título del modal
-            document.getElementById('newConversationModalLabel').textContent = 'Editar Conversación';
+            const time = new Date(message.timestamp);
+            const timeString = time.toLocaleTimeString('es-PE', { hour: '2-digit', minute: '2-digit' });
             
-            // Configurar botón de guardar
-            const saveBtn = document.getElementById('saveConversationBtn');
-            saveBtn.textContent = 'Guardar cambios';
-            saveBtn.onclick = function() {
-                const title = document.getElementById('conversationTitle').value.trim();
-                const description = document.getElementById('conversationDescription').value.trim();
-                const department = document.getElementById('conversationDepartment').value;
-                
-                if (!title || !description || !department) {
-                    showToast('Por favor completa todos los campos', 'error');
-                    return;
-                }
-                
-                try {
-                    updateConversation(conversationId, { title, description, department }, getCurrentUser().id);
-                    showToast('Conversación actualizada correctamente', 'success');
-                    
-                    // Cerrar modal
-                    bootstrap.Modal.getInstance(document.getElementById('newConversationModal')).hide();
-                    
-                    // Recargar conversaciones
-                    renderConversations();
-                } catch (error) {
-                    showToast(error.message, 'error');
-                }
-            };
+            messageInfo.innerHTML = `
+                <span>${message.senderName} - ${timeString}</span>
+                ${message.senderId === currentUser?.id ? 
+                    `<span class="message-status">
+                        ${message.read ? '<i class="fas fa-check-double text-primary"></i>' : '<i class="fas fa-check"></i>'}
+                    </span>` : ''}
+            `;
             
-            // Mostrar modal
-            const modal = new bootstrap.Modal(document.getElementById('newConversationModal'));
-            modal.show();
+            messageDiv.appendChild(messageBubble);
+            messageDiv.appendChild(messageInfo);
+            
+            return messageDiv;
         }
         
-        function editDirectMessage(messageId) {
-            const directMessages = storageAdapter.getDirectMessages();
-            const message = directMessages.find(m => m.id === messageId);
+        function setupDirectMessageChat() {
+            const chatInput = document.getElementById('chatInput');
+            const chatSendBtn = document.getElementById('chatSendBtn');
+            const chatMessages = document.getElementById('chatMessages');
             
-            if (!message) {
-                showToast('Mensaje no encontrado', 'error');
-                return;
-            }
-            
-            // Llenar formulario con datos existentes
-            document.getElementById('directMessageContent').value = message.content;
-            
-            // Cambiar título del modal
-            document.getElementById('newDirectMessageModalLabel').textContent = 'Editar Mensaje Directo';
-            
-            // Configurar botón de enviar
-            const sendBtn = document.getElementById('sendDirectMessageBtn');
-            sendBtn.textContent = 'Guardar cambios';
-            sendBtn.onclick = function() {
-                const content = document.getElementById('directMessageContent').value.trim();
+            const sendMessage = function() {
+                const content = chatInput.value.trim();
                 
                 if (!content) {
-                    showToast('Por favor escribe un mensaje', 'error');
                     return;
                 }
                 
                 try {
-                    updateDirectMessage(messageId, { content }, getCurrentUser().id);
-                    showToast('Mensaje actualizado correctamente', 'success');
+                    const newMessage = sendDirectMessage(content);
+                    const currentUser = getCurrentUser();
+                    const messageElement = createDirectMessageElement(newMessage, currentUser);
+                    chatMessages.appendChild(messageElement);
                     
-                    // Cerrar modal
-                    bootstrap.Modal.getInstance(document.getElementById('newDirectMessageModal')).hide();
+                    // Limpiar el input
+                    chatInput.value = '';
                     
-                    // Recargar mensajes directos
-                    renderDirectMessages();
+                    // Scroll al final
+                    chatMessages.scrollTop = chatMessages.scrollHeight;
+                    
+                    showToast('Mensaje enviado correctamente', 'success');
                 } catch (error) {
                     showToast(error.message, 'error');
                 }
             };
             
-            // Mostrar modal
-            const modal = new bootstrap.Modal(document.getElementById('newDirectMessageModal'));
-            modal.show();
+            // Configurar el botón de enviar
+            chatSendBtn.onclick = sendMessage;
+            
+            // Configurar el envío con Enter
+            chatInput.onkeypress = function(e) {
+                if (e.key === 'Enter') {
+                    sendMessage();
+                }
+            };
         }
         
-        function getCurrentUser() {
-            const session = storageAdapter.getSession();
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            const now = new Date();
+            const diffTime = Math.abs(now - date);
+            const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
             
-            if (session.exploringAsGuest) {
-                return { id: 'guest', name: 'Invitado', email: 'guest@yachaymikuy.org', isAdmin: false };
+            if (diffDays === 0) {
+                return 'Hoy';
+            } else if (diffDays === 1) {
+                return 'Ayer';
+            } else if (diffDays < 7) {
+                return `Hace ${diffDays} días`;
+            } else {
+                return date.toLocaleDateString('es-PE');
             }
-            
-            if (!session.currentUserId) {
-                return null;
-            }
-            
-            const users = storageAdapter.getUsers();
-            return users.find(u => u.id === session.currentUserId);
         }
         
         function calculateAge(dob) {
@@ -3545,9 +3579,11 @@
                 showDashboardSection();
             });
             
-            // Cerrar sesión - CORREGIDO
+            // Cerrar sesión - Corregido para asegurar que funcione correctamente
             document.getElementById('logoutBtn').addEventListener('click', function(e) {
-                e.preventDefault(); // Prevenir comportamiento por defecto
+                e.preventDefault();
+                e.stopPropagation();
+                
                 logout();
                 showAuthSection();
                 showToast('Sesión cerrada correctamente', 'success');
@@ -3560,14 +3596,16 @@
             // Guardar hijo
             document.getElementById('saveChildBtn').addEventListener('click', saveChild);
             
-            // Papelera - CORREGIDO
+            // Papelera - Corregido para asegurar que funcione correctamente
             document.getElementById('viewTrashBtn').addEventListener('click', function(e) {
-                e.preventDefault(); // Prevenir comportamiento por defecto
+                e.preventDefault();
+                e.stopPropagation();
                 showTrash();
             });
             
             document.getElementById('closeTrashBtn').addEventListener('click', function(e) {
-                e.preventDefault(); // Prevenir comportamiento por defecto
+                e.preventDefault();
+                e.stopPropagation();
                 hideTrash();
             });
             
@@ -3600,110 +3638,86 @@
                 showCommunitySection();
             });
             
-            // Botón para volver desde comunidad
-            document.getElementById('closeCommunityBtn').addEventListener('click', function() {
+            // Botón Volver al panel
+            document.getElementById('backToDashboardBtn').addEventListener('click', function() {
                 showDashboardSection();
             });
             
-            // Configurar selector de departamento
+            // Tabs de comunidad
+            document.querySelectorAll('.community-tab').forEach(tab => {
+                tab.addEventListener('click', function() {
+                    // Desactivar todas las pestañas
+                    document.querySelectorAll('.community-tab').forEach(t => t.classList.remove('active'));
+                    document.querySelectorAll('.tab-content').forEach(c => c.classList.add('d-none'));
+                    
+                    // Activar la pestaña actual
+                    this.classList.add('active');
+                    const tabName = this.getAttribute('data-tab');
+                    
+                    if (tabName === 'conversations') {
+                        document.getElementById('conversationsTab').classList.remove('d-none');
+                        renderConversations();
+                    } else if (tabName === 'direct-messages') {
+                        document.getElementById('directMessagesTab').classList.remove('d-none');
+                        renderDirectMessages();
+                    }
+                });
+            });
+            
+            // Selector de departamento
             document.getElementById('departmentSelect').addEventListener('change', function() {
                 renderConversations();
             });
             
-            // Configurar botón de nueva conversación
+            // Nueva conversación
             document.getElementById('newConversationBtn').addEventListener('click', function() {
-                // Limpiar formulario
-                document.getElementById('newConversationForm').reset();
-                
-                // Cambiar título del modal
-                document.getElementById('newConversationModalLabel').textContent = 'Nueva Conversación';
-                
-                // Configurar botón de guardar
-                const saveBtn = document.getElementById('saveConversationBtn');
-                saveBtn.textContent = 'Crear';
-                saveBtn.onclick = function() {
-                    const title = document.getElementById('conversationTitle').value.trim();
-                    const description = document.getElementById('conversationDescription').value.trim();
-                    const department = document.getElementById('conversationDepartment').value;
-                    
-                    if (!title || !description || !department) {
-                        showToast('Por favor completa todos los campos', 'error');
-                        return;
-                    }
-                    
-                    try {
-                        createConversation(title, description, department, getCurrentUser().id);
-                        showToast('Conversación creada correctamente', 'success');
-                        
-                        // Cerrar modal
-                        bootstrap.Modal.getInstance(document.getElementById('newConversationModal')).hide();
-                        
-                        // Actualizar selector y recargar conversaciones
-                        document.getElementById('departmentSelect').value = department;
-                        renderConversations();
-                    } catch (error) {
-                        showToast(error.message, 'error');
-                    }
-                };
-                
-                // Mostrar modal
                 const modal = new bootstrap.Modal(document.getElementById('newConversationModal'));
                 modal.show();
             });
             
-            // Configurar botón de nuevo mensaje directo
-            document.getElementById('newDirectMessageBtn').addEventListener('click', function() {
-                // Limpiar formulario
-                document.getElementById('newDirectMessageForm').reset();
+            // Crear conversación
+            document.getElementById('createConversationBtn').addEventListener('click', function() {
+                const title = document.getElementById('conversationTitle').value;
+                const description = document.getElementById('conversationDescription').value;
+                const department = document.getElementById('conversationDepartment').value;
+                const firstMessage = document.getElementById('firstMessage').value;
                 
-                // Cambiar título del modal
-                document.getElementById('newDirectMessageModalLabel').textContent = 'Nuevo Mensaje Directo';
-                
-                // Configurar botón de enviar
-                const sendBtn = document.getElementById('sendDirectMessageBtn');
-                sendBtn.textContent = 'Enviar';
-                sendBtn.onclick = function() {
-                    const recipientId = document.getElementById('directMessageRecipient').value;
-                    const content = document.getElementById('directMessageContent').value.trim();
-                    
-                    if (!content) {
-                        showToast('Por favor escribe un mensaje', 'error');
-                        return;
-                    }
-                    
-                    try {
-                        createDirectMessage(recipientId, content, getCurrentUser().id);
-                        showToast('Mensaje enviado correctamente', 'success');
-                        
-                        // Cerrar modal
-                        bootstrap.Modal.getInstance(document.getElementById('newDirectMessageModal')).hide();
-                        
-                        // Recargar mensajes directos
-                        renderDirectMessages();
-                    } catch (error) {
-                        showToast(error.message, 'error');
-                    }
-                };
-                
-                // Mostrar modal
-                const modal = new bootstrap.Modal(document.getElementById('newDirectMessageModal'));
-                modal.show();
-            });
-            
-            // Configurar botón de cerrar chat - CORREGIDO
-            document.getElementById('closeChatBtn').addEventListener('click', function(e) {
-                e.preventDefault(); // Prevenir comportamiento por defecto
-                closeChat();
-            });
-            
-            // Cerrar chat al hacer clic fuera - CORREGIDO
-            document.addEventListener('click', function(e) {
-                const chatContainer = document.getElementById('chatContainer');
-                if (chatContainer.style.display === 'flex' && 
-                    !chatContainer.contains(e.target) && 
-                    !e.target.closest('.open-conversation-btn')) {
-                    closeChat();
+                if (!title || !description || !department || !firstMessage) {
+                    showToast('Por favor completa todos los campos', 'error');
+                    return;
                 }
+                
+                try {
+                    createConversation({
+                        title,
+                        description,
+                        department,
+                        firstMessage
+                    });
+                    
+                    showToast('Conversación creada correctamente', 'success');
+                    
+                    // Cerrar modal y limpiar formulario
+                    bootstrap.Modal.getInstance(document.getElementById('newConversationModal')).hide();
+                    document.getElementById('newConversationForm').reset();
+                    
+                    // Actualizar la lista de conversaciones
+                    renderConversations();
+                } catch (error) {
+                    showToast(error.message, 'error');
+                }
+            });
+            
+            // Mensaje directo
+            document.getElementById('startDirectMessageBtn').addEventListener('click', function() {
+                openDirectMessageChat();
+            });
+            
+            // Cerrar chat - Corregido para asegurar que funcione correctamente
+            document.getElementById('chatClose').addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                document.getElementById('chatContainer').classList.remove('active');
             });
             
             // Selección de avatar
