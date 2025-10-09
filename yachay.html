@@ -66,10 +66,58 @@
             min-height: 100vh;
         }
 
+        /* Barra superior fija con logo y botón de volver */
+        .top-bar {
+            background: linear-gradient(135deg, var(--primary-blue), var(--light-blue));
+            color: var(--white);
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .top-bar .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+
+        .top-bar .logo i {
+            margin-right: 10px;
+            color: var(--accent-orange);
+        }
+
+        .btn-back-top {
+            padding: 10px 20px;
+            background-color: rgba(255, 255, 255, 0.2);
+            color: var(--white);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .btn-back-top:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 30px;
+            padding-top: 20px;
             flex: 1;
         }
 
@@ -272,7 +320,7 @@
             background-color: var(--light-gray);
             color: var(--dark-blue);
             appearance: none;
-            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-5'/%3e%3c/svg%3e");
             background-repeat: no-repeat;
             background-position: right 0.75rem center;
             background-size: 16px 12px;
@@ -317,30 +365,6 @@
         .card-daily { border-top-color: var(--accent-cyan); }
         .card-daily .card-icon { background: linear-gradient(45deg, var(--accent-cyan), #4dd0e1); }
         .card-daily .btn-action { background: linear-gradient(45deg, var(--accent-cyan), #4dd0e1); }
-        
-        .back-button-container {
-            margin-top: 40px;
-            text-align: center;
-        }
-        
-        .btn-back {
-            padding: 14px 35px;
-            border: 2px solid var(--gray);
-            color: var(--gray);
-            background-color: transparent;
-            border-radius: 10px;
-            cursor: pointer;
-            font-size: 1rem;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            text-decoration: none;
-        }
-        
-        .btn-back:hover {
-            background-color: var(--gray);
-            color: var(--white);
-            transform: scale(1.05);
-        }
 
         /* --- ESTILOS DEL FOOTER --- */
         .footer {
@@ -520,7 +544,20 @@
         }
 
         @media (max-width: 768px) {
-            .container { padding: 20px; }
+            .container { 
+                padding: 20px; 
+                padding-top: 10px;
+            }
+            .top-bar {
+                padding: 12px 15px;
+            }
+            .top-bar .logo {
+                font-size: 1.2rem;
+            }
+            .btn-back-top {
+                padding: 8px 15px;
+                font-size: 0.8rem;
+            }
             .group-header { 
                 padding: 25px; 
                 flex-direction: column;
@@ -535,6 +572,17 @@
     </style>
 </head>
 <body>
+    <!-- Barra superior con logo y botón de volver -->
+    <div class="top-bar">
+        <div class="logo">
+            <i class="fas fa-apple-alt"></i>
+            Yachay Mikuy
+        </div>
+        <a href="index.html#perfiles-de-tus-hijos" class="btn-back-top">
+            <i class="fas fa-arrow-left"></i> Volver
+        </a>
+    </div>
+
     <div class="container">
         <header class="group-header">
             <div class="group-header-content">
@@ -649,12 +697,6 @@
                 </div>
             </div>
         </main>
-        
-        <div class="back-button-container">
-            <a href="#" id="backToDashboardBtn" class="btn-back">
-                <i class="fas fa-arrow-left"></i> Volver al panel de niños
-            </a>
-        </div>
     </div>
 
     <!-- Footer -->
@@ -852,19 +894,6 @@
                     alert('Por favor, selecciona un departamento antes de generar.');
                 }
             });
-
-            // Configurar el botón de volver para que lleve a la pantalla de finalización de yachaymikuy.html
-            const totalQuestionsInYachay = 55;
-            const backButton = document.getElementById('backToDashboardBtn');
-            
-            if (isGuestMode) {
-                // Modo invitado: volver a la pantalla de finalización en modo invitado
-                backButton.href = `yachaymikuy.html?guest=true&showCompletion=true`;
-            } else {
-                // Modo con cuenta: volver a la pantalla de finalización con el ID del primer niño
-                const firstChildId = completedChildren[0].id;
-                backButton.href = `yachaymikuy.html?childId=${firstChildId}&question=${totalQuestionsInYachay}&edit=true`;
-            }
 
             // Función para crear niños de ejemplo si no existen
             function createGuestChildrenIfNotExists() {
