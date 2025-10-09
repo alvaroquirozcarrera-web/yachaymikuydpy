@@ -583,6 +583,48 @@
             text-decoration: underline;
         }
 
+        /* Toast container */
+        .toast-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1050;
+        }
+        
+        .custom-toast {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            padding: 15px 20px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            animation: slideIn 0.3s ease;
+        }
+        
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        .toast-success {
+            border-left: 5px solid var(--success-green);
+        }
+        
+        .toast-error {
+            border-left: 5px solid var(--danger-red);
+        }
+        
+        .toast-info {
+            border-left: 5px solid var(--accent-cyan);
+        }
+
         @media (max-width: 768px) {
             .container {
                 padding: 20px;
@@ -792,6 +834,7 @@
     </footer>
 
     <div id="actionModalContainer"></div>
+    <div class="toast-container" id="toastContainer"></div>
 
     <script>
         // Storage Adapter - Para facilitar migración a backend
@@ -864,6 +907,32 @@
         }
 
         // --- FIN DE FUNCIONES DE SINCRONIZACIÓN ---
+
+        // Función para mostrar notificaciones toast
+        function showToast(message, type = 'info') {
+            const toastContainer = document.getElementById('toastContainer');
+            const toastId = 'toast-' + Date.now();
+            
+            const toastHtml = `
+                <div id="${toastId}" class="custom-toast toast-${type}">
+                    <div class="me-2">
+                        ${type === 'success' ? '<i class="fas fa-check-circle text-success"></i>' : 
+                          type === 'error' ? '<i class="fas fa-exclamation-circle text-danger"></i>' : 
+                          '<i class="fas fa-info-circle text-info"></i>'}
+                    </div>
+                    <div class="flex-grow-1">${message}</div>
+                    <button type="button" class="btn-close ms-2" onclick="document.getElementById('${toastId}').remove()"></button>
+                </div>
+            `;
+            
+            toastContainer.insertAdjacentHTML('beforeend', toastHtml);
+            
+            // Auto remove after 5 seconds
+            setTimeout(() => {
+                const toast = document.getElementById(toastId);
+                if (toast) toast.remove();
+            }, 5000);
+        }
 
         // Función para calcular la edad a partir de la fecha de nacimiento
         function calculateAge(dob) {
@@ -1005,6 +1074,15 @@
                     progressPercent = 100;
                 }
                 
+                // Actualizar el progreso en el objeto del niño
+                currentChild.progressPercent = progressPercent;
+                const allChildren = storageAdapter.getChildren();
+                const childIndex = allChildren.findIndex(child => child.id === currentChild.id);
+                if (childIndex !== -1) {
+                    allChildren[childIndex] = currentChild;
+                    storageAdapter.saveChildren(allChildren);
+                }
+                
                 if (progressPercent < 100) {
                     // Mostrar advertencia de completado
                     const completionWarning = document.getElementById('completionWarning');
@@ -1136,43 +1214,6 @@
                 storageAdapter.saveResponses(responses);
             }
         });
-
-        // Función para mostrar notificaciones toast
-        function showToast(message, type = 'info') {
-            // Crear contenedor de toast si no existe
-            let toastContainer = document.getElementById('toastContainer');
-            if (!toastContainer) {
-                toastContainer = document.createElement('div');
-                toastContainer.id = 'toastContainer';
-                toastContainer.style.position = 'fixed';
-                toastContainer.style.top = '20px';
-                toastContainer.style.right = '20px';
-                toastContainer.style.zIndex = '1050';
-                document.body.appendChild(toastContainer);
-            }
-            
-            const toastId = 'toast-' + Date.now();
-            
-            const toastHtml = `
-                <div id="${toastId}" class="custom-toast toast-${type}">
-                    <div class="me-2">
-                        ${type === 'success' ? '<i class="fas fa-check-circle text-success"></i>' : 
-                          type === 'error' ? '<i class="fas fa-exclamation-circle text-danger"></i>' : 
-                          '<i class="fas fa-info-circle text-info"></i>'}
-                    </div>
-                    <div class="flex-grow-1">${message}</div>
-                    <button type="button" class="btn-close ms-2" onclick="document.getElementById('${toastId}').remove()"></button>
-                </div>
-            `;
-            
-            toastContainer.insertAdjacentHTML('beforeend', toastHtml);
-            
-            // Auto remove after 5 seconds
-            setTimeout(() => {
-                const toast = document.getElementById(toastId);
-                if (toast) toast.remove();
-            }, 5000);
-        }
 
         // Configuración de modales del footer
         document.addEventListener('DOMContentLoaded', function() {
