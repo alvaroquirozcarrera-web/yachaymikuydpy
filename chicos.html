@@ -1061,26 +1061,33 @@
                 // Verificar si el cuestionario está completado al 100%
                 const responses = storageAdapter.getResponses();
                 const childResponses = responses[currentChild.id] || {};
-                const totalQuestions = 50;
-                const answeredQuestions = Object.keys(childResponses).filter(key => 
-                    key.startsWith('q') && !childResponses[key].optional
-                ).length;
                 
-                let progressPercent = Math.round((answeredQuestions / totalQuestions) * 100);
+                // Verificar si el perfil ya tiene un procentaje guardado
+                let progressPercent = currentChild.progressPercent || 0;
                 
                 // Si es un perfil predefinido (ownerId === null), asumir que está completado al 100%
                 // independientemente de las respuestas en localStorage
                 if (currentChild.ownerId === null) {
                     progressPercent = 100;
-                }
-                
-                // Actualizar el progreso en el objeto del niño
-                currentChild.progressPercent = progressPercent;
-                const allChildren = storageAdapter.getChildren();
-                const childIndex = allChildren.findIndex(child => child.id === currentChild.id);
-                if (childIndex !== -1) {
-                    allChildren[childIndex] = currentChild;
-                    storageAdapter.saveChildren(allChildren);
+                } else {
+                    // Para perfiles de usuario, calcular el progreso basado en las respuestas
+                    const totalQuestions = 50;
+                    const answeredQuestions = Object.keys(childResponses).filter(key => 
+                        key.startsWith('q') && childResponses[key] && childResponses[key].value
+                    ).length;
+                    
+                    progressPercent = Math.round((answeredQuestions / totalQuestions) * 100);
+                    
+                    // Si el progreso calculado es mayor que el guardado, actualizarlo
+                    if (progressPercent > (currentChild.progressPercent || 0)) {
+                        currentChild.progressPercent = progressPercent;
+                        const allChildren = storageAdapter.getChildren();
+                        const childIndex = allChildren.findIndex(child => child.id === currentChild.id);
+                        if (childIndex !== -1) {
+                            allChildren[childIndex] = currentChild;
+                            storageAdapter.saveChildren(allChildren);
+                        }
+                    }
                 }
                 
                 if (progressPercent < 100) {
