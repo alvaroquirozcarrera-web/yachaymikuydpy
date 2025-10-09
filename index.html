@@ -5,8 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Yachay Mikuy - Inicio</title>
     
+    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     
     <style>
@@ -29,14 +32,6 @@
             --shadow: 0 8px 24px rgba(0, 0, 0, 0.08); 
             --radius: 12px;
             --transition: all 0.3s ease-in-out;
-            
-            /* --- Colores de la Comunidad --- */
-            --community-bg: #f0f2f5;
-            --community-header: #00a884;
-            --chat-bg: #e5ddd5;
-            --sent-bubble: #dcf8c6;
-            --received-bubble: #ffffff;
-            --link-color: #007bff;
         }
         
         * {
@@ -470,192 +465,236 @@
             margin: 1rem 0; 
         }
         
-        /* --- INICIO: ESTILOS DE LA COMUNIDAD --- */
-        #comunidadSection {
-            background-color: var(--community-bg);
-            padding: 2rem;
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
+        /* --- ESTILOS PARA LA COMUNIDAD --- */
+        .community-section {
+            display: none;
+            padding: 20px 0;
         }
         
-        .comunidad-header {
+        .community-header {
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .departments-selector {
+            margin-bottom: 20px;
+        }
+        
+        .conversation-card {
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .conversation-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        .conversation-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 1.5rem;
-            flex-wrap: wrap;
-            gap: 1rem;
+            margin-bottom: 10px;
         }
-
-        .conversation-card {
-            background-color: var(--white);
-            border-radius: var(--radius);
-            padding: 1.5rem;
-            margin-bottom: 1rem;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-            transition: var(--transition);
-            border-left: 5px solid var(--primary-blue);
-        }
-
-        .conversation-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 16px rgba(0,0,0,0.1);
-        }
-
-        .conversation-card h5 {
-            color: var(--primary-blue);
+        
+        .conversation-title {
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: #128C7E;
         }
         
         .conversation-meta {
-            font-size: 0.85rem;
-            color: #6c757d;
+            font-size: 0.8rem;
+            color: #666;
         }
-
-        /* Estilos del Chat Flotante */
-        .chat-modal-overlay {
+        
+        .conversation-description {
+            margin-bottom: 10px;
+            color: #444;
+        }
+        
+        .chat-floating {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.6);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 2000;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s ease, visibility 0.3s ease;
-        }
-
-        .chat-modal-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .chat-container {
-            width: 100%;
-            max-width: 400px;
-            height: 90vh;
-            max-height: 700px;
-            background: var(--chat-bg);
-            border-radius: 1rem;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            display: flex;
+            bottom: 20px;
+            right: 20px;
+            width: 350px;
+            height: 500px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.2);
+            z-index: 1000;
+            display: none;
             flex-direction: column;
             overflow: hidden;
-            transform: scale(0.95);
-            transition: transform 0.3s ease;
+            animation: popIn 0.3s ease;
         }
-
-        .chat-modal-overlay.active .chat-container {
-            transform: scale(1);
+        
+        @keyframes popIn {
+            0% { transform: scale(0.8); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
         }
-
+        
         .chat-header {
-            background: #008069; /* Verde WhatsApp */
+            background: #25D366;
             color: white;
-            padding: 1rem;
+            padding: 15px;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-        .chat-header h5 {
-            margin: 0;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
+        
+        .chat-title {
+            font-weight: bold;
         }
         
-        .chat-header .close-chat-btn {
+        .close-chat {
             background: none;
             border: none;
             color: white;
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             cursor: pointer;
         }
-
+        
         .chat-messages {
-            flex-grow: 1;
-            padding: 1rem;
+            flex: 1;
+            padding: 15px;
             overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .chat-messages::-webkit-scrollbar { width: 6px; }
-        .chat-messages::-webkit-scrollbar-track { background: transparent; }
-        .chat-messages::-webkit-scrollbar-thumb { background: #bdbdbd; border-radius: 3px; }
-
-        .message-bubble {
-            max-width: 80%;
-            padding: 0.5rem 0.8rem;
-            border-radius: 12px;
-            margin-bottom: 0.8rem;
-            position: relative;
+            background: #f0f0f0;
         }
         
-        .message-bubble.sent {
-            background-color: var(--sent-bubble);
-            align-self: flex-end;
-            border-bottom-right-radius: 2px;
+        .message {
+            max-width: 80%;
+            padding: 10px 15px;
+            border-radius: 18px;
+            margin-bottom: 10px;
+            position: relative;
+            word-wrap: break-word;
         }
-
-        .message-bubble.received {
-            background-color: var(--received-bubble);
-            align-self: flex-start;
-            border-bottom-left-radius: 2px;
+        
+        .my-message {
+            background: #DCF8C6;
+            margin-left: auto;
+            border-bottom-right-radius: 5px;
+        }
+        
+        .other-message {
+            background: white;
+            margin-right: auto;
+            border-bottom-left-radius: 5px;
         }
         
         .message-sender {
-            font-weight: bold;
             font-size: 0.8rem;
-            margin-bottom: 0.2rem;
-            color: var(--primary-blue);
-        }
-        
-        .message-text {
-            word-wrap: break-word;
-            white-space: pre-wrap;
+            font-weight: bold;
+            margin-bottom: 3px;
         }
         
         .message-time {
             font-size: 0.7rem;
-            color: #888;
             text-align: right;
-            margin-top: 0.3rem;
+            margin-top: 5px;
+            color: #666;
         }
-
+        
         .chat-input {
             display: flex;
-            padding: 0.8rem;
-            background: #f0f0f0;
-            border-top: 1px solid var(--medium-gray);
+            padding: 10px;
+            background: white;
+            border-top: 1px solid #ddd;
         }
-        .chat-input textarea {
-            flex-grow: 1;
-            border: 1px solid var(--medium-gray);
+        
+        .chat-input input {
+            flex: 1;
+            border: 1px solid #ddd;
             border-radius: 20px;
-            padding: 0.6rem 1rem;
-            resize: none;
-            max-height: 100px;
+            padding: 10px 15px;
+            margin-right: 10px;
         }
-        .chat-input button {
-            background-color: #008069;
+        
+        .send-btn {
+            background: #25D366;
             color: white;
             border: none;
             border-radius: 50%;
-            width: 45px;
-            height: 45px;
-            margin-left: 0.5rem;
-            font-size: 1.2rem;
+            width: 40px;
+            height: 40px;
             display: flex;
             align-items: center;
             justify-content: center;
+            cursor: pointer;
         }
         
-        /* --- FIN: ESTILOS DE LA COMUNIDAD --- */
-
+        .direct-messages {
+            margin-top: 30px;
+        }
+        
+        .dm-header {
+            background: #128C7E;
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .dm-container {
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        
+        .unread-indicator {
+            background: #FF3B30;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            margin-left: 10px;
+        }
+        
+        .message-actions {
+            display: flex;
+            gap: 5px;
+            margin-top: 5px;
+        }
+        
+        .action-btn {
+            background: none;
+            border: none;
+            color: #666;
+            font-size: 0.8rem;
+            cursor: pointer;
+        }
+        
+        .action-btn:hover {
+            color: #25D366;
+        }
+        
+        .new-conversation-btn {
+            background: #25D366;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 10px 20px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+        
         @media (max-width: 768px) {
             .logo {
                 font-size: 1.5rem;
@@ -677,13 +716,17 @@
                 font-size: 28px;
             }
             
-            .comunidad-grid {
-                grid-template-columns: 1fr;
+            .chat-floating {
+                width: 90%;
+                height: 70%;
+                bottom: 10px;
+                right: 5%;
             }
         }
     </style>
 </head>
 <body>
+    <!-- Header -->
     <header class="header">
         <div class="container">
             <div class="row align-items-center">
@@ -705,8 +748,10 @@
         </div>
     </header>
 
+    <!-- Main Content -->
     <main class="main-container">
         <div class="container">
+            <!-- Login/Register Section -->
             <div id="authSection" class="row justify-content-center">
                 <div class="col-md-10 col-lg-8">
                     <div class="card">
@@ -714,6 +759,7 @@
                             <h3>Bienvenido a Yachay Mikuy</h3>
                         </div>
                         <div class="card-body p-4">
+                            <!-- Login Form -->
                             <div id="loginForm">
                                 <h4 class="mb-4 text-center">Iniciar Sesión</h4>
                                 <div class="mb-3">
@@ -738,6 +784,7 @@
                                 </div>
                             </div>
                             
+                            <!-- Register Form -->
                             <div id="registerForm" class="d-none">
                                 <h4 class="mb-4 text-center">Crear Cuenta</h4>
                                 <div class="mb-3">
@@ -770,6 +817,7 @@
                                 </div>
                             </div>
                             
+                            <!-- Forgot Password Form -->
                             <div id="forgotPasswordForm" class="d-none">
                                 <h4 class="mb-4 text-center">Recuperar Contraseña</h4>
                                 <p class="text-center mb-4">Ingresa tu correo electrónico y te enviaremos instrucciones para restablecer tu contraseña.</p>
@@ -789,6 +837,7 @@
                 </div>
             </div>
             
+            <!-- Children Dashboard Section -->
             <div id="dashboardSection" class="d-none">
                 <div class="row mb-4" id="perfiles-de-tus-hijos">
                     <div class="col-12">
@@ -802,14 +851,16 @@
                         <button id="generatePlanBtn" class="btn btn-success ms-2">
                             <i class="fas fa-file-medical"></i> Generar plan nutricional
                         </button>
-                        <button id="comunidadBtn" class="btn btn-info ms-2">
+                        <!-- Botón Comunidad agregado -->
+                        <button id="communityBtn" class="btn btn-info ms-2">
                             <i class="fas fa-users"></i> Comunidad
                         </button>
                     </div>
                 </div>
                 
                 <div id="childrenContainer" class="row">
-                    </div>
+                    <!-- Children cards will be dynamically added here -->
+                </div>
                 
                 <div id="emptyState" class="empty-state d-none">
                     <i class="fas fa-child"></i>
@@ -823,43 +874,158 @@
                 <div id="trashContainer" class="trash-container d-none">
                     <h3 class="mb-3">Papelera</h3>
                     <div id="trashItems">
-                        </div>
+                        <!-- Deleted children will be shown here -->
+                    </div>
                     <button id="closeTrashBtn" class="btn btn-secondary">Cerrar papelera</button>
                 </div>
             </div>
             
-            <div id="comunidadSection" class="d-none">
-                <div class="comunidad-header">
-                    <h2><i class="fas fa-users text-primary-blue"></i> Comunidad Yachay Mikuy</h2>
-                    <button id="backToDashboardBtn" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Volver al panel</button>
+            <!-- Community Section -->
+            <div id="communitySection" class="community-section">
+                <div class="community-header">
+                    <h2><i class="fas fa-users"></i> Comunidad Yachay Mikuy</h2>
+                    <p>Conecta con otros padres y comparte experiencias sobre nutrición infantil</p>
                 </div>
-
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="card mb-4">
-                            <div class="card-body">
-                                <h4 class="card-title">Conversaciones de la Comunidad</h4>
-                                <div class="row align-items-center mb-3">
-                                    <div class="col-md-6">
-                                        <label for="departmentFilter" class="form-label">Filtrar por Departamento:</label>
-                                        <select id="departmentFilter" class="form-select">
-                                            </select>
-                                    </div>
-                                    <div class="col-md-6 text-md-end mt-2 mt-md-0">
-                                        <button id="createConversationBtn" class="btn btn-primary"><i class="fas fa-plus"></i> Crear Conversación</button>
-                                    </div>
-                                </div>
-                                <hr>
-                                <div id="conversationsList" style="max-height: 60vh; overflow-y: auto;">
-                                    </div>
-                            </div>
+                
+                <div class="departments-selector">
+                    <label for="departmentSelect" class="form-label">Selecciona tu departamento:</label>
+                    <select class="form-select" id="departmentSelect">
+                        <option value="">Todos los departamentos</option>
+                        <option value="Amazonas">Amazonas</option>
+                        <option value="Áncash">Áncash</option>
+                        <option value="Apurímac">Apurímac</option>
+                        <option value="Arequipa">Arequipa</option>
+                        <option value="Ayacucho">Ayacucho</option>
+                        <option value="Cajamarca">Cajamarca</option>
+                        <option value="Callao">Callao</option>
+                        <option value="Cusco">Cusco</option>
+                        <option value="Huancavelica">Huancavelica</option>
+                        <option value="Huánuco">Huánuco</option>
+                        <option value="Ica">Ica</option>
+                        <option value="Junín">Junín</option>
+                        <option value="La Libertad">La Libertad</option>
+                        <option value="Lambayeque">Lambayeque</option>
+                        <option value="Lima">Lima</option>
+                        <option value="Loreto">Loreto</option>
+                        <option value="Madre de Dios">Madre de Dios</option>
+                        <option value="Moquegua">Moquegua</option>
+                        <option value="Pasco">Pasco</option>
+                        <option value="Piura">Piura</option>
+                        <option value="Puno">Puno</option>
+                        <option value="San Martín">San Martín</option>
+                        <option value="Tacna">Tacna</option>
+                        <option value="Tumbes">Tumbes</option>
+                        <option value="Ucayali">Ucayali</option>
+                    </select>
+                </div>
+                
+                <button class="new-conversation-btn" id="newConversationBtn">
+                    <i class="fas fa-plus"></i> Nueva Conversación
+                </button>
+                
+                <div id="conversationsContainer">
+                    <!-- Las conversaciones se cargarán dinámicamente aquí -->
+                </div>
+                
+                <div class="direct-messages">
+                    <div class="dm-header">
+                        <h3><i class="fas fa-comment-medical"></i> Mensajes Directos con el Administrador</h3>
+                    </div>
+                    <div class="dm-container">
+                        <div id="directMessages">
+                            <!-- Los mensajes directos se cargarán aquí -->
+                        </div>
+                        <div class="chat-input">
+                            <input type="text" id="dmInput" placeholder="Escribe tu mensaje al administrador...">
+                            <button class="send-btn" id="sendDmBtn">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
                         </div>
                     </div>
                 </div>
             </div>
-            </div>
+        </div>
     </main>
     
+    <!-- Chat Flotante -->
+    <div class="chat-floating" id="chatFloating">
+        <div class="chat-header">
+            <div class="chat-title" id="chatTitle">Conversación</div>
+            <button class="close-chat" id="closeChat">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="chat-messages" id="chatMessages">
+            <!-- Los mensajes del chat se cargarán aquí -->
+        </div>
+        <div class="chat-input">
+            <input type="text" id="chatInput" placeholder="Escribe un mensaje...">
+            <button class="send-btn" id="sendChatBtn">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+    </div>
+    
+    <!-- Modal para nueva conversación -->
+    <div class="modal fade" id="newConversationModal" tabindex="-1" aria-labelledby="newConversationModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="newConversationModalLabel">Nueva Conversación</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="newConversationForm">
+                        <div class="mb-3">
+                            <label for="conversationTitle" class="form-label">Título</label>
+                            <input type="text" class="form-control" id="conversationTitle" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="conversationDescription" class="form-label">Descripción</label>
+                            <textarea class="form-control" id="conversationDescription" rows="3" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="conversationDepartment" class="form-label">Departamento</label>
+                            <select class="form-select" id="conversationDepartment" required>
+                                <option value="">Selecciona un departamento</option>
+                                <option value="Amazonas">Amazonas</option>
+                                <option value="Áncash">Áncash</option>
+                                <option value="Apurímac">Apurímac</option>
+                                <option value="Arequipa">Arequipa</option>
+                                <option value="Ayacucho">Ayacucho</option>
+                                <option value="Cajamarca">Cajamarca</option>
+                                <option value="Callao">Callao</option>
+                                <option value="Cusco">Cusco</option>
+                                <option value="Huancavelica">Huancavelica</option>
+                                <option value="Huánuco">Huánuco</option>
+                                <option value="Ica">Ica</option>
+                                <option value="Junín">Junín</option>
+                                <option value="La Libertad">La Libertad</option>
+                                <option value="Lambayeque">Lambayeque</option>
+                                <option value="Lima">Lima</option>
+                                <option value="Loreto">Loreto</option>
+                                <option value="Madre de Dios">Madre de Dios</option>
+                                <option value="Moquegua">Moquegua</option>
+                                <option value="Pasco">Pasco</option>
+                                <option value="Piura">Piura</option>
+                                <option value="Puno">Puno</option>
+                                <option value="San Martín">San Martín</option>
+                                <option value="Tacna">Tacna</option>
+                                <option value="Tumbes">Tumbes</option>
+                                <option value="Ucayali">Ucayali</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" id="saveConversationBtn" class="btn btn-primary">Crear Conversación</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Add/Edit Child Modal -->
     <div class="modal fade" id="childModal" tabindex="-1" aria-labelledby="childModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -915,6 +1081,7 @@
         </div>
     </div>
     
+    <!-- Terms & Conditions Modal -->
     <div class="modal fade" id="termsModal" tabindex="-1" aria-labelledby="termsModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -997,30 +1164,20 @@
         </div>
     </div>
     
+    <!-- Loading Overlay -->
     <div id="loadingOverlay" class="loading-overlay d-none">
         <div class="spinner-border text-primary" role="status">
             <span class="visually-hidden">Cargando...</span>
         </div>
     </div>
     
+    <!-- Toast Container -->
     <div class="toast-container" id="toastContainer"></div>
     
+    <!-- Modal Container -->
     <div id="action-modal-container"></div>
-
-    <div id="chatModalOverlay" class="chat-modal-overlay">
-        <div class="chat-container">
-            <div class="chat-header">
-                <h5 id="chatTitle">Título de la Conversación</h5>
-                <button id="closeChatBtn" class="close-chat-btn">&times;</button>
-            </div>
-            <div id="chatMessages" class="chat-messages">
-                </div>
-            <div class="chat-input">
-                <textarea id="chatMessageInput" placeholder="Escribe tu mensaje..." rows="1"></textarea>
-                <button id="sendChatMessageBtn"><i class="fas fa-paper-plane"></i></button>
-            </div>
-        </div>
-    </div>
+    
+    <!-- Footer -->
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-section">
@@ -1053,25 +1210,29 @@
         <div class="footer-bottom">&copy; 2025 Yachay Mikuy. Todos los derechos reservados.</div>
     </footer>
     
+    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     
     <script>
         /*
          * README - Guía de uso para desarrolladores
-         * * Esta aplicación utiliza localStorage para almacenar todos los datos de forma local.
+         * 
+         * Esta aplicación utiliza localStorage para almacenar todos los datos de forma local.
          * Para migrar a un backend, reemplazar las funciones del storageAdapter con llamadas a una API REST.
-         * * Estructura de datos en localStorage:
+         * 
+         * Estructura de datos en localStorage:
          * - yachay_users: Array de usuarios
          * - yachay_children: Array de perfiles de niños
          * - yachay_responses: Objeto con respuestas al cuestionario
          * - yachay_session: Datos de la sesión actual
          * - yachay_auditLog: Registro de acciones
-         * - yachay_conversations: Array de conversaciones de la comunidad
-         * * Integración con otros archivos:
+         * 
+         * Integración con otros archivos:
          * - chicos.html: Muestra el perfil individual de un niño (childId)
          * - yachay.html: Genera planes nutricionales consolidados
          * - yachaymikuy.html: Cuestionario para recolectar datos
-         * * Mejoras implementadas:
+         * 
+         * Mejoras implementadas:
          * - Restricción de edad: solo aceptar edades de 0 a 13 años
          * - Modificación de preguntas para evitar escribir, usando opciones de selección múltiple
          * - Solo permitir subir archivos cuando sea estrictamente necesario
@@ -1085,7 +1246,33 @@
          * - Botón "Generar plan nutricional" lleva a yachay.html con la información de todos los niños completados
          * - Botón "Salir" en lugar de "Omitir" en el cuestionario
          * - Footer funcional con modales para información adicional
-         * - **NUEVO**: Funcionalidad de Comunidad con chat dinámico y permisos.
+         * 
+         * Checklist de QA:
+         * - Registro → login → crear 2 hijos → verificar solo esos hijos aparecen
+         * - Crear hijo → continuar → responder 3 preguntas → recargar → continuar → respuestas intactas
+         * - Editar perfil → respuestas permanecen
+         * - Soft-delete hijo → deshacer funciona; restaurar desde Trash
+         * - Delete permanent → responses eliminadas
+         * - Explorar sin cuenta → ver Alvaro/Luz (100%) → no aparece "Seleccionar otro niño"
+         * - Intentar editar en guest → redirige a login
+         * - Continuar en 0/medio/100% comportamiento correcto
+         * - Subir archivo >5MB → error
+         * - Subir imagen → preview + guardado
+         * - Export PDF/CSV (simulado) funciona
+         * - Accesibilidad: navegación por teclado, ARIA roles
+         * - Performance: recarga < 1.5s mobile emulation
+         * - AuditLog registra acciones
+         * - Version conflict detection muestra modal
+         * - T&C obligatorio antes de registro
+         * - Validación de edad (0-13 años)
+         * - Preguntas con opciones múltiples
+         * - Botón "Generar plan nutricional" redirige a yachay.html con información completa
+         * - Botón "Ver plan nutricional" individual redirige a chicos.html
+         * - Botón "Editar" permite modificar respuestas del cuestionario
+         * - Perfiles predefinidos con todas las preguntas respondidas
+         * - Cualquier texto que diga "Ver plan nutricional" redirige a chicos.html
+         * - Botón "Salir" en lugar de "Omitir" en el cuestionario
+         * - Footer funcional con modales para información adicional
          */
         
         // Storage Adapter - Para facilitar migración a backend
@@ -1134,15 +1321,25 @@
             saveAuditLog: function(auditLog) {
                 localStorage.setItem('yachay_auditLog', JSON.stringify(auditLog));
             },
-            // --- INICIO: NUEVAS FUNCIONES PARA COMUNIDAD ---
-            getConversations: function() {
-                const conversations = localStorage.getItem('yachay_conversations');
-                return conversations ? JSON.parse(conversations) : [];
+            
+            // Community Data
+            getCommunityData: function() {
+                const communityData = localStorage.getItem('yachay_community');
+                return communityData ? JSON.parse(communityData) : {
+                    conversations: [],
+                    directMessages: []
+                };
             },
-            saveConversations: function(conversations) {
-                localStorage.setItem('yachay_conversations', JSON.stringify(conversations));
-            }
-            // --- FIN: NUEVAS FUNCIONES PARA COMUNIDAD ---
+            saveCommunityData: function(communityData) {
+                localStorage.setItem('yachay_community', JSON.stringify(communityData));
+            },
+            
+            // Para migración a backend, estas funciones se reemplazarían con llamadas API
+            // Ejemplo:
+            // async getUsers() {
+            //     const response = await fetch('/api/users');
+            //     return response.json();
+            // }
         };
         
         // Inicialización de datos mock
@@ -1156,7 +1353,7 @@
             const adminUser = {
                 id: 'admin-' + Date.now(),
                 name: 'Administrador',
-                email: 'alvaro.quiroz@alumno.ud.edu.pe', // Correo del admin
+                email: 'alvaro.quiroz@alumno.ud.edu.pe',
                 passwordHash: btoa('admin123'), // En producción usar hash real
                 isAdmin: true,
                 createdAt: new Date().toISOString()
@@ -1238,47 +1435,219 @@
             storageAdapter.saveUsers([adminUser, demoUser]);
             storageAdapter.saveChildren([child1, child2, alvaro, luz]);
             
-            // Respuestas... (código original sin cambios)
+            // Crear algunas respuestas de ejemplo para los hijos del usuario demo
             const responses = {};
-            responses[child1.id] = {'q1': { type: 'select', value: '20-25 kg', timestamp: new Date().toISOString(), version: 1 },'q2': { type: 'select', value: '110-120 cm', timestamp: new Date().toISOString(), version: 1 },'q3': { type: 'date', value: '2018-05-15', timestamp: new Date().toISOString(), version: 1 },'q4': { type: 'select', value: '16-18', timestamp: new Date().toISOString(), version: 1 },'q5': { type: 'select', value: 'No tengo', timestamp: new Date().toISOString(), version: 1 },'q6': { type: 'select', value: 'Diabetes', timestamp: new Date().toISOString(), version: 1 },'q7': { type: 'select', value: 'Resfriados', timestamp: new Date().toISOString(), version: 1 },'q8': { type: 'select', value: 'Hace menos de 3 meses', timestamp: new Date().toISOString(), version: 1 },'q9': { type: 'select', value: 'Sí', timestamp: new Date().toISOString(), version: 1 },'q10': { type: 'select', value: 'Sí', timestamp: new Date().toISOString(), version: 1 },'q11': { type: 'select', value: 'No tengo', timestamp: new Date().toISOString(), version: 1 },'q12': { type: 'select', value: 'Bueno', timestamp: new Date().toISOString(), version: 1 },'q13': { type: 'select', value: 'Cereal con leche', timestamp: new Date().toISOString(), version: 1 },'q14': { type: 'select', value: 'No tengo', timestamp: new Date().toISOString(), version: 1 },'q15': { type: 'select', value: 'Sopa con pollo', timestamp: new Date().toISOString(), version: 1 },'q16': { type: 'select', value: 'No tengo', timestamp: new Date().toISOString(), version: 1 },'q17': { type: 'select', value: '2 porciones', timestamp: new Date().toISOString(), version: 1 },'q18': { type: 'select', value: '3-5 porciones', timestamp: new Date().toISOString(), version: 1 },'q19': { type: 'select', value: 'A veces', timestamp: new Date().toISOString(), version: 1 },'q20': { type: 'select', value: '1-2 veces por semana', timestamp: new Date().toISOString(), version: 1 },'q21': { type: 'select', value: '3-4 vasos', timestamp: new Date().toISOString(), version: 1 },'q22': { type: 'select', value: 'Rara vez', timestamp: new Date().toISOString(), version: 1 },'q23': { type: 'select', value: 'Diario', timestamp: new Date().toISOString(), version: 1 },'q24': { type: 'select', value: 'Sí, diario', timestamp: new Date().toISOString(), version: 1 },'q25': { type: 'select', value: '2-3 veces por semana', timestamp: new Date().toISOString(), version: 1 },'q26': { type: 'select', value: 'No', timestamp: new Date().toISOString(), version: 1 },'q27': { type: 'select', value: 'No', timestamp: new Date().toISOString(), version: 1 },'q28': { type: 'select', value: 'Sí, deportes', timestamp: new Date().toISOString(), version: 1 },'q29': { type: 'select', value: 'Fútbol', timestamp: new Date().toISOString(), version: 1 },'q30': { type: 'select', value: '3 días', timestamp: new Date().toISOString(), version: 1 },'q31': { type: 'select', value: '30-60 minutos', timestamp: new Date().toISOString(), version: 1 },'q32': { type: 'select', value: 'Sí, en el parque', timestamp: new Date().toISOString(), version: 1 },'q33': { type: 'select', value: '1-2 horas', timestamp: new Date().toISOString(), version: 1 },'q34': { type: 'select', value: '8-10 horas', timestamp: new Date().toISOString(), version: 1 },'q35': { type: 'select', value: 'Sí, cuentos', timestamp: new Date().toISOString(), version: 1 },'q36': { type: 'select', value: 'Sí, ordenar', timestamp: new Date().toISOString(), version: 1 },'q37': { type: 'select', value: 'Sí, en la escuela', timestamp: new Date().toISOString(), version: 1 },'q38': { type: 'select', value: 'Activo', timestamp: new Date().toISOString(), version: 1 },'q39': { type: 'select', value: 'Familiar estable', timestamp: new Date().toISOString(), version: 1 },'q40': { type: 'select', value: 'Padres', timestamp: new Date().toISOString(), version: 1 },'q41': { type: 'select', value: 'Sí', timestamp: new Date().toISOString(), version: 1 },'q42': { type: 'select', value: 'Casa', timestamp: new Date().toISOString(), version: 1 },'q43': { type: 'select', value: 'Sí, seguro', timestamp: new Date().toISOString(), version: 1 },'q44': { type: 'select', value: 'Sí, colegio', timestamp: new Date().toISOString(), version: 1 },'q45': { type: 'select', value: 'Sí', timestamp: new Date().toISOString(), version: 1 },'q46': { type: 'select', value: 'No', timestamp: new Date().toISOString(), version: 1 },'q47': { type: 'select', value: 'No', timestamp: new Date().toISOString(), version: 1 },'q48': { type: 'select', value: 'Feliz', timestamp: new Date().toISOString(), version: 1 },'q49': { type: 'select', value: 'Pediatra', timestamp: new Date().toISOString(), version: 1 },'q50': { type: 'select', value: 'Más verduras', timestamp: new Date().toISOString(), version: 1 }};
-            responses[child2.id] = {'q1': { type: 'select', value: '15-20 kg', timestamp: new Date().toISOString(), version: 1 },'q2': { type: 'select', value: '90-100 cm', timestamp: new Date().toISOString(), version: 1 },'q3': { type: 'date', value: '2020-03-22', timestamp: new Date().toISOString(), version: 1 },'q4': { type: 'select', value: '15-17', timestamp: new Date().toISOString(), version: 1 },'q5': { type: 'select', value: 'No tengo', timestamp: new Date().toISOString(), version: 1 },'q6': { type: 'select', value: 'No', timestamp: new Date().toISOString(), version: 1 },'q7': { type: 'select', value: 'No', timestamp: new Date().toISOString(), version: 1 },'q8': { type: 'select', value: 'Hace menos de 3 meses', timestamp: new Date().toISOString(), version: 1 },'q9': { type: 'select', value: 'Sí', timestamp: new Date().toISOString(), version: 1 },'q10': { type: 'select', value: 'Sí', timestamp: new Date().toISOString(), version: 1 },'q11': { type: 'select', value: 'No tengo', timestamp: new Date().toISOString(), version: 1 },'q12': { type: 'select', value: 'Bueno', timestamp: new Date().toISOString(), version: 1 },'q13': { type: 'select', value: 'Fruta con yogur', timestamp: new Date().toISOString(), version: 1 },'q14': { type: 'select', value: 'No tengo', timestamp: new Date().toISOString(), version: 1 },'q15': { type: 'select', value: 'Puré de verduras', timestamp: new Date().toISOString(), version: 1 },'q16': { type: 'select', value: 'No tengo', timestamp: new Date().toISOString(), version: 1 },'q17': { type: 'select', value: '3 porciones', timestamp: new Date().toISOString(), version: 1 },'q18': { type: 'select', value: '3-5 porciones', timestamp: new Date().toISOString(), version: 1 },'q19': { type: 'select', value: 'A veces', timestamp: new Date().toISOString(), version: 1 },'q20': { type: 'select', value: 'Rara vez', timestamp: new Date().toISOString(), version: 1 },'q21': { type: 'select', value: '2-3 vasos', timestamp: new Date().toISOString(), version: 1 },'q22': { type: 'select', value: 'No', timestamp: new Date().toISOString(), version: 1 },'q23': { type: 'select', value: 'Diario', timestamp: new Date().toISOString(), version: 1 },'q24': { type: 'select', value: 'Sí, diario', timestamp: new Date().toISOString(), version: 1 },'q25': { type: 'select', value: 'A veces', timestamp: new Date().toISOString(), version: 1 },'q26': { type: 'select', value: 'No', timestamp: new Date().toISOString(), version: 1 },'q27': { type: 'select', value: 'No', timestamp: new Date().toISOString(), version: 1 },'q28': { type: 'select', value: 'Sí, juegos', timestamp: new Date().toISOString(), version: 1 },'q29': { type: 'select', value: 'Correr', timestamp: new Date().toISOString(), version: 1 },'q30': { type: 'select', value: '4 días', timestamp: new Date().toISOString(), version: 1 },'q31': { type: 'select', value: 'Menos de 30 minutos', timestamp: new Date().toISOString(), version: 1 },'q32': { type: 'select', value: 'Sí', timestamp: new Date().toISOString(), version: 1 },'q33': { type: 'select', value: 'Menos de 1 hora', timestamp: new Date().toISOString(), version: 1 },'q34': { type: 'select', value: '10-12 horas', timestamp: new Date().toISOString(), version: 1 },'q35': { type: 'select', value: 'Sí, cuentos', timestamp: new Date().toISOString(), version: 1 },'q36': { type: 'select', value: 'Sí, guardar juguetes', timestamp: new Date().toISOString(), version: 1 },'q37': { type: 'select', value: 'Sí, en el jardín', timestamp: new Date().toISOString(), version: 1 },'q38': { type: 'select', value: 'Tranquilo', timestamp: new Date().toISOString(), version: 1 },'q39': { type: 'select', value: 'Familiar estable', timestamp: new Date().toISOString(), version: 1 },'q40': { type: 'select', value: 'Padres', timestamp: new Date().toISOString(), version: 1 },'q41': { type: 'select', value: 'Sí', timestamp: new Date().toISOString(), version: 1 },'q42': { type: 'select', value: 'Departamento', timestamp: new Date().toISOString(), version: 1 },'q43': { type: 'select', value: 'Sí', timestamp: new Date().toISOString(), version: 1 },'q44': { type: 'select', value: 'No', timestamp: new Date().toISOString(), version: 1 },'q45': { type: 'select', value: 'No', timestamp: new Date().toISOString(), version: 1 },'q46': { type: 'select', value: 'No', timestamp: new Date().toISOString(), version: 1 },'q47': { type: 'select', value: 'No', timestamp: new Date().toISOString(), version: 1 },'q48': { type: 'select', value: 'Feliz', timestamp: new Date().toISOString(), version: 1 },'q49': { type: 'select', value: 'Pediatra', timestamp: new Date().toISOString(), version: 1 },'q50': { type: 'select', value: 'Más frutas', timestamp: new Date().toISOString(), version: 1 }};
-            responses[alvaro.id] = {}; responses[luz.id] = {};
+            responses[child1.id] = {
+                'q1': { type: 'select', value: '20-25 kg', timestamp: new Date().toISOString(), version: 1 },
+                'q2': { type: 'select', value: '110-120 cm', timestamp: new Date().toISOString(), version: 1 },
+                'q3': { type: 'date', value: '2018-05-15', timestamp: new Date().toISOString(), version: 1 },
+                'q4': { type: 'select', value: '16-18', timestamp: new Date().toISOString(), version: 1 },
+                'q5': { type: 'select', value: 'No tengo', timestamp: new Date().toISOString(), version: 1 },
+                'q6': { type: 'select', value: 'Diabetes', timestamp: new Date().toISOString(), version: 1 },
+                'q7': { type: 'select', value: 'Resfriados', timestamp: new Date().toISOString(), version: 1 },
+                'q8': { type: 'select', value: 'Hace menos de 3 meses', timestamp: new Date().toISOString(), version: 1 },
+                'q9': { type: 'select', value: 'Sí', timestamp: new Date().toISOString(), version: 1 },
+                'q10': { type: 'select', value: 'Sí', timestamp: new Date().toISOString(), version: 1 },
+                'q11': { type: 'select', value: 'No tengo', timestamp: new Date().toISOString(), version: 1 },
+                'q12': { type: 'select', value: 'Bueno', timestamp: new Date().toISOString(), version: 1 },
+                'q13': { type: 'select', value: 'Cereal con leche', timestamp: new Date().toISOString(), version: 1 },
+                'q14': { type: 'select', value: 'No tengo', timestamp: new Date().toISOString(), version: 1 },
+                'q15': { type: 'select', value: 'Sopa con pollo', timestamp: new Date().toISOString(), version: 1 },
+                'q16': { type: 'select', value: 'No tengo', timestamp: new Date().toISOString(), version: 1 },
+                'q17': { type: 'select', value: '2 porciones', timestamp: new Date().toISOString(), version: 1 },
+                'q18': { type: 'select', value: '3-5 porciones', timestamp: new Date().toISOString(), version: 1 },
+                'q19': { type: 'select', value: 'A veces', timestamp: new Date().toISOString(), version: 1 },
+                'q20': { type: 'select', value: '1-2 veces por semana', timestamp: new Date().toISOString(), version: 1 },
+                'q21': { type: 'select', value: '3-4 vasos', timestamp: new Date().toISOString(), version: 1 },
+                'q22': { type: 'select', value: 'Rara vez', timestamp: new Date().toISOString(), version: 1 },
+                'q23': { type: 'select', value: 'Diario', timestamp: new Date().toISOString(), version: 1 },
+                'q24': { type: 'select', value: 'Sí, diario', timestamp: new Date().toISOString(), version: 1 },
+                'q25': { type: 'select', value: '2-3 veces por semana', timestamp: new Date().toISOString(), version: 1 },
+                'q26': { type: 'select', value: 'No', timestamp: new Date().toISOString(), version: 1 },
+                'q27': { type: 'select', value: 'No', timestamp: new Date().toISOString(), version: 1 },
+                'q28': { type: 'select', value: 'Sí, deportes', timestamp: new Date().toISOString(), version: 1 },
+                'q29': { type: 'select', value: 'Fútbol', timestamp: new Date().toISOString(), version: 1 },
+                'q30': { type: 'select', value: '3 días', timestamp: new Date().toISOString(), version: 1 },
+                'q31': { type: 'select', value: '30-60 minutos', timestamp: new Date().toISOString(), version: 1 },
+                'q32': { type: 'select', value: 'Sí, en el parque', timestamp: new Date().toISOString(), version: 1 },
+                'q33': { type: 'select', value: '1-2 horas', timestamp: new Date().toISOString(), version: 1 },
+                'q34': { type: 'select', value: '8-10 horas', timestamp: new Date().toISOString(), version: 1 },
+                'q35': { type: 'select', value: 'Sí, cuentos', timestamp: new Date().toISOString(), version: 1 },
+                'q36': { type: 'select', value: 'Sí, ordenar', timestamp: new Date().toISOString(), version: 1 },
+                'q37': { type: 'select', value: 'Sí, en la escuela', timestamp: new Date().toISOString(), version: 1 },
+                'q38': { type: 'select', value: 'Activo', timestamp: new Date().toISOString(), version: 1 },
+                'q39': { type: 'select', value: 'Familiar estable', timestamp: new Date().toISOString(), version: 1 },
+                'q40': { type: 'select', value: 'Padres', timestamp: new Date().toISOString(), version: 1 },
+                'q41': { type: 'select', value: 'Sí', timestamp: new Date().toISOString(), version: 1 },
+                'q42': { type: 'select', value: 'Casa', timestamp: new Date().toISOString(), version: 1 },
+                'q43': { type: 'select', value: 'Sí, seguro', timestamp: new Date().toISOString(), version: 1 },
+                'q44': { type: 'select', value: 'Sí, colegio', timestamp: new Date().toISOString(), version: 1 },
+                'q45': { type: 'select', value: 'Sí', timestamp: new Date().toISOString(), version: 1 },
+                'q46': { type: 'select', value: 'No', timestamp: new Date().toISOString(), version: 1 },
+                'q47': { type: 'select', value: 'No', timestamp: new Date().toISOString(), version: 1 },
+                'q48': { type: 'select', value: 'Feliz', timestamp: new Date().toISOString(), version: 1 },
+                'q49': { type: 'select', value: 'Pediatra', timestamp: new Date().toISOString(), version: 1 },
+                'q50': { type: 'select', value: 'Más verduras', timestamp: new Date().toISOString(), version: 1 }
+            };
+            
+            responses[child2.id] = {
+                'q1': { type: 'select', value: '15-20 kg', timestamp: new Date().toISOString(), version: 1 },
+                'q2': { type: 'select', value: '90-100 cm', timestamp: new Date().toISOString(), version: 1 },
+                'q3': { type: 'date', value: '2020-03-22', timestamp: new Date().toISOString(), version: 1 },
+                'q4': { type: 'select', value: '15-17', timestamp: new Date().toISOString(), version: 1 },
+                'q5': { type: 'select', value: 'No tengo', timestamp: new Date().toISOString(), version: 1 },
+                'q6': { type: 'select', value: 'No', timestamp: new Date().toISOString(), version: 1 },
+                'q7': { type: 'select', value: 'No', timestamp: new Date().toISOString(), version: 1 },
+                'q8': { type: 'select', value: 'Hace menos de 3 meses', timestamp: new Date().toISOString(), version: 1 },
+                'q9': { type: 'select', value: 'Sí', timestamp: new Date().toISOString(), version: 1 },
+                'q10': { type: 'select', value: 'Sí', timestamp: new Date().toISOString(), version: 1 },
+                'q11': { type: 'select', value: 'No tengo', timestamp: new Date().toISOString(), version: 1 },
+                'q12': { type: 'select', value: 'Bueno', timestamp: new Date().toISOString(), version: 1 },
+                'q13': { type: 'select', value: 'Fruta con yogur', timestamp: new Date().toISOString(), version: 1 },
+                'q14': { type: 'select', value: 'No tengo', timestamp: new Date().toISOString(), version: 1 },
+                'q15': { type: 'select', value: 'Puré de verduras', timestamp: new Date().toISOString(), version: 1 },
+                'q16': { type: 'select', value: 'No tengo', timestamp: new Date().toISOString(), version: 1 },
+                'q17': { type: 'select', value: '3 porciones', timestamp: new Date().toISOString(), version: 1 },
+                'q18': { type: 'select', value: '3-5 porciones', timestamp: new Date().toISOString(), version: 1 },
+                'q19': { type: 'select', value: 'A veces', timestamp: new Date().toISOString(), version: 1 },
+                'q20': { type: 'select', value: 'Rara vez', timestamp: new Date().toISOString(), version: 1 },
+                'q21': { type: 'select', value: '2-3 vasos', timestamp: new Date().toISOString(), version: 1 },
+                'q22': { type: 'select', value: 'No', timestamp: new Date().toISOString(), version: 1 },
+                'q23': { type: 'select', value: 'Diario', timestamp: new Date().toISOString(), version: 1 },
+                'q24': { type: 'select', value: 'Sí, diario', timestamp: new Date().toISOString(), version: 1 },
+                'q25': { type: 'select', value: 'A veces', timestamp: new Date().toISOString(), version: 1 },
+                'q26': { type: 'select', value: 'No', timestamp: new Date().toISOString(), version: 1 },
+                'q27': { type: 'select', value: 'No', timestamp: new Date().toISOString(), version: 1 },
+                'q28': { type: 'select', value: 'Sí, juegos', timestamp: new Date().toISOString(), version: 1 },
+                'q29': { type: 'select', value: 'Correr', timestamp: new Date().toISOString(), version: 1 },
+                'q30': { type: 'select', value: '4 días', timestamp: new Date().toISOString(), version: 1 },
+                'q31': { type: 'select', value: 'Menos de 30 minutos', timestamp: new Date().toISOString(), version: 1 },
+                'q32': { type: 'select', value: 'Sí', timestamp: new Date().toISOString(), version: 1 },
+                'q33': { type: 'select', value: 'Menos de 1 hora', timestamp: new Date().toISOString(), version: 1 },
+                'q34': { type: 'select', value: '10-12 horas', timestamp: new Date().toISOString(), version: 1 },
+                'q35': { type: 'select', value: 'Sí, cuentos', timestamp: new Date().toISOString(), version: 1 },
+                'q36': { type: 'select', value: 'Sí, guardar juguetes', timestamp: new Date().toISOString(), version: 1 },
+                'q37': { type: 'select', value: 'Sí, en el jardín', timestamp: new Date().toISOString(), version: 1 },
+                'q38': { type: 'select', value: 'Tranquilo', timestamp: new Date().toISOString(), version: 1 },
+                'q39': { type: 'select', value: 'Familiar estable', timestamp: new Date().toISOString(), version: 1 },
+                'q40': { type: 'select', value: 'Padres', timestamp: new Date().toISOString(), version: 1 },
+                'q41': { type: 'select', value: 'Sí', timestamp: new Date().toISOString(), version: 1 },
+                'q42': { type: 'select', value: 'Departamento', timestamp: new Date().toISOString(), version: 1 },
+                'q43': { type: 'select', value: 'Sí', timestamp: new Date().toISOString(), version: 1 },
+                'q44': { type: 'select', value: 'No', timestamp: new Date().toISOString(), version: 1 },
+                'q45': { type: 'select', value: 'No', timestamp: new Date().toISOString(), version: 1 },
+                'q46': { type: 'select', value: 'No', timestamp: new Date().toISOString(), version: 1 },
+                'q47': { type: 'select', value: 'No', timestamp: new Date().toISOString(), version: 1 },
+                'q48': { type: 'select', value: 'Feliz', timestamp: new Date().toISOString(), version: 1 },
+                'q49': { type: 'select', value: 'Pediatra', timestamp: new Date().toISOString(), version: 1 },
+                'q50': { type: 'select', value: 'Más frutas', timestamp: new Date().toISOString(), version: 1 }
+            };
+            
+            // Respuestas para perfiles predefinidos (completadas al 100%)
+            responses[alvaro.id] = {};
+            responses[luz.id] = {};
+            
+            // Generar respuestas completas para perfiles predefinidos (progressPercent = 100%)
             for (let i = 1; i <= 50; i++) {
-                responses[alvaro.id][`q${i}`] = {type: 'select', value: `Opción ${i % 5 || 5}`, timestamp: new Date().toISOString(), version: 1 };
-                responses[luz.id][`q${i}`] = {type: 'select', value: `Opción ${i % 5 || 5}`, timestamp: new Date().toISOString(), version: 1 };
+                responses[alvaro.id][`q${i}`] = {
+                    type: 'select',
+                    value: i % 5 === 0 ? 'Opción 5' : `Opción ${i % 5}`,
+                    timestamp: new Date().toISOString(),
+                    version: 1
+                };
+                
+                responses[luz.id][`q${i}`] = {
+                    type: 'select',
+                    value: i % 5 === 0 ? 'Opción 5' : `Opción ${i % 5}`,
+                    timestamp: new Date().toISOString(),
+                    version: 1
+                };
             }
+            
             storageAdapter.saveResponses(responses);
-
-            // --- INICIO: DATOS MOCK PARA COMUNIDAD ---
-            const conversations = [
+            
+            // Inicializar datos de comunidad
+            const communityData = storageAdapter.getCommunityData();
+            
+            // Crear algunas conversaciones de ejemplo
+            const exampleConversations = [
                 {
-                    id: 'conv-' + Date.now(),
+                    id: 'conv-1',
+                    title: 'Recetas nutritivas para niños con anemia',
+                    description: 'Compartamos recetas ricas en hierro que les gusten a los niños',
                     department: 'Lima',
-                    title: 'Recetas ricas en hierro para bebés de 6 meses',
-                    description: '¡Hola! ¿Alguien tiene ideas de papillas o purés con alimentos ricos en hierro que sean fáciles de preparar?',
-                    createdBy: demoUser.id,
-                    createdAt: new Date(Date.now() - 86400000).toISOString(), // hace 1 día
+                    creatorId: demoUser.id,
+                    creatorName: 'Padre Demo',
+                    createdAt: new Date().toISOString(),
                     messages: [
-                        { msgId: 'msg-' + Date.now(), text: 'Hola, yo le preparo a mi bebé puré de hígado de pollo con camote. ¡Le encanta!', sentBy: adminUser.id, sentAt: new Date(Date.now() - 86000000).toISOString() },
-                        { msgId: 'msg-' + (Date.now() + 1), text: '¡Qué buena idea! Lo intentaré. Gracias.', sentBy: demoUser.id, sentAt: new Date(Date.now() - 85000000).toISOString() }
+                        {
+                            id: 'msg-1',
+                            senderId: demoUser.id,
+                            senderName: 'Padre Demo',
+                            content: 'Hola a todos, ¿alguien tiene recetas ricas en hierro que les gusten a los niños?',
+                            timestamp: new Date().toISOString(),
+                            readBy: [demoUser.id]
+                        },
+                        {
+                            id: 'msg-2',
+                            senderId: adminUser.id,
+                            senderName: 'Administrador',
+                            content: 'Hola! Te recomiendo incluir hígado en pequeñas cantidades mezclado con otros alimentos. También las lentejas son una buena opción.',
+                            timestamp: new Date(Date.now() + 60000).toISOString(),
+                            readBy: [demoUser.id, adminUser.id]
+                        }
                     ]
                 },
                 {
-                    id: 'conv-' + (Date.now() + 2),
+                    id: 'conv-2',
+                    title: 'Cómo mejorar el apetito de los niños',
+                    description: 'Compartamos estrategias para que los niños coman mejor',
                     department: 'Arequipa',
-                    title: 'Mi hijo no quiere comer verduras',
-                    description: 'Ayuda, por favor. Mi hijo de 3 años se niega a comer cualquier tipo de verdura. ¿Qué puedo hacer?',
-                    createdBy: adminUser.id,
-                    createdAt: new Date(Date.now() - 172800000).toISOString(), // hace 2 días
-                    messages: []
+                    creatorId: adminUser.id,
+                    creatorName: 'Administrador',
+                    createdAt: new Date(Date.now() + 120000).toISOString(),
+                    messages: [
+                        {
+                            id: 'msg-3',
+                            senderId: adminUser.id,
+                            senderName: 'Administrador',
+                            content: 'Hola comunidad, ¿qué estrategias han funcionado para ustedes para mejorar el apetito de sus hijos?',
+                            timestamp: new Date(Date.now() + 120000).toISOString(),
+                            readBy: [adminUser.id]
+                        }
+                    ]
                 }
             ];
-            storageAdapter.saveConversations(conversations);
-            // --- FIN: DATOS MOCK PARA COMUNIDAD ---
+            
+            communityData.conversations = exampleConversations;
+            
+            // Crear algunos mensajes directos de ejemplo
+            const exampleDMs = [
+                {
+                    id: 'dm-1',
+                    senderId: demoUser.id,
+                    senderName: 'Padre Demo',
+                    content: 'Hola administrador, tengo una consulta sobre el plan nutricional de mi hijo',
+                    timestamp: new Date().toISOString(),
+                    read: false
+                }
+            ];
+            
+            communityData.directMessages = exampleDMs;
+            
+            storageAdapter.saveCommunityData(communityData);
             
             // Inicializar audit log
             storageAdapter.saveAuditLog([
-                { id: 'audit-' + Date.now(), actorId: null, action: 'system_init', targetType: 'system', targetId: null, meta: { message: 'Sistema inicializado con datos de demostración' }, timestamp: new Date().toISOString() }
+                {
+                    id: 'audit-' + Date.now(),
+                    actorId: null,
+                    action: 'system_init',
+                    targetType: 'system',
+                    targetId: null,
+                    meta: { message: 'Sistema inicializado con datos de demostración' },
+                    timestamp: new Date().toISOString()
+                }
             ]);
         }
         
@@ -1309,6 +1678,7 @@
             
             toastContainer.insertAdjacentHTML('beforeend', toastHtml);
             
+            // Auto remove after 5 seconds
             setTimeout(() => {
                 const toast = document.getElementById(toastId);
                 if (toast) toast.remove();
@@ -1332,60 +1702,94 @@
         // Funciones de gestión de usuarios
         function createUser(userData) {
             const users = storageAdapter.getUsers();
+            
+            // Verificar si el email ya existe
             if (users.some(user => user.email === userData.email)) {
                 throw new Error('El correo electrónico ya está registrado');
             }
+            
             const newUser = {
                 id: 'user-' + Date.now(),
                 ...userData,
-                passwordHash: btoa(userData.password),
-                isAdmin: userData.email === 'alvaro.quiroz@alumno.ud.edu.pe',
+                passwordHash: btoa(userData.password), // En producción usar hash real
+                isAdmin: false,
                 createdAt: new Date().toISOString()
             };
+            
             users.push(newUser);
             storageAdapter.saveUsers(users);
+            
             logAction(newUser.id, 'create_user', 'user', newUser.id, { email: newUser.email });
+            
             return newUser;
         }
         
         function login(email, password) {
             const users = storageAdapter.getUsers();
             const user = users.find(u => u.email === email);
-            if (!user) throw new Error('Usuario no encontrado');
-            if (user.passwordHash !== btoa(password)) throw new Error('Contraseña incorrecta');
+            
+            if (!user) {
+                throw new Error('Usuario no encontrado');
+            }
+            
+            if (user.passwordHash !== btoa(password)) { // En producción comparar hashes reales
+                throw new Error('Contraseña incorrecta');
+            }
+            
+            // Actualizar sesión
             const session = storageAdapter.getSession();
             session.currentUserId = user.id;
             session.exploringAsGuest = false;
             session.lastActiveAt = new Date().toISOString();
             storageAdapter.saveSession(session);
+            
             logAction(user.id, 'login', 'user', user.id);
+            
             return user;
         }
         
         function logout() {
             const session = storageAdapter.getSession();
             const userId = session.currentUserId;
+            
             session.currentUserId = null;
             session.exploringAsGuest = false;
             session.lastActiveAt = new Date().toISOString();
             storageAdapter.saveSession(session);
-            if (userId) logAction(userId, 'logout', 'user', userId);
+            
+            if (userId) {
+                logAction(userId, 'logout', 'user', userId);
+            }
         }
         
         function recoverPassword(email) {
             const users = storageAdapter.getUsers();
             const user = users.find(u => u.email === email);
-            if (!user) throw new Error('Usuario no encontrado');
+            
+            if (!user) {
+                throw new Error('Usuario no encontrado');
+            }
+            
+            // En un entorno real, enviaríamos un correo electrónico con instrucciones
+            // Para este demo, simplemente mostramos un mensaje
             logAction(user.id, 'password_recovery', 'user', user.id, { email });
+            
             return true;
         }
         
         // Funciones de gestión de hijos
         function createChild(ownerId, childData) {
             const children = storageAdapter.getChildren();
+            
+            // Validar edad (0-13 años)
             const birthDate = new Date(childData.dob);
-            const age = Math.floor((new Date() - birthDate) / (365.25 * 24 * 60 * 60 * 1000));
-            if (age < 0 || age > 13) throw new Error('La edad debe estar entre 0 y 13 años');
+            const today = new Date();
+            const age = Math.floor((today - birthDate) / (365.25 * 24 * 60 * 60 * 1000));
+            
+            if (age < 0 || age > 13) {
+                throw new Error('La edad debe estar entre 0 y 13 años');
+            }
+            
             const newChild = {
                 id: 'child-' + Date.now(),
                 ownerId,
@@ -1396,82 +1800,153 @@
                 deletedAt: null,
                 version: 1
             };
+            
             children.push(newChild);
             storageAdapter.saveChildren(children);
+            
             logAction(ownerId, 'create_child', 'child', newChild.id, { name: newChild.name });
+            
             return newChild;
         }
         
         function updateChild(childId, childData) {
             const children = storageAdapter.getChildren();
             const childIndex = children.findIndex(c => c.id === childId);
-            if (childIndex === -1) throw new Error('Hijo no encontrado');
+            
+            if (childIndex === -1) {
+                throw new Error('Hijo no encontrado');
+            }
+            
+            // Validar edad (0-13 años) si se actualiza la fecha de nacimiento
             if (childData.dob) {
                 const birthDate = new Date(childData.dob);
-                const age = Math.floor((new Date() - birthDate) / (365.25 * 24 * 60 * 60 * 1000));
-                if (age < 0 || age > 13) throw new Error('La edad debe estar entre 0 y 13 años');
+                const today = new Date();
+                const age = Math.floor((today - birthDate) / (365.25 * 24 * 60 * 60 * 1000));
+                
+                if (age < 0 || age > 13) {
+                    throw new Error('La edad debe estar entre 0 y 13 años');
+                }
             }
+            
             const oldChild = { ...children[childIndex] };
-            children[childIndex] = { ...children[childIndex], ...childData, updatedAt: new Date().toISOString(), version: children[childIndex].version + 1 };
+            children[childIndex] = {
+                ...children[childIndex],
+                ...childData,
+                updatedAt: new Date().toISOString(),
+                version: children[childIndex].version + 1
+            };
+            
             storageAdapter.saveChildren(children);
-            logAction(children[childIndex].ownerId, 'update_child', 'child', childId, { oldData: oldChild, newData: children[childIndex] });
+            
+            logAction(children[childIndex].ownerId, 'update_child', 'child', childId, { 
+                oldData: oldChild, 
+                newData: children[childIndex] 
+            });
+            
             return children[childIndex];
         }
         
         function softDeleteChild(childId) {
             const children = storageAdapter.getChildren();
             const childIndex = children.findIndex(c => c.id === childId);
-            if (childIndex === -1) throw new Error('Hijo no encontrado');
+            
+            if (childIndex === -1) {
+                throw new Error('Hijo no encontrado');
+            }
+            
             children[childIndex].deletedAt = new Date().toISOString();
             children[childIndex].updatedAt = new Date().toISOString();
             children[childIndex].version += 1;
+            
             storageAdapter.saveChildren(children);
+            
             logAction(children[childIndex].ownerId, 'soft_delete_child', 'child', childId);
+            
+            // Agregar sincronización
             syncChildDeletionAcrossPages(childId, 'soft-delete');
+            
             return children[childIndex];
         }
         
         function restoreChild(childId) {
             const children = storageAdapter.getChildren();
             const childIndex = children.findIndex(c => c.id === childId);
-            if (childIndex === -1) throw new Error('Hijo no encontrado');
+            
+            if (childIndex === -1) {
+                throw new Error('Hijo no encontrado');
+            }
+            
             children[childIndex].deletedAt = null;
             children[childIndex].updatedAt = new Date().toISOString();
             children[childIndex].version += 1;
+            
             storageAdapter.saveChildren(children);
+            
             logAction(children[childIndex].ownerId, 'restore_child', 'child', childId);
+
+            // Agregar sincronización
             syncChildDeletionAcrossPages(childId, 'restore');
+            
             return children[childIndex];
         }
         
         function permanentlyDeleteChild(childId) {
-            let children = storageAdapter.getChildren();
+            const children = storageAdapter.getChildren();
             const childIndex = children.findIndex(c => c.id === childId);
-            if (childIndex === -1) throw new Error('Hijo no encontrado');
+            
+            if (childIndex === -1) {
+                throw new Error('Hijo no encontrado');
+            }
+            
             const ownerId = children[childIndex].ownerId;
-            children = children.filter(c => c.id !== childId);
+            
+            // Eliminar hijo
+            children.splice(childIndex, 1);
             storageAdapter.saveChildren(children);
+            
+            // Eliminar respuestas asociadas
             const responses = storageAdapter.getResponses();
             delete responses[childId];
             storageAdapter.saveResponses(responses);
+            
             logAction(ownerId, 'permanent_delete_child', 'child', childId);
+
+            // Agregar sincronización
             syncChildDeletionAcrossPages(childId, 'permanent-delete');
+            
             return true;
         }
         
         function getChildrenForCurrentUser() {
             const session = storageAdapter.getSession();
-            const allChildren = storageAdapter.getChildren();
-            if (session.exploringAsGuest) return allChildren.filter(child => child.ownerId === null);
-            if (!session.currentUserId) return [];
-            return allChildren.filter(child => child.ownerId === session.currentUserId && !child.deletedAt);
+            
+            if (session.exploringAsGuest) {
+                // Si es invitado, devolver solo perfiles predefinidos
+                const children = storageAdapter.getChildren();
+                return children.filter(child => child.ownerId === null);
+            }
+            
+            if (!session.currentUserId) {
+                return [];
+            }
+            
+            const children = storageAdapter.getChildren();
+            return children.filter(child => 
+                child.ownerId === session.currentUserId && !child.deletedAt
+            );
         }
         
         function getDeletedChildrenForCurrentUser() {
             const session = storageAdapter.getSession();
-            if (!session.currentUserId) return [];
-            const allChildren = storageAdapter.getChildren();
-            return allChildren.filter(child => child.ownerId === session.currentUserId && child.deletedAt);
+            
+            if (!session.currentUserId) {
+                return [];
+            }
+            
+            const children = storageAdapter.getChildren();
+            return children.filter(child => 
+                child.ownerId === session.currentUserId && child.deletedAt
+            );
         }
         
         function startGuestSession() {
@@ -1480,78 +1955,207 @@
             session.exploringAsGuest = true;
             session.lastActiveAt = new Date().toISOString();
             storageAdapter.saveSession(session);
+            
             logAction(null, 'start_guest_session', 'session', null);
+        }
+        
+        function endGuestSession() {
+            const session = storageAdapter.getSession();
+            session.exploringAsGuest = false;
+            session.lastActiveAt = new Date().toISOString();
+            storageAdapter.saveSession(session);
+            
+            logAction(null, 'end_guest_session', 'session', null);
+        }
+        
+        // Funciones de gestión de respuestas
+        function saveResponse(childId, questionId, response) {
+            const responses = storageAdapter.getResponses();
+            
+            if (!responses[childId]) {
+                responses[childId] = {};
+            }
+            
+            responses[childId][questionId] = {
+                ...response,
+                timestamp: new Date().toISOString(),
+                version: responses[childId][questionId] ? 
+                    responses[childId][questionId].version + 1 : 1
+            };
+            
+            storageAdapter.saveResponses(responses);
+            
+            // Actualizar progreso del hijo
+            calculateProgress(childId);
+            
+            logAction(
+                storageAdapter.getSession().currentUserId || null, 
+                'save_response', 
+                'response', 
+                `${childId}-${questionId}`
+            );
+            
+            return responses[childId][questionId];
+        }
+        
+        function getNextQuestion(childId) {
+            const responses = storageAdapter.getResponses();
+            
+            if (!responses[childId]) {
+                return 'q1'; // Primera pregunta
+            }
+            
+            const childResponses = responses[childId];
+            const totalQuestions = 50; // Total de preguntas en el cuestionario
+            
+            for (let i = 1; i <= totalQuestions; i++) {
+                const questionId = `q${i}`;
+                if (!childResponses[questionId]) {
+                    return questionId; // Primera pregunta sin respuesta
+                }
+            }
+            
+            return null; // Todas las preguntas respondidas
+        }
+        
+        function calculateProgress(childId) {
+            const responses = storageAdapter.getResponses();
+            const children = storageAdapter.getChildren();
+            
+            if (!responses[childId]) {
+                return 0;
+            }
+            
+            const childResponses = responses[childId];
+            const totalQuestions = 50; // Total de preguntas en el cuestionario
+            const answeredQuestions = Object.keys(childResponses).filter(key => 
+                key.startsWith('q') && !childResponses[key].optional
+            ).length;
+            
+            const progressPercent = Math.round((answeredQuestions / totalQuestions) * 100);
+            
+            // Actualizar progreso en el perfil del hijo
+            const childIndex = children.findIndex(c => c.id === childId);
+            if (childIndex !== -1) {
+                children[childIndex].progressPercent = progressPercent;
+                children[childIndex].updatedAt = new Date().toISOString();
+                storageAdapter.saveChildren(children);
+            }
+            
+            return progressPercent;
+        }
+        
+        function generatePlanForChild(childId) {
+            // Redirigir a chicos.html con el ID del hijo
+            window.location.href = `chicos.html?childId=${childId}`;
+        }
+        
+        function generateConsolidatedPlanForUser(userId) {
+            // Redirigir a yachay.html con el ID del usuario
+            window.location.href = `yachay.html?userId=${userId}`;
+        }
+        
+        function syncPendingChanges() {
+            // Stub para sincronización con backend
+            // En una implementación real, esto enviaría cambios pendientes al servidor
+            showToast('Sincronización completada', 'success');
+            return true;
         }
         
         // Funciones de UI
         function showAuthSection() {
             document.getElementById('authSection').classList.remove('d-none');
             document.getElementById('dashboardSection').classList.add('d-none');
-            document.getElementById('comunidadSection').classList.add('d-none'); // Ocultar comunidad
+            document.getElementById('communitySection').classList.add('d-none');
             document.getElementById('userMenu').classList.add('d-none');
         }
         
         function showDashboardSection() {
             document.getElementById('authSection').classList.add('d-none');
             document.getElementById('dashboardSection').classList.remove('d-none');
-            document.getElementById('comunidadSection').classList.add('d-none'); // Ocultar comunidad
-
+            document.getElementById('communitySection').classList.add('d-none');
+            
             const session = storageAdapter.getSession();
             if (session.currentUserId) {
                 const users = storageAdapter.getUsers();
                 const user = users.find(u => u.id === session.currentUserId);
+                
                 if (user) {
                     document.getElementById('userName').textContent = user.name;
                     document.getElementById('userMenu').classList.remove('d-none');
-                    document.getElementById('logoutBtn').innerHTML = '<i class="fas fa-sign-out-alt"></i> Cerrar sesión';
                 }
             } else if (session.exploringAsGuest) {
                 document.getElementById('userName').textContent = 'Invitado';
                 document.getElementById('userMenu').classList.remove('d-none');
-                document.getElementById('logoutBtn').innerHTML = '<i class="fas fa-arrow-left"></i> Salir de modo invitado';
+                document.getElementById('logoutBtn').textContent = 'Salir de modo invitado';
             }
+            
             renderChildren();
         }
-
-        // --- INICIO: NUEVA FUNCIÓN PARA MOSTRAR LA COMUNIDAD ---
-        function showComunidadSection() {
-            const session = storageAdapter.getSession();
-            if (!session.currentUserId && !session.exploringAsGuest) {
-                showToast('Debes iniciar sesión para acceder a la comunidad', 'error');
-                return;
-            }
+        
+        function showCommunitySection() {
+            document.getElementById('authSection').classList.add('d-none');
             document.getElementById('dashboardSection').classList.add('d-none');
-            document.getElementById('comunidadSection').classList.remove('d-none');
-            initializeComunidad();
+            document.getElementById('communitySection').classList.remove('d-none');
+            
+            const session = storageAdapter.getSession();
+            if (session.currentUserId) {
+                const users = storageAdapter.getUsers();
+                const user = users.find(u => u.id === session.currentUserId);
+                
+                if (user) {
+                    document.getElementById('userName').textContent = user.name;
+                    document.getElementById('userMenu').classList.remove('d-none');
+                }
+            } else if (session.exploringAsGuest) {
+                document.getElementById('userName').textContent = 'Invitado';
+                document.getElementById('userMenu').classList.remove('d-none');
+                document.getElementById('logoutBtn').textContent = 'Salir de modo invitado';
+            }
+            
+            renderConversations();
+            renderDirectMessages();
         }
-        // --- FIN: NUEVA FUNCIÓN PARA MOSTRAR LA COMUNIDAD ---
         
         function renderChildren() {
             const children = getChildrenForCurrentUser();
             const container = document.getElementById('childrenContainer');
             const emptyState = document.getElementById('emptyState');
+            
             container.innerHTML = '';
+            
             if (children.length === 0) {
                 emptyState.classList.remove('d-none');
                 return;
             }
+            
             emptyState.classList.add('d-none');
+            
             children.forEach(child => {
                 const childCard = document.createElement('div');
                 childCard.className = 'col-md-6 col-lg-4 mb-4';
-                const avatarClass = `avatar-${child.avatarCustomization || 1}`;
-                const progressColor = child.progressPercent === 100 ? 'success' : child.progressPercent >= 50 ? 'warning' : 'info';
+                
+                const avatarClass = child.avatarCustomization === '1' ? 'avatar-1' : 
+                                   child.avatarCustomization === '2' ? 'avatar-2' : 'avatar-3';
+                
+                const progressColor = child.progressPercent === 100 ? 'success' : 
+                                     child.progressPercent >= 50 ? 'warning' : 'info';
+                
                 childCard.innerHTML = `
                     <div class="child-card">
                         <div class="d-flex align-items-center mb-3">
-                            <div class="child-avatar ${avatarClass}"><i class="fas fa-child"></i></div>
+                            <div class="child-avatar ${avatarClass}">
+                                <i class="fas fa-child"></i>
+                            </div>
                             <div class="flex-grow-1">
                                 <h5 class="mb-1">${child.name}</h5>
                                 <p class="mb-0 text-muted">${calculateAge(child.dob)} años</p>
                             </div>
                             <div class="dropdown">
-                                <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-ellipsis-v"></i></button>
-                                <ul class="dropdown-menu">
+                                <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton${child.id}" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fas fa-ellipsis-v"></i>
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton${child.id}">
                                     <li><a class="dropdown-item edit-child-btn" href="#" data-child-id="${child.id}"><i class="fas fa-edit"></i> Editar perfil</a></li>
                                     <li><a class="dropdown-item edit-questions-btn" href="#" data-child-id="${child.id}"><i class="fas fa-question-circle"></i> Editar respuestas</a></li>
                                     ${child.progressPercent === 100 ? `<li><a class="dropdown-item view-plan-btn" href="#" data-child-id="${child.id}"><i class="fas fa-file-medical"></i> Ver plan nutricional</a></li>` : ''}
@@ -1560,86 +2164,188 @@
                                 </ul>
                             </div>
                         </div>
+                        
                         <div class="mb-3">
                             <div class="d-flex justify-content-between mb-1">
-                                <span>Progreso</span><span>${child.progressPercent}%</span>
+                                <span>Progreso del cuestionario</span>
+                                <span>${child.progressPercent}%</span>
                             </div>
-                            <div class="progress-container"><div class="progress-bar bg-${progressColor}" style="width: ${child.progressPercent}%"></div></div>
+                            <div class="progress-container">
+                                <div class="progress-bar bg-${progressColor}" style="width: ${child.progressPercent}%"></div>
+                            </div>
                         </div>
+                        
                         <div class="d-grid">
                             <button class="btn btn-primary continue-btn" data-child-id="${child.id}">
-                                ${child.progressPercent === 0 ? 'Comenzar' : child.progressPercent === 100 ? 'Ver Plan' : 'Continuar'}
+                                ${child.progressPercent === 0 ? 'Comenzar cuestionario' : 
+                                  child.progressPercent === 100 ? 'Ver plan nutricional' : 
+                                  'Continuar cuestionario'}
                             </button>
                         </div>
-                    </div>`;
+                    </div>
+                `;
+                
                 container.appendChild(childCard);
             });
-            // Add event listeners
-            container.querySelectorAll('.edit-child-btn').forEach(btn => btn.addEventListener('click', e => { e.preventDefault(); openEditChildModal(btn.dataset.childId); }));
-            container.querySelectorAll('.edit-questions-btn').forEach(btn => btn.addEventListener('click', e => { e.preventDefault(); window.location.href = `yachaymikuy.html?childId=${btn.dataset.childId}&edit=true`; }));
-            container.querySelectorAll('.view-plan-btn').forEach(btn => btn.addEventListener('click', e => { e.preventDefault(); window.location.href = `chicos.html?childId=${btn.dataset.childId}`; }));
-            container.querySelectorAll('.delete-child-btn').forEach(btn => btn.addEventListener('click', e => { e.preventDefault(); confirmDeleteChild(btn.dataset.childId); }));
-            container.querySelectorAll('.continue-btn').forEach(btn => btn.addEventListener('click', () => {
-                const childId = btn.dataset.childId;
-                const child = storageAdapter.getChildren().find(c => c.id === childId);
-                if (child.progressPercent === 100) window.location.href = `chicos.html?childId=${childId}`;
-                else {
-                    const nextQ = getNextQuestion(childId) || 'q1';
-                    window.location.href = `yachaymikuy.html?childId=${childId}&q=${nextQ}`;
-                }
-            }));
+            
+            // Agregar event listeners
+            document.querySelectorAll('.edit-child-btn').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const childId = this.getAttribute('data-child-id');
+                    openEditChildModal(childId);
+                });
+            });
+            
+            document.querySelectorAll('.edit-questions-btn').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const childId = this.getAttribute('data-child-id');
+                    // Redirigir a yachaymikuy.html para editar respuestas
+                    window.location.href = `yachaymikuy.html?childId=${childId}&edit=true`;
+                });
+            });
+            
+            document.querySelectorAll('.view-plan-btn').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const childId = this.getAttribute('data-child-id');
+                    // Redirigir a chicos.html para ver el plan nutricional individual
+                    window.location.href = `chicos.html?childId=${childId}`;
+                });
+            });
+            
+            document.querySelectorAll('.delete-child-btn').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const childId = this.getAttribute('data-child-id');
+                    confirmDeleteChild(childId);
+                });
+            });
+            
+            document.querySelectorAll('.continue-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const childId = this.getAttribute('data-child-id');
+                    const children = storageAdapter.getChildren();
+                    const child = children.find(c => c.id === childId);
+                    
+                    if (child.progressPercent === 0) {
+                        // Comenzar cuestionario desde la primera pregunta
+                        window.location.href = `yachaymikuy.html?childId=${childId}&q=q1`;
+                    } else if (child.progressPercent === 100) {
+                        // Ver plan nutricional individual
+                        window.location.href = `chicos.html?childId=${childId}`;
+                    } else {
+                        // Continuar desde la última pregunta no respondida
+                        const nextQuestion = getNextQuestion(childId);
+                        window.location.href = `yachaymikuy.html?childId=${childId}&q=${nextQuestion}`;
+                    }
+                });
+            });
         }
         
         function calculateAge(dob) {
             const birthDate = new Date(dob);
-            let age = new Date().getFullYear() - birthDate.getFullYear();
-            const m = new Date().getMonth() - birthDate.getMonth();
-            if (m < 0 || (m === 0 && new Date().getDate() < birthDate.getDate())) age--;
+            const today = new Date();
+            let age = today.getFullYear() - birthDate.getFullYear();
+            const monthDiff = today.getMonth() - birthDate.getMonth();
+            
+            if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+                age--;
+            }
+            
             return age;
         }
         
         function openAddChildModal() {
             document.getElementById('childModalLabel').textContent = 'Agregar Nuevo Hijo';
-            document.getElementById('childForm').reset();
             document.getElementById('childId').value = '';
-            document.querySelectorAll('.avatar-option').forEach(o => o.classList.remove('selected'));
+            document.getElementById('childForm').reset();
+            
+            // Seleccionar primer avatar por defecto
+            document.querySelectorAll('.avatar-option').forEach(option => {
+                option.classList.remove('selected');
+            });
             document.querySelector('.avatar-option[data-avatar="1"]').classList.add('selected');
             document.getElementById('childAvatar').value = '1';
-            new bootstrap.Modal(document.getElementById('childModal')).show();
+            
+            // Asegurar que el modal se muestre correctamente
+            const modal = new bootstrap.Modal(document.getElementById('childModal'));
+            modal.show();
+            
+            // Forzar que el modal esté en el frente
+            document.getElementById('childModal').style.zIndex = '1055';
         }
         
         function openEditChildModal(childId) {
-            const child = storageAdapter.getChildren().find(c => c.id === childId);
-            if (!child) return showToast('Hijo no encontrado', 'error');
+            const children = storageAdapter.getChildren();
+            const child = children.find(c => c.id === childId);
+            
+            if (!child) {
+                showToast('Hijo no encontrado', 'error');
+                return;
+            }
+            
             document.getElementById('childModalLabel').textContent = 'Editar Perfil';
             document.getElementById('childId').value = child.id;
             document.getElementById('childName').value = child.name;
             document.getElementById('childBirthdate').value = child.dob;
             document.getElementById('childSex').value = child.sex;
             document.getElementById('childAvatar').value = child.avatarCustomization;
-            document.querySelectorAll('.avatar-option').forEach(o => o.classList.toggle('selected', o.dataset.avatar === child.avatarCustomization));
-            new bootstrap.Modal(document.getElementById('childModal')).show();
+            
+            // Seleccionar avatar correcto
+            document.querySelectorAll('.avatar-option').forEach(option => {
+                option.classList.remove('selected');
+                if (option.getAttribute('data-avatar') === child.avatarCustomization) {
+                    option.classList.add('selected');
+                }
+            });
+            
+            // Asegurar que el modal se muestre correctamente
+            const modal = new bootstrap.Modal(document.getElementById('childModal'));
+            modal.show();
+            
+            // Forzar que el modal esté en el frente
+            document.getElementById('childModal').style.zIndex = '1055';
         }
         
         function saveChild() {
             const childId = document.getElementById('childId').value;
-            const childData = {
-                name: document.getElementById('childName').value,
-                dob: document.getElementById('childBirthdate').value,
-                sex: document.getElementById('childSex').value,
-                avatarCustomization: document.getElementById('childAvatar').value
-            };
-            if (!childData.name || !childData.dob || !childData.sex) return showToast('Por favor completa todos los campos', 'error');
+            const name = document.getElementById('childName').value;
+            const dob = document.getElementById('childBirthdate').value;
+            const sex = document.getElementById('childSex').value;
+            const avatar = document.getElementById('childAvatar').value;
+            
+            if (!name || !dob || !sex) {
+                showToast('Por favor completa todos los campos obligatorios', 'error');
+                return;
+            }
+            
             const session = storageAdapter.getSession();
+            
             try {
                 if (childId) {
-                    updateChild(childId, childData);
-                    showToast('Perfil actualizado', 'success');
+                    // Editar hijo existente
+                    updateChild(childId, { name, dob, sex, avatarCustomization: avatar });
+                    showToast('Perfil actualizado correctamente', 'success');
                 } else {
-                    if (!session.currentUserId) return showToast('Debes iniciar sesión para agregar un hijo', 'error');
-                    createChild(session.currentUserId, { ...childData, theme: 'default' });
-                    showToast('Hijo agregado', 'success');
+                    // Crear nuevo hijo
+                    if (!session.currentUserId) {
+                        showToast('Debes iniciar sesión para agregar un hijo', 'error');
+                        return;
+                    }
+                    
+                    createChild(session.currentUserId, { 
+                        name, 
+                        dob, 
+                        sex, 
+                        avatarCustomization: avatar,
+                        theme: 'default'
+                    });
+                    showToast('Hijo agregado correctamente', 'success');
                 }
+                
+                // Cerrar modal y actualizar UI
                 bootstrap.Modal.getInstance(document.getElementById('childModal')).hide();
                 renderChildren();
             } catch (error) {
@@ -1648,23 +2354,42 @@
         }
         
         function confirmDeleteChild(childId) {
-            const child = storageAdapter.getChildren().find(c => c.id === childId);
-            if (!child) return showToast('Hijo no encontrado', 'error');
-            if (confirm(`¿Eliminar a ${child.name}? Esta acción se puede deshacer desde la papelera.`)) {
+            const children = storageAdapter.getChildren();
+            const child = children.find(c => c.id === childId);
+            
+            if (!child) {
+                showToast('Hijo no encontrado', 'error');
+                return;
+            }
+            
+            if (confirm(`¿Estás seguro de que deseas eliminar a ${child.name}? Esta acción se puede deshacer desde la papelera.`)) {
                 try {
                     softDeleteChild(childId);
+                    showToast(`${child.name} ha sido eliminado`, 'info');
+                    
+                    // Mostrar toast con opción de deshacer
+                    const toastContainer = document.getElementById('toastContainer');
                     const toastId = 'toast-undo-' + Date.now();
+                    
                     const toastHtml = `
                         <div id="${toastId}" class="custom-toast toast-info">
+                            <div class="me-2">
+                                <i class="fas fa-exclamation-circle text-info"></i>
+                            </div>
                             <div class="flex-grow-1">${child.name} ha sido eliminado</div>
-                            <button type="button" class="btn btn-sm btn-outline-secondary me-2" onclick="undoDeleteChild('${childId}'); document.getElementById('${toastId}').remove();">Deshacer</button>
+                            <button type="button" class="btn btn-sm btn-outline-secondary me-2" onclick="undoDeleteChild('${childId}')">Deshacer</button>
                             <button type="button" class="btn-close" onclick="document.getElementById('${toastId}').remove()"></button>
-                        </div>`;
-                    document.getElementById('toastContainer').insertAdjacentHTML('beforeend', toastHtml);
+                        </div>
+                    `;
+                    
+                    toastContainer.insertAdjacentHTML('beforeend', toastHtml);
+                    
+                    // Auto remove after 10 seconds
                     setTimeout(() => {
                         const toast = document.getElementById(toastId);
                         if (toast) toast.remove();
                     }, 10000);
+                    
                     renderChildren();
                 } catch (error) {
                     showToast(error.message, 'error');
@@ -1675,444 +2400,1346 @@
         function undoDeleteChild(childId) {
             try {
                 restoreChild(childId);
-                showToast('Perfil restaurado', 'success');
+                showToast('Perfil restaurado correctamente', 'success');
                 renderChildren();
-            } catch (error) { showToast(error.message, 'error'); }
+            } catch (error) {
+                showToast(error.message, 'error');
+            }
         }
         
         function showTrash() {
             const deletedChildren = getDeletedChildrenForCurrentUser();
+            const trashContainer = document.getElementById('trashContainer');
             const trashItems = document.getElementById('trashItems');
+            
             trashItems.innerHTML = '';
+            
             if (deletedChildren.length === 0) {
-                trashItems.innerHTML = '<p class="text-muted">La papelera está vacía</p>';
+                trashItems.innerHTML = '<p class="text-muted">No hay elementos en la papelera</p>';
             } else {
                 deletedChildren.forEach(child => {
-                    const avatarClass = `avatar-${child.avatarCustomization || 1}`;
-                    trashItems.innerHTML += `
-                        <div class="trash-item">
-                            <div class="d-flex align-items-center">
-                                <div class="child-avatar ${avatarClass} me-3" style="width:40px;height:40px;font-size:18px;"><i class="fas fa-child"></i></div>
-                                <div><h6 class="mb-0">${child.name}</h6><small class="text-muted">Eliminado: ${new Date(child.deletedAt).toLocaleDateString()}</small></div>
+                    const trashItem = document.createElement('div');
+                    trashItem.className = 'trash-item';
+                    
+                    const avatarClass = child.avatarCustomization === '1' ? 'avatar-1' : 
+                                       child.avatarCustomization === '2' ? 'avatar-2' : 'avatar-3';
+                    
+                    trashItem.innerHTML = `
+                        <div class="d-flex align-items-center">
+                            <div class="child-avatar ${avatarClass} me-3" style="width: 40px; height: 40px; font-size: 18px;">
+                                <i class="fas fa-child"></i>
                             </div>
                             <div>
-                                <button class="btn btn-sm btn-outline-success restore-btn" data-child-id="${child.id}"><i class="fas fa-undo"></i></button>
-                                <button class="btn btn-sm btn-outline-danger permanent-delete-btn" data-child-id="${child.id}"><i class="fas fa-trash"></i></button>
+                                <h6 class="mb-0">${child.name}</h6>
+                                <small class="text-muted">Eliminado el ${new Date(child.deletedAt).toLocaleDateString()}</small>
                             </div>
-                        </div>`;
+                        </div>
+                        <div>
+                            <button class="btn btn-sm btn-outline-success me-2 restore-btn" data-child-id="${child.id}">
+                                <i class="fas fa-undo"></i> Restaurar
+                            </button>
+                            <button class="btn btn-sm btn-outline-danger permanent-delete-btn" data-child-id="${child.id}">
+                                <i class="fas fa-trash"></i> Eliminar permanentemente
+                            </button>
+                        </div>
+                    `;
+                    
+                    trashItems.appendChild(trashItem);
                 });
-                trashItems.querySelectorAll('.restore-btn').forEach(btn => btn.addEventListener('click', () => { undoDeleteChild(btn.dataset.childId); showTrash(); }));
-                trashItems.querySelectorAll('.permanent-delete-btn').forEach(btn => btn.addEventListener('click', () => {
-                    if (confirm('¿Eliminar permanentemente? Esta acción no se puede deshacer.')) {
-                        try {
-                            permanentlyDeleteChild(btn.dataset.childId);
-                            showToast('Perfil eliminado permanentemente', 'success');
-                            showTrash();
-                        } catch (error) { showToast(error.message, 'error'); }
-                    }
-                }));
+                
+                // Agregar event listeners
+                document.querySelectorAll('.restore-btn').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const childId = this.getAttribute('data-child-id');
+                        undoDeleteChild(childId);
+                        showTrash(); // Actualizar la papelera
+                    });
+                });
+                
+                document.querySelectorAll('.permanent-delete-btn').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const childId = this.getAttribute('data-child-id');
+                        if (confirm('¿Estás seguro de que deseas eliminar este perfil permanentemente? Esta acción no se puede deshacer.')) {
+                            try {
+                                permanentlyDeleteChild(childId);
+                                showToast('Perfil eliminado permanentemente', 'success');
+                                showTrash(); // Actualizar la papelera
+                            } catch (error) {
+                                showToast(error.message, 'error');
+                            }
+                        }
+                    });
+                });
             }
-            document.getElementById('trashContainer').classList.remove('d-none');
+            
+            trashContainer.classList.remove('d-none');
         }
         
         function hideTrash() {
             document.getElementById('trashContainer').classList.add('d-none');
         }
         
+        // --- INICIO DE FUNCIONES DE SINCRONIZACIÓN ---
+        
+        // Función para sincronizar la eliminación/restauración entre páginas
         function syncChildDeletionAcrossPages(childId, action) {
-            const syncData = { childId, action, timestamp: new Date().toISOString() };
+            // action puede ser 'soft-delete', 'restore' o 'permanent-delete'
+            const syncData = {
+                childId: childId,
+                action: action,
+                timestamp: new Date().toISOString()
+            };
+            
+            // Guardar en localStorage para que otras páginas puedan detectar cambios
             localStorage.setItem('yachay_sync_action', JSON.stringify(syncData));
+            
+            // Notificar a otras pestañas abiertas usando BroadcastChannel
             if ('BroadcastChannel' in window) {
                 const channel = new BroadcastChannel('yachay_sync');
                 channel.postMessage(syncData);
-                channel.close();
             }
         }
+
+        // --- FIN DE FUNCIONES DE SINCRONIZACIÓN ---
         
-        // --- INICIO: LÓGICA DE LA COMUNIDAD ---
-        const departments = ["Amazonas", "Áncash", "Apurímac", "Arequipa", "Ayacucho", "Cajamarca", "Callao", "Cusco", "Huancavelica", "Huánuco", "Ica", "Junín", "La Libertad", "Lambayeque", "Lima", "Loreto", "Madre de Dios", "Moquegua", "Pasco", "Piura", "Puno", "San Martín", "Tacna", "Tumbes", "Ucayali"];
-        let currentOpenConversationId = null;
-
-        function getCurrentUser() {
-            const session = storageAdapter.getSession();
-            if (!session.currentUserId) return { id: 'guest', name: 'Invitado', isAdmin: false };
-            const users = storageAdapter.getUsers();
-            return users.find(u => u.id === session.currentUserId);
-        }
-
-        function isAdmin() {
-            const currentUser = getCurrentUser();
-            return currentUser && currentUser.email === 'alvaro.quiroz@alumno.ud.edu.pe';
-        }
-
-        function initializeComunidad() {
-            const filter = document.getElementById('departmentFilter');
-            filter.innerHTML = '<option value="all">Todos los Departamentos</option>';
-            departments.forEach(dep => {
-                filter.innerHTML += `<option value="${dep}">${dep}</option>`;
-            });
-            filter.addEventListener('change', () => renderConversations());
-            renderConversations();
-        }
-
+        // --- FUNCIONES DE LA COMUNIDAD ---
+        
         function renderConversations() {
-            const conversationsList = document.getElementById('conversationsList');
-            const selectedDepartment = document.getElementById('departmentFilter').value;
-            let conversations = storageAdapter.getConversations();
-
-            if (selectedDepartment !== 'all') {
-                conversations = conversations.filter(c => c.department === selectedDepartment);
-            }
-
-            conversations.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-
-            conversationsList.innerHTML = '';
-            if (conversations.length === 0) {
-                conversationsList.innerHTML = '<p class="text-center text-muted mt-3">No hay conversaciones en este departamento. ¡Sé el primero en crear una!</p>';
-                return;
-            }
-
-            const users = storageAdapter.getUsers();
-            const currentUser = getCurrentUser();
+            const communityData = storageAdapter.getCommunityData();
+            const selectedDepartment = document.getElementById('departmentSelect').value;
+            const container = document.getElementById('conversationsContainer');
             
-            conversations.forEach(conv => {
-                const author = users.find(u => u.id === conv.createdBy) || { name: 'Usuario Desconocido' };
-                const canModify = isAdmin() || currentUser.id === conv.createdBy;
-
-                const card = document.createElement('div');
-                card.className = 'conversation-card';
-                card.innerHTML = `
-                    <div class="d-flex justify-content-between align-items-start">
-                        <div>
-                            <h5>${conv.title}</h5>
-                            <p class="mb-2">${conv.description}</p>
-                            <div class="conversation-meta">
-                                <i class="fas fa-user"></i> Creado por <strong>${author.name}</strong> 
-                                <span class="mx-2">|</span>
-                                <i class="fas fa-calendar-alt"></i> ${new Date(conv.createdAt).toLocaleDateString()}
-                            </div>
-                        </div>
-                        ${canModify ? `
-                        <div class="dropdown">
-                            <button class="btn btn-sm btn-light" type="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-ellipsis-h"></i></button>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item edit-conv-btn" href="#" data-conv-id="${conv.id}"><i class="fas fa-edit fa-fw"></i> Editar</a></li>
-                                <li><a class="dropdown-item text-danger delete-conv-btn" href="#" data-conv-id="${conv.id}"><i class="fas fa-trash fa-fw"></i> Eliminar</a></li>
-                            </ul>
-                        </div>
-                        ` : ''}
-                    </div>
-                    <div class="text-end mt-2">
-                        <button class="btn btn-outline-primary btn-sm open-chat-btn" data-conv-id="${conv.id}">
-                            <i class="fas fa-comments"></i> Abrir Conversación (${conv.messages.length})
-                        </button>
+            // Filtrar conversaciones por departamento
+            let filteredConversations = communityData.conversations;
+            if (selectedDepartment) {
+                filteredConversations = communityData.conversations.filter(
+                    conv => conv.department === selectedDepartment
+                );
+            }
+            
+            container.innerHTML = '';
+            
+            if (filteredConversations.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-comments"></i>
+                        <h4>No hay conversaciones en este departamento</h4>
+                        <p>Sé el primero en iniciar una conversación sobre nutrición infantil.</p>
                     </div>
                 `;
-                conversationsList.appendChild(card);
+                return;
+            }
+            
+            filteredConversations.forEach(conversation => {
+                const conversationCard = document.createElement('div');
+                conversationCard.className = 'conversation-card';
+                
+                // Calcular mensajes no leídos
+                const session = storageAdapter.getSession();
+                const unreadCount = conversation.messages.filter(
+                    msg => !msg.readBy.includes(session.currentUserId)
+                ).length;
+                
+                conversationCard.innerHTML = `
+                    <div class="conversation-header">
+                        <div class="conversation-title">${conversation.title}</div>
+                        <div class="conversation-meta">
+                            ${unreadCount > 0 ? `<span class="unread-indicator">${unreadCount}</span>` : ''}
+                            ${new Date(conversation.createdAt).toLocaleDateString()}
+                        </div>
+                    </div>
+                    <div class="conversation-description">${conversation.description}</div>
+                    <div class="conversation-meta">
+                        <small>Creado por: ${conversation.creatorName} | Departamento: ${conversation.department}</small>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center mt-3">
+                        <button class="btn btn-sm btn-outline-primary open-conversation-btn" data-conversation-id="${conversation.id}">
+                            <i class="fas fa-comment"></i> Abrir conversación
+                        </button>
+                        ${canDeleteConversation(conversation) ? `
+                            <button class="btn btn-sm btn-outline-danger delete-conversation-btn" data-conversation-id="${conversation.id}">
+                                <i class="fas fa-trash"></i> Eliminar
+                            </button>
+                        ` : ''}
+                    </div>
+                `;
+                
+                container.appendChild(conversationCard);
             });
             
-            // Event listeners for actions
-            conversationsList.querySelectorAll('.open-chat-btn').forEach(btn => btn.addEventListener('click', () => openChat(btn.dataset.convId)));
-            conversationsList.querySelectorAll('.edit-conv-btn').forEach(btn => btn.addEventListener('click', e => { e.preventDefault(); e.stopPropagation(); editConversation(btn.dataset.convId); }));
-            conversationsList.querySelectorAll('.delete-conv-btn').forEach(btn => btn.addEventListener('click', e => { e.preventDefault(); e.stopPropagation(); deleteConversation(btn.dataset.convId); }));
+            // Agregar event listeners para abrir conversaciones
+            document.querySelectorAll('.open-conversation-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const conversationId = this.getAttribute('data-conversation-id');
+                    openConversation(conversationId);
+                });
+            });
+            
+            // Agregar event listeners para eliminar conversaciones
+            document.querySelectorAll('.delete-conversation-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const conversationId = this.getAttribute('data-conversation-id');
+                    deleteConversation(conversationId);
+                });
+            });
         }
-
-        function createConversation() {
-            const title = prompt("Introduce el título de la conversación:");
-            if (!title) return;
-            const description = prompt("Introduce una breve descripción:");
-            if (!description) return;
-            const department = prompt(`Elige un departamento para esta conversación:\n\n${departments.join(', ')}`);
-            if (!department || !departments.includes(department)) {
-                return showToast('Departamento no válido.', 'error');
+        
+        function renderDirectMessages() {
+            const communityData = storageAdapter.getCommunityData();
+            const container = document.getElementById('directMessages');
+            const session = storageAdapter.getSession();
+            
+            container.innerHTML = '';
+            
+            // Filtrar mensajes directos para el usuario actual
+            const userDMs = communityData.directMessages.filter(
+                dm => dm.senderId === session.currentUserId || dm.recipientId === session.currentUserId
+            );
+            
+            if (userDMs.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center text-muted py-3">
+                        <i class="fas fa-comment-slash fa-2x mb-2"></i>
+                        <p>No hay mensajes directos</p>
+                    </div>
+                `;
+                return;
             }
-
-            const conversations = storageAdapter.getConversations();
+            
+            userDMs.forEach(dm => {
+                const messageDiv = document.createElement('div');
+                const isMyMessage = dm.senderId === session.currentUserId;
+                
+                messageDiv.className = `message ${isMyMessage ? 'my-message' : 'other-message'}`;
+                messageDiv.innerHTML = `
+                    <div class="message-sender">${dm.senderName}</div>
+                    <div>${dm.content}</div>
+                    <div class="message-time">${new Date(dm.timestamp).toLocaleTimeString()}</div>
+                    ${isMyMessage ? `
+                        <div class="message-actions">
+                            <button class="action-btn edit-dm-btn" data-dm-id="${dm.id}">
+                                <i class="fas fa-edit"></i> Editar
+                            </button>
+                            <button class="action-btn delete-dm-btn" data-dm-id="${dm.id}">
+                                <i class="fas fa-trash"></i> Eliminar
+                            </button>
+                        </div>
+                    ` : ''}
+                `;
+                
+                container.appendChild(messageDiv);
+            });
+            
+            // Agregar event listeners para mensajes directos
+            document.querySelectorAll('.edit-dm-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const dmId = this.getAttribute('data-dm-id');
+                    editDirectMessage(dmId);
+                });
+            });
+            
+            document.querySelectorAll('.delete-dm-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const dmId = this.getAttribute('data-dm-id');
+                    deleteDirectMessage(dmId);
+                });
+            });
+        }
+        
+        function openConversation(conversationId) {
+            const communityData = storageAdapter.getCommunityData();
+            const conversation = communityData.conversations.find(conv => conv.id === conversationId);
+            
+            if (!conversation) {
+                showToast('Conversación no encontrada', 'error');
+                return;
+            }
+            
+            // Actualizar el título del chat
+            document.getElementById('chatTitle').textContent = conversation.title;
+            
+            // Renderizar mensajes
+            const chatMessages = document.getElementById('chatMessages');
+            chatMessages.innerHTML = '';
+            
+            const session = storageAdapter.getSession();
+            
+            conversation.messages.forEach(message => {
+                const messageDiv = document.createElement('div');
+                const isMyMessage = message.senderId === session.currentUserId;
+                
+                messageDiv.className = `message ${isMyMessage ? 'my-message' : 'other-message'}`;
+                messageDiv.innerHTML = `
+                    <div class="message-sender">${message.senderName}</div>
+                    <div>${message.content}</div>
+                    <div class="message-time">${new Date(message.timestamp).toLocaleTimeString()}</div>
+                    ${isMyMessage ? `
+                        <div class="message-actions">
+                            <button class="action-btn edit-message-btn" data-conversation-id="${conversationId}" data-message-id="${message.id}">
+                                <i class="fas fa-edit"></i> Editar
+                            </button>
+                            <button class="action-btn delete-message-btn" data-conversation-id="${conversationId}" data-message-id="${message.id}">
+                                <i class="fas fa-trash"></i> Eliminar
+                            </button>
+                        </div>
+                    ` : ''}
+                `;
+                
+                chatMessages.appendChild(messageDiv);
+            });
+            
+            // Marcar mensajes como leídos
+            markConversationAsRead(conversationId);
+            
+            // Configurar el botón de enviar para esta conversación
+            document.getElementById('sendChatBtn').onclick = function() {
+                sendMessageToConversation(conversationId);
+            };
+            
+            // Mostrar el chat flotante
+            document.getElementById('chatFloating').style.display = 'flex';
+            
+            // Agregar event listeners para editar/eliminar mensajes
+            document.querySelectorAll('.edit-message-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const convId = this.getAttribute('data-conversation-id');
+                    const msgId = this.getAttribute('data-message-id');
+                    editMessage(convId, msgId);
+                });
+            });
+            
+            document.querySelectorAll('.delete-message-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const convId = this.getAttribute('data-conversation-id');
+                    const msgId = this.getAttribute('data-message-id');
+                    deleteMessage(convId, msgId);
+                });
+            });
+            
+            // Hacer scroll al final de los mensajes
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+        
+        function sendMessageToConversation(conversationId) {
+            const input = document.getElementById('chatInput');
+            const content = input.value.trim();
+            
+            if (!content) {
+                showToast('Por favor escribe un mensaje', 'error');
+                return;
+            }
+            
+            const communityData = storageAdapter.getCommunityData();
+            const conversation = communityData.conversations.find(conv => conv.id === conversationId);
+            
+            if (!conversation) {
+                showToast('Conversación no encontrada', 'error');
+                return;
+            }
+            
+            const session = storageAdapter.getSession();
+            const users = storageAdapter.getUsers();
+            const currentUser = users.find(u => u.id === session.currentUserId);
+            
+            if (!currentUser) {
+                showToast('Usuario no encontrado', 'error');
+                return;
+            }
+            
+            // Crear nuevo mensaje
+            const newMessage = {
+                id: 'msg-' + Date.now(),
+                senderId: currentUser.id,
+                senderName: currentUser.name,
+                content: content,
+                timestamp: new Date().toISOString(),
+                readBy: [currentUser.id]
+            };
+            
+            // Agregar mensaje a la conversación
+            conversation.messages.push(newMessage);
+            
+            // Guardar cambios
+            storageAdapter.saveCommunityData(communityData);
+            
+            // Limpiar input
+            input.value = '';
+            
+            // Actualizar la vista de la conversación
+            openConversation(conversationId);
+            
+            showToast('Mensaje enviado', 'success');
+        }
+        
+        function sendDirectMessage() {
+            const input = document.getElementById('dmInput');
+            const content = input.value.trim();
+            
+            if (!content) {
+                showToast('Por favor escribe un mensaje', 'error');
+                return;
+            }
+            
+            const session = storageAdapter.getSession();
+            const users = storageAdapter.getUsers();
+            const currentUser = users.find(u => u.id === session.currentUserId);
+            
+            if (!currentUser) {
+                showToast('Usuario no encontrado', 'error');
+                return;
+            }
+            
+            const communityData = storageAdapter.getCommunityData();
+            
+            // Crear nuevo mensaje directo
+            const newDM = {
+                id: 'dm-' + Date.now(),
+                senderId: currentUser.id,
+                senderName: currentUser.name,
+                content: content,
+                timestamp: new Date().toISOString(),
+                read: false
+            };
+            
+            // Agregar mensaje directo
+            communityData.directMessages.push(newDM);
+            
+            // Guardar cambios
+            storageAdapter.saveCommunityData(communityData);
+            
+            // Limpiar input
+            input.value = '';
+            
+            // Actualizar la vista de mensajes directos
+            renderDirectMessages();
+            
+            showToast('Mensaje enviado al administrador', 'success');
+        }
+        
+        function createNewConversation() {
+            const title = document.getElementById('conversationTitle').value.trim();
+            const description = document.getElementById('conversationDescription').value.trim();
+            const department = document.getElementById('conversationDepartment').value;
+            
+            if (!title || !description || !department) {
+                showToast('Por favor completa todos los campos', 'error');
+                return;
+            }
+            
+            const session = storageAdapter.getSession();
+            const users = storageAdapter.getUsers();
+            const currentUser = users.find(u => u.id === session.currentUserId);
+            
+            if (!currentUser) {
+                showToast('Usuario no encontrado', 'error');
+                return;
+            }
+            
+            const communityData = storageAdapter.getCommunityData();
+            
+            // Crear nueva conversación
             const newConversation = {
                 id: 'conv-' + Date.now(),
-                department,
-                title,
-                description,
-                createdBy: getCurrentUser().id,
+                title: title,
+                description: description,
+                department: department,
+                creatorId: currentUser.id,
+                creatorName: currentUser.name,
                 createdAt: new Date().toISOString(),
                 messages: []
             };
-            conversations.push(newConversation);
-            storageAdapter.saveConversations(conversations);
+            
+            // Agregar conversación
+            communityData.conversations.push(newConversation);
+            
+            // Guardar cambios
+            storageAdapter.saveCommunityData(communityData);
+            
+            // Cerrar modal
+            bootstrap.Modal.getInstance(document.getElementById('newConversationModal')).hide();
+            
+            // Actualizar la vista de conversaciones
             renderConversations();
-            showToast('Conversación creada con éxito.', 'success');
-        }
-
-        function editConversation(convId) {
-            let conversations = storageAdapter.getConversations();
-            let conv = conversations.find(c => c.id === convId);
-            if (!conv) return;
-
-            const newTitle = prompt("Edita el título:", conv.title);
-            if (newTitle) conv.title = newTitle;
-            const newDesc = prompt("Edita la descripción:", conv.description);
-            if (newDesc) conv.description = newDesc;
-
-            storageAdapter.saveConversations(conversations);
-            renderConversations();
-            showToast('Conversación actualizada.', 'success');
+            
+            showToast('Conversación creada', 'success');
         }
         
-        function deleteConversation(convId) {
-            if (!confirm('¿Estás seguro de que quieres eliminar esta conversación y todos sus mensajes?')) return;
-            let conversations = storageAdapter.getConversations();
-            conversations = conversations.filter(c => c.id !== convId);
-            storageAdapter.saveConversations(conversations);
+        function markConversationAsRead(conversationId) {
+            const session = storageAdapter.getSession();
+            const communityData = storageAdapter.getCommunityData();
+            const conversation = communityData.conversations.find(conv => conv.id === conversationId);
+            
+            if (!conversation) return;
+            
+            // Marcar todos los mensajes como leídos por el usuario actual
+            conversation.messages.forEach(message => {
+                if (!message.readBy.includes(session.currentUserId)) {
+                    message.readBy.push(session.currentUserId);
+                }
+            });
+            
+            // Guardar cambios
+            storageAdapter.saveCommunityData(communityData);
+            
+            // Actualizar la vista de conversaciones
             renderConversations();
-            showToast('Conversación eliminada.', 'info');
         }
-
-        function openChat(convId) {
-            currentOpenConversationId = convId;
-            const conversations = storageAdapter.getConversations();
-            const conv = conversations.find(c => c.id === convId);
-            if (!conv) return;
-
-            document.getElementById('chatTitle').textContent = conv.title;
-            document.getElementById('chatModalOverlay').classList.add('active');
-            renderChatMessages();
-            document.getElementById('chatMessageInput').focus();
-        }
-
-        function closeChat() {
-            currentOpenConversationId = null;
-            document.getElementById('chatModalOverlay').classList.remove('active');
-        }
-
-        function renderChatMessages() {
-            if (!currentOpenConversationId) return;
-            const messagesContainer = document.getElementById('chatMessages');
-            const conversations = storageAdapter.getConversations();
-            const conv = conversations.find(c => c.id === currentOpenConversationId);
-            if (!conv) return;
-
-            messagesContainer.innerHTML = '';
+        
+        function canDeleteConversation(conversation) {
+            const session = storageAdapter.getSession();
             const users = storageAdapter.getUsers();
-            const currentUser = getCurrentUser();
-
-            if (conv.messages.length === 0) {
-                messagesContainer.innerHTML = '<p class="text-center text-muted">Aún no hay mensajes. ¡Sé el primero!</p>';
+            const currentUser = users.find(u => u.id === session.currentUserId);
+            
+            // El administrador puede eliminar cualquier conversación
+            if (currentUser && currentUser.isAdmin) return true;
+            
+            // Los usuarios solo pueden eliminar sus propias conversaciones
+            return conversation.creatorId === session.currentUserId;
+        }
+        
+        function deleteConversation(conversationId) {
+            if (!confirm('¿Estás seguro de que deseas eliminar esta conversación?')) {
                 return;
             }
-
-            conv.messages.forEach(msg => {
-                const sender = users.find(u => u.id === msg.sentBy) || { name: 'Invitado' };
-                const isSentByMe = msg.sentBy === currentUser.id;
-                
-                const bubble = document.createElement('div');
-                bubble.className = `message-bubble ${isSentByMe ? 'sent' : 'received'}`;
-                bubble.innerHTML = `
-                    ${!isSentByMe ? `<div class="message-sender">${sender.name}</div>` : ''}
-                    <div class="message-text">${msg.text}</div>
-                    <div class="message-time">${new Date(msg.sentAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</div>
-                `;
-                messagesContainer.appendChild(bubble);
-            });
-            messagesContainer.scrollTop = messagesContainer.scrollHeight;
-        }
-
-        function sendChatMessage() {
-            const input = document.getElementById('chatMessageInput');
-            const text = input.value.trim();
-            if (!text || !currentOpenConversationId) return;
-
-            let conversations = storageAdapter.getConversations();
-            let conv = conversations.find(c => c.id === currentOpenConversationId);
-            if (!conv) return;
-
-            const newMessage = {
-                msgId: 'msg-' + Date.now(),
-                text,
-                sentBy: getCurrentUser().id,
-                sentAt: new Date().toISOString()
-            };
-            conv.messages.push(newMessage);
-            storageAdapter.saveConversations(conversations);
             
-            input.value = '';
-            input.style.height = 'auto';
-            renderChatMessages();
-            renderConversations(); // Para actualizar el contador de mensajes
+            const communityData = storageAdapter.getCommunityData();
+            const conversationIndex = communityData.conversations.findIndex(conv => conv.id === conversationId);
+            
+            if (conversationIndex === -1) {
+                showToast('Conversación no encontrada', 'error');
+                return;
+            }
+            
+            const conversation = communityData.conversations[conversationIndex];
+            
+            // Verificar permisos
+            if (!canDeleteConversation(conversation)) {
+                showToast('No tienes permiso para eliminar esta conversación', 'error');
+                return;
+            }
+            
+            // Eliminar conversación
+            communityData.conversations.splice(conversationIndex, 1);
+            
+            // Guardar cambios
+            storageAdapter.saveCommunityData(communityData);
+            
+            // Actualizar la vista
+            renderConversations();
+            
+            // Cerrar el chat si está abierto
+            if (document.getElementById('chatFloating').style.display === 'flex') {
+                document.getElementById('chatFloating').style.display = 'none';
+            }
+            
+            showToast('Conversación eliminada', 'success');
         }
-
-        // --- FIN: LÓGICA DE LA COMUNIDAD ---
         
+        function editMessage(conversationId, messageId) {
+            const communityData = storageAdapter.getCommunityData();
+            const conversation = communityData.conversations.find(conv => conv.id === conversationId);
+            
+            if (!conversation) {
+                showToast('Conversación no encontrada', 'error');
+                return;
+            }
+            
+            const message = conversation.messages.find(msg => msg.id === messageId);
+            
+            if (!message) {
+                showToast('Mensaje no encontrado', 'error');
+                return;
+            }
+            
+            const newContent = prompt('Editar mensaje:', message.content);
+            
+            if (newContent !== null && newContent.trim() !== '') {
+                message.content = newContent.trim();
+                message.timestamp = new Date().toISOString(); // Actualizar timestamp
+                
+                // Guardar cambios
+                storageAdapter.saveCommunityData(communityData);
+                
+                // Actualizar la vista
+                openConversation(conversationId);
+                
+                showToast('Mensaje actualizado', 'success');
+            }
+        }
+        
+        function deleteMessage(conversationId, messageId) {
+            if (!confirm('¿Estás seguro de que deseas eliminar este mensaje?')) {
+                return;
+            }
+            
+            const communityData = storageAdapter.getCommunityData();
+            const conversation = communityData.conversations.find(conv => conv.id === conversationId);
+            
+            if (!conversation) {
+                showToast('Conversación no encontrada', 'error');
+                return;
+            }
+            
+            const messageIndex = conversation.messages.findIndex(msg => msg.id === messageId);
+            
+            if (messageIndex === -1) {
+                showToast('Mensaje no encontrado', 'error');
+                return;
+            }
+            
+            const session = storageAdapter.getSession();
+            const message = conversation.messages[messageIndex];
+            
+            // Verificar permisos (solo el remitente o el admin pueden eliminar)
+            const users = storageAdapter.getUsers();
+            const currentUser = users.find(u => u.id === session.currentUserId);
+            
+            if (!currentUser || (!currentUser.isAdmin && message.senderId !== session.currentUserId)) {
+                showToast('No tienes permiso para eliminar este mensaje', 'error');
+                return;
+            }
+            
+            // Eliminar mensaje
+            conversation.messages.splice(messageIndex, 1);
+            
+            // Guardar cambios
+            storageAdapter.saveCommunityData(communityData);
+            
+            // Actualizar la vista
+            openConversation(conversationId);
+            
+            showToast('Mensaje eliminado', 'success');
+        }
+        
+        function editDirectMessage(dmId) {
+            const communityData = storageAdapter.getCommunityData();
+            const dm = communityData.directMessages.find(d => d.id === dmId);
+            
+            if (!dm) {
+                showToast('Mensaje no encontrado', 'error');
+                return;
+            }
+            
+            const newContent = prompt('Editar mensaje:', dm.content);
+            
+            if (newContent !== null && newContent.trim() !== '') {
+                dm.content = newContent.trim();
+                dm.timestamp = new Date().toISOString(); // Actualizar timestamp
+                
+                // Guardar cambios
+                storageAdapter.saveCommunityData(communityData);
+                
+                // Actualizar la vista
+                renderDirectMessages();
+                
+                showToast('Mensaje actualizado', 'success');
+            }
+        }
+        
+        function deleteDirectMessage(dmId) {
+            if (!confirm('¿Estás seguro de que deseas eliminar este mensaje?')) {
+                return;
+            }
+            
+            const communityData = storageAdapter.getCommunityData();
+            const dmIndex = communityData.directMessages.findIndex(d => d.id === dmId);
+            
+            if (dmIndex === -1) {
+                showToast('Mensaje no encontrado', 'error');
+                return;
+            }
+            
+            const session = storageAdapter.getSession();
+            const dm = communityData.directMessages[dmIndex];
+            
+            // Verificar permisos (solo el remitente o el admin pueden eliminar)
+            const users = storageAdapter.getUsers();
+            const currentUser = users.find(u => u.id === session.currentUserId);
+            
+            if (!currentUser || (!currentUser.isAdmin && dm.senderId !== session.currentUserId)) {
+                showToast('No tienes permiso para eliminar este mensaje', 'error');
+                return;
+            }
+            
+            // Eliminar mensaje directo
+            communityData.directMessages.splice(dmIndex, 1);
+            
+            // Guardar cambios
+            storageAdapter.saveCommunityData(communityData);
+            
+            // Actualizar la vista
+            renderDirectMessages();
+            
+            showToast('Mensaje eliminado', 'success');
+        }
+        
+        // --- FIN DE FUNCIONES DE LA COMUNIDAD ---
+
         // Event Listeners
         document.addEventListener('DOMContentLoaded', function() {
             // Inicializar datos mock si es necesario
             initializeMockData();
             
+            // --- INICIO DE VERIFICACIÓN DE SINCRONIZACIÓN AL CARGAR ---
+            // Verificar si hay acciones de sincronización pendientes de otras pestañas
             const syncAction = localStorage.getItem('yachay_sync_action');
             if (syncAction) {
                 const syncData = JSON.parse(syncAction);
-                if ((new Date() - new Date(syncData.timestamp)) < 5000) renderChildren();
+                // Si la acción es reciente (menos de 5 segundos), la procesamos
+                const actionTime = new Date(syncData.timestamp);
+                const now = new Date();
+                if ((now - actionTime) < 5000) {
+                    // La acción es reciente, recargamos la vista para reflejar los cambios
+                    renderChildren();
+                }
+                // Limpiamos la acción para no procesarla de nuevo
                 localStorage.removeItem('yachay_sync_action');
             }
 
+            // Configurar listener para sincronización en tiempo real con otras pestañas
             if ('BroadcastChannel' in window) {
                 const channel = new BroadcastChannel('yachay_sync');
-                channel.onmessage = () => renderChildren();
+                channel.onmessage = function(event) {
+                    const syncData = event.data;
+                    // Si recibimos un mensaje de sincronización, recargamos la vista
+                    renderChildren();
+                };
             }
+            // --- FIN DE VERIFICACIÓN DE SINCRONIZACIÓN AL CARGAR ---
             
+            // Verificar sesión actual
             const session = storageAdapter.getSession();
-            if (session.currentUserId || session.exploringAsGuest) {
+            
+            if (session.currentUserId) {
+                showDashboardSection();
+            } else if (session.exploringAsGuest) {
                 showDashboardSection();
             } else {
                 showAuthSection();
             }
             
-            // Navegación de autenticación
-            document.getElementById('showRegisterLink').addEventListener('click', e => { e.preventDefault(); toggleAuthForms('register'); });
-            document.getElementById('showLoginLink').addEventListener('click', e => { e.preventDefault(); toggleAuthForms('login'); });
-            document.getElementById('forgotPasswordLink').addEventListener('click', e => { e.preventDefault(); toggleAuthForms('forgot'); });
-            document.getElementById('backToLoginLink').addEventListener('click', e => { e.preventDefault(); toggleAuthForms('login'); });
-            function toggleAuthForms(formToShow) {
-                document.getElementById('loginForm').classList.toggle('d-none', formToShow !== 'login');
-                document.getElementById('registerForm').classList.toggle('d-none', formToShow !== 'register');
-                document.getElementById('forgotPasswordForm').classList.toggle('d-none', formToShow !== 'forgot');
-            }
-
-            // Acciones de autenticación
-            document.getElementById('loginBtn').addEventListener('click', () => {
-                const email = document.getElementById('loginEmail').value;
-                const password = document.getElementById('loginPassword').value;
-                if (!email || !password) return showToast('Completa todos los campos', 'error');
-                showLoading();
-                setTimeout(() => { // Simula llamada a API
-                    try {
-                        login(email, password);
-                        showToast('Inicio de sesión exitoso', 'success');
-                        showDashboardSection();
-                    } catch (error) { showToast(error.message, 'error'); } 
-                    finally { hideLoading(); }
-                }, 500);
+            // Navegación entre formularios
+            document.getElementById('showRegisterLink').addEventListener('click', function(e) {
+                e.preventDefault();
+                document.getElementById('loginForm').classList.add('d-none');
+                document.getElementById('registerForm').classList.remove('d-none');
+                document.getElementById('forgotPasswordForm').classList.add('d-none');
             });
             
-            document.getElementById('registerBtn').addEventListener('click', () => {
+            document.getElementById('showLoginLink').addEventListener('click', function(e) {
+                e.preventDefault();
+                document.getElementById('loginForm').classList.remove('d-none');
+                document.getElementById('registerForm').classList.add('d-none');
+                document.getElementById('forgotPasswordForm').classList.add('d-none');
+            });
+            
+            document.getElementById('forgotPasswordLink').addEventListener('click', function(e) {
+                e.preventDefault();
+                document.getElementById('loginForm').classList.add('d-none');
+                document.getElementById('registerForm').classList.add('d-none');
+                document.getElementById('forgotPasswordForm').classList.remove('d-none');
+            });
+            
+            document.getElementById('backToLoginLink').addEventListener('click', function(e) {
+                e.preventDefault();
+                document.getElementById('loginForm').classList.remove('d-none');
+                document.getElementById('registerForm').classList.add('d-none');
+                document.getElementById('forgotPasswordForm').classList.add('d-none');
+            });
+            
+            // Login
+            document.getElementById('loginBtn').addEventListener('click', function() {
+                const email = document.getElementById('loginEmail').value;
+                const password = document.getElementById('loginPassword').value;
+                
+                if (!email || !password) {
+                    showToast('Por favor completa todos los campos', 'error');
+                    return;
+                }
+                
+                showLoading();
+                
+                try {
+                    login(email, password);
+                    showToast('Inicio de sesión exitoso', 'success');
+                    showDashboardSection();
+                } catch (error) {
+                    showToast(error.message, 'error');
+                } finally {
+                    hideLoading();
+                }
+            });
+            
+            // Registro
+            document.getElementById('registerBtn').addEventListener('click', function() {
                 const name = document.getElementById('registerName').value;
                 const email = document.getElementById('registerEmail').value;
                 const password = document.getElementById('registerPassword').value;
-                const confirmPass = document.getElementById('confirmPassword').value;
-                const terms = document.getElementById('acceptTerms').checked;
-                if (!name || !email || !password || !confirmPass) return showToast('Completa todos los campos', 'error');
-                if (password !== confirmPass) return showToast('Las contraseñas no coinciden', 'error');
-                if (!terms) return showToast('Debes aceptar los términos', 'error');
+                const confirmPassword = document.getElementById('confirmPassword').value;
+                const acceptTerms = document.getElementById('acceptTerms').checked;
+                
+                if (!name || !email || !password || !confirmPassword) {
+                    showToast('Por favor completa todos los campos', 'error');
+                    return;
+                }
+                
+                if (password !== confirmPassword) {
+                    showToast('Las contraseñas no coinciden', 'error');
+                    return;
+                }
+                
+                if (!acceptTerms) {
+                    showToast('Debes aceptar los términos y condiciones', 'error');
+                    return;
+                }
+                
                 showLoading();
-                setTimeout(() => { // Simula llamada a API
-                    try {
-                        createUser({ name, email, password });
-                        login(email, password);
-                        showToast('Cuenta creada e sesión iniciada', 'success');
-                        showDashboardSection();
-                    } catch (error) { showToast(error.message, 'error'); }
-                    finally { hideLoading(); }
-                }, 500);
+                
+                try {
+                    createUser({ name, email, password });
+                    showToast('Cuenta creada correctamente', 'success');
+                    
+                    // Iniciar sesión automáticamente
+                    login(email, password);
+                    showDashboardSection();
+                } catch (error) {
+                    showToast(error.message, 'error');
+                } finally {
+                    hideLoading();
+                }
             });
             
-            document.getElementById('recoverBtn').addEventListener('click', () => {
+            // Recuperar contraseña
+            document.getElementById('recoverBtn').addEventListener('click', function() {
                 const email = document.getElementById('forgotEmail').value;
-                if (!email) return showToast('Ingresa tu correo', 'error');
+                
+                if (!email) {
+                    showToast('Por favor ingresa tu correo electrónico', 'error');
+                    return;
+                }
+                
                 showLoading();
-                setTimeout(() => { // Simula llamada a API
-                    try {
-                        recoverPassword(email);
-                        showToast('Instrucciones enviadas a tu correo', 'success');
-                        toggleAuthForms('login');
-                    } catch (error) { showToast(error.message, 'error'); }
-                    finally { hideLoading(); }
-                }, 500);
+                
+                try {
+                    recoverPassword(email);
+                    showToast('Se han enviado instrucciones a tu correo electrónico', 'success');
+                    
+                    // Volver al formulario de login
+                    document.getElementById('loginForm').classList.remove('d-none');
+                    document.getElementById('registerForm').classList.add('d-none');
+                    document.getElementById('forgotPasswordForm').classList.add('d-none');
+                } catch (error) {
+                    showToast(error.message, 'error');
+                } finally {
+                    hideLoading();
+                }
             });
             
-            document.getElementById('guestBtn').addEventListener('click', () => {
+            // Explorar como invitado
+            document.getElementById('guestBtn').addEventListener('click', function() {
                 startGuestSession();
                 showToast('Explorando como invitado', 'info');
                 showDashboardSection();
             });
             
-            document.getElementById('logoutBtn').addEventListener('click', () => {
+            // Cerrar sesión
+            document.getElementById('logoutBtn').addEventListener('click', function() {
                 logout();
                 showAuthSection();
-                showToast('Sesión cerrada', 'success');
+                showToast('Sesión cerrada correctamente', 'success');
             });
             
-            // Acciones del Dashboard
+            // Agregar hijo
             document.getElementById('addChildBtn').addEventListener('click', openAddChildModal);
             document.getElementById('emptyAddChildBtn').addEventListener('click', openAddChildModal);
+            
+            // Guardar hijo
             document.getElementById('saveChildBtn').addEventListener('click', saveChild);
+            
+            // Papelera
             document.getElementById('viewTrashBtn').addEventListener('click', showTrash);
             document.getElementById('closeTrashBtn').addEventListener('click', hideTrash);
-            document.getElementById('generatePlanBtn').addEventListener('click', () => {
-                const children = getChildrenForCurrentUser();
-                const completed = children.filter(c => c.progressPercent === 100);
-                if (completed.length === 0) return showToast('Completa los datos de al menos un niño', 'warning');
+            
+            // Generar plan nutricional
+            document.getElementById('generatePlanBtn').addEventListener('click', function() {
                 const session = storageAdapter.getSession();
-                const url = session.exploringAsGuest ? 'yachay.html' : `yachay.html?userId=${session.currentUserId}`;
-                window.location.href = url;
+                
+                // Verificar si hay niños completados al 100%
+                const children = getChildrenForCurrentUser();
+                const completedChildren = children.filter(child => child.progressPercent === 100);
+                
+                if (completedChildren.length === 0) {
+                    showToast('Necesitas completar los datos de al menos un niño para generar un plan nutricional', 'error');
+                    return;
+                }
+                
+                if (session.exploringAsGuest) {
+                    // Si es invitado, generar plan con perfiles predefinidos
+                    window.location.href = 'yachay.html';
+                } else if (session.currentUserId) {
+                    // Si está logueado, generar plan con sus hijos
+                    window.location.href = `yachay.html?userId=${session.currentUserId}`;
+                } else {
+                    showToast('Debes iniciar sesión o explorar como invitado', 'error');
+                }
             });
-
-            // --- INICIO: LISTENERS DE COMUNIDAD ---
-            document.getElementById('comunidadBtn').addEventListener('click', showComunidadSection);
-            document.getElementById('backToDashboardBtn').addEventListener('click', showDashboardSection);
-            document.getElementById('createConversationBtn').addEventListener('click', createConversation);
-            document.getElementById('closeChatBtn').addEventListener('click', closeChat);
-            document.getElementById('chatModalOverlay').addEventListener('click', e => { if (e.target === e.currentTarget) closeChat(); });
-            document.getElementById('sendChatMessageBtn').addEventListener('click', sendChatMessage);
-            document.getElementById('chatMessageInput').addEventListener('keydown', e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendChatMessage(); } });
-            document.getElementById('chatMessageInput').addEventListener('input', e => {
-                e.target.style.height = 'auto';
-                e.target.style.height = (e.target.scrollHeight) + 'px';
+            
+            // Botón Comunidad
+            document.getElementById('communityBtn').addEventListener('click', function() {
+                const session = storageAdapter.getSession();
+                
+                if (!session.currentUserId && !session.exploringAsGuest) {
+                    showToast('Debes iniciar sesión o explorar como invitado para acceder a la comunidad', 'error');
+                    return;
+                }
+                
+                showCommunitySection();
             });
-            // --- FIN: LISTENERS DE COMUNIDAD ---
             
             // Selección de avatar
             document.querySelectorAll('.avatar-option').forEach(option => {
                 option.addEventListener('click', function() {
-                    document.querySelectorAll('.avatar-option').forEach(opt => opt.classList.remove('selected'));
+                    document.querySelectorAll('.avatar-option').forEach(opt => {
+                        opt.classList.remove('selected');
+                    });
                     this.classList.add('selected');
                     document.getElementById('childAvatar').value = this.getAttribute('data-avatar');
                 });
             });
             
-            // Modales del footer
+            // Configurar modales del footer
             setupFooterModals();
+            
+            // --- EVENT LISTENERS DE LA COMUNIDAD ---
+            
+            // Filtro de departamentos
+            document.getElementById('departmentSelect').addEventListener('change', function() {
+                renderConversations();
+            });
+            
+            // Nueva conversación
+            document.getElementById('newConversationBtn').addEventListener('click', function() {
+                const session = storageAdapter.getSession();
+                
+                if (!session.currentUserId) {
+                    showToast('Debes iniciar sesión para crear una conversación', 'error');
+                    return;
+                }
+                
+                // Abrir modal de nueva conversación
+                const modal = new bootstrap.Modal(document.getElementById('newConversationModal'));
+                modal.show();
+            });
+            
+            // Guardar conversación
+            document.getElementById('saveConversationBtn').addEventListener('click', createNewConversation);
+            
+            // Cerrar chat flotante
+            document.getElementById('closeChat').addEventListener('click', function() {
+                document.getElementById('chatFloating').style.display = 'none';
+            });
+            
+            // Enviar mensaje directo
+            document.getElementById('sendDmBtn').addEventListener('click', sendDirectMessage);
+            
+            // Enviar mensaje directo con Enter
+            document.getElementById('dmInput').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    sendDirectMessage();
+                }
+            });
+            
+            // Enviar mensaje en chat con Enter
+            document.getElementById('chatInput').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    document.getElementById('sendChatBtn').click();
+                }
+            });
+            
+            // Verificar si hay un hash en la URL para navegar a una sección específica
+            if (window.location.hash === '#perfiles-de-tus-hijos') {
+                // Si el hash es #perfiles-de-tus-hijos, asegurarse de que la sección sea visible
+                const dashboardSection = document.getElementById('dashboardSection');
+                if (dashboardSection && dashboardSection.classList.contains('d-none')) {
+                    showDashboardSection();
+                }
+                
+                // Hacer scroll a la sección
+                setTimeout(() => {
+                    const profilesSection = document.getElementById('perfiles-de-tus-hijos');
+                    if (profilesSection) {
+                        profilesSection.scrollIntoView({ behavior: 'smooth' });
+                    }
+                }, 100);
+            }
         });
         
         function setupFooterModals() {
-            const container = document.getElementById('action-modal-container');
+            const actionModalContainer = document.getElementById('action-modal-container');
+
+            // Objeto con las plantillas HTML para cada modal
             const templates = {
-                about: `<h2>Acerca de Yachay Mikuy</h2>...`,
-                services: `<h2>Nuestros Servicios</h2>...`,
-                faq: `<h2>Preguntas Frecuentes</h2>...`,
-                privacy: `<h2>Política de Privacidad</h2>...`,
-                terms: `<h2>Términos y Condiciones</h2>...`
-            }; // Contenido de modales abreviado por brevedad.
-            
+                aboutModal: () => `
+                    <div class="modal active">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h2>Acerca de Yachay Mikuy</h2>
+                                <button class="close-modal">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="content-section">
+                                    <h3><i class="fas fa-bullseye"></i> Nuestra Misión</h3>
+                                    <p>Reducir la prevalencia de anemia y malnutrición en niños de 0 a 13 años mediante planes de alimentación personalizados, adaptados culturalmente y económicamente a la realidad de las familias peruanas.</p>
+                                </div>
+                                <div class="content-section">
+                                    <h3><i class="fas fa-eye"></i> Nuestra Visión</h3>
+                                    <p>Convertirnos en la plataforma digital líder en nutrición infantil en Perú, contribuyendo al desarrollo humano y social del país a través de hábitos alimentarios saludables.</p>
+                                </div>
+                                <div class="content-section">
+                                    <h3><i class="fas fa-users"></i> Nuestro Equipo</h3>
+                                    <p>Contamos con un equipo multidisciplinario de profesionales de la salud, nutricionistas, desarrolladores de software y expertos en educación, comprometidos con mejorar la nutrición infantil en el país.</p>
+                                </div>
+                                <div class="content-section">
+                                    <h3><i class="fas fa-chart-line"></i> Impacto</h3>
+                                    <p>Según estudios del INEI (2023), la anemia infantil afecta a más del 40% de niños menores de 3 años en algunas regiones del Perú. Nuestro proyecto busca reducir esta cifra mediante intervenciones personalizadas y seguimiento continuo.</p>
+                                </div>
+                                <div class="highlight-box">
+                                    <h3 style="margin-top:0;"><i class="fas fa-award"></i> Reconocimientos</h3>
+                                    <p>Proyecto seleccionado por la Universidad de Piura como iniciativa de impacto social en el programa de Ingeniería Industrial y de Sistemas.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>`,
+                servicesModal: () => `
+                    <div class="modal active">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h2>Nuestros Servicios</h2>
+                                <button class="close-modal">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="content-section">
+                                    <h3><i class="fas fa-utensils"></i> Planes de Alimentación Personalizados</h3>
+                                    <p>Desarrollamos planes nutricionales adaptados a las necesidades específicas de cada niño, considerando:</p>
+                                    <ul>
+                                        <li>Edad y estado de salud</li>
+                                        <li>Disponibilidad de alimentos locales</li>
+                                        <li>Hábitos culturales y preferencias familiares</li>
+                                        <li>Capacidad económica del hogar</li>
+                                    </ul>
+                                </div>
+                                <div class="content-section">
+                                    <h3><i class="fas fa-chart-line"></i> Seguimiento Nutricional</h3>
+                                    <p>Monitoreamos el progreso de cada niño a través de:</p>
+                                    <ul>
+                                        <li>Registro diario de consumo alimentario</li>
+                                        <li>Evaluación periódica de indicadores de salud</li>
+                                        <li>Ajustes automáticos según resultados obtenidos</li>
+                                        <li>Reportes mensuales para padres y tutores</li>
+                                    </ul>
+                                </div>
+                                <div class="content-section">
+                                    <h3><i class="fas fa-graduation-cap"></i> Educación Nutricional</h3>
+                                    <p>Ofrecemos material educativo en múltiples formatos:</p>
+                                    <ul>
+                                        <li>Recetas prácticas con ingredientes locales</li>
+                                        <li>Videos tutoriales de preparación</li>
+                                        <li>Guías informativas sobre nutrientes esenciales</li>
+                                        <li>Consejos para mejorar hábitos alimentarios</li>
+                                    </ul>
+                                </div>
+                                <div class="content-section">
+                                    <h3><i class="fas fa-users"></i> Comunidad de Apoyo</h3>
+                                    <p>Conectamos a las familias con:</p>
+                                    <ul>
+                                        <li>Nutricionistas y profesionales de la salud</li>
+                                        <li>Otras familias que comparten experiencias</li>
+                                        <li>Foros de discusión y consejos prácticos</li>
+                                        <li>Eventos virtuales de capacitación</li>
+                                    </ul>
+                                </div>
+                                <div class="highlight-box">
+                                    <h3 style="margin-top:0;"><i class="fas fa-mobile-alt"></i> Accesibilidad</h3>
+                                    <p>Nuestra plataforma funciona en modo offline y cuenta con versión ligera para zonas con conectividad limitada.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>`,
+                faqModal: () => `
+                    <div class="modal active">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h2>Preguntas Frecuentes</h2>
+                                <button class="close-modal">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="content-section">
+                                    <h3><i class="fas fa-question-circle"></i> ¿Qué es Yachay Mikuy?</h3>
+                                    <p>Yachay Mikuy es una plataforma digital que ofrece planes de alimentación personalizados para combatir la anemia infantil en Perú, combinando tecnología, educación y nutrición culturalmente adaptada.</p>
+                                </div>
+                                <div class="content-section">
+                                    <h3><i class="fas fa-child"></i> ¿Para qué edades está diseñada la plataforma?</h3>
+                                    <p>Nuestra plataforma está diseñada para niños de 0 a 13 años, etapa crucial en el desarrollo donde los hábitos alimentarios se consolidan y se pueden prevenir deficiencias nutricionales a largo plazo.</p>
+                                </div>
+                                <div class="content-section">
+                                    <h3><i class="fas fa-user-plus"></i> ¿Cómo puedo registrarme?</h3>
+                                    <p>Puedes registrarte haciendo clic en el botón "Comenzar Ahora" en nuestra página principal y completando el formulario con tus datos personales. El proceso es rápido y seguro.</p>
+                                </div>
+                                <div class="content-section">
+                                    <h3><i class="fas fa-shield-alt"></i> ¿Es seguro compartir los datos de mis hijos?</h3>
+                                    <p>Sí, implementamos medidas avanzadas de protección de datos:</p>
+                                    <ul>
+                                        <li>Cifrado de extremo a extremo</li>
+                                        <li>Consentimiento parental explícito</li>
+                                        <li>Cumplimiento con normativas de protección de datos</li>
+                                        <li>Acceso restringido solo a personal autorizado</li>
+                                    </ul>
+                                </div>
+                                <div class="content-section">
+                                    <h3><i class="fas fa-heartbeat"></i> ¿Cómo funciona el seguimiento nutricional?</h3>
+                                    <p>A través de nuestra aplicación, puedes registrar el consumo alimentario de tus hijos y nosotros monitoreamos su progreso. El sistema genera alertas y recomendaciones automáticas según los resultados obtenidos.</p>
+                                </div>
+                                <div class="content-section">
+                                    <h3><i class="fas fa-dollar-sign"></i> ¿Qué costo tiene el servicio?</h3>
+                                    <p>Ofrecemos diferentes planes de suscripción:</p>
+                                    <ul>
+                                        <li>Plan básico: S/10-15 mensuales</li>
+                                        <li>Plan premium con atención personalizada</li>
+                                        <li>Subsidios para familias vulnerables mediante alianzas</li>
+                                        <li>Acceso gratuito en centros educativos convenidos</li>
+                                    </ul>
+                                </div>
+                                <div class="content-section">
+                                    <h3><i class="fas fa-wifi"></i> ¿Funciona sin internet?</h3>
+                                    <p>Sí, contamos con modo offline que permite:</p>
+                                    <ul>
+                                        <li>Acceso a recetas y guías descargadas</li>
+                                        <li>Registro de consumo para sincronizar después</li>
+                                        <li>Notificaciones vía SMS para zonas rurales</li>
+                                    </ul>
+                                </div>
+                                <div class="content-section">
+                                    <h3><i class="fas fa-hands-helping"></i> ¿Cómo obtengo ayuda si tengo problemas?</h3>
+                                    <p>Puedes contactarnos a través de:</p>
+                                    <ul>
+                                        <li>Chat en vivo en la aplicación</li>
+                                        <li>Correo electrónico: yachay.mikuy@gmail.com</li>
+                                        <li>Teléfono: +51 918 072 862</li>
+                                        <li>WhatsApp: +51 918 072 862</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>`,
+                privacyModal: () => `
+                    <div class="modal active">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h2>Política de Privacidad</h2>
+                                <button class="close-modal">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="content-section">
+                                    <h3><i class="fas fa-info-circle"></i> Información que Recopilamos</h3>
+                                    <p>Recopilamos información personal y de salud de manera responsable:</p>
+                                    <ul>
+                                        <li><strong>Datos personales:</strong> Nombre, correo electrónico, teléfono, departamento de residencia</li>
+                                        <li><strong>Datos de los niños:</strong> Nombre, fecha de nacimiento, peso, altura, historial médico relevante</li>
+                                        <li><strong>Datos de uso:</strong> Interacciones con la plataforma, preferencias alimentarias, progreso nutricional</li>
+                                        <li><strong>Datos técnicos:</strong> Dirección IP, tipo de dispositivo, navegador utilizado</li>
+                                    </ul>
+                                </div>
+                                <div class="content-section">
+                                    <h3><i class="fas fa-cogs"></i> Uso de la Información</h3>
+                                    <p>Utilizamos tu información para:</p>
+                                    <ul>
+                                        <li>Proporcionar planes de alimentación personalizados</li>
+                                        <li>Realizar seguimiento nutricional efectivo</li>
+                                        <li>Mejorar continuamente nuestros servicios</li>
+                                        <li>Comunicarnos contigo sobre actualizaciones relevantes</li>
+                                        <li>Generar reportes estadísticos anonimizados</li>
+                                    </ul>
+                                </div>
+                                <div class="content-section">
+                                    <h3><i class="fas fa-lock"></i> Protección de Datos</h3>
+                                    <p>Implementamos medidas de seguridad robustas:</p>
+                                    <ul>
+                                        <li>Cifrado SSL/TLS para todas las transmisiones</li>
+                                        <li>Almacenamiento cifrado en servidores seguros</li>
+                                        <li>Autenticación de dos factores para accesos críticos</li>
+                                        <li>Auditorías de seguridad periódicas</li>
+                                        <li>Backups automáticos y recovery plan</li>
+                                    </ul>
+                                </div>
+                                <div class="content-section">
+                                    <h3><i class="fas fa-user-shield"></i> Derechos de los Usuarios</h3>
+                                    <p>Tienes derecho a:</p>
+                                    <ul>
+                                        <li><strong>Acceder:</strong> Solicitar una copia de tus datos personales</li>
+                                        <li><strong>Rectificar:</strong> Corregir información inexacta o incompleta</li>
+                                        <li><strong>Cancelar:</strong> Solicitar la eliminación de tus datos</li>
+                                        <li><strong>Oponerse:</strong> Restringir el procesamiento de tus datos</li>
+                                        <li><strong>Portabilidad:</strong> Transferir tus datos a otro servicio</li>
+                                    </ul>
+                                    <p>Para ejercer estos derechos, contacta a yachay.mikuy@gmail.com</p>
+                                </div>
+                                <div class="content-section">
+                                    <h3><i class="fas fa-user-friends"></i> Consentimiento Parental</h3>
+                                    <p>Para el tratamiento de datos de menores:</p>
+                                    <ul>
+                                        <li>Requerimos consentimiento explícito de padres o tutores</li>
+                                        <li>Los padres son responsables de la veracidad de los datos</li>
+                                        <li>Podemos solicitar documentación adicional si es necesario</li>
+                                        <li>Los padres pueden revocar el consentimiento en cualquier momento</li>
+                                    </ul>
+                                </div>
+                                <div class="content-section">
+                                    <h3><i class="fas fa-clock"></i> Retención de Datos</h3>
+                                    <p>Conservamos los datos según los siguientes criterios:</p>
+                                    <ul>
+                                        <li>Datos de cuenta: mientras la cuenta esté activa</li>
+                                        <li>Datos de salud: mínimo 5 años después del último uso</li>
+                                        <li>Datos financieros: 7 años según normativa fiscal</li>
+                                        <li>Datos anonimizados: indefinidamente para estadísticas</li>
+                                    </ul>
+                                </div>
+                                <div class="highlight-box">
+                                    <h3 style="margin-top:0;"><i class="fas fa-exclamation-triangle"></i> Importante</h3>
+                                    <p>Esta política se actualiza periódicamente. Te notificaremos cualquier cambio significativo a través de tu correo electrónico registrado.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>`,
+                termsModal: () => `
+                    <div class="modal active">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h2>Términos y Condiciones</h2>
+                                <button class="close-modal">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="content-section">
+                                    <h3><i class="fas fa-check-circle"></i> Aceptación de los Términos</h3>
+                                    <p>Al utilizar la plataforma Yachay Mikuy, aceptas estos términos y condiciones en su totalidad. Si no estás de acuerdo con alguno de estos términos, no debes utilizar nuestros servicios.</p>
+                                    <p>El uso continuado de la plataforma después de cualquier modificación constituye aceptación de los nuevos términos.</p>
+                                </div>
+                                <div class="content-section">
+                                    <h3><i class="fas fa-cube"></i> Descripción del Servicio</h3>
+                                    <p>Yachay Mikuy es una plataforma digital que ofrece:</p>
+                                    <ul>
+                                        <li>Planes de alimentación personalizados para niños de 0 a 13 años</li>
+                                        <li>Seguimiento nutricional continuo</li>
+                                        <li>Educación nutricional adaptada culturalmente</li>
+                                        <li>Comunidad de apoyo para padres y cuidadores</li>
+                                        <li>Acceso a profesionales de la salud</li>
+                                    </ul>
+                                </div>
+                                <div class="content-section">
+                                    <h3><i class="fas fa-user-check"></i> Responsabilidades del Usuario</h3>
+                                    <p>Como usuario, te comprometes a:</p>
+                                    <ul>
+                                        <li>Proporcionar información veraz y actualizada</li>
+                                        <li>Mantener la confidencialidad de tus credenciales de acceso</li>
+                                        <li>Seguir las recomendaciones nutricionales de manera responsable</li>
+                                        <li>No compartir contenido inapropiado u ofensivo</li>
+                                        <li>Respetar los derechos de otros usuarios</li>
+                                        <li>Reportar cualquier problema o incidencia</li>
+                                    </ul>
+                                </div>
+                                <div class="content-section">
+                                    <h3><i class="fas fa-ban"></i> Uso Prohibido</h3>
+                                    <p>Está estrictamente prohibido:</p>
+                                    <ul>
+                                        <li>Utilizar la plataforma para fines comerciales no autorizados</li>
+                                        <li>Intentar acceder a cuentas de otros usuarios</li>
+                                        <li>Distribuir malware o software malicioso</li>
+                                        <li>Violentar la propiedad intelectual de Yachay Mikuy</li>
+                                        <li>Proporcionar información médica falsa o engañosa</li>
+                                        <li>Acosar o intimidar a otros usuarios</li>
+                                    </ul>
+                                </div>
+                                <div class="content-section">
+                                    <h3><i class="fas fa-copyright"></i> Propiedad Intelectual</h3>
+                                    <p>Todo el contenido de la plataforma está protegido por derechos de autor:</p>
+                                    <ul>
+                                        <li>Textos, imágenes, diseños, logotipos y software</li>
+                                        <li>Algoritmos de recomendación nutricional</li>
+                                        <li>Base de datos de recetas y alimentos</li>
+                                        <li>Material educativo y formatos originales</li>
+                                    </ul>
+                                    <p>Queda prohibida la reproducción total o parcial sin autorización expresa.</p>
+                                </div>
+                                <div class="content-section">
+                                    <h3><i class="fas fa-heart"></i> Información Médica</h3>
+                                    <p>Importante considerar:</p>
+                                    <ul>
+                                        <li>Yachay Mikuy no reemplaza la consulta médica profesional</li>
+                                        <li>Las recomendaciones son complementarias al tratamiento médico</li>
+                                        <li>Ante cualquier emergencia médica, contacta a servicios de salud</li>
+                                        <li>Los planes nutricionales deben ser supervisados por profesionales</li>
+                                    </ul>
+                                </div>
+                                <div class="content-section">
+                                    <h3><i class="fas fa-exclamation-triangle"></i> Limitación de Responsabilidad</h3>
+                                    <p>Yachay Mikuy no se responsabiliza por:</p>
+                                    <ul>
+                                        <li>El uso indebido de la plataforma por parte de los usuarios</li>
+                                        <li>Consecuencias derivadas de no seguir adecuadamente las recomendaciones</li>
+                                        <li>Problemas técnicos fuera de nuestro control</li>
+                                        <li>Contenido proporcionado por terceros</li>
+                                        <li>Daños indirectos, incidentales o consecuentes</li>
+                                    </ul>
+                                </div>
+                                <div class="content-section">
+                                    <h3><i class="fas fa-sync-alt"></i> Modificaciones de los Términos</h3>
+                                    <p>Yachay Mikuy se reserva el derecho de:</p>
+                                    <ul>
+                                        <li>Modificar estos términos y condiciones en cualquier momento</li>
+                                        <li>Actualizar las políticas de privacidad y uso de datos</li>
+                                        <li>Cambiar las características y funcionalidades del servicio</li>
+                                        <li>Suspender o terminar servicios por razones justificadas</li>
+                                    </ul>
+                                    <p>Las modificaciones entrarán en vigor desde su publicación en la plataforma.</p>
+                                </div>
+                                <div class="content-section">
+                                    <h3><i class="fas fa-gavel"></i> Ley Aplicable y Jurisdicción</h3>
+                                    <p>Estos términos se rigen por las leyes de la República del Perú. Cualquier disputa será resuelta en los tribunales de Lima, Perú.</p>
+                                </div>
+                                <div class="highlight-box">
+                                    <h3 style="margin-top:0;"><i class="fas fa-calendar-alt"></i> Vigencia</h3>
+                                    <p>Estos términos y condiciones entran en vigor a partir del 1 de enero de 2025 y permanecerán vigentes hasta su modificación.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>`
+            };
+
+            // Funciones para abrir y cerrar el modal
+            const ui = {
+                openModal: (content) => { actionModalContainer.innerHTML = content; },
+                closeModal: () => { actionModalContainer.innerHTML = ''; }
+            };
+
+            // Listener de clics para todo el documento
             document.body.addEventListener('click', (e) => {
-                const linkId = e.target.id || e.target.parentElement.id;
-                let modalType = null;
-                if (linkId === 'aboutLink') modalType = 'about';
-                else if (linkId === 'servicesLink') modalType = 'services';
-                else if (linkId === 'faqLink') modalType = 'faq';
-                else if (linkId === 'privacyLink') modalType = 'privacy';
-                else if (linkId === 'termsLink') modalType = 'terms';
-                
-                if (modalType) {
+                // Prevenir la acción por defecto si es un enlace
+                if (e.target.closest('a')) {
                      e.preventDefault();
-                     // Lógica para mostrar el modal del footer (no implementada aquí para mantener el foco en la comunidad)
-                     console.log(`Abrir modal: ${modalType}`);
                 }
                 
+                // Abrir modales según el ID del enlace clickeado
+                if (e.target.matches('#aboutLink')) { ui.openModal(templates.aboutModal()); }
+                if (e.target.matches('#servicesLink')) { ui.openModal(templates.servicesModal()); }
+                if (e.target.matches('#faqLink')) { ui.openModal(templates.faqModal()); }
+                if (e.target.matches('#privacyLink')) { ui.openModal(templates.privacyModal()); }
+                if (e.target.matches('#termsLink')) { ui.openModal(templates.termsModal()); }
+                
+                // Cerrar el modal si se hace clic en el fondo o en el botón de cerrar
                 if (e.target.matches('.modal') || e.target.matches('.close-modal')) { 
-                    container.innerHTML = '';
+                    ui.closeModal(); 
                 }
             });
         }
-        
     </script>
 </body>
 </html>
