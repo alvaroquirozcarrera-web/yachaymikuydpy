@@ -10,9 +10,7 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- AOS Animation -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     
     <style>
         :root {
@@ -32,9 +30,12 @@
             --medium-gray: #dee2e6;
             --text-dark: #212529;
             --shadow: 0 8px 24px rgba(0, 0, 0, 0.08); 
-            --shadow-hover: 0 12px 30px rgba(0, 0, 0, 0.12);
             --radius: 12px;
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition: all 0.3s ease-in-out;
+            --whatsapp-green: #25D366;
+            --whatsapp-green-light: #DCF8C6;
+            --whatsapp-gray: #E5DDD5;
+            --whatsapp-gray-dark: #8696A0;
         }
         
         * {
@@ -44,37 +45,21 @@
         }
         
         body {
-            font-family: 'Poppins', 'Nunito', sans-serif;
+            font-family: 'Nunito', sans-serif;
             background-color: var(--light-gray);
             color: var(--text-dark);
             line-height: 1.6;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            overflow-x: hidden;
         }
         
-        /* Header Styles */
         .header {
             background: linear-gradient(135deg, var(--primary-blue), var(--accent-color));
             color: white;
             padding: 20px 0;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             z-index: 100;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff" fill-opacity="0.1" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,133.3C960,128,1056,96,1152,90.7C1248,85,1344,107,1392,117.3L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat bottom;
-            background-size: cover;
-            opacity: 0.3;
         }
         
         .logo {
@@ -82,42 +67,29 @@
             font-weight: 800;
             display: flex;
             align-items: center;
-            position: relative;
-            z-index: 1;
         }
         
         .logo i {
             margin-right: 10px;
             color: var(--secondary-color);
-            animation: pulse 2s infinite;
         }
         
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
-        }
-        
-        /* Main Container */
         .main-container {
             flex: 1;
             padding: 40px 0;
-            position: relative;
         }
         
-        /* Card Styles */
         .card {
             border-radius: 15px;
-            box-shadow: var(--shadow);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             border: none;
             overflow: hidden;
-            transition: var(--transition);
-            position: relative;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         
         .card:hover {
             transform: translateY(-5px);
-            box-shadow: var(--shadow-hover);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
         }
         
         .card-header {
@@ -126,52 +98,20 @@
             font-weight: 600;
             padding: 15px 20px;
             border: none;
-            position: relative;
         }
         
-        .card-header::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(to right, var(--secondary-color), var(--warning-color));
-        }
-        
-        /* Button Styles */
         .btn-primary {
             background: linear-gradient(to right, var(--primary-blue), var(--accent-color));
             border: none;
             border-radius: 50px;
             padding: 10px 25px;
             font-weight: 600;
-            transition: var(--transition);
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-        }
-        
-        .btn-primary::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(to right, var(--accent-color), var(--primary-blue));
-            transition: left 0.5s ease;
-            z-index: -1;
-        }
-        
-        .btn-primary:hover::before {
-            left: 0;
+            transition: all 0.3s ease;
         }
         
         .btn-primary:hover {
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            color: white;
         }
         
         .btn-secondary {
@@ -180,7 +120,7 @@
             border-radius: 50px;
             padding: 10px 25px;
             font-weight: 600;
-            transition: var(--transition);
+            transition: all 0.3s ease;
         }
         
         .btn-secondary:hover {
@@ -189,14 +129,13 @@
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
         
-        /* Child Card Styles */
         .child-card {
             background: white;
             border-radius: 15px;
             padding: 20px;
             margin-bottom: 20px;
-            box-shadow: var(--shadow);
-            transition: var(--transition);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
         }
@@ -213,7 +152,7 @@
         
         .child-card:hover {
             transform: translateX(5px);
-            box-shadow: var(--shadow-hover);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
         }
         
         .child-avatar {
@@ -227,35 +166,14 @@
             color: white;
             font-size: 24px;
             margin-right: 15px;
-            position: relative;
-            overflow: hidden;
         }
         
-        .child-avatar::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: rgba(255, 255, 255, 0.2);
-            transform: rotate(45deg);
-            transition: all 0.5s ease;
-        }
-        
-        .child-card:hover .child-avatar::after {
-            top: -100%;
-            left: -100%;
-        }
-        
-        /* Progress Bar Styles */
         .progress-container {
             height: 10px;
             background-color: #e9ecef;
             border-radius: 10px;
             overflow: hidden;
             margin-top: 10px;
-            position: relative;
         }
         
         .progress-bar {
@@ -263,34 +181,8 @@
             background: linear-gradient(to right, var(--success-color), var(--primary-color));
             border-radius: 10px;
             transition: width 0.5s ease;
-            position: relative;
-            overflow: hidden;
         }
         
-        .progress-bar::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            bottom: 0;
-            right: 0;
-            background: linear-gradient(
-                to right,
-                rgba(255, 255, 255, 0),
-                rgba(255, 255, 255, 0.3) 50%,
-                rgba(255, 255, 255, 0)
-            );
-            transform: translateX(-100%);
-            animation: shimmer 2s infinite;
-        }
-        
-        @keyframes shimmer {
-            100% {
-                transform: translateX(100%);
-            }
-        }
-        
-        /* Toast Styles */
         .toast-container {
             position: fixed;
             top: 20px;
@@ -307,29 +199,6 @@
             display: flex;
             align-items: center;
             animation: slideIn 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .custom-toast::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 5px;
-            height: 100%;
-        }
-        
-        .toast-success::before {
-            background-color: var(--success-color);
-        }
-        
-        .toast-error::before {
-            background-color: var(--danger-color);
-        }
-        
-        .toast-info::before {
-            background-color: var(--info-color);
         }
         
         @keyframes slideIn {
@@ -343,12 +212,23 @@
             }
         }
         
-        /* Form Styles */
+        .toast-success {
+            border-left: 5px solid var(--success-color);
+        }
+        
+        .toast-error {
+            border-left: 5px solid var(--danger-color);
+        }
+        
+        .toast-info {
+            border-left: 5px solid var(--info-color);
+        }
+        
         .form-control, .form-select {
             border-radius: 10px;
             border: 1px solid #ddd;
             padding: 12px 15px;
-            transition: var(--transition);
+            transition: all 0.3s ease;
         }
         
         .form-control:focus, .form-select:focus {
@@ -356,11 +236,9 @@
             box-shadow: 0 0 0 0.25rem rgba(26, 75, 140, 0.25);
         }
         
-        /* Modal Styles */
         .modal-content {
             border-radius: 15px;
             border: none;
-            overflow: hidden;
         }
         
         .modal-header {
@@ -370,7 +248,6 @@
             border: none;
         }
         
-        /* Avatar Options */
         .avatar-options {
             display: flex;
             justify-content: space-around;
@@ -386,27 +263,8 @@
             justify-content: center;
             font-size: 36px;
             cursor: pointer;
-            transition: var(--transition);
+            transition: all 0.3s ease;
             border: 3px solid transparent;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .avatar-option::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.2);
-            transform: scale(0);
-            border-radius: 50%;
-            transition: transform 0.3s ease;
-        }
-        
-        .avatar-option:hover::after {
-            transform: scale(1);
         }
         
         .avatar-option:hover {
@@ -430,13 +288,8 @@
             background: linear-gradient(135deg, #FFD26F, #3677FF);
         }
         
-        /* Trash Container */
         .trash-container {
             margin-top: 30px;
-            background: white;
-            border-radius: 15px;
-            padding: 20px;
-            box-shadow: var(--shadow);
         }
         
         .trash-item {
@@ -448,27 +301,8 @@
             justify-content: space-between;
             align-items: center;
             border-left: 5px solid var(--danger-color);
-            transition: var(--transition);
-            position: relative;
-            overflow: hidden;
         }
         
-        .trash-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: rgba(244, 67, 54, 0.1);
-            transition: left 0.3s ease;
-        }
-        
-        .trash-item:hover::before {
-            left: 0;
-        }
-        
-        /* Empty State */
         .empty-state {
             text-align: center;
             padding: 40px 20px;
@@ -481,7 +315,6 @@
             color: #dee2e6;
         }
         
-        /* Loading Overlay */
         .spinner-border {
             width: 3rem;
             height: 3rem;
@@ -500,26 +333,13 @@
             z-index: 9998;
         }
         
-        /* Footer Styles */
+        /* --- ESTILOS DEL FOOTER --- */
         .footer { 
             background-color: var(--primary-blue); 
             color: rgba(255,255,255,0.8); 
             padding: 3rem 5%; 
             margin-top: auto;
-            position: relative;
-            overflow: hidden;
         }
-        
-        .footer::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(to right, var(--secondary-color), var(--warning-color));
-        }
-        
         .footer-content { 
             display: grid; 
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
@@ -527,12 +347,10 @@
             max-width: 1200px; 
             margin: 0 auto; 
         }
-        
         .footer-section { 
             display: flex; 
             flex-direction: column; 
         }
-        
         .footer-section h3 { 
             color: var(--white); 
             margin-bottom: 1.5rem; 
@@ -540,7 +358,6 @@
             position: relative; 
             padding-bottom: 0.5rem; 
         }
-        
         .footer-section h3::after { 
             content: ''; 
             position: absolute; 
@@ -550,7 +367,6 @@
             height: 2px; 
             background: var(--accent-red); 
         }
-        
         .footer-links { list-style: none; padding: 0; margin: 0; }
         .footer-links li { margin-bottom: 0.8rem; }
         .footer-links a { 
@@ -560,24 +376,7 @@
             display: flex; 
             align-items: center; 
             gap: 0.5rem; 
-            position: relative;
         }
-        
-        .footer-links a::before {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--accent-red);
-            transition: width 0.3s ease;
-        }
-        
-        .footer-links a:hover::before {
-            width: 100%;
-        }
-        
         .footer-links a:hover { color: var(--white); transform: translateX(5px); }
         .footer-links a i { width: 20px; text-align: center; }
         .footer-section p { margin-bottom: 0.8rem; display: flex; align-items: center; gap: 0.5rem; }
@@ -600,12 +399,12 @@
             border-top: 1px solid rgba(255,255,255,0.2); 
             font-size: 0.9rem; 
         }
-        
-        /* Modal Styles */
+
+        /* --- ESTILOS PARA MODALES --- */
         .modal { 
             display: none; 
             position: fixed; 
-            z-index: 1055; 
+            z-index: 1055; /* Aumentado para asegurar que esté por encima de otros elementos */
             left: 0; top: 0; 
             width: 100%; height: 100%; 
             background-color: rgba(0,0,0,0.5); 
@@ -624,8 +423,7 @@
             position: relative; 
             animation: modalSlideIn 0.4s; 
             display: flex; flex-direction: column; 
-            z-index: 1056;
-            overflow: hidden;
+            z-index: 1056; /* Aseguramos que el contenido del modal también tenga un z-index alto */
         }
         .modal-header { 
             padding: 1.5rem; 
@@ -650,7 +448,7 @@
         }
         .close-modal:hover { color: var(--accent-red); transform: rotate(90deg); }
         
-        /* Content Section Styles */
+        /* --- ESTILOS PARA CONTENIDO DE MODALES --- */
         .content-section { margin-bottom: 1.5rem; }
         .content-section h3 { 
             color: var(--primary-blue); 
@@ -671,79 +469,288 @@
             margin: 1rem 0; 
         }
         
-        /* Floating Links Styles */
-        .floating-links {
+        /* --- ESTILOS PARA COMUNIDAD --- */
+        .community-section {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .community-section.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .community-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .community-tabs {
+            display: flex;
+            border-bottom: 1px solid var(--medium-gray);
+            margin-bottom: 20px;
+        }
+        
+        .community-tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .community-tab:hover {
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+        
+        .community-tab.active {
+            border-bottom: 3px solid var(--primary-blue);
+            color: var(--primary-blue);
+            font-weight: 600;
+        }
+        
+        .department-selector {
+            margin-bottom: 20px;
+        }
+        
+        .conversation-card {
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .conversation-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .conversation-title {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .conversation-description {
+            color: var(--dark-color);
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+        
+        .conversation-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            color: var(--dark-color);
+        }
+        
+        .conversation-author {
+            font-weight: 500;
+        }
+        
+        .conversation-date {
+            color: var(--dark-color);
+        }
+        
+        .new-conversation-btn {
+            margin-bottom: 20px;
+        }
+        
+        /* --- ESTILOS PARA CHAT FLOTANTE --- */
+        .chat-container {
             position: fixed;
             bottom: 20px;
             right: 20px;
-            z-index: 1000;
-            display: flex;
+            width: 400px;
+            height: 600px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.2);
+            display: none;
             flex-direction: column;
-            gap: 10px;
-        }
-        
-        .floating-link {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: var(--primary-blue);
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-            position: relative;
+            z-index: 1050;
             overflow: hidden;
         }
         
-        .floating-link::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--accent-color);
-            transform: scale(0);
-            border-radius: 50%;
-            transition: transform 0.3s ease;
+        .chat-container.active {
+            display: flex;
+            animation: slideUp 0.3s ease;
         }
         
-        .floating-link:hover::before {
-            transform: scale(1);
+        @keyframes slideUp {
+            from {
+                transform: translateY(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
         }
         
-        .floating-link:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-hover);
-        }
-        
-        .floating-link i {
-            position: relative;
-            z-index: 1;
-        }
-        
-        .floating-tooltip {
-            position: absolute;
-            right: 60px;
-            top: 50%;
-            transform: translateY(-50%);
-            background: var(--dark-color);
+        .chat-header {
+            background: var(--whatsapp-green);
             color: white;
-            padding: 5px 10px;
-            border-radius: 5px;
-            white-space: nowrap;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s ease;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
         
-        .floating-link:hover .floating-tooltip {
-            opacity: 1;
+        .chat-header-title {
+            font-weight: 600;
         }
         
-        /* Responsive Styles */
+        .chat-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+        
+        .chat-messages {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            background: var(--whatsapp-gray);
+            background-image: url('https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png');
+        }
+        
+        .chat-message {
+            margin-bottom: 10px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .chat-message.sent {
+            align-items: flex-end;
+        }
+        
+        .chat-message.received {
+            align-items: flex-start;
+        }
+        
+        .message-bubble {
+            max-width: 70%;
+            padding: 8px 12px;
+            border-radius: 10px;
+            word-wrap: break-word;
+        }
+        
+        .message-bubble.sent {
+            background-color: var(--whatsapp-green-light);
+            border-top-right-radius: 0;
+        }
+        
+        .message-bubble.received {
+            background-color: white;
+            border-top-left-radius: 0;
+        }
+        
+        .message-info {
+            font-size: 0.7rem;
+            color: var(--whatsapp-gray-dark);
+            margin-top: 3px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .message-info.sent {
+            justify-content: flex-end;
+        }
+        
+        .message-info.received {
+            justify-content: flex-start;
+        }
+        
+        .message-status {
+            margin-left: 3px;
+        }
+        
+        .chat-input-container {
+            padding: 10px;
+            background: white;
+            border-top: 1px solid var(--medium-gray);
+            display: flex;
+        }
+        
+        .chat-input {
+            flex: 1;
+            border: 1px solid var(--medium-gray);
+            border-radius: 20px;
+            padding: 8px 15px;
+            margin-right: 10px;
+        }
+        
+        .chat-send-btn {
+            background: var(--whatsapp-green);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+        
+        .chat-send-btn:hover {
+            background: #128C7E;
+        }
+        
+        .unread-indicator {
+            background: var(--danger-color);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 0.7rem;
+            margin-left: 5px;
+        }
+        
+        .message-actions {
+            display: flex;
+            gap: 5px;
+            margin-top: 5px;
+        }
+        
+        .message-action-btn {
+            background: none;
+            border: none;
+            color: var(--whatsapp-gray-dark);
+            font-size: 0.8rem;
+            cursor: pointer;
+            padding: 2px 5px;
+        }
+        
+        .message-action-btn:hover {
+            color: var(--primary-blue);
+        }
+        
+        .no-conversations {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--dark-color);
+        }
+        
+        .no-conversations i {
+            font-size: 48px;
+            margin-bottom: 15px;
+            color: var(--medium-gray);
+        }
+        
         @media (max-width: 768px) {
             .logo {
                 font-size: 1.5rem;
@@ -765,52 +772,13 @@
                 font-size: 28px;
             }
             
-            .floating-links {
-                bottom: 10px;
-                right: 10px;
+            .chat-container {
+                width: 100%;
+                height: 100%;
+                bottom: 0;
+                right: 0;
+                border-radius: 0;
             }
-            
-            .floating-link {
-                width: 40px;
-                height: 40px;
-            }
-        }
-        
-        /* Animations */
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        
-        @keyframes slideUp {
-            from { transform: translateY(20px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-        
-        .fade-in {
-            animation: fadeIn 0.5s ease;
-        }
-        
-        .slide-up {
-            animation: slideUp 0.5s ease;
-        }
-        
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 10px;
-        }
-        
-        ::-webkit-scrollbar-track {
-            background: var(--light-gray);
-        }
-        
-        ::-webkit-scrollbar-thumb {
-            background: var(--primary-blue);
-            border-radius: 5px;
-        }
-        
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--accent-color);
         }
     </style>
 </head>
@@ -843,7 +811,7 @@
             <!-- Login/Register Section -->
             <div id="authSection" class="row justify-content-center">
                 <div class="col-md-10 col-lg-8">
-                    <div class="card" data-aos="fade-up">
+                    <div class="card">
                         <div class="card-header text-center">
                             <h3>Bienvenido a Yachay Mikuy</h3>
                         </div>
@@ -895,7 +863,7 @@
                                 <div class="mb-3 form-check">
                                     <input type="checkbox" class="form-check-input" id="acceptTerms" required>
                                     <label class="form-check-label" for="acceptTerms">
-                                        Acepto los <a href="#" id="termsLink">términos y condiciones</a>
+                                        Acepto los <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">términos y condiciones</a>
                                     </label>
                                 </div>
                                 <div class="d-grid gap-2 mb-3">
@@ -930,15 +898,18 @@
             <div id="dashboardSection" class="d-none">
                 <div class="row mb-4" id="perfiles-de-tus-hijos">
                     <div class="col-12">
-                        <h2 class="mb-3" data-aos="fade-up">Perfiles de tus hijos</h2>
-                        <button id="addChildBtn" class="btn btn-primary" data-aos="fade-up" data-aos-delay="100">
+                        <h2 class="mb-3">Perfiles de tus hijos</h2>
+                        <button id="addChildBtn" class="btn btn-primary">
                             <i class="fas fa-plus-circle"></i> Agregar nuevo hijo
                         </button>
-                        <button id="viewTrashBtn" class="btn btn-outline-danger ms-2" data-aos="fade-up" data-aos-delay="200">
+                        <button id="viewTrashBtn" class="btn btn-outline-danger ms-2">
                             <i class="fas fa-trash"></i> Papelera
                         </button>
-                        <button id="generatePlanBtn" class="btn btn-success ms-2" data-aos="fade-up" data-aos-delay="300">
+                        <button id="generatePlanBtn" class="btn btn-success ms-2">
                             <i class="fas fa-file-medical"></i> Generar plan nutricional
+                        </button>
+                        <button id="communityBtn" class="btn btn-info ms-2">
+                            <i class="fas fa-users"></i> Comunidad
                         </button>
                     </div>
                 </div>
@@ -962,6 +933,83 @@
                         <!-- Deleted children will be shown here -->
                     </div>
                     <button id="closeTrashBtn" class="btn btn-secondary">Cerrar papelera</button>
+                </div>
+            </div>
+            
+            <!-- Community Section -->
+            <div id="communitySection" class="community-section">
+                <div class="community-header">
+                    <h2>Comunidad Yachay Mikuy</h2>
+                    <button id="backToDashboardBtn" class="btn btn-outline-secondary">
+                        <i class="fas fa-arrow-left"></i> Volver al panel
+                    </button>
+                </div>
+                
+                <div class="community-tabs">
+                    <div class="community-tab active" data-tab="conversations">
+                        <i class="fas fa-comments me-2"></i> Conversaciones
+                    </div>
+                    <div class="community-tab" data-tab="direct-messages">
+                        <i class="fas fa-envelope me-2"></i> Mensajes directos
+                    </div>
+                </div>
+                
+                <!-- Conversaciones Tab -->
+                <div id="conversationsTab" class="tab-content">
+                    <div class="department-selector">
+                        <label for="departmentSelect" class="form-label">Selecciona tu departamento:</label>
+                        <select class="form-select" id="departmentSelect">
+                            <option value="">Todos los departamentos</option>
+                            <option value="amazonas">Amazonas</option>
+                            <option value="ancash">Áncash</option>
+                            <option value="apurimac">Apurímac</option>
+                            <option value="arequipa">Arequipa</option>
+                            <option value="ayacucho">Ayacucho</option>
+                            <option value="cajamarca">Cajamarca</option>
+                            <option value="callao">Callao</option>
+                            <option value="cusco">Cusco</option>
+                            <option value="huancavelica">Huancavelica</option>
+                            <option value="huanuco">Huánuco</option>
+                            <option value="ica">Ica</option>
+                            <option value="junin">Junín</option>
+                            <option value="la-libertad">La Libertad</option>
+                            <option value="lambayeque">Lambayeque</option>
+                            <option value="lima">Lima</option>
+                            <option value="loreto">Loreto</option>
+                            <option value="madre-de-dios">Madre de Dios</option>
+                            <option value="moquegua">Moquegua</option>
+                            <option value="pasco">Pasco</option>
+                            <option value="piura">Piura</option>
+                            <option value="puno">Puno</option>
+                            <option value="san-martin">San Martín</option>
+                            <option value="tacna">Tacna</option>
+                            <option value="tumbes">Tumbes</option>
+                            <option value="ucayali">Ucayali</option>
+                        </select>
+                    </div>
+                    
+                    <button id="newConversationBtn" class="btn btn-primary new-conversation-btn">
+                        <i class="fas fa-plus-circle"></i> Nueva conversación
+                    </button>
+                    
+                    <div id="conversationsContainer">
+                        <!-- Conversations will be dynamically added here -->
+                    </div>
+                </div>
+                
+                <!-- Mensajes Directos Tab -->
+                <div id="directMessagesTab" class="tab-content d-none">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="mb-0">Mensajes directos con el administrador</h5>
+                        </div>
+                        <div class="card-body">
+                            <p>Envía tus preguntas o inquietudes directamente al administrador de Yachay Mikuy.</p>
+                            <button id="startDirectMessageBtn" class="btn btn-primary">
+                                <i class="fas fa-envelope"></i> Enviar mensaje directo
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1023,6 +1071,152 @@
         </div>
     </div>
     
+    <!-- New Conversation Modal -->
+    <div class="modal fade" id="newConversationModal" tabindex="-1" aria-labelledby="newConversationModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="newConversationModalLabel">Nueva Conversación</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="newConversationForm">
+                        <div class="mb-3">
+                            <label for="conversationTitle" class="form-label">Título de la conversación</label>
+                            <input type="text" class="form-control" id="conversationTitle" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="conversationDescription" class="form-label">Descripción</label>
+                            <textarea class="form-control" id="conversationDescription" rows="3" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="conversationDepartment" class="form-label">Departamento</label>
+                            <select class="form-select" id="conversationDepartment" required>
+                                <option value="">Selecciona un departamento</option>
+                                <option value="amazonas">Amazonas</option>
+                                <option value="ancash">Áncash</option>
+                                <option value="apurimac">Apurímac</option>
+                                <option value="arequipa">Arequipa</option>
+                                <option value="ayacucho">Ayacucho</option>
+                                <option value="cajamarca">Cajamarca</option>
+                                <option value="callao">Callao</option>
+                                <option value="cusco">Cusco</option>
+                                <option value="huancavelica">Huancavelica</option>
+                                <option value="huanuco">Huánuco</option>
+                                <option value="ica">Ica</option>
+                                <option value="junin">Junín</option>
+                                <option value="la-libertad">La Libertad</option>
+                                <option value="lambayeque">Lambayeque</option>
+                                <option value="lima">Lima</option>
+                                <option value="loreto">Loreto</option>
+                                <option value="madre-de-dios">Madre de Dios</option>
+                                <option value="moquegua">Moquegua</option>
+                                <option value="pasco">Pasco</option>
+                                <option value="piura">Piura</option>
+                                <option value="puno">Puno</option>
+                                <option value="san-martin">San Martín</option>
+                                <option value="tacna">Tacna</option>
+                                <option value="tumbes">Tumbes</option>
+                                <option value="ucayali">Ucayali</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="firstMessage" class="form-label">Primer mensaje</label>
+                            <textarea class="form-control" id="firstMessage" rows="3" required></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" id="createConversationBtn" class="btn btn-primary">Crear conversación</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Terms & Conditions Modal -->
+    <div class="modal fade" id="termsModal" tabindex="-1" aria-labelledby="termsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="termsModalLabel">Términos y Condiciones</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <h6><strong>📋 1. ACEPTACIÓN DE LOS TÉRMINOS</strong></h6>
+                    <p>Al utilizar la plataforma Yachay Mikuy, aceptas estos términos y condiciones en su totalidad. Si no estás de acuerdo con alguno de estos términos, no debes utilizar nuestros servicios.</p>
+                    <p>El uso continuado de la plataforma después de cualquier modificación constituye aceptación de los nuevos términos.</p>
+                    
+                    <h6><strong>🍎 2. DESCRIPCIÓN DEL SERVICIO</strong></h6>
+                    <p>Yachay Mikuy es una plataforma digital que ofrece:</p>
+                    <p>Planes de alimentación personalizados para niños de 0 a 13 años</p>
+                    <p>Seguimiento nutricional continuo</p>
+                    <p>Educación nutricional adaptada culturalmente</p>
+                    <p>Comunidad de apoyo para padres y cuidadores</p>
+                    <p>Acceso a profesionales de la salud</p>
+                    
+                    <h6><strong>👤 3. RESPONSABILIDADES DEL USUARIO</strong></h6>
+                    <p>Como usuario, te comprometes a:</p>
+                    <p>Proporcionar información veraz y actualizada</p>
+                    <p>Mantener la confidencialidad de tus credenciales de acceso</p>
+                    <p>Seguir las recomendaciones nutricionales de manera responsable</p>
+                    <p>No compartir contenido inapropiado u ofensivo</p>
+                    <p>Respetar los derechos de otros usuarios</p>
+                    <p>Reportar cualquier problema o incidencia</p>
+                    
+                    <h6><strong>🚫 4. USO PROHIBIDO</strong></h6>
+                    <p>Está estrictamente prohibido:</p>
+                    <p>Utilizar la plataforma para fines comerciales no autorizados</p>
+                    <p>Intentar acceder a cuentas de otros usuarios</p>
+                    <p>Distribuir malware o software malicioso</p>
+                    <p>Violentar la propiedad intelectual de Yachay Mikuy</p>
+                    <p>Proporcionar información médica falsa o engañosa</p>
+                    <p>Acosar o intimidar a otros usuarios</p>
+                    
+                    <h6><strong>©️ 5. PROPIEDAD INTELECTUAL</strong></h6>
+                    <p>Todo el contenido de la plataforma está protegido por derechos de autor:</p>
+                    <p>Textos, imágenes, diseños, logotipos y software</p>
+                    <p>Algoritmos de recomendación nutricional</p>
+                    <p>Base de datos de recetas y alimentos</p>
+                    <p>Material educativo y formatos originales</p>
+                    <p>Queda prohibida la reproducción total o parcial sin autorización expresa.</p>
+                    
+                    <h6><strong>🏥 6. INFORMACIÓN MÉDICA</strong></h6>
+                    <p>Importante considerar:</p>
+                    <p>Yachay Mikuy no reemplaza la consulta médica profesional</p>
+                    <p>Las recomendaciones son complementarias al tratamiento médico</p>
+                    <p>Ante cualquier emergencia médica, contacta a servicios de salud</p>
+                    <p>Los planes nutricionales deben ser supervisados por profesionales</p>
+                    
+                    <h6><strong>⚠️ 7. LIMITACIÓN DE RESPONSABILIDAD</strong></h6>
+                    <p>Yachay Mikuy no se responsabiliza por:</p>
+                    <p>El uso indebido de la plataforma por parte de los usuarios</p>
+                    <p>Consecuencias derivadas de no seguir adecuadamente las recomendaciones</p>
+                    <p>Problemas técnicos fuera de nuestro control</p>
+                    <p>Contenido proporcionado por terceros</p>
+                    <p>Daños indirectos, incidentales o consecuentes</p>
+                    
+                    <h6><strong>🔄 8. MODIFICACIONES DE LOS TÉRMINOS</strong></h6>
+                    <p>Yachay Mikuy se reserva el derecho de:</p>
+                    <p>Modificar estos términos y condiciones en cualquier momento</p>
+                    <p>Actualizar las políticas de privacidad y uso de datos</p>
+                    <p>Cambiar las características y funcionalidades del servicio</p>
+                    <p>Suspender o terminar servicios por razones justificadas</p>
+                    <p>Las modificaciones entrarán en vigor desde su publicación en la plataforma.</p>
+                    
+                    <h6><strong>⚖️ 9. LEY APLICABLE Y JURISDICCIÓN</strong></h6>
+                    <p>Estos términos se rigen por las leyes de la República del Perú. Cualquier disputa será resuelta en los tribunales de Lima, Perú.</p>
+                    
+                    <h6><strong>📅 10. VIGENCIA</strong></h6>
+                    <p>Estos términos y condiciones entran en vigor a partir del 1 de enero de 2025 y permanecerán vigentes hasta su modificación.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
     <!-- Loading Overlay -->
     <div id="loadingOverlay" class="loading-overlay d-none">
         <div class="spinner-border text-primary" role="status">
@@ -1035,6 +1229,25 @@
     
     <!-- Modal Container -->
     <div id="action-modal-container"></div>
+    
+    <!-- Chat Container -->
+    <div id="chatContainer" class="chat-container">
+        <div class="chat-header">
+            <div class="chat-header-title" id="chatTitle">Conversación</div>
+            <button class="chat-close" id="chatClose">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="chat-messages" id="chatMessages">
+            <!-- Messages will be dynamically added here -->
+        </div>
+        <div class="chat-input-container">
+            <input type="text" class="chat-input" id="chatInput" placeholder="Escribe un mensaje...">
+            <button class="chat-send-btn" id="chatSendBtn">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+    </div>
     
     <!-- Footer -->
     <footer class="footer">
@@ -1069,34 +1282,10 @@
         <div class="footer-bottom">&copy; 2025 Yachay Mikuy. Todos los derechos reservados.</div>
     </footer>
     
-    <!-- Floating Links -->
-    <div class="floating-links">
-        <div class="floating-link" id="floatingTerms">
-            <i class="fas fa-file-contract"></i>
-            <span class="floating-tooltip">Términos y Condiciones</span>
-        </div>
-        <div class="floating-link" id="floatingPrivacy">
-            <i class="fas fa-shield-alt"></i>
-            <span class="floating-tooltip">Política de Privacidad</span>
-        </div>
-        <div class="floating-link" id="floatingHelp">
-            <i class="fas fa-question-circle"></i>
-            <span class="floating-tooltip">Ayuda</span>
-        </div>
-    </div>
-    
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- AOS Animation JS -->
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     
     <script>
-        // Initialize AOS
-        AOS.init({
-            duration: 800,
-            once: true
-        });
-        
         /*
          * README - Guía de uso para desarrolladores
          * 
@@ -1109,6 +1298,9 @@
          * - yachay_responses: Objeto con respuestas al cuestionario
          * - yachay_session: Datos de la sesión actual
          * - yachay_auditLog: Registro de acciones
+         * - yachay_conversations: Array de conversaciones de la comunidad
+         * - yachay_messages: Objeto con mensajes de cada conversación
+         * - yachay_directMessages: Array de mensajes directos al administrador
          * 
          * Integración con otros archivos:
          * - chicos.html: Muestra el perfil individual de un niño (childId)
@@ -1129,6 +1321,10 @@
          * - Botón "Generar plan nutricional" lleva a yachay.html con la información de todos los niños completados
          * - Botón "Salir" en lugar de "Omitir" en el cuestionario
          * - Footer funcional con modales para información adicional
+         * - Funcionalidad de comunidad con conversaciones por departamento
+         * - Chat flotante tipo WhatsApp para interactuar en las conversaciones
+         * - Mensajes directos con el administrador
+         * - Permisos diferenciados para usuarios y administrador
          * 
          * Checklist de QA:
          * - Registro → login → crear 2 hijos → verificar solo esos hijos aparecen
@@ -1156,6 +1352,14 @@
          * - Cualquier texto que diga "Ver plan nutricional" redirige a chicos.html
          * - Botón "Salir" en lugar de "Omitir" en el cuestionario
          * - Footer funcional con modales para información adicional
+         * - Botón "Comunidad" abre la sección de comunidad
+         * - Selector de departamento filtra las conversaciones
+         * - Crear nueva conversación funciona correctamente
+         * - Chat flotante muestra los mensajes de la conversación
+         * - Mensajes enviados aparecen alineados a la derecha en verde claro
+         * - Mensajes recibidos aparecen alineados a la izquierda en blanco
+         * - Mensajes directos al administrador funcionan correctamente
+         * - Permisos de usuario y administrador funcionan correctamente
          */
         
         // Storage Adapter - Para facilitar migración a backend
@@ -1205,6 +1409,33 @@
                 localStorage.setItem('yachay_auditLog', JSON.stringify(auditLog));
             },
             
+            // Conversations
+            getConversations: function() {
+                const conversations = localStorage.getItem('yachay_conversations');
+                return conversations ? JSON.parse(conversations) : [];
+            },
+            saveConversations: function(conversations) {
+                localStorage.setItem('yachay_conversations', JSON.stringify(conversations));
+            },
+            
+            // Messages
+            getMessages: function() {
+                const messages = localStorage.getItem('yachay_messages');
+                return messages ? JSON.parse(messages) : {};
+            },
+            saveMessages: function(messages) {
+                localStorage.setItem('yachay_messages', JSON.stringify(messages));
+            },
+            
+            // Direct Messages
+            getDirectMessages: function() {
+                const directMessages = localStorage.getItem('yachay_directMessages');
+                return directMessages ? JSON.parse(directMessages) : [];
+            },
+            saveDirectMessages: function(directMessages) {
+                localStorage.setItem('yachay_directMessages', JSON.stringify(directMessages));
+            },
+            
             // Para migración a backend, estas funciones se reemplazarían con llamadas API
             // Ejemplo:
             // async getUsers() {
@@ -1224,7 +1455,7 @@
             const adminUser = {
                 id: 'admin-' + Date.now(),
                 name: 'Administrador',
-                email: 'admin@yachaymikuy.org',
+                email: 'alvaro.quiroz@alumno.ud.edu.pe',
                 passwordHash: btoa('admin123'), // En producción usar hash real
                 isAdmin: true,
                 createdAt: new Date().toISOString()
@@ -1436,6 +1667,131 @@
             }
             
             storageAdapter.saveResponses(responses);
+            
+            // Crear conversaciones de ejemplo
+            const conversations = [
+                {
+                    id: 'conv-' + Date.now(),
+                    title: 'Recetas para combatir la anemia',
+                    description: 'Compartamos recetas ricas en hierro para nuestros niños',
+                    authorId: demoUser.id,
+                    authorName: demoUser.name,
+                    department: 'lima',
+                    createdAt: new Date().toISOString(),
+                    updatedAt: new Date().toISOString()
+                },
+                {
+                    id: 'conv-' + (Date.now() + 1),
+                    title: 'Consejos para que los niños coman verduras',
+                    description: '¿Cómo logramos que nuestros hijos coman más verduras?',
+                    authorId: adminUser.id,
+                    authorName: adminUser.name,
+                    department: 'arequipa',
+                    createdAt: new Date(Date.now() - 86400000).toISOString(), // 1 día atrás
+                    updatedAt: new Date(Date.now() - 86400000).toISOString()
+                },
+                {
+                    id: 'conv-' + (Date.now() + 2),
+                    title: 'Snacks saludables para el colegio',
+                    description: 'Ideas de snacks nutritivos para la lonchera',
+                    authorId: demoUser.id,
+                    authorName: demoUser.name,
+                    department: 'piura',
+                    createdAt: new Date(Date.now() - 172800000).toISOString(), // 2 días atrás
+                    updatedAt: new Date(Date.now() - 172800000).toISOString()
+                }
+            ];
+            
+            storageAdapter.saveConversations(conversations);
+            
+            // Crear mensajes de ejemplo para las conversaciones
+            const messages = {};
+            
+            // Mensajes para la primera conversación
+            messages[conversations[0].id] = [
+                {
+                    id: 'msg-' + Date.now(),
+                    senderId: demoUser.id,
+                    senderName: demoUser.name,
+                    content: 'Hola a todos, quería compartir esta receta de lomo saltado que les encanta a mis hijos',
+                    timestamp: new Date(Date.now() - 3600000).toISOString(), // 1 hora atrás
+                    read: true
+                },
+                {
+                    id: 'msg-' + (Date.now() + 1),
+                    senderId: adminUser.id,
+                    senderName: adminUser.name,
+                    content: '¡Qué buena idea! El lomo saltado es excelente y los niños lo adoran. ¿Podrías compartir la receta completa?',
+                    timestamp: new Date(Date.now() - 3000000).toISOString(), // 50 minutos atrás
+                    read: true
+                },
+                {
+                    id: 'msg-' + (Date.now() + 2),
+                    senderId: demoUser.id,
+                    senderName: demoUser.name,
+                    content: 'Claro, necesitas 200g de lomo de res, cebolla, tomate, ají amarillo y un poco de sillao. Primero marinas el lomo con sillao y jengibre, luego salteas todo junto',
+                    timestamp: new Date(Date.now() - 2400000).toISOString(), // 40 minutos atrás
+                    read: true
+                }
+            ];
+            
+            // Mensajes para la segunda conversación
+            messages[conversations[1].id] = [
+                {
+                    id: 'msg-' + (Date.now() + 10),
+                    senderId: adminUser.id,
+                    senderName: adminUser.name,
+                    content: 'Uno de los trucos que más me ha funcionado es presentar las verduras de forma divertida, como caritas o animales',
+                    timestamp: new Date(Date.now() - 86400000).toISOString(), // 1 día atrás
+                    read: true
+                },
+                {
+                    id: 'msg-' + (Date.now() + 11),
+                    senderId: demoUser.id,
+                    senderName: demoUser.name,
+                    content: 'Eso es genial, voy a intentarlo. A mi hijo mayor le cuesta mucho comer brócoli',
+                    timestamp: new Date(Date.now() - 86000000).toISOString(), // 23 horas y 50 minutos atrás
+                    read: true
+                }
+            ];
+            
+            // Mensajes para la tercera conversación
+            messages[conversations[2].id] = [
+                {
+                    id: 'msg-' + (Date.now() + 20),
+                    senderId: demoUser.id,
+                    senderName: demoUser.name,
+                    content: 'Les recomiendo preparar mix de frutos secos con yogurt natural, mis hijos lo adoran',
+                    timestamp: new Date(Date.now() - 172800000).toISOString(), // 2 días atrás
+                    read: true
+                }
+            ];
+            
+            storageAdapter.saveMessages(messages);
+            
+            // Crear mensajes directos de ejemplo
+            const directMessages = [
+                {
+                    id: 'dm-' + Date.now(),
+                    senderId: demoUser.id,
+                    senderName: demoUser.name,
+                    content: 'Hola, tengo una duda sobre el plan nutricional de mi hijo',
+                    timestamp: new Date(Date.now() - 7200000).toISOString(), // 2 horas atrás
+                    read: true,
+                    reply: null
+                },
+                {
+                    id: 'dm-' + (Date.now() + 1),
+                    senderId: adminUser.id,
+                    senderName: adminUser.name,
+                    content: 'Hola, claro, ¿en qué puedo ayudarte?',
+                    timestamp: new Date(Date.now() - 7000000).toISOString(), // 1 hora y 55 minutos atrás
+                    read: true,
+                    reply: 'dm-' + Date.now()
+                }
+            ];
+            
+            storageAdapter.saveDirectMessages(directMessages);
             
             // Inicializar audit log
             storageAdapter.saveAuditLog([
@@ -1862,16 +2218,325 @@
             return true;
         }
         
+        // Funciones de gestión de comunidad
+        function createConversation(conversationData) {
+            const conversations = storageAdapter.getConversations();
+            const session = storageAdapter.getSession();
+            
+            if (!session.currentUserId) {
+                throw new Error('Debes iniciar sesión para crear una conversación');
+            }
+            
+            const users = storageAdapter.getUsers();
+            const currentUser = users.find(u => u.id === session.currentUserId);
+            
+            const newConversation = {
+                id: 'conv-' + Date.now(),
+                title: conversationData.title,
+                description: conversationData.description,
+                authorId: session.currentUserId,
+                authorName: currentUser.name,
+                department: conversationData.department,
+                createdAt: new Date().toISOString(),
+                updatedAt: new Date().toISOString()
+            };
+            
+            conversations.push(newConversation);
+            storageAdapter.saveConversations(conversations);
+            
+            // Crear primer mensaje
+            const messages = storageAdapter.getMessages();
+            messages[newConversation.id] = [
+                {
+                    id: 'msg-' + Date.now(),
+                    senderId: session.currentUserId,
+                    senderName: currentUser.name,
+                    content: conversationData.firstMessage,
+                    timestamp: new Date().toISOString(),
+                    read: true
+                }
+            ];
+            storageAdapter.saveMessages(messages);
+            
+            logAction(session.currentUserId, 'create_conversation', 'conversation', newConversation.id, { 
+                title: newConversation.title 
+            });
+            
+            return newConversation;
+        }
+        
+        function getConversationsForDepartment(department) {
+            const conversations = storageAdapter.getConversations();
+            
+            if (!department) {
+                return conversations;
+            }
+            
+            return conversations.filter(conv => conv.department === department);
+        }
+        
+        function getMessagesForConversation(conversationId) {
+            const messages = storageAdapter.getMessages();
+            return messages[conversationId] || [];
+        }
+        
+        function sendMessage(conversationId, content) {
+            const session = storageAdapter.getSession();
+            
+            if (!session.currentUserId) {
+                throw new Error('Debes iniciar sesión para enviar un mensaje');
+            }
+            
+            const users = storageAdapter.getUsers();
+            const currentUser = users.find(u => u.id === session.currentUserId);
+            
+            const messages = storageAdapter.getMessages();
+            
+            if (!messages[conversationId]) {
+                messages[conversationId] = [];
+            }
+            
+            const newMessage = {
+                id: 'msg-' + Date.now(),
+                senderId: session.currentUserId,
+                senderName: currentUser.name,
+                content: content,
+                timestamp: new Date().toISOString(),
+                read: true
+            };
+            
+            messages[conversationId].push(newMessage);
+            storageAdapter.saveMessages(messages);
+            
+            logAction(session.currentUserId, 'send_message', 'message', newMessage.id, { 
+                conversationId: conversationId 
+            });
+            
+            return newMessage;
+        }
+        
+        function deleteMessage(conversationId, messageId) {
+            const session = storageAdapter.getSession();
+            const messages = storageAdapter.getMessages();
+            
+            if (!messages[conversationId]) {
+                throw new Error('Conversación no encontrada');
+            }
+            
+            const messageIndex = messages[conversationId].findIndex(m => m.id === messageId);
+            
+            if (messageIndex === -1) {
+                throw new Error('Mensaje no encontrado');
+            }
+            
+            const message = messages[conversationId][messageIndex];
+            
+            // Verificar permisos
+            if (!isAdmin() && message.senderId !== session.currentUserId) {
+                throw new Error('No tienes permiso para eliminar este mensaje');
+            }
+            
+            messages[conversationId].splice(messageIndex, 1);
+            storageAdapter.saveMessages(messages);
+            
+            logAction(session.currentUserId, 'delete_message', 'message', messageId, { 
+                conversationId: conversationId 
+            });
+            
+            return true;
+        }
+        
+        function editMessage(conversationId, messageId, newContent) {
+            const session = storageAdapter.getSession();
+            const messages = storageAdapter.getMessages();
+            
+            if (!messages[conversationId]) {
+                throw new Error('Conversación no encontrada');
+            }
+            
+            const messageIndex = messages[conversationId].findIndex(m => m.id === messageId);
+            
+            if (messageIndex === -1) {
+                throw new Error('Mensaje no encontrado');
+            }
+            
+            const message = messages[conversationId][messageIndex];
+            
+            // Verificar permisos
+            if (!isAdmin() && message.senderId !== session.currentUserId) {
+                throw new Error('No tienes permiso para editar este mensaje');
+            }
+            
+            const oldContent = message.content;
+            message.content = newContent;
+            message.edited = true;
+            message.editedAt = new Date().toISOString();
+            
+            storageAdapter.saveMessages(messages);
+            
+            logAction(session.currentUserId, 'edit_message', 'message', messageId, { 
+                conversationId: conversationId,
+                oldContent: oldContent,
+                newContent: newContent
+            });
+            
+            return message;
+        }
+        
+        function deleteConversation(conversationId) {
+            const session = storageAdapter.getSession();
+            const conversations = storageAdapter.getConversations();
+            
+            const conversationIndex = conversations.findIndex(c => c.id === conversationId);
+            
+            if (conversationIndex === -1) {
+                throw new Error('Conversación no encontrada');
+            }
+            
+            const conversation = conversations[conversationIndex];
+            
+            // Verificar permisos
+            if (!isAdmin() && conversation.authorId !== session.currentUserId) {
+                throw new Error('No tienes permiso para eliminar esta conversación');
+            }
+            
+            conversations.splice(conversationIndex, 1);
+            storageAdapter.saveConversations(conversations);
+            
+            // Eliminar mensajes asociados
+            const messages = storageAdapter.getMessages();
+            delete messages[conversationId];
+            storageAdapter.saveMessages(messages);
+            
+            logAction(session.currentUserId, 'delete_conversation', 'conversation', conversationId);
+            
+            return true;
+        }
+        
+        function sendDirectMessage(content) {
+            const session = storageAdapter.getSession();
+            
+            if (!session.currentUserId) {
+                throw new Error('Debes iniciar sesión para enviar un mensaje');
+            }
+            
+            const users = storageAdapter.getUsers();
+            const currentUser = users.find(u => u.id === session.currentUserId);
+            
+            const directMessages = storageAdapter.getDirectMessages();
+            
+            const newMessage = {
+                id: 'dm-' + Date.now(),
+                senderId: session.currentUserId,
+                senderName: currentUser.name,
+                content: content,
+                timestamp: new Date().toISOString(),
+                read: false,
+                reply: null
+            };
+            
+            directMessages.push(newMessage);
+            storageAdapter.saveDirectMessages(directMessages);
+            
+            logAction(session.currentUserId, 'send_direct_message', 'direct_message', newMessage.id);
+            
+            return newMessage;
+        }
+        
+        function replyToDirectMessage(messageId, replyContent) {
+            const session = storageAdapter.getSession();
+            
+            if (!isAdmin()) {
+                throw new Error('Solo el administrador puede responder mensajes directos');
+            }
+            
+            const directMessages = storageAdapter.getDirectMessages();
+            const messageIndex = directMessages.findIndex(m => m.id === messageId);
+            
+            if (messageIndex === -1) {
+                throw new Error('Mensaje no encontrado');
+            }
+            
+            const message = directMessages[messageIndex];
+            
+            const replyMessage = {
+                id: 'dm-reply-' + Date.now(),
+                senderId: session.currentUserId,
+                senderName: 'Administrador',
+                content: replyContent,
+                timestamp: new Date().toISOString(),
+                read: false,
+                reply: messageId
+            };
+            
+            directMessages.push(replyMessage);
+            storageAdapter.saveDirectMessages(directMessages);
+            
+            // Marcar el mensaje original como respondido
+            message.reply = replyMessage.id;
+            storageAdapter.saveDirectMessages(directMessages);
+            
+            logAction(session.currentUserId, 'reply_direct_message', 'direct_message', replyMessage.id, {
+                originalMessageId: messageId
+            });
+            
+            return replyMessage;
+        }
+        
+        function getDirectMessages() {
+            const session = storageAdapter.getSession();
+            const directMessages = storageAdapter.getDirectMessages();
+            
+            if (isAdmin()) {
+                // El administrador ve todos los mensajes
+                return directMessages;
+            } else if (session.currentUserId) {
+                // Los usuarios solo ven sus mensajes y las respuestas del administrador
+                return directMessages.filter(m => 
+                    m.senderId === session.currentUserId || 
+                    (m.reply && directMessages.find(dm => dm.id === m.reply)?.senderId === session.currentUserId)
+                );
+            }
+            
+            return [];
+        }
+        
+        function isAdmin() {
+            const session = storageAdapter.getSession();
+            
+            if (!session.currentUserId) {
+                return false;
+            }
+            
+            const users = storageAdapter.getUsers();
+            const currentUser = users.find(u => u.id === session.currentUserId);
+            
+            return currentUser && currentUser.isAdmin;
+        }
+        
+        function getCurrentUser() {
+            const session = storageAdapter.getSession();
+            
+            if (!session.currentUserId) {
+                return null;
+            }
+            
+            const users = storageAdapter.getUsers();
+            return users.find(u => u.id === session.currentUserId);
+        }
+        
         // Funciones de UI
         function showAuthSection() {
             document.getElementById('authSection').classList.remove('d-none');
             document.getElementById('dashboardSection').classList.add('d-none');
+            document.getElementById('communitySection').classList.remove('active');
             document.getElementById('userMenu').classList.add('d-none');
         }
         
         function showDashboardSection() {
             document.getElementById('authSection').classList.add('d-none');
             document.getElementById('dashboardSection').classList.remove('d-none');
+            document.getElementById('communitySection').classList.remove('active');
             
             const session = storageAdapter.getSession();
             if (session.currentUserId) {
@@ -1891,6 +2556,29 @@
             renderChildren();
         }
         
+        function showCommunitySection() {
+            document.getElementById('authSection').classList.add('d-none');
+            document.getElementById('dashboardSection').classList.add('d-none');
+            document.getElementById('communitySection').classList.add('active');
+            
+            const session = storageAdapter.getSession();
+            if (session.currentUserId) {
+                const users = storageAdapter.getUsers();
+                const user = users.find(u => u.id === session.currentUserId);
+                
+                if (user) {
+                    document.getElementById('userName').textContent = user.name;
+                    document.getElementById('userMenu').classList.remove('d-none');
+                }
+            } else if (session.exploringAsGuest) {
+                document.getElementById('userName').textContent = 'Invitado';
+                document.getElementById('userMenu').classList.remove('d-none');
+                document.getElementById('logoutBtn').textContent = 'Salir de modo invitado';
+            }
+            
+            renderConversations();
+        }
+        
         function renderChildren() {
             const children = getChildrenForCurrentUser();
             const container = document.getElementById('childrenContainer');
@@ -1905,11 +2593,9 @@
             
             emptyState.classList.add('d-none');
             
-            children.forEach((child, index) => {
+            children.forEach(child => {
                 const childCard = document.createElement('div');
                 childCard.className = 'col-md-6 col-lg-4 mb-4';
-                childCard.setAttribute('data-aos', 'fade-up');
-                childCard.setAttribute('data-aos-delay', index * 100);
                 
                 const avatarClass = child.avatarCustomization === '1' ? 'avatar-1' : 
                                    child.avatarCustomization === '2' ? 'avatar-2' : 'avatar-3';
@@ -1963,9 +2649,6 @@
                 
                 container.appendChild(childCard);
             });
-            
-            // Refrescar AOS para nuevos elementos
-            AOS.refresh();
             
             // Agregar event listeners
             document.querySelectorAll('.edit-child-btn').forEach(btn => {
@@ -2021,6 +2704,421 @@
                     }
                 });
             });
+        }
+        
+        function renderConversations() {
+            const departmentSelect = document.getElementById('departmentSelect');
+            const selectedDepartment = departmentSelect.value;
+            const conversations = getConversationsForDepartment(selectedDepartment);
+            const container = document.getElementById('conversationsContainer');
+            
+            container.innerHTML = '';
+            
+            if (conversations.length === 0) {
+                container.innerHTML = `
+                    <div class="no-conversations">
+                        <i class="fas fa-comments"></i>
+                        <h4>No hay conversaciones en este departamento</h4>
+                        <p>Sé el primero en crear una conversación en tu comunidad</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            conversations.forEach(conversation => {
+                const messages = getMessagesForConversation(conversation.id);
+                const unreadCount = messages.filter(m => !m.read && m.senderId !== getCurrentUser()?.id).length;
+                
+                const conversationCard = document.createElement('div');
+                conversationCard.className = 'conversation-card';
+                conversationCard.setAttribute('data-conversation-id', conversation.id);
+                
+                conversationCard.innerHTML = `
+                    <div class="conversation-title">
+                        ${conversation.title}
+                        ${unreadCount > 0 ? `<span class="unread-indicator">${unreadCount}</span>` : ''}
+                    </div>
+                    <div class="conversation-description">${conversation.description}</div>
+                    <div class="conversation-meta">
+                        <span class="conversation-author">Por: ${conversation.authorName}</span>
+                        <span class="conversation-date">${formatDate(conversation.createdAt)}</span>
+                    </div>
+                    <div class="mt-2">
+                        <button class="btn btn-sm btn-primary open-conversation-btn" data-conversation-id="${conversation.id}">
+                            <i class="fas fa-comments"></i> Abrir conversación
+                        </button>
+                        ${isAdmin() || conversation.authorId === getCurrentUser()?.id ? 
+                            `<button class="btn btn-sm btn-outline-danger delete-conversation-btn ms-2" data-conversation-id="${conversation.id}">
+                                <i class="fas fa-trash"></i> Eliminar
+                            </button>` : ''}
+                    </div>
+                `;
+                
+                container.appendChild(conversationCard);
+            });
+            
+            // Agregar event listeners
+            document.querySelectorAll('.open-conversation-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const conversationId = this.getAttribute('data-conversation-id');
+                    openChat(conversationId);
+                });
+            });
+            
+            document.querySelectorAll('.delete-conversation-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const conversationId = this.getAttribute('data-conversation-id');
+                    if (confirm('¿Estás seguro de que deseas eliminar esta conversación? Esta acción no se puede deshacer.')) {
+                        try {
+                            deleteConversation(conversationId);
+                            showToast('Conversación eliminada correctamente', 'success');
+                            renderConversations();
+                        } catch (error) {
+                            showToast(error.message, 'error');
+                        }
+                    }
+                });
+            });
+        }
+        
+        function renderDirectMessages() {
+            const directMessages = getDirectMessages();
+            const container = document.getElementById('directMessagesContainer');
+            
+            if (!container) {
+                return;
+            }
+            
+            container.innerHTML = '';
+            
+            if (directMessages.length === 0) {
+                container.innerHTML = `
+                    <div class="no-conversations">
+                        <i class="fas fa-envelope"></i>
+                        <h4>No hay mensajes directos</h4>
+                        <p>Envía un mensaje directo al administrador para obtener ayuda</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            directMessages.forEach(message => {
+                const messageCard = document.createElement('div');
+                messageCard.className = 'conversation-card';
+                
+                const isReply = message.reply !== null;
+                const isFromCurrentUser = message.senderId === getCurrentUser()?.id;
+                
+                messageCard.innerHTML = `
+                    <div class="conversation-title">
+                        ${isReply ? 'Respuesta del administrador' : `Mensaje de ${message.senderName}`}
+                    </div>
+                    <div class="conversation-description">${message.content}</div>
+                    <div class="conversation-meta">
+                        <span class="conversation-date">${formatDate(message.timestamp)}</span>
+                        ${!message.read ? '<span class="badge bg-primary ms-2">Nuevo</span>' : ''}
+                    </div>
+                    ${isAdmin() && !isReply ? 
+                        `<div class="mt-2">
+                            <button class="btn btn-sm btn-primary reply-direct-message-btn" data-message-id="${message.id}">
+                                <i class="fas fa-reply"></i> Responder
+                            </button>
+                        </div>` : ''}
+                `;
+                
+                container.appendChild(messageCard);
+            });
+            
+            // Agregar event listeners
+            document.querySelectorAll('.reply-direct-message-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const messageId = this.getAttribute('data-message-id');
+                    const replyContent = prompt('Escribe tu respuesta:');
+                    
+                    if (replyContent) {
+                        try {
+                            replyToDirectMessage(messageId, replyContent);
+                            showToast('Respuesta enviada correctamente', 'success');
+                            renderDirectMessages();
+                        } catch (error) {
+                            showToast(error.message, 'error');
+                        }
+                    }
+                });
+            });
+        }
+        
+        function openChat(conversationId) {
+            const conversations = storageAdapter.getConversations();
+            const conversation = conversations.find(c => c.id === conversationId);
+            
+            if (!conversation) {
+                showToast('Conversación no encontrada', 'error');
+                return;
+            }
+            
+            const chatContainer = document.getElementById('chatContainer');
+            const chatTitle = document.getElementById('chatTitle');
+            const chatMessages = document.getElementById('chatMessages');
+            
+            chatTitle.textContent = conversation.title;
+            chatMessages.innerHTML = '';
+            
+            const messages = getMessagesForConversation(conversationId);
+            const currentUser = getCurrentUser();
+            
+            messages.forEach(message => {
+                const messageElement = createMessageElement(message, currentUser);
+                chatMessages.appendChild(messageElement);
+            });
+            
+            // Marcar mensajes como leídos
+            messages.forEach(message => {
+                if (message.senderId !== currentUser?.id) {
+                    message.read = true;
+                }
+            });
+            
+            const allMessages = storageAdapter.getMessages();
+            allMessages[conversationId] = messages;
+            storageAdapter.saveMessages(allMessages);
+            
+            // Mostrar el chat
+            chatContainer.classList.add('active');
+            
+            // Scroll al final
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+            
+            // Configurar el envío de mensajes
+            setupChatSendMessage(conversationId);
+        }
+        
+        function createMessageElement(message, currentUser) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `chat-message ${message.senderId === currentUser?.id ? 'sent' : 'received'}`;
+            messageDiv.setAttribute('data-message-id', message.id);
+            
+            const messageBubble = document.createElement('div');
+            messageBubble.className = `message-bubble ${message.senderId === currentUser?.id ? 'sent' : 'received'}`;
+            messageBubble.textContent = message.content;
+            
+            const messageInfo = document.createElement('div');
+            messageInfo.className = `message-info ${message.senderId === currentUser?.id ? 'sent' : 'received'}`;
+            
+            const time = new Date(message.timestamp);
+            const timeString = time.toLocaleTimeString('es-PE', { hour: '2-digit', minute: '2-digit' });
+            
+            messageInfo.innerHTML = `
+                <span>${message.senderName} - ${timeString}</span>
+                ${message.senderId === currentUser?.id ? 
+                    `<span class="message-status">
+                        ${message.read ? '<i class="fas fa-check-double text-primary"></i>' : '<i class="fas fa-check"></i>'}
+                    </span>` : ''}
+            `;
+            
+            messageDiv.appendChild(messageBubble);
+            messageDiv.appendChild(messageInfo);
+            
+            // Agregar acciones de mensaje si es del usuario actual o es admin
+            if (isAdmin() || message.senderId === currentUser?.id) {
+                const messageActions = document.createElement('div');
+                messageActions.className = 'message-actions';
+                
+                const editBtn = document.createElement('button');
+                editBtn.className = 'message-action-btn';
+                editBtn.innerHTML = '<i class="fas fa-edit"></i> Editar';
+                editBtn.addEventListener('click', function() {
+                    const newContent = prompt('Edita tu mensaje:', message.content);
+                    if (newContent && newContent !== message.content) {
+                        try {
+                            editMessage(conversationId, message.id, newContent);
+                            messageBubble.textContent = newContent;
+                            if (message.edited) {
+                                const editedIndicator = document.createElement('span');
+                                editedIndicator.className = 'text-muted ms-1';
+                                editedIndicator.textContent = '(editado)';
+                                messageInfo.appendChild(editedIndicator);
+                            }
+                            showToast('Mensaje editado correctamente', 'success');
+                        } catch (error) {
+                            showToast(error.message, 'error');
+                        }
+                    }
+                });
+                
+                const deleteBtn = document.createElement('button');
+                deleteBtn.className = 'message-action-btn';
+                deleteBtn.innerHTML = '<i class="fas fa-trash"></i> Eliminar';
+                deleteBtn.addEventListener('click', function() {
+                    if (confirm('¿Estás seguro de que deseas eliminar este mensaje?')) {
+                        try {
+                            deleteMessage(conversationId, message.id);
+                            messageDiv.remove();
+                            showToast('Mensaje eliminado correctamente', 'success');
+                        } catch (error) {
+                            showToast(error.message, 'error');
+                        }
+                    }
+                });
+                
+                messageActions.appendChild(editBtn);
+                messageActions.appendChild(deleteBtn);
+                messageDiv.appendChild(messageActions);
+            }
+            
+            return messageDiv;
+        }
+        
+        function setupChatSendMessage(conversationId) {
+            const chatInput = document.getElementById('chatInput');
+            const chatSendBtn = document.getElementById('chatSendBtn');
+            const chatMessages = document.getElementById('chatMessages');
+            
+            const sendMessage = function() {
+                const content = chatInput.value.trim();
+                
+                if (!content) {
+                    return;
+                }
+                
+                try {
+                    const newMessage = sendMessage(conversationId, content);
+                    const currentUser = getCurrentUser();
+                    const messageElement = createMessageElement(newMessage, currentUser);
+                    chatMessages.appendChild(messageElement);
+                    
+                    // Limpiar el input
+                    chatInput.value = '';
+                    
+                    // Scroll al final
+                    chatMessages.scrollTop = chatMessages.scrollHeight;
+                } catch (error) {
+                    showToast(error.message, 'error');
+                }
+            };
+            
+            // Configurar el botón de enviar
+            chatSendBtn.onclick = sendMessage;
+            
+            // Configurar el envío con Enter
+            chatInput.onkeypress = function(e) {
+                if (e.key === 'Enter') {
+                    sendMessage();
+                }
+            };
+        }
+        
+        function openDirectMessageChat() {
+            const chatContainer = document.getElementById('chatContainer');
+            const chatTitle = document.getElementById('chatTitle');
+            const chatMessages = document.getElementById('chatMessages');
+            
+            chatTitle.textContent = 'Mensaje directo al administrador';
+            chatMessages.innerHTML = '';
+            
+            const directMessages = getDirectMessages();
+            const currentUser = getCurrentUser();
+            
+            directMessages.forEach(message => {
+                const messageElement = createDirectMessageElement(message, currentUser);
+                chatMessages.appendChild(messageElement);
+            });
+            
+            // Mostrar el chat
+            chatContainer.classList.add('active');
+            
+            // Scroll al final
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+            
+            // Configurar el envío de mensajes
+            setupDirectMessageChat();
+        }
+        
+        function createDirectMessageElement(message, currentUser) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `chat-message ${message.senderId === currentUser?.id ? 'sent' : 'received'}`;
+            messageDiv.setAttribute('data-message-id', message.id);
+            
+            const messageBubble = document.createElement('div');
+            messageBubble.className = `message-bubble ${message.senderId === currentUser?.id ? 'sent' : 'received'}`;
+            messageBubble.textContent = message.content;
+            
+            const messageInfo = document.createElement('div');
+            messageInfo.className = `message-info ${message.senderId === currentUser?.id ? 'sent' : 'received'}`;
+            
+            const time = new Date(message.timestamp);
+            const timeString = time.toLocaleTimeString('es-PE', { hour: '2-digit', minute: '2-digit' });
+            
+            messageInfo.innerHTML = `
+                <span>${message.senderName} - ${timeString}</span>
+                ${message.senderId === currentUser?.id ? 
+                    `<span class="message-status">
+                        ${message.read ? '<i class="fas fa-check-double text-primary"></i>' : '<i class="fas fa-check"></i>'}
+                    </span>` : ''}
+            `;
+            
+            messageDiv.appendChild(messageBubble);
+            messageDiv.appendChild(messageInfo);
+            
+            return messageDiv;
+        }
+        
+        function setupDirectMessageChat() {
+            const chatInput = document.getElementById('chatInput');
+            const chatSendBtn = document.getElementById('chatSendBtn');
+            const chatMessages = document.getElementById('chatMessages');
+            
+            const sendMessage = function() {
+                const content = chatInput.value.trim();
+                
+                if (!content) {
+                    return;
+                }
+                
+                try {
+                    const newMessage = sendDirectMessage(content);
+                    const currentUser = getCurrentUser();
+                    const messageElement = createDirectMessageElement(newMessage, currentUser);
+                    chatMessages.appendChild(messageElement);
+                    
+                    // Limpiar el input
+                    chatInput.value = '';
+                    
+                    // Scroll al final
+                    chatMessages.scrollTop = chatMessages.scrollHeight;
+                    
+                    showToast('Mensaje enviado correctamente', 'success');
+                } catch (error) {
+                    showToast(error.message, 'error');
+                }
+            };
+            
+            // Configurar el botón de enviar
+            chatSendBtn.onclick = sendMessage;
+            
+            // Configurar el envío con Enter
+            chatInput.onkeypress = function(e) {
+                if (e.key === 'Enter') {
+                    sendMessage();
+                }
+            };
+        }
+        
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            const now = new Date();
+            const diffTime = Math.abs(now - date);
+            const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+            
+            if (diffDays === 0) {
+                return 'Hoy';
+            } else if (diffDays === 1) {
+                return 'Ayer';
+            } else if (diffDays < 7) {
+                return `Hace ${diffDays} días`;
+            } else {
+                return date.toLocaleDateString('es-PE');
+            }
         }
         
         function calculateAge(dob) {
@@ -2196,11 +3294,9 @@
             if (deletedChildren.length === 0) {
                 trashItems.innerHTML = '<p class="text-muted">No hay elementos en la papelera</p>';
             } else {
-                deletedChildren.forEach((child, index) => {
+                deletedChildren.forEach(child => {
                     const trashItem = document.createElement('div');
                     trashItem.className = 'trash-item';
-                    trashItem.setAttribute('data-aos', 'fade-up');
-                    trashItem.setAttribute('data-aos-delay', index * 50);
                     
                     const avatarClass = child.avatarCustomization === '1' ? 'avatar-1' : 
                                        child.avatarCustomization === '2' ? 'avatar-2' : 'avatar-3';
@@ -2228,10 +3324,7 @@
                     trashItems.appendChild(trashItem);
                 });
                 
-                // Refrescar AOS para nuevos elementos
-                AOS.refresh();
-                
-                // Agregar event listeners para los botones de restaurar y eliminar permanentemente
+                // Agregar event listeners
                 document.querySelectorAll('.restore-btn').forEach(btn => {
                     btn.addEventListener('click', function() {
                         const childId = this.getAttribute('data-child-id');
@@ -2453,7 +3546,7 @@
                 showDashboardSection();
             });
             
-            // CORRECCIÓN: Event listener para el botón de cerrar sesión
+            // Cerrar sesión
             document.getElementById('logoutBtn').addEventListener('click', function() {
                 logout();
                 showAuthSection();
@@ -2495,6 +3588,91 @@
                 }
             });
             
+            // Botón Comunidad
+            document.getElementById('communityBtn').addEventListener('click', function() {
+                showCommunitySection();
+            });
+            
+            // Botón Volver al panel
+            document.getElementById('backToDashboardBtn').addEventListener('click', function() {
+                showDashboardSection();
+            });
+            
+            // Tabs de comunidad
+            document.querySelectorAll('.community-tab').forEach(tab => {
+                tab.addEventListener('click', function() {
+                    // Desactivar todas las pestañas
+                    document.querySelectorAll('.community-tab').forEach(t => t.classList.remove('active'));
+                    document.querySelectorAll('.tab-content').forEach(c => c.classList.add('d-none'));
+                    
+                    // Activar la pestaña actual
+                    this.classList.add('active');
+                    const tabName = this.getAttribute('data-tab');
+                    
+                    if (tabName === 'conversations') {
+                        document.getElementById('conversationsTab').classList.remove('d-none');
+                        renderConversations();
+                    } else if (tabName === 'direct-messages') {
+                        document.getElementById('directMessagesTab').classList.remove('d-none');
+                        renderDirectMessages();
+                    }
+                });
+            });
+            
+            // Selector de departamento
+            document.getElementById('departmentSelect').addEventListener('change', function() {
+                renderConversations();
+            });
+            
+            // Nueva conversación
+            document.getElementById('newConversationBtn').addEventListener('click', function() {
+                const modal = new bootstrap.Modal(document.getElementById('newConversationModal'));
+                modal.show();
+            });
+            
+            // Crear conversación
+            document.getElementById('createConversationBtn').addEventListener('click', function() {
+                const title = document.getElementById('conversationTitle').value;
+                const description = document.getElementById('conversationDescription').value;
+                const department = document.getElementById('conversationDepartment').value;
+                const firstMessage = document.getElementById('firstMessage').value;
+                
+                if (!title || !description || !department || !firstMessage) {
+                    showToast('Por favor completa todos los campos', 'error');
+                    return;
+                }
+                
+                try {
+                    createConversation({
+                        title,
+                        description,
+                        department,
+                        firstMessage
+                    });
+                    
+                    showToast('Conversación creada correctamente', 'success');
+                    
+                    // Cerrar modal y limpiar formulario
+                    bootstrap.Modal.getInstance(document.getElementById('newConversationModal')).hide();
+                    document.getElementById('newConversationForm').reset();
+                    
+                    // Actualizar la lista de conversaciones
+                    renderConversations();
+                } catch (error) {
+                    showToast(error.message, 'error');
+                }
+            });
+            
+            // Mensaje directo
+            document.getElementById('startDirectMessageBtn').addEventListener('click', function() {
+                openDirectMessageChat();
+            });
+            
+            // Cerrar chat
+            document.getElementById('chatClose').addEventListener('click', function() {
+                document.getElementById('chatContainer').classList.remove('active');
+            });
+            
             // Selección de avatar
             document.querySelectorAll('.avatar-option').forEach(option => {
                 option.addEventListener('click', function() {
@@ -2508,9 +3686,6 @@
             
             // Configurar modales del footer
             setupFooterModals();
-            
-            // Configurar enlaces flotantes
-            setupFloatingLinks();
             
             // Verificar si hay un hash en la URL para navegar a una sección específica
             if (window.location.hash === '#perfiles-de-tus-hijos') {
@@ -2890,261 +4065,6 @@
                 if (e.target.matches('#privacyLink')) { ui.openModal(templates.privacyModal()); }
                 if (e.target.matches('#termsLink')) { ui.openModal(templates.termsModal()); }
                 
-                // Cerrar el modal si se hace clic en el fondo o en el botón de cerrar
-                if (e.target.matches('.modal') || e.target.matches('.close-modal')) { 
-                    ui.closeModal(); 
-                }
-            });
-        }
-        
-        function setupFloatingLinks() {
-            const actionModalContainer = document.getElementById('action-modal-container');
-            
-            // Objeto con las plantillas HTML para cada modal
-            const templates = {
-                termsModal: () => `
-                    <div class="modal active">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h2>Términos y Condiciones</h2>
-                                <button class="close-modal">&times;</button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="content-section">
-                                    <h3><i class="fas fa-check-circle"></i> Aceptación de los Términos</h3>
-                                    <p>Al utilizar la plataforma Yachay Mikuy, aceptas estos términos y condiciones en su totalidad. Si no estás de acuerdo con alguno de estos términos, no debes utilizar nuestros servicios.</p>
-                                    <p>El uso continuado de la plataforma después de cualquier modificación constituye aceptación de los nuevos términos.</p>
-                                </div>
-                                <div class="content-section">
-                                    <h3><i class="fas fa-cube"></i> Descripción del Servicio</h3>
-                                    <p>Yachay Mikuy es una plataforma digital que ofrece:</p>
-                                    <ul>
-                                        <li>Planes de alimentación personalizados para niños de 0 a 13 años</li>
-                                        <li>Seguimiento nutricional continuo</li>
-                                        <li>Educación nutricional adaptada culturalmente</li>
-                                        <li>Comunidad de apoyo para padres y cuidadores</li>
-                                        <li>Acceso a profesionales de la salud</li>
-                                    </ul>
-                                </div>
-                                <div class="content-section">
-                                    <h3><i class="fas fa-user-check"></i> Responsabilidades del Usuario</h3>
-                                    <p>Como usuario, te comprometes a:</p>
-                                    <ul>
-                                        <li>Proporcionar información veraz y actualizada</li>
-                                        <li>Mantener la confidencialidad de tus credenciales de acceso</li>
-                                        <li>Seguir las recomendaciones nutricionales de manera responsable</li>
-                                        <li>No compartir contenido inapropiado u ofensivo</li>
-                                        <li>Respetar los derechos de otros usuarios</li>
-                                        <li>Reportar cualquier problema o incidencia</li>
-                                    </ul>
-                                </div>
-                                <div class="content-section">
-                                    <h3><i class="fas fa-ban"></i> Uso Prohibido</h3>
-                                    <p>Está estrictamente prohibido:</p>
-                                    <ul>
-                                        <li>Utilizar la plataforma para fines comerciales no autorizados</li>
-                                        <li>Intentar acceder a cuentas de otros usuarios</li>
-                                        <li>Distribuir malware o software malicioso</li>
-                                        <li>Violentar la propiedad intelectual de Yachay Mikuy</li>
-                                        <li>Proporcionar información médica falsa o engañosa</li>
-                                        <li>Acosar o intimidar a otros usuarios</li>
-                                    </ul>
-                                </div>
-                                <div class="content-section">
-                                    <h3><i class="fas fa-copyright"></i> Propiedad Intelectual</h3>
-                                    <p>Todo el contenido de la plataforma está protegido por derechos de autor:</p>
-                                    <ul>
-                                        <li>Textos, imágenes, diseños, logotipos y software</li>
-                                        <li>Algoritmos de recomendación nutricional</li>
-                                        <li>Base de datos de recetas y alimentos</li>
-                                        <li>Material educativo y formatos originales</li>
-                                    </ul>
-                                    <p>Queda prohibida la reproducción total o parcial sin autorización expresa.</p>
-                                </div>
-                                <div class="content-section">
-                                    <h3><i class="fas fa-heart"></i> Información Médica</h3>
-                                    <p>Importante considerar:</p>
-                                    <ul>
-                                        <li>Yachay Mikuy no reemplaza la consulta médica profesional</li>
-                                        <li>Las recomendaciones son complementarias al tratamiento médico</li>
-                                        <li>Ante cualquier emergencia médica, contacta a servicios de salud</li>
-                                        <li>Los planes nutricionales deben ser supervisados por profesionales</li>
-                                    </ul>
-                                </div>
-                                <div class="content-section">
-                                    <h3><i class="fas fa-exclamation-triangle"></i> Limitación de Responsabilidad</h3>
-                                    <p>Yachay Mikuy no se responsabiliza por:</p>
-                                    <ul>
-                                        <li>El uso indebido de la plataforma por parte de los usuarios</li>
-                                        <li>Consecuencias derivadas de no seguir adecuadamente las recomendaciones</li>
-                                        <li>Problemas técnicos fuera de nuestro control</li>
-                                        <li>Contenido proporcionado por terceros</li>
-                                        <li>Daños indirectos, incidentales o consecuentes</li>
-                                    </ul>
-                                </div>
-                                <div class="content-section">
-                                    <h3><i class="fas fa-sync-alt"></i> Modificaciones de los Términos</h3>
-                                    <p>Yachay Mikuy se reserva el derecho de:</p>
-                                    <ul>
-                                        <li>Modificar estos términos y condiciones en cualquier momento</li>
-                                        <li>Actualizar las políticas de privacidad y uso de datos</li>
-                                        <li>Cambiar las características y funcionalidades del servicio</li>
-                                        <li>Suspender o terminar servicios por razones justificadas</li>
-                                    </ul>
-                                    <p>Las modificaciones entrarán en vigor desde su publicación en la plataforma.</p>
-                                </div>
-                                <div class="content-section">
-                                    <h3><i class="fas fa-gavel"></i> Ley Aplicable y Jurisdicción</h3>
-                                    <p>Estos términos se rigen por las leyes de la República del Perú. Cualquier disputa será resuelta en los tribunales de Lima, Perú.</p>
-                                </div>
-                                <div class="highlight-box">
-                                    <h3 style="margin-top:0;"><i class="fas fa-calendar-alt"></i> Vigencia</h3>
-                                    <p>Estos términos y condiciones entran en vigor a partir del 1 de enero de 2025 y permanecerán vigentes hasta su modificación.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>`,
-                privacyModal: () => `
-                    <div class="modal active">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h2>Política de Privacidad</h2>
-                                <button class="close-modal">&times;</button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="content-section">
-                                    <h3><i class="fas fa-info-circle"></i> Información que Recopilamos</h3>
-                                    <p>Recopilamos información personal y de salud de manera responsable:</p>
-                                    <ul>
-                                        <li><strong>Datos personales:</strong> Nombre, correo electrónico, teléfono, departamento de residencia</li>
-                                        <li><strong>Datos de los niños:</strong> Nombre, fecha de nacimiento, peso, altura, historial médico relevante</li>
-                                        <li><strong>Datos de uso:</strong> Interacciones con la plataforma, preferencias alimentarias, progreso nutricional</li>
-                                        <li><strong>Datos técnicos:</strong> Dirección IP, tipo de dispositivo, navegador utilizado</li>
-                                    </ul>
-                                </div>
-                                <div class="content-section">
-                                    <h3><i class="fas fa-cogs"></i> Uso de la Información</h3>
-                                    <p>Utilizamos tu información para:</p>
-                                    <ul>
-                                        <li>Proporcionar planes de alimentación personalizados</li>
-                                        <li>Realizar seguimiento nutricional efectivo</li>
-                                        <li>Mejorar continuamente nuestros servicios</li>
-                                        <li>Comunicarnos contigo sobre actualizaciones relevantes</li>
-                                        <li>Generar reportes estadísticos anonimizados</li>
-                                    </ul>
-                                </div>
-                                <div class="content-section">
-                                    <h3><i class="fas fa-lock"></i> Protección de Datos</h3>
-                                    <p>Implementamos medidas de seguridad robustas:</p>
-                                    <ul>
-                                        <li>Cifrado SSL/TLS para todas las transmisiones</li>
-                                        <li>Almacenamiento cifrado en servidores seguros</li>
-                                        <li>Autenticación de dos factores para accesos críticos</li>
-                                        <li>Auditorías de seguridad periódicas</li>
-                                        <li>Backups automáticos y recovery plan</li>
-                                    </ul>
-                                </div>
-                                <div class="content-section">
-                                    <h3><i class="fas fa-user-shield"></i> Derechos de los Usuarios</h3>
-                                    <p>Tienes derecho a:</p>
-                                    <ul>
-                                        <li><strong>Acceder:</strong> Solicitar una copia de tus datos personales</li>
-                                        <li><strong>Rectificar:</strong> Corregir información inexacta o incompleta</li>
-                                        <li><strong>Cancelar:</strong> Solicitar la eliminación de tus datos</li>
-                                        <li><strong>Oponerse:</strong> Restringir el procesamiento de tus datos</li>
-                                        <li><strong>Portabilidad:</strong> Transferir tus datos a otro servicio</li>
-                                    </ul>
-                                    <p>Para ejercer estos derechos, contacta a yachay.mikuy@gmail.com</p>
-                                </div>
-                                <div class="content-section">
-                                    <h3><i class="fas fa-user-friends"></i> Consentimiento Parental</h3>
-                                    <p>Para el tratamiento de datos de menores:</p>
-                                    <ul>
-                                        <li>Requerimos consentimiento explícito de padres o tutores</li>
-                                        <li>Los padres son responsables de la veracidad de los datos</li>
-                                        <li>Podemos solicitar documentación adicional si es necesario</li>
-                                        <li>Los padres pueden revocar el consentimiento en cualquier momento</li>
-                                    </ul>
-                                </div>
-                                <div class="content-section">
-                                    <h3><i class="fas fa-clock"></i> Retención de Datos</h3>
-                                    <p>Conservamos los datos según los siguientes criterios:</p>
-                                    <ul>
-                                        <li>Datos de cuenta: mientras la cuenta esté activa</li>
-                                        <li>Datos de salud: mínimo 5 años después del último uso</li>
-                                        <li>Datos financieros: 7 años según normativa fiscal</li>
-                                        <li>Datos anonimizados: indefinidamente para estadísticas</li>
-                                    </ul>
-                                </div>
-                                <div class="highlight-box">
-                                    <h3 style="margin-top:0;"><i class="fas fa-exclamation-triangle"></i> Importante</h3>
-                                    <p>Esta política se actualiza periódicamente. Te notificaremos cualquier cambio significativo a través de tu correo electrónico registrado.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>`,
-                helpModal: () => `
-                    <div class="modal active">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h2>Ayuda y Soporte</h2>
-                                <button class="close-modal">&times;</button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="content-section">
-                                    <h3><i class="fas fa-question-circle"></i> ¿Cómo podemos ayudarte?</h3>
-                                    <p>Si tienes alguna pregunta o necesitas asistencia con nuestra plataforma, no dudes en contactarnos a través de los siguientes canales:</p>
-                                </div>
-                                <div class="content-section">
-                                    <h3><i class="fas fa-envelope"></i> Correo Electrónico</h3>
-                                    <p>Puedes enviarnos un correo electrónico a <a href="mailto:yachay.mikuy@gmail.com">yachay.mikuy@gmail.com</a> y te responderemos a la brevedad posible.</p>
-                                </div>
-                                <div class="content-section">
-                                    <h3><i class="fas fa-phone"></i> Teléfono</h3>
-                                    <p>Llámanos al <a href="tel:+51918072862">+51 918 072 862</a> de lunes a viernes de 9:00 a.m. a 6:00 p.m.</p>
-                                </div>
-                                <div class="content-section">
-                                    <h3><i class="fab fa-whatsapp"></i> WhatsApp</h3>
-                                    <p>Escríbenos al <a href="https://wa.me/51918072862" target="_blank">+51 918 072 862</a> para obtener asistencia inmediata.</p>
-                                </div>
-                                <div class="content-section">
-                                    <h3><i class="fas fa-comments"></i> Chat en Vivo</h3>
-                                    <p>Utiliza nuestro chat en vivo disponible en la plataforma para obtener ayuda en tiempo real durante nuestro horario de atención.</p>
-                                </div>
-                                <div class="content-section">
-                                    <h3><i class="fas fa-book"></i> Guías y Tutoriales</h3>
-                                    <p>Consulta nuestra sección de tutoriales y guías paso a paso para aprender a utilizar todas las funcionalidades de la plataforma.</p>
-                                </div>
-                                <div class="highlight-box">
-                                    <h3 style="margin-top:0;"><i class="fas fa-lightbulb"></i> Sugerencias</h3>
-                                    <p>¡Valoramos tu opinión! Si tienes alguna sugerencia para mejorar nuestra plataforma, por favor compártela con nosotros. Tu feedback nos ayuda a crecer y ofrecerte un mejor servicio.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>`
-            };
-
-            // Funciones para abrir y cerrar el modal
-            const ui = {
-                openModal: (content) => { actionModalContainer.innerHTML = content; },
-                closeModal: () => { actionModalContainer.innerHTML = ''; }
-            };
-
-            // Listener de clics para los enlaces flotantes
-            document.getElementById('floatingTerms').addEventListener('click', function() {
-                ui.openModal(templates.termsModal());
-            });
-            
-            document.getElementById('floatingPrivacy').addEventListener('click', function() {
-                ui.openModal(templates.privacyModal());
-            });
-            
-            document.getElementById('floatingHelp').addEventListener('click', function() {
-                ui.openModal(templates.helpModal());
-            });
-            
-            // Listener de clics para cerrar el modal
-            document.body.addEventListener('click', (e) => {
                 // Cerrar el modal si se hace clic en el fondo o en el botón de cerrar
                 if (e.target.matches('.modal') || e.target.matches('.close-modal')) { 
                     ui.closeModal(); 
