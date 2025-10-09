@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perfil Individual - Yachay Mikuy</title>
+    <title>Perfil del Niño - Yachay Mikuy</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -36,7 +36,7 @@
             --shadow: 0 8px 24px rgba(0, 0, 0, 0.08); 
             --radius: 12px;
             --transition: all 0.3s ease-in-out;
-            --accent-red-footer: #e63946;
+            --accent-red: #e63946;
         }
 
         @keyframes fadeIn {
@@ -48,6 +48,12 @@
                 opacity: 1;
                 transform: translateY(0);
             }
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
         }
 
         * {
@@ -61,12 +67,13 @@
             background-image: linear-gradient(120deg, #f5f9ff 0%, #e6f0fa 100%);
             color: #333;
             line-height: 1.6;
+            position: relative;
             display: flex;
             flex-direction: column;
             min-height: 100vh;
         }
 
-        /* Barra superior fija con logo y botón de volver */
+        /* Barra superior fija con botón de volver */
         .top-bar {
             background: linear-gradient(135deg, var(--primary-blue), var(--light-blue));
             color: var(--white);
@@ -121,7 +128,6 @@
             flex: 1;
         }
 
-        /* --- ESTILO PARA EL ENCABEZADO INDIVIDUAL --- */
         .profile-header {
             background: var(--white);
             border-radius: 20px;
@@ -129,8 +135,8 @@
             padding: 30px 40px;
             margin-bottom: 40px;
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            justify-content: space-between;
             border-left: 8px solid var(--primary-blue);
         }
 
@@ -153,12 +159,6 @@
             flex-shrink: 0;
             box-shadow: 0 4px 15px rgba(44, 90, 160, 0.4);
             animation: pulse 2.5s infinite ease-in-out;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
         }
 
         .child-details h1 {
@@ -286,21 +286,6 @@
             z-index: 1;
         }
 
-        .profile-indicator {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: rgba(44, 90, 160, 0.1);
-            color: var(--primary-blue);
-            padding: 5px 10px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
         .region-selector, .btn-action {
             width: 100%;
             padding: 15px;
@@ -325,6 +310,12 @@
             margin-bottom: 15px;
         }
 
+        .region-selector:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 3px rgba(44, 90, 160, 0.2);
+        }
+
         .btn-action {
             border: none;
             color: var(--white);
@@ -340,29 +331,51 @@
             box-shadow: 0 6px 20px rgba(0,0,0,0.15);
         }
         
+        /* --- Card-specific colors & gradients --- */
         .card-pantry { border-top-color: var(--success-green); }
         .card-pantry .card-icon { background: linear-gradient(45deg, var(--success-green), #58c271); }
         .card-pantry .btn-action { background: linear-gradient(45deg, var(--success-green), #58c271); }
+        .card-pantry .btn-action:hover { background: linear-gradient(45deg, var(--success-green-dark), var(--success-green)); }
 
         .card-region { border-top-color: var(--accent-orange); }
         .card-region .card-icon { background: linear-gradient(45deg, var(--accent-orange), #ffb74d); }
         .card-region .btn-action { background: linear-gradient(45deg, var(--accent-orange), #ffb74d); }
+        .card-region .btn-action:hover { background: linear-gradient(45deg, var(--accent-orange-dark), var(--accent-orange)); }
         
         .card-wellness { border-top-color: var(--accent-purple); }
         .card-wellness .card-icon { background: linear-gradient(45deg, var(--accent-purple), #9575cd); }
         .card-wellness .btn-action { background: linear-gradient(45deg, var(--accent-purple), #9575cd); }
+        .card-wellness .btn-action:hover { background: linear-gradient(45deg, var(--accent-purple-dark), var(--accent-purple)); }
 
         .card-academic { border-top-color: var(--accent-teal); }
         .card-academic .card-icon { background: linear-gradient(45deg, var(--accent-teal), #4dd9b4); }
         .card-academic .btn-action { background: linear-gradient(45deg, var(--accent-teal), #4dd9b4); }
+        .card-academic .btn-action:hover { background: linear-gradient(45deg, var(--accent-teal-dark), var(--accent-teal)); }
         
         .card-games { border-top-color: var(--accent-pink); }
         .card-games .card-icon { background: linear-gradient(45deg, var(--accent-pink), #f06292); }
         .card-games .btn-action { background: linear-gradient(45deg, var(--accent-pink), #f06292); }
+        .card-games .btn-action:hover { background: linear-gradient(45deg, var(--accent-pink-dark), var(--accent-pink)); }
 
         .card-daily { border-top-color: var(--accent-cyan); }
         .card-daily .card-icon { background: linear-gradient(45deg, var(--accent-cyan), #4dd0e1); }
         .card-daily .btn-action { background: linear-gradient(45deg, var(--accent-cyan), #4dd0e1); }
+        .card-daily .btn-action:hover { background: linear-gradient(45deg, var(--accent-cyan-dark), var(--accent-cyan)); }
+        
+        .profile-indicator {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(44, 90, 160, 0.1);
+            color: var(--primary-blue);
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
 
         /* --- ESTILOS DEL FOOTER --- */
         .footer {
@@ -383,7 +396,7 @@
             font-size: 1.4rem;
             margin-bottom: 15px;
             font-weight: 600;
-            border-bottom: 2px solid var(--accent-red-footer);
+            border-bottom: 2px solid var(--accent-red);
             padding-bottom: 5px;
             display: inline-block;
         }
@@ -394,7 +407,7 @@
             transition: var(--transition);
         }
         .social-links a:hover {
-            color: var(--accent-red-footer);
+            color: var(--accent-red);
             transform: scale(1.1);
         }
         .footer-section p {
@@ -403,7 +416,7 @@
         }
         .footer-section p i {
             margin-right: 10px;
-            color: var(--accent-red-footer);
+            color: var(--accent-red);
         }
         .footer-links {
             list-style: none;
@@ -416,7 +429,7 @@
             display: block; 
         }
         .footer-links a:hover {
-            color: var(--accent-red-footer);
+            color: var(--accent-red);
             padding-left: 5px;
         }
         .footer-links a i {
@@ -492,7 +505,7 @@
             transition: var(--transition);
         }
         .close-modal:hover {
-            color: var(--accent-red-footer);
+            color: var(--accent-red);
             transform: rotate(90deg);
         }
         
@@ -517,12 +530,12 @@
         }
         .modal-body i {
             margin-right: 8px;
-            color: var(--accent-red-footer);
+            color: var(--accent-red);
         }
         .content-section {
             margin-bottom: 20px;
             padding: 15px;
-            border-left: 3px solid var(--accent-red-footer);
+            border-left: 3px solid var(--accent-red);
             background-color: var(--light-gray);
             border-radius: 0 5px 5px 0;
         }
@@ -537,37 +550,8 @@
             background-color: #ffe5e8;
             padding: 15px;
             border-radius: var(--radius);
-            border: 1px solid var(--accent-red-footer);
+            border: 1px solid var(--accent-red);
             margin-top: 30px;
-        }
-
-        /* Alerta de completado */
-        .completion-warning {
-            background-color: #fff3cd;
-            border: 1px solid #ffeaa7;
-            border-radius: 10px;
-            padding: 15px;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .completion-warning i {
-            color: #f39c12;
-            font-size: 1.5rem;
-        }
-        .completion-warning p {
-            margin: 0;
-            flex-grow: 1;
-        }
-        .completion-warning a {
-            color: var(--primary-blue);
-            font-weight: 600;
-            text-decoration: none;
-            margin-left: 10px;
-        }
-        .completion-warning a:hover {
-            text-decoration: underline;
         }
 
         /* Toast container */
@@ -613,8 +597,8 @@
         }
 
         @media (max-width: 768px) {
-            .container { 
-                padding: 20px; 
+            .container {
+                padding: 20px;
                 padding-top: 10px;
             }
             .top-bar {
@@ -627,17 +611,22 @@
                 padding: 8px 15px;
                 font-size: 0.8rem;
             }
-            .profile-header { 
-                padding: 25px; 
+            .profile-header {
                 flex-direction: column;
-                gap: 20px;
+                text-align: center;
+                gap: 15px;
+                padding: 25px;
             }
             .profile-left {
                 flex-direction: column;
                 text-align: center;
             }
-            .child-details h1 { font-size: 2rem; }
-            .dashboard-grid { grid-template-columns: 1fr; }
+            .child-details h1 {
+                font-size: 2rem;
+            }
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
             .btn-exit {
                 align-self: center;
             }
@@ -671,13 +660,6 @@
                 <i class="fas fa-sign-out-alt"></i> Salir
             </a>
         </header>
-
-        <!-- Alerta de completado -->
-        <div id="completionWarning" class="completion-warning d-none">
-            <i class="fas fa-exclamation-triangle"></i>
-            <p>El cuestionario no está completado al 100%. Para acceder a todas las funcionalidades, por favor completa todas las preguntas.</p>
-            <a id="continueQuestionnaire" href="#">Continuar cuestionario</a>
-        </div>
 
         <main class="dashboard-grid">
             <div class="dashboard-card card-pantry">
@@ -1039,54 +1021,7 @@
                 document.getElementById('childAge').textContent = calculateAge(currentChild.dob);
                 document.title = `${currentChild.name} - Perfil - Yachay Mikuy`;
 
-                // Verificar si el cuestionario está completado al 100%
-                const responses = storageAdapter.getResponses();
-                const childResponses = responses[currentChild.id] || {};
-                
-                // Verificar si el perfil ya tiene un procentaje guardado
-                let progressPercent = currentChild.progressPercent || 0;
-                
-                // Si es un perfil predefinido (ownerId === null), asumir que está completado al 100%
-                // independientemente de las respuestas en localStorage
-                if (currentChild.ownerId === null) {
-                    progressPercent = 100;
-                } else {
-                    // Para perfiles de usuario, calcular el progreso basado en las respuestas
-                    const totalQuestions = 50;
-                    const answeredQuestions = Object.keys(childResponses).filter(key => 
-                        key.startsWith('q') && childResponses[key] && childResponses[key].value
-                    ).length;
-                    
-                    progressPercent = Math.round((answeredQuestions / totalQuestions) * 100);
-                    
-                    // Si el progreso calculado es mayor que el guardado, actualizarlo
-                    if (progressPercent > (currentChild.progressPercent || 0)) {
-                        currentChild.progressPercent = progressPercent;
-                        const allChildren = storageAdapter.getChildren();
-                        const childIndex = allChildren.findIndex(child => child.id === currentChild.id);
-                        if (childIndex !== -1) {
-                            allChildren[childIndex] = currentChild;
-                            storageAdapter.saveChildren(allChildren);
-                        }
-                    }
-                }
-                
-                if (progressPercent < 100) {
-                    // Mostrar advertencia de completado
-                    const completionWarning = document.getElementById('completionWarning');
-                    completionWarning.classList.remove('d-none');
-                    
-                    // Configurar enlace para continuar con el cuestionario
-                    const continueLink = document.getElementById('continueQuestionnaire');
-                    continueLink.href = `yachaymikuy.html?childId=${currentChild.id}`;
-                } else {
-                    // Ocultar advertencia de completado
-                    const completionWarning = document.getElementById('completionWarning');
-                    completionWarning.classList.add('d-none');
-                }
-
-                // Configurar los enlaces de TODOS los tableros - CAMBIO PRINCIPAL
-                // Cambiamos nino1.html, nino2.html, etc. por chicos1.html, chicos2.html, etc.
+                // Configurar los enlaces de TODOS los tableros
                 document.getElementById('pantryLink').href = `chicos1.html?childId=${currentChild.id}${isGuestMode ? '&guest=true' : ''}`;
                 document.getElementById('wellnessLink').href = `chicos3.html?childId=${currentChild.id}${isGuestMode ? '&guest=true' : ''}`;
                 document.getElementById('academicLink').href = `chicos4.html?childId=${currentChild.id}${isGuestMode ? '&guest=true' : ''}`;
@@ -1113,7 +1048,6 @@
                 regionButton.addEventListener('click', function() {
                     const selectedDepartment = regionSelector.value;
                     if (selectedDepartment) {
-                        // Cambiamos nino2.html por chicos2.html
                         window.location.href = `chicos2.html?childId=${currentChild.id}&departamento=${selectedDepartment}${isGuestMode ? '&guest=true' : ''}`;
                     } else {
                         alert('Por favor, selecciona un departamento antes de generar.');
