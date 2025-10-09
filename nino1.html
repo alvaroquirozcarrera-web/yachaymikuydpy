@@ -6,6 +6,7 @@
     <title>Comida con Despensa - Yachay Mikuy</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary-blue: #2c5aa0;
@@ -29,6 +30,10 @@
             --shadow-color: rgba(40, 50, 70, 0.1);
             --danger-red: #dc3545;
             --danger-red-dark: #c82333;
+            --iron-red: #e74c3c;
+            --iron-red-dark: #c0392b;
+            --vitamin-c-orange: #f39c12;
+            --vitamin-c-orange-dark: #e67e22;
         }
 
         @keyframes fadeIn {
@@ -36,9 +41,22 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        @keyframes fadeOut {
-            from { opacity: 1; transform: translateY(0); }
-            to { opacity: 0; transform: translateY(-20px); }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
         }
 
         * {
@@ -72,17 +90,46 @@
             justify-content: space-between;
             align-items: center;
             border-left: 8px solid var(--success-green);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 150px;
+            height: 150px;
+            background-color: rgba(40, 167, 69, 0.1);
+            border-radius: 50%;
+            z-index: 0;
+        }
+
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: -30px;
+            left: -30px;
+            width: 100px;
+            height: 100px;
+            background-color: rgba(40, 167, 69, 0.1);
+            border-radius: 50%;
+            z-index: 0;
         }
 
         .header-content {
             display: flex;
             align-items: center;
             gap: 20px;
+            position: relative;
+            z-index: 1;
         }
 
         .header-icon {
             font-size: 2.5rem;
             color: var(--success-green);
+            animation: bounce 2s infinite;
         }
 
         .header-title h1 {
@@ -90,6 +137,7 @@
             font-size: 2rem;
             font-weight: 800;
             margin-bottom: 5px;
+            font-family: 'Fredoka', cursive;
         }
 
         .header-title p {
@@ -100,6 +148,8 @@
         .header-actions {
             display: flex;
             gap: 15px;
+            position: relative;
+            z-index: 1;
         }
 
         .btn {
@@ -156,6 +206,98 @@
             display: flex;
             align-items: center;
             gap: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .child-tag:hover {
+            background-color: rgba(93, 140, 196, 0.2);
+            transform: scale(1.05);
+        }
+
+        /* Anemia Info Section */
+        .anemia-info {
+            background: linear-gradient(135deg, rgba(231, 76, 60, 0.1), rgba(243, 156, 18, 0.1));
+            border-radius: 20px;
+            box-shadow: 0 8px 30px var(--shadow-color);
+            padding: 25px;
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .anemia-info::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            width: 100px;
+            height: 100px;
+            background-color: rgba(231, 76, 60, 0.1);
+            border-radius: 50%;
+            z-index: 0;
+        }
+
+        .anemia-info-content {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .anemia-icon {
+            font-size: 3rem;
+            color: var(--iron-red);
+            animation: pulse 2s infinite;
+        }
+
+        .anemia-text h2 {
+            color: var(--iron-red);
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            font-family: 'Fredoka', cursive;
+        }
+
+        .anemia-text p {
+            color: var(--dark-blue);
+            font-size: 1rem;
+            margin-bottom: 15px;
+        }
+
+        .anemia-tips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .anemia-tip {
+            background-color: var(--white);
+            border-radius: 15px;
+            padding: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex: 1;
+            min-width: 200px;
+            transition: all 0.3s ease;
+        }
+
+        .anemia-tip:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .anemia-tip-icon {
+            font-size: 1.5rem;
+            color: var(--iron-red);
+        }
+
+        .anemia-tip-text {
+            font-size: 0.9rem;
+            font-weight: 500;
         }
 
         /* Instructions Section */
@@ -345,6 +487,7 @@
         .photo-icon {
             font-size: 3rem;
             color: var(--success-green);
+            animation: float 3s ease-in-out infinite;
         }
 
         .photo-text {
@@ -370,10 +513,28 @@
             border-radius: 10px;
             margin-bottom: 10px;
             animation: fadeIn 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ingredient-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 5px;
+            background-color: var(--success-green);
         }
 
         .ingredient-name {
             font-weight: 500;
+        }
+
+        .ingredient-iron {
+            font-size: 0.8rem;
+            color: var(--iron-red);
+            font-weight: 600;
         }
 
         .btn-remove {
@@ -441,6 +602,23 @@
             justify-content: center;
             gap: 10px;
             transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-meal::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            transition: left 0.5s ease;
+        }
+
+        .btn-meal:hover::before {
+            left: 100%;
         }
 
         .btn-breakfast {
@@ -566,6 +744,16 @@
             margin-bottom: 8px;
         }
 
+        .iron-rich {
+            color: var(--iron-red);
+            font-weight: 600;
+        }
+
+        .vitamin-c-rich {
+            color: var(--vitamin-c-orange);
+            font-weight: 600;
+        }
+
         .tips-box {
             background-color: rgba(40, 167, 69, 0.1);
             border-left: 4px solid var(--success-green);
@@ -587,6 +775,14 @@
             border-left: 4px solid var(--danger-red);
             padding: 15px;
             border-radius: 0 10px 10px 0;
+        }
+
+        .iron-info {
+            background-color: rgba(231, 76, 60, 0.1);
+            border-left: 4px solid var(--iron-red);
+            padding: 15px;
+            border-radius: 0 10px 10px 0;
+            margin-bottom: 20px;
         }
 
         /* Loading Spinner */
@@ -683,6 +879,15 @@
                 justify-content: center;
             }
 
+            .anemia-info-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .anemia-tips {
+                flex-direction: column;
+            }
+
             .recipe-grid {
                 grid-template-columns: 1fr;
             }
@@ -718,6 +923,39 @@
                 </a>
             </div>
         </header>
+
+        <!-- Anemia Info Section -->
+        <section class="anemia-info">
+            <div class="anemia-info-content">
+                <div class="anemia-icon">
+                    <i class="fas fa-heartbeat"></i>
+                </div>
+                <div class="anemia-text">
+                    <h2>Combatiendo la Anemia Infantil</h2>
+                    <p>La anemia afecta a más del 40% de niños menores de 3 años en Perú. Una alimentación rica en hierro es clave para prevenirla.</p>
+                    <div class="anemia-tips">
+                        <div class="anemia-tip">
+                            <div class="anemia-tip-icon">
+                                <i class="fas fa-apple-alt"></i>
+                            </div>
+                            <div class="anemia-tip-text">Combina alimentos ricos en hierro con vitamina C</div>
+                        </div>
+                        <div class="anemia-tip">
+                            <div class="anemia-tip-icon">
+                                <i class="fas fa-lemon"></i>
+                            </div>
+                            <div class="anemia-tip-text">Evita té o café con las comidas principales</div>
+                        </div>
+                        <div class="anemia-tip">
+                            <div class="anemia-tip-icon">
+                                <i class="fas fa-carrot"></i>
+                            </div>
+                            <div class="anemia-tip-text">Incluye vegetales de color verde oscuro</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
         <!-- Instructions Section -->
         <section class="instructions">
@@ -837,18 +1075,189 @@
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Cargar datos de todos los niños desde localStorage
-            const storedData = localStorage.getItem('yachayMikuyChildren');
+        // Storage Adapter - Para facilitar migración a backend
+        const storageAdapter = {
+            // Users
+            getUsers: function() {
+                const users = localStorage.getItem('yachay_users');
+                return users ? JSON.parse(users) : [];
+            },
+            saveUsers: function(users) {
+                localStorage.setItem('yachay_users', JSON.stringify(users));
+            },
             
-            if (!storedData) {
-                document.body.innerHTML = '<h1>Error: No se encontraron datos de niños.</h1>';
-                return;
+            // Children
+            getChildren: function() {
+                const children = localStorage.getItem('yachay_children');
+                return children ? JSON.parse(children) : [];
+            },
+            saveChildren: function(children) {
+                localStorage.setItem('yachay_children', JSON.stringify(children));
+            },
+            
+            // Responses
+            getResponses: function() {
+                const responses = localStorage.getItem('yachay_responses');
+                return responses ? JSON.parse(responses) : {};
+            },
+            saveResponses: function(responses) {
+                localStorage.setItem('yachay_responses', JSON.stringify(responses));
+            },
+            
+            // Session
+            getSession: function() {
+                const session = localStorage.getItem('yachay_session');
+                return session ? JSON.parse(session) : { currentUserId: null, exploringAsGuest: false, lastActiveAt: null };
+            },
+            saveSession: function(session) {
+                localStorage.setItem('yachay_session', JSON.stringify(session));
+            },
+            
+            // Audit Log
+            getAuditLog: function() {
+                const auditLog = localStorage.getItem('yachay_auditLog');
+                return auditLog ? JSON.parse(auditLog) : [];
+            },
+            saveAuditLog: function(auditLog) {
+                localStorage.setItem('yachay_auditLog', JSON.stringify(auditLog));
+            }
+        };
+
+        // --- INICIO DE FUNCIONES DE SINCRONIZACIÓN ---
+        
+        // Función para sincronizar la eliminación/restauración entre páginas
+        function syncChildDeletionAcrossPages(childId, action) {
+            // action puede ser 'soft-delete', 'restore' o 'permanent-delete'
+            const syncData = {
+                childId: childId,
+                action: action,
+                timestamp: new Date().toISOString()
+            };
+            
+            // Guardar en localStorage para que otras páginas puedan detectar cambios
+            localStorage.setItem('yachay_sync_action', JSON.stringify(syncData));
+            
+            // Notificar a otras pestañas abiertas usando BroadcastChannel
+            if ('BroadcastChannel' in window) {
+                const channel = new BroadcastChannel('yachay_sync');
+                channel.postMessage(syncData);
+            }
+        }
+
+        // --- FIN DE FUNCIONES DE SINCRONIZACIÓN ---
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // --- INICIO DE VERIFICACIÓN DE SINCRONIZACIÓN AL CARGAR ---
+            // Verificar si hay acciones de sincronización pendientes de otras pestañas
+            const syncAction = localStorage.getItem('yachay_sync_action');
+            if (syncAction) {
+                const syncData = JSON.parse(syncAction);
+                // Si la acción es reciente (menos de 5 segundos), la procesamos
+                const actionTime = new Date(syncData.timestamp);
+                const now = new Date();
+                if ((now - actionTime) < 5000) {
+                    // Si la acción afecta a algún niño mostrado, recargamos la página
+                    const session = storageAdapter.getSession();
+                    const guestMode = getURLParameter('guest') === 'true';
+                    
+                    let childrenToShow;
+                    if (guestMode || session.exploringAsGuest) {
+                        // Modo invitado: mostrar solo los perfiles de invitado
+                        childrenToShow = storageAdapter.getChildren().filter(child => child.ownerId === null);
+                    } else if (session.currentUserId) {
+                        // Modo con cuenta: mostrar los perfiles del usuario actual
+                        childrenToShow = storageAdapter.getChildren().filter(child => 
+                            child.ownerId === session.currentUserId
+                        );
+                    }
+                    
+                    // Verificar si el niño eliminado está en la lista de niños mostrados
+                    if (childrenToShow.some(child => child.id === syncData.childId)) {
+                        if (syncData.action === 'soft-delete' || syncData.action === 'permanent-delete') {
+                            showToast('Un perfil ha sido eliminado', 'info');
+                            // Recargar la página para actualizar la lista de niños
+                            setTimeout(() => {
+                                location.reload();
+                            }, 2000);
+                        }
+                    }
+                }
+                // Limpiamos la acción para no procesarla de nuevo
+                localStorage.removeItem('yachay_sync_action');
+            }
+
+            // Configurar listener para sincronización en tiempo real con otras pestañas
+            if ('BroadcastChannel' in window) {
+                const channel = new BroadcastChannel('yachay_sync');
+                channel.onmessage = function(event) {
+                    const syncData = event.data;
+                    const session = storageAdapter.getSession();
+                    const guestMode = getURLParameter('guest') === 'true';
+                    
+                    let childrenToShow;
+                    if (guestMode || session.exploringAsGuest) {
+                        // Modo invitado: mostrar solo los perfiles de invitado
+                        childrenToShow = storageAdapter.getChildren().filter(child => child.ownerId === null);
+                    } else if (session.currentUserId) {
+                        // Modo con cuenta: mostrar los perfiles del usuario actual
+                        childrenToShow = storageAdapter.getChildren().filter(child => 
+                            child.ownerId === session.currentUserId
+                        );
+                    }
+                    
+                    // Verificar si el niño eliminado está en la lista de niños mostrados
+                    if (childrenToShow.some(child => child.id === syncData.childId)) {
+                        if (syncData.action === 'soft-delete' || syncData.action === 'permanent-delete') {
+                            showToast('Un perfil ha sido eliminado', 'info');
+                            // Recargar la página para actualizar la lista de niños
+                            setTimeout(() => {
+                                location.reload();
+                            }, 2000);
+                        }
+                    }
+                };
+            }
+            // --- FIN DE VERIFICACIÓN DE SINCRONIZACIÓN AL CARGAR ---
+
+            const urlParams = new URLSearchParams(window.location.search);
+            const guestMode = urlParams.get('guest') === 'true';
+            const showCompletion = urlParams.get('showCompletion') === 'true';
+            const userId = urlParams.get('userId');
+
+            // Verificar si estamos en modo invitado o con cuenta
+            const session = storageAdapter.getSession();
+            let isGuestMode = guestMode || session.exploringAsGuest;
+
+            // Cargar los datos de TODOS los niños desde localStorage
+            let allChildrenData = storageAdapter.getChildren();
+            
+            if (!allChildrenData || allChildrenData.length === 0) {
+                // Si no hay datos, crear los niños de ejemplo si estamos en modo invitado
+                if (isGuestMode) {
+                    createGuestChildrenIfNotExists();
+                    allChildrenData = storageAdapter.getChildren();
+                } else {
+                    document.body.innerHTML = '<h1>Error: No se encontraron datos de niños. Por favor, complete al menos un cuestionario.</h1>';
+                    return;
+                }
             }
             
-            const allChildrenData = JSON.parse(storedData);
             // Filtrar para usar solo los perfiles que han completado el cuestionario
-            const completedChildren = allChildrenData.filter(child => child.completed);
+            let completedChildren;
+            
+            if (isGuestMode) {
+                // Modo invitado: mostrar solo los perfiles de invitado (Alvaro y Luz)
+                completedChildren = allChildrenData.filter(child => child.ownerId === null);
+            } else {
+                // Modo con cuenta: mostrar los perfiles del usuario actual
+                if (session.currentUserId) {
+                    completedChildren = allChildrenData.filter(child => 
+                        child.ownerId === session.currentUserId
+                    );
+                } else {
+                    completedChildren = [];
+                }
+            }
 
             if (completedChildren.length === 0) {
                 document.body.innerHTML = '<h1>No hay perfiles completados. Por favor, finalice al menos un cuestionario para continuar.</h1>';
@@ -866,14 +1275,45 @@
             
             // Lista de alimentos comunes ricos en hierro para autocompletado
             const ironRichFoods = [
-                "Carne de res", "Pollo", "Pescado", "Huevo", "Espinaca", 
-                "Lentejas", "Garbanzos", "Frijoles", "Tofu", "Quinoa",
-                "Avena", "Cereales fortificados", "Pasta fortificada", "Pan integral",
-                "Hígado", "Mollejas", "Sardinas", "Atún", "Salmón",
-                "Brócoli", "Col rizada", "Acelga", "Remolacha", "Tomate",
-                "Pimiento rojo", "Naranja", "Fresa", "Kiwi", "Papaya",
-                "Mango", "Piña", "Guayaba", "Ciruela", "Manzana",
-                "Plátano", "Aguacate", "Yogur", "Leche fortificada", "Queso"
+                {name: "Carne de res", iron: "Alto", vitaminC: "Bajo"},
+                {name: "Pollo", iron: "Medio", vitaminC: "Bajo"},
+                {name: "Pescado", iron: "Medio", vitaminC: "Bajo"},
+                {name: "Huevo", iron: "Medio", vitaminC: "Bajo"},
+                {name: "Espinaca", iron: "Alto", vitaminC: "Medio"},
+                {name: "Lentejas", iron: "Alto", vitaminC: "Bajo"},
+                {name: "Garbanzos", iron: "Medio", vitaminC: "Bajo"},
+                {name: "Frijoles", iron: "Alto", vitaminC: "Bajo"},
+                {name: "Tofu", iron: "Medio", vitaminC: "Bajo"},
+                {name: "Quinoa", iron: "Medio", vitaminC: "Bajo"},
+                {name: "Avena", iron: "Medio", vitaminC: "Bajo"},
+                {name: "Cereales fortificados", iron: "Alto", vitaminC: "Bajo"},
+                {name: "Pasta fortificada", iron: "Alto", vitaminC: "Bajo"},
+                {name: "Pan integral", iron: "Medio", vitaminC: "Bajo"},
+                {name: "Hígado", iron: "Muy Alto", vitaminC: "Bajo"},
+                {name: "Mollejas", iron: "Muy Alto", vitaminC: "Bajo"},
+                {name: "Sardinas", iron: "Alto", vitaminC: "Bajo"},
+                {name: "Atún", iron: "Medio", vitaminC: "Bajo"},
+                {name: "Salmón", iron: "Medio", vitaminC: "Bajo"},
+                {name: "Brócoli", iron: "Medio", vitaminC: "Alto"},
+                {name: "Col rizada", iron: "Medio", vitaminC: "Alto"},
+                {name: "Acelga", iron: "Medio", vitaminC: "Medio"},
+                {name: "Remolacha", iron: "Medio", vitaminC: "Bajo"},
+                {name: "Tomate", iron: "Bajo", vitaminC: "Alto"},
+                {name: "Pimiento rojo", iron: "Bajo", vitaminC: "Muy Alto"},
+                {name: "Naranja", iron: "Bajo", vitaminC: "Muy Alto"},
+                {name: "Fresa", iron: "Bajo", vitaminC: "Alto"},
+                {name: "Kiwi", iron: "Bajo", vitaminC: "Muy Alto"},
+                {name: "Papaya", iron: "Bajo", vitaminC: "Alto"},
+                {name: "Mango", iron: "Bajo", vitaminC: "Alto"},
+                {name: "Piña", iron: "Bajo", vitaminC: "Alto"},
+                {name: "Guayaba", iron: "Bajo", vitaminC: "Muy Alto"},
+                {name: "Ciruela", iron: "Bajo", vitaminC: "Medio"},
+                {name: "Manzana", iron: "Bajo", vitaminC: "Medio"},
+                {name: "Plátano", iron: "Bajo", vitaminC: "Medio"},
+                {name: "Aguacate", iron: "Bajo", vitaminC: "Bajo"},
+                {name: "Yogur", iron: "Bajo", vitaminC: "Bajo"},
+                {name: "Leche fortificada", iron: "Alto", vitaminC: "Bajo"},
+                {name: "Queso", iron: "Bajo", vitaminC: "Bajo"}
             ];
             
             // Cargar ingredientes guardados previamente
@@ -930,7 +1370,7 @@
                 }
                 
                 const filteredFoods = ironRichFoods.filter(food => 
-                    food.toLowerCase().includes(value)
+                    food.name.toLowerCase().includes(value)
                 );
                 
                 if (filteredFoods.length > 0) {
@@ -939,9 +1379,15 @@
                     filteredFoods.forEach(food => {
                         const item = document.createElement('div');
                         item.classList.add('autocomplete-item');
-                        item.textContent = food;
+                        
+                        // Resaltar contenido rico en hierro o vitamina C
+                        let ironClass = food.iron === 'Alto' || food.iron === 'Muy Alto' ? 'iron-rich' : '';
+                        let vitaminCClass = food.vitaminC === 'Alto' || food.vitaminC === 'Muy Alto' ? 'vitamin-c-rich' : '';
+                        
+                        item.innerHTML = `${food.name} <span class="${ironClass}">Hierro: ${food.iron}</span> <span class="${vitaminCClass}">Vitamina C: ${food.vitaminC}</span>`;
+                        
                         item.addEventListener('click', function() {
-                            ingredientInput.value = food;
+                            ingredientInput.value = food.name;
                             autocompleteList.style.display = 'none';
                         });
                         autocompleteList.appendChild(item);
@@ -964,8 +1410,16 @@
                 const value = ingredientInput.value.trim();
                 if (value) {
                     // Verificar si el ingrediente ya existe
-                    if (!ingredients.includes(value)) {
-                        ingredients.push(value);
+                    if (!ingredients.some(ing => ing.name === value)) {
+                        // Buscar información nutricional del ingrediente
+                        const foodInfo = ironRichFoods.find(food => food.name === value);
+                        
+                        ingredients.push({
+                            name: value,
+                            iron: foodInfo ? foodInfo.iron : 'Desconocido',
+                            vitaminC: foodInfo ? foodInfo.vitaminC : 'Desconocido'
+                        });
+                        
                         renderIngredients();
                         ingredientInput.value = '';
                         autocompleteList.style.display = 'none';
@@ -995,8 +1449,14 @@
                 ingredients.forEach((ingredient, index) => {
                     const item = document.createElement('div');
                     item.classList.add('ingredient-item');
+                    
+                    // Resaltar ingredientes ricos en hierro o vitamina C
+                    let ironClass = ingredient.iron === 'Alto' || ingredient.iron === 'Muy Alto' ? 'iron-rich' : '';
+                    let vitaminCClass = ingredient.vitaminC === 'Alto' || ingredient.vitaminC === 'Muy Alto' ? 'vitamin-c-rich' : '';
+                    
                     item.innerHTML = `
-                        <span class="ingredient-name">${ingredient}</span>
+                        <span class="ingredient-name">${ingredient.name}</span>
+                        <span class="ingredient-iron">Hierro: ${ingredient.iron} | Vitamina C: ${ingredient.vitaminC}</span>
                         <button class="btn-remove" data-index="${index}">
                             <i class="fas fa-times"></i>
                         </button>
@@ -1105,7 +1565,13 @@
                 const recipes = {
                     desayuno: {
                         nombreReceta: "Batido energético de espinacas y plátano",
-                        ingredientes: ["1 plátano maduro", "1 taza de espinacas frescas", "1 taza de leche fortificada", "1 cucharada de avena", "1 cucharadita de miel"],
+                        ingredientes: [
+                            {name: "1 plátano maduro", iron: "Bajo", vitaminC: "Medio"},
+                            {name: "1 taza de espinacas frescas", iron: "Alto", vitaminC: "Medio"},
+                            {name: "1 taza de leche fortificada", iron: "Alto", vitaminC: "Bajo"},
+                            {name: "1 cucharada de avena", iron: "Medio", vitaminC: "Bajo"},
+                            {name: "1 cucharadita de miel", iron: "Bajo", vitaminC: "Bajo"}
+                        ],
                         preparacion: [
                             "Pelar y cortar el plátano en rodajas.",
                             "Lavar bien las espinacas.",
@@ -1115,52 +1581,83 @@
                         ],
                         consejosDespensa: "Puedes añadir otras frutas como fresas o mango para variar el sabor. Si no tienes leche fortificada, puedes usar leche normal y añadir suplementos de hierro.",
                         beneficiosNiño: "Este batido es rico en hierro de las espinacas y vitamina C del plátano, que ayuda a absorber mejor el hierro. También proporciona energía para empezar el día.",
-                        alertaAlergenos: "Contiene lácteos. Si tu hijo es alérgico a la leche, puedes sustituirla por bebida de almendras fortificada."
+                        alertaAlergenos: "Contiene lácteos. Si tu hijo es alérgico a la leche, puedes sustituirla por bebida de almendras fortificada.",
+                        infoHierro: "Las espinacas son una excelente fuente de hierro no hemo, que se absorbe mejor cuando se combina con vitamina C."
                     },
                     almuerzo: {
                         nombreReceta: "Lentejas con arroz y pollo",
-                        ingredientes: ["1 taza de lentejas", "1/2 taza de arroz integral", "100g de pechuga de pollo", "1 zanahoria", "1 cebolla", "2 dientes de ajo", "Aceite de oliva", "Sal y pimienta"],
+                        ingredientes: [
+                            {name: "1 taza de lentejas", iron: "Alto", vitaminC: "Bajo"},
+                            {name: "1/2 taza de arroz integral", iron: "Medio", vitaminC: "Bajo"},
+                            {name: "100g de pechuga de pollo", iron: "Medio", vitaminC: "Bajo"},
+                            {name: "1 zanahoria", iron: "Bajo", vitaminC: "Bajo"},
+                            {name: "1 cebolla", iron: "Bajo", vitaminC: "Medio"},
+                            {name: "2 dientes de ajo", iron: "Bajo", vitaminC: "Medio"},
+                            {name: "Pimiento rojo", iron: "Bajo", vitaminC: "Muy Alto"},
+                            {name: "Aceite de oliva", iron: "Bajo", vitaminC: "Bajo"},
+                            {name: "Sal y pimienta", iron: "Bajo", vitaminC: "Bajo"}
+                        ],
                         preparacion: [
                             "Cocinar las lentejas en agua con sal hasta que estén tiernas.",
                             "Cocinar el arroz integral según las instrucciones del paquete.",
                             "Cortar el pollo en cubos y saltearlo en aceite de oliva con ajo picado.",
-                            "Añadir la cebolla y zanahoria picadas y cocinar hasta que estén tiernas.",
+                            "Añadir la cebolla, zanahoria y pimiento rojo picados y cocinar hasta que estén tiernos.",
                             "Mezclar el pollo con las lentejas y servir acompañado de arroz."
                         ],
-                        consejosDespensa: "Puedes añadir otras verduras como pimientos o calabacín para aumentar el valor nutricional. Si no tienes pollo, puedes sustituirlo por tofu o huevo.",
-                        beneficiosNiño: "Las lentejas son una excelente fuente de hierro vegetal, y el pollo proporciona proteínas de alta calidad. Este plato es muy completo y nutritivo.",
-                        alertaAlergenos: "Sin alérgenos comunes, pero siempre verifica que tus hijos no tengan alergias a los ingredientes."
+                        consejosDespensa: "Puedes añadir otras verduras como brócoli o tomate para aumentar el valor nutricional. Si no tienes pollo, puedes sustituirlo por tofu o huevo.",
+                        beneficiosNiño: "Las lentejas son una excelente fuente de hierro vegetal, y el pollo proporciona proteínas de alta calidad. El pimiento rojo aporta vitamina C que mejora la absorción del hierro.",
+                        alertaAlergenos: "Sin alérgenos comunes, pero siempre verifica que tus hijos no tengan alergias a los ingredientes.",
+                        infoHierro: "Las lentejas contienen hierro no hemo, cuya absorción se mejora significativamente cuando se consume con alimentos ricos en vitamina C como el pimiento rojo."
                     },
                     cena: {
                         nombreReceta: "Salmón al horno con espárragos",
-                        ingredientes: ["1 filete de salmón", "200g de espárragos", "1 limón", "2 cucharadas de aceite de oliva", "1 diente de ajo", "Sal y pimienta", "Eneldo fresco"],
+                        ingredientes: [
+                            {name: "1 filete de salmón", iron: "Medio", vitaminC: "Bajo"},
+                            {name: "200g de espárragos", iron: "Medio", vitaminC: "Medio"},
+                            {name: "1 limón", iron: "Bajo", vitaminC: "Alto"},
+                            {name: "2 cucharadas de aceite de oliva", iron: "Bajo", vitaminC: "Bajo"},
+                            {name: "1 diente de ajo", iron: "Bajo", vitaminC: "Medio"},
+                            {name: "Pimientos rojos asados", iron: "Bajo", vitaminC: "Muy Alto"},
+                            {name: "Sal y pimienta", iron: "Bajo", vitaminC: "Bajo"},
+                            {name: "Eneldo fresco", iron: "Bajo", vitaminC: "Bajo"}
+                        ],
                         preparacion: [
                             "Precalentar el horno a 200°C.",
                             "Lavar los espárragos y cortar los extremos duros.",
                             "Colocar el salmón y los espárragos en una bandeja para horno.",
+                            "Añadir los pimientos rojos asados en tiras.",
                             "Rociar con aceite de oliva, ajo picado, sal y pimienta.",
                             "Exprimir el jugo de medio limón sobre el salmón.",
                             "Hornear durante 15-20 minutos.",
                             "Servir decorado con eneldo fresco y rodajas de limón."
                         ],
                         consejosDespensa: "Puedes acompañar con una porción de quinoa o arroz integral para añadir carbohidratos. Si no tienes salmón, puedes usar otro pescado rico en omega-3 como atún o trucha.",
-                        beneficiosNiño: "El salmón es rico en hierro y ácidos grasos omega-3, que son importantes para el desarrollo cerebral. Los espárragos aportan fibra y vitaminas.",
-                        alertaAlergenos: "Contiene pescado. Si tus hijos son alérgicos al pescado, puedes sustituir el salmón por tofu o pollo."
+                        beneficiosNiño: "El salmón es rico en hierro y ácidos grasos omega-3, que son importantes para el desarrollo cerebral. Los espárragos y pimientos aportan fibra y vitamina C.",
+                        alertaAlergenos: "Contiene pescado. Si tus hijos son alérgicos al pescado, puedes sustituir el salmón por tofu o pollo.",
+                        infoHierro: "El salmón contiene hierro hemo, que se absorbe más fácilmente que el hierro de origen vegetal. La vitamina C de los pimientos y limón mejora aún más esta absorción."
                     },
                     postre: {
                         nombreReceta: "Mousse de chocolate y aguacate",
-                        ingredientes: ["1 aguacate maduro", "2 cucharadas de cacao en polvo sin azúcar", "1 cucharada de miel", "1/4 taza de leche de almendras fortificada", "1/2 cucharadita de extracto de vainilla"],
+                        ingredientes: [
+                            {name: "1 aguacate maduro", iron: "Bajo", vitaminC: "Bajo"},
+                            {name: "2 cucharadas de cacao en polvo sin azúcar", iron: "Alto", vitaminC: "Bajo"},
+                            {name: "1 cucharada de miel", iron: "Bajo", vitaminC: "Bajo"},
+                            {name: "1/4 taza de leche de almendras fortificada", iron: "Alto", vitaminC: "Bajo"},
+                            {name: "1/2 cucharadita de extracto de vainilla", iron: "Bajo", vitaminC: "Bajo"},
+                            {name: "Fresas frescas", iron: "Bajo", vitaminC: "Alto"}
+                        ],
                         preparacion: [
                             "Cortar el aguacate por la mitad, retirar el hueso y sacar la pulpa.",
                             "Colocar la pulpa del aguacate en una batidora o procesador de alimentos.",
                             "Añadir el cacao en polvo, la miel, la leche de almendras y la vainilla.",
                             "Batir hasta obtener una crema suave y homogénea.",
                             "Refrigerar durante al menos 30 minutos antes de servir.",
-                            "Decorar con frutas frescas o un poco de cacao en polvo."
+                            "Decorar con fresas frescas y un poco de cacao en polvo."
                         ],
                         consejosDespensa: "Puedes añadir plátano para hacerlo más cremoso y dulce. Si no tienes leche de almendras, puedes usar cualquier otra leche vegetal fortificada.",
-                        beneficiosNiño: "Este postre es rico en hierro del cacao y grasas saludables del aguacate. Es una alternativa saludable a los postres procesados.",
-                        alertaAlergenos: "Sin alérgenos comunes, pero verifica que tus hijos no sean alérgicos a ninguno de los ingredientes."
+                        beneficiosNiño: "Este postre es rico en hierro del cacao y grasas saludables del aguacate. Las fresas aportan vitamina C que mejora la absorción del hierro.",
+                        alertaAlergenos: "Sin alérgenos comunes, pero verifica que tus hijos no sean alérgicos a ninguno de los ingredientes.",
+                        infoHierro: "El cacao en polvo es sorprendentemente rico en hierro. Combinarlo con fresas ricas en vitamina C maximiza la absorción de este mineral esencial."
                     }
                 };
                 
@@ -1200,6 +1697,14 @@
                         postre: 'Postre'
                     };
                     
+                    // Procesar ingredientes para resaltar los ricos en hierro y vitamina C
+                    let ingredientsHtml = '';
+                    recipe.ingredientes.forEach(ing => {
+                        let ironClass = ing.iron === 'Alto' || ing.iron === 'Muy Alto' ? 'iron-rich' : '';
+                        let vitaminCClass = ing.vitaminC === 'Alto' || ing.vitaminC === 'Muy Alto' ? 'vitamin-c-rich' : '';
+                        ingredientsHtml += `<li>${ing.name} <span class="${ironClass}">Hierro: ${ing.iron}</span> <span class="${vitaminCClass}">Vitamina C: ${ing.vitaminC}</span></li>`;
+                    });
+                    
                     card.innerHTML = `
                         <div class="recipe-header">
                             <div>
@@ -1216,7 +1721,7 @@
                                     <i class="fas fa-list"></i> Ingredientes
                                 </h4>
                                 <ul class="ingredient-list">
-                                    ${recipe.ingredientes.map(ing => `<li>${ing}</li>`).join('')}
+                                    ${ingredientsHtml}
                                 </ul>
                             </div>
                             <div class="recipe-section">
@@ -1227,6 +1732,16 @@
                                     ${recipe.preparacion.map(step => `<li>${step}</li>`).join('')}
                                 </ol>
                             </div>
+                            ${recipe.infoHierro ? `
+                                <div class="recipe-section">
+                                    <div class="iron-info">
+                                        <h4 class="section-subtitle">
+                                            <i class="fas fa-heartbeat"></i> Información sobre Hierro
+                                        </h4>
+                                        <p>${recipe.infoHierro}</p>
+                                    </div>
+                                </div>
+                            ` : ''}
                             <div class="recipe-section">
                                 <div class="tips-box">
                                     <h4 class="section-subtitle">
@@ -1269,7 +1784,7 @@
                         let textToCopy = `*${recipe.nombreReceta}*\n\n`;
                         textToCopy += `*Ingredientes:*\n`;
                         recipe.ingredientes.forEach(ing => {
-                            textToCopy += `- ${ing}\n`;
+                            textToCopy += `- ${ing.name} (Hierro: ${ing.iron}, Vitamina C: ${ing.vitaminC})\n`;
                         });
                         textToCopy += `\n*Preparación:*\n`;
                         recipe.preparacion.forEach((step, i) => {
@@ -1277,6 +1792,9 @@
                         });
                         textToCopy += `\n*Consejos para tu Despensa:*\n${recipe.consejosDespensa}\n\n`;
                         textToCopy += `*Beneficios para los Niños:*\n${recipe.beneficiosNiño}\n`;
+                        if (recipe.infoHierro) {
+                            textToCopy += `\n*Información sobre Hierro:*\n${recipe.infoHierro}\n`;
+                        }
                         if (recipe.alertaAlergenos) {
                             textToCopy += `\n*Alerta de Alérgenos:*\n${recipe.alertaAlergenos}`;
                         }
@@ -1342,6 +1860,136 @@
                     modal.style.display = 'none';
                 }
             });
+
+            // Función para mostrar notificaciones toast
+            function showToast(message, type = 'info') {
+                const toastContainer = document.createElement('div');
+                toastContainer.className = 'toast-container';
+                toastContainer.style.position = 'fixed';
+                toastContainer.style.top = '20px';
+                toastContainer.style.right = '20px';
+                toastContainer.style.zIndex = '1050';
+                
+                const toastId = 'toast-' + Date.now();
+                
+                const toastHtml = `
+                    <div id="${toastId}" class="custom-toast toast-${type}" style="
+                        background: white;
+                        border-radius: 10px;
+                        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+                        padding: 15px 20px;
+                        margin-bottom: 10px;
+                        display: flex;
+                        align-items: center;
+                        animation: slideIn 0.3s ease;
+                        ${type === 'success' ? 'border-left: 5px solid var(--success-green);' : 
+                          type === 'error' ? 'border-left: 5px solid var(--danger-red);' : 
+                          'border-left: 5px solid var(--accent-cyan);'}
+                    ">
+                        <div class="me-2">
+                            ${type === 'success' ? '<i class="fas fa-check-circle text-success"></i>' : 
+                              type === 'error' ? '<i class="fas fa-exclamation-circle text-danger"></i>' : 
+                              '<i class="fas fa-info-circle text-info"></i>'}
+                        </div>
+                        <div class="flex-grow-1">${message}</div>
+                        <button type="button" class="btn-close ms-2" onclick="document.getElementById('${toastId}').remove()"></button>
+                    </div>
+                `;
+                
+                toastContainer.innerHTML = toastHtml;
+                document.body.appendChild(toastContainer);
+                
+                // Auto remove after 5 seconds
+                setTimeout(() => {
+                    const toast = document.getElementById(toastId);
+                    if (toast) {
+                        toast.remove();
+                        if (toastContainer.children.length === 0) {
+                            document.body.removeChild(toastContainer);
+                        }
+                    }
+                }, 5000);
+            }
+
+            // Función para obtener parámetros de la URL
+            function getURLParameter(name) {
+                const urlParams = new URLSearchParams(window.location.search);
+                return urlParams.get(name);
+            }
+
+            // Función para crear niños de ejemplo si no existen
+            function createGuestChildrenIfNotExists() {
+                let childrenData = storageAdapter.getChildren();
+                
+                // Verificar si ya existen los niños de ejemplo
+                const hasAlvaro = childrenData.some(child => child.name === 'Alvaro');
+                const hasLuz = childrenData.some(child => child.name === 'Luz');
+                
+                if (!hasAlvaro) {
+                    childrenData.push({
+                        id: 'alvaro-' + Date.now(),
+                        name: 'Alvaro',
+                        dob: '2017-08-10',
+                        sex: 'male',
+                        avatarCustomization: '1',
+                        theme: 'default',
+                        ownerId: null,
+                        createdAt: new Date().toISOString(),
+                        updatedAt: new Date().toISOString(),
+                        progressPercent: 100,
+                        deletedAt: null,
+                        version: 1
+                    });
+                }
+                
+                if (!hasLuz) {
+                    childrenData.push({
+                        id: 'luz-' + Date.now(),
+                        name: 'Luz',
+                        dob: '2019-12-05',
+                        sex: 'female',
+                        avatarCustomization: '2',
+                        theme: 'default',
+                        ownerId: null,
+                        createdAt: new Date().toISOString(),
+                        updatedAt: new Date().toISOString(),
+                        progressPercent: 100,
+                        deletedAt: null,
+                        version: 1
+                    });
+                }
+                
+                storageAdapter.saveChildren(childrenData);
+                
+                // Crear respuestas para los perfiles predefinidos
+                const responses = storageAdapter.getResponses();
+                
+                if (!responses['alvaro-' + Date.now()]) {
+                    responses['alvaro-' + Date.now()] = {};
+                    for (let i = 1; i <= 50; i++) {
+                        responses['alvaro-' + Date.now()][`q${i}`] = {
+                            type: 'select',
+                            value: i % 5 === 0 ? 'Opción 5' : `Opción ${i % 5}`,
+                            timestamp: new Date().toISOString(),
+                            version: 1
+                        };
+                    }
+                }
+                
+                if (!responses['luz-' + Date.now()]) {
+                    responses['luz-' + Date.now()] = {};
+                    for (let i = 1; i <= 50; i++) {
+                        responses['luz-' + Date.now()][`q${i}`] = {
+                            type: 'select',
+                            value: i % 5 === 0 ? 'Opción 5' : `Opción ${i % 5}`,
+                            timestamp: new Date().toISOString(),
+                            version: 1
+                        };
+                    }
+                }
+                
+                storageAdapter.saveResponses(responses);
+            }
         });
     </script>
 </body>
