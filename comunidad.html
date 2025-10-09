@@ -1,0 +1,2708 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comunidad Interactiva - Yachay Mikuy</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #1e3a8a;
+            --primary-dark: #1e40af;
+            --primary-light: #3b82f6;
+            --secondary-color: #f1f5f9;
+            --background-color: #f8fafc;
+            --text-color: #1e293b;
+            --text-light: #64748b;
+            --message-sent: #dbeafe;
+            --message-received: #ffffff;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            --accent-color: #0ea5e9;
+            --success-color: #10b981;
+            --danger-color: #ef4444;
+            --warning-color: #f59e0b;
+            --user-color-1: #3b82f6;
+            --user-color-2: #ef4444;
+            --user-color-3: #10b981;
+            --user-color-4: #f59e0b;
+            --user-color-5: #8b5cf6;
+            --user-color-6: #ec4899;
+            --user-color-7: #14b8a6;
+            --user-color-8: #f97316;
+            --user-color-9: #6366f1;
+            --user-color-10: #84cc16;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            color: var(--text-color);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 20px 0;
+            box-shadow: var(--shadow-lg);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .logo i {
+            font-size: 32px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .back-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            backdrop-filter: blur(10px);
+        }
+
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Main Content */
+        main {
+            flex: 1;
+            padding: 30px 0;
+        }
+
+        /* Tab Navigation */
+        .tab-navigation {
+            display: flex;
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            margin-bottom: 30px;
+            border: 1px solid var(--secondary-color);
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 18px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tab-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .tab-btn:hover::before {
+            left: 100%;
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            color: white;
+            transform: scale(1.02);
+        }
+
+        .tab-btn:hover:not(.active) {
+            background-color: var(--secondary-color);
+        }
+
+        .tab-btn i {
+            font-size: 20px;
+        }
+
+        /* Tab Content */
+        .tab-content {
+            display: none;
+            animation: fadeInUp 0.5s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeInUp {
+            from { 
+                opacity: 0; 
+                transform: translateY(20px); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0); 
+            }
+        }
+
+        /* Department Selector */
+        .department-selector {
+            margin-bottom: 30px;
+        }
+
+        .department-selector select {
+            width: 100%;
+            padding: 16px 20px;
+            border: 2px solid var(--secondary-color);
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 500;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow);
+        }
+
+        .department-selector select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* Conversation Cards - Grid Responsivo Mejorado */
+        .conversations-container {
+            display: grid;
+            gap: 24px;
+            margin-bottom: 30px;
+            grid-template-columns: 1fr;
+        }
+
+        /* Tablets */
+        @media (min-width: 640px) {
+            .conversations-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* Laptops pequeños */
+        @media (min-width: 968px) {
+            .conversations-container {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        /* Desktops */
+        @media (min-width: 1280px) {
+            .conversations-container {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        /* Pantallas muy grandes */
+        @media (min-width: 1536px) {
+            .conversations-container {
+                grid-template-columns: repeat(5, 1fr);
+            }
+        }
+
+        .conversation-card {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            position: relative;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid var(--secondary-color);
+            overflow: hidden;
+        }
+
+        .conversation-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .conversation-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .conversation-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .conversation-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--text-color);
+            line-height: 1.3;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            min-height: 52px;
+        }
+
+        .conversation-description {
+            color: var(--text-light);
+            margin-bottom: 20px;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            flex-grow: 1;
+            line-height: 1.5;
+            font-size: 15px;
+        }
+
+        .conversation-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 16px;
+            font-size: 14px;
+            color: var(--text-light);
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--secondary-color);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-weight: 500;
+        }
+
+        .meta-item i {
+            color: var(--primary-color);
+        }
+
+        .conversation-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: auto;
+        }
+
+        .btn {
+            padding: 12px 16px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: 14px;
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .btn:active::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-secondary {
+            background: var(--secondary-color);
+            color: var(--text-color);
+        }
+
+        .btn-secondary:hover {
+            background: #e2e8f0;
+            transform: translateY(-2px);
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, var(--danger-color) 0%, #dc2626 100%);
+            color: white;
+        }
+
+        .btn-danger:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Floating Action Button */
+        .fab-container {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 100;
+        }
+
+        .fab {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            color: white;
+            border: none;
+            font-size: 28px;
+            cursor: pointer;
+            box-shadow: var(--shadow-xl);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .fab::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(0);
+            transition: transform 0.3s ease;
+        }
+
+        .fab:hover::after {
+            transform: scale(1);
+        }
+
+        .fab:hover {
+            transform: scale(1.1) rotate(90deg);
+        }
+
+        /* Chat Modal */
+        .chat-modal {
+            position: fixed;
+            bottom: 0;
+            right: 30px;
+            width: 380px;
+            height: 520px;
+            background: white;
+            border-radius: 20px 20px 0 0;
+            box-shadow: var(--shadow-xl);
+            display: none;
+            flex-direction: column;
+            z-index: 1000;
+            animation: slideUp 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(100%); }
+            to { transform: translateY(0); }
+        }
+
+        .chat-modal.active {
+            display: flex;
+        }
+
+        .chat-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 20px 20px 0 0;
+        }
+
+        .chat-close {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            margin-left: 12px;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .chat-close:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(90deg);
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            background-image: url('https://i.pinimg.com/736x/8c/98/99/8c98994518b575bfd8c949e91d20548b.jpg');
+            background-size: cover;
+            background-blend-mode: overlay;
+        }
+
+        .message {
+            margin-bottom: 16px;
+            display: flex;
+            flex-direction: column;
+            animation: fadeIn 0.3s ease;
+            position: relative;
+        }
+
+        .message.sent {
+            align-items: flex-end;
+        }
+
+        .message.received {
+            align-items: flex-start;
+        }
+
+        .message-bubble {
+            max-width: 75%;
+            padding: 12px 16px;
+            border-radius: 20px;
+            word-wrap: break-word;
+            position: relative;
+            box-shadow: var(--shadow);
+        }
+
+        .message.sent .message-bubble {
+            background: linear-gradient(135deg, var(--message-sent) 0%, #bfdbfe 100%);
+            border-bottom-right-radius: 6px;
+        }
+
+        .message.received .message-bubble {
+            background: white;
+            border-bottom-left-radius: 6px;
+        }
+
+        .message-info {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            color: var(--text-light);
+            margin-top: 6px;
+        }
+
+        .message.sent .message-info {
+            justify-content: flex-end;
+        }
+
+        .message.received .message-info {
+            justify-content: flex-start;
+        }
+
+        .message-actions {
+            position: absolute;
+            top: 0;
+            right: 0;
+            display: none;
+            gap: 6px;
+        }
+
+        .message:hover .message-actions {
+            display: flex;
+        }
+
+        .message-action-btn {
+            background: rgba(0, 0, 0, 0.1);
+            border: none;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            transition: all 0.2s ease;
+        }
+
+        .message-action-btn:hover {
+            background: rgba(0, 0, 0, 0.2);
+            transform: scale(1.1);
+        }
+
+        .chat-input-container {
+            padding: 20px;
+            background: white;
+            border-top: 1px solid var(--secondary-color);
+            display: flex;
+            gap: 12px;
+        }
+
+        .chat-input {
+            flex: 1;
+            padding: 12px 16px;
+            border: 2px solid var(--secondary-color);
+            border-radius: 25px;
+            outline: none;
+            transition: all 0.3s ease;
+            font-size: 15px;
+        }
+
+        .chat-input:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.1);
+        }
+
+        .chat-send {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            color: white;
+            border: none;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            font-size: 18px;
+        }
+
+        .chat-send:hover {
+            transform: scale(1.1);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Direct Messages */
+        .direct-messages-container {
+            display: flex;
+            height: 640px;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow-xl);
+        }
+
+        .users-list {
+            width: 320px;
+            border-right: 1px solid var(--secondary-color);
+            overflow-y: auto;
+            background: var(--background-color);
+        }
+
+        .user-item {
+            padding: 16px;
+            border-bottom: 1px solid var(--secondary-color);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .user-item:hover {
+            background: var(--secondary-color);
+            transform: translateX(4px);
+        }
+
+        .user-item.active {
+            background: linear-gradient(135deg, rgba(30, 58, 138, 0.1) 0%, rgba(59, 130, 246, 0.1) 100%);
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .user-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: white;
+            font-size: 18px;
+            box-shadow: var(--shadow);
+        }
+
+        .user-info {
+            flex: 1;
+        }
+
+        .user-name {
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .user-last-message {
+            font-size: 14px;
+            color: var(--text-light);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .direct-chat {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .typing-indicator {
+            display: none;
+            padding: 12px 20px;
+            color: var(--text-light);
+            font-style: italic;
+            font-size: 14px;
+            background: var(--secondary-color);
+        }
+
+        .typing-indicator.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        /* Modal Styles */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal.active {
+            display: flex;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 540px;
+            max-height: 90vh;
+            overflow-y: auto;
+            animation: slideIn 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        @keyframes slideIn {
+            from { 
+                transform: scale(0.8) translateY(20px); 
+                opacity: 0; 
+            }
+            to { 
+                transform: scale(1) translateY(0); 
+                opacity: 1; 
+            }
+        }
+
+        .modal-header {
+            padding: 24px;
+            border-bottom: 1px solid var(--secondary-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            color: white;
+            border-radius: 20px 20px 0 0;
+        }
+
+        .modal-header h2 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .close-modal {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            font-size: 28px;
+            cursor: pointer;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .close-modal:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(90deg);
+        }
+
+        .modal-body {
+            padding: 24px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--text-color);
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid var(--secondary-color);
+            border-radius: 10px;
+            font-family: inherit;
+            transition: all 0.3s ease;
+            font-size: 15px;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        /* Notification */
+        .notification {
+            position: fixed;
+            top: 100px;
+            right: 30px;
+            background: white;
+            padding: 16px 24px;
+            border-radius: 12px;
+            box-shadow: var(--shadow-xl);
+            display: none;
+            align-items: center;
+            gap: 12px;
+            z-index: 3000;
+            animation: slideInRight 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            min-width: 300px;
+        }
+
+        @keyframes slideInRight {
+            from { 
+                transform: translateX(100%); 
+                opacity: 0; 
+            }
+            to { 
+                transform: translateX(0); 
+                opacity: 1; 
+            }
+        }
+
+        .notification.active {
+            display: flex;
+        }
+
+        .notification.success {
+            border-left: 4px solid var(--success-color);
+        }
+
+        .notification.error {
+            border-left: 4px solid var(--danger-color);
+        }
+
+        .notification.info {
+            border-left: 4px solid var(--primary-color);
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 40px 0 20px;
+            margin-top: auto;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 20px;
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-section ul li a {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer-section ul li a:hover {
+            color: white;
+            transform: translateX(4px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            color: white;
+            transition: all 0.3s ease;
+            font-size: 18px;
+        }
+
+        .social-links a:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-4px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .chat-modal {
+                width: 100%;
+                right: 0;
+                height: 70vh;
+                border-radius: 20px 20px 0 0;
+            }
+
+            .direct-messages-container {
+                flex-direction: column;
+                height: auto;
+            }
+
+            .users-list {
+                width: 100%;
+                max-height: 240px;
+            }
+
+            .direct-chat {
+                height: 400px;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+
+            .conversation-actions {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+            .header-content {
+                flex-direction: column;
+                gap: 16px;
+            }
+
+            .logo {
+                font-size: 24px;
+            }
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text-light);
+            grid-column: 1 / -1;
+        }
+
+        .empty-state i {
+            font-size: 64px;
+            margin-bottom: 20px;
+            color: var(--text-light);
+            opacity: 0.5;
+        }
+
+        .empty-state h3 {
+            margin-bottom: 12px;
+            color: var(--text-color);
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        /* Unread Badge */
+        .unread-badge {
+            background: linear-gradient(135deg, var(--danger-color) 0%, #dc2626 100%);
+            color: white;
+            font-size: 12px;
+            font-weight: 700;
+            padding: 4px 8px;
+            border-radius: 12px;
+            margin-left: 8px;
+            min-width: 20px;
+            text-align: center;
+        }
+
+        /* User Color Indicator */
+        .user-color-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 6px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Content Section Styles */
+        .content-section {
+            margin-bottom: 24px;
+        }
+
+        .content-section h3 {
+            color: var(--primary-color);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .content-section ul {
+            padding-left: 24px;
+            margin-bottom: 16px;
+        }
+
+        .content-section li {
+            margin-bottom: 8px;
+            line-height: 1.6;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(30, 58, 138, 0.1) 0%, rgba(59, 130, 246, 0.1) 100%);
+            border-left: 4px solid var(--primary-color);
+            padding: 20px;
+            border-radius: 0 12px 12px 0;
+            margin-top: 24px;
+        }
+
+        /* Loading State */
+        .loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 60px;
+            grid-column: 1 / -1;
+        }
+
+        .spinner {
+            border: 4px solid var(--secondary-color);
+            border-top: 4px solid var(--primary-color);
+            border-radius: 50%;
+            width: 48px;
+            height: 48px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Word Counter */
+        .word-counter {
+            font-size: 12px;
+            color: var(--text-light);
+            text-align: right;
+            margin-top: 4px;
+        }
+
+        .word-counter.warning {
+            color: var(--warning-color);
+        }
+
+        .word-counter.error {
+            color: var(--danger-color);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-comments"></i>
+                    <span>Comunidad Interactiva</span>
+                </div>
+                <button class="back-btn" onclick="window.location.href='index.html'">
+                    <i class="fas fa-arrow-left"></i>
+                    <span>Volver al Inicio</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="tab-navigation">
+            <button class="tab-btn active" onclick="switchTab('community')">
+                <i class="fas fa-users"></i>
+                <span>Comunidad</span>
+            </button>
+            <button class="tab-btn" onclick="switchTab('direct')">
+                <i class="fas fa-envelope"></i>
+                <span>Mensajes Directos</span>
+            </button>
+        </div>
+
+        <!-- Community Tab -->
+        <div id="community-tab" class="tab-content active">
+            <div class="department-selector">
+                <select id="department-select" onchange="filterConversations()">
+                    <option value="all">Todos los departamentos</option>
+                    <option value="Amazonas">Amazonas</option>
+                    <option value="Áncash">Áncash</option>
+                    <option value="Apurímac">Apurímac</option>
+                    <option value="Arequipa">Arequipa</option>
+                    <option value="Ayacucho">Ayacucho</option>
+                    <option value="Cajamarca">Cajamarca</option>
+                    <option value="Callao">Callao</option>
+                    <option value="Cusco">Cusco</option>
+                    <option value="Huancavelica">Huancavelica</option>
+                    <option value="Huánuco">Huánuco</option>
+                    <option value="Ica">Ica</option>
+                    <option value="Junín">Junín</option>
+                    <option value="La Libertad">La Libertad</option>
+                    <option value="Lambayeque">Lambayeque</option>
+                    <option value="Lima">Lima</option>
+                    <option value="Loreto">Loreto</option>
+                    <option value="Madre de Dios">Madre de Dios</option>
+                    <option value="Moquegua">Moquegua</option>
+                    <option value="Pasco">Pasco</option>
+                    <option value="Piura">Piura</option>
+                    <option value="Puno">Puno</option>
+                    <option value="San Martín">San Martín</option>
+                    <option value="Tacna">Tacna</option>
+                    <option value="Tumbes">Tumbes</option>
+                    <option value="Ucayali">Ucayali</option>
+                </select>
+            </div>
+
+            <div id="conversations-container" class="conversations-container">
+                <!-- Conversations will be loaded here -->
+            </div>
+
+            <div id="empty-state" class="empty-state" style="display: none;">
+                <i class="fas fa-comments"></i>
+                <h3>No hay conversaciones en este departamento</h3>
+                <p>Sé el primero en crear una conversación en tu comunidad</p>
+            </div>
+        </div>
+
+        <!-- Direct Messages Tab -->
+        <div id="direct-tab" class="tab-content">
+            <div class="direct-messages-container">
+                <div class="users-list" id="users-list">
+                    <!-- Users list will be loaded here -->
+                </div>
+                <div class="direct-chat" id="direct-chat">
+                    <div class="chat-header">
+                        <div id="direct-chat-user-info">
+                            <span>Selecciona un usuario para chatear</span>
+                        </div>
+                        <button class="chat-close" onclick="closeDirectChat()">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <div class="chat-messages" id="direct-chat-messages">
+                        <div class="empty-state">
+                            <i class="fas fa-comments"></i>
+                            <h3>Selecciona una conversación</h3>
+                            <p>Elige un usuario de la lista para comenzar a chatear</p>
+                        </div>
+                    </div>
+                    <div class="typing-indicator" id="typing-indicator">
+                        <i class="fas fa-ellipsis-h"></i> Alguien está escribiendo...
+                    </div>
+                    <div class="chat-input-container">
+                        <input type="text" class="chat-input" id="direct-chat-input" placeholder="Escribe un mensaje..." disabled>
+                        <button class="chat-send" id="direct-chat-send" disabled>
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Floating Action Button -->
+    <div class="fab-container">
+        <button class="fab" onclick="openCreateConversationModal()">
+            <i class="fas fa-plus"></i>
+        </button>
+    </div>
+
+    <!-- Create Conversation Modal -->
+    <div class="modal" id="create-conversation-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Crear Nueva Conversación</h2>
+                <button class="close-modal" onclick="closeModal('create-conversation-modal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="new-conversation-form">
+                    <div class="form-group">
+                        <label for="conversation-title">Título (máx. 20 palabras)</label>
+                        <input type="text" id="conversation-title" required maxlength="200" oninput="updateWordCounter('conversation-title', 20)">
+                        <div class="word-counter" id="conversation-title-counter">0 / 20 palabras</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="conversation-department">Departamento</label>
+                        <select id="conversation-department" required>
+                            <option value="">Seleccionar departamento</option>
+                            <option value="Amazonas">Amazonas</option>
+                            <option value="Áncash">Áncash</option>
+                            <option value="Apurímac">Apurímac</option>
+                            <option value="Arequipa">Arequipa</option>
+                            <option value="Ayacucho">Ayacucho</option>
+                            <option value="Cajamarca">Cajamarca</option>
+                            <option value="Callao">Callao</option>
+                            <option value="Cusco">Cusco</option>
+                            <option value="Huancavelica">Huancavelica</option>
+                            <option value="Huánuco">Huánuco</option>
+                            <option value="Ica">Ica</option>
+                            <option value="Junín">Junín</option>
+                            <option value="La Libertad">La Libertad</option>
+                            <option value="Lambayeque">Lambayeque</option>
+                            <option value="Lima">Lima</option>
+                            <option value="Loreto">Loreto</option>
+                            <option value="Madre de Dios">Madre de Dios</option>
+                            <option value="Moquegua">Moquegua</option>
+                            <option value="Pasco">Pasco</option>
+                            <option value="Piura">Piura</option>
+                            <option value="Puno">Puno</option>
+                            <option value="San Martín">San Martín</option>
+                            <option value="Tacna">Tacna</option>
+                            <option value="Tumbes">Tumbes</option>
+                            <option value="Ucayali">Ucayali</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="conversation-description">Descripción (máx. 50 palabras)</label>
+                        <textarea id="conversation-description" rows="3" required maxlength="500" oninput="updateWordCounter('conversation-description', 50)"></textarea>
+                        <div class="word-counter" id="conversation-description-counter">0 / 50 palabras</div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-plus"></i>
+                        <span>Crear Conversación</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Conversation Modal -->
+    <div class="modal" id="edit-conversation-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Editar Conversación</h2>
+                <button class="close-modal" onclick="closeModal('edit-conversation-modal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="edit-conversation-form">
+                    <div class="form-group">
+                        <label for="edit-conversation-title">Título (máx. 20 palabras)</label>
+                        <input type="text" id="edit-conversation-title" required maxlength="200" oninput="updateWordCounter('edit-conversation-title', 20)">
+                        <div class="word-counter" id="edit-conversation-title-counter">0 / 20 palabras</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-conversation-department">Departamento</label>
+                        <select id="edit-conversation-department" required>
+                            <option value="Amazonas">Amazonas</option>
+                            <option value="Áncash">Áncash</option>
+                            <option value="Apurímac">Apurímac</option>
+                            <option value="Arequipa">Arequipa</option>
+                            <option value="Ayacucho">Ayacucho</option>
+                            <option value="Cajamarca">Cajamarca</option>
+                            <option value="Callao">Callao</option>
+                            <option value="Cusco">Cusco</option>
+                            <option value="Huancavelica">Huancavelica</option>
+                            <option value="Huánuco">Huánuco</option>
+                            <option value="Ica">Ica</option>
+                            <option value="Junín">Junín</option>
+                            <option value="La Libertad">La Libertad</option>
+                            <option value="Lambayeque">Lambayeque</option>
+                            <option value="Lima">Lima</option>
+                            <option value="Loreto">Loreto</option>
+                            <option value="Madre de Dios">Madre de Dios</option>
+                            <option value="Moquegua">Moquegua</option>
+                            <option value="Pasco">Pasco</option>
+                            <option value="Piura">Piura</option>
+                            <option value="Puno">Puno</option>
+                            <option value="San Martín">San Martín</option>
+                            <option value="Tacna">Tacna</option>
+                            <option value="Tumbes">Tumbes</option>
+                            <option value="Ucayali">Ucayali</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-conversation-description">Descripción (máx. 50 palabras)</label>
+                        <textarea id="edit-conversation-description" rows="3" required maxlength="500" oninput="updateWordCounter('edit-conversation-description', 50)"></textarea>
+                        <div class="word-counter" id="edit-conversation-description-counter">0 / 50 palabras</div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save"></i>
+                        <span>Guardar Cambios</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chat Modal -->
+    <div class="chat-modal" id="chat-modal">
+        <div class="chat-header">
+            <div id="chat-title">Conversación</div>
+            <div>
+                <button class="chat-close" onclick="clearChatForMe()" title="Limpiar chat para mí">
+                    <i class="fas fa-broom"></i>
+                </button>
+                <button class="chat-close" onclick="closeChat()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+        <div class="chat-messages" id="chat-messages">
+            <!-- Messages will be loaded here -->
+        </div>
+        <div class="typing-indicator" id="chat-typing-indicator">
+            <i class="fas fa-ellipsis-h"></i> Alguien está escribiendo...
+        </div>
+        <div class="chat-input-container">
+            <input type="text" class="chat-input" id="chat-input" placeholder="Escribe un mensaje...">
+            <button class="chat-send" id="chat-send">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div class="notification" id="notification">
+        <i class="fas fa-check-circle"></i>
+        <span id="notification-message">Operación exitosa</span>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Yachay Mikuy</h3>
+                    <p>Plataforma digital para combatir la anemia infantil en Perú a través de planes de alimentación personalizados.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Enlaces Rápidos</h3>
+                    <ul>
+                        <li><a href="#" onclick="openModal('aboutModal')"><i class="fas fa-chevron-right"></i> Acerca de</a></li>
+                        <li><a href="#" onclick="openModal('servicesModal')"><i class="fas fa-chevron-right"></i> Servicios</a></li>
+                        <li><a href="#" onclick="openModal('faqModal')"><i class="fas fa-chevron-right"></i> Preguntas Frecuentes</a></li>
+                        <li><a href="#" onclick="window.location.href='index.html'"><i class="fas fa-chevron-right"></i> Inicio</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Legal</h3>
+                    <ul>
+                        <li><a href="#" onclick="openModal('privacyModal')"><i class="fas fa-chevron-right"></i> Política de Privacidad</a></li>
+                        <li><a href="#" onclick="openModal('termsModal')"><i class="fas fa-chevron-right"></i> Términos y Condiciones</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contacto</h3>
+                    <ul>
+                        <li><i class="fas fa-envelope"></i> yachay.mikuy@gmail.com</li>
+                        <li><i class="fas fa-phone"></i> +51 918 072 862</li>
+                        <li><i class="fab fa-whatsapp"></i> +51 918 072 862</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Yachay Mikuy. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Objeto con las plantillas HTML para cada modal
+        const templates = {
+            aboutModal: () => `
+                <div class="modal active">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h2>Acerca de Yachay Mikuy</h2>
+                            <button class="close-modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="content-section">
+                                <h3><i class="fas fa-bullseye"></i> Nuestra Misión</h3>
+                                <p>Reducir la prevalencia de anemia y malnutrición en niños de 0 a 13 años mediante planes de alimentación personalizados, adaptados culturalmente y económicamente a la realidad de las familias peruanas.</p>
+                            </div>
+                            <div class="content-section">
+                                <h3><i class="fas fa-eye"></i> Nuestra Visión</h3>
+                                <p>Convertirnos en la plataforma digital líder en nutrición infantil en Perú, contribuyendo al desarrollo humano y social del país a través de hábitos alimentarios saludables.</p>
+                            </div>
+                            <div class="content-section">
+                                <h3><i class="fas fa-users"></i> Nuestro Equipo</h3>
+                                <p>Contamos con un equipo multidisciplinario de profesionales de la salud, nutricionistas, desarrolladores de software y expertos en educación, comprometidos con mejorar la nutrición infantil en el país.</p>
+                            </div>
+                            <div class="content-section">
+                                <h3><i class="fas fa-chart-line"></i> Impacto</h3>
+                                <p>Según estudios del INEI (2023), la anemia infantil afecta a más del 40% de niños menores de 3 años en algunas regiones del Perú. Nuestro proyecto busca reducir esta cifra mediante intervenciones personalizadas y seguimiento continuo.</p>
+                            </div>
+                            <div class="highlight-box">
+                                <h3 style="margin-top:0;"><i class="fas fa-award"></i> Reconocimientos</h3>
+                                <p>Proyecto seleccionado por la Universidad de Piura como iniciativa de impacto social en el programa de Ingeniería Industrial y de Sistemas.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>`,
+            servicesModal: () => `
+                <div class="modal active">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h2>Nuestros Servicios</h2>
+                            <button class="close-modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="content-section">
+                                <h3><i class="fas fa-utensils"></i> Planes de Alimentación Personalizados</h3>
+                                <p>Desarrollamos planes nutricionales adaptados a las necesidades específicas de cada niño, considerando:</p>
+                                <ul>
+                                    <li>Edad y estado de salud</li>
+                                    <li>Disponibilidad de alimentos locales</li>
+                                    <li>Hábitos culturales y preferencias familiares</li>
+                                    <li>Capacidad económica del hogar</li>
+                                </ul>
+                            </div>
+                            <div class="content-section">
+                                <h3><i class="fas fa-chart-line"></i> Seguimiento Nutricional</h3>
+                                <p>Monitoreamos el progreso de cada niño a través de:</p>
+                                <ul>
+                                    <li>Registro diario de consumo alimentario</li>
+                                    <li>Evaluación periódica de indicadores de salud</li>
+                                    <li>Ajustes automáticos según resultados obtenidos</li>
+                                    <li>Reportes mensuales para padres y tutores</li>
+                                </ul>
+                            </div>
+                            <div class="content-section">
+                                <h3><i class="fas fa-graduation-cap"></i> Educación Nutricional</h3>
+                                <p>Ofrecemos material educativo en múltiples formatos:</p>
+                                <ul>
+                                    <li>Recetas prácticas con ingredientes locales</li>
+                                    <li>Videos tutoriales de preparación</li>
+                                    <li>Guías informativas sobre nutrientes esenciales</li>
+                                    <li>Consejos para mejorar hábitos alimentarios</li>
+                                </ul>
+                            </div>
+                            <div class="content-section">
+                                <h3><i class="fas fa-users"></i> Comunidad de Apoyo</h3>
+                                <p>Conectamos a las familias con:</p>
+                                <ul>
+                                    <li>Nutricionistas y profesionales de la salud</li>
+                                    <li>Otras familias que comparten experiencias</li>
+                                    <li>Foros de discusión y consejos prácticos</li>
+                                    <li>Eventos virtuales de capacitación</li>
+                                </ul>
+                            </div>
+                            <div class="highlight-box">
+                                <h3 style="margin-top:0;"><i class="fas fa-mobile-alt"></i> Accesibilidad</h3>
+                                <p>Nuestra plataforma funciona en modo offline y cuenta con versión ligera para zonas con conectividad limitada.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>`,
+            faqModal: () => `
+                <div class="modal active">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h2>Preguntas Frecuentes</h2>
+                            <button class="close-modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="content-section">
+                                <h3><i class="fas fa-question-circle"></i> ¿Qué es Yachay Mikuy?</h3>
+                                <p>Yachay Mikuy es una plataforma digital que ofrece planes de alimentación personalizados para combatir la anemia infantil en Perú, combinando tecnología, educación y nutrición culturalmente adaptada.</p>
+                            </div>
+                            <div class="content-section">
+                                <h3><i class="fas fa-child"></i> ¿Para qué edades está diseñada la plataforma?</h3>
+                                <p>Nuestra plataforma está diseñada para niños de 0 a 13 años, etapa crucial en el desarrollo donde los hábitos alimentarios se consolidan y se pueden prevenir deficiencias nutricionales a largo plazo.</p>
+                            </div>
+                            <div class="content-section">
+                                <h3><i class="fas fa-user-plus"></i> ¿Cómo puedo registrarme?</h3>
+                                <p>Puedes registrarte haciendo clic en el botón "Comenzar Ahora" en nuestra página principal y completando el formulario con tus datos personales. El proceso es rápido y seguro.</p>
+                            </div>
+                            <div class="content-section">
+                                <h3><i class="fas fa-shield-alt"></i> ¿Es seguro compartir los datos de mis hijos?</h3>
+                                <p>Sí, implementamos medidas avanzadas de protección de datos:</p>
+                                <ul>
+                                    <li>Cifrado de extremo a extremo</li>
+                                    <li>Consentimiento parental explícito</li>
+                                    <li>Cumplimiento con normativas de protección de datos</li>
+                                    <li>Acceso restringido solo a personal autorizado</li>
+                                </ul>
+                            </div>
+                            <div class="content-section">
+                                <h3><i class="fas fa-heartbeat"></i> ¿Cómo funciona el seguimiento nutricional?</h3>
+                                <p>A través de nuestra aplicación, puedes registrar el consumo alimentario de tus hijos y nosotros monitoreamos su progreso. El sistema genera alertas y recomendaciones automáticas según los resultados obtenidos.</p>
+                            </div>
+                            <div class="content-section">
+                                <h3><i class="fas fa-dollar-sign"></i> ¿Qué costo tiene el servicio?</h3>
+                                <p>Ofrecemos diferentes planes de suscripción:</p>
+                                <ul>
+                                    <li>Plan básico: S/10-15 mensuales</li>
+                                    <li>Plan premium con atención personalizada</li>
+                                    <li>Subsidios para familias vulnerables mediante alianzas</li>
+                                    <li>Acceso gratuito en centros educativos convenidos</li>
+                                </ul>
+                            </div>
+                            <div class="content-section">
+                                <h3><i class="fas fa-wifi"></i> ¿Funciona sin internet?</h3>
+                                <p>Sí, contamos con modo offline que permite:</p>
+                                <ul>
+                                    <li>Acceso a recetas y guías descargadas</li>
+                                    <li>Registro de consumo para sincronizar después</li>
+                                    <li>Notificaciones vía SMS para zonas rurales</li>
+                                </ul>
+                            </div>
+                            <div class="content-section">
+                                <h3><i class="fas fa-hands-helping"></i> ¿Cómo obtengo ayuda si tengo problemas?</h3>
+                                <p>Puedes contactarnos a través de:</p>
+                                <ul>
+                                    <li>Chat en vivo en la aplicación</li>
+                                    <li>Correo electrónico: yachay.mikuy@gmail.com</li>
+                                    <li>Teléfono: +51 918 072 862</li>
+                                    <li>WhatsApp: +51 918 072 862</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>`,
+            privacyModal: () => `
+                <div class="modal active">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h2>Política de Privacidad</h2>
+                            <button class="close-modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="content-section">
+                                <h3><i class="fas fa-info-circle"></i> Información que Recopilamos</h3>
+                                <p>Recopilamos información personal y de salud de manera responsable:</p>
+                                <ul>
+                                    <li><strong>Datos personales:</strong> Nombre, correo electrónico, teléfono, departamento de residencia</li>
+                                    <li><strong>Datos de los niños:</strong> Nombre, fecha de nacimiento, peso, altura, historial médico relevante</li>
+                                    <li><strong>Datos de uso:</strong> Interacciones con la plataforma, preferencias alimentarias, progreso nutricional</li>
+                                    <li><strong>Datos técnicos:</strong> Dirección IP, tipo de dispositivo, navegador utilizado</li>
+                                </ul>
+                            </div>
+                            <div class="content-section">
+                                <h3><i class="fas fa-cogs"></i> Uso de la Información</h3>
+                                <p>Utilizamos tu información para:</p>
+                                <ul>
+                                    <li>Proporcionar planes de alimentación personalizados</li>
+                                    <li>Realizar seguimiento nutricional efectivo</li>
+                                    <li>Mejorar continuamente nuestros servicios</li>
+                                    <li>Comunicarnos contigo sobre actualizaciones relevantes</li>
+                                    <li>Generar reportes estadísticos anonimizados</li>
+                                </ul>
+                            </div>
+                            <div class="content-section">
+                                <h3><i class="fas fa-lock"></i> Protección de Datos</h3>
+                                <p>Implementamos medidas de seguridad robustas:</p>
+                                <ul>
+                                    <li>Cifrado SSL/TLS para todas las transmisiones</li>
+                                    <li>Almacenamiento cifrado en servidores seguros</li>
+                                    <li>Autenticación de dos factores para accesos críticos</li>
+                                    <li>Auditorías de seguridad periódicas</li>
+                                    <li>Backups automáticos y recovery plan</li>
+                                </ul>
+                            </div>
+                            <div class="content-section">
+                                <h3><i class="fas fa-user-shield"></i> Derechos de los Usuarios</h3>
+                                <p>Tienes derecho a:</p>
+                                <ul>
+                                    <li><strong>Acceder:</strong> Solicitar una copia de tus datos personales</li>
+                                    <li><strong>Rectificar:</strong> Corregir información inexacta o incompleta</li>
+                                    <li><strong>Cancelar:</strong> Solicitar la eliminación de tus datos</li>
+                                    <li><strong>Oponerse:</strong> Restringir el procesamiento de tus datos</li>
+                                    <li><strong>Portabilidad:</strong> Transferir tus datos a otro servicio</li>
+                                </ul>
+                                <p>Para ejercer estos derechos, contacta a yachay.mikuy@gmail.com</p>
+                            </div>
+                            <div class="content-section">
+                                <h3><i class="fas fa-user-friends"></i> Consentimiento Parental</h3>
+                                <p>Para el tratamiento de datos de menores:</p>
+                                <ul>
+                                    <li>Requerimos consentimiento explícito de padres o tutores</li>
+                                    <li>Los padres son responsables de la veracidad de los datos</li>
+                                    <li>Podemos solicitar documentación adicional si es necesario</li>
+                                    <li>Los padres pueden revocar el consentimiento en cualquier momento</li>
+                                </ul>
+                            </div>
+                            <div class="content-section">
+                                <h3><i class="fas fa-clock"></i> Retención de Datos</h3>
+                                <p>Conservamos los datos según los siguientes criterios:</p>
+                                <ul>
+                                    <li>Datos de cuenta: mientras la cuenta esté activa</li>
+                                    <li>Datos de salud: mínimo 5 años después del último uso</li>
+                                    <li>Datos financieros: 7 años según normativa fiscal</li>
+                                    <li>Datos anonimizados: indefinidamente para estadísticas</li>
+                                </ul>
+                            </div>
+                            <div class="highlight-box">
+                                <h3 style="margin-top:0;"><i class="fas fa-exclamation-triangle"></i> Importante</h3>
+                                <p>Esta política se actualiza periódicamente. Te notificaremos cualquier cambio significativo a través de tu correo electrónico registrado.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>`,
+            termsModal: () => `
+                <div class="modal active">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h2>Términos y Condiciones</h2>
+                            <button class="close-modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="content-section">
+                                <h3><i class="fas fa-check-circle"></i> Aceptación de los Términos</h3>
+                                <p>Al utilizar la plataforma Yachay Mikuy, aceptas estos términos y condiciones en su totalidad. Si no estás de acuerdo con alguno de estos términos, no debes utilizar nuestros servicios.</p>
+                                <p>El uso continuado de la plataforma después de cualquier modificación constituye aceptación de los nuevos términos.</p>
+                            </div>
+                            <div class="content-section">
+                                <h3><i class="fas fa-cube"></i> Descripción del Servicio</h3>
+                                <p>Yachay Mikuy es una plataforma digital que ofrece:</p>
+                                <ul>
+                                    <li>Planes de alimentación personalizados para niños de 0 a 13 años</li>
+                                    <li>Seguimiento nutricional continuo</li>
+                                    <li>Educación nutricional adaptada culturalmente</li>
+                                    <li>Comunidad de apoyo para padres y cuidadores</li>
+                                    <li>Acceso a profesionales de la salud</li>
+                                </ul>
+                            </div>
+                            <div class="content-section">
+                                <h3><i class="fas fa-user-check"></i> Responsabilidades del Usuario</h3>
+                                <p>Como usuario, te comprometes a:</p>
+                                <ul>
+                                    <li>Proporcionar información veraz y actualizada</li>
+                                    <li>Mantener la confidencialidad de tus credenciales de acceso</li>
+                                    <li>Seguir las recomendaciones nutricionales de manera responsable</li>
+                                    <li>No compartir contenido inapropiado u ofensivo</li>
+                                    <li>Respetar los derechos de otros usuarios</li>
+                                    <li>Reportar cualquier problema o incidencia</li>
+                                </ul>
+                            </div>
+                            <div class="content-section">
+                                <h3><i class="fas fa-ban"></i> Uso Prohibido</h3>
+                                <p>Está estrictamente prohibido:</p>
+                                <ul>
+                                    <li>Utilizar la plataforma para fines comerciales no autorizados</li>
+                                    <li>Intentar acceder a cuentas de otros usuarios</li>
+                                    <li>Distribuir malware o software malicioso</li>
+                                    <li>Violentar la propiedad intelectual de Yachay Mikuy</li>
+                                    <li>Proporcionar información médica falsa o engañosa</li>
+                                    <li>Acosar o intimidar a otros usuarios</li>
+                                </ul>
+                            </div>
+                            <div class="content-section">
+                                <h3><i class="fas fa-copyright"></i> Propiedad Intelectual</h3>
+                                <p>Todo el contenido de la plataforma está protegido por derechos de autor:</p>
+                                <ul>
+                                    <li>Textos, imágenes, diseños, logotipos y software</li>
+                                    <li>Algoritmos de recomendación nutricional</li>
+                                    <li>Base de datos de recetas y alimentos</li>
+                                    <li>Material educativo y formatos originales</li>
+                                </ul>
+                                <p>Queda prohibida la reproducción total o parcial sin autorización expresa.</p>
+                            </div>
+                            <div class="content-section">
+                                <h3><i class="fas fa-heart"></i> Información Médica</h3>
+                                <p>Importante considerar:</p>
+                                <ul>
+                                    <li>Yachay Mikuy no reemplaza la consulta médica profesional</li>
+                                    <li>Las recomendaciones son complementarias al tratamiento médico</li>
+                                    <li>Ante cualquier emergencia médica, contacta a servicios de salud</li>
+                                    <li>Los planes nutricionales deben ser supervisados por profesionales</li>
+                                </ul>
+                            </div>
+                            <div class="content-section">
+                                <h3><i class="fas fa-exclamation-triangle"></i> Limitación de Responsabilidad</h3>
+                                <p>Yachay Mikuy no se responsabiliza por:</p>
+                                <ul>
+                                    <li>El uso indebido de la plataforma por parte de los usuarios</li>
+                                    <li>Consecuencias derivadas de no seguir adecuadamente las recomendaciones</li>
+                                    <li>Problemas técnicos fuera de nuestro control</li>
+                                    <li>Contenido proporcionado por terceros</li>
+                                    <li>Daños indirectos, incidentales o consecuentes</li>
+                                </ul>
+                            </div>
+                            <div class="content-section">
+                                <h3><i class="fas fa-sync-alt"></i> Modificaciones de los Términos</h3>
+                                <p>Yachay Mikuy se reserva el derecho de:</p>
+                                <ul>
+                                    <li>Modificar estos términos y condiciones en cualquier momento</li>
+                                    <li>Actualizar las políticas de privacidad y uso de datos</li>
+                                    <li>Cambiar las características y funcionalidades del servicio</li>
+                                    <li>Suspender o terminar servicios por razones justificadas</li>
+                                </ul>
+                                <p>Las modificaciones entrarán en vigor desde su publicación en la plataforma.</p>
+                            </div>
+                            <div class="content-section">
+                                <h3><i class="fas fa-gavel"></i> Ley Aplicable y Jurisdicción</h3>
+                                <p>Estos términos se rigen por las leyes de la República del Perú. Cualquier disputa será resuelta en los tribunales de Lima, Perú.</p>
+                            </div>
+                            <div class="highlight-box">
+                                <h3 style="margin-top:0;"><i class="fas fa-calendar-alt"></i> Vigencia</h3>
+                                <p>Estos términos y condiciones entran en vigor a partir del 1 de enero de 2025 y permanecerán vigentes hasta su modificación.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>`
+        };
+
+        // Global variables
+        let currentUser = null;
+        let conversations = [];
+        let messages = {};
+        let directMessages = {};
+        let currentConversationId = null;
+        let currentDirectUserId = null;
+        let editingConversationId = null;
+        let userColors = {};
+
+        // Initialize app
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeApp();
+            loadConversations();
+            loadDirectMessages();
+            setupEventListeners();
+        });
+
+        // Initialize app
+        function initializeApp() {
+            // Check if user is logged in
+            const storedUser = localStorage.getItem('currentUser');
+            if (storedUser) {
+                currentUser = JSON.parse(storedUser);
+            } else {
+                // Simulate login for demo purposes
+                currentUser = {
+                    id: Math.random().toString(36).substring(2, 9),
+                    name: 'Usuario Demo',
+                    email: 'demo@example.com',
+                    isAdmin: false
+                };
+                
+                // Check if admin
+                if (currentUser.email === 'alvaro.quiroz@alumno.ud.edu.pe' || currentUser.email === 'alvaro.quiroz@alum.udep.edu.pe') {
+                    currentUser.isAdmin = true;
+                }
+                
+                localStorage.setItem('currentUser', JSON.stringify(currentUser));
+            }
+            
+            // Initialize data if not exists
+            if (!localStorage.getItem('conversations')) {
+                localStorage.setItem('conversations', JSON.stringify([]));
+            }
+            
+            if (!localStorage.getItem('messages')) {
+                localStorage.setItem('messages', JSON.stringify({}));
+            }
+            
+            if (!localStorage.getItem('directMessages')) {
+                localStorage.setItem('directMessages', JSON.stringify({}));
+            }
+            
+            // Initialize user colors
+            initializeUserColors();
+        }
+
+        // Initialize user colors
+        function initializeUserColors() {
+            const colors = [
+                '--user-color-1', '--user-color-2', '--user-color-3', '--user-color-4', '--user-color-5',
+                '--user-color-6', '--user-color-7', '--user-color-8', '--user-color-9', '--user-color-10'
+            ];
+            
+            // Assign colors to users
+            const storedColors = localStorage.getItem('userColors');
+            if (storedColors) {
+                userColors = JSON.parse(storedColors);
+            } else {
+                // Assign default colors
+                userColors[currentUser.id] = colors[0];
+                localStorage.setItem('userColors', JSON.stringify(userColors));
+            }
+        }
+
+        // Get user color
+        function getUserColor(userId) {
+            if (!userColors[userId]) {
+                const colors = [
+                    '--user-color-1', '--user-color-2', '--user-color-3', '--user-color-4', '--user-color-5',
+                    '--user-color-6', '--user-color-7', '--user-color-8', '--user-color-9', '--user-color-10'
+                ];
+                
+                const usedColors = Object.values(userColors);
+                const availableColors = colors.filter(color => !usedColors.includes(color));
+                
+                if (availableColors.length > 0) {
+                    userColors[userId] = availableColors[0];
+                } else {
+                    userColors[userId] = colors[Math.floor(Math.random() * colors.length)];
+                }
+                
+                localStorage.setItem('userColors', JSON.stringify(userColors));
+            }
+            
+            return getComputedStyle(document.documentElement).getPropertyValue(userColors[userId]);
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            // New conversation form
+            document.getElementById('new-conversation-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                createConversation();
+            });
+            
+            // Edit conversation form
+            document.getElementById('edit-conversation-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                updateConversation();
+            });
+            
+            // Chat send button
+            document.getElementById('chat-send').addEventListener('click', sendMessage);
+            
+            // Chat input enter key
+            document.getElementById('chat-input').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    sendMessage();
+                }
+            });
+            
+            // Direct chat send button
+            document.getElementById('direct-chat-send').addEventListener('click', sendDirectMessage);
+            
+            // Direct chat input enter key
+            document.getElementById('direct-chat-input').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    sendDirectMessage();
+                }
+            });
+            
+            // Simulate typing indicator
+            document.getElementById('chat-input').addEventListener('input', function() {
+                showTypingIndicator('chat');
+            });
+            
+            document.getElementById('direct-chat-input').addEventListener('input', function() {
+                showTypingIndicator('direct');
+            });
+            
+            // Close modals when clicking outside
+            document.addEventListener('click', function(e) {
+                if (e.target.classList.contains('modal')) {
+                    closeModal(e.target.id);
+                }
+            });
+            
+            // Close modal buttons
+            document.querySelectorAll('.close-modal').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const modal = this.closest('.modal');
+                    if (modal) {
+                        closeModal(modal.id);
+                    }
+                });
+            });
+        }
+
+        // Update word counter
+        function updateWordCounter(fieldId, maxWords) {
+            const field = document.getElementById(fieldId);
+            const counter = document.getElementById(fieldId + '-counter');
+            const text = field.value.trim();
+            const words = text.split(/\s+/).filter(word => word.length > 0);
+            const wordCount = words.length;
+            
+            counter.textContent = `${wordCount} / ${maxWords} palabras`;
+            
+            // Update counter color based on word count
+            counter.classList.remove('warning', 'error');
+            if (wordCount > maxWords * 0.8) {
+                counter.classList.add('warning');
+            }
+            if (wordCount >= maxWords) {
+                counter.classList.add('error');
+                // Truncate to max words
+                field.value = words.slice(0, maxWords).join(' ');
+            }
+        }
+
+        // Switch tabs
+        function switchTab(tab) {
+            // Update tab buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Update tab content
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            if (tab === 'community') {
+                document.querySelector('.tab-btn:nth-child(1)').classList.add('active');
+                document.getElementById('community-tab').classList.add('active');
+            } else if (tab === 'direct') {
+                document.querySelector('.tab-btn:nth-child(2)').classList.add('active');
+                document.getElementById('direct-tab').classList.add('active');
+                loadDirectMessages();
+            }
+        }
+
+        // Load conversations
+        function loadConversations() {
+            conversations = JSON.parse(localStorage.getItem('conversations')) || [];
+            messages = JSON.parse(localStorage.getItem('messages')) || {};
+            
+            filterConversations();
+        }
+
+        // Filter conversations by department
+        function filterConversations() {
+            const department = document.getElementById('department-select').value;
+            const container = document.getElementById('conversations-container');
+            const emptyState = document.getElementById('empty-state');
+            
+            container.innerHTML = '';
+            
+            let filteredConversations = conversations;
+            
+            if (department !== 'all') {
+                filteredConversations = conversations.filter(conv => conv.department === department);
+            }
+            
+            if (filteredConversations.length === 0) {
+                emptyState.style.display = 'block';
+                return;
+            }
+            
+            emptyState.style.display = 'none';
+            
+            filteredConversations.forEach(conversation => {
+                const card = createConversationCard(conversation);
+                container.appendChild(card);
+            });
+        }
+
+        // Create conversation card
+        function createConversationCard(conversation) {
+            const card = document.createElement('div');
+            card.className = 'conversation-card';
+            
+            const isOwner = conversation.userId === currentUser.id || currentUser.isAdmin;
+            
+            // Truncate title to 20 words
+            const titleWords = conversation.title.split(/\s+/).slice(0, 20).join(' ');
+            const descriptionWords = conversation.description.split(/\s+/).slice(0, 50).join(' ');
+            
+            card.innerHTML = `
+                <h3 class="conversation-title">${titleWords}${conversation.title.split(/\s+/).length > 20 ? '...' : ''}</h3>
+                <p class="conversation-description">${descriptionWords}${conversation.description.split(/\s+/).length > 50 ? '...' : ''}</p>
+                <div class="conversation-meta">
+                    <div class="meta-item">
+                        <i class="fas fa-user"></i>
+                        <span>${conversation.userName}</span>
+                    </div>
+                    <div class="meta-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>${conversation.department}</span>
+                    </div>
+                </div>
+                <div class="conversation-meta">
+                    <div class="meta-item">
+                        <i class="fas fa-calendar"></i>
+                        <span>${formatDate(conversation.createdAt)}</span>
+                    </div>
+                    <div class="meta-item">
+                        <i class="fas fa-comment"></i>
+                        <span>${getMessageCount(conversation.id)} mensajes</span>
+                    </div>
+                </div>
+                <div class="conversation-actions">
+                    <button class="btn btn-primary" onclick="openChat('${conversation.id}', '${conversation.title}')">
+                        <i class="fas fa-comments"></i>
+                        <span>Ver conversación</span>
+                    </button>
+                    ${isOwner ? `
+                        <button class="btn btn-secondary" onclick="openEditModal('${conversation.id}')">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="btn btn-danger" onclick="deleteConversation('${conversation.id}')">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    ` : ''}
+                </div>
+            `;
+            
+            return card;
+        }
+
+        // Open create conversation modal
+        function openCreateConversationModal() {
+            document.getElementById('create-conversation-modal').classList.add('active');
+        }
+
+        // Close modal
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+        }
+
+        // Open modal
+        function openModal(modalName) {
+            // Remove any existing modal
+            const existingModal = document.querySelector('.modal.active');
+            if (existingModal) {
+                existingModal.remove();
+            }
+            
+            // Create and append new modal
+            const modalContainer = document.createElement('div');
+            modalContainer.innerHTML = templates[modalName]();
+            document.body.appendChild(modalContainer);
+            
+            // Setup close button event listener
+            const closeBtn = modalContainer.querySelector('.close-modal');
+            if (closeBtn) {
+                closeBtn.addEventListener('click', function() {
+                    modalContainer.remove();
+                });
+            }
+            
+            // Setup click outside to close
+            modalContainer.addEventListener('click', function(e) {
+                if (e.target === modalContainer) {
+                    modalContainer.remove();
+                }
+            });
+        }
+
+        // Create new conversation
+        function createConversation() {
+            const title = document.getElementById('conversation-title').value.trim();
+            const department = document.getElementById('conversation-department').value;
+            const description = document.getElementById('conversation-description').value.trim();
+            
+            // Validate word counts
+            const titleWords = title.split(/\s+/).filter(word => word.length > 0);
+            const descriptionWords = description.split(/\s+/).filter(word => word.length > 0);
+            
+            if (titleWords.length === 0 || titleWords.length > 20) {
+                showNotification('El título debe tener entre 1 y 20 palabras', 'error');
+                return;
+            }
+            
+            if (descriptionWords.length === 0 || descriptionWords.length > 50) {
+                showNotification('La descripción debe tener entre 1 y 50 palabras', 'error');
+                return;
+            }
+            
+            const conversation = {
+                id: Math.random().toString(36).substring(2, 9),
+                title: titleWords.slice(0, 20).join(' '),
+                department,
+                description: descriptionWords.slice(0, 50).join(' '),
+                userId: currentUser.id,
+                userName: currentUser.name,
+                createdAt: new Date().toISOString()
+            };
+            
+            conversations.push(conversation);
+            localStorage.setItem('conversations', JSON.stringify(conversations));
+            
+            // Initialize messages for this conversation
+            messages[conversation.id] = [];
+            localStorage.setItem('messages', JSON.stringify(messages));
+            
+            // Reset form and close modal
+            document.getElementById('new-conversation-form').reset();
+            document.getElementById('conversation-title-counter').textContent = '0 / 20 palabras';
+            document.getElementById('conversation-description-counter').textContent = '0 / 50 palabras';
+            closeModal('create-conversation-modal');
+            
+            // Reload conversations
+            filterConversations();
+            
+            // Show notification
+            showNotification('Conversación creada exitosamente', 'success');
+        }
+
+        // Open edit modal
+        function openEditModal(conversationId) {
+            const conversation = conversations.find(conv => conv.id === conversationId);
+            
+            if (!conversation) return;
+            
+            editingConversationId = conversationId;
+            
+            document.getElementById('edit-conversation-title').value = conversation.title;
+            document.getElementById('edit-conversation-department').value = conversation.department;
+            document.getElementById('edit-conversation-description').value = conversation.description;
+            
+            // Update word counters
+            updateWordCounter('edit-conversation-title', 20);
+            updateWordCounter('edit-conversation-description', 50);
+            
+            document.getElementById('edit-conversation-modal').classList.add('active');
+        }
+
+        // Update conversation
+        function updateConversation() {
+            const title = document.getElementById('edit-conversation-title').value.trim();
+            const department = document.getElementById('edit-conversation-department').value;
+            const description = document.getElementById('edit-conversation-description').value.trim();
+            
+            // Validate word counts
+            const titleWords = title.split(/\s+/).filter(word => word.length > 0);
+            const descriptionWords = description.split(/\s+/).filter(word => word.length > 0);
+            
+            if (titleWords.length === 0 || titleWords.length > 20) {
+                showNotification('El título debe tener entre 1 y 20 palabras', 'error');
+                return;
+            }
+            
+            if (descriptionWords.length === 0 || descriptionWords.length > 50) {
+                showNotification('La descripción debe tener entre 1 y 50 palabras', 'error');
+                return;
+            }
+            
+            const conversationIndex = conversations.findIndex(conv => conv.id === editingConversationId);
+            
+            if (conversationIndex === -1) return;
+            
+            conversations[conversationIndex].title = titleWords.slice(0, 20).join(' ');
+            conversations[conversationIndex].department = department;
+            conversations[conversationIndex].description = descriptionWords.slice(0, 50).join(' ');
+            
+            localStorage.setItem('conversations', JSON.stringify(conversations));
+            
+            // Close modal
+            closeModal('edit-conversation-modal');
+            
+            // Reload conversations
+            filterConversations();
+            
+            // Show notification
+            showNotification('Conversación actualizada exitosamente', 'success');
+        }
+
+        // Delete conversation
+        function deleteConversation(conversationId) {
+            if (!confirm('¿Estás seguro de que quieres eliminar esta conversación?')) return;
+            
+            // Remove conversation
+            conversations = conversations.filter(conv => conv.id !== conversationId);
+            localStorage.setItem('conversations', JSON.stringify(conversations));
+            
+            // Remove messages
+            delete messages[conversationId];
+            localStorage.setItem('messages', JSON.stringify(messages));
+            
+            // Reload conversations
+            filterConversations();
+            
+            // Show notification
+            showNotification('Conversación eliminada exitosamente', 'success');
+        }
+
+        // Open chat
+        function openChat(conversationId, conversationTitle) {
+            currentConversationId = conversationId;
+            
+            document.getElementById('chat-title').textContent = conversationTitle;
+            document.getElementById('chat-modal').classList.add('active');
+            
+            loadMessages(conversationId);
+        }
+
+        // Close chat
+        function closeChat() {
+            document.getElementById('chat-modal').classList.remove('active');
+            currentConversationId = null;
+        }
+
+        // Clear chat for current user
+        function clearChatForMe() {
+            if (!currentConversationId) return;
+            
+            if (!confirm('¿Estás seguro de que quieres limpiar esta conversación para ti?')) return;
+            
+            // Get user's hidden messages
+            let hiddenMessages = JSON.parse(localStorage.getItem('hiddenMessages') || '{}');
+            
+            if (!hiddenMessages[currentConversationId]) {
+                hiddenMessages[currentConversationId] = [];
+            }
+            
+            // Add all current messages to hidden list
+            const conversationMessages = messages[currentConversationId] || [];
+            conversationMessages.forEach(msg => {
+                if (!hiddenMessages[currentConversationId].includes(msg.id)) {
+                    hiddenMessages[currentConversationId].push(msg.id);
+                }
+            });
+            
+            // Save hidden messages
+            localStorage.setItem('hiddenMessages', JSON.stringify(hiddenMessages));
+            
+            // Reload messages
+            loadMessages(currentConversationId);
+            
+            // Show notification
+            showNotification('Conversación limpiada para ti', 'success');
+        }
+
+        // Load messages
+        function loadMessages(conversationId) {
+            const messagesContainer = document.getElementById('chat-messages');
+            messagesContainer.innerHTML = '';
+            
+            const conversationMessages = messages[conversationId] || [];
+            
+            // Get user's hidden messages
+            const hiddenMessages = JSON.parse(localStorage.getItem('hiddenMessages') || '{}');
+            const userHiddenMessages = hiddenMessages[conversationId] || [];
+            
+            // Filter out hidden messages
+            const visibleMessages = conversationMessages.filter(msg => !userHiddenMessages.includes(msg.id));
+            
+            if (visibleMessages.length === 0) {
+                messagesContainer.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-comments"></i>
+                        <h3>No hay mensajes aún</h3>
+                        <p>Sé el primero en enviar un mensaje</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            visibleMessages.forEach(message => {
+                const messageElement = createMessageElement(message);
+                messagesContainer.appendChild(messageElement);
+            });
+            
+            // Scroll to bottom
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        // Create message element
+        function createMessageElement(message) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${message.userId === currentUser.id ? 'sent' : 'received'}`;
+            
+            const messageTime = new Date(message.timestamp).toLocaleTimeString('es-PE', {
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+            
+            const userColor = getUserColor(message.userId);
+            const canDelete = message.userId === currentUser.id || currentUser.isAdmin;
+            
+            messageDiv.innerHTML = `
+                <div class="message-bubble">
+                    <div style="display: flex; align-items: center; margin-bottom: 6px;">
+                        <span class="user-color-indicator" style="background-color: ${userColor};"></span>
+                        <span style="font-weight: 600; font-size: 14px;">${message.userName}</span>
+                    </div>
+                    <div>${message.text}</div>
+                </div>
+                <div class="message-info">
+                    <span>${messageTime}</span>
+                    ${message.userId === currentUser.id ? '<i class="fas fa-check-double"></i>' : ''}
+                </div>
+                ${canDelete ? `
+                    <div class="message-actions">
+                        <button class="message-action-btn" onclick="deleteMessage('${message.id}', ${message.userId === currentUser.id ? 'false' : 'true'})" title="Eliminar mensaje">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                ` : ''}
+            `;
+            
+            return messageDiv;
+        }
+
+        // Delete message
+        function deleteMessage(messageId, forAll = false) {
+            if (!currentConversationId) return;
+            
+            if (!forAll && !confirm('¿Estás seguro de que quieres eliminar este mensaje solo para ti?')) return;
+            
+            if (forAll && !confirm('¿Estás seguro de que quieres eliminar este mensaje para todos?')) return;
+            
+            if (forAll) {
+                // Remove message from conversation
+                const messageIndex = messages[currentConversationId].findIndex(msg => msg.id === messageId);
+                if (messageIndex !== -1) {
+                    messages[currentConversationId].splice(messageIndex, 1);
+                    localStorage.setItem('messages', JSON.stringify(messages));
+                }
+            } else {
+                // Add message to user's hidden messages
+                let hiddenMessages = JSON.parse(localStorage.getItem('hiddenMessages') || '{}');
+                
+                if (!hiddenMessages[currentConversationId]) {
+                    hiddenMessages[currentConversationId] = [];
+                }
+                
+                if (!hiddenMessages[currentConversationId].includes(messageId)) {
+                    hiddenMessages[currentConversationId].push(messageId);
+                    localStorage.setItem('hiddenMessages', JSON.stringify(hiddenMessages));
+                }
+            }
+            
+            // Reload messages
+            loadMessages(currentConversationId);
+            
+            // Show notification
+            showNotification('Mensaje eliminado', 'success');
+        }
+
+        // Send message
+        function sendMessage() {
+            const input = document.getElementById('chat-input');
+            const text = input.value.trim();
+            
+            if (!text || !currentConversationId) return;
+            
+            const message = {
+                id: Math.random().toString(36).substring(2, 9),
+                text,
+                userId: currentUser.id,
+                userName: currentUser.name,
+                timestamp: new Date().toISOString()
+            };
+            
+            // Add message to conversation
+            if (!messages[currentConversationId]) {
+                messages[currentConversationId] = [];
+            }
+            
+            messages[currentConversationId].push(message);
+            localStorage.setItem('messages', JSON.stringify(messages));
+            
+            // Clear input
+            input.value = '';
+            
+            // Reload messages
+            loadMessages(currentConversationId);
+            
+            // Play sound effect (simulated)
+            playMessageSound();
+            
+            // Show notification
+            showNotification('Mensaje enviado', 'success');
+        }
+
+        // Load direct messages
+        function loadDirectMessages() {
+            directMessages = JSON.parse(localStorage.getItem('directMessages')) || {};
+            
+            const usersList = document.getElementById('users-list');
+            usersList.innerHTML = '';
+            
+            // Get unique users
+            const users = {};
+            
+            // Add admin as a user
+            users['admin'] = {
+                id: 'admin',
+                name: 'Administrador',
+                email: 'alvaro.quiroz@alumno.ud.edu.pe',
+                unreadCount: 0
+            };
+            
+            // Add users from conversations
+            conversations.forEach(conv => {
+                if (conv.userId !== currentUser.id) {
+                    users[conv.userId] = {
+                        id: conv.userId,
+                        name: conv.userName,
+                        email: conv.userEmail || '',
+                        unreadCount: 0
+                    };
+                }
+            });
+            
+            // Add users from direct messages
+            Object.keys(directMessages).forEach(userId => {
+                if (userId !== currentUser.id) {
+                    const userMessages = directMessages[userId] || [];
+                    const unreadCount = userMessages.filter(msg => 
+                        msg.userId !== currentUser.id && !msg.read
+                    ).length;
+                    
+                    users[userId] = {
+                        id: userId,
+                        name: userMessages[0]?.userName || 'Usuario',
+                        email: userMessages[0]?.userEmail || '',
+                        unreadCount
+                    };
+                }
+            });
+            
+            // Create user list items
+            Object.values(users).forEach(user => {
+                const userItem = document.createElement('div');
+                userItem.className = 'user-item';
+                userItem.onclick = () => openDirectChat(user.id, user.name);
+                
+                const lastMessage = directMessages[user.id] && directMessages[user.id].length > 0
+                    ? directMessages[user.id][directMessages[user.id].length - 1].text
+                    : 'No hay mensajes';
+                
+                const userColor = getUserColor(user.id);
+                
+                userItem.innerHTML = `
+                    <div class="user-avatar" style="background-color: ${userColor};">${user.name.charAt(0).toUpperCase()}</div>
+                    <div class="user-info">
+                        <div class="user-name">${user.name}</div>
+                        <div class="user-last-message">${lastMessage}</div>
+                    </div>
+                    ${user.unreadCount > 0 ? `<span class="unread-badge">${user.unreadCount}</span>` : ''}
+                `;
+                
+                usersList.appendChild(userItem);
+            });
+        }
+
+        // Open direct chat
+        function openDirectChat(userId, userName) {
+            currentDirectUserId = userId;
+            
+            // Update active user
+            document.querySelectorAll('.user-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            event.currentTarget.classList.add('active');
+            
+            // Update chat header
+            document.getElementById('direct-chat-user-info').innerHTML = `
+                <span>${userName}</span>
+            `;
+            
+            // Enable input
+            document.getElementById('direct-chat-input').disabled = false;
+            document.getElementById('direct-chat-send').disabled = false;
+            
+            // Load messages
+            loadDirectChatMessages(userId);
+        }
+
+        // Load direct chat messages
+        function loadDirectChatMessages(userId) {
+            const messagesContainer = document.getElementById('direct-chat-messages');
+            messagesContainer.innerHTML = '';
+            
+            const userMessages = directMessages[userId] || [];
+            
+            if (userMessages.length === 0) {
+                messagesContainer.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-comments"></i>
+                        <h3>No hay mensajes aún</h3>
+                        <p>Envía el primer mensaje a este usuario</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            userMessages.forEach(message => {
+                const messageElement = createMessageElement(message);
+                messagesContainer.appendChild(messageElement);
+            });
+            
+            // Mark messages as read
+            userMessages.forEach(message => {
+                if (message.userId !== currentUser.id) {
+                    message.read = true;
+                }
+            });
+            
+            directMessages[userId] = userMessages;
+            localStorage.setItem('directMessages', JSON.stringify(directMessages));
+            
+            // Scroll to bottom
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+            
+            // Reload users list to update unread count
+            loadDirectMessages();
+        }
+
+        // Send direct message
+        function sendDirectMessage() {
+            const input = document.getElementById('direct-chat-input');
+            const text = input.value.trim();
+            
+            if (!text || !currentDirectUserId) return;
+            
+            const message = {
+                id: Math.random().toString(36).substring(2, 9),
+                text,
+                userId: currentUser.id,
+                userName: currentUser.name,
+                timestamp: new Date().toISOString(),
+                read: true
+            };
+            
+            // Add message to user
+            if (!directMessages[currentDirectUserId]) {
+                directMessages[currentDirectUserId] = [];
+            }
+            
+            directMessages[currentDirectUserId].push(message);
+            localStorage.setItem('directMessages', JSON.stringify(directMessages));
+            
+            // Clear input
+            input.value = '';
+            
+            // Reload messages
+            loadDirectChatMessages(currentDirectUserId);
+            
+            // Play sound effect (simulated)
+            playMessageSound();
+            
+            // Show notification
+            showNotification('Mensaje enviado', 'success');
+        }
+
+        // Close direct chat
+        function closeDirectChat() {
+            currentDirectUserId = null;
+            
+            document.getElementById('direct-chat-user-info').innerHTML = `
+                <span>Selecciona un usuario para chatear</span>
+            `;
+            
+            document.getElementById('direct-chat-messages').innerHTML = `
+                <div class="empty-state">
+                    <i class="fas fa-comments"></i>
+                    <h3>Selecciona una conversación</h3>
+                    <p>Elige un usuario de la lista para comenzar a chatear</p>
+                </div>
+            `;
+            
+            document.getElementById('direct-chat-input').disabled = true;
+            document.getElementById('direct-chat-send').disabled = true;
+            
+            // Remove active class from all users
+            document.querySelectorAll('.user-item').forEach(item => {
+                item.classList.remove('active');
+            });
+        }
+
+        // Show typing indicator
+        function showTypingIndicator(chatType) {
+            const indicatorId = chatType === 'chat' 
+                ? 'chat-typing-indicator' 
+                : 'typing-indicator';
+            
+            const indicator = document.getElementById(indicatorId);
+            indicator.classList.add('active');
+            
+            // Hide after 3 seconds
+            setTimeout(() => {
+                indicator.classList.remove('active');
+            }, 3000);
+        }
+
+        // Get message count
+        function getMessageCount(conversationId) {
+            return messages[conversationId] ? messages[conversationId].length : 0;
+        }
+
+        // Format date
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('es-PE', {
+                day: 'numeric',
+                month: 'short',
+                year: 'numeric'
+            });
+        }
+
+        // Show notification
+        function showNotification(message, type = 'success') {
+            const notification = document.getElementById('notification');
+            const messageElement = document.getElementById('notification-message');
+            
+            messageElement.textContent = message;
+            
+            notification.className = 'notification active ' + type;
+            
+            // Set icon based on type
+            const icon = notification.querySelector('i');
+            if (type === 'success') {
+                icon.className = 'fas fa-check-circle';
+            } else if (type === 'error') {
+                icon.className = 'fas fa-exclamation-circle';
+            } else if (type === 'info') {
+                icon.className = 'fas fa-info-circle';
+            }
+            
+            // Hide after 3 seconds
+            setTimeout(() => {
+                notification.classList.remove('active');
+            }, 3000);
+        }
+
+        // Play message sound (simulated)
+        function playMessageSound() {
+            // Create a simple beep sound using Web Audio API
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+            
+            oscillator.frequency.value = 800;
+            oscillator.type = 'sine';
+            
+            gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
+            
+            oscillator.start(audioContext.currentTime);
+            oscillator.stop(audioContext.currentTime + 0.1);
+        }
+    </script>
+</body>
+</html>
