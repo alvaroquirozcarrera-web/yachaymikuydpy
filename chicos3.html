@@ -24,6 +24,8 @@
             --primary-blue: #2c5aa0;
             --light-blue: #5d8cc4;
             --dark-blue: #1a3a6e;
+            --iron-color: #B22222;
+            --vitamin-c-color: #FF8C00;
         }
 
         * {
@@ -37,9 +39,22 @@
             background-color: #f5f5f5;
             color: var(--dark-color);
             line-height: 1.6;
-            background-image: linear-gradient(135deg, rgba(236, 236, 252, 0.5), rgba(252, 236, 252, 0.5));
+            background-image: url('https://picsum.photos/seed/psychology-children/1600/900.jpg');
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
             min-height: 100vh;
-            padding-bottom: 60px; /* Espacio para el footer en móviles */
+            padding-bottom: 60px;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.85);
+            z-index: -1;
         }
 
         .container {
@@ -53,7 +68,7 @@
             background-color: white;
             border-radius: 15px;
             padding: 15px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -62,6 +77,7 @@
             position: sticky;
             top: 0;
             z-index: 100;
+            border: 2px solid var(--primary-color);
         }
 
         .header h1 {
@@ -74,6 +90,7 @@
 
         .header h1 i {
             font-size: 1.5rem;
+            color: var(--primary-color);
         }
 
         .header-buttons {
@@ -93,6 +110,7 @@
             gap: 5px;
             transition: all 0.3s ease;
             font-size: 0.9rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
 
         .btn-primary {
@@ -125,10 +143,114 @@
             color: white;
         }
 
+        .btn-iron {
+            background-color: var(--iron-color);
+            color: white;
+        }
+
+        .btn-vitamin-c {
+            background-color: var(--vitamin-c-color);
+            color: white;
+        }
+
         .btn:hover {
             opacity: 0.9;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Sección de Anemia y Bienestar Emocional */
+        .anemia-wellness-section {
+            background-color: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border: 2px solid var(--iron-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .anemia-wellness-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 10px;
+            height: 100%;
+            background-color: var(--iron-color);
+        }
+
+        .anemia-wellness-title {
+            color: var(--iron-color);
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .anemia-wellness-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .anemia-wellness-text {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .anemia-wellness-image {
+            flex: 1;
+            min-width: 250px;
+            max-width: 300px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .anemia-wellness-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .emotion-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .emotion-card {
+            background-color: #fff9f9;
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .emotion-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .emotion-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .emotion-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: var(--iron-color);
+        }
+
+        .emotion-description {
+            font-size: 0.9rem;
+            color: var(--dark-color);
         }
 
         .interaction-section {
@@ -136,7 +258,8 @@
             border-radius: 15px;
             padding: 30px;
             margin-bottom: 30px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border: 2px solid var(--primary-color);
         }
 
         .interaction-section h2 {
@@ -144,6 +267,10 @@
             margin-bottom: 20px;
             font-size: 1.5rem;
             text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
         }
 
         .mood-input {
@@ -198,19 +325,23 @@
 
         .tips-container {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
         }
 
         .tip-card {
             background-color: white;
             border-radius: 15px;
             padding: 25px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
             animation: fadeIn 0.5s;
+        }
+
+        .tip-card:hover {
+            transform: translateY(-5px);
         }
 
         .tip-card.removing {
@@ -252,6 +383,9 @@
             margin-bottom: 15px;
             font-size: 1.3rem;
             padding-left: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         .tip-card p {
@@ -284,14 +418,20 @@
             background-color: var(--info-color);
             color: white;
             border: none;
-            border-radius: 5px;
-            padding: 5px 10px;
+            border-radius: 25px;
+            padding: 8px 15px;
             cursor: pointer;
-            font-size: 0.8rem;
+            font-size: 0.9rem;
             margin-top: 15px;
             display: flex;
             align-items: center;
             gap: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .copy-tip-btn:hover {
+            background-color: #0288d1;
+            transform: translateY(-2px);
         }
 
         .loader {
@@ -336,7 +476,8 @@
             border-radius: 15px;
             padding: 20px;
             margin-bottom: 30px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border: 2px solid var(--danger-color);
             display: none;
         }
 
@@ -350,16 +491,24 @@
         .favorites-header h2 {
             color: var(--primary-color);
             font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         .clear-favorites-btn {
             background-color: var(--danger-color);
             color: white;
             border: none;
-            border-radius: 5px;
-            padding: 5px 10px;
+            border-radius: 25px;
+            padding: 8px 15px;
             cursor: pointer;
             font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .clear-favorites-btn:hover {
+            transform: translateY(-2px);
         }
 
         .favorites-container {
@@ -373,12 +522,20 @@
             border-radius: 10px;
             padding: 15px;
             position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .favorite-tip-card:hover {
+            transform: translateY(-3px);
         }
 
         .favorite-tip-card h3 {
             color: var(--primary-color);
             margin-bottom: 10px;
             font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .favorite-tip-card p {
@@ -396,6 +553,11 @@
             color: var(--danger-color);
             font-size: 1rem;
             cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .remove-favorite-btn:hover {
+            transform: scale(1.2);
         }
 
         .game-suggestion {
@@ -425,10 +587,14 @@
             border: 1px solid #ffeeba;
             color: #856404;
             padding: 15px;
-            border-radius: 5px;
+            border-radius: 10px;
             margin: 20px 0;
             text-align: center;
             font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
         }
 
         /* Toast container para notificaciones */
@@ -503,6 +669,79 @@
             margin-bottom: 5px;
         }
 
+        /* Sección de Consejos para la Anemia */
+        .anemia-tips-section {
+            background-color: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border: 2px solid var(--iron-color);
+        }
+
+        .anemia-tips-title {
+            color: var(--iron-color);
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .anemia-tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .anemia-tip-card {
+            background-color: #fff9f9;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .anemia-tip-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .anemia-tip-image {
+            height: 150px;
+            overflow: hidden;
+        }
+
+        .anemia-tip-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .anemia-tip-card:hover .anemia-tip-image img {
+            transform: scale(1.05);
+        }
+
+        .anemia-tip-content {
+            padding: 15px;
+        }
+
+        .anemia-tip-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: var(--iron-color);
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .anemia-tip-description {
+            font-size: 0.9rem;
+            color: var(--dark-color);
+            line-height: 1.5;
+        }
+
         @media (max-width: 768px) {
             .container {
                 padding: 15px;
@@ -531,6 +770,18 @@
                 grid-template-columns: 1fr;
             }
 
+            .anemia-wellness-content {
+                flex-direction: column;
+            }
+
+            .emotion-cards {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+
+            .anemia-tips-grid {
+                grid-template-columns: 1fr;
+            }
+
             .mobile-footer {
                 display: flex;
             }
@@ -544,6 +795,7 @@
     </style>
 </head>
 <body>
+    <div class="overlay"></div>
     <div class="container">
         <div class="header">
             <h1><i class="fas fa-brain"></i> Bienestar Psicológico</h1>
@@ -553,8 +805,118 @@
             </div>
         </div>
 
+        <!-- Sección de Anemia y Bienestar Emocional -->
+        <div class="anemia-wellness-section">
+            <h2 class="anemia-wellness-title"><i class="fas fa-heartbeat"></i> Anemia y Bienestar Emocional</h2>
+            <div class="anemia-wellness-content">
+                <div class="anemia-wellness-text">
+                    <p>La anemia no solo afecta físicamente a los niños, sino que también puede influir en su estado de ánimo y desarrollo emocional. Los niños con anemia pueden experimentar:</p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li>Irritabilidad y cambios de humor</li>
+                        <li>Fatiga que afecta su participación en actividades</li>
+                        <li>Dificultad para concentrarse en tareas</li>
+                        <li>Menor interés en juegos sociales</li>
+                    </ul>
+                    <p style="margin-top: 10px;">Una nutrición adecuada no solo combate la anemia, sino que también promueve un mejor equilibrio emocional y cognitivo.</p>
+                    <div style="margin-top: 15px;">
+                        <span class="btn-iron" style="padding: 5px 10px; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 5px;">
+                            <i class="fas fa-tint"></i> Hierro
+                        </span>
+                        <span style="margin: 0 10px;">+</span>
+                        <span class="btn-vitamin-c" style="padding: 5px 10px; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 5px;">
+                            <i class="fas fa-lemon"></i> Vitamina C
+                        </span>
+                        <span style="margin: 0 10px;">=</span>
+                        <span class="btn-success" style="padding: 5px 10px; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 5px;">
+                            <i class="fas fa-smile"></i> Bienestar Emocional
+                        </span>
+                    </div>
+                </div>
+                <div class="anemia-wellness-image">
+                    <img src="https://picsum.photos/seed/child-emotions/300/200.jpg" alt="Emociones infantiles">
+                </div>
+            </div>
+            
+            <div class="emotion-cards">
+                <div class="emotion-card">
+                    <div class="emotion-icon" style="color: var(--danger-color);">
+                        <i class="fas fa-tired"></i>
+                    </div>
+                    <div class="emotion-title">Fatiga</div>
+                    <div class="emotion-description">La falta de hierro reduce la energía y puede causar apatía</div>
+                </div>
+                <div class="emotion-card">
+                    <div class="emotion-icon" style="color: var(--warning-color);">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <div class="emotion-title">Concentración</div>
+                    <div class="emotion-description">El oxígeno insuficiente afecta la capacidad de concentración</div>
+                </div>
+                <div class="emotion-card">
+                    <div class="emotion-icon" style="color: var(--info-color);">
+                        <i class="fas fa-mood"></i>
+                    </div>
+                    <div class="emotion-title">Estado de Ánimo</div>
+                    <div class="emotion-description">La anemia puede causar irritabilidad y cambios de humor</div>
+                </div>
+                <div class="emotion-card">
+                    <div class="emotion-icon" style="color: var(--success-color);">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="emotion-title">Socialización</div>
+                    <div class="emotion-description">La energía afecta la participación en actividades sociales</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sección de Consejos para la Anemia -->
+        <div class="anemia-tips-section">
+            <h2 class="anemia-tips-title"><i class="fas fa-lightbulb"></i> Consejos para Apoyar el Bienestar Emocional</h2>
+            <div class="anemia-tips-grid">
+                <div class="anemia-tip-card">
+                    <div class="anemia-tip-image">
+                        <img src="https://picsum.photos/seed/positive-reinforcement/300/150.jpg" alt="Refuerzo positivo">
+                    </div>
+                    <div class="anemia-tip-content">
+                        <div class="anemia-tip-title">
+                            <i class="fas fa-star"></i> Refuerzo Positivo
+                        </div>
+                        <div class="anemia-tip-description">
+                            Celebra los pequeños logros, especialmente cuando tu hijo pruebe nuevos alimentos ricos en hierro. El refuerzo positivo crea asociaciones emocionales saludables con la comida.
+                        </div>
+                    </div>
+                </div>
+                <div class="anemia-tip-card">
+                    <div class="anemia-tip-image">
+                        <img src="https://picsum.photos/seed/food-creativity/300/150.jpg" alt="Creatividad con alimentos">
+                    </div>
+                    <div class="anemia-tip-content">
+                        <div class="anemia-tip-title">
+                            <i class="fas fa-palette"></i> Creatividad con Alimentos
+                        </div>
+                        <div class="anemia-tip-description">
+                            Transforma los alimentos ricos en hierro en divertidas creaciones. Hacer "caritas" con espinacas o "árboles" con brócoli puede reducir la resistencia a probar nuevos alimentos.
+                        </div>
+                    </div>
+                </div>
+                <div class="anemia-tip-card">
+                    <div class="anemia-tip-image">
+                        <img src="https://picsum.photos/seed/relaxation-techniques/300/150.jpg" alt="Técnicas de relajación">
+                    </div>
+                    <div class="anemia-tip-content">
+                        <div class="anemia-tip-title">
+                            <i class="fas fa-spa"></i> Técnicas de Relajación
+                        </div>
+                        <div class="anemia-tip-description">
+                            Enseña técnicas simples de respiración que tu hijo pueda usar cuando se sienta frustrado o cansado. La respiración profunda aumenta el oxígeno y mejora el estado de ánimo.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="interaction-section">
-            <h2>¿Cómo se siente tu hijo hoy?</h2>
+            <h2><i class="fas fa-comments"></i> ¿Cómo se siente tu hijo hoy?</h2>
             <div class="mood-input">
                 <textarea id="mood-description" placeholder="Hoy se sintió frustrado porque no pudo armar su juguete..."></textarea>
             </div>
@@ -608,27 +970,33 @@
         const sampleTips = [
             {
                 titulo: "Técnica de Respiración del Volcán",
-                descripcion: "Enséñale a tu hijo a respirar profundamente imaginando que es un volcán. Inhala lentamente por la nariz contando hasta 4, sostén el aire contando hasta 2, y exhala por la boca como si fuera lava de volcán contando hasta 6. Repite 3-5 veces para calmar la ansiedad."
+                descripcion: "Enséñale a tu hijo a respirar profundamente imaginando que es un volcán. Inhala lentamente por la nariz contando hasta 4, sostén el aire contando hasta 2, y exhala por la boca como si fuera lava de volcán contando hasta 6. Repite 3-5 veces para calmar la ansiedad.",
+                icon: "fa-wind"
             },
             {
                 titulo: "El Frasco de la Calma",
-                descripcion: "Crea un frasco transparente con agua, purpurina brillante y un poco de glicerina. Cuando tu hijo se sienta ansioso, agita el frasco y obsérvalo con él mientras la purpurina se asienta. Esto ayuda a redirigir la atención y calmar el sistema nervioso."
+                descripcion: "Crea un frasco transparente con agua, purpurina brillante y un poco de glicerina. Cuando tu hijo se sienta ansioso, agita el frasco y obsérvalo con él mientras la purpurina se asienta. Esto ayuda a redirigir la atención y calmar el sistema nervioso.",
+                icon: "fa-prescription-bottle"
             },
             {
                 titulo: "Dibuja tus Emociones",
-                descripcion: "Invita a tu hijo a dibujar lo que siente usando colores que representen sus emociones. Después, pueden hablar sobre el dibujo juntos. Esta actividad ayuda a los niños a expresar sentimientos que difícilmente pueden verbalizar."
+                descripcion: "Invita a tu hijo a dibujar lo que siente usando colores que representen sus emociones. Después, pueden hablar sobre el dibujo juntos. Esta actividad ayuda a los niños a expresar sentimientos que difícilmente pueden verbalizar.",
+                icon: "fa-paint-brush"
             },
             {
                 titulo: "Cuentos Terapéuticos",
-                descripcion: "Crea o busca cuentos donde los personajes enfrenten situaciones similares a las de tu hijo. Al ver cómo los personajes resuelven sus problemas, tu hijo puede encontrar soluciones para sus propias emociones y sentirse comprendido."
+                descripcion: "Crea o busca cuentos donde los personajes enfrenten situaciones similares a las de tu hijo. Al ver cómo los personajes resuelven sus problemas, tu hijo puede encontrar soluciones para sus propias emociones y sentirse comprendido.",
+                icon: "fa-book-open"
             },
             {
                 titulo: "El Rincón de la Serenidad",
-                descripcion: "Dedica un espacio en casa como 'rincón de la serenidad' con cojines, libros tranquilos, juguetes sensoriales y música suave. Cuando tu hijo se sienta abrumado, puede ir a este espacio para calmarse por sí mismo."
+                descripcion: "Dedica un espacio en casa como 'rincón de la serenidad' con cojines, libros tranquilos, juguetes sensoriales y música suave. Cuando tu hijo se sienta abrumado, puede ir a este espacio para calmarse por sí mismo.",
+                icon: "fa-couch"
             },
             {
                 titulo: "Juego de Roles",
-                descripcion: "Practica situaciones difíciles a través del juego de roles. Tú puedes ser tu hijo y él puede ser otra persona (amigo, maestro, etc.). Esto le permite ver la situación desde otra perspectiva y desarrollar estrategias para manejarla."
+                descripcion: "Practica situaciones difíciles a través del juego de roles. Tú puedes ser tu hijo y él puede ser otra persona (amigo, maestro, etc.). Esto le permite ver la situación desde otra perspectiva y desarrollar estrategias para manejarla.",
+                icon: "fa-theater-masks"
             }
         ];
 
@@ -808,7 +1176,7 @@
             
             const message = document.createElement('div');
             message.className = 'development-message';
-            message.textContent = 'Funcionalidad en desarrollo. Próximamente podrás generar consejos psicológicos personalizados con IA.';
+            message.innerHTML = '<i class="fas fa-tools"></i> Funcionalidad en desarrollo. Próximamente podrás generar consejos psicológicos personalizados con IA.';
             
             const tipsContainer = document.getElementById('tips-container');
             tipsContainer.parentNode.insertBefore(message, tipsContainer);
@@ -856,7 +1224,7 @@
                     <button class="favorite-btn ${isFavorite ? 'active' : ''}" data-index="${index}">
                         <i class="fas fa-star"></i>
                     </button>
-                    <h3>${tip.titulo}</h3>
+                    <h3><i class="fas ${tip.icon || 'fa-lightbulb'}"></i> ${tip.titulo}</h3>
                     <p>${tip.descripcion}</p>
                     <button class="copy-tip-btn" data-index="${index}">
                         <i class="fas fa-copy"></i> Copiar Consejo
@@ -928,7 +1296,7 @@
                     <button class="remove-favorite-btn" data-index="${index}">
                         <i class="fas fa-times"></i>
                     </button>
-                    <h3>${tip.titulo}</h3>
+                    <h3><i class="fas ${tip.icon || 'fa-lightbulb'}"></i> ${tip.titulo}</h3>
                     <p>${tip.descripcion}</p>
                     
                     <div class="game-suggestion">
