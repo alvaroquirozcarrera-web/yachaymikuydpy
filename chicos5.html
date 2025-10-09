@@ -3,26 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Juegos Educativos - Yachay Mikuy</title>
+    <title>Combate la Anemia - Juegos Educativos</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Bubblegum+Sans&display=swap" rel="stylesheet">
     <style>
-        /* Estilos similares a chicos.html para mantener consistencia */
         :root {
-            --primary-blue: #2c5aa0;
-            --light-blue: #5d8cc4;
-            --dark-blue: #1a3a6e;
-            --success-green: #28a745;
+            --primary-red: #e53935;
+            --light-red: #ef5350;
+            --dark-red: #c62828;
+            --success-green: #43a047;
             --accent-orange: #ff9800;
-            --accent-purple: #6f42c1;
-            --accent-teal: #20c997;
-            --accent-pink: #d63384;
-            --accent-cyan: #0dcaf0;
+            --accent-purple: #8e24aa;
+            --accent-teal: #00897b;
+            --accent-pink: #d81b60;
+            --accent-cyan: #00acc1;
             --gray: #6c757d;
             --light-gray: #f8f9fa;
             --white: #ffffff;
             --shadow-color: rgba(40, 50, 70, 0.1);
             --danger-red: #dc3545;
+            --iron-color: #5d4037;
         }
 
         * {
@@ -33,70 +33,75 @@
         }
 
         body {
-            background-image: linear-gradient(120deg, #f5f9ff 0%, #e6f0fa 100%);
+            background-image: linear-gradient(120deg, #ffebee 0%, #ffcdd2 100%);
             color: #333;
             line-height: 1.6;
             overflow-x: hidden;
             display: flex;
             flex-direction: column;
             min-height: 100vh;
+            padding-bottom: 60px;
         }
 
         .container {
-            max-width: 1400px; /* Aumentado el ancho máximo para aprovechar mejor el espacio en pantallas grandes */
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 30px;
+            padding: 20px;
             flex: 1;
         }
 
-        .profile-header {
+        .header {
             background: var(--white);
             border-radius: 20px;
             box-shadow: 0 8px 30px var(--shadow-color);
-            padding: 30px 40px;
-            margin-bottom: 40px;
+            padding: 20px;
+            margin-bottom: 30px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            border-left: 8px solid var(--accent-pink);
+            border-left: 8px solid var(--primary-red);
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
-        .profile-left {
+        .header-left {
             display: flex;
             align-items: center;
-            gap: 25px;
+            gap: 20px;
         }
 
-        .child-avatar {
-            width: 90px;
-            height: 90px;
-            background: linear-gradient(135deg, var(--accent-pink), #f06292);
+        .logo {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--primary-red), var(--accent-pink));
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
             color: var(--white);
-            font-size: 3rem;
+            font-size: 2.5rem;
             flex-shrink: 0;
             box-shadow: 0 4px 15px rgba(214, 51, 132, 0.4);
         }
 
-        .child-details h1 {
-            color: var(--dark-blue);
-            font-size: 2.5rem;
+        .title-section h1 {
+            color: var(--dark-red);
+            font-size: 2rem;
             font-weight: 800;
             margin: 0;
+            font-family: 'Bubblegum Sans', cursive;
         }
 
-        .child-details p {
+        .title-section p {
             color: var(--gray);
-            font-size: 1.2rem;
+            font-size: 1rem;
             margin: 0;
             font-weight: 500;
         }
 
         .btn-back {
-            padding: 12px 25px;
+            padding: 12px 20px;
             background: linear-gradient(45deg, var(--gray), #868e96);
             color: var(--white);
             border: none;
@@ -117,29 +122,48 @@
             box-shadow: 0 6px 20px rgba(108, 117, 125, 0.4);
         }
 
+        .info-banner {
+            background: linear-gradient(135deg, var(--primary-red), var(--accent-pink));
+            color: white;
+            border-radius: 15px;
+            padding: 15px 20px;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            box-shadow: 0 4px 15px rgba(229, 57, 53, 0.3);
+        }
+
+        .info-banner i {
+            font-size: 2rem;
+        }
+
+        .info-banner h3 {
+            font-size: 1.3rem;
+            margin-bottom: 5px;
+        }
+
+        .info-banner p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
         .games-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* Ajustado para mejor aprovechamiento del espacio */
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
             margin-bottom: 40px;
         }
 
-        /* Media queries para diferentes tamaños de pantalla */
         @media (min-width: 768px) {
             .games-container {
-                grid-template-columns: repeat(2, 1fr); /* 2 columnas en tablets */
+                grid-template-columns: repeat(2, 1fr);
             }
         }
 
         @media (min-width: 1024px) {
             .games-container {
-                grid-template-columns: repeat(3, 1fr); /* 3 columnas en laptops */
-            }
-        }
-
-        @media (min-width: 1400px) {
-            .games-container {
-                grid-template-columns: repeat(4, 1fr); /* 4 columnas en pantallas grandes */
+                grid-template-columns: repeat(3, 1fr);
             }
         }
 
@@ -147,13 +171,13 @@
             background: var(--white);
             border-radius: 20px;
             box-shadow: 0 8px 30px var(--shadow-color);
-            padding: 25px;
+            padding: 20px;
             transition: all 0.3s ease;
-            border-top: 5px solid var(--accent-pink);
+            border-top: 5px solid var(--primary-red);
             cursor: pointer;
             position: relative;
             overflow: hidden;
-            height: 100%; /* Asegurar que todas las tarjetas tengan la misma altura */
+            height: 100%;
             display: flex;
             flex-direction: column;
         }
@@ -166,46 +190,47 @@
         .game-icon {
             width: 70px;
             height: 70px;
-            background: linear-gradient(45deg, var(--accent-pink), #f06292);
+            background: linear-gradient(45deg, var(--primary-red), var(--accent-pink));
             border-radius: 15px;
             display: flex;
             justify-content: center;
             align-items: center;
             color: var(--white);
             font-size: 2rem;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 10px rgba(214, 51, 132, 0.3);
+            margin-bottom: 15px;
+            box-shadow: 0 4px 10px rgba(229, 57, 53, 0.3);
         }
 
         .game-title {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             font-weight: 700;
-            color: var(--dark-blue);
-            margin-bottom: 10px;
+            color: var(--dark-red);
+            margin-bottom: 8px;
+            font-family: 'Bubblegum Sans', cursive;
         }
 
         .game-age {
             display: inline-block;
-            background: rgba(214, 51, 132, 0.1);
-            color: var(--accent-pink);
+            background: rgba(229, 57, 53, 0.1);
+            color: var(--primary-red);
             padding: 5px 12px;
             border-radius: 20px;
             font-size: 0.9rem;
             font-weight: 600;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
         }
 
         .game-description {
             color: var(--gray);
             font-size: 0.95rem;
-            margin-bottom: 20px;
-            flex-grow: 1; /* Permitir que la descripción crezca para llenar el espacio */
+            margin-bottom: 15px;
+            flex-grow: 1;
         }
 
         .game-stats {
             display: flex;
             justify-content: space-between;
-            margin-top: auto; /* Empujar las estadísticas hacia abajo */
+            margin-top: auto;
             padding-top: 15px;
             border-top: 1px solid #eee;
         }
@@ -215,9 +240,9 @@
         }
 
         .stat-value {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             font-weight: 700;
-            color: var(--dark-blue);
+            color: var(--dark-red);
         }
 
         .stat-label {
@@ -225,41 +250,11 @@
             color: var(--gray);
         }
 
-        .stats-container {
-            background: var(--white);
-            border-radius: 20px;
-            box-shadow: 0 8px 30px var(--shadow-color);
-            padding: 30px;
-            margin-bottom: 40px;
-        }
-
-        .stats-title {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--dark-blue);
-            margin-bottom: 20px;
-            text-align: center;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-        }
-
-        .stat-card {
-            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
-            border-radius: 15px;
-            padding: 20px;
-            text-align: center;
-            border-left: 4px solid var(--accent-pink);
-        }
-
         .game-area {
             background: var(--white);
             border-radius: 20px;
             box-shadow: 0 8px 30px var(--shadow-color);
-            padding: 30px;
+            padding: 20px;
             margin-bottom: 40px;
             min-height: 500px;
             display: none;
@@ -273,72 +268,151 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
             border-bottom: 1px solid #eee;
             padding-bottom: 15px;
         }
 
         .game-title-area {
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             font-weight: 700;
-            color: var(--dark-blue);
+            color: var(--dark-red);
+            font-family: 'Bubblegum Sans', cursive;
         }
 
         .game-timer {
             font-size: 1.2rem;
             font-weight: 600;
-            color: var(--accent-pink);
+            color: var(--primary-red);
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        .trophy-overlay {
+        .game-timer i {
+            font-size: 1.4rem;
+        }
+
+        .game-instructions {
+            background: rgba(229, 57, 53, 0.1);
+            border-radius: 15px;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-left: 5px solid var(--primary-red);
+        }
+
+        .game-instructions h3 {
+            color: var(--primary-red);
+            margin-bottom: 10px;
+            font-family: 'Bubblegum Sans', cursive;
+        }
+
+        .game-instructions p {
+            margin-bottom: 5px;
+            font-size: 0.95rem;
+        }
+
+        .game-message {
+            text-align: center;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            margin-top: 20px;
+            font-weight: 600;
+            color: var(--dark-red);
+        }
+
+        .floating-message {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
             z-index: 1000;
             opacity: 0;
-            visibility: hidden;
-            transition: all 0.5s ease;
-        }
-
-        .trophy-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .trophy-container {
+            transition: all 0.3s ease;
+            max-width: 80%;
             text-align: center;
-            transform: scale(0.5);
-            transition: transform 0.5s ease;
+            font-weight: 600;
         }
 
-        .trophy-overlay.active .trophy-container {
-            transform: scale(1);
+        .floating-message.success {
+            border-left: 5px solid var(--success-green);
+            color: var(--success-green);
         }
 
-        .trophy-icon {
-            font-size: 15rem;
-            color: gold;
-            text-shadow: 0 0 20px rgba(255, 215, 0, 0.7);
-            animation: pulse 1.5s infinite;
+        .floating-message.error {
+            border-left: 5px solid var(--danger-red);
+            color: var(--danger-red);
         }
 
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
+        .floating-message.warning {
+            border-left: 5px solid var(--accent-orange);
+            color: var(--accent-orange);
         }
 
-        .trophy-text {
-            color: var(--white);
-            font-size: 2.5rem;
-            font-weight: 800;
+        .floating-message.show {
+            opacity: 1;
+        }
+
+        .recommendation-message {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 15px;
             margin-top: 20px;
+            border-left: 5px solid var(--accent-purple);
+            animation: slideIn 0.5s ease;
+        }
+
+        @keyframes slideIn {
+            0% { transform: translateY(-20px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+
+        .recommendation-message h4 {
+            color: var(--accent-purple);
+            margin-bottom: 10px;
+        }
+
+        .recommendation-message ul {
+            padding-left: 20px;
+        }
+
+        .recommendation-message li {
+            margin-bottom: 5px;
+        }
+
+        .game-footer {
+            text-align: center;
+            margin-top: 30px;
+            display: none;
+        }
+
+        .btn-game {
+            padding: 12px 25px;
+            background: linear-gradient(45deg, var(--primary-red), var(--accent-pink));
+            color: var(--white);
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-game:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(229, 57, 53, 0.4);
+        }
+
+        .btn-game i {
+            font-size: 1.2rem;
         }
 
         /* Estilos específicos para juegos */
@@ -351,7 +425,7 @@
 
         .memory-card {
             aspect-ratio: 1;
-            background: linear-gradient(135deg, var(--light-blue), var(--primary-blue));
+            background: linear-gradient(135deg, var(--light-red), var(--primary-red));
             border-radius: 10px;
             display: flex;
             justify-content: center;
@@ -391,7 +465,7 @@
         }
 
         .memory-card-back {
-            background: linear-gradient(135deg, var(--light-blue), var(--primary-blue));
+            background: linear-gradient(135deg, var(--light-red), var(--primary-red));
             color: white;
         }
 
@@ -425,6 +499,7 @@
             cursor: grab;
             box-shadow: 0 4px 10px rgba(0,0,0,0.1);
             transition: all 0.3s ease;
+            touch-action: none;
         }
 
         .food-item:hover {
@@ -463,8 +538,8 @@
             width: 60px;
             height: 60px;
             border-radius: 50%;
-            background: rgba(214, 51, 132, 0.1);
-            border: 2px dashed var(--accent-pink);
+            background: rgba(229, 57, 53, 0.1);
+            border: 2px dashed var(--primary-red);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -490,7 +565,7 @@
         }
 
         .drop-zone.filled {
-            background: rgba(40, 167, 69, 0.2);
+            background: rgba(67, 160, 71, 0.2);
             border-color: var(--success-green);
             animation: fillZone 0.5s ease;
         }
@@ -522,7 +597,7 @@
         }
 
         .maze-wall {
-            background: var(--dark-blue);
+            background: var(--dark-red);
         }
 
         .maze-path {
@@ -534,7 +609,7 @@
         }
 
         .maze-end {
-            background: var(--accent-pink);
+            background: var(--primary-red);
         }
 
         .maze-player {
@@ -590,6 +665,7 @@
             cursor: pointer;
             box-shadow: 0 4px 10px rgba(0,0,0,0.1);
             transition: all 0.3s ease;
+            touch-action: manipulation;
         }
 
         .ingredient:hover {
@@ -598,7 +674,7 @@
         }
 
         .ingredient.selected {
-            background: var(--accent-pink);
+            background: var(--primary-red);
             color: white;
             transform: scale(1.1);
             animation: selectPulse 0.5s ease;
@@ -647,10 +723,11 @@
             text-align: center;
             cursor: pointer;
             transition: all 0.3s ease;
+            touch-action: manipulation;
         }
 
         .quiz-option:hover {
-            border-color: var(--accent-pink);
+            border-color: var(--primary-red);
             transform: translateY(-3px);
             box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
@@ -706,6 +783,7 @@
             cursor: pointer;
             transition: all 0.3s ease;
             position: relative;
+            touch-action: manipulation;
         }
 
         .farm-plot:hover {
@@ -723,7 +801,7 @@
         }
 
         .farm-plot.ready {
-            background: #ff9800;
+            background: var(--accent-orange);
             animation: pulse 1.5s infinite;
         }
 
@@ -734,13 +812,14 @@
 
         .farm-btn {
             padding: 10px 20px;
-            background: var(--accent-pink);
+            background: var(--primary-red);
             color: white;
             border: none;
             border-radius: 10px;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
+            touch-action: manipulation;
         }
 
         .farm-btn:hover {
@@ -822,6 +901,7 @@
             font-size: 1.5rem;
             cursor: pointer;
             transition: all 0.3s ease;
+            touch-action: manipulation;
         }
 
         .hero-btn:hover {
@@ -850,6 +930,7 @@
             transform-style: preserve-3d;
             transition: transform 0.5s;
             cursor: pointer;
+            touch-action: manipulation;
         }
 
         .puzzle-piece.flipped {
@@ -869,7 +950,7 @@
         }
 
         .puzzle-back {
-            background: linear-gradient(135deg, var(--accent-pink), #f06292);
+            background: linear-gradient(135deg, var(--primary-red), var(--accent-pink));
             color: white;
         }
 
@@ -941,6 +1022,7 @@
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
+            touch-action: manipulation;
         }
 
         .race-btn:hover {
@@ -990,6 +1072,7 @@
             font-size: 1.8rem;
             cursor: pointer;
             transition: all 0.3s ease;
+            touch-action: manipulation;
         }
 
         .chef-ingredient:hover {
@@ -998,7 +1081,7 @@
         }
 
         .chef-ingredient.selected {
-            background: var(--accent-pink);
+            background: var(--primary-red);
             color: white;
             transform: scale(1.1);
         }
@@ -1042,13 +1125,14 @@
 
         .chef-btn {
             padding: 12px 25px;
-            background: var(--accent-pink);
+            background: var(--primary-red);
             color: white;
             border: none;
             border-radius: 10px;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
+            touch-action: manipulation;
         }
 
         .chef-btn:hover {
@@ -1056,208 +1140,190 @@
             box-shadow: 0 4px 10px rgba(0,0,0,0.2);
         }
 
-        .game-message {
-            text-align: center;
-            padding: 20px;
-            background: #f8f9fa;
-            border-radius: 15px;
-            margin-top: 20px;
-            font-weight: 600;
-            color: var(--dark-blue);
-        }
-
-        .floating-message {
+        .trophy-overlay {
             position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: white;
-            padding: 20px 30px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            z-index: 1000;
-            opacity: 0;
-            transition: all 0.3s ease;
-            max-width: 80%;
-            text-align: center;
-            font-weight: 600;
-        }
-
-        .floating-message.success {
-            border-left: 5px solid var(--success-green);
-            color: var(--success-green);
-        }
-
-        .floating-message.error {
-            border-left: 5px solid var(--danger-red);
-            color: var(--danger-red);
-        }
-
-        .floating-message.warning {
-            border-left: 5px solid var(--accent-orange);
-            color: var(--accent-orange);
-        }
-
-        .floating-message.show {
-            opacity: 1;
-        }
-
-        .recommendation-message {
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 15px;
-            padding: 15px;
-            margin-top: 20px;
-            border-left: 5px solid var(--accent-purple);
-            animation: slideIn 0.5s ease;
-        }
-
-        @keyframes slideIn {
-            0% { transform: translateY(-20px); opacity: 0; }
-            100% { transform: translateY(0); opacity: 1; }
-        }
-
-        .recommendation-message h4 {
-            color: var(--accent-purple);
-            margin-bottom: 10px;
-        }
-
-        .recommendation-message ul {
-            padding-left: 20px;
-        }
-
-        .recommendation-message li {
-            margin-bottom: 5px;
-        }
-
-        .game-instructions {
-            background: rgba(44, 90, 160, 0.1);
-            border-radius: 15px;
-            padding: 15px;
-            margin-bottom: 20px;
-            border-left: 5px solid var(--primary-blue);
-        }
-
-        .game-instructions h3 {
-            color: var(--primary-blue);
-            margin-bottom: 10px;
-        }
-
-        .game-instructions p {
-            margin-bottom: 5px;
-        }
-
-        .game-footer {
-            text-align: center;
-            margin-top: 30px;
-            display: none;
-        }
-
-        /* Footer Styles */
-        .footer {
-            background-color: var(--white);
-            border-top: 1px solid rgba(0, 0, 0, 0.1);
-            padding: 40px 0 20px;
-            margin-top: 50px;
-        }
-
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            align-items: center;
-            gap: 30px;
-        }
-
-        .footer-logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .footer-logo i {
-            font-size: 2rem;
-            color: var(--primary-blue);
-        }
-
-        .footer-logo span {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--dark-blue);
-        }
-
-        .footer-nav ul {
-            display: flex;
-            flex-wrap: wrap;
-            list-style: none;
-            gap: 20px;
-        }
-
-        .footer-nav a {
-            text-decoration: none;
-            color: var(--gray);
-            font-weight: 500;
-            transition: color 0.3s ease;
-        }
-
-        .footer-nav a:hover {
-            color: var(--primary-blue);
-        }
-
-        .footer-social {
-            display: flex;
-            gap: 15px;
-        }
-
-        .footer-social a {
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
             display: flex;
             justify-content: center;
             align-items: center;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background-color: rgba(44, 90, 160, 0.1);
-            color: var(--primary-blue);
-            transition: all 0.3s ease;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.5s ease;
         }
 
-        .footer-social a:hover {
-            background-color: var(--primary-blue);
-            color: var(--white);
-            transform: translateY(-3px);
+        .trophy-overlay.active {
+            opacity: 1;
+            visibility: visible;
         }
 
-        .footer-copyright {
-            max-width: 1200px;
-            margin: 30px auto 0;
-            padding: 20px 20px 0;
+        .trophy-container {
             text-align: center;
-            border-top: 1px solid rgba(0, 0, 0, 0.1);
-            color: var(--gray);
-            font-size: 0.9rem;
+            transform: scale(0.5);
+            transition: transform 0.5s ease;
         }
 
+        .trophy-overlay.active .trophy-container {
+            transform: scale(1);
+        }
+
+        .trophy-icon {
+            font-size: 15rem;
+            color: gold;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.7);
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .trophy-text {
+            color: var(--white);
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-top: 20px;
+            font-family: 'Bubblegum Sans', cursive;
+        }
+
+        .trophy-message {
+            color: var(--white);
+            font-size: 1.2rem;
+            margin-top: 15px;
+            max-width: 80%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .trophy-actions {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .btn-trophy {
+            padding: 12px 25px;
+            background: linear-gradient(45deg, var(--primary-red), var(--accent-pink));
+            color: var(--white);
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-trophy:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(229, 57, 53, 0.4);
+        }
+
+        .btn-trophy i {
+            font-size: 1.2rem;
+        }
+
+        /* Footer para móviles */
+        .mobile-footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--primary-red);
+            color: white;
+            padding: 10px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            z-index: 100;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+        }
+
+        .mobile-footer a {
+            color: white;
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 0.8rem;
+        }
+
+        .mobile-footer i {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+
+        /* Toast container para notificaciones */
+        .toast-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1050;
+        }
+        
+        .custom-toast {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            padding: 15px 20px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            animation: slideIn 0.3s ease;
+        }
+        
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        .toast-success {
+            border-left: 5px solid var(--success-green);
+        }
+        
+        .toast-error {
+            border-left: 5px solid var(--danger-red);
+        }
+        
+        .toast-info {
+            border-left: 5px solid var(--info-color);
+        }
+
+        /* Responsive */
         @media (max-width: 768px) {
             .container {
-                padding: 20px;
+                padding: 15px;
             }
-            .profile-header {
+            .header {
                 flex-direction: column;
                 text-align: center;
                 gap: 15px;
-                padding: 25px;
+                padding: 20px;
             }
-            .profile-left {
+            .header-left {
                 flex-direction: column;
                 text-align: center;
             }
-            .child-details h1 {
-                font-size: 2rem;
+            .title-section h1 {
+                font-size: 1.8rem;
             }
             .games-container {
-                grid-template-columns: 1fr; /* 1 columna en móviles */
+                grid-template-columns: 1fr;
             }
             .trophy-icon {
                 font-size: 10rem;
@@ -1293,34 +1359,28 @@
             .chef-ingredients, .chef-pot {
                 width: 100%;
             }
-            
-            /* Footer responsive styles */
-            .footer-content {
-                flex-direction: column;
-                text-align: center;
-                gap: 25px;
+            .mobile-footer {
+                display: flex;
             }
-            
-            .footer-nav ul {
-                justify-content: center;
-            }
-            
-            .footer-copyright {
-                padding-top: 15px;
+        }
+
+        @media (min-width: 769px) {
+            .mobile-footer {
+                display: none;
             }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <header class="profile-header">
-            <div class="profile-left">
-                <div class="child-avatar">
-                    <i class="fas fa-child"></i>
+        <header class="header">
+            <div class="header-left">
+                <div class="logo">
+                    <i class="fas fa-heartbeat"></i>
                 </div>
-                <div class="child-details">
-                    <h1 id="childName">Cargando perfil...</h1>
-                    <p>Edad: <span id="childAge">-</span> años</p>
+                <div class="title-section">
+                    <h1>Combate la Anemia</h1>
+                    <p>Aprende a prevenirla con alimentos ricos en hierro</p>
                 </div>
             </div>
             <a href="#" id="backToProfile" class="btn-back">
@@ -1328,27 +1388,13 @@
             </a>
         </header>
 
-        <section class="stats-container">
-            <h2 class="stats-title">Estadísticas de Juegos</h2>
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-value" id="totalGames">0</div>
-                    <div class="stat-label">Juegos Jugados</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-value" id="totalWins">0</div>
-                    <div class="stat-label">Victorias</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-value" id="winPercentage">0%</div>
-                    <div class="stat-label">Porcentaje de Victorias</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-value" id="avgTime">0s</div>
-                    <div class="stat-label">Tiempo Promedio</div>
-                </div>
+        <div class="info-banner">
+            <i class="fas fa-info-circle"></i>
+            <div>
+                <h3>¿Sabías qué?</h3>
+                <p>La anemia es una condición donde la sangre no tiene suficientes glóbulos rojos sanos. ¡Juega y aprende a prevenirla!</p>
             </div>
-        </section>
+        </div>
 
         <section class="games-container" id="gamesMenu">
             <!-- Los juegos se cargarán dinámicamente aquí -->
@@ -1357,55 +1403,137 @@
         <section class="game-area" id="gameArea">
             <div class="game-header">
                 <h2 class="game-title-area" id="currentGameTitle">Juego Seleccionado</h2>
-                <div class="game-timer" id="gameTimer">00:00</div>
+                <div class="game-timer" id="gameTimer">
+                    <i class="fas fa-clock"></i>
+                    <span>00:00</span>
+                </div>
             </div>
             <div id="gameContent">
                 <!-- El contenido del juego se cargará aquí -->
             </div>
             <div class="game-footer" id="gameFooter">
-                <button class="btn-back" id="backToGamesMenu">
+                <button class="btn-game" id="backToGamesMenu">
                     <i class="fas fa-arrow-left"></i> Volver a Juegos
                 </button>
             </div>
         </section>
     </div>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-logo">
-                <i class="fas fa-heart"></i>
-                <span>Yachay Mikuy</span>
-            </div>
-            <nav class="footer-nav">
-                <ul>
-                    <li><a href="#">Acerca de nosotros</a></li>
-                    <li><a href="#">Términos y condiciones</a></li>
-                    <li><a href="#">Política de privacidad</a></li>
-                    <li><a href="#">Contacto</a></li>
-                </ul>
-            </nav>
-            <div class="footer-social">
-                <a href="#"><i class="fab fa-facebook-f"></i></a>
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
-                <a href="#"><i class="fab fa-youtube"></i></a>
-            </div>
-        </div>
-        <div class="footer-copyright">
-            <p>© 2023 Yachay Mikuy. Todos los derechos reservados.</p>
-        </div>
-    </footer>
+    <!-- Footer para móviles -->
+    <div class="mobile-footer">
+        <a href="#" id="mobileBackToProfile">
+            <i class="fas fa-arrow-left"></i>
+            <span>Volver</span>
+        </a>
+        <a href="#" id="mobileHome">
+            <i class="fas fa-home"></i>
+            <span>Inicio</span>
+        </a>
+        <a href="#" id="mobileProfile">
+            <i class="fas fa-user"></i>
+            <span>Perfil</span>
+        </a>
+        <a href="#" id="mobileExit">
+            <i class="fas fa-sign-out-alt"></i>
+            <span>Salir</span>
+        </a>
+    </div>
+
+    <!-- Toast container -->
+    <div class="toast-container" id="toastContainer"></div>
 
     <div class="trophy-overlay" id="trophyOverlay">
         <div class="trophy-container">
             <i class="fas fa-trophy trophy-icon"></i>
             <div class="trophy-text">¡Ganaste!</div>
+            <div class="trophy-message" id="trophyMessage">Has completado el juego y aprendido sobre alimentos que combaten la anemia.</div>
+            <div class="trophy-actions">
+                <button class="btn-trophy" id="playAgainBtn">
+                    <i class="fas fa-redo"></i> Jugar de nuevo
+                </button>
+                <button class="btn-trophy" id="anotherGameBtn">
+                    <i class="fas fa-gamepad"></i> Otro juego
+                </button>
+            </div>
         </div>
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // Storage Adapter - Para facilitar migración a backend
+            const storageAdapter = {
+                // Users
+                getUsers: function() {
+                    const users = localStorage.getItem('yachay_users');
+                    return users ? JSON.parse(users) : [];
+                },
+                saveUsers: function(users) {
+                    localStorage.setItem('yachay_users', JSON.stringify(users));
+                },
+                
+                // Children
+                getChildren: function() {
+                    const children = localStorage.getItem('yachay_children');
+                    return children ? JSON.parse(children) : [];
+                },
+                saveChildren: function(children) {
+                    localStorage.setItem('yachay_children', JSON.stringify(children));
+                },
+                
+                // Responses
+                getResponses: function() {
+                    const responses = localStorage.getItem('yachay_responses');
+                    return responses ? JSON.parse(responses) : {};
+                },
+                saveResponses: function(responses) {
+                    localStorage.setItem('yachay_responses', JSON.stringify(responses));
+                },
+                
+                // Session
+                getSession: function() {
+                    const session = localStorage.getItem('yachay_session');
+                    return session ? JSON.parse(session) : { currentUserId: null, exploringAsGuest: false, lastActiveAt: null };
+                },
+                saveSession: function(session) {
+                    localStorage.setItem('yachay_session', JSON.stringify(session));
+                },
+                
+                // Audit Log
+                getAuditLog: function() {
+                    const auditLog = localStorage.getItem('yachay_auditLog');
+                    return auditLog ? JSON.parse(auditLog) : [];
+                },
+                saveAuditLog: function(auditLog) {
+                    localStorage.setItem('yachay_auditLog', JSON.stringify(auditLog));
+                }
+            };
+
+            // Función para mostrar notificaciones toast mejoradas
+            function showToast(message, type = 'info') {
+                const toastContainer = document.getElementById('toastContainer');
+                const toastId = 'toast-' + Date.now();
+                
+                const toastHtml = `
+                    <div id="${toastId}" class="custom-toast toast-${type}">
+                        <div class="me-2">
+                            ${type === 'success' ? '<i class="fas fa-check-circle text-success"></i>' : 
+                              type === 'error' ? '<i class="fas fa-exclamation-circle text-danger"></i>' : 
+                              '<i class="fas fa-info-circle text-info"></i>'}
+                        </div>
+                        <div class="flex-grow-1">${message}</div>
+                        <button type="button" class="btn-close ms-2" onclick="document.getElementById('${toastId}').remove()"></button>
+                    </div>
+                `;
+                
+                toastContainer.insertAdjacentHTML('beforeend', toastHtml);
+                
+                // Auto remove after 5 seconds
+                setTimeout(() => {
+                    const toast = document.getElementById(toastId);
+                    if (toast) toast.remove();
+                }, 5000);
+            }
+
             const urlParams = new URLSearchParams(window.location.search);
             const childId = urlParams.get('childId');
 
@@ -1415,14 +1543,7 @@
                 return;
             }
 
-            const storedData = localStorage.getItem('yachayMikuyChildren');
-            if (!storedData) {
-                document.body.innerHTML = '<h1>Error: No se encontraron datos. Redirigiendo...</h1>';
-                setTimeout(() => { window.location.href = 'index.html'; }, 3000);
-                return;
-            }
-            
-            const childrenData = JSON.parse(storedData);
+            const childrenData = storageAdapter.getChildren();
             const currentChild = childrenData.find(child => child.id === childId);
 
             if (!currentChild) {
@@ -1431,12 +1552,17 @@
                 return;
             }
 
-            document.getElementById('childName').textContent = currentChild.name;
-            document.getElementById('childAge').textContent = currentChild.age;
-            document.title = `${currentChild.name} - Juegos - Yachay Mikuy`;
+            document.title = `${currentChild.name} - Combate la Anemia - Yachay Mikuy`;
 
             // Configurar el botón de volver
             document.getElementById('backToProfile').href = `chicos.html?childId=${childId}`;
+            
+            // Configurar enlaces del footer móvil
+            const mobileBackToProfile = document.getElementById('mobileBackToProfile');
+            const mobileProfile = document.getElementById('mobileProfile');
+            
+            mobileBackToProfile.href = `chicos.html?childId=${childId}`;
+            mobileProfile.href = `chicos.html?childId=${childId}`;
 
             // Definición de los juegos - Todos con 30 segundos
             const games = [
@@ -1518,7 +1644,7 @@
                     age: '10-13 años',
                     description: 'Prepara platos balanceados para clientes.',
                     icon: 'fa-utensils',
-                    timeLimit: 30 // 30 segundos (ahora todos tienen 30 segundos)
+                    timeLimit: 30 // 30 segundos
                 }
             ];
 
@@ -1538,33 +1664,6 @@
             
             // Guardar estadísticas actualizadas
             localStorage.setItem(`gameStats_${childId}`, JSON.stringify(childStats));
-
-            // Calcular estadísticas globales
-            function updateGlobalStats() {
-                let totalPlayed = 0;
-                let totalWins = 0;
-                let totalTime = 0;
-                let timeCount = 0;
-
-                Object.values(childStats).forEach(gameStats => {
-                    totalPlayed += gameStats.played;
-                    totalWins += gameStats.wins;
-                    gameStats.times.forEach(time => {
-                        totalTime += time;
-                        timeCount++;
-                    });
-                });
-
-                const winPercentage = totalPlayed > 0 ? Math.round((totalWins / totalPlayed) * 100) : 0;
-                const avgTime = timeCount > 0 ? Math.round(totalTime / timeCount) : 0;
-
-                document.getElementById('totalGames').textContent = totalPlayed;
-                document.getElementById('totalWins').textContent = totalWins;
-                document.getElementById('winPercentage').textContent = `${winPercentage}%`;
-                document.getElementById('avgTime').textContent = `${avgTime}s`;
-            }
-
-            updateGlobalStats();
 
             // Crear tarjetas de juegos
             const gamesMenu = document.getElementById('gamesMenu');
@@ -1641,7 +1740,7 @@
             function updateTimerDisplay() {
                 const minutes = Math.floor(timeRemaining / 60);
                 const seconds = timeRemaining % 60;
-                document.getElementById('gameTimer').textContent = 
+                document.getElementById('gameTimer').querySelector('span').textContent = 
                     `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
             }
 
@@ -1691,7 +1790,8 @@
             // Juego 1: Memoria de Hierro
             function loadMemoryGame(game) {
                 const gameContent = document.getElementById('gameContent');
-                const foods = ['🥬', '🥩', '🍳', '🐟', '🥜', '🥚'];
+                // Más alimentos ricos en hierro
+                const foods = ['🥬', '🥩', '🍳', '🐟', '🥜', '🥚', '🫐', '🍓', '🥑', '🍅'];
                 const cards = [...foods, ...foods];
                 
                 // Barajar las cartas
@@ -1742,6 +1842,9 @@
                                         flippedCards[1].classList.add('matched');
                                         matchedPairs++;
                                         
+                                        // Mostrar información sobre el alimento
+                                        showFoodInfo(flippedCards[0].dataset.food);
+                                        
                                         if (matchedPairs === foods.length) {
                                             winGame(game);
                                         }
@@ -1767,7 +1870,8 @@
             // Juego 2: Cazador de Vitaminas
             function loadVitaminHunterGame(game) {
                 const gameContent = document.getElementById('gameContent');
-                const foods = ['🥬', '🥩', '🍳', '🐟', '🥜', '🥚', '🥕', '🍎'];
+                // Más alimentos ricos en hierro y vitamina C
+                const foods = ['🥬', '🥩', '🍳', '🐟', '🥜', '🥚', '🫐', '🍓', '🥑', '🍅', '🍊', '🥝'];
                 
                 gameContent.innerHTML = `
                     <div class="game-instructions">
@@ -1802,6 +1906,7 @@
                     foodItem.draggable = true;
                     foodItem.textContent = food;
                     
+                    // Eventos de arrastre para dispositivos táctiles
                     foodItem.addEventListener('dragstart', function(e) {
                         this.classList.add('dragging');
                         e.dataTransfer.setData('text/plain', food);
@@ -1809,6 +1914,69 @@
                     
                     foodItem.addEventListener('dragend', function() {
                         this.classList.remove('dragging');
+                    });
+                    
+                    // Eventos táctiles para móviles
+                    let touchItem = null;
+                    let touchOffset = { x: 0, y: 0 };
+                    
+                    foodItem.addEventListener('touchstart', function(e) {
+                        touchItem = this.cloneNode(true);
+                        touchItem.style.position = 'fixed';
+                        touchItem.style.zIndex = '1000';
+                        touchItem.style.pointerEvents = 'none';
+                        touchItem.classList.add('dragging');
+                        
+                        const touch = e.touches[0];
+                        touchOffset.x = touch.clientX - this.getBoundingClientRect().left;
+                        touchOffset.y = touch.clientY - this.getBoundingClientRect().top;
+                        
+                        touchItem.style.left = `${touch.clientX - touchOffset.x}px`;
+                        touchItem.style.top = `${touch.clientY - touchOffset.y}px`;
+                        
+                        document.body.appendChild(touchItem);
+                    });
+                    
+                    foodItem.addEventListener('touchmove', function(e) {
+                        if (!touchItem) return;
+                        
+                        const touch = e.touches[0];
+                        touchItem.style.left = `${touch.clientX - touchOffset.x}px`;
+                        touchItem.style.top = `${touch.clientY - touchOffset.y}px`;
+                        
+                        // Detectar elemento debajo del toque
+                        const elementBelow = document.elementFromPoint(touch.clientX, touch.clientY);
+                        if (elementBelow && elementBelow.classList.contains('drop-zone')) {
+                            dropZones.forEach(zone => zone.style.transform = 'scale(1)');
+                            elementBelow.style.transform = 'scale(1.1)';
+                        }
+                    });
+                    
+                    foodItem.addEventListener('touchend', function(e) {
+                        if (!touchItem) return;
+                        
+                        const touch = e.changedTouches[0];
+                        const elementBelow = document.elementFromPoint(touch.clientX, touch.clientY);
+                        
+                        if (elementBelow && elementBelow.classList.contains('drop-zone')) {
+                            elementBelow.style.transform = 'scale(1)';
+                            
+                            if (!elementBelow.classList.contains('filled')) {
+                                elementBelow.textContent = food;
+                                elementBelow.classList.add('filled');
+                                filledZones++;
+                                
+                                // Mostrar información del alimento
+                                showFoodInfo(food, elementBelow.dataset.zone);
+                                
+                                if (filledZones === dropZones.length) {
+                                    winGame(game);
+                                }
+                            }
+                        }
+                        
+                        document.body.removeChild(touchItem);
+                        touchItem = null;
                     });
                     
                     foodItems.appendChild(foodItem);
@@ -1856,7 +2024,13 @@
                     '🥜': 'Los frutos secos aportan hierro y grasas saludables',
                     '🥚': 'Los huevos son una buena fuente de hierro',
                     '🥕': 'Las zanahorias tienen betacaroteno y vitaminas',
-                    '🍎': 'Las manzanas contienen vitamina C que ayuda a absorber hierro'
+                    '🍎': 'Las manzanas contienen vitamina C que ayuda a absorber hierro',
+                    '🫐': 'Los arándanos son ricos en antioxidantes y vitamina C',
+                    '🍓': 'Las fresas tienen vitamina C que mejora la absorción de hierro',
+                    '🥑': 'El aguacate contiene grasas saludables y vitamina E',
+                    '🍅': 'Los tomates tienen licopeno y vitamina C',
+                    '🍊': 'Las naranjas son ricas en vitamina C que ayuda a absorber hierro',
+                    '🥝': 'El kiwi tiene más vitamina C que las naranjas'
                 };
                 
                 const zoneInfo = {
@@ -1890,14 +2064,20 @@
                 gameContent.innerHTML = `
                     <div class="game-instructions">
                         <h3>Instrucciones:</h3>
-                        <p>• Usa las flechas del teclado para moverte</p>
+                        <p>• Usa las flechas del teclado o los botones para moverte</p>
                         <p>• Recolecta todos los alimentos antes de llegar a la meta</p>
                         <p>• ¡Evita las paredes del laberinto!</p>
                         <p>• ¡Tienes ${game.timeLimit} segundos para completar el juego!</p>
                     </div>
                     <div class="maze-container">
                         <div class="maze" id="maze"></div>
-                        <div class="game-message">Usa las flechas del teclado para moverte y recolectar alimentos</div>
+                        <div class="game-message">Usa las flechas para moverte y recolectar alimentos</div>
+                        <div class="hero-controls">
+                            <button class="hero-btn" id="mazeUp"><i class="fas fa-arrow-up"></i></button>
+                            <button class="hero-btn" id="mazeLeft"><i class="fas fa-arrow-left"></i></button>
+                            <button class="hero-btn" id="mazeRight"><i class="fas fa-arrow-right"></i></button>
+                            <button class="hero-btn" id="mazeDown"><i class="fas fa-arrow-down"></i></button>
+                        </div>
                     </div>
                 `;
                 
@@ -1937,6 +2117,7 @@
                 }
                 
                 // Añadir alimentos aleatorios
+                const ironRichFoods = ['🥬', '🥩', '🍳', '🐟', '🥜', '🥚', '🫐', '🍓'];
                 for (let i = 0; i < totalFoods; i++) {
                     let x, y;
                     do {
@@ -1948,31 +2129,29 @@
                     const cell = maze.children[cellIndex];
                     const food = document.createElement('div');
                     food.className = 'maze-food';
-                    food.dataset.food = '🥬';
+                    food.dataset.food = ironRichFoods[i];
                     cell.appendChild(food);
                 }
                 
-                // Control del jugador con teclado
-                document.addEventListener('keydown', function(e) {
-                    if (!currentGame || currentGame.id !== 'nutrition-maze') return;
-                    
+                // Función para mover al jugador
+                function movePlayer(direction) {
                     const player = document.getElementById('player');
                     if (!player) return;
                     
                     let newX = playerPosition.x;
                     let newY = playerPosition.y;
                     
-                    switch(e.key) {
-                        case 'ArrowUp':
+                    switch(direction) {
+                        case 'up':
                             newY--;
                             break;
-                        case 'ArrowDown':
+                        case 'down':
                             newY++;
                             break;
-                        case 'ArrowLeft':
+                        case 'left':
                             newX--;
                             break;
-                        case 'ArrowRight':
+                        case 'right':
                             newX++;
                             break;
                         default:
@@ -2007,13 +2186,42 @@
                             showFloatingMessage('¡Debes recolectar todos los alimentos antes de llegar a la meta!', 'warning');
                         }
                     }
+                }
+                
+                // Control del jugador con teclado
+                document.addEventListener('keydown', function(e) {
+                    if (!currentGame || currentGame.id !== 'nutrition-maze') return;
+                    
+                    switch(e.key) {
+                        case 'ArrowUp':
+                            movePlayer('up');
+                            break;
+                        case 'ArrowDown':
+                            movePlayer('down');
+                            break;
+                        case 'ArrowLeft':
+                            movePlayer('left');
+                            break;
+                        case 'ArrowRight':
+                            movePlayer('right');
+                            break;
+                        default:
+                            return;
+                    }
                 });
+                
+                // Control con botones para dispositivos táctiles
+                document.getElementById('mazeUp').addEventListener('click', () => movePlayer('up'));
+                document.getElementById('mazeDown').addEventListener('click', () => movePlayer('down'));
+                document.getElementById('mazeLeft').addEventListener('click', () => movePlayer('left'));
+                document.getElementById('mazeRight').addEventListener('click', () => movePlayer('right'));
             }
 
             // Juego 4: Receta Mágica
             function loadRecipeGame(game) {
                 const gameContent = document.getElementById('gameContent');
-                const ingredients = ['🥬', '🥩', '🍅', '🧄', '🧅', '🥕', '🥔', '🌽'];
+                // Más ingredientes ricos en hierro
+                const ingredients = ['🥬', '🥩', '🍅', '🧄', '🧅', '🥕', '🥔', '🌽', '🫐', '🍓', '🥑', '🍊'];
                 const validRecipes = [
                     {
                         ingredients: ['🥬', '🥩', '🧄'],
@@ -2029,6 +2237,11 @@
                         ingredients: ['🥕', '🥔', '🌽'],
                         name: 'Guiso de vegetales',
                         description: 'Los vegetales aportan fibra y nutrientes esenciales'
+                    },
+                    {
+                        ingredients: ['🫐', '🍓', '🥑'],
+                        name: 'Ensalada de frutas',
+                        description: 'Las frutas con vitamina C mejoran la absorción de hierro'
                     }
                 ];
                 
@@ -2144,6 +2357,18 @@
                         options: ["Pollo", "Pescado", "Carne roja"],
                         correct: 2,
                         explanation: "La carne roja contiene hierro hemo, que se absorbe mejor."
+                    },
+                    {
+                        question: "¿Qué vitamina ayuda a absorber el hierro?",
+                        options: ["Vitamina A", "Vitamina C", "Vitamina D"],
+                        correct: 1,
+                        explanation: "La vitamina C aumenta la absorción de hierro no hemo de los vegetales."
+                    },
+                    {
+                        question: "¿Qué fruta es rica en vitamina C?",
+                        options: ["🍌 Plátano", "🍊 Naranja", "🍎 Manzana"],
+                        correct: 1,
+                        explanation: "Las naranjas y otros cítricos son excelentes fuentes de vitamina C."
                     }
                 ];
                 
@@ -2233,7 +2458,8 @@
             // Juego 6: Granja de Nutrientes
             function loadFarmGame(game) {
                 const gameContent = document.getElementById('gameContent');
-                const crops = ['🥬', '🥕', '🌽', '🥔', '🍅'];
+                // Más cultivos ricos en hierro
+                const crops = ['🥬', '🥕', '🌽', '🥔', '🍅', '🫐', '🍓', '🥑'];
                 let plantedCrops = 0;
                 let harvestedCrops = 0;
                 const targetCrops = 2; // Reducido a 2 cultivos para hacerlo más rápido
@@ -2379,9 +2605,10 @@
                 }
                 
                 function spawnFood() {
+                    const ironRichFoods = ['🥬', '🥩', '🍳', '🐟', '🥜', '🥚', '🫐', '🍓'];
                     const food = document.createElement('div');
                     food.className = 'hero-food';
-                    food.textContent = '🥬';
+                    food.textContent = ironRichFoods[Math.floor(Math.random() * ironRichFoods.length)];
                     heroArea.appendChild(food);
                     
                     // Eliminar alimento después de 7 segundos
@@ -2447,7 +2674,8 @@
             // Juego 8: Rompecabezas Nutritivo
             function loadPuzzleGame(game) {
                 const gameContent = document.getElementById('gameContent');
-                const puzzlePieces = ['🥬', '🥩', '🍳', '🐟'];
+                // Más alimentos ricos en hierro
+                const puzzlePieces = ['🥬', '🥩', '🍳', '🐟', '🥜', '🥚', '🫐', '🍓'];
                 let flippedPieces = 0;
                 
                 gameContent.innerHTML = `
@@ -2488,6 +2716,9 @@
                             this.classList.add('flipped');
                             flippedPieces++;
                             
+                            // Mostrar información sobre el alimento
+                            showFoodInfo(piece);
+                            
                             if (flippedPieces === puzzlePieces.length) {
                                 winGame(game);
                             }
@@ -2503,15 +2734,14 @@
                 const gameContent = document.getElementById('gameContent');
                 let playerPosition = 10;
                 let foodsCollected = 0;
-                const targetFoods = 2; // Reducido a 2 alimentos para hacerlo más rápido
-                const trackLength = 90;
+                const targetFoods = 3;
                 
                 gameContent.innerHTML = `
                     <div class="game-instructions">
                         <h3>Instrucciones:</h3>
-                        <p>• Haz clic en "Avanzar" para moverte</p>
-                        <p>• Recoge alimentos en el camino</p>
-                        <p>• ¡Llega a la meta con todos los alimentos!</p>
+                        <p>• Haz clic en "Correr" para avanzar</p>
+                        <p>• Recoge alimentos ricos en hierro en el camino</p>
+                        <p>• ¡Llega a la meta después de recolectar todos los alimentos!</p>
                         <p>• ¡Tienes ${game.timeLimit} segundos para completar el juego!</p>
                     </div>
                     <div class="race-container">
@@ -2519,182 +2749,168 @@
                             <div class="race-player" id="racePlayer"></div>
                         </div>
                         <div class="race-controls">
-                            <button class="race-btn" id="moveForwardBtn">Avanzar</button>
-                            <button class="race-btn" id="collectFoodBtn">Recoger</button>
+                            <button class="race-btn" id="runBtn">Correr</button>
                         </div>
-                        <div class="game-message">Recoge ${targetFoods} alimentos y llega a la meta</div>
+                        <div class="game-message">Recolecta ${targetFoods} alimentos y llega a la meta</div>
                     </div>
                 `;
                 
                 const raceTrack = document.getElementById('raceTrack');
                 const racePlayer = document.getElementById('racePlayer');
-                const moveForwardBtn = document.getElementById('moveForwardBtn');
-                const collectFoodBtn = document.getElementById('collectFoodBtn');
+                const runBtn = document.getElementById('runBtn');
                 
-                // Actualizar posición del jugador
-                function updatePlayerPosition() {
-                    racePlayer.style.left = `${playerPosition}%`;
-                }
-                
-                // Crear líneas de meta
-                for (let i = 20; i <= 100; i += 20) {
+                // Crear líneas de carril
+                for (let i = 1; i < 10; i++) {
                     const line = document.createElement('div');
                     line.className = 'race-line';
-                    line.style.left = `${i}%`;
+                    line.style.left = `${i * 10}%`;
                     raceTrack.appendChild(line);
                 }
                 
-                // Crear alimentos
-                function createFood() {
+                // Añadir alimentos
+                const ironRichFoods = ['🥬', '🥩', '🍳', '🐟', '🥜', '🥚', '🫐', '🍓'];
+                const foodPositions = [25, 50, 75]; // Posiciones de los alimentos
+                
+                foodPositions.forEach((pos, index) => {
                     const food = document.createElement('div');
                     food.className = 'race-food';
-                    food.textContent = '🥬';
-                    food.style.left = `${Math.random() * 80 + 10}%`;
+                    food.style.left = `${pos}%`;
+                    food.textContent = ironRichFoods[index];
+                    food.dataset.collected = 'false';
                     raceTrack.appendChild(food);
-                }
-                
-                // Crear alimentos iniciales
-                for (let i = 0; i < 5; i++) {
-                    createFood();
-                }
-                
-                moveForwardBtn.addEventListener('click', function() {
-                    if (playerPosition < trackLength) {
-                        playerPosition += 15; // Incremento más grande para hacerlo más rápido
-                        updatePlayerPosition();
-                        
-                        if (playerPosition >= trackLength && foodsCollected >= targetFoods) {
-                            winGame(game);
-                        } else if (playerPosition >= trackLength && foodsCollected < targetFoods) {
-                            showFloatingMessage('¡Debes recoger todos los alimentos antes de llegar a la meta!', 'warning');
-                        }
-                    }
                 });
                 
-                collectFoodBtn.addEventListener('click', function() {
-                    const foods = document.querySelectorAll('.race-food');
-                    const playerRect = racePlayer.getBoundingClientRect();
-                    
-                    foods.forEach(food => {
-                        const foodRect = food.getBoundingClientRect();
+                // Meta
+                const finishLine = document.createElement('div');
+                finishLine.className = 'race-line';
+                finishLine.style.left = '95%';
+                finishLine.style.width = '5px';
+                finishLine.style.height = '100%';
+                finishLine.style.background = 'var(--primary-red)';
+                raceTrack.appendChild(finishLine);
+                
+                runBtn.addEventListener('click', function() {
+                    if (playerPosition < 95) {
+                        playerPosition += 5;
+                        racePlayer.style.left = `${playerPosition}px`;
                         
-                        // Verificar si el alimento está cerca del jugador
-                        if (Math.abs(playerRect.left - foodRect.left) < 50) {
-                            food.remove();
-                            foodsCollected++;
-                            showFloatingMessage('¡Alimento recogido!', 'success');
-                            
-                            // Crear un nuevo alimento
-                            createFood();
+                        // Verificar si hay alimento en la posición actual
+                        const foods = document.querySelectorAll('.race-food');
+                        foods.forEach(food => {
+                            const foodPos = parseInt(food.style.left);
+                            if (Math.abs(playerPosition - foodPos * raceTrack.offsetWidth / 100) < 20 && food.dataset.collected === 'false') {
+                                food.dataset.collected = 'true';
+                                food.style.opacity = '0';
+                                foodsCollected++;
+                                showFloatingMessage(`¡Alimento recolectado! ${foodsCollected}/${targetFoods}`, 'success');
+                            }
+                        });
+                        
+                        // Verificar si llegó a la meta
+                        if (playerPosition >= 95) {
+                            if (foodsCollected >= targetFoods) {
+                                winGame(game);
+                            } else {
+                                showFloatingMessage('¡Debes recolectar todos los alimentos antes de llegar a la meta!', 'warning');
+                            }
                         }
-                    });
+                    }
                 });
             }
 
-            // Juego 10: Chef contra la Anemia (ahora con 30 segundos)
+            // Juego 10: Chef contra la Anemia
             function loadChefGame(game) {
                 const gameContent = document.getElementById('gameContent');
-                // Forzar el tiempo límite a 30 segundos para este juego
-                game.timeLimit = 30;
-                
-                // Reducido a 6 ingredientes para hacerlo más manejable
-                const ingredients = ['🥬', '🥩', '🍅', '🧄', '🧅', '🥕'];
+                // Más ingredientes ricos en hierro
+                const ingredients = ['🥬', '🥩', '🍳', '🐟', '🥜', '🥚', '🫐', '🍓', '🥑', '🍅', '🧄', '🧅'];
                 const validRecipes = [
                     {
                         ingredients: ['🥬', '🥩', '🧄'],
-                        name: 'Estofado de carne con espinacas',
-                        description: 'La carne roja y las espinacas son ricas en hierro. El ajo ayuda a absorberlo.',
-                        benefits: 'Aporta hierro hemo y no hemo, con vitamina C para mejor absorción.'
+                        name: 'Estofado nutritivo',
+                        description: 'Combina hierro de la carne con vitaminas de las verduras'
                     },
                     {
                         ingredients: ['🍅', '🧄', '🧅'],
-                        name: 'Salsa de tomate nutritiva',
-                        description: 'El tomate tiene vitamina C que ayuda a absorber el hierro de otros alimentos.',
-                        benefits: 'Combina licopeno con compuestos azufrados que mejoran la absorción de hierro.'
+                        name: 'Salsa de tomate',
+                        description: 'El tomate tiene vitamina C que ayuda a absorber hierro'
                     },
                     {
-                        ingredients: ['🥕', '🥬', '🍅'],
-                        name: 'Ensalada nutritiva',
-                        description: 'Combina vegetales ricos en hierro y vitamina C.',
-                        benefits: 'Aporta hierro no hemo y vitamina C para mejorar su absorción.'
+                        ingredients: ['🥕', '🥔', '🌽'],
+                        name: 'Guiso de vegetales',
+                        description: 'Los vegetales aportan fibra y nutrientes esenciales'
+                    },
+                    {
+                        ingredients: ['🫐', '🍓', '🥑'],
+                        name: 'Ensalada de frutas',
+                        description: 'Las frutas con vitamina C mejoran la absorción de hierro'
                     }
                 ];
-                let selectedIngredients = [];
-                let recipesCompleted = 0;
-                const targetRecipes = 1; // Solo se necesita 1 receta para ganar
-                let failedAttempts = 0;
-                const maxFailedAttempts = 3;
                 
                 gameContent.innerHTML = `
                     <div class="game-instructions">
                         <h3>Instrucciones:</h3>
-                        <p>• Selecciona 3 ingredientes para crear una receta</p>
-                        <p>• Las combinaciones correctas crearán platos nutritivos</p>
-                        <p>• ¡Crea ${targetRecipes} receta diferente para ganar!</p>
-                        <p>• Tienes solo ${game.timeLimit} segundos</p>
+                        <p>• Selecciona ingredientes para preparar platos nutritivos</p>
+                        <p>• Las combinaciones correctas crearán platos deliciosos</p>
+                        <p>• ¡Prepara 1 plato diferente para ganar!</p>
+                        <p>• ¡Tienes ${game.timeLimit} segundos para completar el juego!</p>
                     </div>
                     <div class="chef-container">
                         <div class="chef-kitchen">
                             <div class="chef-ingredients">
-                                <h3>Ingredientes Disponibles</h3>
+                                <h3>Ingredientes disponibles</h3>
                                 <div id="chefIngredientsList"></div>
                             </div>
                             <div class="chef-pot">
-                                <i class="fas fa-fire-burner chef-pot-icon"></i>
+                                <div class="chef-pot-icon">🍲</div>
+                                <h3>Olla</h3>
                                 <div class="chef-pot-ingredients" id="chefPotIngredients"></div>
-                                <div class="game-message">Agrega 3 ingredientes a la olla</div>
+                                <div class="chef-actions">
+                                    <button class="chef-btn" id="cookBtn">Cocinar</button>
+                                    <button class="chef-btn" id="clearBtn">Vaciar</button>
+                                </div>
                             </div>
                         </div>
-                        <div class="chef-actions">
-                            <button class="chef-btn" id="cookBtn">Cocinar</button>
-                            <button class="chef-btn" id="clearBtn">Limpiar Olla</button>
-                        </div>
-                        <div id="recommendationMessage" class="recommendation-message" style="display: none;"></div>
+                        <div class="game-message">Prepara platos nutritivos para combatir la anemia</div>
                     </div>
                 `;
-                
-                // Actualizar el temporizador para mostrar 30 segundos
-                timeRemaining = game.timeLimit;
-                updateTimerDisplay();
                 
                 const chefIngredientsList = document.getElementById('chefIngredientsList');
                 const chefPotIngredients = document.getElementById('chefPotIngredients');
                 const cookBtn = document.getElementById('cookBtn');
                 const clearBtn = document.getElementById('clearBtn');
-                const gameMessage = document.querySelector('.chef-pot .game-message');
-                const recommendationMessage = document.getElementById('recommendationMessage');
+                
+                let selectedIngredients = [];
+                let recipesCreated = 0;
+                const targetRecipes = 1;
                 
                 // Crear elementos de ingredientes
                 ingredients.forEach(ingredient => {
                     const ingredientEl = document.createElement('div');
                     ingredientEl.className = 'chef-ingredient';
                     ingredientEl.textContent = ingredient;
-                    ingredientEl.title = `Ingrediente: ${ingredient}`;
                     
                     ingredientEl.addEventListener('click', function() {
                         if (selectedIngredients.length < 3) {
+                            this.classList.add('selected');
                             selectedIngredients.push(ingredient);
                             
+                            // Añadir a la olla
                             const potIngredient = document.createElement('div');
                             potIngredient.className = 'chef-pot-ingredient';
                             potIngredient.textContent = ingredient;
-                            potIngredient.title = `Ingrediente: ${ingredient}`;
                             chefPotIngredients.appendChild(potIngredient);
-                            
-                            // Actualizar mensaje
-                            if (selectedIngredients.length === 3) {
-                                gameMessage.textContent = '¡Listo para cocinar!';
-                                gameMessage.style.color = 'var(--success-green)';
-                            } else {
-                                gameMessage.textContent = `Agrega ${3 - selectedIngredients.length} ingredientes más`;
-                                gameMessage.style.color = 'var(--gray)';
-                            }
-                        } else {
-                            showFloatingMessage('Ya has seleccionado 3 ingredientes', 'warning');
                         }
                     });
                     
                     chefIngredientsList.appendChild(ingredientEl);
+                });
+                
+                clearBtn.addEventListener('click', function() {
+                    selectedIngredients = [];
+                    chefPotIngredients.innerHTML = '';
+                    document.querySelectorAll('.chef-ingredient.selected').forEach(el => {
+                        el.classList.remove('selected');
+                    });
                 });
                 
                 cookBtn.addEventListener('click', function() {
@@ -2706,253 +2922,155 @@
                         );
                         
                         if (recipe) {
-                            recipesCompleted++;
+                            showFloatingMessage(`¡${recipe.name} preparado!`, 'success');
+                            recipesCreated++;
                             
-                            // Mostrar información detallada de la receta
-                            showRecipeInfo(recipe);
-                            
-                            if (recipesCompleted >= targetRecipes) {
-                                winGame(game);
-                            } else {
-                                // Limpiar la olla después de un tiempo
-                                setTimeout(() => {
-                                    chefPotIngredients.innerHTML = '';
-                                    selectedIngredients = [];
-                                    gameMessage.textContent = `¡Receta completada! ${recipesCompleted}/${targetRecipes}`;
-                                    gameMessage.style.color = 'var(--success-green)';
-                                }, 4000);
-                            }
+                            setTimeout(() => {
+                                if (recipesCreated >= targetRecipes) {
+                                    winGame(game);
+                                } else {
+                                    // Limpiar selección
+                                    clearBtn.click();
+                                    showFloatingMessage(`Prepara ${targetRecipes - recipesCreated} platos más`, 'info');
+                                }
+                            }, 2000);
                         } else {
-                            failedAttempts++;
+                            showFloatingMessage('Esta combinación no es nutritiva. Intenta de nuevo.', 'error');
                             
-                            // Mostrar por qué la combinación no es válida
-                            showInvalidCombination(selectedIngredients);
-                            
-                            // Si falla 3 veces, mostrar recomendaciones
-                            if (failedAttempts >= maxFailedAttempts) {
-                                showRecommendationMessage();
-                            }
+                            // Limpiar selección después de 2 segundos
+                            setTimeout(() => {
+                                clearBtn.click();
+                            }, 2000);
                         }
                     } else {
-                        showFloatingMessage('Selecciona 3 ingredientes para cocinar.', 'warning');
+                        showFloatingMessage('Selecciona 3 ingredientes', 'warning');
                     }
                 });
-                
-                clearBtn.addEventListener('click', function() {
-                    chefPotIngredients.innerHTML = '';
-                    selectedIngredients = [];
-                    gameMessage.textContent = 'Agrega 3 ingredientes a la olla';
-                    gameMessage.style.color = 'var(--gray)';
-                });
-                
-                // Función para mostrar información detallada de la receta
-                function showRecipeInfo(recipe) {
-                    const floatingMessage = document.createElement('div');
-                    floatingMessage.className = 'floating-message success';
-                    floatingMessage.innerHTML = `
-                        <h3>¡${recipe.name}!</h3>
-                        <p>${recipe.description}</p>
-                        <p><strong>Beneficios:</strong> ${recipe.benefits}</p>
-                    `;
-                    document.body.appendChild(floatingMessage);
-                    
-                    // Animación de entrada
-                    setTimeout(() => {
-                        floatingMessage.classList.add('show');
-                    }, 10);
-                    
-                    // Eliminar después de 4 segundos
-                    setTimeout(() => {
-                        floatingMessage.classList.remove('show');
-                        setTimeout(() => {
-                            floatingMessage.remove();
-                        }, 300);
-                    }, 4000);
-                }
-                
-                // Función para mostrar por qué una combinación no es válida
-                function showInvalidCombination(ingredients) {
-                    const reasons = [
-                        'Esta combinación no tiene suficiente hierro',
-                        'Falta vitamina C para ayudar a absorber el hierro',
-                        'Los ingredientes no se complementan nutricionalmente',
-                        'Esta combinación tiene exceso de carbohidratos',
-                        'Falta proteína de alta calidad en esta combinación'
-                    ];
-                    
-                    const randomReason = reasons[Math.floor(Math.random() * reasons.length)];
-                    
-                    const floatingMessage = document.createElement('div');
-                    floatingMessage.className = 'floating-message error';
-                    floatingMessage.innerHTML = `
-                        <h3>Combinación no válida</h3>
-                        <p>${randomReason}</p>
-                        <p>Intenta otra combinación de ingredientes</p>
-                    `;
-                    document.body.appendChild(floatingMessage);
-                    
-                    // Animación de entrada
-                    setTimeout(() => {
-                        floatingMessage.classList.add('show');
-                    }, 10);
-                    
-                    // Eliminar después de 3 segundos
-                    setTimeout(() => {
-                        floatingMessage.classList.remove('show');
-                        setTimeout(() => {
-                            floatingMessage.remove();
-                        }, 300);
-                    }, 3000);
-                }
-                
-                // Función para mostrar recomendaciones
-                function showRecommendationMessage() {
-                    recommendationMessage.style.display = 'block';
-                    recommendationMessage.innerHTML = `
-                        <h4>Recomendaciones para crear recetas nutritivas:</h4>
-                        <ul>
-                            <li>Combina carnes rojas con vegetales verdes (espinacas, brócoli)</li>
-                            <li>Añade alimentos ricos en vitamina C (tomate, pimientos)</li>
-                            <li>Incluye legumbres y frutos secos para más hierro</li>
-                            <li>Evita combinar demasiados alimentos con bajo contenido de hierro</li>
-                            <li>Recuerda que el hierro se absorbe mejor con vitamina C</li>
-                        </ul>
-                    `;
-                    
-                    // Reiniciar contador de fallos después de mostrar recomendaciones
-                    setTimeout(() => {
-                        failedAttempts = 0;
-                        recommendationMessage.style.display = 'none';
-                    }, 10000);
-                }
             }
 
-            // Función para mostrar mensajes flotantes
-            function showFloatingMessage(message, type) {
+            // Función para mostrar mensaje flotante
+            function showFloatingMessage(message, type = 'info') {
+                const existingMessage = document.querySelector('.floating-message');
+                if (existingMessage) {
+                    existingMessage.remove();
+                }
+                
                 const floatingMessage = document.createElement('div');
                 floatingMessage.className = `floating-message ${type}`;
                 floatingMessage.textContent = message;
                 document.body.appendChild(floatingMessage);
                 
-                // Animación de entrada
                 setTimeout(() => {
                     floatingMessage.classList.add('show');
-                }, 10);
+                }, 100);
                 
-                // Eliminar después de 3 segundos
                 setTimeout(() => {
                     floatingMessage.classList.remove('show');
                     setTimeout(() => {
                         floatingMessage.remove();
                     }, 300);
-                }, 3000);
+                }, 2000);
             }
 
-            // Función para mostrar recomendaciones específicas por juego
+            // Función para mostrar recomendaciones
             function showRecommendation(gameId, message) {
-                const recommendationDiv = document.createElement('div');
-                recommendationDiv.className = 'recommendation-message';
-                recommendationDiv.innerHTML = `
-                    <h4>Consejo:</h4>
-                    <p>${message}</p>
-                `;
-                
                 const gameContent = document.getElementById('gameContent');
-                gameContent.appendChild(recommendationDiv);
+                const existingRecommendation = gameContent.querySelector('.recommendation-message');
+                if (existingRecommendation) {
+                    existingRecommendation.remove();
+                }
                 
-                // Eliminar después de 5 segundos
-                setTimeout(() => {
-                    recommendationDiv.remove();
-                }, 5000);
+                const recommendation = document.createElement('div');
+                recommendation.className = 'recommendation-message';
+                recommendation.innerHTML = `
+                    <h4>Consejo Nutricional</h4>
+                    <p>${message}</p>
+                    <ul>
+                        <li>Los alimentos ricos en vitamina C ayudan a absorber mejor el hierro</li>
+                        <li>Combina vegetales con carnes para una dieta balanceada</li>
+                        <li>Los frutos secos son excelentes fuentes de hierro</li>
+                    </ul>
+                `;
+                gameContent.appendChild(recommendation);
             }
 
-            // Función para ganar un juego
+            // Función para ganar el juego
             function winGame(game) {
-                if (gameWon) return;
                 gameWon = true;
-                
                 clearInterval(timerInterval);
                 
                 // Actualizar estadísticas
-                const gameStats = childStats[game.id];
-                gameStats.played++;
-                gameStats.wins++;
-                gameStats.times.push(game.timeLimit - timeRemaining);
-                
-                localStorage.setItem(`gameStats_${childId}`, JSON.stringify(childStats));
-                updateGlobalStats();
-                
-                // Mostrar copa
-                showTrophy();
-                
-                // Ocultar el trofeo después de 4 segundos y volver a la selección de juegos
-                setTimeout(() => {
-                    hideTrophy();
-                    backToGamesMenu();
-                }, 4000);
-            }
-
-            // Función para perder un juego
-            function loseGame() {
-                // Actualizar estadísticas
-                const gameStats = currentGame.id ? childStats[currentGame.id] : null;
-                if (gameStats) {
-                    gameStats.played++;
-                    localStorage.setItem(`gameStats_${childId}`, JSON.stringify(childStats));
-                    updateGlobalStats();
+                if (!childStats[game.id]) {
+                    childStats[game.id] = {
+                        played: 0,
+                        wins: 0,
+                        times: []
+                    };
                 }
                 
-                // Guardar el juego actual antes de resetear
-                const gameToRetry = currentGame;
+                childStats[game.id].played++;
+                childStats[game.id].wins++;
+                childStats[game.id].times.push(game.timeLimit - timeRemaining);
+                
+                localStorage.setItem(`gameStats_${childId}`, JSON.stringify(childStats));
+                
+                // Mostrar mensaje de victoria
+                const trophyOverlay = document.getElementById('trophyOverlay');
+                const trophyMessage = document.getElementById('trophyMessage');
+                
+                // Mensaje educativo sobre anemia
+                const anemiaMessages = [
+                    "¡Excelente! Has aprendido que los alimentos ricos en hierro como la carne roja, las espinacas y los frutos secos ayudan a prevenir la anemia.",
+                    "¡Bien hecho! La vitamina C de las frutas como las naranjas y fresas ayuda a tu cuerpo a absorber mejor el hierro de los alimentos.",
+                    "¡Felicidades! Una dieta balanceada con carnes, vegetales y frutas es clave para combatir la anemia y mantener tu cuerpo sano.",
+                    "¡Genial! Los huevos, el pescado y las legumbres son excelentes fuentes de hierro que deberías incluir en tu alimentación diaria."
+                ];
+                
+                trophyMessage.textContent = anemiaMessages[Math.floor(Math.random() * anemiaMessages.length)];
+                
+                trophyOverlay.classList.add('active');
+                
+                // Configurar botones del trofeo
+                document.getElementById('playAgainBtn').onclick = function() {
+                    trophyOverlay.classList.remove('active');
+                    startGame(game);
+                };
+                
+                document.getElementById('anotherGameBtn').onclick = function() {
+                    trophyOverlay.classList.remove('active');
+                    document.getElementById('gameArea').classList.remove('active');
+                    document.getElementById('gamesMenu').style.display = 'grid';
+                };
+            }
+
+            // Función para perder el juego
+            function loseGame() {
+                clearInterval(timerInterval);
+                
+                // Actualizar estadísticas
+                if (!childStats[currentGame.id]) {
+                    childStats[currentGame.id] = {
+                        played: 0,
+                        wins: 0,
+                        times: []
+                    };
+                }
+                
+                childStats[currentGame.id].played++;
+                localStorage.setItem(`gameStats_${childId}`, JSON.stringify(childStats));
                 
                 // Mostrar mensaje de derrota
-                const gameContent = document.getElementById('gameContent');
-                gameContent.innerHTML = `
-                    <div style="text-align: center; padding: 50px;">
-                        <h3>¡Tiempo agotado!</h3>
-                        <p>Intenta nuevamente.</p>
-                        <button id="retryBtn" style="margin-top: 20px; padding: 10px 20px; background: var(--accent-pink); color: white; border: none; border-radius: 5px; cursor: pointer;">
-                            Reintentar
-                        </button>
-                    </div>
-                `;
-                
-                // Añadir evento al botón de reintentar
-                const retryBtn = document.getElementById('retryBtn');
-                retryBtn.addEventListener('click', function() {
-                    // Limpiar el estado actual
-                    clearInterval(timerInterval);
-                    
-                    // Reiniciar el juego actual
-                    startGame(gameToRetry);
-                });
+                showFloatingMessage('¡Tiempo agotado! Intenta de nuevo.', 'error');
                 
                 // Mostrar botón de volver
                 document.getElementById('gameFooter').style.display = 'block';
             }
 
-            // Función para mostrar la copa
-            function showTrophy() {
-                document.getElementById('trophyOverlay').classList.add('active');
-            }
-
-            // Función para ocultar la copa
-            function hideTrophy() {
-                document.getElementById('trophyOverlay').classList.remove('active');
-            }
-
-            // Función para volver al menú de juegos
-            function backToGamesMenu() {
+            // Configurar botón de volver a juegos
+            document.getElementById('backToGamesMenu').addEventListener('click', function() {
+                clearInterval(timerInterval);
                 document.getElementById('gameArea').classList.remove('active');
                 document.getElementById('gamesMenu').style.display = 'grid';
-                document.getElementById('gameFooter').style.display = 'none';
-                currentGame = null;
-                gameWon = false;
-            }
-
-            // Configurar botón para volver al menú de juegos
-            document.getElementById('backToGamesMenu').addEventListener('click', function() {
-                backToGamesMenu();
             });
         });
     </script>
