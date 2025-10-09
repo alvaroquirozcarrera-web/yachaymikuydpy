@@ -175,6 +175,13 @@
             align-items: center;
             gap: 8px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .child-tag:hover {
+            background-color: rgba(93, 140, 196, 0.2);
+            transform: translateY(-2px);
         }
 
         .btn-exit {
@@ -543,6 +550,44 @@
             margin-top: 30px;
         }
 
+        /* Modal de detalles del niño */
+        .child-details-modal .modal-content {
+            max-width: 600px;
+        }
+        .child-detail-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+        .child-detail-label {
+            font-weight: 600;
+            color: var(--dark-blue);
+        }
+        .child-detail-value {
+            color: var(--gray);
+        }
+        .responses-summary {
+            margin-top: 20px;
+        }
+        .responses-summary h4 {
+            color: var(--primary-blue);
+            margin-bottom: 15px;
+        }
+        .response-item {
+            background-color: #f8f9fa;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+        .response-question {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        .response-answer {
+            color: var(--gray);
+        }
+
         @media (max-width: 768px) {
             .container { 
                 padding: 20px; 
@@ -855,6 +900,7 @@
                 const childTag = document.createElement('span');
                 childTag.className = 'child-tag';
                 childTag.innerHTML = `<i class="fas fa-child"></i> ${child.name}`;
+                childTag.addEventListener('click', () => showChildDetails(child));
                 childrenListContainer.appendChild(childTag);
             });
             
@@ -894,6 +940,94 @@
                     alert('Por favor, selecciona un departamento antes de generar.');
                 }
             });
+
+            // Función para mostrar detalles del niño
+            function showChildDetails(child) {
+                const responses = storageAdapter.getResponses();
+                const childResponses = responses[child.id] || {};
+                
+                // Crear modal con detalles del niño
+                const modalHtml = `
+                    <div class="modal active child-details-modal">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h2>Detalles de ${child.name}</h2>
+                                <button class="close-modal">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="child-detail-item">
+                                    <span class="child-detail-label">Edad:</span>
+                                    <span class="child-detail-value">${calculateAge(child.dob)} años</span>
+                                </div>
+                                <div class="child-detail-item">
+                                    <span class="child-detail-label">Fecha de nacimiento:</span>
+                                    <span class="child-detail-value">${new Date(child.dob).toLocaleDateString()}</span>
+                                </div>
+                                <div class="child-detail-item">
+                                    <span class="child-detail-label">Sexo:</span>
+                                    <span class="child-detail-value">${child.sex === 'male' ? 'Masculino' : child.sex === 'female' ? 'Femenino' : 'Otro'}</span>
+                                </div>
+                                <div class="child-detail-item">
+                                    <span class="child-detail-label">Progreso del cuestionario:</span>
+                                    <span class="child-detail-value">${child.progressPercent}%</span>
+                                </div>
+                                
+                                <div class="responses-summary">
+                                    <h4>Resumen de respuestas importantes:</h4>
+                                    ${getImportantResponses(childResponses)}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                document.getElementById('actionModalContainer').innerHTML = modalHtml;
+                
+                // Agregar event listener para cerrar el modal
+                document.querySelector('.close-modal').addEventListener('click', function() {
+                    document.getElementById('actionModalContainer').innerHTML = '';
+                });
+                
+                // Cerrar al hacer clic fuera del modal
+                document.querySelector('.modal').addEventListener('click', function(e) {
+                    if (e.target === this) {
+                        document.getElementById('actionModalContainer').innerHTML = '';
+                    }
+                });
+            }
+            
+            // Función para obtener respuestas importantes
+            function getImportantResponses(childResponses) {
+                const importantQuestions = {
+                    'q1': 'Peso actual',
+                    'q2': 'Estatura actual',
+                    'q13': 'Desayuno habitual',
+                    'q15': 'Almuerzo habitual',
+                    'q17': 'Porciones de fruta al día',
+                    'q21': 'Consumo de agua',
+                    'q28': 'Actividad física',
+                    'q34': 'Horas de sueño',
+                    'q48': 'Estado emocional'
+                };
+                
+                let html = '';
+                for (const [questionId, questionLabel] of Object.entries(importantQuestions)) {
+                    if (childResponses[questionId]) {
+                        html += `
+                            <div class="response-item">
+                                <div class="response-question">${questionLabel}:</div>
+                                <div class="response-answer">${childResponses[questionId].value}</div>
+                            </div>
+                        `;
+                    }
+                }
+                
+                if (html === '') {
+                    html = '<p>No hay respuestas registradas</p>';
+                }
+                
+                return html;
+            }
 
             // Función para crear niños de ejemplo si no existen
             function createGuestChildrenIfNotExists() {
@@ -1338,7 +1472,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>`,
+                    </div>`
             };
 
             // Escucha global de clics para manejar la apertura y cierre de modales
