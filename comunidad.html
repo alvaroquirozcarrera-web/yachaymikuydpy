@@ -1865,7 +1865,7 @@
             
             if (!session.currentUserId && !session.exploringAsGuest) {
                 // No hay sesión activa, redirigir a index1.html
-                window.location.href = 'index1.html';
+                window.location.href = 'index.html';
                 return;
             }
             
@@ -1884,7 +1884,7 @@
                 
                 if (!currentUser) {
                     // Usuario no encontrado, redirigir a index1.html
-                    window.location.href = 'index1.html';
+                    window.location.href = 'index.html';
                     return;
                 }
             }
@@ -2021,7 +2021,7 @@
             storageAdapter.saveSession(session);
             
             // Redirect to index1.html
-            window.location.href = 'index1.html';
+            window.location.href = 'index.html';
         }
 
         // Update word counter
