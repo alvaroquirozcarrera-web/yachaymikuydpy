@@ -640,7 +640,7 @@
             <i class="fas fa-apple-alt"></i>
             Yachay Mikuy
         </div>
-        <a href="index.html#perfiles-de-tus-hijos" class="btn-back-top">
+        <a href="index1.html#perfiles-de-tus-hijos" class="btn-back-top">
             <i class="fas fa-arrow-left"></i> Volver
         </a>
     </div>
@@ -656,7 +656,7 @@
                     <p>Edad: <span id="childAge">-</span> años</p>
                 </div>
             </div>
-            <a href="index.html" class="btn-exit">
+            <a href="index1.html" class="btn-exit">
                 <i class="fas fa-sign-out-alt"></i> Salir
             </a>
         </header>
@@ -933,7 +933,7 @@
                         if (syncData.action === 'soft-delete' || syncData.action === 'permanent-delete') {
                             showToast('El perfil actual ha sido eliminado', 'info');
                             setTimeout(() => {
-                                window.location.href = 'index.html#perfiles-de-tus-hijos';
+                                window.location.href = 'index1.html#perfiles-de-tus-hijos';
                             }, 2000);
                         }
                     }
@@ -953,7 +953,7 @@
                         if (syncData.action === 'soft-delete' || syncData.action === 'permanent-delete') {
                             showToast('El perfil actual ha sido eliminado', 'info');
                             setTimeout(() => {
-                                window.location.href = 'index.html#perfiles-de-tus-hijos';
+                                window.location.href = 'index1.html#perfiles-de-tus-hijos';
                             }, 2000);
                         }
                     }
@@ -980,11 +980,11 @@
                         loadChildProfile(guestChildren[0]);
                     } else {
                         document.body.innerHTML = '<h1>Error: No se encontraron datos. Redirigiendo...</h1>';
-                        setTimeout(() => { window.location.href = 'index.html'; }, 3000);
+                        setTimeout(() => { window.location.href = 'index1.html'; }, 3000);
                     }
                 } else {
                     document.body.innerHTML = '<h1>Error: No se ha seleccionado un perfil. Redirigiendo...</h1>';
-                    setTimeout(() => { window.location.href = 'index.html'; }, 3000);
+                    setTimeout(() => { window.location.href = 'index1.html'; }, 3000);
                 }
                 return;
             }
@@ -999,7 +999,7 @@
                     loadChildProfile(currentChild);
                 } else {
                     document.body.innerHTML = `<h1>Error: Perfil con ID ${childId} no encontrado. Redirigiendo...</h1>`;
-                    setTimeout(() => { window.location.href = 'index.html'; }, 3000);
+                    setTimeout(() => { window.location.href = 'index1.html'; }, 3000);
                 }
             } else {
                 // Modo con cuenta
@@ -1008,7 +1008,7 @@
 
                 if (!currentChild) {
                     document.body.innerHTML = `<h1>Error: Perfil con ID ${childId} no encontrado. Redirigiendo...</h1>`;
-                    setTimeout(() => { window.location.href = 'index.html'; }, 3000);
+                    setTimeout(() => { window.location.href = 'index1.html'; }, 3000);
                     return;
                 }
 

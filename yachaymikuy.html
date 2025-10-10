@@ -626,7 +626,7 @@
                     </div>
                 </div>
                 <div class="col-md-6 text-md-end">
-                    <a href="index.html#profiles" class="btn btn-light btn-sm">
+                    <a href="index1.html#profiles" class="btn btn-light btn-sm">
                         <i class="fas fa-arrow-left"></i> Volver al inicio
                     </a>
                 </div>
@@ -787,7 +787,7 @@
          * Integración con otros archivos:
          * - chicos.html: Muestra el perfil individual de un niño (childId)
          * - yachay.html: Genera planes nutricionales consolidados
-         * - index.html: Panel principal de gestión de perfiles
+         * - index1.html: Panel principal de gestión de perfiles
          * 
          * Mejoras implementadas:
          * - Restricción de edad: solo aceptar edades de 0 a 13 años
@@ -1480,7 +1480,7 @@
             if (!childId) {
                 showToast('No se ha especificado un perfil de niño', 'error');
                 setTimeout(() => {
-                    window.location.href = 'index.html#profiles';
+                    window.location.href = 'index1.html#profiles';
                 }, 2000);
                 return null;
             }
@@ -1491,7 +1491,7 @@
             if (!child) {
                 showToast('Perfil de niño no encontrado', 'error');
                 setTimeout(() => {
-                    window.location.href = 'index.html#profiles';
+                    window.location.href = 'index1.html#profiles';
                 }, 2000);
                 return null;
             }
@@ -1708,7 +1708,7 @@
             }
             
             // Redirigir a la página de perfiles
-            window.location.href = 'index.html#profiles';
+            window.location.href = 'index1.html#profiles';
         }
         
         function showCompletionSection() {
@@ -1812,7 +1812,7 @@
                         if (syncData.action === 'soft-delete' || syncData.action === 'permanent-delete') {
                             showToast('El perfil actual ha sido eliminado', 'info');
                             setTimeout(() => {
-                                window.location.href = 'index.html#profiles';
+                                window.location.href = 'index1.html#profiles';
                             }, 2000);
                         }
                     }
@@ -1832,7 +1832,7 @@
                         if (syncData.action === 'soft-delete' || syncData.action === 'permanent-delete') {
                             showToast('El perfil actual ha sido eliminado', 'info');
                             setTimeout(() => {
-                                window.location.href = 'index.html#profiles';
+                                window.location.href = 'index1.html#profiles';
                             }, 2000);
                         }
                     }
@@ -1846,7 +1846,7 @@
             if (!session.currentUserId && !session.exploringAsGuest) {
                 showToast('Debes iniciar sesión para acceder a esta página', 'error');
                 setTimeout(() => {
-                    window.location.href = 'index.html#profiles';
+                    window.location.href = 'index1.html#profiles';
                 }, 2000);
                 return;
             }
@@ -1894,7 +1894,7 @@
             });
             
             document.getElementById('backToProfileBtn').addEventListener('click', function() {
-                window.location.href = 'index.html#profiles';
+                window.location.href = 'index1.html#profiles';
             });
             
             // Configurar modales del footer
