@@ -34,6 +34,8 @@
             --user-color-8: #f97316;
             --user-color-9: #6366f1;
             --user-color-10: #84cc16;
+            --premium-gold: #fbbf24;
+            --premium-gradient: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
         }
 
         * {
@@ -58,16 +60,17 @@
             padding: 0 20px;
         }
 
-        /* Header Styles */
+        /* Header Styles - Mejorado */
         header {
             background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
             color: white;
             padding: 20px 0;
-            box-shadow: var(--shadow-lg);
+            box-shadow: var(--shadow-xl);
             position: sticky;
             top: 0;
             z-index: 100;
             backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .header-content {
@@ -95,11 +98,116 @@
             50% { transform: scale(1.1); }
         }
 
-        .back-btn {
-            background: rgba(255, 255, 255, 0.2);
-            border: 2px solid rgba(255, 255, 255, 0.3);
+        /* Sección de usuario mejorada */
+        .user-section {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 8px 16px;
+            border-radius: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .user-profile::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .user-profile:hover::before {
+            left: 100%;
+        }
+
+        .user-profile:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--premium-gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 18px;
             color: white;
-            padding: 12px 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+
+        .user-avatar::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 12px;
+            height: 12px;
+            background: var(--success-color);
+            border-radius: 50%;
+            border: 2px solid white;
+        }
+
+        .user-details {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .user-greeting {
+            font-size: 12px;
+            opacity: 0.8;
+            font-weight: 400;
+        }
+
+        .user-name {
+            font-weight: 600;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .user-badge {
+            background: var(--premium-gradient);
+            color: white;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 2px 6px;
+            border-radius: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Botones de acción mejorados */
+        .action-buttons {
+            display: flex;
+            gap: 12px;
+        }
+
+        .action-btn {
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 10px 16px;
             border-radius: 12px;
             cursor: pointer;
             font-weight: 600;
@@ -108,42 +216,47 @@
             align-items: center;
             gap: 8px;
             backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
         }
 
-        .back-btn:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-lg);
+        .action-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
         }
 
-        .user-info {
-            display: flex;
-            align-items: center;
-            gap: 15px;
+        .action-btn:hover::before {
+            left: 100%;
         }
 
-        .user-name {
-            font-weight: 600;
-            font-size: 16px;
+        .action-btn:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
         }
 
-        .logout-btn {
-            background: rgba(255, 255, 255, 0.2);
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            color: white;
-            padding: 8px 16px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+        .action-btn.logout {
+            background: rgba(239, 68, 68, 0.2);
+            border-color: rgba(239, 68, 68, 0.3);
         }
 
-        .logout-btn:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: translateY(-2px);
+        .action-btn.logout:hover {
+            background: rgba(239, 68, 68, 0.3);
+        }
+
+        .action-btn.back {
+            background: rgba(59, 130, 246, 0.2);
+            border-color: rgba(59, 130, 246, 0.3);
+        }
+
+        .action-btn.back:hover {
+            background: rgba(59, 130, 246, 0.3);
         }
 
         /* Main Content */
@@ -1045,6 +1158,16 @@
             .logo {
                 font-size: 24px;
             }
+            
+            .user-section {
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            .action-buttons {
+                width: 100%;
+                justify-content: space-between;
+            }
         }
 
         /* Empty State */
@@ -1173,16 +1296,27 @@
                     <i class="fas fa-comments"></i>
                     <span>Comunidad Interactiva</span>
                 </div>
-                <div class="user-info">
-                    <span class="user-name" id="userName">Usuario</span>
-                    <button class="logout-btn" onclick="logout()">
-                        <i class="fas fa-sign-out-alt"></i>
-                        <span>Cerrar sesión</span>
-                    </button>
-                    <button class="back-btn" onclick="window.location.href='index1.html'">
-                        <i class="fas fa-arrow-left"></i>
-                        <span>Volver al Inicio</span>
-                    </button>
+                <div class="user-section">
+                    <div class="user-profile">
+                        <div class="user-avatar" id="userAvatar">U</div>
+                        <div class="user-details">
+                            <div class="user-greeting">Bienvenido/a</div>
+                            <div class="user-name">
+                                <span id="userName">Usuario</span>
+                                <span class="user-badge">Premium</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="action-buttons">
+                        <button class="action-btn back" onclick="window.location.href='index1.html'">
+                            <i class="fas fa-arrow-left"></i>
+                            <span>Volver</span>
+                        </button>
+                        <button class="action-btn logout" onclick="logout()">
+                            <i class="fas fa-sign-out-alt"></i>
+                            <span>Salir</span>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1891,6 +2025,10 @@
             
             // Update UI with user info
             document.getElementById('userName').textContent = currentUser.name;
+            
+            // Actualizar avatar con la inicial del nombre
+            const userAvatar = document.getElementById('userAvatar');
+            userAvatar.textContent = currentUser.name.charAt(0).toUpperCase();
             
             // Initialize data if not exists
             if (!localStorage.getItem('conversations')) {
