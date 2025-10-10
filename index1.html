@@ -2263,8 +2263,10 @@
             // Cerrar sesión
             document.getElementById('logoutBtn').addEventListener('click', function() {
                 logout();
-                showAuthSection();
                 showToast('Sesión cerrada correctamente', 'success');
+                
+                // Redirigir a index.html después de cerrar sesión
+                window.location.href = 'index.html';
             });
             
             // Botón Volver - redirige a index.html
