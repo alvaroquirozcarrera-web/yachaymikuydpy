@@ -116,6 +116,36 @@
             box-shadow: var(--shadow-lg);
         }
 
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .user-name {
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .logout-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logout-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
         /* Main Content */
         main {
             flex: 1;
@@ -1143,10 +1173,17 @@
                     <i class="fas fa-comments"></i>
                     <span>Comunidad Interactiva</span>
                 </div>
-                <button class="back-btn" onclick="window.location.href='index1.html'">
-                    <i class="fas fa-arrow-left"></i>
-                    <span>Volver al Inicio</span>
-                </button>
+                <div class="user-info">
+                    <span class="user-name" id="userName">Usuario</span>
+                    <button class="logout-btn" onclick="logout()">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>Cerrar sesión</span>
+                    </button>
+                    <button class="back-btn" onclick="window.location.href='index1.html'">
+                        <i class="fas fa-arrow-left"></i>
+                        <span>Volver al Inicio</span>
+                    </button>
+                </div>
             </div>
         </div>
     </header>
@@ -1445,6 +1482,27 @@
     </footer>
 
     <script>
+        // Storage Adapter - Para facilitar migración a backend (mismo que en index1.html)
+        const storageAdapter = {
+            // Users
+            getUsers: function() {
+                const users = localStorage.getItem('yachay_users');
+                return users ? JSON.parse(users) : [];
+            },
+            saveUsers: function(users) {
+                localStorage.setItem('yachay_users', JSON.stringify(users));
+            },
+            
+            // Session
+            getSession: function() {
+                const session = localStorage.getItem('yachay_session');
+                return session ? JSON.parse(session) : { currentUserId: null, exploringAsGuest: false, lastActiveAt: null };
+            },
+            saveSession: function(session) {
+                localStorage.setItem('yachay_session', JSON.stringify(session));
+            }
+        };
+
         // Objeto con las plantillas HTML para cada modal
         const templates = {
             aboutModal: () => `
@@ -1802,26 +1860,37 @@
 
         // Initialize app
         function initializeApp() {
-            // Check if user is logged in
-            const storedUser = localStorage.getItem('currentUser');
-            if (storedUser) {
-                currentUser = JSON.parse(storedUser);
-            } else {
-                // Simulate login for demo purposes
+            // Check if user is logged in using the same system as index1.html
+            const session = storageAdapter.getSession();
+            
+            if (!session.currentUserId && !session.exploringAsGuest) {
+                // No hay sesión activa, redirigir a index1.html
+                window.location.href = 'index1.html';
+                return;
+            }
+            
+            if (session.exploringAsGuest) {
+                // Usuario invitado
                 currentUser = {
-                    id: Math.random().toString(36).substring(2, 9),
-                    name: 'Usuario Demo',
-                    email: 'demo@example.com',
+                    id: 'guest',
+                    name: 'Invitado',
+                    email: 'guest@example.com',
                     isAdmin: false
                 };
+            } else {
+                // Usuario registrado
+                const users = storageAdapter.getUsers();
+                currentUser = users.find(user => user.id === session.currentUserId);
                 
-                // Check if admin
-                if (currentUser.email === 'alvaro.quiroz@alumno.ud.edu.pe' || currentUser.email === 'alvaro.quiroz@alum.udep.edu.pe') {
-                    currentUser.isAdmin = true;
+                if (!currentUser) {
+                    // Usuario no encontrado, redirigir a index1.html
+                    window.location.href = 'index1.html';
+                    return;
                 }
-                
-                localStorage.setItem('currentUser', JSON.stringify(currentUser));
             }
+            
+            // Update UI with user info
+            document.getElementById('userName').textContent = currentUser.name;
             
             // Initialize data if not exists
             if (!localStorage.getItem('conversations')) {
@@ -1940,6 +2009,19 @@
                     }
                 });
             });
+        }
+
+        // Logout function
+        function logout() {
+            // Clear session using the same system as index1.html
+            const session = storageAdapter.getSession();
+            session.currentUserId = null;
+            session.exploringAsGuest = false;
+            session.lastActiveAt = new Date().toISOString();
+            storageAdapter.saveSession(session);
+            
+            // Redirect to index1.html
+            window.location.href = 'index1.html';
         }
 
         // Update word counter
@@ -2441,13 +2523,15 @@
             // Get unique users
             const users = {};
             
-            // Add admin as a user
-            users['admin'] = {
-                id: 'admin',
-                name: 'Administrador',
-                email: 'alvaro.quiroz@alumno.ud.edu.pe',
-                unreadCount: 0
-            };
+            // Add admin as a user if current user is not admin
+            if (!currentUser.isAdmin) {
+                users['admin'] = {
+                    id: 'admin',
+                    name: 'Administrador',
+                    email: 'alvaro.quiroz@alumno.ud.edu.pe',
+                    unreadCount: 0
+                };
+            }
             
             // Add users from conversations
             conversations.forEach(conv => {
