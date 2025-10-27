@@ -5,12 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Yachay Mikuy - Cuestionario</title>
     
-    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
     
     <style>
         :root {
@@ -19,15 +16,12 @@
             --primary-color: #4CAF50;
             --secondary-color: #FF9800;
             --accent-color: #2196F3;
-            --light-color: #F5F5F5;
-            --dark-color: #333333;
             --success-color: #8BC34A;
             --warning-color: #FFC107;
             --danger-color: #F44336;
             --info-color: #03A9F4;
             --white: #ffffff;
             --light-gray: #f8f9fa;
-            --medium-gray: #dee2e6;
             --text-dark: #212529;
             --shadow: 0 8px 24px rgba(0, 0, 0, 0.08); 
             --radius: 12px;
@@ -48,693 +42,197 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-        }
-        
-        .header {
-            background: linear-gradient(135deg, var(--primary-blue), var(--accent-color));
-            color: white;
-            padding: 20px 0;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-        
-        .logo {
-            font-size: 2rem;
-            font-weight: 800;
-            display: flex;
-            align-items: center;
-        }
-        
-        .logo i {
-            margin-right: 10px;
-            color: var(--secondary-color);
-        }
-        
-        .main-container {
-            flex: 1;
-            padding: 40px 0;
-        }
-        
-        .question-container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            padding: 30px;
             position: relative;
-            overflow: hidden;
-        }
-        
-        .question-container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 5px;
-            background: linear-gradient(to right, var(--primary-blue), var(--accent-color));
-        }
-        
-        .progress-section {
-            margin-bottom: 30px;
-        }
-        
-        .progress-info {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 10px;
-        }
-        
-        .progress-container {
-            height: 15px;
-            background-color: #e9ecef;
-            border-radius: 15px;
-            overflow: hidden;
-        }
-        
-        .progress-bar {
-            height: 100%;
-            background: linear-gradient(to right, var(--success-color), var(--primary-color));
-            border-radius: 15px;
-            transition: width 0.5s ease;
-        }
-        
-        .question-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-        
-        .question-icon {
-            font-size: 2.5rem;
-            margin-right: 20px;
-            color: var(--primary-blue);
-        }
-        
-        .question-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--text-dark);
-        }
-        
-        .question-help {
-            font-size: 1rem;
-            color: #6c757d;
-            margin-top: 5px;
-        }
-        
-        .answer-section {
-            margin: 30px 0;
-        }
-        
-        .answer-option {
-            margin-bottom: 20px;
-        }
-        
-        .form-control, .form-select {
-            border-radius: 10px;
-            border: 1px solid #ddd;
-            padding: 12px 15px;
-            transition: all 0.3s ease;
-        }
-        
-        .form-control:focus, .form-select:focus {
-            border-color: var(--primary-blue);
-            box-shadow: 0 0 0 0.25rem rgba(26, 75, 140, 0.25);
-        }
-        
-        .file-upload {
-            position: relative;
-            display: inline-block;
-            cursor: pointer;
-            width: 100%;
-        }
-        
-        .file-upload input[type=file] {
-            position: absolute;
-            left: -9999px;
-        }
-        
-        .file-upload-label {
-            display: block;
-            padding: 15px;
-            border: 2px dashed #ddd;
-            border-radius: 10px;
-            text-align: center;
-            color: #6c757d;
-            transition: all 0.3s ease;
-        }
-        
-        .file-upload-label:hover {
-            border-color: var(--primary-blue);
-            color: var(--primary-blue);
-        }
-        
-        .file-preview {
-            margin-top: 15px;
-            text-align: center;
-        }
-        
-        .file-preview img {
-            max-width: 100%;
-            max-height: 200px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-        
-        .file-info {
-            margin-top: 10px;
-            font-size: 0.9rem;
-            color: #6c757d;
-        }
-        
-        .btn-primary {
-            background: linear-gradient(to right, var(--primary-blue), var(--accent-color));
-            border: none;
-            border-radius: 50px;
-            padding: 12px 30px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-        
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        }
-        
-        .btn-secondary {
-            background: var(--secondary-color);
-            border: none;
-            border-radius: 50px;
-            padding: 12px 30px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-        
-        .btn-secondary:hover {
-            background: #E68900;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        }
-        
-        .btn-outline-secondary {
-            border-radius: 50px;
-            padding: 12px 30px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-        
-        .btn-outline-secondary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-        
-        .action-buttons {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 30px;
-        }
-        
-        .child-info {
-            display: flex;
-            align-items: center;
-            margin-bottom: 20px;
-            padding: 15px;
-            background-color: #f8f9fa;
-            border-radius: 10px;
-        }
-        
-        .child-avatar {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 24px;
-            margin-right: 15px;
-        }
-        
-        .avatar-1 {
-            background: linear-gradient(135deg, #FF9A8B, #FF6B95);
-        }
-        
-        .avatar-2 {
-            background: linear-gradient(135deg, #A1C4FD, #C2E9FB);
-        }
-        
-        .avatar-3 {
-            background: linear-gradient(135deg, #FFD26F, #3677FF);
-        }
-        
-        .toast-container {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 1050;
-        }
-        
-        .custom-toast {
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            padding: 15px 20px;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            animation: slideIn 0.3s ease;
-        }
-        
-        @keyframes slideIn {
-            from {
-                transform: translateX(100%);
-                opacity: 0;
-            }
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
-        }
-        
-        .toast-success {
-            border-left: 5px solid var(--success-color);
-        }
-        
-        .toast-error {
-            border-left: 5px solid var(--danger-color);
-        }
-        
-        .toast-info {
-            border-left: 5px solid var(--info-color);
-        }
-        
-        .avatar-container {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 1000;
-        }
-        
-        .avatar-bubble {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--primary-blue), var(--accent-color));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 36px;
-            cursor: pointer;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            transition: all 0.3s ease;
-            position: relative;
-        }
-        
-        .avatar-bubble:hover {
-            transform: scale(1.1);
-        }
-        
-        .avatar-speech {
-            position: absolute;
-            bottom: 90px;
-            right: 0;
-            background: white;
-            border-radius: 15px;
-            padding: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            max-width: 250px;
-            opacity: 0;
-            transform: translateY(10px);
-            transition: all 0.3s ease;
-            pointer-events: none;
-            font-family: 'Nunito', sans-serif;
-            font-weight: 600;
-            color: var(--text-dark);
-            border: 2px solid var(--primary-blue);
-        }
-        
-        .avatar-speech::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            right: 30px;
-            width: 0;
-            height: 0;
-            border-left: 10px solid transparent;
-            border-right: 10px solid transparent;
-            border-top: 10px solid white;
-        }
-        
-        .avatar-speech.show {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
-        .completion-section {
-            text-align: center;
-            padding: 40px 0;
-        }
-        
-        .completion-icon {
-            font-size: 5rem;
-            color: var(--success-color);
-            margin-bottom: 20px;
-        }
-        
-        .completion-title {
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 20px;
-            color: var(--text-dark);
-        }
-        
-        .completion-message {
-            font-size: 1.1rem;
-            color: #6c757d;
-            margin-bottom: 30px;
-        }
-        
-        .loading-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(255, 255, 255, 0.8);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-        }
-        
-        .spinner-border {
-            width: 3rem;
-            height: 3rem;
-        }
-        
-        .edit-mode-indicator {
-            background-color: var(--warning-color);
-            color: white;
-            padding: 8px 15px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            margin-bottom: 20px;
-            display: inline-block;
-        }
-        
-        /* --- ESTILOS DEL FOOTER --- */
-        .footer { 
-            background-color: var(--primary-blue); 
-            color: rgba(255,255,255,0.8); 
-            padding: 3rem 5%; 
-            margin-top: auto;
-        }
-        .footer-content { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
-            gap: 2.5rem; 
-            max-width: 1200px; 
-            margin: 0 auto; 
-        }
-        .footer-section { 
-            display: flex; 
-            flex-direction: column; 
-        }
-        .footer-section h3 { 
-            color: var(--white); 
-            margin-bottom: 1.5rem; 
-            font-size: 1.2rem; 
-            position: relative; 
-            padding-bottom: 0.5rem; 
-        }
-        .footer-section h3::after { 
-            content: ''; 
-            position: absolute; 
-            bottom: 0; 
-            left: 0; 
-            width: 40px; 
-            height: 2px; 
-            background: var(--accent-red); 
-        }
-        .footer-links { list-style: none; padding: 0; margin: 0; }
-        .footer-links li { margin-bottom: 0.8rem; }
-        .footer-links a { 
-            color: rgba(255,255,255,0.8); 
-            text-decoration: none; 
-            transition: var(--transition); 
-            display: flex; 
-            align-items: center; 
-            gap: 0.5rem; 
-        }
-        .footer-links a:hover { color: var(--white); transform: translateX(5px); }
-        .footer-links a i { width: 20px; text-align: center; }
-        .footer-section p { margin-bottom: 0.8rem; display: flex; align-items: center; gap: 0.5rem; }
-        .social-links { display: flex; gap: 1rem; margin-top: 1rem; }
-        .social-links a { 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            width: 40px; 
-            height: 40px; 
-            background: rgba(255,255,255,0.1); 
-            border-radius: 50%; 
-            transition: var(--transition); 
-        }
-        .social-links a:hover { background: var(--accent-red); transform: translateY(-3px); }
-        .footer-bottom { 
-            text-align: center; 
-            margin-top: 2.5rem; 
-            padding-top: 1.5rem; 
-            border-top: 1px solid rgba(255,255,255,0.2); 
-            font-size: 0.9rem; 
+            overflow-x: hidden;
         }
 
-        /* --- ESTILOS PARA MODALES --- */
-        .modal { 
-            display: none; 
-            position: fixed; 
-            z-index: 1000; 
-            left: 0; top: 0; 
-            width: 100%; height: 100%; 
-            background-color: rgba(0,0,0,0.5); 
-            justify-content: center; 
-            align-items: center; 
-            padding: 1rem; 
+        /* --- MEJORA: Animación de fondo con más frutas y comidas --- */
+        .food-animation-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
         }
+
+        .food-icon {
+            position: absolute;
+            bottom: -150px; /* Inician desde abajo */
+            font-size: 2rem; /* Tamaño base, será variado con JS */
+            opacity: 0;
+            animation: float 25s infinite linear;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+            10%, 90% { opacity: 0.7; } /* Opacidad mucho más viva */
+            100% { transform: translateY(-120vh) rotate(720deg); opacity: 0; }
+        }
+
+        /* Eliminamos los :nth-child fijos. Ahora se controlan por JavaScript para que sea aleatorio */
+
+        .header, .main-container, .footer { position: relative; z-index: 1; }
+        .header { background: linear-gradient(135deg, var(--primary-blue), var(--accent-color)); color: white; padding: 20px 0; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .logo { font-size: 2rem; font-weight: 800; display: flex; align-items: center; }
+        .logo i { margin-right: 10px; color: var(--secondary-color); }
+        .main-container { flex: 1; padding: 40px 0; }
+        
+        .question-container { max-width: 800px; margin: 0 auto; background: white; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); padding: 30px; position: relative; overflow: hidden; }
+        .question-container::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 5px; background: linear-gradient(to right, var(--primary-blue), var(--accent-color)); }
+        .question-content-wrapper { transition: opacity 0.4s ease-out, transform 0.4s ease-out; }
+        .question-content-wrapper.fade-out { opacity: 0; transform: translateX(-20px); }
+        
+        .progress-section { margin-bottom: 30px; }
+        .progress-info { display: flex; justify-content: flex-end; margin-bottom: 10px; font-weight: 600; }
+        #questionNumber { display: none; }
+        .progress-container { height: 15px; background-color: #e9ecef; border-radius: 15px; overflow: hidden; }
+        .progress-bar { height: 100%; background: linear-gradient(to right, var(--success-color), var(--primary-color)); border-radius: 15px; transition: width 0.5s ease; }
+        
+        .question-header { display: flex; align-items: center; margin-bottom: 20px; }
+        .question-icon { font-size: 2.5rem; margin-right: 20px; color: var(--primary-blue); }
+        .question-title { font-size: 1.5rem; font-weight: 700; color: var(--text-dark); }
+        .question-help { font-size: 1rem; color: #6c757d; margin-top: 5px; }
+        .answer-section { margin: 30px 0; }
+        .form-control, .form-select { border-radius: 10px; border: 1px solid #ddd; padding: 12px 15px; transition: all 0.3s ease; }
+        .form-control:focus, .form-select:focus { border-color: var(--primary-blue); box-shadow: 0 0 0 0.25rem rgba(26, 75, 140, 0.25); }
+        
+        .btn-primary { background: linear-gradient(to right, var(--primary-blue), var(--accent-color)); border: none; border-radius: 50px; padding: 12px 30px; font-weight: 600; transition: all 0.3s ease; }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+        .btn-primary:not(:disabled) { animation: pulse 1.5s infinite; }
+        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(26, 75, 140, 0.4); } 70% { box-shadow: 0 0 0 10px rgba(26, 75, 140, 0); } 100% { box-shadow: 0 0 0 0 rgba(26, 75, 140, 0); } }
+        .btn-secondary { background: var(--secondary-color); border: none; border-radius: 50px; padding: 12px 30px; font-weight: 600; transition: all 0.3s ease; }
+        .btn-secondary:hover { background: #E68900; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+        .btn-outline-secondary { border-radius: 50px; padding: 12px 30px; font-weight: 600; transition: all 0.3s ease; }
+        .btn-outline-secondary:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        
+        .action-buttons { display: flex; justify-content: space-between; margin-top: 30px; }
+        .child-info { display: flex; align-items: center; margin: 0 auto 20px; max-width: 800px; padding: 15px; background-color: var(--white); border-radius: 10px; box-shadow: var(--shadow); }
+        .child-avatar { width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; margin-right: 15px; }
+        .avatar-1 { background: linear-gradient(135deg, #FF9A8B, #FF6B95); }
+        .avatar-2 { background: linear-gradient(135deg, #A1C4FD, #C2E9FB); }
+        .avatar-3 { background: linear-gradient(135deg, #FFD26F, #3677FF); }
+        
+        .toast-container { position: fixed; top: 80px; right: 20px; z-index: 1050; }
+        .custom-toast { background: white; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); padding: 15px 20px; margin-bottom: 10px; display: flex; align-items: center; animation: slideIn 0.3s ease; }
+        @keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+        .toast-success { border-left: 5px solid var(--success-color); }
+        .toast-error { border-left: 5px solid var(--danger-color); }
+        .toast-info { border-left: 5px solid var(--info-color); }
+
+        .avatar-container { position: fixed; bottom: 20px; right: 20px; z-index: 1000; }
+        .avatar-bubble { width: 80px; height: 80px; border-radius: 50%; background: white; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 5px 20px rgba(0, 83, 153, 0.2); transition: all 0.3s ease; position: relative; border: 3px solid var(--primary-blue); }
+        .avatar-bubble svg { width: 50px; height: 50px; }
+        .avatar-bubble:hover { transform: scale(1.1) rotate(10deg); }
+        .avatar-speech { position: absolute; bottom: 100px; right: 0; background: white; border-radius: 15px; padding: 12px 18px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); width: 240px; opacity: 0; transform: translateY(10px); transition: all 0.3s ease; pointer-events: none; font-weight: 600; color: var(--text-dark); border: 2px solid var(--primary-blue); font-size: 0.9rem; }
+        .avatar-speech::after { content: ''; position: absolute; bottom: -10px; right: 30px; width: 0; height: 0; border-left: 10px solid transparent; border-right: 10px solid transparent; border-top: 10px solid var(--primary-blue); }
+        .avatar-speech.show { opacity: 1; transform: translateY(0); }
+        
+        .completion-section { text-align: center; padding: 40px 0; }
+        .completion-icon { font-size: 5rem; color: var(--success-color); margin-bottom: 20px; }
+        .completion-title { font-size: 2rem; font-weight: 700; margin-bottom: 20px; color: var(--text-dark); }
+        .completion-message { font-size: 1.1rem; color: #6c757d; margin-bottom: 30px; }
+        
+        .loading-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(255, 255, 255, 0.8); display: flex; justify-content: center; align-items: center; z-index: 9999; }
+        .spinner-border { width: 3rem; height: 3rem; }
+        .edit-mode-indicator { background-color: var(--warning-color); color: white; padding: 8px 15px; border-radius: 20px; font-size: 0.9rem; margin: 0 auto 20px; display: inline-block; max-width: 800px; }
+        
+        .footer { background: linear-gradient(135deg, var(--primary-blue), var(--accent-color)); color: rgba(255,255,255,0.9); padding: 2.5rem 5%; margin-top: 3rem; position: relative; overflow: hidden; }
+        .footer::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="none"/><circle cx="50" cy="50" r="40" fill="rgba(255,255,255,0.05)"/></svg>'); background-size: 100px 100px; opacity: 0.3; }
+        .footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; max-width: 1200px; margin: 0 auto; position: relative; z-index: 2; }
+        .footer-section h3 { color: var(--white); margin-bottom: 1.2rem; font-size: 1.2rem; font-weight: 700; position: relative; padding-bottom: 0.5rem; }
+        .footer-section h3::after { content: ''; position: absolute; bottom: 0; left: 0; width: 40px; height: 3px; background: var(--accent-red); border-radius: 2px; }
+        .footer-links { list-style: none; padding: 0; margin: 0; }
+        .footer-links li { margin-bottom: 0.8rem; }
+        .footer-links a { color: rgba(255,255,255,0.8); text-decoration: none; transition: var(--transition); display: flex; align-items: center; gap: 0.5rem; font-weight: 500; }
+        .footer-links a:hover { color: var(--white); transform: translateX(5px); text-shadow: 0 0 10px rgba(255,255,255,0.5); }
+        .footer-links a i { width: 20px; text-align: center; }
+        .footer-section p { margin-bottom: 0.8rem; display: flex; align-items: center; gap: 0.5rem; font-weight: 500; }
+        .social-links { display: flex; gap: 1rem; margin-top: 1rem; }
+        .social-links a { display: flex; align-items: center; justify-content: center; width: 45px; height: 45px; background: rgba(255,255,255,0.1); border-radius: 50%; transition: var(--transition); border: 2px solid rgba(255,255,255,0.2); }
+        .social-links a:hover { background: var(--accent-red); transform: translateY(-5px) rotate(360deg); box-shadow: 0 10px 20px rgba(230, 57, 70, 0.4); }
+        .footer-bottom { text-align: center; margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.2); font-size: 0.9rem; position: relative; z-index: 2; }
+        
+        .modal { display: none; position: fixed; z-index: 1055; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); justify-content: center; align-items: center; padding: 1rem; }
         .modal.active { display: flex; }
         @keyframes modalSlideIn { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-        .modal-content { 
-            background-color: var(--white); 
-            border-radius: var(--radius); 
-            width: 100%; 
-            max-width: 600px; 
-            max-height: 90vh; 
-            position: relative; 
-            animation: modalSlideIn 0.4s; 
-            display: flex; flex-direction: column; 
-        }
-        .modal-header { 
-            padding: 1.5rem; 
-            border-bottom: 1px solid var(--medium-gray); 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-        }
+        .modal-content { background-color: var(--white); border-radius: var(--radius); width: 100%; max-width: 600px; max-height: 90vh; position: relative; animation: modalSlideIn 0.4s; display: flex; flex-direction: column; }
+        .modal-header { padding: 1.5rem; border-bottom: 1px solid #dee2e6; display: flex; justify-content: space-between; align-items: center; }
         .modal-header h2 { margin: 0; color: var(--primary-blue); }
         .modal-body { padding: 1.5rem; overflow-y: auto; flex: 1; }
-        .modal-body::-webkit-scrollbar { width: 8px; }
-        .modal-body::-webkit-scrollbar-track { background: var(--light-gray); border-radius: 4px; }
-        .modal-body::-webkit-scrollbar-thumb { background: var(--primary-blue); border-radius: 4px; }
-        .modal-body::-webkit-scrollbar-thumb:hover { background: var(--accent-red); }
-        .close-modal { 
-            background: none; 
-            border: none; 
-            font-size: 1.5rem; 
-            cursor: pointer; 
-            color: var(--dark-gray); 
-            transition: var(--transition); 
-        }
+        .close-modal { background: none; border: none; font-size: 1.5rem; cursor: pointer; color: #6c757d; transition: var(--transition); }
         .close-modal:hover { color: var(--accent-red); transform: rotate(90deg); }
-        
-        /* --- ESTILOS PARA CONTENIDO DE MODALES --- */
         .content-section { margin-bottom: 1.5rem; }
-        .content-section h3 { 
-            color: var(--primary-blue); 
-            margin-bottom: 0.8rem; 
-            font-size: 1.1rem; 
-            display: flex; 
-            align-items: center; 
-            gap: 0.5rem; 
-        }
-        .content-section p { line-height: 1.6; color: var(--text-dark); }
-        .content-section ul { margin-left: 1.5rem; margin-top: 0.5rem; }
-        .content-section li { margin-bottom: 0.5rem; line-height: 1.5; }
-        .highlight-box { 
-            background: var(--light-gray); 
-            padding: 1rem; 
-            border-radius: 8px; 
-            border-left: 4px solid var(--accent-red); 
-            margin: 1rem 0; 
-        }
+        .content-section h3 { color: var(--primary-blue); margin-bottom: 0.8rem; font-size: 1.1rem; display: flex; align-items: center; gap: 0.5rem; }
+        .highlight-box{background:var(--light-gray);padding:1rem;border-radius:8px;border-left:4px solid var(--accent-red);margin:1rem 0}
         
         @media (max-width: 768px) {
-            .logo {
-                font-size: 1.5rem;
-            }
-            
-            .question-container {
-                padding: 20px;
-            }
-            
-            .question-icon {
-                font-size: 2rem;
-                margin-right: 15px;
-            }
-            
-            .question-title {
-                font-size: 1.3rem;
-            }
-            
-            .action-buttons {
-                flex-direction: column;
-                gap: 10px;
-            }
-            
-            .avatar-bubble {
-                width: 60px;
-                height: 60px;
-                font-size: 28px;
-            }
-            
-            .avatar-speech {
-                max-width: 200px;
-            }
+            .logo { font-size: 1.5rem; }
+            .question-container { padding: 20px; }
+            .action-buttons { flex-direction: column; gap: 10px; }
+            .avatar-bubble { width: 60px; height: 60px; }
+            .avatar-bubble svg { width: 40px; height: 40px; }
+            .avatar-speech { max-width: 200px; bottom: 75px; }
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
+    <div class="food-animation-container" id="foodContainer">
+        </div>
+
     <header class="header">
         <div class="container">
             <div class="row align-items-center">
-                <div class="col-md-6">
-                    <div class="logo">
-                        <i class="fas fa-apple-alt"></i>
-                        Yachay Mikuy
-                    </div>
-                </div>
-                <div class="col-md-6 text-md-end">
-                    <a href="index1.html#profiles" class="btn btn-light btn-sm">
-                        <i class="fas fa-arrow-left"></i> Volver al inicio
-                    </a>
-                </div>
+                <div class="col-md-6"><div class="logo"><i class="fas fa-apple-alt"></i> Yachay Mikuy</div></div>
+                <div class="col-md-6 text-md-end"><a href="index1.html" class="btn btn-light btn-sm"><i class="fas fa-arrow-left"></i> Volver al inicio</a></div>
             </div>
         </div>
     </header>
 
-    <!-- Main Content -->
     <main class="main-container">
-        <div class="container">
-            <!-- Child Info -->
-            <div id="childInfo" class="child-info">
-                <!-- Child info will be dynamically added here -->
-            </div>
-            
-            <!-- Edit Mode Indicator -->
-            <div id="editModeIndicator" class="edit-mode-indicator d-none">
-                <i class="fas fa-edit"></i> Modo de edición: Puedes modificar tus respuestas anteriores
-            </div>
-            
-            <!-- Question Container -->
-            <div id="questionContainer" class="question-container">
-                <!-- Progress Section -->
-                <div class="progress-section">
-                    <div class="progress-info">
-                        <span id="questionNumber">Pregunta 1 de 50</span>
-                        <span id="progressPercent">0%</span>
+        <div class="container text-center">
+            <div id="childInfo" class="child-info"></div>
+            <div id="editModeIndicator" class="edit-mode-indicator d-none"><i class="fas fa-edit"></i> Modo de edición</div>
+            <div id="questionContainer" class="question-container text-start">
+                <div id="question-content-wrapper" class="question-content-wrapper">
+                    <div class="progress-section">
+                        <div class="progress-info"><span id="progressPercent">0%</span></div>
+                        <div class="progress-container"><div id="progressBar" class="progress-bar"></div></div>
                     </div>
-                    <div class="progress-container">
-                        <div id="progressBar" class="progress-bar" style="width: 0%"></div>
+                    <div class="question-header">
+                        <div id="questionIcon" class="question-icon"><i class="fas fa-question-circle"></i></div>
+                        <div><h3 id="questionTitle" class="question-title">Cargando...</h3><p id="questionHelp" class="question-help">Cargando...</p></div>
                     </div>
-                </div>
-                
-                <!-- Question Header -->
-                <div class="question-header">
-                    <div id="questionIcon" class="question-icon">
-                        <i class="fas fa-question-circle"></i>
+                    <div id="answerSection" class="answer-section"></div>
+                    <div class="action-buttons">
+                        <button id="prevBtn" class="btn btn-outline-secondary" disabled><i class="fas fa-arrow-left"></i> Anterior</button>
+                        <button id="exitBtn" class="btn btn-secondary" style="display: none;"><i class="fas fa-sign-out-alt"></i> Salir</button>
+                        <button id="nextBtn" class="btn btn-primary" disabled>Siguiente <i class="fas fa-arrow-right"></i></button>
                     </div>
-                    <div>
-                        <h3 id="questionTitle" class="question-title">Cargando pregunta...</h3>
-                        <p id="questionHelp" class="question-help">Cargando ayuda...</p>
-                    </div>
-                </div>
-                
-                <!-- Answer Section -->
-                <div id="answerSection" class="answer-section">
-                    <!-- Answer options will be dynamically added here -->
-                </div>
-                
-                <!-- Action Buttons -->
-                <div class="action-buttons">
-                    <button id="prevBtn" class="btn btn-outline-secondary" disabled>
-                        <i class="fas fa-arrow-left"></i> Anterior
-                    </button>
-                    <button id="exitBtn" class="btn btn-secondary">
-                        <i class="fas fa-sign-out-alt"></i> Salir
-                    </button>
-                    <button id="nextBtn" class="btn btn-primary" disabled>
-                        Siguiente <i class="fas fa-arrow-right"></i>
-                    </button>
                 </div>
             </div>
-            
-            <!-- Completion Section -->
             <div id="completionSection" class="completion-section d-none">
-                <div class="completion-icon">
-                    <i class="fas fa-check-circle"></i>
-                </div>
+                <div class="completion-icon"><i class="fas fa-check-circle"></i></div>
                 <h2 class="completion-title">¡Cuestionario completado!</h2>
-                <p class="completion-message">
-                    Gracias por proporcionar toda esta información. Ahora podemos generar un plan nutricional personalizado para tu hijo/a.
-                </p>
+                <p class="completion-message">Gracias por tu tiempo. Ahora podemos generar un plan nutricional personalizado.</p>
                 <div class="d-flex justify-content-center gap-3">
-                    <button id="viewPlanBtn" class="btn btn-primary">
-                        <i class="fas fa-file-medical"></i> Ver plan nutricional
-                    </button>
-                    <button id="backToProfileBtn" class="btn btn-outline-secondary">
-                        <i class="fas fa-arrow-left"></i> Volver al perfil
-                    </button>
+                    <button id="viewPlanBtn" class="btn btn-primary"><i class="fas fa-file-medical"></i> Ver plan</button>
+                    <button id="backToProfileBtn" class="btn btn-outline-secondary"><i class="fas fa-arrow-left"></i> Volver al perfil</button>
                 </div>
             </div>
         </div>
     </main>
     
-    <!-- Avatar Container -->
     <div class="avatar-container">
-        <div id="avatarBubble" class="avatar-bubble">
-            <i class="fas fa-robot"></i>
-        </div>
-        <div id="avatarSpeech" class="avatar-speech">
-            <p id="avatarMessage">¡Hola! Soy tu compañero de Yachay Mikuy — te ayudaré paso a paso.</p>
-        </div>
+        <div id="avatarBubble" class="avatar-bubble"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.477 2 2 6.477 2 12C2 17.523 6.477 22 12 22C17.523 22 22 17.523 22 12C22 6.477 17.523 2 12 2Z" fill="#2196F3"/><path d="M12 6C10.8954 6 10 6.89543 10 8C10 9.10457 10.8954 10 12 10C13.1046 10 14 9.10457 14 8C14 6.89543 13.1046 6 12 6Z" fill="white"/><path d="M18 16.5C18 14.0147 15.3137 12 12 12C8.68629 12 6 14.0147 6 16.5H18Z" fill="white"/><path d="M12 2C9.25 2 7 4.25 7 7H17C17 4.25 14.75 2 12 2Z" fill="#1a4b8c" fill-opacity="0.3"/></svg></div>
+        <div id="avatarSpeech" class="avatar-speech"><p id="avatarMessage">¡Hola! Soy Mikuycito.</p></div>
     </div>
     
-    <!-- Loading Overlay -->
-    <div id="loadingOverlay" class="loading-overlay d-none">
-        <div class="spinner-border text-primary" role="status">
-            <span class="visually-hidden">Cargando...</span>
-        </div>
-    </div>
-    
-    <!-- Toast Container -->
+    <div id="loadingOverlay" class="loading-overlay d-none"><div class="spinner-border text-primary" role="status"></div></div>
     <div class="toast-container" id="toastContainer"></div>
-    
-    <!-- Modal Container -->
     <div id="action-modal-container"></div>
     
-    <!-- Footer -->
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-section">
@@ -767,1153 +265,321 @@
         <div class="footer-bottom">&copy; 2025 Yachay Mikuy. Todos los derechos reservados.</div>
     </footer>
     
-    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     
     <script>
-        /*
-         * README - Guía de uso para desarrolladores
-         * 
-         * Esta aplicación utiliza localStorage para almacenar todos los datos de forma local.
-         * Para migrar a un backend, reemplazar las funciones del storageAdapter con llamadas a una API REST.
-         * 
-         * Estructura de datos en localStorage:
-         * - yachay_users: Array de usuarios
-         * - yachay_children: Array de perfiles de niños
-         * - yachay_responses: Objeto con respuestas al cuestionario
-         * - yachay_session: Datos de la sesión actual
-         * - yachay_auditLog: Registro de acciones
-         * 
-         * Integración con otros archivos:
-         * - chicos.html: Muestra el perfil individual de un niño (childId)
-         * - yachay.html: Genera planes nutricionales consolidados
-         * - index1.html: Panel principal de gestión de perfiles
-         * 
-         * Mejoras implementadas:
-         * - Restricción de edad: solo aceptar edades de 0 a 13 años
-         * - Modificación de preguntas para evitar escribir, usando opciones de selección múltiple
-         * - Solo permitir subir archivos cuando sea estrictamente necesario
-         * - Implementar preguntas de opción múltiple con 5 alternativas donde todas sean correctas
-         * - Mejorar la funcionalidad del botón "Generar plan nutricional" para que lleve toda la información a yachay.html
-         * - Al ingresar sin cuenta, también redirigir a yachay.html
-         * - Al ver plan nutricional individual, redirigir a chicos.html
-         * - En la edición de cada perfil, permitir editar las preguntas ya respondidas
-         * - Perfiles predefinidos (Alvaro y Luz) con todas las preguntas respondidas al 100%
-         * - Cualquier botón o texto que diga "Ver plan nutricional" lleva a chicos.html con la información del niño
-         * - Botón "Generar plan nutricional" lleva a yachay.html con la información de todos los niños completados
-         * - Botón "Salir" en lugar de "Omitir" en el cuestionario
-         * - Footer funcional con modales para información adicional
-         * - Preguntas actualizadas con los 4 grupos especificados
-         * - Guardado automático de respuestas al avanzar o retroceder
-         * - No se puede pasar a la siguiente pregunta sin responder la anterior
-         * 
-         * Checklist de QA:
-         * - Registro → login → crear 2 hijos → verificar solo esos hijos aparecen
-         * - Crear hijo → continuar → responder 3 preguntas → recargar → continuar → respuestas intactas
-         * - Editar perfil → respuestas permanecen
-         * - Soft-delete hijo → deshacer funciona; restaurar desde Trash
-         * - Delete permanent → responses eliminadas
-         * - Explorar sin cuenta → ver Alvaro/Luz (100%) → no aparece "Seleccionar otro niño"
-         * - Intentar editar en guest → redirige a login
-         * - Continuar en 0/medio/100% comportamiento correcto
-         * - Avatar frases en inicio/mitad/final
-         * - Avatar mini-pregunta opcional guarda en responses
-         * - yachay.html muestra datos consolidados (si hay >1 hijo)
-         * - chicos.html bloquea si <100% y muestra faltantes
-         * - Subir archivo >5MB → error
-         * - Subir imagen → preview + guardado
-         * - Export PDF/CSV (simulado) funciona
-         * - Accesibilidad: navegación por teclado, ARIA roles
-         * - Performance: recarga < 1.5s mobile emulation
-         * - AuditLog registra acciones
-         * - Version conflict detection muestra modal
-         * - T&C obligatorio antes de registro
-         * - Validación de edad (0-13 años)
-         * - Preguntas con opciones múltiples
-         * - Botón "Generar plan nutricional" redirige a yachay.html con información completa
-         * - Botón "Ver plan nutricional" individual redirige a chicos.html
-         * - Botón "Editar" permite modificar respuestas del cuestionario
-         * - Perfiles predefinidos con todas las preguntas respondidas
-         * - Cualquier texto que diga "Ver plan nutricional" redirige a chicos.html
-         * - Botón "Salir" en lugar de "Omitir" en el cuestionario
-         * - Footer funcional con modales para información adicional
-         * - Preguntas actualizadas con los 4 grupos especificados
-         * - Guardado automático de respuestas al avanzar o retroceder
-         * - No se puede pasar a la siguiente pregunta sin responder la anterior
-         */
-        
-        // Storage Adapter - Para facilitar migración a backend
         const storageAdapter = {
-            // Users
-            getUsers: function() {
-                const users = localStorage.getItem('yachay_users');
-                return users ? JSON.parse(users) : [];
-            },
-            saveUsers: function(users) {
-                localStorage.setItem('yachay_users', JSON.stringify(users));
-            },
-            
-            // Children
-            getChildren: function() {
-                const children = localStorage.getItem('yachay_children');
-                return children ? JSON.parse(children) : [];
-            },
-            saveChildren: function(children) {
-                localStorage.setItem('yachay_children', JSON.stringify(children));
-            },
-            
-            // Responses
-            getResponses: function() {
-                const responses = localStorage.getItem('yachay_responses');
-                return responses ? JSON.parse(responses) : {};
-            },
-            saveResponses: function(responses) {
-                localStorage.setItem('yachay_responses', JSON.stringify(responses));
-            },
-            
-            // Session
-            getSession: function() {
-                const session = localStorage.getItem('yachay_session');
-                return session ? JSON.parse(session) : { currentUserId: null, exploringAsGuest: false, lastActiveAt: null };
-            },
-            saveSession: function(session) {
-                localStorage.setItem('yachay_session', JSON.stringify(session));
-            },
-            
-            // Audit Log
-            getAuditLog: function() {
-                const auditLog = localStorage.getItem('yachay_auditLog');
-                return auditLog ? JSON.parse(auditLog) : [];
-            },
-            saveAuditLog: function(auditLog) {
-                localStorage.setItem('yachay_auditLog', JSON.stringify(auditLog));
-            },
-            
-            // Para migración a backend, estas funciones se reemplazarían con llamadas API
-            // Ejemplo:
-            // async getUsers() {
-            //     const response = await fetch('/api/users');
-            //     return response.json();
-            // }
+            getChildren: () => JSON.parse(localStorage.getItem('yachay_children')) || [],
+            saveChildren: (children) => localStorage.setItem('yachay_children', JSON.stringify(children)),
+            getResponses: () => JSON.parse(localStorage.getItem('yachay_responses')) || {},
+            saveResponses: (responses) => localStorage.setItem('yachay_responses', JSON.stringify(responses)),
+            getSession: () => JSON.parse(localStorage.getItem('yachay_session')) || { currentUserId: null, exploringAsGuest: false },
         };
-        
-        // Base de datos de preguntas actualizadas
+
         const questionsDB = {
-            // Grupo 1 — Datos generales y crecimiento (12 preguntas)
-            q1: {
-                group: 1,
-                icon: 'fas fa-weight',
-                title: '¿Cuál es el peso actual del niño/niña?',
-                help: 'Selecciona el rango de peso aproximado del niño/niña.',
-                type: 'select',
-                options: ['10-15 kg', '15-20 kg', '20-25 kg', '25-30 kg', '30-35 kg', 'No tengo']
-            },
-            q2: {
-                group: 1,
-                icon: 'fas fa-ruler-vertical',
-                title: '¿Cuál es su estatura/talla hoy?',
-                help: 'Selecciona el rango de estatura aproximado del niño/niña.',
-                type: 'select',
-                options: ['80-90 cm', '90-100 cm', '100-110 cm', '110-120 cm', '120-130 cm', 'No tengo']
-            },
-            q3: {
-                group: 1,
-                icon: 'fas fa-calendar-alt',
-                title: '¿Cuál es su fecha de nacimiento?',
-                help: 'Selecciona la fecha exacta de nacimiento del niño/niña.',
-                type: 'select',
-                options: ['Enero - Marzo', 'Abril - Junio', 'Julio - Septiembre', 'Octubre - Diciembre', 'No recuerdo exactamente', 'No tengo']
-            },
-            q4: {
-                group: 1,
-                icon: 'fas fa-chart-line',
-                title: '¿Conoces su índice de masa corporal (IMC)?',
-                help: 'Selecciona el rango del IMC si lo conoces.',
-                type: 'select',
-                options: ['Menos de 15', '15-18', '18-22', '22-25', 'Más de 25', 'No tengo']
-            },
-            q5: {
-                group: 1,
-                icon: 'fas fa-file-medical',
-                title: '¿Tienes acceso al carné de crecimiento?',
-                help: 'Selecciona si tienes acceso al carné de crecimiento.',
-                type: 'select',
-                options: ['Sí, lo tengo a mano', 'Sí, pero en casa', 'Sí, pero en el centro de salud', 'No, lo perdí', 'Nunca tuvimos carné', 'No tengo']
-            },
-            q6: {
-                group: 1,
-                icon: 'fas fa-dna',
-                title: '¿Hay antecedentes familiares de problemas nutricionales?',
-                help: 'Selecciona si hay antecedentes familiares como obesidad, diabetes, desnutrición, etc.',
-                type: 'select',
-                options: ['Sí, obesidad', 'Sí, diabetes', 'Sí, desnutrición', 'Sí, otros problemas', 'No hay antecedentes', 'No tengo']
-            },
-            q7: {
-                group: 1,
-                icon: 'fas fa-procedures',
-                title: '¿Ha tenido enfermedades importantes en el último año?',
-                help: 'Selecciona si ha tenido enfermedades importantes en el último año.',
-                type: 'select',
-                options: ['Sí, enfermedades respiratorias frecuentes', 'Sí, enfermedades digestivas', 'Sí, enfermedades de la piel', 'Sí, otras enfermedades', 'No ha tenido enfermedades importantes', 'No tengo']
-            },
-            q8: {
-                group: 1,
-                icon: 'fas fa-stethoscope',
-                title: '¿Cuándo fue su última consulta médica?',
-                help: 'Selecciona cuándo fue su última consulta médica.',
-                type: 'select',
-                options: ['Menos de 1 mes', '1-3 meses', '3-6 meses', '6-12 meses', 'Más de 1 año', 'No tengo']
-            },
-            q9: {
-                group: 1,
-                icon: 'fas fa-syringe',
-                title: '¿Está al día con sus vacunas?',
-                help: 'Selecciona si está al día con sus vacunas.',
-                type: 'select',
-                options: ['Sí, completamente al día', 'Sí, pero con algunas pendientes', 'No, varias pendientes', 'No, casi ninguna al día', 'No sé', 'No tengo']
-            },
-            q10: {
-                group: 1,
-                icon: 'fas fa-baby',
-                title: '¿Fue amamantado exclusivamente hasta 6 meses?',
-                help: 'Selecciona si fue amamantado exclusivamente hasta los 6 meses.',
-                type: 'select',
-                options: ['Sí, exclusivamente hasta 6 meses', 'Sí, pero con otros alimentos antes de 6 meses', 'Parcialmente amamantado', 'No fue amamantado', 'No sé', 'No tengo']
-            },
-            q11: {
-                group: 1,
-                icon: 'fas fa-vial',
-                title: '¿Se le hicieron análisis de laboratorio en el último año?',
-                help: 'Selecciona si se le hicieron análisis de laboratorio en el último año.',
-                type: 'select',
-                options: ['Sí, análisis de sangre completos', 'Sí, análisis de orina', 'Sí, análisis de heces', 'Sí, otros análisis', 'No se le hicieron análisis', 'No tengo']
-            },
-            q12: {
-                group: 1,
-                icon: 'fas fa-notes-medical',
-                title: '¿Cómo es su estado general de salud?',
-                help: 'Selecciona cómo es su estado general de salud.',
-                type: 'select',
-                options: ['Excelente', 'Bueno', 'Regular', 'Necesita mejorar', 'Malo', 'No tengo']
-            },
-            
-            // Grupo 2 — Alimentación y hábitos (15 preguntas)
-            q13: {
-                group: 2,
-                icon: 'fas fa-utensils',
-                title: '¿Qué suele comer en el desayuno?',
-                help: 'Selecciona qué suele comer en el desayuno.',
-                type: 'select',
-                options: ['Cereales con leche', 'Pan con mantequilla/mermelada', 'Frutas', 'Huevos', 'Té/leche con pan', 'No tengo']
-            },
-            q14: {
-                group: 2,
-                icon: 'fas fa-image',
-                title: '¿Tienes fotos del desayuno de tu hijo/a?',
-                help: 'Selecciona si tienes fotos del desayuno de tu hijo/a.',
-                type: 'select',
-                options: ['Sí, fotos recientes', 'Sí, pero antiguas', 'Sí, en el celular', 'Sí, en la computadora', 'No tengo fotos', 'No tengo']
-            },
-            q15: {
-                group: 2,
-                icon: 'fas fa-utensils',
-                title: '¿Qué suele comer en el almuerzo?',
-                help: 'Selecciona qué suele comer en el almuerzo.',
-                type: 'select',
-                options: ['Sopa y segundo', 'Solo segundo', 'Ensalada', 'Sándwich', 'Comida rápida', 'No tengo']
-            },
-            q16: {
-                group: 2,
-                icon: 'fas fa-image',
-                title: '¿Tienes fotos del almuerzo de tu hijo/a?',
-                help: 'Selecciona si tienes fotos del almuerzo de tu hijo/a.',
-                type: 'select',
-                options: ['Sí, fotos recientes', 'Sí, pero antiguas', 'Sí, en el celular', 'Sí, en la computadora', 'No tengo fotos', 'No tengo']
-            },
-            q17: {
-                group: 2,
-                icon: 'fas fa-apple-alt',
-                title: '¿Cuántas porciones de fruta consume al día?',
-                help: 'Selecciona cuántas porciones de fruta consume al día.',
-                type: 'select',
-                options: ['Menos de 1 porción', '1 porción', '2 porciones', '3 porciones', '4 o más porciones', 'No tengo']
-            },
-            q18: {
-                group: 2,
-                icon: 'fas fa-carrot',
-                title: '¿Cuántas porciones de verduras consume por semana?',
-                help: 'Selecciona cuántas porciones de verduras consume por semana.',
-                type: 'select',
-                options: ['Menos de 3 porciones', '3-5 porciones', '6-8 porciones', '9-11 porciones', '12 o más porciones', 'No tengo']
-            },
-            q19: {
-                group: 2,
-                icon: 'fas fa-bread-slice',
-                title: '¿Consume cereales integrales con frecuencia?',
-                help: 'Selecciona con qué frecuencia consume cereales integrales.',
-                type: 'select',
-                options: ['Diariamente', '3-5 veces por semana', '1-2 veces por semana', 'Ocasionalmente', 'Nunca', 'No tengo']
-            },
-            q20: {
-                group: 2,
-                icon: 'fas fa-candy-cane',
-                title: '¿Con qué frecuencia come dulces o snacks?',
-                help: 'Selecciona con qué frecuencia come dulces o snacks.',
-                type: 'select',
-                options: ['Diariamente', '3-5 veces por semana', '1-2 veces por semana', 'Ocasionalmente', 'Rara vez o nunca', 'No tengo']
-            },
-            q21: {
-                group: 2,
-                icon: 'fas fa-tint',
-                title: '¿Cuánta agua bebe al día?',
-                help: 'Selecciona cuánta agua bebe al día.',
-                type: 'select',
-                options: ['Menos de 2 vasos', '2-3 vasos', '4-5 vasos', '6-7 vasos', '8 o más vasos', 'No tengo']
-            },
-            q22: {
-                group: 2,
-                icon: 'fas fa-glass-cheers',
-                title: '¿Consume bebidas azucaradas?',
-                help: 'Selecciona con qué frecuencia consume bebidas azucaradas.',
-                type: 'select',
-                options: ['Diariamente', '3-5 veces por semana', '1-2 veces por semana', 'Ocasionalmente', 'Rara vez o nunca', 'No tengo']
-            },
-            q23: {
-                group: 2,
-                icon: 'fas fa-glass-milk',
-                title: '¿Consume leche o lácteos?',
-                help: 'Selecciona con qué frecuencia consume leche o lácteos.',
-                type: 'select',
-                options: ['Diariamente', '3-5 veces por semana', '1-2 veces por semana', 'Ocasionalmente', 'Rara vez o nunca', 'No tengo']
-            },
-            q24: {
-                group: 2,
-                icon: 'fas fa-drumstick-bite',
-                title: '¿Incluye proteína animal en su dieta?',
-                help: 'Selecciona con qué frecuencia incluye proteína animal en su dieta.',
-                type: 'select',
-                options: ['Diariamente', '3-5 veces por semana', '1-2 veces por semana', 'Ocasionalmente', 'Rara vez o nunca', 'No tengo']
-            },
-            q25: {
-                group: 2,
-                icon: 'fas fa-seedling',
-                title: '¿Incluye proteína vegetal en su dieta?',
-                help: 'Selecciona con qué frecuencia incluye proteína vegetal en su dieta.',
-                type: 'select',
-                options: ['Diariamente', '3-5 veces por semana', '1-2 veces por semana', 'Ocasionalmente', 'Rara vez o nunca', 'No tengo']
-            },
-            q26: {
-                group: 2,
-                icon: 'fas fa-salt',
-                title: '¿Se agrega sal extra a sus comidas?',
-                help: 'Selecciona si se agrega sal extra a sus comidas.',
-                type: 'select',
-                options: ['Siempre', 'Frecuentemente', 'A veces', 'Rara vez', 'Nunca', 'No tengo']
-            },
-            q27: {
-                group: 2,
-                icon: 'fas fa-pills',
-                title: '¿Recibe suplementos vitamínicos?',
-                help: 'Selecciona si recibe suplementos vitamínicos.',
-                type: 'select',
-                options: ['Diariamente', '3-5 veces por semana', '1-2 veces por semana', 'Ocasionalmente', 'Nunca', 'No tengo']
-            },
-            
-            // Grupo 3 — Actividad física y estilo de vida (11 preguntas)
-            q28: {
-                group: 3,
-                icon: 'fas fa-running',
-                title: '¿Realiza actividad física regularmente?',
-                help: 'Selecciona si realiza actividad física regularmente.',
-                type: 'select',
-                options: ['Diariamente', '3-5 veces por semana', '1-2 veces por semana', 'Ocasionalmente', 'Nunca', 'No tengo']
-            },
-            q29: {
-                group: 3,
-                icon: 'fas fa-football-ball',
-                title: '¿Cuál es su actividad física favorita?',
-                help: 'Selecciona cuál es su actividad física favorita.',
-                type: 'select',
-                options: ['Fútbol', 'Natación', 'Bicicleta', 'Baile', 'Correr', 'No tengo']
-            },
-            q30: {
-                group: 3,
-                icon: 'fas fa-calendar-week',
-                title: '¿Cuántos días a la semana realiza actividad física?',
-                help: 'Selecciona cuántos días a la semana realiza actividad física.',
-                type: 'select',
-                options: ['1 día', '2 días', '3 días', '4 días', '5 o más días', 'No tengo']
-            },
-            q31: {
-                group: 3,
-                icon: 'fas fa-clock',
-                title: '¿Cuánto dura cada sesión de actividad física?',
-                help: 'Selecciona cuánto dura cada sesión de actividad física.',
-                type: 'select',
-                options: ['Menos de 30 minutos', '30-60 minutos', '1-2 horas', '2-3 horas', 'Más de 3 horas', 'No tengo']
-            },
-            q32: {
-                group: 3,
-                icon: 'fas fa-puzzle-piece',
-                title: '¿Participa en juegos al aire libre?',
-                help: 'Selecciona si participa en juegos al aire libre.',
-                type: 'select',
-                options: ['Diariamente', '3-5 veces por semana', '1-2 veces por semana', 'Ocasionalmente', 'Nunca', 'No tengo']
-            },
-            q33: {
-                group: 3,
-                icon: 'fas fa-tv',
-                title: '¿Cuántas horas al día pasa frente a pantallas?',
-                help: 'Selecciona cuántas horas al día pasa frente a pantallas.',
-                type: 'select',
-                options: ['Menos de 1 hora', '1-2 horas', '2-3 horas', '3-4 horas', 'Más de 4 horas', 'No tengo']
-            },
-            q34: {
-                group: 3,
-                icon: 'fas fa-bed',
-                title: '¿Cuántas horas duerme por noche?',
-                help: 'Selecciona cuántas horas duerme por noche.',
-                type: 'select',
-                options: ['Menos de 6 horas', '6-8 horas', '8-10 horas', '10-12 horas', 'Más de 12 horas', 'No tengo']
-            },
-            q35: {
-                group: 3,
-                icon: 'fas fa-book',
-                title: '¿Tiene rutinas antes de dormir?',
-                help: 'Selecciona si tiene rutinas antes de dormir.',
-                type: 'select',
-                options: ['Cuentos', 'Baño', 'Música suave', 'Meditación', 'No tiene rutinas específicas', 'No tengo']
-            },
-            q36: {
-                group: 3,
-                icon: 'fas fa-broom',
-                title: '¿Ayuda en tareas del hogar?',
-                help: 'Selecciona si ayuda en tareas del hogar.',
-                type: 'select',
-                options: ['Diariamente', 'Frecuentemente', 'Ocasionalmente', 'Rara vez', 'Nunca', 'No tengo']
-            },
-            q37: {
-                group: 3,
-                icon: 'fas fa-users',
-                title: '¿Interactúa regularmente con otros niños?',
-                help: 'Selecciona si interactúa regularmente con otros niños.',
-                type: 'select',
-                options: ['Diariamente', 'Frecuentemente', 'Ocasionalmente', 'Rara vez', 'Nunca', 'No tengo']
-            },
-            q38: {
-                group: 3,
-                icon: 'fas fa-clipboard-list',
-                title: '¿Cómo es un día típico desde que se despierta hasta que duerme?',
-                help: 'Selecciona cómo es un día típico desde que se despierta hasta que duerme.',
-                type: 'select',
-                options: ['Muy activo', 'Activo', 'Equilibrado', 'Sedentario', 'Muy sedentario', 'No tengo']
-            },
-            
-            // Grupo 4 — Entorno, bienestar y contexto familiar (12 preguntas)
-            q39: {
-                group: 4,
-                icon: 'fas fa-home',
-                title: '¿Cómo es el entorno familiar donde vive el niño?',
-                help: 'Selecciona cómo es el entorno familiar donde vive el niño.',
-                type: 'select',
-                options: ['Muy estable', 'Estable', 'Normal', 'Algunas dificultades', 'Muchas dificultades', 'No tengo']
-            },
-            q40: {
-                group: 4,
-                icon: 'fas fa-user-friends',
-                title: '¿Con quién vive el niño?',
-                help: 'Selecciona con quién vive el niño.',
-                type: 'select',
-                options: ['Padres', 'Padres y hermanos', 'Padres y abuelos', 'Solo con la madre', 'Solo con el padre', 'No tengo']
-            },
-            q41: {
-                group: 4,
-                icon: 'fas fa-tint',
-                title: '¿Cuenta con acceso a agua potable en casa?',
-                help: 'Selecciona si cuenta con acceso a agua potable en casa.',
-                type: 'select',
-                options: ['Sí, agua potable de calidad', 'Sí, agua potable pero no siempre', 'A veces', 'No siempre', 'No', 'No tengo']
-            },
-            q42: {
-                group: 4,
-                icon: 'fas fa-building',
-                title: '¿Qué tipo de vivienda es?',
-                help: 'Selecciona qué tipo de vivienda es.',
-                type: 'select',
-                options: ['Casa propia', 'Departamento propio', 'Casa alquilada', 'Departamento alquilado', 'Otro tipo de vivienda', 'No tengo']
-            },
-            q43: {
-                group: 4,
-                icon: 'fas fa-hospital',
-                title: '¿Tiene acceso regular a servicios de salud?',
-                help: 'Selecciona si tiene acceso regular a servicios de salud.',
-                type: 'select',
-                options: ['Sí, seguro médico privado', 'Sí, seguro público', 'Sí, posta médica', 'Solo en emergencias', 'No tiene acceso', 'No tengo']
-            },
-            q44: {
-                group: 4,
-                icon: 'fas fa-school',
-                title: '¿Asiste a colegio o centro educativo?',
-                help: 'Selecciona si asiste a colegio o centro educativo.',
-                type: 'select',
-                options: ['Sí, colegio privado', 'Sí, colegio público', 'Sí, jardín', 'No asiste a centro educativo', 'Educación en casa', 'No tengo']
-            },
-            q45: {
-                group: 4,
-                icon: 'fas fa-chalkboard-teacher',
-                title: '¿Recibe educación sobre alimentación en la escuela?',
-                help: 'Selecciona si recibe educación sobre alimentación en la escuela.',
-                type: 'select',
-                options: ['Sí, regularmente', 'Sí, ocasionalmente', 'Poco', 'No', 'No sé', 'No tengo']
-            },
-            q46: {
-                group: 4,
-                icon: 'fas fa-utensils',
-                title: '¿Recibe alimentos por programas escolares?',
-                help: 'Selecciona si recibe alimentos por programas escolares.',
-                type: 'select',
-                options: ['Sí, diariamente', 'Sí, algunos días', 'Ocasionalmente', 'Rara vez', 'No', 'No tengo']
-            },
-            q47: {
-                group: 4,
-                icon: 'fas fa-money-bill',
-                title: '¿Hay limitaciones económicas que afecten su alimentación?',
-                help: 'Selecciona si hay limitaciones económicas que afecten su alimentación.',
-                type: 'select',
-                options: ['No, ninguna limitación', 'Limitaciones leves', 'Limitaciones moderadas', 'Limitaciones importantes', 'Limitaciones severas', 'No tengo']
-            },
-            q48: {
-                group: 4,
-                icon: 'fas fa-heart',
-                title: '¿Cómo es su estado emocional general?',
-                help: 'Selecciona cómo es su estado emocional general.',
-                type: 'select',
-                options: ['Muy feliz', 'Feliz', 'Normal', 'Algo triste', 'Muy triste', 'No tengo']
-            },
-            q49: {
-                group: 4,
-                icon: 'fas fa-user-md',
-                title: '¿Cuenta con apoyo profesional?',
-                help: 'Selecciona si cuenta con apoyo profesional.',
-                type: 'select',
-                options: ['Pediatra regularmente', 'Nutricionista', 'Psicólogo', 'Varios profesionales', 'No tiene apoyo profesional', 'No tengo']
-            },
-            q50: {
-                group: 4,
-                icon: 'fas fa-clipboard-check',
-                title: '¿Qué cambios te gustaría ver en sus hábitos?',
-                help: 'Selecciona qué cambios te gustaría ver en sus hábitos.',
-                type: 'select',
-                options: ['Más actividad física', 'Mejor alimentación', 'Más horas de sueño', 'Menos tiempo en pantallas', 'Todos los anteriores', 'No tengo']
-            }
+              q1: { group: 1, icon: 'fas fa-weight', title: '¿Cuál es el peso actual del niño/niña?', help: 'Selecciona el rango de peso aproximado.', type: 'select', options: ['10-15 kg', '15-20 kg', '20-25 kg', '25-30 kg', '30-35 kg', 'No tengo'] },
+              q2: { group: 1, icon: 'fas fa-ruler-vertical', title: '¿Cuál es su estatura/talla hoy?', help: 'Selecciona el rango de estatura aproximado.', type: 'select', options: ['80-90 cm', '90-100 cm', '100-110 cm', '110-120 cm', '120-130 cm', 'No tengo'] },
+              q3: { group: 1, icon: 'fas fa-calendar-alt', title: '¿En qué trimestre del año nació?', help: 'Selecciona el trimestre de nacimiento.', type: 'select', options: ['Enero - Marzo', 'Abril - Junio', 'Julio - Septiembre', 'Octubre - Diciembre', 'No recuerdo', 'No tengo'] },
+              q4: { group: 1, icon: 'fas fa-chart-line', title: '¿Conoces su índice de masa corporal (IMC)?', help: 'Selecciona el rango del IMC si lo conoces.', type: 'select', options: ['Menos de 15', '15-18', '18-22', '22-25', 'Más de 25', 'No tengo'] },
+              q5: { group: 1, icon: 'fas fa-file-medical', title: '¿Tienes acceso al carné de crecimiento?', help: 'Indica si tienes el carné a la mano.', type: 'select', options: ['Sí, lo tengo a mano', 'Sí, pero en casa', 'En el centro de salud', 'No, lo perdí', 'Nunca tuvimos', 'No tengo'] },
+              q6: { group: 1, icon: 'fas fa-dna', title: '¿Hay antecedentes familiares de problemas nutricionales?', help: 'Ej: obesidad, diabetes, desnutrición.', type: 'select', options: ['Sí, obesidad', 'Sí, diabetes', 'Sí, desnutrición', 'Sí, otros', 'No hay antecedentes', 'No sé'] },
+              q7: { group: 1, icon: 'fas fa-procedures', title: '¿Ha tenido enfermedades importantes en el último año?', help: 'Selecciona si ha tenido enfermedades recurrentes.', type: 'select', options: ['Respiratorias frecuentes', 'Digestivas', 'De la piel', 'Otras', 'No ha tenido', 'No recuerdo'] },
+              q8: { group: 1, icon: 'fas fa-stethoscope', title: '¿Cuándo fue su última consulta médica?', help: 'Selecciona el tiempo aproximado.', type: 'select', options: ['Menos de 1 mes', '1-3 meses', '3-6 meses', '6-12 meses', 'Más de 1 año', 'No recuerdo'] },
+              q9: { group: 1, icon: 'fas fa-syringe', title: '¿Está al día con sus vacunas?', help: 'Indica el estado de su vacunación.', type: 'select', options: ['Sí, completamente', 'Casi al día', 'Le faltan varias', 'No tiene casi ninguna', 'No sé', 'Prefiero no decir'] },
+             q10: { group: 1, icon: 'fas fa-baby', title: '¿Fue amamantado exclusivamente hasta los 6 meses?', help: 'Lactancia materna exclusiva.', type: 'select', options: ['Sí, exclusivamente', 'Sí, pero no exclusivo', 'Parcialmente', 'No fue amamantado', 'No sé', 'No aplica'] },
+             q11: { group: 1, icon: 'fas fa-vial', title: '¿Le hicieron análisis de laboratorio el último año?', help: 'Ej: sangre, orina, heces.', type: 'select', options: ['Sí, de sangre', 'Sí, de orina/heces', 'Sí, ambos', 'Sí, otros', 'No se le hicieron', 'No recuerdo'] },
+             q12: { group: 1, icon: 'fas fa-notes-medical', title: '¿Cómo calificarías su estado general de salud?', help: 'Tu percepción sobre su salud.', type: 'select', options: ['Excelente', 'Bueno', 'Regular', 'Necesita mejorar', 'Malo', 'No estoy seguro'] },
+             q13: { group: 2, icon: 'fas fa-utensils', title: '¿Qué suele comer en el desayuno?', help: 'Elige la opción más frecuente.', type: 'select', options: ['Cereales/Avena con leche', 'Pan con algo', 'Frutas', 'Huevos/Proteína', 'Bebida y galletas', 'No desayuna'] },
+             q14: { group: 2, icon: 'fas fa-camera', title: 'Si pudieras, ¿subirías fotos de sus comidas?', help: 'Esto nos ayuda a entender mejor las porciones.', type: 'select', options: ['Sí, definitivamente', 'Sí, a veces', 'Tal vez', 'Prefiero no hacerlo', 'No tengo cómo', 'No sé'] },
+             q15: { group: 2, icon: 'fas fa-drumstick-bite', title: '¿Qué suele comer en el almuerzo?', help: 'Elige la opción más común.', type: 'select', options: ['Sopa y segundo', 'Solo segundo (plato fuerte)', 'Menú o comida casera', 'Sándwich o algo ligero', 'Comida rápida', 'Varía mucho'] },
+             q16: { group: 2, icon: 'fas fa-utensils', title: '¿Y en la cena?', help: '¿Qué es lo más habitual para cenar?', type: 'select', options: ['Lo mismo del almuerzo', 'Algo ligero (sopa, avena)', 'Pan o sándwich', 'Leche o yogur', 'No cena', 'Varía mucho'] },
+             q17: { group: 2, icon: 'fas fa-apple-alt', title: '¿Cuántas porciones de fruta consume al día?', help: 'Una porción es una manzana, un plátano, etc.', type: 'select', options: ['Ninguna', 'Menos de 1', '1 a 2 porciones', '3 porciones', '4 o más', 'No sé'] },
+             q18: { group: 2, icon: 'fas fa-carrot', title: '¿Y cuántas porciones de verduras consume al día?', help: 'Incluye ensaladas, guisos, sopas.', type: 'select', options: ['Casi nunca', 'Algunas veces a la semana', '1 porción al día', '2 porciones al día', '3 o más', 'No sé'] },
+             q19: { group: 2, icon: 'fas fa-bread-slice', title: '¿Consume alimentos integrales?', help: 'Ej: pan integral, avena, arroz integral, quinua.', type: 'select', options: ['Diariamente', 'Varias veces por semana', '1-2 veces por semana', 'Casi nunca', 'Nunca', 'No sé cuáles son'] },
+             q20: { group: 2, icon: 'fas fa-cookie-bite', title: '¿Con qué frecuencia come dulces o snacks procesados?', help: 'Galletas, papitas, caramelos, etc.', type: 'select', options: ['Varias veces al día', 'Diariamente', 'Algunas veces a la semana', 'Solo fines de semana', 'Casi nunca', 'Nunca'] },
+             q21: { group: 2, icon: 'fas fa-tint', title: '¿Cuánta agua pura bebe al día?', help: 'Sin contar jugos o sopas.', type: 'select', options: ['Casi nada', '1 a 2 vasos', '3 a 4 vasos', '5 a 6 vasos', 'Más de 6 vasos', 'No le gusta el agua'] },
+             q22: { group: 2, icon: 'fas fa-wine-bottle', title: '¿Consume bebidas azucaradas?', help: 'Gaseosas, jugos envasados, etc.', type: 'select', options: ['Diariamente', 'Varias veces por semana', 'Fines de semana', 'Ocasionalmente', 'Casi nunca', 'Nunca'] },
+             q23: { group: 2, icon: 'fas fa-cheese', title: '¿Consume leche, yogur o queso?', help: 'Indica la frecuencia de lácteos.', type: 'select', options: ['Diariamente', 'Varias veces por semana', 'A veces', 'Casi nunca', 'Es intolerante/alérgico', 'No le gusta'] },
+             q24: { group: 2, icon: 'fas fa-egg', title: '¿Qué tipo de proteína consume más?', help: 'Pollo, pescado, res, menestras, etc.', type: 'select', options: ['Pollo', 'Res o cerdo', 'Pescado', 'Menestras/Lentejas', 'Huevo', 'No come mucha proteína'] },
+             q25: { group: 2, icon: 'fas fa-seedling', title: '¿Come menestras (lentejas, frijoles, etc.)?', help: 'Indica la frecuencia.', type: 'select', options: ['2 o más veces por semana', '1 vez por semana', 'Cada 15 días', 'Casi nunca', 'No le gustan', 'No sé'] },
+             q26: { group: 2, icon: 'fas fa-thumbs-down', title: '¿Hay algún alimento que se niegue a comer?', help: 'Elige el grupo de alimentos principal.', type: 'select', options: ['Verduras', 'Frutas', 'Carnes o pescado', 'Menestras', 'No, come de todo', 'Es muy selectivo con todo'] },
+             q27: { group: 2, icon: 'fas fa-pills', title: '¿Toma algún suplemento vitamínico o de hierro?', help: 'Recetado por un médico.', type: 'select', options: ['Sí, hierro', 'Sí, multivitamínico', 'Sí, ambos', 'Tomó en el pasado', 'No, nunca', 'No recuerdo'] },
+             q28: { group: 3, icon: 'fas fa-running', title: '¿Cuántos días a la semana realiza actividad física intensa?', help: 'Correr, saltar, jugar, por al menos 30 min.', type: 'select', options: ['Ninguno', '1-2 días', '3-4 días', '5 o más días', 'Todos los días', 'No sé'] },
+             q29: { group: 3, icon: 'fas fa-gamepad', title: '¿Cuál es su pasatiempo principal?', help: '¿Qué prefiere hacer en su tiempo libre?', type: 'select', options: ['Jugar al aire libre', 'Ver TV/videos', 'Jugar videojuegos', 'Leer o dibujar', 'Estar con amigos', 'Otro'] },
+             q30: { group: 3, icon: 'fas fa-school', title: '¿Cómo es su nivel de energía en la escuela?', help: 'Según lo que te dice o reportan los profesores.', type: 'select', options: ['Muy activo y atento', 'Normalmente activo', 'A veces cansado', 'Casi siempre cansado', 'No va a la escuela', 'No sé'] },
+             q31: { group: 3, icon: 'fas fa-bicycle', title: '¿Realiza algún deporte de forma regular?', help: 'Fútbol, vóley, natación, etc.', type: 'select', options: ['Sí, en el colegio', 'Sí, fuera del colegio', 'Sí, en ambos', 'No, pero le gustaría', 'No le interesan', 'No aplica por la edad'] },
+             q32: { group: 3, icon: 'fas fa-walking', title: '¿Camina o usa bicicleta para ir a lugares cercanos?', help: 'En lugar de usar transporte motorizado.', type: 'select', options: ['Sí, frecuentemente', 'Sí, a veces', 'Rara vez', 'Nunca, siempre en vehículo', 'No salimos mucho', 'No aplica'] },
+             q33: { group: 3, icon: 'fas fa-tv', title: '¿Cuántas horas al día pasa frente a pantallas (TV, tablet, cel)?', help: 'Suma todo el tiempo recreativo.', type: 'select', options: ['Menos de 1 hora', '1-2 horas', '2-3 horas', '3-4 horas', 'Más de 4 horas', 'No usa pantallas'] },
+             q34: { group: 3, icon: 'fas fa-bed', title: '¿Cuántas horas duerme por noche, en promedio?', help: 'Cuenta las horas de sueño continuo.', type: 'select', options: ['Menos de 8 horas', '8 a 9 horas', '10 a 11 horas', '12 o más horas', 'Duerme muy irregular', 'No sé'] },
+             q35: { group: 3, icon: 'fas fa-book-reader', title: '¿Tiene una rutina relajante antes de dormir?', help: 'Leer, baño tibio, música suave, etc.', type: 'select', options: ['Sí, siempre', 'A veces', 'Rara vez', 'No, se duerme con la TV/celular', 'No, le cuesta dormir', 'No aplica'] },
+             q36: { group: 3, icon: 'fas fa-broom', title: '¿Participa en las tareas del hogar?', help: 'Guardar juguetes, poner la mesa, etc.', type: 'select', options: ['Sí, tiene responsabilidades diarias', 'Sí, cuando se le pide', 'A veces ayuda', 'Rara vez o nunca', 'Es muy pequeño aún', 'No aplica'] },
+             q37: { group: 3, icon: 'fas fa-users', title: '¿Cómo es su interacción social con otros niños?', help: '¿Es sociable, tímido, etc.?', type: 'select', options: ['Muy sociable, tiene muchos amigos', 'Sociable, con un grupo pequeño', 'Prefiere jugar solo', 'Le cuesta hacer amigos', 'Solo juega con hermanos', 'Poco contacto con otros niños'] },
+             q38: { group: 3, icon: 'fas fa-smile', title: '¿Cómo describirías su estado de ánimo general?', help: 'La mayor parte del tiempo.', type: 'select', options: ['Alegre y enérgico', 'Tranquilo y calmado', 'Variable, con altos y bajos', 'A menudo irritable o triste', 'Apático o sin energía', 'No estoy seguro'] },
+             q39: { group: 4, icon: 'fas fa-home', title: '¿El ambiente en casa es generalmente tranquilo?', help: '¿Hay un entorno de calma y apoyo?', type: 'select', options: ['Sí, muy tranquilo', 'Generalmente sí', 'A veces hay estrés', 'Frecuentemente tenso', 'Prefiero no responder', 'No sé'] },
+             q40: { group: 4, icon: 'fas fa-user-friends', title: '¿Quién es el principal responsable de la alimentación del niño?', help: '¿Quién cocina y decide las comidas?', type: 'select', options: ['La madre', 'El padre', 'Ambos', 'Los abuelos', 'Otro familiar', 'Una persona contratada'] },
+             q41: { group: 4, icon: 'fas fa-hand-holding-water', title: '¿Tienen acceso a agua potable segura en casa?', help: 'Agua hervida, filtrada o embotellada.', type: 'select', options: ['Sí, siempre', 'La mayoría de las veces', 'A veces es difícil', 'No, usamos agua de pozo/río', 'Compramos agua', 'No sé'] },
+             q42: { group: 4, icon: 'fas fa-shopping-cart', title: '¿Dónde compran principalmente sus alimentos?', help: 'Mercado, supermercado, bodega, etc.', type: 'select', options: ['Mercado local', 'Supermercado', 'Bodega del barrio', 'Mixto (mercado y super)', 'Cultivamos nuestros alimentos', 'Otro'] },
+             q43: { group: 4, icon: 'fas fa-hospital-user', title: '¿Tienen acceso fácil a un centro de salud o posta?', help: 'Cercanía y disponibilidad.', type: 'select', options: ['Sí, muy cerca y accesible', 'Sí, pero está algo lejos', 'Es difícil llegar', 'Solo para emergencias', 'No tenemos uno cerca', 'No lo usamos'] },
+             q44: { group: 4, icon: 'fas fa-utensils', title: '¿La familia come junta habitualmente?', help: 'Al menos una comida principal al día.', type: 'select', options: ['Sí, casi siempre', 'La mayoría de los días', 'Solo los fines de semana', 'Rara vez', 'Nunca, cada uno come a su hora', 'No es posible'] },
+             q45: { group: 4, icon: 'fas fa-graduation-cap', title: '¿Los padres han recibido charlas sobre nutrición?', help: 'En la posta, colegio, etc.', type: 'select', options: ['Sí, recientemente', 'Sí, hace tiempo', 'Muy pocas o ninguna', 'No, nunca', 'No recuerdo', 'No aplica'] },
+             q46: { group: 4, icon: 'fas fa-school', title: '¿El niño recibe algún programa de alimentación en la escuela?', help: 'Qali Warma, vaso de leche, etc.', type: 'select', options: ['Sí, desayuno', 'Sí, almuerzo', 'Sí, ambos', 'No, ninguno', 'No va a la escuela', 'No estoy seguro'] },
+             q47: { group: 4, icon: 'fas fa-wallet', title: '¿La situación económica limita la compra de ciertos alimentos?', help: 'Ej: carnes, pescado, frutas.', type: 'select', options: ['No, podemos comprar de todo', 'A veces limita un poco', 'Sí, a menudo', 'Sí, severamente', 'Prefiero no responder', 'No sé'] },
+             q48: { group: 4, icon: 'fas fa-heartbeat', title: '¿Alguien en casa tiene alguna condición de salud crónica?', help: 'Diabetes, hipertensión, alergias, etc.', type: 'select', options: ['Sí, un adulto', 'Sí, otro niño', 'Sí, varias personas', 'No, nadie', 'Prefiero no responder', 'No sé'] },
+             q49: { group: 4, icon: 'fas fa-info-circle', title: '¿Cuál es su mayor preocupación sobre la alimentación de su hijo/a?', help: 'Elige la que más te inquieta.', type: 'select', options: ['Que no come suficiente', 'Que no come variado', 'Su bajo peso o talla', 'Su sobrepeso', 'Que no come sano', 'No tengo preocupaciones'] },
+             q50: { group: 4, icon: 'fas fa-star', title: '¿Cuál es tu principal objetivo al usar Yachay Mikuy?', help: '¿Qué esperas lograr con nosotros?', type: 'select', options: ['Que gane peso/talla', 'Que venza la anemia', 'Que coma más sano y variado', 'Prevenir problemas a futuro', 'Aprender a cocinar saludable', 'Todos los anteriores'] },
         };
-        
-        // Frases del avatar
+
         const avatarPhrases = {
-            start: [
-                '¡Hola! Soy tu compañero de Yachay Mikuy — te ayudaré paso a paso.',
-                'No te preocupes, responde con calma — cada dato ayuda mucho.',
-                '¿Listos? Empezamos con datos sencillos como peso y talla.',
-                'Selecciona la opción que mejor describa la situación.'
-            ],
-            middle: [
-                '¡Bien! Ya vamos por la mitad, muy buen trabajo.',
-                '¿Sabías que comer frutas de varios colores ayuda a crecer sano?',
-                'Pequeños cambios = grandes resultados. Sigamos.',
-                'Sigue seleccionando las opciones que mejor describan la situación.'
-            ],
-            end: [
-                '¡Casi llegamos! Unos pocos pasos más.',
-                'Recuerda que puedes editar cualquier respuesta después.',
-                'Vamos, que lo estás haciendo muy bien.',
-                'Estamos a punto de completar el cuestionario.'
-            ],
-            completion: [
-                '¡Lo logramos! Tus datos están completos 🎉',
-                'Voy a preparar un plan con ideas deliciosas y saludables.',
-                'Tu esfuerzo merece una insignia — mira tu tablero.',
-                'Si quieres, puedo darte 3 recetas rápidas según las respuestas.'
-            ],
-            error: [
-                'Ups — hubo un error. Intenta de nuevo.',
-                'No te preocupes, puedes seleccionar otra opción.',
-                '¿Quieres que te explique mejor esta pregunta?',
-                '¡Bien hecho! Guarda cambios y podrás continuar.'
-            ],
-            optional: [
-                '¿Te gustaría compartir algo más sobre su alimentación?',
-                '¿Cuál es su actividad favorita que lo hace moverse?',
-                '¿Cuál es su fruta preferida?',
-                '¿Qué le gusta hacer después de la escuela?'
-            ]
+            start: ["¡Hola! Soy Mikuycito. Juntos haremos que comer sano sea divertido. ¡Empecemos!", "Cada respuesta nos acerca a un plan delicioso y nutritivo. ¡Tú puedes!", "¡Solo queremos conocerte mejor!"],
+            middle: ["¡Vamos súper bien! ¡Sigue así!", "¿Sabías que los alimentos con color tienen más vitaminas?", "¡Lo estás haciendo genial!"],
+            end: ["¡Falta poquísimo! Ya casi puedo preparar tus recetas secretas.", "¡Qué buen trabajo! Estamos a solo unos pasos del final.", "La última parte. ¡Estoy emocionado!"],
+            completion: ["¡Lo logramos! ¡Cuestionario completo! 🎉", "¡Excelente! Ahora voy a preparar el plan más increíble para ti.", "¡Misión cumplida! Ahora empieza la aventura de comer rico y sano."],
+            milestone: ["¡Genial! Primera parte completada. ¡Choca esos cinco! ✋", "¡Segunda sección lista! Ahora, ¡a hablar de comida rica!", "¡Muy bien! Ya sabemos cómo te mueves. ¡Ahora la parte final!"],
         };
         
-        // Variables globales
-        let currentChildId = null;
-        let currentQuestionId = null;
-        let currentQuestion = null;
-        let responses = {};
-        let totalQuestions = Object.keys(questionsDB).length;
-        let isEditMode = false;
-        
-        // Funciones de utilidad
-        function showLoading() {
-            document.getElementById('loadingOverlay').classList.remove('d-none');
-        }
-        
-        function hideLoading() {
-            document.getElementById('loadingOverlay').classList.add('d-none');
-        }
+        let currentChildId=null,currentQuestionId=null,responses={};const totalQuestions=Object.keys(questionsDB).length;
         
         function showToast(message, type = 'info') {
             const toastContainer = document.getElementById('toastContainer');
             const toastId = 'toast-' + Date.now();
-            
-            const toastHtml = `
-                <div id="${toastId}" class="custom-toast toast-${type}">
-                    <div class="me-2">
-                        ${type === 'success' ? '<i class="fas fa-check-circle text-success"></i>' : 
-                          type === 'error' ? '<i class="fas fa-exclamation-circle text-danger"></i>' : 
-                          '<i class="fas fa-info-circle text-info"></i>'}
-                    </div>
-                    <div class="flex-grow-1">${message}</div>
-                    <button type="button" class="btn-close ms-2" onclick="document.getElementById('${toastId}').remove()"></button>
-                </div>
-            `;
-            
-            toastContainer.insertAdjacentHTML('beforeend', toastHtml);
-            
-            // Auto remove after 5 seconds
-            setTimeout(() => {
-                const toast = document.getElementById(toastId);
-                if (toast) toast.remove();
-            }, 5000);
+            const icon = type === 'success' ? 'fa-check-circle text-success' : type === 'error' ? 'fa-exclamation-circle text-danger' : 'fa-info-circle text-info';
+            toastContainer.insertAdjacentHTML('beforeend', `<div id="${toastId}" class="custom-toast toast-${type}"><div class="me-2"><i class="fas ${icon}"></i></div><div class="flex-grow-1">${message}</div><button type="button" class="btn-close ms-2" onclick="document.getElementById('${toastId}').remove()"></button></div>`);
+            setTimeout(() => document.getElementById(toastId)?.remove(), 5000);
         }
-        
-        function logAction(actorId, action, targetType, targetId, meta = {}) {
-            const auditLog = storageAdapter.getAuditLog();
-            auditLog.push({
-                id: 'audit-' + Date.now(),
-                actorId,
-                action,
-                targetType,
-                targetId,
-                meta,
-                timestamp: new Date().toISOString()
-            });
-            storageAdapter.saveAuditLog(auditLog);
-        }
-        
-        function getURLParameter(name) {
-            const urlParams = new URLSearchParams(window.location.search);
-            return urlParams.get(name);
-        }
-        
-        function calculateAge(dob) {
-            const birthDate = new Date(dob);
-            const today = new Date();
-            let age = today.getFullYear() - birthDate.getFullYear();
-            const monthDiff = today.getMonth() - birthDate.getMonth();
-            
-            if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
-                age--;
-            }
-            
-            return age;
-        }
-        
+
         function calculateProgress(childId) {
-            const responses = storageAdapter.getResponses();
-            
-            if (!responses[childId]) {
-                return 0;
-            }
-            
-            const childResponses = responses[childId];
-            const answeredQuestions = Object.keys(childResponses).filter(key => 
-                key.startsWith('q') && !childResponses[key].optional
-            ).length;
-            
-            return Math.round((answeredQuestions / totalQuestions) * 100);
+            const childResponses = (storageAdapter.getResponses()[childId] || {});
+            const answeredCount = Object.keys(childResponses).filter(key => key.startsWith('q')).length;
+            return Math.round((answeredCount / totalQuestions) * 100);
         }
-        
-        function saveResponse(childId, questionId, response) {
-            const responses = storageAdapter.getResponses();
+
+        function saveResponse(childId, questionId, response, showConfirmation = false) {
+            const allResponses = storageAdapter.getResponses();
+            if (!allResponses[childId]) { allResponses[childId] = {}; }
             
-            if (!responses[childId]) {
-                responses[childId] = {};
-            }
-            
-            responses[childId][questionId] = {
-                ...response,
-                timestamp: new Date().toISOString(),
-                version: responses[childId][questionId] ? 
-                    responses[childId][questionId].version + 1 : 1
-            };
-            
-            storageAdapter.saveResponses(responses);
-            
-            // Actualizar progreso del hijo
-            const progressPercent = calculateProgress(childId);
+            allResponses[childId][questionId] = { ...response, timestamp: new Date().toISOString() };
+            storageAdapter.saveResponses(allResponses);
+            responses = allResponses[childId];
+
+            const progress = calculateProgress(childId);
             const children = storageAdapter.getChildren();
             const childIndex = children.findIndex(c => c.id === childId);
-            
             if (childIndex !== -1) {
-                children[childIndex].progressPercent = progressPercent;
-                children[childIndex].updatedAt = new Date().toISOString();
+                children[childIndex].progressPercent = progress;
                 storageAdapter.saveChildren(children);
             }
             
-            logAction(
-                storageAdapter.getSession().currentUserId || null, 
-                'save_response', 
-                'response', 
-                `${childId}-${questionId}`
-            );
-            
-            return responses[childId][questionId];
+            if (showConfirmation) showToast('Respuesta guardada', 'success');
         }
-        
+
         function loadChildInfo() {
-            const childId = getURLParameter('childId');
-            
+            const childId = new URLSearchParams(window.location.search).get('childId');
             if (!childId) {
-                showToast('No se ha especificado un perfil de niño', 'error');
-                setTimeout(() => {
-                    window.location.href = 'index1.html#profiles';
-                }, 2000);
+                showToast('No se ha especificado un perfil.', 'error');
+                setTimeout(() => { window.location.href = 'index1.html'; }, 2000);
                 return null;
             }
             
-            const children = storageAdapter.getChildren();
-            const child = children.find(c => c.id === childId);
-            
+            const child = storageAdapter.getChildren().find(c => c.id === childId);
             if (!child) {
-                showToast('Perfil de niño no encontrado', 'error');
-                setTimeout(() => {
-                    window.location.href = 'index1.html#profiles';
-                }, 2000);
+                showToast('Perfil no encontrado.', 'error');
+                setTimeout(() => { window.location.href = 'index1.html'; }, 2000);
                 return null;
             }
             
             currentChildId = childId;
+            const isEditMode = new URLSearchParams(window.location.search).get('edit') === 'true';
             
-            // Verificar si estamos en modo edición
-            isEditMode = getURLParameter('edit') === 'true';
-            
-            // Mostrar información del niño
-            const childInfo = document.getElementById('childInfo');
-            const avatarClass = child.avatarCustomization === '1' ? 'avatar-1' : 
-                               child.avatarCustomization === '2' ? 'avatar-2' : 'avatar-3';
-            
-            childInfo.innerHTML = `
-                <div class="child-avatar ${avatarClass}">
-                    <i class="fas fa-child"></i>
-                </div>
-                <div class="flex-grow-1">
-                    <h4 class="mb-1">${child.name}</h4>
-                    <p class="mb-0 text-muted">${calculateAge(child.dob)} años</p>
-                </div>
-            `;
-            
-            // Mostrar indicador de modo edición si corresponde
-            const editModeIndicator = document.getElementById('editModeIndicator');
-            if (isEditMode) {
-                editModeIndicator.classList.remove('d-none');
-            } else {
-                editModeIndicator.classList.add('d-none');
-            }
-            
-            // Cargar respuestas existentes
-            const allResponses = storageAdapter.getResponses();
-            responses = allResponses[childId] || {};
-            
-            // Si es un perfil predefinido y no hay respuestas, cargar respuestas predefinidas
-            if (child.ownerId === null && Object.keys(responses).length === 0) {
-                loadPredefinedResponses(childId);
-                const allResponses = storageAdapter.getResponses();
-                responses = allResponses[childId] || {};
-            }
-            
+            const avatarClass = child.avatarCustomization === '1' ? 'avatar-1' : child.avatarCustomization === '2' ? 'avatar-2' : 'avatar-3';
+            document.getElementById('childInfo').innerHTML = `<div class="child-avatar ${avatarClass}"><i class="fas fa-child"></i></div><div class="flex-grow-1 text-start"><h4 class="mb-1">${child.name}</h4><p class="mb-0 text-muted">${new Date().getFullYear() - new Date(child.dob).getFullYear()} años</p></div>`;
+            document.getElementById('editModeIndicator').classList.toggle('d-none', !isEditMode);
+            document.getElementById('exitBtn').style.display = isEditMode ? 'inline-block' : 'none';
+
+            responses = storageAdapter.getResponses()[childId] || {};
             return child;
-        }
-        
-        function loadPredefinedResponses(childId) {
-            const responses = storageAdapter.getResponses();
-            
-            if (!responses[childId]) {
-                responses[childId] = {};
-            }
-            
-            // Generar respuestas completas para perfiles predefinidos
-            for (let i = 1; i <= 50; i++) {
-                responses[childId][`q${i}`] = {
-                    type: questionsDB[`q${i}`].type,
-                    value: i % 6 === 0 ? questionsDB[`q${i}`].options[5] : questionsDB[`q${i}`].options[i % 5],
-                    timestamp: new Date().toISOString(),
-                    version: 1
-                };
-            }
-            
-            storageAdapter.saveResponses(responses);
-            
-            // Actualizar progreso del hijo
-            const children = storageAdapter.getChildren();
-            const childIndex = children.findIndex(c => c.id === childId);
-            
-            if (childIndex !== -1) {
-                children[childIndex].progressPercent = 100;
-                children[childIndex].updatedAt = new Date().toISOString();
-                storageAdapter.saveChildren(children);
-            }
         }
         
         function loadQuestion(questionId) {
             currentQuestionId = questionId;
-            currentQuestion = questionsDB[questionId];
-            
-            if (!currentQuestion) {
-                showToast('Pregunta no encontrada', 'error');
-                return;
-            }
-            
-            // Actualizar información de progreso
-            const questionNumber = parseInt(questionId.substring(1));
-            const progressPercent = Math.round((questionNumber / totalQuestions) * 100);
-            
-            document.getElementById('questionNumber').textContent = `Pregunta ${questionNumber} de ${totalQuestions}`;
-            document.getElementById('progressPercent').textContent = `${progressPercent}%`;
-            document.getElementById('progressBar').style.width = `${progressPercent}%`;
-            
-            // Actualizar información de la pregunta
-            document.getElementById('questionIcon').innerHTML = `<i class="${currentQuestion.icon}"></i>`;
-            document.getElementById('questionTitle').textContent = currentQuestion.title;
-            document.getElementById('questionHelp').textContent = currentQuestion.help;
-            
-            // Cargar opciones de respuesta
-            const answerSection = document.getElementById('answerSection');
-            answerSection.innerHTML = '';
-            
-            // Verificar si ya hay una respuesta para esta pregunta
-            const existingResponse = responses[questionId];
-            
-            if (currentQuestion.type === 'select') {
-                let optionsHtml = '';
-                currentQuestion.options.forEach(option => {
-                    const selected = existingResponse && existingResponse.value === option ? 'selected' : '';
-                    optionsHtml += `<option value="${option}" ${selected}>${option}</option>`;
-                });
-                
-                answerSection.innerHTML = `
-                    <div class="answer-option">
-                        <select class="form-select" id="answerSelect">
-                            <option value="">Seleccionar...</option>
-                            ${optionsHtml}
-                        </select>
-                    </div>
-                `;
-            }
-            
-            // Actualizar estado de los botones
-            updateButtonState();
-            
-            // Mostrar mensaje del avatar según el progreso
-            showAvatarMessage(progressPercent);
+            const questionData = questionsDB[questionId];
+            if (!questionData) return;
+
+            const progressPercent = calculateProgress(currentChildId);
+            const wrapper = document.getElementById('question-content-wrapper');
+            wrapper.classList.add('fade-out');
+
+            setTimeout(() => {
+                document.getElementById('progressPercent').textContent = `${progressPercent}%`;
+                document.getElementById('progressBar').style.width = `${progressPercent}%`;
+                document.getElementById('questionIcon').innerHTML = `<i class="${questionData.icon}"></i>`;
+                document.getElementById('questionTitle').textContent = questionData.title;
+                document.getElementById('questionHelp').textContent = questionData.help;
+
+                const existingResponse = responses[questionId];
+                let optionsHtml = questionData.options.map(option => `<option value="${option}" ${existingResponse && existingResponse.value === option ? 'selected' : ''}>${option}</option>`).join('');
+                document.getElementById('answerSection').innerHTML = `<div class="answer-option"><select class="form-select" id="answerSelect"><option value="">Seleccionar...</option>${optionsHtml}</select></div>`;
+
+                updateButtonState();
+                showAvatarMessage();
+                wrapper.classList.remove('fade-out');
+            }, 400);
         }
         
         function getCurrentAnswer() {
-            if (currentQuestion.type === 'select') {
-                return document.getElementById('answerSelect').value;
-            }
-            
-            return '';
+            const select = document.getElementById('answerSelect');
+            return select ? select.value : '';
         }
-        
+
         function updateButtonState() {
-            const answer = getCurrentAnswer();
-            const nextBtn = document.getElementById('nextBtn');
-            const prevBtn = document.getElementById('prevBtn');
-            const exitBtn = document.getElementById('exitBtn');
-            
-            // Habilitar/deshabilitar botón "Siguiente"
-            nextBtn.disabled = !answer;
-            
-            // Habilitar/deshabilitar botón "Anterior"
-            const questionNumber = parseInt(currentQuestionId.substring(1));
-            prevBtn.disabled = questionNumber <= 1;
-            
-            // Si es modo edición, mostrar botón "Salir"
-            exitBtn.style.display = isEditMode ? 'inline-block' : 'none';
+            document.getElementById('nextBtn').disabled = !getCurrentAnswer();
+            document.getElementById('prevBtn').disabled = parseInt(currentQuestionId.substring(1)) <= 1;
         }
-        
-        function saveCurrentAnswer() {
+
+        function saveCurrentAnswerIfSelected(showConfirmation = false) {
             const answer = getCurrentAnswer();
-            
-            if (!answer) {
-                showToast('Por favor responde la pregunta antes de continuar', 'error');
-                return false;
+            if (answer) {
+                saveResponse(currentChildId, currentQuestionId, { type: 'select', value: answer }, showConfirmation);
+                return true;
             }
-            
-            const response = {
-                type: currentQuestion.type,
-                value: answer,
-                timestamp: new Date().toISOString()
-            };
-            
-            saveResponse(currentChildId, currentQuestionId, response);
-            showToast('Respuesta guardada', 'success');
-            
-            return true;
+            return false;
         }
-        
+
         function goToNextQuestion() {
-            if (!saveCurrentAnswer()) {
+            if (!saveCurrentAnswerIfSelected(true)) {
+                showToast('Selecciona una opción para continuar.', 'warning');
                 return;
             }
             
-            const questionNumber = parseInt(currentQuestionId.substring(1));
-            
-            if (questionNumber >= totalQuestions) {
-                // Todas las preguntas respondidas
+            const currentNumber = parseInt(currentQuestionId.substring(1));
+            const nextQuestionId = `q${currentNumber + 1}`;
+
+            if (questionsDB[nextQuestionId] && questionsDB[currentQuestionId].group !== questionsDB[nextQuestionId].group) {
+                showToast(avatarPhrases.milestone[questionsDB[currentQuestionId].group - 1], 'info');
+            }
+
+            if (currentNumber >= totalQuestions) {
+                const children = storageAdapter.getChildren();
+                const childIndex = children.findIndex(c => c.id === currentChildId);
+                if (childIndex !== -1) {
+                    children[childIndex].progressPercent = 100;
+                    storageAdapter.saveChildren(children);
+                }
                 showCompletionSection();
             } else {
-                // Ir a la siguiente pregunta
-                const nextQuestionId = `q${questionNumber + 1}`;
                 loadQuestion(nextQuestionId);
             }
         }
         
         function goToPreviousQuestion() {
-            // Guardar la respuesta actual antes de retroceder
-            const answer = getCurrentAnswer();
-            if (answer) {
-                saveCurrentAnswer();
-            }
-            
+            saveCurrentAnswerIfSelected(false);
             const questionNumber = parseInt(currentQuestionId.substring(1));
-            
-            if (questionNumber <= 1) {
-                return;
+            if (questionNumber > 1) {
+                loadQuestion(`q${questionNumber - 1}`);
             }
-            
-            const prevQuestionId = `q${questionNumber - 1}`;
-            loadQuestion(prevQuestionId);
         }
-        
+
         function exitQuestionnaire() {
-            // Guardar respuesta actual antes de salir
-            const answer = getCurrentAnswer();
-            if (answer) {
-                saveCurrentAnswer();
-            }
-            
-            // Redirigir a la página de perfiles
-            window.location.href = 'index1.html#profiles';
+            saveCurrentAnswerIfSelected(false);
+            showToast('Tus respuestas han sido guardadas.', 'info');
+            setTimeout(() => { window.location.href = 'index1.html'; }, 1500);
         }
-        
+
         function showCompletionSection() {
             document.getElementById('questionContainer').classList.add('d-none');
             document.getElementById('completionSection').classList.remove('d-none');
-            
-            // Mostrar mensaje del avatar de completado
             showAvatarMessage('completion');
         }
         
-        function showAvatarMessage(progress) {
-            const avatarMessage = document.getElementById('avatarMessage');
+        function showAvatarMessage(stage = null) {
             const avatarSpeech = document.getElementById('avatarSpeech');
+            const questionNumber = stage ? totalQuestions : parseInt(currentQuestionId.substring(1));
+            let phrases = avatarPhrases.start;
+            if (stage === 'completion') phrases = avatarPhrases.completion;
+            else if (questionNumber > 12 && questionNumber <= 38) phrases = avatarPhrases.middle;
+            else if (questionNumber > 38) phrases = avatarPhrases.end;
             
-            let phrase;
-            
-            if (progress === 'completion') {
-                const phrases = avatarPhrases.completion;
-                phrase = phrases[Math.floor(Math.random() * phrases.length)];
-            } else if (progress < 25) {
-                const phrases = avatarPhrases.start;
-                phrase = phrases[Math.floor(Math.random() * phrases.length)];
-            } else if (progress < 75) {
-                const phrases = avatarPhrases.middle;
-                phrase = phrases[Math.floor(Math.random() * phrases.length)];
-            } else {
-                const phrases = avatarPhrases.end;
-                phrase = phrases[Math.floor(Math.random() * phrases.length)];
-            }
-            
-            avatarMessage.textContent = phrase;
+            document.getElementById('avatarMessage').textContent = phrases[Math.floor(Math.random() * phrases.length)];
             avatarSpeech.classList.add('show');
-            
-            // Ocultar mensaje después de 5 segundos
-            setTimeout(() => {
-                avatarSpeech.classList.remove('show');
-            }, 5000);
+            setTimeout(() => avatarSpeech.classList.remove('show'), 6000);
         }
         
-        function showOptionalQuestion() {
-            const phrases = avatarPhrases.optional;
-            const phrase = phrases[Math.floor(Math.random() * phrases.length)];
-            
-            const avatarMessage = document.getElementById('avatarMessage');
-            const avatarSpeech = document.getElementById('avatarSpeech');
-            
-            avatarMessage.textContent = phrase;
-            avatarSpeech.classList.add('show');
-            
-            // Ocultar mensaje después de 5 segundos
-            setTimeout(() => {
-                avatarSpeech.classList.remove('show');
-            }, 5000);
-            
-            // Guardar como respuesta opcional
-            saveResponse(currentChildId, 'optional-' + Date.now(), {
-                type: 'text',
-                value: phrase,
-                optional: true,
-                timestamp: new Date().toISOString()
-            });
-        }
-        
-        // --- INICIO DE FUNCIONES DE SINCRONIZACIÓN ---
-        
-        // Función para sincronizar la eliminación/restauración entre páginas
-        function syncChildDeletionAcrossPages(childId, action) {
-            // action puede ser 'soft-delete', 'restore' o 'permanent-delete'
-            const syncData = {
-                childId: childId,
-                action: action,
-                timestamp: new Date().toISOString()
-            };
-            
-            // Guardar en localStorage para que otras páginas puedan detectar cambios
-            localStorage.setItem('yachay_sync_action', JSON.stringify(syncData));
-            
-            // Notificar a otras pestañas abiertas usando BroadcastChannel
-            if ('BroadcastChannel' in window) {
-                const channel = new BroadcastChannel('yachay_sync');
-                channel.postMessage(syncData);
+        function getNextUnansweredQuestion() {
+            for (let i = 1; i <= totalQuestions; i++) {
+                if (!responses[`q${i}`]) return `q${i}`;
             }
+            return null;
         }
 
-        // --- FIN DE FUNCIONES DE SINCRONIZACIÓN ---
-        
-        // Event Listeners
-        document.addEventListener('DOMContentLoaded', function() {
-            // --- INICIO DE VERIFICACIÓN DE SINCRONIZACIÓN AL CARGAR ---
-            // Verificar si hay acciones de sincronización pendientes de otras pestañas
-            const syncAction = localStorage.getItem('yachay_sync_action');
-            if (syncAction) {
-                const syncData = JSON.parse(syncAction);
-                // Si la acción es reciente (menos de 5 segundos), la procesamos
-                const actionTime = new Date(syncData.timestamp);
-                const now = new Date();
-                if ((now - actionTime) < 5000) {
-                    // Si la acción afecta al niño actual, redirigimos
-                    const currentChildId = getURLParameter('childId');
-                    if (currentChildId === syncData.childId) {
-                        if (syncData.action === 'soft-delete' || syncData.action === 'permanent-delete') {
-                            showToast('El perfil actual ha sido eliminado', 'info');
-                            setTimeout(() => {
-                                window.location.href = 'index1.html#profiles';
-                            }, 2000);
-                        }
-                    }
-                }
-                // Limpiamos la acción para no procesarla de nuevo
-                localStorage.removeItem('yachay_sync_action');
-            }
+        // --- NUEVA FUNCIÓN PARA LA ANIMACIÓN ---
+        function createFoodAnimation() {
+            const container = document.getElementById('foodContainer');
+            if (!container) return;
 
-            // Configurar listener para sincronización en tiempo real con otras pestañas
-            if ('BroadcastChannel' in window) {
-                const channel = new BroadcastChannel('yachay_sync');
-                channel.onmessage = function(event) {
-                    const syncData = event.data;
-                    // Si recibimos un mensaje de sincronización, verificamos si afecta al niño actual
-                    const currentChildId = getURLParameter('childId');
-                    if (currentChildId === syncData.childId) {
-                        if (syncData.action === 'soft-delete' || syncData.action === 'permanent-delete') {
-                            showToast('El perfil actual ha sido eliminado', 'info');
-                            setTimeout(() => {
-                                window.location.href = 'index1.html#profiles';
-                            }, 2000);
-                        }
-                    }
-                };
-            }
-            // --- FIN DE VERIFICACIÓN DE SINCRONIZACIÓN AL CARGAR ---
-            
-            // Verificar sesión
-            const session = storageAdapter.getSession();
-            
-            if (!session.currentUserId && !session.exploringAsGuest) {
-                showToast('Debes iniciar sesión para acceder a esta página', 'error');
-                setTimeout(() => {
-                    window.location.href = 'index1.html#profiles';
-                }, 2000);
-                return;
-            }
-            
-            // Cargar información del niño
-            const child = loadChildInfo();
-            
-            if (!child) {
-                return;
-            }
-            
-            // Determinar qué pregunta cargar
-            const questionId = getURLParameter('q');
-            
-            if (questionId && questionsDB[questionId]) {
-                loadQuestion(questionId);
-            } else {
-                // Buscar la siguiente pregunta no respondida
-                const nextQuestionId = getNextQuestion();
+            const foodIcons = [
+                'fas fa-apple-alt', 'fas fa-carrot', 'fas fa-lemon', 'fas fa-pepper-hot', 'fas fa-seedling', 
+                'fas fa-leaf', 'fas fa-fish', 'fas fa-egg', 'fas fa-bread-slice', 'fas fa-cheese', 
+                'fas fa-drumstick-bite', 'fas fa-ice-cream', 'fas fa-pizza-slice', 'fas fa-cookie', 
+                'fas fa-bacon', 'fas fa-stroopwafel', 'fas fa-hotdog', 'fas fa-candy-cane',
+                'fas fa-shrimp', 'fas fa-burger', 'fas fa-blender', 'fas fa-mug-hot',
+                'fas fa-plate-wheat', 'fas fa-bottle-water', 'fas fa-martini-glass-citrus'
+            ];
+
+            const colors = [
+                '#ff6347', '#ffa500', '#32cd32', '#1e90ff', '#9b59b6', '#e67e22',
+                '#1abc9c', '#e74c3c', '#f1c40f', '#3498db', '#2ecc71', '#ff6b81',
+                '#ff9f43', '#4cd137', '#00a8ff', '#9c88ff', '#f0932b', '#00d2d3'
+            ];
+
+            const iconCount = 40; // Aumentamos la cantidad de íconos
+
+            for (let i = 0; i < iconCount; i++) {
+                const iconEl = document.createElement('i');
+                const randomIcon = foodIcons[Math.floor(Math.random() * foodIcons.length)];
                 
-                if (nextQuestionId) {
-                    loadQuestion(nextQuestionId);
-                } else {
-                    // Todas las preguntas respondidas
-                    showCompletionSection();
-                }
+                iconEl.className = `${randomIcon} food-icon`;
+                
+                // Propiedades aleatorias para cada ícono
+                iconEl.style.left = `${Math.random() * 98}vw`; // Posición horizontal aleatoria
+                iconEl.style.animationDuration = `${Math.random() * 20 + 20}s`; // Duración entre 20s y 40s
+                iconEl.style.animationDelay = `-${Math.random() * 20}s`; // Inicio desfasado
+                iconEl.style.fontSize = `${Math.random() * 1.5 + 1.5}rem`; // Tamaño entre 1.5rem y 3rem
+                iconEl.style.color = colors[Math.floor(Math.random() * colors.length)];
+                
+                container.appendChild(iconEl);
+            }
+        }
+
+
+        document.addEventListener('DOMContentLoaded', function() {
+            if (!storageAdapter.getSession().currentUserId && !storageAdapter.getSession().exploringAsGuest) {
+                showToast('Debes iniciar sesión para acceder.', 'error');
+                setTimeout(() => { window.location.href = 'index1.html'; }, 2000);
+                return;
             }
             
-            // Event listeners para los botones
+            // --- Llamamos a la nueva función de animación ---
+            createFoodAnimation();
+
+            if (!loadChildInfo()) return;
+            
+            const nextQuestionId = getNextUnansweredQuestion();
+            if (nextQuestionId) {
+                loadQuestion(nextQuestionId);
+            } else {
+                showCompletionSection();
+            }
+            
             document.getElementById('nextBtn').addEventListener('click', goToNextQuestion);
             document.getElementById('prevBtn').addEventListener('click', goToPreviousQuestion);
             document.getElementById('exitBtn').addEventListener('click', exitQuestionnaire);
+            document.getElementById('questionContainer').addEventListener('change', updateButtonState);
+            document.getElementById('avatarBubble').addEventListener('click', () => showAvatarMessage());
+            document.getElementById('viewPlanBtn').addEventListener('click', () => window.location.href = `chicos.html?childId=${currentChildId}`);
+            document.getElementById('backToProfileBtn').addEventListener('click', () => window.location.href = 'index1.html');
             
-            // Event listeners para los campos de respuesta
-            document.addEventListener('input', updateButtonState);
-            document.addEventListener('change', updateButtonState);
-            
-            // Event listener para el avatar
-            document.getElementById('avatarBubble').addEventListener('click', showOptionalQuestion);
-            
-            // Event listeners para los botones de la sección de completado
-            document.getElementById('viewPlanBtn').addEventListener('click', function() {
-                // Redirigir a chicos.html para ver el plan nutricional individual
-                window.location.href = `chicos.html?childId=${currentChildId}`;
-            });
-            
-            document.getElementById('backToProfileBtn').addEventListener('click', function() {
-                window.location.href = 'index1.html#profiles';
-            });
-            
-            // Configurar modales del footer
             setupFooterModals();
         });
-        
-        function getNextQuestion() {
-            const totalQuestions = Object.keys(questionsDB).length;
-            
-            for (let i = 1; i <= totalQuestions; i++) {
-                const questionId = `q${i}`;
-                if (!responses[questionId]) {
-                    return questionId;
-                }
-            }
-            
-            return null;
-        }
-        
+
         function setupFooterModals() {
             const actionModalContainer = document.getElementById('action-modal-container');
 
@@ -1929,23 +595,19 @@
                             <div class="modal-body">
                                 <div class="content-section">
                                     <h3><i class="fas fa-bullseye"></i> Nuestra Misión</h3>
-                                    <p>Reducir la prevalencia de anemia y malnutrición en niños de 0 a 13 años mediante planes de alimentación personalizados, adaptados culturalmente y económicamente a la realidad de las familias peruanas.</p>
+                                    <p>Reducir la anemia infantil en más del 60% y mejorar la nutrición infantil en Latinoamérica con soluciones personalizadas, accesibles y sostenibles.</p>
                                 </div>
                                 <div class="content-section">
                                     <h3><i class="fas fa-eye"></i> Nuestra Visión</h3>
-                                    <p>Convertirnos en la plataforma digital líder en nutrición infantil en Perú, contribuyendo al desarrollo humano y social del país a través de hábitos alimentarios saludables.</p>
+                                    <p>Ser la plataforma líder que transforma la nutrición infantil en Latinoamérica, asegurando un futuro brillante para cada niño a través de la tecnología y el conocimiento ancestral.</p>
                                 </div>
                                 <div class="content-section">
                                     <h3><i class="fas fa-users"></i> Nuestro Equipo</h3>
-                                    <p>Contamos con un equipo multidisciplinario de profesionales de la salud, nutricionistas, desarrolladores de software y expertos en educación, comprometidos con mejorar la nutrición infantil en el país.</p>
-                                </div>
-                                <div class="content-section">
-                                    <h3><i class="fas fa-chart-line"></i> Impacto</h3>
-                                    <p>Según estudios del INEI (2023), la anemia infantil afecta a más del 40% de niños menores de 3 años en algunas regiones del Perú. Nuestro proyecto busca reducir esta cifra mediante intervenciones personalizadas y seguimiento continuo.</p>
+                                    <p>Somos un equipo multidisciplinario con más de tres años de experiencia en innovación, tecnología y gestión. Nuestro equipo incluye a María Palacios (Directora Ejecutiva), Álvaro Quiroz (Director de Tecnología), Luz Montalvo, Christian Valdivia y Steve Gómez, todos dedicados a crear soluciones escalables y de alto impacto.</p>
                                 </div>
                                 <div class="highlight-box">
-                                    <h3 style="margin-top:0;"><i class="fas fa-award"></i> Reconocimientos</h3>
-                                    <p>Proyecto seleccionado por la Universidad de Piura como iniciativa de impacto social en el programa de Ingeniería Industrial y de Sistemas.</p>
+                                    <h3 style="margin-top:0;"><i class="fas fa-exclamation-circle"></i> Un Problema Real</h3>
+                                    <p>En América Latina, alrededor de 23 millones de niños sufren de anemia. Solo en Perú, 2 millones están afectados. Estas cifras nos impulsan a actuar.</p>
                                 </div>
                             </div>
                         </div>
@@ -1959,48 +621,37 @@
                             </div>
                             <div class="modal-body">
                                 <div class="content-section">
-                                    <h3><i class="fas fa-utensils"></i> Planes de Alimentación Personalizados</h3>
-                                    <p>Desarrollamos planes nutricionales adaptados a las necesidades específicas de cada niño, considerando:</p>
+                                    <h3><i class="fas fa-robot"></i> Planes Personalizados con IA</h3>
+                                    <p>Somos la primera plataforma que combate la anemia a través de planes personalizados con enfoque integral. Usamos IA y Big Data para procesar la información de cada niño y generar un plan único que se adapta a sus circunstancias locales y culturales.</p>
                                     <ul>
-                                        <li>Edad y estado de salud</li>
-                                        <li>Disponibilidad de alimentos locales</li>
-                                        <li>Hábitos culturales y preferencias familiares</li>
-                                        <li>Capacidad económica del hogar</li>
+                                        <li>Recopilación de información del niño.</li>
+                                        <li>Procesamiento de datos con IA y Big Data.</li>
+                                        <li>Generación de un plan 100% personalizado.</li>
+                                        <li>Monitoreo y ajustes constantes.</li>
                                     </ul>
                                 </div>
                                 <div class="content-section">
-                                    <h3><i class="fas fa-chart-line"></i> Seguimiento Nutricional</h3>
-                                    <p>Monitoreamos el progreso de cada niño a través de:</p>
+                                    <h3><i class="fas fa-gamepad"></i> Gamificación con "Mikuycito"</h3>
+                                    <p>Para hacer el proceso divertido y educativo, hemos creado a Mikuycito, el aliado interactivo de la alimentación inteligente.</p>
                                     <ul>
-                                        <li>Registro diario de consumo alimentario</li>
-                                        <li>Evaluación periódica de indicadores de salud</li>
-                                        <li>Ajustes automáticos según resultados obtenidos</li>
-                                        <li>Reportes mensuales para padres y tutores</li>
+                                        <li>Avatar personalizable para cada niño.</li>
+                                        <li>Juegos interactivos sobre nutrición.</li>
+                                        <li>Recompensas y premios por rachas de alimentación saludable.</li>
+                                        <li>Cuestionarios de aprendizaje.</li>
                                     </ul>
                                 </div>
                                 <div class="content-section">
-                                    <h3><i class="fas fa-graduation-cap"></i> Educación Nutricional</h3>
-                                    <p>Ofrecemos material educativo en múltiples formatos:</p>
+                                    <h3><i class="fas fa-dollar-sign"></i> Precios Accesibles</h3>
+                                    <p>Creemos que la salud no debe ser un lujo. Por eso ofrecemos precios asequibles para todos.</p>
                                     <ul>
-                                        <li>Recetas prácticas con ingredientes locales</li>
-                                        <li>Videos tutoriales de preparación</li>
-                                        <li>Guías informativas sobre nutrientes esenciales</li>
-                                        <li>Consejos para mejorar hábitos alimentarios</li>
-                                    </ul>
-                                </div>
-                                <div class="content-section">
-                                    <h3><i class="fas fa-users"></i> Comunidad de Apoyo</h3>
-                                    <p>Conectamos a las familias con:</p>
-                                    <ul>
-                                        <li>Nutricionistas y profesionales de la salud</li>
-                                        <li>Otras familias que comparten experiencias</li>
-                                        <li>Foros de discusión y consejos prácticos</li>
-                                        <li>Eventos virtuales de capacitación</li>
+                                        <li><b>Público General:</b> $5 mensuales.</li>
+                                        <li><b>Áreas Vulnerables:</b> $3 mensuales.</li>
+                                        <li>Además, contamos con funciones gratuitas para todos.</li>
                                     </ul>
                                 </div>
                                 <div class="highlight-box">
-                                    <h3 style="margin-top:0;"><i class="fas fa-mobile-alt"></i> Accesibilidad</h3>
-                                    <p>Nuestra plataforma funciona en modo offline y cuenta con versión ligera para zonas con conectividad limitada.</p>
+                                    <h3 style="margin-top:0;"><i class="fas fa-rocket"></i> Recuperación 5 Veces más Rápida</h3>
+                                    <p>Con nuestra metodología personalizada, el tiempo de recuperación de la anemia se reduce de 5 meses (o más) a tan solo 1 mes.</p>
                                 </div>
                             </div>
                         </div>
@@ -2014,59 +665,20 @@
                             </div>
                             <div class="modal-body">
                                 <div class="content-section">
-                                    <h3><i class="fas fa-question-circle"></i> ¿Qué es Yachay Mikuy?</h3>
-                                    <p>Yachay Mikuy es una plataforma digital que ofrece planes de alimentación personalizados para combatir la anemia infantil en Perú, combinando tecnología, educación y nutrición culturalmente adaptada.</p>
+                                    <h3><i class="fas fa-question-circle"></i> ¿Por qué Yachay Mikuy es diferente?</h3>
+                                    <p>A diferencia de los suplementos genéricos o programas estatales, nosotros no ofrecemos una solución única para todos. Entendemos que la anemia es un problema multidimensional (nutricional, psicológico, cognitivo). Por eso, creamos planes 100% personalizados que consideran las diferencias individuales y se adaptan a la realidad local de cada familia.</p>
                                 </div>
                                 <div class="content-section">
                                     <h3><i class="fas fa-child"></i> ¿Para qué edades está diseñada la plataforma?</h3>
-                                    <p>Nuestra plataforma está diseñada para niños de 0 a 13 años, etapa crucial en el desarrollo donde los hábitos alimentarios se consolidan y se pueden prevenir deficiencias nutricionales a largo plazo.</p>
+                                    <p>Nuestra plataforma está diseñada principalmente para niños de 0 a 13 años, una etapa crucial para el desarrollo físico y cognitivo.</p>
                                 </div>
                                 <div class="content-section">
-                                    <h3><i class="fas fa-user-plus"></i> ¿Cómo puedo registrarme?</h3>
-                                    <p>Puedes registrarte haciendo clic en el botón "Comenzar Ahora" en nuestra página principal y completando el formulario con tus datos personales. El proceso es rápido y seguro.</p>
+                                    <h3><i class="fas fa-user-plus"></i> ¿Cómo garantizan que el plan funcionará?</h3>
+                                    <p>Nuestro sistema se basa en datos y estudios científicos que demuestran la eficacia de los tratamientos personalizados. Un estudio en The Lancet (2010) y otro de Nutri H (2023) confirman que la fortificación y las intervenciones personalizadas reducen la anemia en tiempos tan cortos como 1 o 2 meses.</p>
                                 </div>
                                 <div class="content-section">
                                     <h3><i class="fas fa-shield-alt"></i> ¿Es seguro compartir los datos de mis hijos?</h3>
-                                    <p>Sí, implementamos medidas avanzadas de protección de datos:</p>
-                                    <ul>
-                                        <li>Cifrado de extremo a extremo</li>
-                                        <li>Consentimiento parental explícito</li>
-                                        <li>Cumplimiento con normativas de protección de datos</li>
-                                        <li>Acceso restringido solo a personal autorizado</li>
-                                    </ul>
-                                </div>
-                                <div class="content-section">
-                                    <h3><i class="fas fa-heartbeat"></i> ¿Cómo funciona el seguimiento nutricional?</h3>
-                                    <p>A través de nuestra aplicación, puedes registrar el consumo alimentario de tus hijos y nosotros monitoreamos su progreso. El sistema genera alertas y recomendaciones automáticas según los resultados obtenidos.</p>
-                                </div>
-                                <div class="content-section">
-                                    <h3><i class="fas fa-dollar-sign"></i> ¿Qué costo tiene el servicio?</h3>
-                                    <p>Ofrecemos diferentes planes de suscripción:</p>
-                                    <ul>
-                                        <li>Plan básico: S/10-15 mensuales</li>
-                                        <li>Plan premium con atención personalizada</li>
-                                        <li>Subsidios para familias vulnerables mediante alianzas</li>
-                                        <li>Acceso gratuito en centros educativos convenidos</li>
-                                    </ul>
-                                </div>
-                                <div class="content-section">
-                                    <h3><i class="fas fa-wifi"></i> ¿Funciona sin internet?</h3>
-                                    <p>Sí, contamos con modo offline que permite:</p>
-                                    <ul>
-                                        <li>Acceso a recetas y guías descargadas</li>
-                                        <li>Registro de consumo para sincronizar después</li>
-                                        <li>Notificaciones vía SMS para zonas rurales</li>
-                                    </ul>
-                                </div>
-                                <div class="content-section">
-                                    <h3><i class="fas fa-hands-helping"></i> ¿Cómo obtengo ayuda si tengo problemas?</h3>
-                                    <p>Puedes contactarnos a través de:</p>
-                                    <ul>
-                                        <li>Chat en vivo en la aplicación</li>
-                                        <li>Correo electrónico: yachay.mikuy@gmail.com</li>
-                                        <li>Teléfono: +51 918 072 862</li>
-                                        <li>WhatsApp: +51 918 072 862</li>
-                                    </ul>
+                                    <p>La seguridad y privacidad de tus datos son nuestra máxima prioridad. Cumplimos con todas las normativas de protección de datos y utilizamos tecnología de encriptación para mantener segura la información. Solo usamos los datos para generar y mejorar los planes nutricionales.</p>
                                 </div>
                             </div>
                         </div>
@@ -2081,203 +693,88 @@
                             <div class="modal-body">
                                 <div class="content-section">
                                     <h3><i class="fas fa-info-circle"></i> Información que Recopilamos</h3>
-                                    <p>Recopilamos información personal y de salud de manera responsable:</p>
+                                    <p>Recopilamos información personal y de salud de manera responsable para personalizar la experiencia:</p>
                                     <ul>
-                                        <li><strong>Datos personales:</strong> Nombre, correo electrónico, teléfono, departamento de residencia</li>
-                                        <li><strong>Datos de los niños:</strong> Nombre, fecha de nacimiento, peso, altura, historial médico relevante</li>
-                                        <li><strong>Datos de uso:</strong> Interacciones con la plataforma, preferencias alimentarias, progreso nutricional</li>
-                                        <li><strong>Datos técnicos:</strong> Dirección IP, tipo de dispositivo, navegador utilizado</li>
+                                        <li><strong>Datos del Tutor:</strong> Nombre, correo electrónico, teléfono.</li>
+                                        <li><strong>Datos del Niño:</strong> Nombre, fecha de nacimiento, peso, altura, historial médico relevante, hábitos alimenticios y de actividad física.</li>
+                                        <li><strong>Datos de Uso:</strong> Interacciones con la plataforma y el avatar Mikuycito.</li>
                                     </ul>
                                 </div>
                                 <div class="content-section">
                                     <h3><i class="fas fa-cogs"></i> Uso de la Información</h3>
-                                    <p>Utilizamos tu información para:</p>
+                                    <p>Utilizamos la información para:</p>
                                     <ul>
-                                        <li>Proporcionar planes de alimentación personalizados</li>
-                                        <li>Realizar seguimiento nutricional efectivo</li>
-                                        <li>Mejorar continuamente nuestros servicios</li>
-                                        <li>Comunicarnos contigo sobre actualizaciones relevantes</li>
-                                        <li>Generar reportes estadísticos anonimizados</li>
+                                        <li>Generar planes de alimentación personalizados mediante nuestros algoritmos de IA.</li>
+                                        <li>Monitorear el progreso y ajustar las recomendaciones.</li>
+                                        <li>Mejorar nuestros servicios y realizar investigaciones anonimizadas para combatir la malnutrición.</li>
+                                        <li>Comunicar actualizaciones importantes sobre la cuenta y el plan nutricional.</li>
                                     </ul>
                                 </div>
                                 <div class="content-section">
-                                    <h3><i class="fas fa-lock"></i> Protección de Datos</h3>
-                                    <p>Implementamos medidas de seguridad robustas:</p>
-                                    <ul>
-                                        <li>Cifrado SSL/TLS para todas las transmisiones</li>
-                                        <li>Almacenamiento cifrado en servidores seguros</li>
-                                        <li>Autenticación de dos factores para accesos críticos</li>
-                                        <li>Auditorías de seguridad periódicas</li>
-                                        <li>Backups automáticos y recovery plan</li>
-                                    </ul>
-                                </div>
-                                <div class="content-section">
-                                    <h3><i class="fas fa-user-shield"></i> Derechos de los Usuarios</h3>
-                                    <p>Tienes derecho a:</p>
-                                    <ul>
-                                        <li><strong>Acceder:</strong> Solicitar una copia de tus datos personales</li>
-                                        <li><strong>Rectificar:</strong> Corregir información inexacta o incompleta</li>
-                                        <li><strong>Cancelar:</strong> Solicitar la eliminación de tus datos</li>
-                                        <li><strong>Oponerse:</strong> Restringir el procesamiento de tus datos</li>
-                                        <li><strong>Portabilidad:</strong> Transferir tus datos a otro servicio</li>
-                                    </ul>
-                                    <p>Para ejercer estos derechos, contacta a yachay.mikuy@gmail.com</p>
-                                </div>
-                                <div class="content-section">
-                                    <h3><i class="fas fa-user-friends"></i> Consentimiento Parental</h3>
-                                    <p>Para el tratamiento de datos de menores:</p>
-                                    <ul>
-                                        <li>Requerimos consentimiento explícito de padres o tutores</li>
-                                        <li>Los padres son responsables de la veracidad de los datos</li>
-                                        <li>Podemos solicitar documentación adicional si es necesario</li>
-                                        <li>Los padres pueden revocar el consentimiento en cualquier momento</li>
-                                    </ul>
-                                </div>
-                                <div class="content-section">
-                                    <h3><i class="fas fa-clock"></i> Retención de Datos</h3>
-                                    <p>Conservamos los datos según los siguientes criterios:</p>
-                                    <ul>
-                                        <li>Datos de cuenta: mientras la cuenta esté activa</li>
-                                        <li>Datos de salud: mínimo 5 años después del último uso</li>
-                                        <li>Datos financieros: 7 años según normativa fiscal</li>
-                                        <li>Datos anonimizados: indefinidamente para estadísticas</li>
-                                    </ul>
+                                    <h3><i class="fas fa-user-shield"></i> Consentimiento Parental</h3>
+                                    <p>Requerimos el consentimiento explícito y verificable de los padres o tutores legales para recopilar y procesar los datos de un menor de edad. Los tutores tienen el control total sobre la información y pueden solicitar su acceso, rectificación o eliminación en cualquier momento.</p>
                                 </div>
                                 <div class="highlight-box">
                                     <h3 style="margin-top:0;"><i class="fas fa-exclamation-triangle"></i> Importante</h3>
-                                    <p>Esta política se actualiza periódicamente. Te notificaremos cualquier cambio significativo a través de tu correo electrónico registrado.</p>
+                                    <p>No compartimos datos personales identificables con terceros sin su consentimiento explícito, excepto cuando sea requerido por ley. Esta política se actualiza periódicamente.</p>
                                 </div>
                             </div>
                         </div>
                     </div>`,
                 termsModal: () => `
-                    <div class="modal active">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h2>Términos y Condiciones</h2>
-                                <button class="close-modal">&times;</button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="content-section">
-                                    <h3><i class="fas fa-check-circle"></i> Aceptación de los Términos</h3>
-                                    <p>Al utilizar la plataforma Yachay Mikuy, aceptas estos términos y condiciones en su totalidad. Si no estás de acuerdo con alguno de estos términos, no debes utilizar nuestros servicios.</p>
-                                    <p>El uso continuado de la plataforma después de cualquier modificación constituye aceptación de los nuevos términos.</p>
+                       <div class="modal active">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h2>Términos y Condiciones</h2>
+                                    <button class="close-modal">&times;</button>
                                 </div>
-                                <div class="content-section">
-                                    <h3><i class="fas fa-cube"></i> Descripción del Servicio</h3>
-                                    <p>Yachay Mikuy es una plataforma digital que ofrece:</p>
-                                    <ul>
-                                        <li>Planes de alimentación personalizados para niños de 0 a 13 años</li>
-                                        <li>Seguimiento nutricional continuo</li>
-                                        <li>Educación nutricional adaptada culturalmente</li>
-                                        <li>Comunidad de apoyo para padres y cuidadores</li>
-                                        <li>Acceso a profesionales de la salud</li>
-                                    </ul>
-                                </div>
-                                <div class="content-section">
-                                    <h3><i class="fas fa-user-check"></i> Responsabilidades del Usuario</h3>
-                                    <p>Como usuario, te comprometes a:</p>
-                                    <ul>
-                                        <li>Proporcionar información veraz y actualizada</li>
-                                        <li>Mantener la confidencialidad de tus credenciales de acceso</li>
-                                        <li>Seguir las recomendaciones nutricionales de manera responsable</li>
-                                        <li>No compartir contenido inapropiado u ofensivo</li>
-                                        <li>Respetar los derechos de otros usuarios</li>
-                                        <li>Reportar cualquier problema o incidencia</li>
-                                    </ul>
-                                </div>
-                                <div class="content-section">
-                                    <h3><i class="fas fa-ban"></i> Uso Prohibido</h3>
-                                    <p>Está estrictamente prohibido:</p>
-                                    <ul>
-                                        <li>Utilizar la plataforma para fines comerciales no autorizados</li>
-                                        <li>Intentar acceder a cuentas de otros usuarios</li>
-                                        <li>Distribuir malware o software malicioso</li>
-                                        <li>Violentar la propiedad intelectual de Yachay Mikuy</li>
-                                        <li>Proporcionar información médica falsa o engañosa</li>
-                                        <li>Acosar o intimidar a otros usuarios</li>
-                                    </ul>
-                                </div>
-                                <div class="content-section">
-                                    <h3><i class="fas fa-copyright"></i> Propiedad Intelectual</h3>
-                                    <p>Todo el contenido de la plataforma está protegido por derechos de autor:</p>
-                                    <ul>
-                                        <li>Textos, imágenes, diseños, logotipos y software</li>
-                                        <li>Algoritmos de recomendación nutricional</li>
-                                        <li>Base de datos de recetas y alimentos</li>
-                                        <li>Material educativo y formatos originales</li>
-                                    </ul>
-                                    <p>Queda prohibida la reproducción total o parcial sin autorización expresa.</p>
-                                </div>
-                                <div class="content-section">
-                                    <h3><i class="fas fa-heart"></i> Información Médica</h3>
-                                    <p>Importante considerar:</p>
-                                    <ul>
-                                        <li>Yachay Mikuy no reemplaza la consulta médica profesional</li>
-                                        <li>Las recomendaciones son complementarias al tratamiento médico</li>
-                                        <li>Ante cualquier emergencia médica, contacta a servicios de salud</li>
-                                        <li>Los planes nutricionales deben ser supervisados por profesionales</li>
-                                    </ul>
-                                </div>
-                                <div class="content-section">
-                                    <h3><i class="fas fa-exclamation-triangle"></i> Limitación de Responsabilidad</h3>
-                                    <p>Yachay Mikuy no se responsabiliza por:</p>
-                                    <ul>
-                                        <li>El uso indebido de la plataforma por parte de los usuarios</li>
-                                        <li>Consecuencias derivadas de no seguir adecuadamente las recomendaciones</li>
-                                        <li>Problemas técnicos fuera de nuestro control</li>
-                                        <li>Contenido proporcionado por terceros</li>
-                                        <li>Daños indirectos, incidentales o consecuentes</li>
-                                    </ul>
-                                </div>
-                                <div class="content-section">
-                                    <h3><i class="fas fa-sync-alt"></i> Modificaciones de los Términos</h3>
-                                    <p>Yachay Mikuy se reserva el derecho de:</p>
-                                    <ul>
-                                        <li>Modificar estos términos y condiciones en cualquier momento</li>
-                                        <li>Actualizar las políticas de privacidad y uso de datos</li>
-                                        <li>Cambiar las características y funcionalidades del servicio</li>
-                                        <li>Suspender o terminar servicios por razones justificadas</li>
-                                    </ul>
-                                    <p>Las modificaciones entrarán en vigor desde su publicación en la plataforma.</p>
-                                </div>
-                                <div class="content-section">
-                                    <h3><i class="fas fa-gavel"></i> Ley Aplicable y Jurisdicción</h3>
-                                    <p>Estos términos se rigen por las leyes de la República del Perú. Cualquier disputa será resuelta en los tribunales de Lima, Perú.</p>
-                                </div>
-                                <div class="highlight-box">
-                                    <h3 style="margin-top:0;"><i class="fas fa-calendar-alt"></i> Vigencia</h3>
-                                    <p>Estos términos y condiciones entran en vigor a partir del 1 de enero de 2025 y permanecerán vigentes hasta su modificación.</p>
+                                <div class="modal-body">
+                                    <div class="content-section">
+                                        <h3><i class="fas fa-check-circle"></i> Aceptación de los Términos</h3>
+                                        <p>Al utilizar la plataforma Yachay Mikuy, aceptas estos términos y condiciones. El uso de la plataforma para un menor de edad implica que usted, como padre o tutor, acepta estos términos en su nombre.</p>
+                                    </div>
+                                    <div class="content-section">
+                                        <h3><i class="fas fa-heart"></i> Descargo de Responsabilidad Médica</h3>
+                                        <p>Yachay Mikuy es una herramienta de apoyo y educación nutricional. <strong>No reemplaza el diagnóstico, consejo o tratamiento de un profesional médico cualificado.</strong> Siempre consulte a su pediatra o nutricionista antes de realizar cambios significativos en la dieta de su hijo, especialmente si existen condiciones médicas preexistentes.</p>
+                                    </div>
+                                    <div class="content-section">
+                                        <h3><i class="fas user-check"></i> Responsabilidades del Usuario</h3>
+                                        <ul>
+                                            <li>Usted es responsable de proporcionar información precisa y actualizada sobre su hijo para garantizar la personalización efectiva del plan.</li>
+                                            <li>Es su responsabilidad supervisar la implementación del plan nutricional y el uso de la aplicación por parte del menor.</li>
+                                            <li>Se compromete a no utilizar la plataforma para fines ilegales o no autorizados.</li>
+                                        </ul>
+                                    </div>
+                                    <div class="content-section">
+                                        <h3><i class="fas fa-copyright"></i> Propiedad Intelectual</h3>
+                                        <p>Todo el contenido, algoritmos y la marca Yachay Mikuy son propiedad de sus creadores. Queda prohibida su reproducción o distribución sin autorización expresa.</p>
+                                    </div>
+                                    <div class="highlight-box">
+                                        <h3 style="margin-top:0;"><i class="fas fa-sync-alt"></i> Modificaciones</h3>
+                                        <p>Nos reservamos el derecho de modificar estos términos en cualquier momento. Se notificará a los usuarios de cambios significativos. El uso continuado de la plataforma constituirá la aceptación de los nuevos términos.</p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>`
+                        </div>`
             };
 
-            // Funciones para abrir y cerrar el modal
             const ui = {
                 openModal: (content) => { actionModalContainer.innerHTML = content; },
                 closeModal: () => { actionModalContainer.innerHTML = ''; }
             };
 
-            // Listener de clics para todo el documento
             document.body.addEventListener('click', (e) => {
-                // Prevenir la acción por defecto si es un enlace
-                if (e.target.closest('a')) {
-                     e.preventDefault();
-                }
+                if (e.target.matches('.modal, .close-modal')) { ui.closeModal(); }
                 
-                // Abrir modales según el ID del enlace clickeado
-                if (e.target.matches('#aboutLink')) { ui.openModal(templates.aboutModal()); }
-                if (e.target.matches('#servicesLink')) { ui.openModal(templates.servicesModal()); }
-                if (e.target.matches('#faqLink')) { ui.openModal(templates.faqModal()); }
-                if (e.target.matches('#privacyLink')) { ui.openModal(templates.privacyModal()); }
-                if (e.target.matches('#termsLink')) { ui.openModal(templates.termsModal()); }
+                const link = e.target.closest('a');
+                if (!link || !link.id.endsWith('Link')) return;
                 
-                // Cerrar el modal si se hace clic en el fondo o en el botón de cerrar
-                if (e.target.matches('.modal') || e.target.matches('.close-modal')) { 
-                    ui.closeModal(); 
-                }
+                e.preventDefault();
+                if (link.id === 'aboutLink') ui.openModal(templates.aboutModal());
+                if (link.id === 'servicesLink') ui.openModal(templates.servicesModal());
+                if (link.id === 'faqLink') ui.openModal(templates.faqModal());
+                if (link.id === 'privacyLink') ui.openModal(templates.privacyModal());
+                if (link.id === 'termsLink') ui.openModal(templates.termsModal());
             });
         }
     </script>
