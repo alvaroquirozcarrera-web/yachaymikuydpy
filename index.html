@@ -784,10 +784,26 @@
             box-shadow: 0 20px 40px rgba(0,0,0,0.2);
         }
         
-        .team-img {
-            height: 250px;
+        .team-img-container {
+            position: relative;
             width: 100%;
-            object-fit: cover;
+            padding-top: 125%; /* Relación de aspecto 4:5 */
+            overflow: hidden;
+            background-color: #f8f9fa;
+        }
+        
+        .team-img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: contain; /* Cambiado a contain para mostrar la imagen completa */
+            transition: transform 0.5s ease;
+        }
+        
+        .team-member:hover .team-img {
+            transform: scale(1.05);
         }
         
         .team-content {
@@ -1136,7 +1152,7 @@
                 <div class="row g-3">
                     <div class="col-md-4 col-lg-2" data-aos="fade-up" data-aos-delay="100">
                         <div class="food-card">
-                            <img src="https://images.unsplash.com/photo-1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Hígado de pollo" class="food-img">
+                            <img src="https://www.lavanguardia.com/uploads/2020/11/05/5fb28177d1c94.jpeg" alt="Hígado de pollo" class="food-img">
                             <div class="food-content">
                                 <h3 class="food-title">Hígado</h3>
                                 <p class="food-description">Fuente de hierro hemínico</p>
@@ -1151,7 +1167,7 @@
                     </div>
                     <div class="col-md-4 col-lg-2" data-aos="fade-up" data-aos-delay="200">
                         <div class="food-card">
-                            <img src="https://images.unsplash.com/photo-5946081/pexels-photo-5946081.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Kiwicha" class="food-img">
+                            <img src="https://foods.pe/wp-content/uploads/2021/10/kiwicha-planta-foods-superalimentos-peruanos-681x1024.jpg" alt="Kiwicha" class="food-img">
                             <div class="food-content">
                                 <h3 class="food-title">Kiwicha</h3>
                                 <p class="food-description">Superfood andino</p>
@@ -1166,7 +1182,7 @@
                     </div>
                     <div class="col-md-4 col-lg-2" data-aos="fade-up" data-aos-delay="300">
                         <div class="food-card">
-                            <img src="https://images.unsplash.com/photo-1633578/pexels-photo-1633578.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Lentejas" class="food-img">
+                            <img src="https://vamosacomerrico.com/wp-content/uploads/2019/04/beneficios-lentejas.jpg" alt="Lentejas" class="food-img">
                             <div class="food-content">
                                 <h3 class="food-title">Lentejas</h3>
                                 <p class="food-description">Proteína vegetal</p>
@@ -1181,7 +1197,7 @@
                     </div>
                     <div class="col-md-4 col-lg-2" data-aos="fade-up" data-aos-delay="400">
                         <div class="food-card">
-                            <img src="https://images.unsplash.com/photo-1092730/pexels-photo-1092730.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Cacao" class="food-img">
+                            <img src="https://www.primeraedicion.com.ar/wp-content/uploads/2021/07/cacao.jpg" alt="Cacao" class="food-img">
                             <div class="food-content">
                                 <h3 class="food-title">Cacao</h3>
                                 <p class="food-description">Antioxidantes</p>
@@ -1196,7 +1212,7 @@
                     </div>
                     <div class="col-md-4 col-lg-2" data-aos="fade-up" data-aos-delay="500">
                         <div class="food-card">
-                            <img src="https://images.unsplash.com/photo-1640774/pexels-photo-1640774.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Pescado" class="food-img">
+                            <img src="https://www.telemundo.com/sites/nbcutelemundo/files/images/promo/video_clip/2015/10/13/pescado.jpg" alt="Pescado" class="food-img">
                             <div class="food-content">
                                 <h3 class="food-title">Pescado</h3>
                                 <p class="food-description">Omega-3</p>
@@ -1211,7 +1227,7 @@
                     </div>
                     <div class="col-md-4 col-lg-2" data-aos="fade-up" data-aos-delay="600">
                         <div class="food-card">
-                            <img src="https://images.unsplash.com/photo-566906/pexels-photo-566906.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Quinua" class="food-img">
+                            <img src="https://cdn.portalfruticola.com/2016/01/quinoa-plants.jpeg" alt="Quinua" class="food-img">
                             <div class="food-content">
                                 <h3 class="food-title">Quinua</h3>
                                 <p class="food-description">Proteína completa</p>
@@ -1238,7 +1254,9 @@
                 <div class="row g-4">
                     <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
                         <div class="team-member">
-                            <img src="luz.jpg" alt="Luz María Montalvo Cucchi" class="team-img">
+                            <div class="team-img-container">
+                                <img src="Luz.jpg" alt="Luz María Montalvo Cucchi" class="team-img">
+                            </div>
                             <div class="team-content">
                                 <h3 class="team-name">Luz María Montalvo Cucchi</h3>
                                 <p class="team-role">CEO</p>
@@ -1252,7 +1270,9 @@
                     </div>
                     <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
                         <div class="team-member">
-                            <img src="alvaro.jpg" alt="Alvaro Quiroz Carrera" class="team-img">
+                            <div class="team-img-container">
+                                <img src="Alvaro.jpg" alt="Alvaro Quiroz Carrera" class="team-img">
+                            </div>
                             <div class="team-content">
                                 <h3 class="team-name">Alvaro Quiroz Carrera</h3>
                                 <p class="team-role">CTO</p>
@@ -1266,7 +1286,9 @@
                     </div>
                     <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
                         <div class="team-member">
-                            <img src="gonzalo.jpg" alt="Gonzalo Pérez Núñez" class="team-img">
+                            <div class="team-img-container">
+                                <img src="Gonzalo.jpg" alt="Gonzalo Pérez Núñez" class="team-img">
+                            </div>
                             <div class="team-content">
                                 <h3 class="team-name">Gonzalo Pérez Núñez</h3>
                                 <p class="team-role">CFO</p>
@@ -1280,7 +1302,9 @@
                     </div>
                     <div class="col-md-4" data-aos="fade-up" data-aos-delay="400">
                         <div class="team-member">
-                            <img src="herman.jpg" alt="Brayan De La Cruz Fernández" class="team-img">
+                            <div class="team-img-container">
+                                <img src="Herman.jpg" alt="Brayan De La Cruz Fernández" class="team-img">
+                            </div>
                             <div class="team-content">
                                 <h3 class="team-name">Brayan De La Cruz Fernández</h3>
                                 <p class="team-role">Director de Alianzas</p>
@@ -1294,7 +1318,9 @@
                     </div>
                     <div class="col-md-4" data-aos="fade-up" data-aos-delay="500">
                         <div class="team-member">
-                            <img src="arturo.jpg" alt="Hitler Tafur Lobato" class="team-img">
+                            <div class="team-img-container">
+                                <img src="Arturo.jpg" alt="Hitler Tafur Lobato" class="team-img">
+                            </div>
                             <div class="team-content">
                                 <h3 class="team-name">Hitler Tafur Lobato</h3>
                                 <p class="team-role">CPO/CMO</p>
@@ -1308,7 +1334,9 @@
                     </div>
                     <div class="col-md-4" data-aos="fade-up" data-aos-delay="600">
                         <div class="team-member">
-                            <img src="alex.jpg" alt="Alex Fernando García Tito" class="team-img">
+                            <div class="team-img-container">
+                                <img src="Alex.jpg" alt="Alex Fernando García Tito" class="team-img">
+                            </div>
                             <div class="team-content">
                                 <h3 class="team-name">Alex Fernando García Tito</h3>
                                 <p class="team-role">COO</p>
