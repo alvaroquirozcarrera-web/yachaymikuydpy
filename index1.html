@@ -203,22 +203,24 @@
             color: white;
         }
         
+        /* === ESTILO MEJORADO PARA EL BOTÓN VOLVER === */
         .btn-back {
-            background: rgba(255, 255, 255, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: var(--white);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            background-color: transparent;
             border-radius: 50px;
             padding: 8px 20px;
             font-weight: 600;
             transition: all 0.3s ease;
-            color: white;
-            display: flex;
+            display: inline-flex;
             align-items: center;
         }
         
         .btn-back:hover {
-            background: rgba(255, 255, 255, 0.3);
+            color: var(--primary-blue);
+            background-color: var(--white);
+            border-color: var(--white);
             transform: translateY(-2px);
-            color: white;
         }
         
         .btn-back i {
@@ -1004,60 +1006,35 @@
         /*
          * README - Guía de uso para desarrolladores
          * * Esta aplicación utiliza localStorage para almacenar todos los datos de forma local.
-         * Para migrar a un backend, reemplazar las funciones del storageAdapter con llamadas a una API REST.
-         * * Estructura de datos en localStorage:
-         * - yachay_users: Array de usuarios
-         * - yachay_children: Array de perfiles de niños
-         * - yachay_responses: Objeto con respuestas al cuestionario
-         * - yachay_session: Datos de la sesión actual
-         * - yachay_auditLog: Registro de acciones
-         * * Integración con otros archivos:
-         * - chicos.html: Muestra el perfil individual de un niño (childId)
-         * - yachay.html: Genera planes nutricionales consolidados
-         * - yachaymikuy.html: Cuestionario para recolectar datos
-         * * Mejoras implementadas:
-         * - Restricción de edad: solo aceptar edades de 0 a 13 años
-         * - Modificación de preguntas para evitar escribir, usando opciones de selección múltiple
-         * - Solo permitir subir archivos cuando sea estrictamente necesario
-         * - Implementar preguntas de opción múltiple con 5 alternativas donde todas sean correctas
-         * - Mejorar la funcionalidad del botón "Generar plan nutricional" para que lleve toda la información a yachay.html
-         * - Al ingresar sin cuenta, también redirigir a yachay.html
-         * - Al ver plan nutricional individual, redirigir a chicos.html
-         * - En la edición de cada perfil, permitir editar las preguntas ya respondidas
-         * - Perfiles predefinidos (Alvaro y Luz) con todas las preguntas respondidas al 100%
-         * - Cualquier botón o texto que diga "Ver plan nutricional" lleva a chicos.html con la información del niño
-         * - Botón "Generar plan nutricional" lleva a yachay.html con la información de todos los niños completados
-         * - Botón "Ver plan nutricional" individual redirige a chicos.html
-         * - Botón "Salir" en lugar de "Omitir" en el cuestionario
-         * - Footer funcional con modales para información adicional
-         * * Checklist de QA:
-         * - Registro → login → crear 2 hijos → verificar solo esos hijos aparecen
-         * - Crear hijo → continuar → responder 3 preguntas → recargar → continuar → respuestas intactas
-         * - Editar perfil → respuestas permanecen
-         * - Soft-delete hijo → deshacer funciona; restaurar desde Trash
-         * - Delete permanent → responses eliminadas
-         * - Explorar sin cuenta → ver Alvaro/Luz (100%) → no aparece "Seleccionar otro niño"
-         * - Intentar editar en guest → redirige a login
-         * - Continuar en 0/medio/100% comportamiento correcto
-         * - Subir archivo >5MB → error
-         * - Subir imagen → preview + guardado
-         * - Export PDF/CSV (simulado) funciona
-         * - Accesibilidad: navegación por teclado, ARIA roles
-         * - Performance: recarga < 1.5s mobile emulation
-         * - AuditLog registra acciones
-         * - Version conflict detection muestra modal
-         * - T&C obligatorio antes de registro
-         * - Validación de edad (0-13 años)
-         * - Preguntas con opciones múltiples
-         * - Botón "Generar plan nutricional" redirige a yachay.html con información completa
-         * - Botón "Ver plan nutricional" individual redirige a chicos.html
-         * - Botón "Editar" permite modificar respuestas del cuestionario
-         * - Perfiles predefinidos con todas las preguntas respondidas
-         * - Cualquier texto que diga "Ver plan nutricional" redirige a chicos.html
-         * - Botón "Salir" en lugar de "Omitir" en el cuestionario
-         * - Footer funcional con modales para información adicional
+         * * Se ha implementado un sistema de redirección silenciosa a index.html tras 1 minuto de inactividad.
+         * * El cierre de sesión también redirige a index.html.
          */
         
+        // === INICIO: LÓGICA DE INACTIVIDAD ===
+        let inactivityTimer;
+
+        function handleInactivity() {
+            const session = storageAdapter.getSession();
+
+            // Verifica si hay una sesión activa (usuario logueado o invitado)
+            if (session.currentUserId || session.exploringAsGuest) {
+                console.log("Inactividad con sesión activa. Cerrando sesión y redirigiendo silenciosamente.");
+                logout(); // Cierra la sesión del usuario
+                window.location.href = 'index.html'; // Redirige a la página de inicio
+            } else {
+                // Si no hay sesión activa (está en la pantalla de login/registro)
+                console.log("Inactividad sin sesión activa. Redirigiendo silenciosamente a la página de inicio.");
+                window.location.href = 'index.html';
+            }
+        }
+
+        function resetInactivityTimer() {
+            clearTimeout(inactivityTimer);
+            // El timeout es de 1 minuto (60000 milisegundos)
+            inactivityTimer = setTimeout(handleInactivity, 60000);
+        }
+        // === FIN: LÓGICA DE INACTIVIDAD ===
+
         // Storage Adapter - Para facilitar migración a backend
         const storageAdapter = {
             // Users
@@ -1104,13 +1081,6 @@
             saveAuditLog: function(auditLog) {
                 localStorage.setItem('yachay_auditLog', JSON.stringify(auditLog));
             },
-            
-            // Para migración a backend, estas funciones se reemplazarían con llamadas API
-            // Ejemplo:
-            // async getUsers() {
-            //     const response = await fetch('/api/users');
-            //     return response.json();
-            // }
         };
         
         // Inicialización de datos mock
@@ -1125,7 +1095,7 @@
                 id: 'admin-' + Date.now(),
                 name: 'Administrador',
                 email: 'admin@yachaymikuy.org',
-                passwordHash: btoa('admin123'), // En producción usar hash real
+                passwordHash: btoa('admin123'),
                 isAdmin: true,
                 createdAt: new Date().toISOString()
             };
@@ -1135,7 +1105,7 @@
                 id: 'user-' + Date.now(),
                 name: 'Padre Demo',
                 email: 'demo@yachaymikuy.org',
-                passwordHash: btoa('demo123'), // En producción usar hash real
+                passwordHash: btoa('demo123'),
                 isAdmin: false,
                 createdAt: new Date().toISOString()
             };
@@ -1402,16 +1372,26 @@
         // Funciones de gestión de usuarios
         function createUser(userData) {
             const users = storageAdapter.getUsers();
-            
-            // Verificar si el email ya existe
-            if (users.some(user => user.email === userData.email)) {
-                throw new Error('El correo electrónico ya está registrado');
+            const existingUserIndex = users.findIndex(user => user.email === userData.email);
+
+            if (existingUserIndex !== -1) {
+                const existingUser = users[existingUserIndex];
+                if (existingUser.passwordHash) {
+                    throw new Error('El correo electrónico ya está registrado');
+                } else {
+                    users[existingUserIndex].name = userData.name;
+                    users[existingUserIndex].passwordHash = btoa(userData.password);
+                    users[existingUserIndex].updatedAt = new Date().toISOString();
+                    storageAdapter.saveUsers(users);
+                    logAction(existingUser.id, 'user_re-registered', 'user', existingUser.id);
+                    return users[existingUserIndex];
+                }
             }
-            
+
             const newUser = {
                 id: 'user-' + Date.now(),
                 ...userData,
-                passwordHash: btoa(userData.password), // En producción usar hash real
+                passwordHash: btoa(userData.password),
                 isAdmin: false,
                 createdAt: new Date().toISOString()
             };
@@ -1428,15 +1408,14 @@
             const users = storageAdapter.getUsers();
             const user = users.find(u => u.email === email);
             
-            if (!user) {
-                throw new Error('Usuario no encontrado');
+            if (!user || !user.passwordHash) {
+                throw new Error('Usuario no encontrado o contraseña no establecida.');
             }
             
-            if (user.passwordHash !== btoa(password)) { // En producción comparar hashes reales
+            if (user.passwordHash !== btoa(password)) {
                 throw new Error('Contraseña incorrecta');
             }
             
-            // Actualizar sesión
             const session = storageAdapter.getSession();
             session.currentUserId = user.id;
             session.exploringAsGuest = false;
@@ -1464,15 +1443,16 @@
         
         function recoverPassword(email) {
             const users = storageAdapter.getUsers();
-            const user = users.find(u => u.email === email);
+            const userIndex = users.findIndex(u => u.email === email);
             
-            if (!user) {
+            if (userIndex === -1) {
                 throw new Error('Usuario no encontrado');
             }
             
-            // En un entorno real, enviaríamos un correo electrónico con instrucciones
-            // Para este demo, simplemente mostramos un mensaje
-            logAction(user.id, 'password_recovery', 'user', user.id, { email });
+            users[userIndex].passwordHash = null;
+            storageAdapter.saveUsers(users);
+            
+            logAction(users[userIndex].id, 'password_recovery_reset', 'user', users[userIndex].id, { email });
             
             return true;
         }
@@ -1481,7 +1461,6 @@
         function createChild(ownerId, childData) {
             const children = storageAdapter.getChildren();
             
-            // Validar edad (0-13 años)
             const birthDate = new Date(childData.dob);
             const today = new Date();
             const age = Math.floor((today - birthDate) / (365.25 * 24 * 60 * 60 * 1000));
@@ -1517,7 +1496,6 @@
                 throw new Error('Hijo no encontrado');
             }
             
-            // Validar edad (0-13 años) si se actualiza la fecha de nacimiento
             if (childData.dob) {
                 const birthDate = new Date(childData.dob);
                 const today = new Date();
@@ -1562,7 +1540,6 @@
             
             logAction(children[childIndex].ownerId, 'soft_delete_child', 'child', childId);
             
-            // Agregar sincronización
             syncChildDeletionAcrossPages(childId, 'soft-delete');
             
             return children[childIndex];
@@ -1584,7 +1561,6 @@
             
             logAction(children[childIndex].ownerId, 'restore_child', 'child', childId);
 
-            // Agregar sincronización
             syncChildDeletionAcrossPages(childId, 'restore');
             
             return children[childIndex];
@@ -1600,18 +1576,15 @@
             
             const ownerId = children[childIndex].ownerId;
             
-            // Eliminar hijo
             children.splice(childIndex, 1);
             storageAdapter.saveChildren(children);
             
-            // Eliminar respuestas asociadas
             const responses = storageAdapter.getResponses();
             delete responses[childId];
             storageAdapter.saveResponses(responses);
             
             logAction(ownerId, 'permanent_delete_child', 'child', childId);
 
-            // Agregar sincronización
             syncChildDeletionAcrossPages(childId, 'permanent-delete');
             
             return true;
@@ -1621,7 +1594,6 @@
             const session = storageAdapter.getSession();
             
             if (session.exploringAsGuest) {
-                // Si es invitado, devolver solo perfiles predefinidos
                 const children = storageAdapter.getChildren();
                 return children.filter(child => child.ownerId === null);
             }
@@ -1685,7 +1657,6 @@
             
             storageAdapter.saveResponses(responses);
             
-            // Actualizar progreso del hijo
             calculateProgress(childId);
             
             logAction(
@@ -1702,20 +1673,20 @@
             const responses = storageAdapter.getResponses();
             
             if (!responses[childId]) {
-                return 'q1'; // Primera pregunta
+                return 'q1';
             }
             
             const childResponses = responses[childId];
-            const totalQuestions = 50; // Total de preguntas en el cuestionario
+            const totalQuestions = 50;
             
             for (let i = 1; i <= totalQuestions; i++) {
                 const questionId = `q${i}`;
                 if (!childResponses[questionId]) {
-                    return questionId; // Primera pregunta sin respuesta
+                    return questionId;
                 }
             }
             
-            return null; // Todas las preguntas respondidas
+            return null;
         }
         
         function calculateProgress(childId) {
@@ -1727,14 +1698,13 @@
             }
             
             const childResponses = responses[childId];
-            const totalQuestions = 50; // Total de preguntas en el cuestionario
+            const totalQuestions = 50;
             const answeredQuestions = Object.keys(childResponses).filter(key => 
                 key.startsWith('q') && !childResponses[key].optional
             ).length;
             
             const progressPercent = Math.round((answeredQuestions / totalQuestions) * 100);
             
-            // Actualizar progreso en el perfil del hijo
             const childIndex = children.findIndex(c => c.id === childId);
             if (childIndex !== -1) {
                 children[childIndex].progressPercent = progressPercent;
@@ -1746,18 +1716,14 @@
         }
         
         function generatePlanForChild(childId) {
-            // Redirigir a chicos.html con el ID del hijo
             window.location.href = `chicos.html?childId=${childId}`;
         }
         
         function generateConsolidatedPlanForUser(userId) {
-            // Redirigir a yachay.html con el ID del usuario
             window.location.href = `yachay.html?userId=${userId}`;
         }
         
         function syncPendingChanges() {
-            // Stub para sincronización con backend
-            // En una implementación real, esto enviaría cambios pendientes al servidor
             showToast('Sincronización completada', 'success');
             return true;
         }
@@ -1767,14 +1733,12 @@
             document.getElementById('authSection').classList.remove('d-none');
             document.getElementById('dashboardSection').classList.add('d-none');
             document.getElementById('userMenu').classList.add('d-none');
-            // Mostrar botón Volver solo en la sección de autenticación
             document.getElementById('backBtn').classList.remove('d-none');
         }
         
         function showDashboardSection() {
             document.getElementById('authSection').classList.add('d-none');
             document.getElementById('dashboardSection').classList.remove('d-none');
-            // Ocultar botón Volver en el dashboard
             document.getElementById('backBtn').classList.add('d-none');
             
             const session = storageAdapter.getSession();
@@ -1785,14 +1749,12 @@
                 if (user) {
                     document.getElementById('userName').textContent = user.name;
                     document.getElementById('userMenu').classList.remove('d-none');
-                    // Mostrar botón de comunidad solo si el usuario ha iniciado sesión
                     document.getElementById('communityBtn').classList.remove('d-none');
                 }
             } else if (session.exploringAsGuest) {
                 document.getElementById('userName').textContent = 'Invitado';
                 document.getElementById('userMenu').classList.remove('d-none');
                 document.getElementById('logoutBtn').textContent = 'Salir de modo invitado';
-                // Ocultar botón de comunidad para usuarios invitados
                 document.getElementById('communityBtn').classList.add('d-none');
             }
             
@@ -1872,7 +1834,6 @@
                 container.appendChild(childCard);
             });
             
-            // Agregar event listeners
             document.querySelectorAll('.edit-child-btn').forEach(btn => {
                 btn.addEventListener('click', function(e) {
                     e.preventDefault();
@@ -1885,7 +1846,6 @@
                 btn.addEventListener('click', function(e) {
                     e.preventDefault();
                     const childId = this.getAttribute('data-child-id');
-                    // Redirigir a yachaymikuy.html para editar respuestas
                     window.location.href = `yachaymikuy.html?childId=${childId}&edit=true`;
                 });
             });
@@ -1894,7 +1854,6 @@
                 btn.addEventListener('click', function(e) {
                     e.preventDefault();
                     const childId = this.getAttribute('data-child-id');
-                    // Redirigir a chicos.html para ver el plan nutricional individual
                     window.location.href = `chicos.html?childId=${childId}`;
                 });
             });
@@ -1914,13 +1873,10 @@
                     const child = children.find(c => c.id === childId);
                     
                     if (child.progressPercent === 0) {
-                        // Comenzar cuestionario desde la primera pregunta
                         window.location.href = `yachaymikuy.html?childId=${childId}&q=q1`;
                     } else if (child.progressPercent === 100) {
-                        // Ver plan nutricional individual
                         window.location.href = `chicos.html?childId=${childId}`;
                     } else {
-                        // Continuar desde la última pregunta no respondida
                         const nextQuestion = getNextQuestion(childId);
                         window.location.href = `yachaymikuy.html?childId=${childId}&q=${nextQuestion}`;
                     }
@@ -1946,18 +1902,15 @@
             document.getElementById('childId').value = '';
             document.getElementById('childForm').reset();
             
-            // Seleccionar primer avatar por defecto
             document.querySelectorAll('.avatar-option').forEach(option => {
                 option.classList.remove('selected');
             });
             document.querySelector('.avatar-option[data-avatar="1"]').classList.add('selected');
             document.getElementById('childAvatar').value = '1';
             
-            // Asegurar que el modal se muestre correctamente
             const modal = new bootstrap.Modal(document.getElementById('childModal'));
             modal.show();
             
-            // Forzar que el modal esté en el frente
             document.getElementById('childModal').style.zIndex = '1055';
         }
         
@@ -1977,7 +1930,6 @@
             document.getElementById('childSex').value = child.sex;
             document.getElementById('childAvatar').value = child.avatarCustomization;
             
-            // Seleccionar avatar correcto
             document.querySelectorAll('.avatar-option').forEach(option => {
                 option.classList.remove('selected');
                 if (option.getAttribute('data-avatar') === child.avatarCustomization) {
@@ -1985,11 +1937,9 @@
                 }
             });
             
-            // Asegurar que el modal se muestre correctamente
             const modal = new bootstrap.Modal(document.getElementById('childModal'));
             modal.show();
             
-            // Forzar que el modal esté en el frente
             document.getElementById('childModal').style.zIndex = '1055';
         }
         
@@ -2009,11 +1959,9 @@
             
             try {
                 if (childId) {
-                    // Editar hijo existente
                     updateChild(childId, { name, dob, sex, avatarCustomization: avatar });
                     showToast('Perfil actualizado correctamente', 'success');
                 } else {
-                    // Crear nuevo hijo
                     if (!session.currentUserId) {
                         showToast('Debes iniciar sesión para agregar un hijo', 'error');
                         return;
@@ -2029,7 +1977,6 @@
                     showToast('Hijo agregado correctamente', 'success');
                 }
                 
-                // Cerrar modal y actualizar UI
                 bootstrap.Modal.getInstance(document.getElementById('childModal')).hide();
                 renderChildren();
             } catch (error) {
@@ -2051,7 +1998,6 @@
                     softDeleteChild(childId);
                     showToast(`${child.name} ha sido eliminado`, 'info');
                     
-                    // Mostrar toast con opción de deshacer
                     const toastContainer = document.getElementById('toastContainer');
                     const toastId = 'toast-undo-' + Date.now();
                     
@@ -2068,7 +2014,6 @@
                     
                     toastContainer.insertAdjacentHTML('beforeend', toastHtml);
                     
-                    // Auto remove after 10 seconds
                     setTimeout(() => {
                         const toast = document.getElementById(toastId);
                         if (toast) toast.remove();
@@ -2131,12 +2076,11 @@
                     trashItems.appendChild(trashItem);
                 });
                 
-                // Agregar event listeners
                 document.querySelectorAll('.restore-btn').forEach(btn => {
                     btn.addEventListener('click', function() {
                         const childId = this.getAttribute('data-child-id');
                         undoDeleteChild(childId);
-                        showTrash(); // Actualizar la papelera
+                        showTrash();
                     });
                 });
                 
@@ -2147,7 +2091,7 @@
                             try {
                                 permanentlyDeleteChild(childId);
                                 showToast('Perfil eliminado permanentemente', 'success');
-                                showTrash(); // Actualizar la papelera
+                                showTrash();
                             } catch (error) {
                                 showToast(error.message, 'error');
                             }
@@ -2175,11 +2119,11 @@
             if (/[^A-Za-z0-9]/.test(password)) score++;
 
             let width = (score / 5) * 100;
-            let color = '#F44336'; // Débil (Rojo)
+            let color = '#F44336';
             let strengthText = 'Débil';
 
-            if (score >= 2) { color = '#FFC107'; strengthText = 'Media'; } // Media (Amarillo)
-            if (score >= 4) { color = '#8BC34A'; strengthText = 'Fuerte'; } // Fuerte (Verde)
+            if (score >= 2) { color = '#FFC107'; strengthText = 'Media'; }
+            if (score >= 4) { color = '#8BC34A'; strengthText = 'Fuerte'; }
 
             meter.style.width = width + '%';
             meter.style.backgroundColor = color;
@@ -2192,81 +2136,66 @@
             if (!bgContainer) return;
 
             const emojis = ['🍓', '🍇', '🍉', '🍊', '🍋', '🍌', '🍍', '🥭', '🍎', '🍏', '🍐', '🍑', '🍒', '🥝', '🍅', '🥑', '🍆', '🥕', '🌽', '🌶️', '🥒', '🥬', '🥦', '🧄', '🧅'];
-            const count = 25; // Número de emojis en el fondo
+            const count = 25;
 
             for (let i = 0; i < count; i++) {
                 const emojiElement = document.createElement('span');
                 emojiElement.textContent = emojis[Math.floor(Math.random() * emojis.length)];
 
-                // Estilos aleatorios
                 emojiElement.style.left = `${Math.random() * 100}vw`;
-                emojiElement.style.fontSize = `${Math.random() * 2 + 1.5}rem`; // Tamaño entre 1.5rem y 3.5rem
-                emojiElement.style.animationDuration = `${Math.random() * 15 + 20}s`; // Duración entre 20s y 35s
-                emojiElement.style.animationDelay = `${Math.random() * 20}s`; // Retraso hasta 20s
+                emojiElement.style.fontSize = `${Math.random() * 2 + 1.5}rem`;
+                emojiElement.style.animationDuration = `${Math.random() * 15 + 20}s`;
+                emojiElement.style.animationDelay = `${Math.random() * 20}s`;
 
                 bgContainer.appendChild(emojiElement);
             }
         }
         
-        // --- INICIO DE FUNCIONES DE SINCRONIZACIÓN ---
-        
-        // Función para sincronizar la eliminación/restauración entre páginas
         function syncChildDeletionAcrossPages(childId, action) {
-            // action puede ser 'soft-delete', 'restore' o 'permanent-delete'
             const syncData = {
                 childId: childId,
                 action: action,
                 timestamp: new Date().toISOString()
             };
             
-            // Guardar en localStorage para que otras páginas puedan detectar cambios
             localStorage.setItem('yachay_sync_action', JSON.stringify(syncData));
             
-            // Notificar a otras pestañas abiertas usando BroadcastChannel
             if ('BroadcastChannel' in window) {
                 const channel = new BroadcastChannel('yachay_sync');
                 channel.postMessage(syncData);
             }
         }
 
-        // --- FIN DE FUNCIONES DE SINCRONIZACIÓN ---
-
         // Event Listeners
         document.addEventListener('DOMContentLoaded', function() {
-            // Inicializar datos mock si es necesario
+            resetInactivityTimer();
+            window.addEventListener('mousemove', resetInactivityTimer, false);
+            window.addEventListener('mousedown', resetInactivityTimer, false);
+            window.addEventListener('keypress', resetInactivityTimer, false);
+            window.addEventListener('touchmove', resetInactivityTimer, false);
+            window.addEventListener('scroll', resetInactivityTimer, true);
+            
             initializeMockData();
-
-            // *** NUEVO: Crear el fondo animado con emojis ***
             createAnimatedBackground();
             
-            // --- INICIO DE VERIFICACIÓN DE SINCRONIZACIÓN AL CARGAR ---
-            // Verificar si hay acciones de sincronización pendientes de otras pestañas
             const syncAction = localStorage.getItem('yachay_sync_action');
             if (syncAction) {
                 const syncData = JSON.parse(syncAction);
-                // Si la acción es reciente (menos de 5 segundos), la procesamos
                 const actionTime = new Date(syncData.timestamp);
                 const now = new Date();
                 if ((now - actionTime) < 5000) {
-                    // La acción es reciente, recargamos la vista para reflejar los cambios
                     renderChildren();
                 }
-                // Limpiamos la acción para no procesarla de nuevo
                 localStorage.removeItem('yachay_sync_action');
             }
 
-            // Configurar listener para sincronización en tiempo real con otras pestañas
             if ('BroadcastChannel' in window) {
                 const channel = new BroadcastChannel('yachay_sync');
                 channel.onmessage = function(event) {
-                    const syncData = event.data;
-                    // Si recibimos un mensaje de sincronización, recargamos la vista
                     renderChildren();
                 };
             }
-            // --- FIN DE VERIFICACIÓN DE SINCRONIZACIÓN AL CARGAR ---
             
-            // Verificar sesión actual
             const session = storageAdapter.getSession();
             
             if (session.currentUserId) {
@@ -2277,7 +2206,6 @@
                 showAuthSection();
             }
             
-            // Navegación entre formularios
             document.getElementById('showRegisterLink').addEventListener('click', function(e) {
                 e.preventDefault();
                 document.getElementById('loginForm').classList.add('d-none');
@@ -2306,7 +2234,6 @@
                 document.getElementById('forgotPasswordForm').classList.add('d-none');
             });
             
-            // Login
             document.getElementById('loginBtn').addEventListener('click', function() {
                 const email = document.getElementById('loginEmail').value;
                 const password = document.getElementById('loginPassword').value;
@@ -2329,7 +2256,6 @@
                 }
             });
             
-            // Registro
             document.getElementById('registerBtn').addEventListener('click', function() {
                 const name = document.getElementById('registerName').value;
                 const email = document.getElementById('registerEmail').value;
@@ -2358,7 +2284,6 @@
                     createUser({ name, email, password });
                     showToast('Cuenta creada correctamente', 'success');
                     
-                    // Iniciar sesión automáticamente
                     login(email, password);
                     showDashboardSection();
                 } catch (error) {
@@ -2368,7 +2293,6 @@
                 }
             });
             
-            // Recuperar contraseña
             document.getElementById('recoverBtn').addEventListener('click', function() {
                 const email = document.getElementById('forgotEmail').value;
                 
@@ -2381,9 +2305,8 @@
                 
                 try {
                     recoverPassword(email);
-                    showToast('Se han enviado instrucciones a tu correo electrónico', 'success');
+                    showToast('Solicitud procesada. Ahora puedes crear una nueva contraseña desde el formulario de registro con tu mismo correo.', 'success');
                     
-                    // Volver al formulario de login
                     document.getElementById('loginForm').classList.remove('d-none');
                     document.getElementById('registerForm').classList.add('d-none');
                     document.getElementById('forgotPasswordForm').classList.add('d-none');
@@ -2394,41 +2317,32 @@
                 }
             });
             
-            // Explorar como invitado
             document.getElementById('guestBtn').addEventListener('click', function() {
                 startGuestSession();
                 showToast('Explorando como invitado', 'info');
                 showDashboardSection();
             });
             
-            // Cerrar sesión
             document.getElementById('logoutBtn').addEventListener('click', function() {
                 logout();
-                showAuthSection();
-                showToast('Sesión cerrada correctamente', 'success');
+                window.location.href = 'index.html';
             });
             
-            // Botón Volver - redirige a index.html
             document.getElementById('backBtn').addEventListener('click', function() {
                 window.location.href = 'index.html';
             });
             
-            // Agregar hijo
             document.getElementById('addChildBtn').addEventListener('click', openAddChildModal);
             document.getElementById('emptyAddChildBtn').addEventListener('click', openAddChildModal);
             
-            // Guardar hijo
             document.getElementById('saveChildBtn').addEventListener('click', saveChild);
             
-            // Papelera
             document.getElementById('viewTrashBtn').addEventListener('click', showTrash);
             document.getElementById('closeTrashBtn').addEventListener('click', hideTrash);
             
-            // Generar plan nutricional
             document.getElementById('generatePlanBtn').addEventListener('click', function() {
                 const session = storageAdapter.getSession();
                 
-                // Verificar si hay niños completados al 100%
                 const children = getChildrenForCurrentUser();
                 const completedChildren = children.filter(child => child.progressPercent === 100);
                 
@@ -2438,22 +2352,18 @@
                 }
                 
                 if (session.exploringAsGuest) {
-                    // Si es invitado, generar plan con perfiles predefinidos
                     window.location.href = 'yachay.html';
                 } else if (session.currentUserId) {
-                    // Si está logueado, generar plan con sus hijos
                     window.location.href = `yachay.html?userId=${session.currentUserId}`;
                 } else {
                     showToast('Debes iniciar sesión o explorar como invitado', 'error');
                 }
             });
             
-            // Botón Comunidad
             document.getElementById('communityBtn').addEventListener('click', function() {
                 window.location.href = 'comunidad.html';
             });
             
-            // Selección de avatar
             document.querySelectorAll('.avatar-option').forEach(option => {
                 option.addEventListener('click', function() {
                     document.querySelectorAll('.avatar-option').forEach(opt => {
@@ -2464,7 +2374,6 @@
                 });
             });
             
-            // Funcionalidad para mostrar/ocultar contraseñas
             document.getElementById('toggleLoginPassword').addEventListener('click', function() {
                 const passwordInput = document.getElementById('loginPassword');
                 const icon = this;
@@ -2514,18 +2423,14 @@
                 updatePasswordStrength(this.value);
             });
             
-            // Configurar modales del footer
             setupFooterModals();
             
-            // Verificar si hay un hash en la URL para navegar a una sección específica
             if (window.location.hash === '#perfiles-de-tus-hijos') {
-                // Si el hash es #perfiles-de-tus-hijos, asegurarse de que la sección sea visible
                 const dashboardSection = document.getElementById('dashboardSection');
                 if (dashboardSection && dashboardSection.classList.contains('d-none')) {
                     showDashboardSection();
                 }
                 
-                // Hacer scroll a la sección
                 setTimeout(() => {
                     const profilesSection = document.getElementById('perfiles-de-tus-hijos');
                     if (profilesSection) {
@@ -2538,7 +2443,6 @@
         function setupFooterModals() {
             const actionModalContainer = document.getElementById('action-modal-container');
 
-            // Objeto con las plantillas HTML para cada modal
             const templates = {
                 aboutModal: () => `
                     <div class="modal active">
@@ -2713,13 +2617,11 @@
                     </div>`
             };
 
-            // Funciones para abrir y cerrar el modal
             const ui = {
                 openModal: (content) => { actionModalContainer.innerHTML = content; },
                 closeModal: () => { actionModalContainer.innerHTML = ''; }
             };
 
-            // Listener de clics para todo el documento
             document.body.addEventListener('click', (e) => {
                 const target = e.target.closest('a') || e.target;
                 

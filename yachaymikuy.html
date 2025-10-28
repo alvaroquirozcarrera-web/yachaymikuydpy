@@ -46,7 +46,6 @@
             overflow-x: hidden;
         }
 
-        /* --- MEJORA: Animación de fondo con más frutas y comidas --- */
         .food-animation-container {
             position: fixed;
             top: 0;
@@ -59,19 +58,17 @@
 
         .food-icon {
             position: absolute;
-            bottom: -150px; /* Inician desde abajo */
-            font-size: 2rem; /* Tamaño base, será variado con JS */
+            bottom: -150px;
+            font-size: 2rem;
             opacity: 0;
             animation: float 25s infinite linear;
         }
 
         @keyframes float {
             0% { transform: translateY(0) rotate(0deg); opacity: 0; }
-            10%, 90% { opacity: 0.7; } /* Opacidad mucho más viva */
+            10%, 90% { opacity: 0.7; }
             100% { transform: translateY(-120vh) rotate(720deg); opacity: 0; }
         }
-
-        /* Eliminamos los :nth-child fijos. Ahora se controlan por JavaScript para que sea aleatorio */
 
         .header, .main-container, .footer { position: relative; z-index: 1; }
         .header { background: linear-gradient(135deg, var(--primary-blue), var(--accent-color)); color: white; padding: 20px 0; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
@@ -179,13 +176,16 @@
 </head>
 <body>
     <div class="food-animation-container" id="foodContainer">
-        </div>
+    </div>
 
     <header class="header">
         <div class="container">
             <div class="row align-items-center">
-                <div class="col-md-6"><div class="logo"><i class="fas fa-apple-alt"></i> Yachay Mikuy</div></div>
-                <div class="col-md-6 text-md-end"><a href="index1.html" class="btn btn-light btn-sm"><i class="fas fa-arrow-left"></i> Volver al inicio</a></div>
+                <div class="col-6"><div class="logo"><i class="fas fa-apple-alt"></i> Yachay Mikuy</div></div>
+                <div class="col-6 text-end">
+                    <a href="index1.html" class="btn btn-light btn-sm me-2"><i class="fas fa-arrow-left"></i> Volver</a>
+                    <button id="logoutBtn" class="btn btn-outline-light btn-sm"><i class="fas fa-sign-out-alt"></i> Salir</button>
+                </div>
             </div>
         </div>
     </header>
@@ -268,12 +268,37 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     
     <script>
+        // === INICIO: LÓGICA DE SESIÓN E INACTIVIDAD ===
+        let inactivityTimer;
+
+        function logout() {
+            const session = storageAdapter.getSession();
+            session.currentUserId = null;
+            session.exploringAsGuest = false;
+            storageAdapter.saveSession(session);
+            console.log("Sesión cerrada.");
+        }
+
+        function handleInactivity() {
+            console.log("Inactividad de 2 minutos detectada. Cerrando sesión y redirigiendo.");
+            logout(); // Primero cierra la sesión
+            window.location.href = 'index.html'; // Luego redirige
+        }
+
+        function resetInactivityTimer() {
+            clearTimeout(inactivityTimer);
+            // El timeout es de 2 minutos (120000 milisegundos)
+            inactivityTimer = setTimeout(handleInactivity, 120000);
+        }
+        // === FIN: LÓGICA DE SESIÓN E INACTIVIDAD ===
+        
         const storageAdapter = {
             getChildren: () => JSON.parse(localStorage.getItem('yachay_children')) || [],
             saveChildren: (children) => localStorage.setItem('yachay_children', JSON.stringify(children)),
             getResponses: () => JSON.parse(localStorage.getItem('yachay_responses')) || {},
             saveResponses: (responses) => localStorage.setItem('yachay_responses', JSON.stringify(responses)),
             getSession: () => JSON.parse(localStorage.getItem('yachay_session')) || { currentUserId: null, exploringAsGuest: false },
+            saveSession: (session) => localStorage.setItem('yachay_session', JSON.stringify(session)),
         };
 
         const questionsDB = {
@@ -376,14 +401,14 @@
             const childId = new URLSearchParams(window.location.search).get('childId');
             if (!childId) {
                 showToast('No se ha especificado un perfil.', 'error');
-                setTimeout(() => { window.location.href = 'index1.html'; }, 2000);
+                setTimeout(() => { window.location.href = 'index.html'; }, 2000);
                 return null;
             }
             
             const child = storageAdapter.getChildren().find(c => c.id === childId);
             if (!child) {
                 showToast('Perfil no encontrado.', 'error');
-                setTimeout(() => { window.location.href = 'index1.html'; }, 2000);
+                setTimeout(() => { window.location.href = 'index.html'; }, 2000);
                 return null;
             }
             
@@ -481,7 +506,7 @@
         function exitQuestionnaire() {
             saveCurrentAnswerIfSelected(false);
             showToast('Tus respuestas han sido guardadas.', 'info');
-            setTimeout(() => { window.location.href = 'index1.html'; }, 1500);
+            setTimeout(() => { window.location.href = 'index.html'; }, 1500);
         }
 
         function showCompletionSection() {
@@ -510,7 +535,6 @@
             return null;
         }
 
-        // --- NUEVA FUNCIÓN PARA LA ANIMACIÓN ---
         function createFoodAnimation() {
             const container = document.getElementById('foodContainer');
             if (!container) return;
@@ -530,7 +554,7 @@
                 '#ff9f43', '#4cd137', '#00a8ff', '#9c88ff', '#f0932b', '#00d2d3'
             ];
 
-            const iconCount = 40; // Aumentamos la cantidad de íconos
+            const iconCount = 40;
 
             for (let i = 0; i < iconCount; i++) {
                 const iconEl = document.createElement('i');
@@ -538,11 +562,10 @@
                 
                 iconEl.className = `${randomIcon} food-icon`;
                 
-                // Propiedades aleatorias para cada ícono
-                iconEl.style.left = `${Math.random() * 98}vw`; // Posición horizontal aleatoria
-                iconEl.style.animationDuration = `${Math.random() * 20 + 20}s`; // Duración entre 20s y 40s
-                iconEl.style.animationDelay = `-${Math.random() * 20}s`; // Inicio desfasado
-                iconEl.style.fontSize = `${Math.random() * 1.5 + 1.5}rem`; // Tamaño entre 1.5rem y 3rem
+                iconEl.style.left = `${Math.random() * 98}vw`;
+                iconEl.style.animationDuration = `${Math.random() * 20 + 20}s`;
+                iconEl.style.animationDelay = `-${Math.random() * 20}s`;
+                iconEl.style.fontSize = `${Math.random() * 1.5 + 1.5}rem`;
                 iconEl.style.color = colors[Math.floor(Math.random() * colors.length)];
                 
                 container.appendChild(iconEl);
@@ -551,13 +574,20 @@
 
 
         document.addEventListener('DOMContentLoaded', function() {
+            // === INICIAR TEMPORIZADOR DE INACTIVIDAD ===
+            resetInactivityTimer();
+            window.addEventListener('mousemove', resetInactivityTimer, false);
+            window.addEventListener('mousedown', resetInactivityTimer, false);
+            window.addEventListener('keypress', resetInactivityTimer, false);
+            window.addEventListener('touchmove', resetInactivityTimer, false);
+            window.addEventListener('scroll', resetInactivityTimer, true);
+            
             if (!storageAdapter.getSession().currentUserId && !storageAdapter.getSession().exploringAsGuest) {
                 showToast('Debes iniciar sesión para acceder.', 'error');
-                setTimeout(() => { window.location.href = 'index1.html'; }, 2000);
+                setTimeout(() => { window.location.href = 'index.html'; }, 2000);
                 return;
             }
             
-            // --- Llamamos a la nueva función de animación ---
             createFoodAnimation();
 
             if (!loadChildInfo()) return;
@@ -575,15 +605,20 @@
             document.getElementById('questionContainer').addEventListener('change', updateButtonState);
             document.getElementById('avatarBubble').addEventListener('click', () => showAvatarMessage());
             document.getElementById('viewPlanBtn').addEventListener('click', () => window.location.href = `chicos.html?childId=${currentChildId}`);
-            document.getElementById('backToProfileBtn').addEventListener('click', () => window.location.href = 'index1.html');
+            document.getElementById('backToProfileBtn').addEventListener('click', () => window.location.href = 'index.html');
             
+            // === FUNCIONALIDAD DEL NUEVO BOTÓN SALIR ===
+            document.getElementById('logoutBtn').addEventListener('click', () => {
+                logout(); // Cierra la sesión
+                window.location.href = 'index.html'; // Redirige a la página de inicio
+            });
+
             setupFooterModals();
         });
 
         function setupFooterModals() {
             const actionModalContainer = document.getElementById('action-modal-container');
 
-            // Objeto con las plantillas HTML para cada modal
             const templates = {
                 aboutModal: () => `
                     <div class="modal active">
@@ -722,40 +757,40 @@
                         </div>
                     </div>`,
                 termsModal: () => `
-                       <div class="modal active">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h2>Términos y Condiciones</h2>
-                                    <button class="close-modal">&times;</button>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="content-section">
-                                        <h3><i class="fas fa-check-circle"></i> Aceptación de los Términos</h3>
-                                        <p>Al utilizar la plataforma Yachay Mikuy, aceptas estos términos y condiciones. El uso de la plataforma para un menor de edad implica que usted, como padre o tutor, acepta estos términos en su nombre.</p>
+                                <div class="modal active">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h2>Términos y Condiciones</h2>
+                                            <button class="close-modal">&times;</button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="content-section">
+                                                <h3><i class="fas fa-check-circle"></i> Aceptación de los Términos</h3>
+                                                <p>Al utilizar la plataforma Yachay Mikuy, aceptas estos términos y condiciones. El uso de la plataforma para un menor de edad implica que usted, como padre o tutor, acepta estos términos en su nombre.</p>
+                                            </div>
+                                            <div class="content-section">
+                                                <h3><i class="fas fa-heart"></i> Descargo de Responsabilidad Médica</h3>
+                                                <p>Yachay Mikuy es una herramienta de apoyo y educación nutricional. <strong>No reemplaza el diagnóstico, consejo o tratamiento de un profesional médico cualificado.</strong> Siempre consulte a su pediatra o nutricionista antes de realizar cambios significativos en la dieta de su hijo, especialmente si existen condiciones médicas preexistentes.</p>
+                                            </div>
+                                            <div class="content-section">
+                                                <h3><i class="fas user-check"></i> Responsabilidades del Usuario</h3>
+                                                <ul>
+                                                    <li>Usted es responsable de proporcionar información precisa y actualizada sobre su hijo para garantizar la personalización efectiva del plan.</li>
+                                                    <li>Es su responsabilidad supervisar la implementación del plan nutricional y el uso de la aplicación por parte del menor.</li>
+                                                    <li>Se compromete a no utilizar la plataforma para fines ilegales o no autorizados.</li>
+                                                </ul>
+                                            </div>
+                                            <div class="content-section">
+                                                <h3><i class="fas fa-copyright"></i> Propiedad Intelectual</h3>
+                                                <p>Todo el contenido, algoritmos y la marca Yachay Mikuy son propiedad de sus creadores. Queda prohibida su reproducción o distribución sin autorización expresa.</p>
+                                            </div>
+                                            <div class="highlight-box">
+                                                <h3 style="margin-top:0;"><i class="fas fa-sync-alt"></i> Modificaciones</h3>
+                                                <p>Nos reservamos el derecho de modificar estos términos en cualquier momento. Se notificará a los usuarios de cambios significativos. El uso continuado de la plataforma constituirá la aceptación de los nuevos términos.</p>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="content-section">
-                                        <h3><i class="fas fa-heart"></i> Descargo de Responsabilidad Médica</h3>
-                                        <p>Yachay Mikuy es una herramienta de apoyo y educación nutricional. <strong>No reemplaza el diagnóstico, consejo o tratamiento de un profesional médico cualificado.</strong> Siempre consulte a su pediatra o nutricionista antes de realizar cambios significativos en la dieta de su hijo, especialmente si existen condiciones médicas preexistentes.</p>
-                                    </div>
-                                    <div class="content-section">
-                                        <h3><i class="fas user-check"></i> Responsabilidades del Usuario</h3>
-                                        <ul>
-                                            <li>Usted es responsable de proporcionar información precisa y actualizada sobre su hijo para garantizar la personalización efectiva del plan.</li>
-                                            <li>Es su responsabilidad supervisar la implementación del plan nutricional y el uso de la aplicación por parte del menor.</li>
-                                            <li>Se compromete a no utilizar la plataforma para fines ilegales o no autorizados.</li>
-                                        </ul>
-                                    </div>
-                                    <div class="content-section">
-                                        <h3><i class="fas fa-copyright"></i> Propiedad Intelectual</h3>
-                                        <p>Todo el contenido, algoritmos y la marca Yachay Mikuy son propiedad de sus creadores. Queda prohibida su reproducción o distribución sin autorización expresa.</p>
-                                    </div>
-                                    <div class="highlight-box">
-                                        <h3 style="margin-top:0;"><i class="fas fa-sync-alt"></i> Modificaciones</h3>
-                                        <p>Nos reservamos el derecho de modificar estos términos en cualquier momento. Se notificará a los usuarios de cambios significativos. El uso continuado de la plataforma constituirá la aceptación de los nuevos términos.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>`
+                                </div>`
             };
 
             const ui = {

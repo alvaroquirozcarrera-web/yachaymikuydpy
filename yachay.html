@@ -532,7 +532,7 @@
                 </div>
                 <p class="group-header-message" id="dynamicMessage"></p>
             </div>
-            <a href="index1.html" class="btn-exit">
+            <a href="#" id="exitButton" class="btn-exit">
                 <i class="fas fa-sign-out-alt"></i> Salir
             </a>
         </header>
@@ -675,6 +675,32 @@
     <div class="toast-container" id="toastContainer"></div>
 
     <script>
+        // === INICIO: LÓGICA DE INACTIVIDAD ===
+        let inactivityTimer;
+
+        function handleInactivity() {
+            console.log("Inactividad de 2 minutos detectada. Cerrando sesión y redirigiendo.");
+            logout(); // Cierra la sesión
+            window.location.href = 'index.html'; // Redirige a la página de inicio
+        }
+
+        function resetInactivityTimer() {
+            clearTimeout(inactivityTimer);
+            // El timeout es de 2 minutos (120000 milisegundos)
+            inactivityTimer = setTimeout(handleInactivity, 120000);
+        }
+        // === FIN: LÓGICA DE INACTIVIDAD ===
+
+        // === INICIO: LÓGICA DE SESIÓN ===
+        function logout() {
+            const session = storageAdapter.getSession();
+            session.currentUserId = null;
+            session.exploringAsGuest = false;
+            storageAdapter.saveSession(session);
+            console.log("Sesión cerrada.");
+        }
+        // === FIN: LÓGICA DE SESIÓN ===
+
         const storageAdapter = { getUsers: function() { const users = localStorage.getItem('yachay_users'); return users ? JSON.parse(users) : []; }, saveUsers: function(users) { localStorage.setItem('yachay_users', JSON.stringify(users)); }, getChildren: function() { const children = localStorage.getItem('yachay_children'); return children ? JSON.parse(children) : []; }, saveChildren: function(children) { localStorage.setItem('yachay_children', JSON.stringify(children)); }, getResponses: function() { const responses = localStorage.getItem('yachay_responses'); return responses ? JSON.parse(responses) : {}; }, saveResponses: function(responses) { localStorage.setItem('yachay_responses', JSON.stringify(responses)); }, getSession: function() { const session = localStorage.getItem('yachay_session'); return session ? JSON.parse(session) : { currentUserId: null, exploringAsGuest: false, lastActiveAt: null }; }, saveSession: function(session) { localStorage.setItem('yachay_session', JSON.stringify(session)); }, getAuditLog: function() { const auditLog = localStorage.getItem('yachay_auditLog'); return auditLog ? JSON.parse(auditLog) : []; }, saveAuditLog: function(auditLog) { localStorage.setItem('yachay_auditLog', JSON.stringify(auditLog)); } };
         function syncChildDeletionAcrossPages(childId, action) { const syncData = { childId: childId, action: action, timestamp: new Date().toISOString() }; localStorage.setItem('yachay_sync_action', JSON.stringify(syncData)); if ('BroadcastChannel' in window) { const channel = new BroadcastChannel('yachay_sync'); channel.postMessage(syncData); } }
         function showToast(message, type = 'info') { const toastContainer = document.getElementById('toastContainer'); const toastId = 'toast-' + Date.now(); const toastHtml = ` <div id="${toastId}" class="custom-toast toast-${type}"> <div class="me-2"> ${type === 'success' ? '<i class="fas fa-check-circle text-success"></i>' : type === 'error' ? '<i class="fas fa-exclamation-circle text-danger"></i>' : '<i class="fas fa-info-circle text-info"></i>'} </div> <div class="flex-grow-1">${message}</div> <button type="button" class="btn-close ms-2" onclick="document.getElementById('${toastId}').remove()"></button> </div> `; toastContainer.insertAdjacentHTML('beforeend', toastHtml); setTimeout(() => { const toast = document.getElementById(toastId); if (toast) toast.remove(); }, 5000); }
@@ -685,28 +711,10 @@
             const container = document.getElementById('foodContainer');
             if (!container) return;
             const foodIcons = ['fas fa-apple-alt', 'fas fa-carrot', 'fas fa-lemon', 'fas fa-pepper-hot', 'fas fa-seedling', 'fas fa-leaf', 'fas fa-fish', 'fas fa-egg', 'fas fa-bread-slice', 'fas fa-cheese', 'fas fa-drumstick-bite', 'fas fa-ice-cream', 'fas fa-pizza-slice', 'fas fa-cookie', 'fas fa-bacon', 'fas fa-stroopwafel', 'fas fa-hotdog', 'fas fa-candy-cane', 'fas fa-shrimp', 'fas fa-burger', 'fas fa-blender', 'fas fa-mug-hot', 'fas fa-plate-wheat', 'fas fa-bottle-water'];
-            // Colores más vibrantes y saturados
             const colors = [
-                '#FF4500', // Rojo naranja (más fuerte)
-                '#FFD700', // Oro (más fuerte)
-                '#3CB371', // Verde medio mar (más fuerte)
-                '#1E90FF', // Azul dodger (fuerte)
-                '#9370DB', // Púrpura medio (más fuerte)
-                '#FF8C00', // Naranja oscuro (más fuerte)
-                '#20B2AA', // Verde mar claro (más fuerte)
-                '#DC143C', // Rojo carmesí (fuerte)
-                '#FFDAB9', // Melocotón (pastel pero vibrante)
-                '#4682B4', // Azul acero (más fuerte)
-                '#6B8E23', // Verde oliva oscuro (más fuerte)
-                '#FF69B4', // Rosa fuerte (más fuerte)
-                '#FF7F50', // Coral (más fuerte)
-                '#8A2BE2', // Azul violeta (fuerte)
-                '#00CED1', // Turquesa oscuro (fuerte)
-                '#FF1493', // Rosa profundo (más fuerte)
-                '#FF4B00', // Naranja fuego
-                '#32CD32', // Verde lima (fuerte)
-                '#00BFFF', // Azul cielo profundo
-                '#FF6347'  // Tomate
+                '#FF4500', '#FFD700', '#3CB371', '#1E90FF', '#9370DB', '#FF8C00', '#20B2AA', '#DC143C', '#FFDAB9', 
+                '#4682B4', '#6B8E23', '#FF69B4', '#FF7F50', '#8A2BE2', '#00CED1', '#FF1493', '#FF4B00', '#32CD32', 
+                '#00BFFF', '#FF6347'
             ];
             const iconCount = 35;
             for (let i = 0; i < iconCount; i++) {
@@ -738,6 +746,24 @@
         }
 
         document.addEventListener('DOMContentLoaded', function() {
+            // === INICIAR TEMPORIZADOR DE INACTIVIDAD Y EVENT LISTENERS ===
+            resetInactivityTimer();
+            window.addEventListener('mousemove', resetInactivityTimer);
+            window.addEventListener('mousedown', resetInactivityTimer);
+            window.addEventListener('keypress', resetInactivityTimer);
+            window.addEventListener('touchmove', resetInactivityTimer);
+            window.addEventListener('scroll', resetInactivityTimer, true);
+            
+            // === MANEJO DEL BOTÓN SALIR ===
+            document.getElementById('exitButton').addEventListener('click', function(e) {
+                e.preventDefault(); // Previene la navegación inmediata
+                logout(); // Cierra la sesión
+                showToast('Cerrando sesión...', 'info');
+                setTimeout(() => {
+                    window.location.href = 'index.html'; // Redirige a index.html
+                }, 1500);
+            });
+
             createFoodAnimation();
             displayDynamicMessage();
 

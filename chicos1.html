@@ -3,1341 +3,135 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Comida con Despensa - YachayMikuy</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Cocina Inteligente contra la Anemia - Yachay Mikuy</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         :root {
-            --primary-color: #4CAF50;
-            --secondary-color: #FFC107;
-            --accent-color: #FF5722;
-            --light-color: #F9F9F9;
-            --dark-color: #333;
-            --danger-color: #F44336;
-            --warning-color: #FF9800;
-            --success-color: #8BC34A;
-            --info-color: #03A9F4;
-            --primary-blue: #2c5aa0;
-            --light-blue: #5d8cc4;
-            --dark-blue: #1a3a6e;
-            --iron-color: #B22222;
-            --vitamin-c-color: #FF8C00;
+            --primary-color: #4CAF50; --secondary-color: #FFC107; --accent-color: #FF5722;
+            --light-color: #F9F9F9; --dark-color: #333; --danger-color: #F44336;
+            --warning-color: #FF9800; --success-color: #8BC34A; --info-color: #03A9F4;
+            --primary-blue: #2c5aa0; --light-blue: #5d8cc4; --dark-blue: #1a3a6e;
+            --iron-color: #B22222; --vitamin-c-color: #FF8C00;
             --shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            background-color: #f5f5f5;
-            color: var(--dark-color);
-            line-height: 1.6;
-            padding-bottom: 60px;
-            background-image: url('https://picsum.photos/seed/healthyfood/1600/900.jpg');
-            background-size: cover;
-            background-attachment: fixed;
-            background-position: center;
-            overflow-x: hidden;
-        }
-
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(255, 255, 255, 0.85);
-            z-index: -1;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        /* Barra superior mejorada */
-        .header {
-            background: linear-gradient(135deg, white 0%, #f8f9fa 100%);
-            border-radius: 20px;
-            padding: 20px;
-            box-shadow: var(--shadow);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 25px;
-            flex-wrap: wrap;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            border: 2px solid var(--primary-color);
-            backdrop-filter: blur(10px);
-            transition: var(--transition);
-        }
-
-        .header:hover {
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-        }
-
-        .header h1 {
-            color: var(--primary-blue);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 1.5rem;
-            position: relative;
-        }
-
-        .header h1::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 3px;
-            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
-            transition: width 0.5s ease;
-        }
-
-        .header:hover h1::after {
-            width: 100%;
-        }
-
-        .header h1 i {
-            font-size: 1.5rem;
-            color: var(--primary-color);
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
-        }
-
-        .header-buttons {
-            display: flex;
-            gap: 10px;
-        }
-
-        .btn {
-            padding: 12px 20px;
-            border: none;
-            border-radius: 25px;
-            cursor: pointer;
-            font-weight: bold;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            transition: var(--transition);
-            font-size: 0.9rem;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.5);
-            transform: translate(-50%, -50%);
-            transition: width 0.6s, height 0.6s;
-        }
-
-        .btn:hover::before {
-            width: 300px;
-            height: 300px;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--primary-color), #45a049);
-            color: white;
-        }
-
-        .btn-secondary {
-            background: linear-gradient(135deg, var(--secondary-color), #e0a800);
-            color: var(--dark-color);
-        }
-
-        .btn-danger {
-            background: linear-gradient(135deg, var(--danger-color), #d32f2f);
-            color: white;
-        }
-
-        .btn-warning {
-            background: linear-gradient(135deg, var(--warning-color), #f57c00);
-            color: white;
-        }
-
-        .btn-success {
-            background: linear-gradient(135deg, var(--success-color), #689f38);
-            color: white;
-        }
-
-        .btn-info {
-            background: linear-gradient(135deg, var(--info-color), #0288d1);
-            color: white;
-        }
-
-        .btn-iron {
-            background: linear-gradient(135deg, var(--iron-color), #8b1a1a);
-            color: white;
-        }
-
-        .btn-vitamin-c {
-            background: linear-gradient(135deg, var(--vitamin-c-color), #e65100);
-            color: white;
-        }
-
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-        }
-
-        /* Navegación por pestañas */
-        .nav-tabs {
-            display: flex;
-            background: white;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            margin-bottom: 25px;
-        }
-
-        .nav-tab {
-            flex: 1;
-            padding: 15px;
-            text-align: center;
-            cursor: pointer;
-            background: white;
-            color: var(--dark-color);
-            font-weight: 500;
-            transition: var(--transition);
-            position: relative;
-        }
-
-        .nav-tab i {
-            display: block;
-            font-size: 1.5rem;
-            margin-bottom: 5px;
-        }
-
-        .nav-tab.active {
-            background: linear-gradient(135deg, var(--primary-blue), var(--light-blue));
-            color: white;
-        }
-
-        .nav-tab:not(.active):hover {
-            background-color: #f0f0f0;
-        }
-
-        .tab-content {
-            display: none;
-            animation: fadeIn 0.5s;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        /* Sección de Anemia */
-        .anemia-section {
-            background: linear-gradient(135deg, white 0%, #fff8f8 100%);
-            border-radius: 20px;
-            padding: 25px;
-            margin-bottom: 25px;
-            box-shadow: var(--shadow);
-            border: 2px solid var(--iron-color);
-            position: relative;
-            overflow: hidden;
-            transition: var(--transition);
-        }
-
-        .anemia-section:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-        }
-
-        .anemia-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 10px;
-            height: 100%;
-            background: linear-gradient(to bottom, var(--iron-color), #ff6b6b);
-        }
-
-        .anemia-title {
-            color: var(--iron-color);
-            font-size: 1.8rem;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .anemia-content {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            align-items: center;
-        }
-
-        .anemia-text {
-            flex: 1;
-            min-width: 250px;
-        }
-
-        .anemia-image {
-            flex: 1;
-            min-width: 250px;
-            max-width: 300px;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            transition: var(--transition);
-        }
-
-        .anemia-image:hover {
-            transform: scale(1.03);
-        }
-
-        .anemia-image img {
-            width: 100%;
-            height: auto;
-            display: block;
-            transition: var(--transition);
-        }
-
-        .anemia-image:hover img {
-            transform: scale(1.05);
-        }
-
-        .anemia-formula {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-top: 20px;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .formula-item {
-            padding: 10px 15px;
-            border-radius: 25px;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            transition: var(--transition);
-        }
-
-        .formula-item:hover {
-            transform: translateY(-3px);
-        }
-
-        /* Sección de Alimentos Recomendados */
-        .recommended-foods {
-            background: linear-gradient(135deg, white 0%, #f8fff8 100%);
-            border-radius: 20px;
-            padding: 25px;
-            margin-bottom: 25px;
-            box-shadow: var(--shadow);
-            border: 2px solid var(--success-color);
-        }
-
-        .recommended-title {
-            color: var(--success-color);
-            font-size: 1.5rem;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .food-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 20px;
-        }
-
-        .food-card {
-            background: white;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-            transition: var(--transition);
-            cursor: pointer;
-            position: relative;
-        }
-
-        .food-card::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(76, 175, 80, 0.1), rgba(139, 195, 74, 0.1));
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-
-        .food-card:hover::after {
-            opacity: 1;
-        }
-
-        .food-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
-        }
-
-        .food-image {
-            height: 150px;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .food-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: var(--transition);
-        }
-
-        .food-card:hover .food-image img {
-            transform: scale(1.1);
-        }
-
-        .food-info {
-            padding: 15px;
-        }
-
-        .food-name {
-            font-weight: bold;
-            margin-bottom: 8px;
-            color: var(--dark-color);
-            font-size: 1.1rem;
-        }
-
-        .food-benefit {
-            font-size: 0.9rem;
-            color: var(--primary-color);
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .iron-level {
-            display: flex;
-            align-items: center;
-            margin-top: 10px;
-        }
-
-        .iron-bar {
-            flex: 1;
-            height: 8px;
-            background-color: #e0e0e0;
-            border-radius: 4px;
-            overflow: hidden;
-        }
-
-        .iron-fill {
-            height: 100%;
-            background: linear-gradient(to right, var(--iron-color), #ff6b6b);
-            transition: width 1s ease;
-        }
-
-        .iron-percentage {
-            margin-left: 10px;
-            font-weight: bold;
-            color: var(--iron-color);
-        }
-
-        /* Sección de Alimentos a Evitar */
-        .avoid-foods {
-            background: linear-gradient(135deg, white 0%, #fff8f8 100%);
-            border-radius: 20px;
-            padding: 25px;
-            margin-bottom: 25px;
-            box-shadow: var(--shadow);
-            border: 2px solid var(--danger-color);
-        }
-
-        .avoid-title {
-            color: var(--danger-color);
-            font-size: 1.5rem;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .avoid-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 20px;
-        }
-
-        .avoid-card {
-            background: white;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-            border: 1px solid #ffe0e0;
-            transition: var(--transition);
-        }
-
-        .avoid-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
-        }
-
-        .avoid-image {
-            height: 150px;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .avoid-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            filter: grayscale(50%);
-            transition: var(--transition);
-        }
-
-        .avoid-card:hover .avoid-image img {
-            filter: grayscale(20%);
-            transform: scale(1.05);
-        }
-
-        .avoid-badge {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: linear-gradient(135deg, var(--danger-color), #d32f2f);
-            color: white;
-            padding: 5px 10px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: bold;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-        }
-
-        .avoid-info {
-            padding: 15px;
-        }
-
-        .avoid-name {
-            font-weight: bold;
-            margin-bottom: 8px;
-            color: var(--dark-color);
-            font-size: 1.1rem;
-        }
-
-        .avoid-reason {
-            font-size: 0.9rem;
-            color: var(--danger-color);
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        /* Sección de Combos Recomendados */
-        .combos-section {
-            background: linear-gradient(135deg, white 0%, #fff9f0 100%);
-            border-radius: 20px;
-            padding: 25px;
-            margin-bottom: 25px;
-            box-shadow: var(--shadow);
-            border: 2px solid var(--vitamin-c-color);
-        }
-
-        .combos-title {
-            color: var(--vitamin-c-color);
-            font-size: 1.5rem;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .combo-card {
-            display: flex;
-            background: white;
-            border-radius: 15px;
-            overflow: hidden;
-            margin-bottom: 20px;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-            transition: var(--transition);
-        }
-
-        .combo-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-        }
-
-        .combo-image {
-            width: 120px;
-            height: 120px;
-            overflow: hidden;
-        }
-
-        .combo-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: var(--transition);
-        }
-
-        .combo-card:hover .combo-image img {
-            transform: scale(1.1);
-        }
-
-        .combo-info {
-            flex: 1;
-            padding: 15px;
-        }
-
-        .combo-name {
-            font-weight: bold;
-            margin-bottom: 8px;
-            color: var(--dark-color);
-            font-size: 1.1rem;
-        }
-
-        .combo-description {
-            font-size: 0.9rem;
-            color: var(--dark-color);
-            margin-bottom: 10px;
-        }
-
-        .combo-benefits {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-
-        .combo-benefit {
-            background: linear-gradient(135deg, var(--vitamin-c-color), #e65100);
-            color: white;
-            padding: 3px 8px;
-            border-radius: 15px;
-            font-size: 0.8rem;
-            display: flex;
-            align-items: center;
-            gap: 3px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-
-        /* Sección de Instrucciones */
-        .instructions {
-            background: linear-gradient(135deg, white 0%, #f0f7ff 100%);
-            border-radius: 20px;
-            padding: 25px;
-            margin-bottom: 25px;
-            box-shadow: var(--shadow);
-            border: 2px solid var(--primary-blue);
-        }
-
-        .collapsible {
-            background: linear-gradient(135deg, var(--primary-blue), var(--light-blue));
-            color: white;
-            cursor: pointer;
-            padding: 15px;
-            width: 100%;
-            border: none;
-            text-align: left;
-            outline: none;
-            font-size: 1.1rem;
-            border-radius: 10px;
-            margin-bottom: 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: var(--transition);
-        }
-
-        .collapsible:hover {
-            background: linear-gradient(135deg, var(--light-blue), var(--primary-blue));
-        }
-
-        .collapsible-content {
-            padding: 0 15px;
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease-out;
-            background-color: white;
-            border-radius: 0 0 10px 10px;
-        }
-
-        .collapsible-content.active {
-            padding: 15px;
-            max-height: 500px;
-        }
-
-        .step {
-            display: flex;
-            margin-bottom: 15px;
-            align-items: flex-start;
-        }
-
-        .step-number {
-            background: linear-gradient(135deg, var(--primary-blue), var(--light-blue));
-            color: white;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-right: 15px;
-            flex-shrink: 0;
-            font-weight: bold;
-        }
-
-        /* Sección de Entrada de Alimentos */
-        .food-input {
-            background: linear-gradient(135deg, white 0%, #fffdf0 100%);
-            border-radius: 20px;
-            padding: 25px;
-            margin-bottom: 25px;
-            box-shadow: var(--shadow);
-            border: 2px solid var(--secondary-color);
-        }
-
-        .tabs {
-            display: flex;
-            margin-bottom: 20px;
-            border-bottom: 1px solid #ddd;
-            overflow-x: auto;
-        }
-
-        .tab {
-            padding: 12px 20px;
-            cursor: pointer;
-            background-color: #f1f1f1;
-            border: 1px solid #ddd;
-            border-bottom: none;
-            border-radius: 10px 10px 0 0;
-            margin-right: 5px;
-            white-space: nowrap;
-            transition: var(--transition);
-        }
-
-        .tab.active {
-            background-color: white;
-            border-bottom: 1px solid white;
-            margin-bottom: -1px;
-            font-weight: bold;
-            color: var(--primary-blue);
-        }
-
-        .tab-content {
-            display: none;
-            padding: 20px;
-            border: 1px solid #ddd;
-            border-radius: 0 0 10px 10px;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        .input-group {
-            display: flex;
-            margin-bottom: 15px;
-            gap: 10px;
-        }
-
-        .input-group input {
-            flex: 1;
-            padding: 12px;
-            border: 2px solid #ddd;
-            border-radius: 25px;
-            font-size: 1rem;
-            transition: var(--transition);
-        }
-
-        .input-group input:focus {
-            border-color: var(--primary-color);
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
-        }
-
-        .food-list {
-            margin-top: 20px;
-        }
-
-        .food-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px;
-            background-color: #f9f9f9;
-            border-radius: 25px;
-            margin-bottom: 10px;
-            animation: fadeIn 0.5s;
-            border-left: 4px solid var(--primary-color);
-            transition: var(--transition);
-        }
-
-        .food-item:hover {
-            background-color: #f0f0f0;
-            transform: translateX(5px);
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes fadeOut {
-            from { opacity: 1; transform: translateY(0); }
-            to { opacity: 0; transform: translateY(-10px); }
-        }
-
-        .food-item.removing {
-            animation: fadeOut 0.5s forwards;
-        }
-
-        .remove-btn {
-            background: linear-gradient(135deg, var(--danger-color), #d32f2f);
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 30px;
-            height: 30px;
-            cursor: pointer;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            transition: var(--transition);
-        }
-
-        .remove-btn:hover {
-            transform: rotate(90deg);
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-        }
-
-        .file-upload {
-            position: relative;
-            display: inline-block;
-            cursor: pointer;
-            width: 100%;
-        }
-
-        .file-upload input[type=file] {
-            position: absolute;
-            opacity: 0;
-            width: 100%;
-            height: 100%;
-            cursor: pointer;
-        }
-
-        .file-upload-btn {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 100%;
-            padding: 40px 20px;
-            background-color: #f1f1f1;
-            border: 2px dashed #ddd;
-            border-radius: 10px;
-            text-align: center;
-            color: var(--dark-color);
-            font-size: 1.2rem;
-            gap: 10px;
-            transition: var(--transition);
-        }
-
-        .file-upload-btn:hover {
-            background-color: #e9e9e9;
-            border-color: var(--primary-color);
-        }
-
-        .file-upload-btn i {
-            font-size: 2rem;
-            color: var(--primary-color);
-        }
-
-        /* Sección de Botones de Recetas */
-        .recipe-buttons {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-bottom: 25px;
-        }
-
-        .recipe-buttons .btn {
-            flex: 1;
-            min-width: 200px;
-            justify-content: center;
-        }
-
-        /* Sección de Recetas */
-        .recipes-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
-        }
-
-        .recipe-card {
-            background: white;
-            border-radius: 20px;
-            padding: 20px;
-            box-shadow: var(--shadow);
-            animation: fadeIn 0.5s;
-            position: relative;
-            overflow: hidden;
-            transition: var(--transition);
-        }
-
-        .recipe-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-        }
-
-        .recipe-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 5px;
-            background: linear-gradient(to right, var(--primary-color), var(--secondary-color), var(--info-color));
-        }
-
-        .recipe-card.removing {
-            animation: fadeOut 0.5s forwards;
-        }
-
-        .recipe-card h3 {
-            color: var(--primary-blue);
-            margin-bottom: 15px;
-            font-size: 1.3rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .recipe-card h4 {
-            margin-top: 15px;
-            margin-bottom: 10px;
-            color: var(--dark-color);
-            font-size: 1.1rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .recipe-card ul, .recipe-card ol {
-            margin-left: 20px;
-            margin-bottom: 15px;
-        }
-
-        .recipe-card li {
-            margin-bottom: 8px;
-            line-height: 1.5;
-        }
-
-        .recipe-tip {
-            background-color: #f0f7ff;
-            border-left: 4px solid var(--info-color);
-            padding: 12px;
-            margin: 15px 0;
-            border-radius: 0 10px 10px 0;
-            display: flex;
-            align-items: flex-start;
-            gap: 10px;
-        }
-
-        .recipe-benefit {
-            background-color: #f0fff4;
-            border-left: 4px solid var(--success-color);
-            padding: 12px;
-            margin: 15px 0;
-            border-radius: 0 10px 10px 0;
-            display: flex;
-            align-items: flex-start;
-            gap: 10px;
-        }
-
-        .recipe-alert {
-            background-color: #fff8f0;
-            border-left: 4px solid var(--warning-color);
-            padding: 12px;
-            margin: 15px 0;
-            border-radius: 0 10px 10px 0;
-            display: flex;
-            align-items: flex-start;
-            gap: 10px;
-        }
-
-        .copy-btn {
-            background: linear-gradient(135deg, var(--info-color), #0288d1);
-            color: white;
-            border: none;
-            border-radius: 25px;
-            padding: 8px 15px;
-            cursor: pointer;
-            font-size: 0.9rem;
-            margin-top: 10px;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            transition: var(--transition);
-        }
-
-        .copy-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-
-        .loader {
-            border: 5px solid #f3f3f3;
-            border-top: 5px solid var(--primary-color);
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            animation: spin 1s linear infinite;
-            margin: 20px auto;
-            display: none;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .autocomplete {
-            position: relative;
-        }
-
-        .autocomplete-items {
-            position: absolute;
-            border: 1px solid #d4d4d4;
-            border-bottom: none;
-            border-top: none;
-            z-index: 99;
-            top: 100%;
-            left: 0;
-            right: 0;
-            max-height: 200px;
-            overflow-y: auto;
-            border-radius: 0 0 10px 10px;
-        }
-
-        .autocomplete-items div {
-            padding: 10px;
-            cursor: pointer;
-            background-color: #fff;
-            border-bottom: 1px solid #d4d4d4;
-            transition: var(--transition);
-        }
-
-        .autocomplete-items div:hover {
-            background-color: #e9e9e9;
-        }
-
-        .autocomplete-active {
-            background-color: var(--primary-color) !important;
-            color: #ffffff;
-        }
-
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0,0,0,0.4);
-        }
-
-        .modal-content {
-            background-color: #fefefe;
-            margin: 15% auto;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 80%;
-            max-width: 500px;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-        }
-
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 10px;
-        }
-
-        .close {
-            color: #aaa;
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: color 0.3s ease;
-        }
-
-        .close:hover {
-            color: black;
-        }
-
-        .modal-footer {
-            display: flex;
-            justify-content: flex-end;
-            gap: 10px;
-            margin-top: 20px;
-            border-top: 1px solid #eee;
-            padding-top: 15px;
-        }
-
-        .development-message {
-            background: linear-gradient(135deg, #fff3cd, #ffeaa7);
-            border: 1px solid #ffeeba;
-            color: #856404;
-            padding: 15px;
-            border-radius: 10px;
-            margin: 20px 0;
-            text-align: center;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            animation: pulse 2s infinite;
-        }
-
-        /* Toast container para notificaciones */
-        .toast-container {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 1050;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: #f5f5f5; color: var(--dark-color); line-height: 1.6; padding-bottom: 80px; background-image: url('https://picsum.photos/seed/foodbg/1920/1080'); background-size: cover; background-attachment: fixed; }
+        .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(255, 255, 255, 0.9); z-index: -1; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        .header { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); border-radius: 20px; padding: 20px; box-shadow: var(--shadow); display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; flex-wrap: wrap; position: sticky; top: 20px; z-index: 1000; border: 1px solid var(--primary-color); }
+        .header h1 { color: var(--primary-blue); display: flex; align-items: center; gap: 10px; font-size: 1.5rem; }
+        .header h1 i { color: var(--primary-color); animation: pulse 2s infinite; }
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
+        .header-buttons { display: flex; gap: 10px; }
+        .btn { padding: 12px 20px; border: none; border-radius: 25px; cursor: pointer; font-weight: bold; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; transition: var(--transition); font-size: 0.9rem; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); position: relative; overflow: hidden; }
+        .btn::before { content: ''; position: absolute; top: 50%; left: 50%; width: 0; height: 0; border-radius: 50%; background: rgba(255, 255, 255, 0.3); transform: translate(-50%, -50%); transition: width 0.6s, height 0.6s; }
+        .btn:hover::before { width: 300px; height: 300px; }
+        .btn-primary { background: linear-gradient(135deg, var(--primary-color), #45a049); color: white; }
+        .btn-secondary { background: linear-gradient(135deg, var(--secondary-color), #e0a800); color: var(--dark-color); }
+        .btn-danger { background: linear-gradient(135deg, var(--danger-color), #d32f2f); color: white; }
+        .btn-success { background: linear-gradient(135deg, var(--success-color), #689f38); color: white; }
+        .btn-info { background: linear-gradient(135deg, var(--info-color), #0288d1); color: white; }
+        .btn:hover { transform: translateY(-3px); box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); }
+        .nav-tabs { display: flex; background: white; border-radius: 15px; overflow: hidden; box-shadow: var(--shadow); margin-bottom: 25px; }
+        .nav-tab { flex: 1; padding: 15px; text-align: center; cursor: pointer; background: white; color: var(--dark-color); font-weight: 500; transition: var(--transition); position: relative; }
+        .nav-tab i { display: block; font-size: 1.5rem; margin-bottom: 5px; }
+        .nav-tab.active { background: linear-gradient(135deg, var(--primary-blue), var(--light-blue)); color: white; }
+        .tab-content { display: none; animation: fadeIn 0.5s; }
+        .tab-content.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         
-        .custom-toast {
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            padding: 15px 20px;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            animation: slideIn 0.3s ease;
-        }
+        /* Anemia Section */
+        .anemia-section { background: white; border-radius: 20px; padding: 25px; margin-bottom: 25px; box-shadow: var(--shadow); border-left: 10px solid var(--iron-color); }
+        .anemia-title { color: var(--iron-color); font-size: 1.8rem; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+        .anemia-intro-text { font-size: 1.1rem; color: #555; margin-bottom: 25px; }
+        .anemia-intro-text strong { color: var(--danger-color); }
+        .multidimensional-section { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 30px; }
+        .dimension-card { background: #fafafa; padding: 20px; border-radius: 15px; border-left: 5px solid; }
+        .dimension-card.nutricional { border-color: var(--success-color); }
+        .dimension-card.psicologico { border-color: var(--info-color); }
+        .dimension-card.cognitivo { border-color: var(--warning-color); }
+        .dimension-card h4 { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+        .charts-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        .chart-card { background: #fafafa; padding: 20px; border-radius: 15px; box-shadow: var(--shadow); position: relative; height: 350px; }
+        .chart-card canvas { max-width: 100%; }
+
+        /* Foods Section */
+        .recommended-foods, .avoid-foods { background: white; border-radius: 20px; padding: 25px; margin-bottom: 25px; box-shadow: var(--shadow); }
+        .recommended-foods { border-left: 10px solid var(--success-color); }
+        .avoid-foods { border-left: 10px solid var(--danger-color); }
+        .section-title { font-size: 1.5rem; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+        .recommended-title { color: var(--success-color); }
+        .avoid-title { color: var(--danger-color); }
+        .food-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 20px; }
+        .food-card { background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05); transition: var(--transition); cursor: pointer; border: 1px solid #eee; position: relative; }
+        .food-card:hover { transform: translateY(-8px); box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); }
+        .food-image { height: 120px; overflow: hidden; position: relative; }
+        .food-image img { width: 100%; height: 100%; object-fit: cover; transition: var(--transition); }
+        .food-card:hover .food-image img { transform: scale(1.1); }
+        .food-card-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); display: flex; justify-content: center; align-items: center; opacity: 0; transition: var(--transition); }
+        .food-card-overlay i { color: white; font-size: 2.5rem; transition: var(--transition); }
+        .food-card:hover .food-card-overlay { opacity: 1; }
+        .food-card:hover .food-card-overlay i { transform: scale(1.2); }
+        .food-info { padding: 15px; text-align: center; }
+        .food-name { font-weight: bold; margin-bottom: 8px; font-size: 1rem; }
+        .food-benefit, .avoid-reason { font-size: 0.8rem; display: flex; align-items: center; justify-content: center; gap: 5px; }
+        .food-benefit { color: var(--success-color); }
+        .avoid-reason { color: var(--danger-color); }
         
-        @keyframes slideIn {
-            from {
-                transform: translateX(100%);
-                opacity: 0;
-            }
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
-        }
+        /* Recipes Tab */
+        .pantry-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; margin-bottom: 25px; }
+        .pantry-card { background: white; border-radius: 20px; padding: 25px; box-shadow: var(--shadow); }
+        .pantry-card h3 { margin-bottom: 15px; color: var(--primary-blue); }
+        .input-group { display: flex; margin-bottom: 15px; gap: 10px; }
+        .input-group input { flex: 1; padding: 12px; border: 2px solid #ddd; border-radius: 25px; font-size: 1rem; transition: var(--transition); }
+        .input-group input:focus { border-color: var(--primary-color); outline: none; }
+        .file-upload-area { border: 2px dashed #ccc; border-radius: 10px; padding: 20px; text-align: center; cursor: pointer; transition: var(--transition); }
+        .file-upload-area:hover { border-color: var(--primary-color); background: #f9f9f9; }
+        .file-upload-area i { font-size: 2rem; color: var(--primary-color); }
+        .saved-pantry-section { margin-top: 25px; }
+        .saved-pantry-section h3 { margin-bottom: 15px; }
+        .ingredients-list-container { display: flex; flex-wrap: wrap; gap: 10px; padding: 10px; background: #f0f8ff; border-radius: 10px; min-height: 40px; margin-bottom: 15px; }
+        .food-item-tag { display: inline-flex; align-items: center; background: var(--primary-color); color: white; padding: 5px 12px; border-radius: 20px; font-size: 0.9rem; animation: fadeIn 0.3s; }
+        .food-item-tag button { background: none; border: none; color: white; margin-left: 8px; cursor: pointer; font-size: 1rem; }
+        #pantry-image-preview { max-width: 150px; border-radius: 10px; margin-top: 10px; box-shadow: var(--shadow); }
+        .pantry-actions { display: flex; gap: 10px; margin-top: 20px; }
+        .pantry-actions .btn { flex: 1; justify-content: center; }
+        .recipe-buttons { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin-bottom: 25px; }
+        .loader { border: 5px solid #f3f3f3; border-top: 5px solid var(--primary-color); border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; margin: 30px auto; display: none; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        .recipes-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .recipe-card { background: white; border-radius: 20px; padding: 25px; box-shadow: var(--shadow); animation: fadeIn 0.5s; border-left: 5px solid; display: flex; flex-direction: column; }
+        .recipe-card h3 { color: var(--primary-blue); margin-bottom: 15px; }
+        .recipe-card h4 { margin-top: 15px; margin-bottom: 10px; }
+        .recipe-card ul, .recipe-card ol { margin-left: 20px; flex-grow: 1; }
+        .recipe-detail { background-color: #f8f9fa; border-left: 4px solid; padding: 12px; margin: 15px 0; border-radius: 0 10px 10px 0; display: flex; align-items: flex-start; gap: 10px; }
+        .recipe-tip { border-color: var(--info-color); }
+        .recipe-benefit { border-color: var(--success-color); }
+        .recipe-alert { border-color: var(--warning-color); }
+
+        /* Modal & Toasts */
+        .modal { display: none; position: fixed; z-index: 1050; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.5); backdrop-filter: blur(5px); }
+        .modal-content { background-color: #fefefe; margin: 10% auto; padding: 30px; border: 1px solid #888; width: 90%; max-width: 600px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.3); animation: slideDown 0.4s; }
+        @keyframes slideDown { from { transform: translateY(-50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
+        .modal-header h3 { color: var(--primary-blue); font-size: 1.5rem; }
+        .close { color: #aaa; font-size: 28px; font-weight: bold; cursor: pointer; }
+        .development-message { background: linear-gradient(135deg, #fff3cd, #ffeaa7); border: 1px solid #ffeeba; color: #856404; padding: 15px; border-radius: 10px; margin: 20px 0; text-align: center; font-weight: bold; }
+        .toast-container { position: fixed; top: 20px; right: 20px; z-index: 1055; }
+        .custom-toast { background: white; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); padding: 15px 20px; margin-bottom: 10px; display: flex; align-items: center; animation: slideIn 0.3s ease; min-width: 250px; }
+        @keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+        .toast-success { border-left: 5px solid var(--success-color); }
+        .toast-error { border-left: 5px solid var(--danger-color); }
+        .toast-info { border-left: 5px solid var(--info-color); }
         
-        .toast-success {
-            border-left: 5px solid var(--success-color);
+        @media (max-width: 992px) {
+            .pantry-grid { grid-template-columns: 1fr; }
+            .recipes-container { grid-template-columns: 1fr; }
         }
-        
-        .toast-error {
-            border-left: 5px solid var(--danger-color);
-        }
-        
-        .toast-info {
-            border-left: 5px solid var(--info-color);
-        }
-
-        /* Footer para móviles */
-        .mobile-footer {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background: linear-gradient(135deg, var(--primary-blue), var(--dark-blue));
-            color: white;
-            padding: 10px;
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            z-index: 100;
-            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
-        }
-
-        .mobile-footer a {
-            color: white;
-            text-decoration: none;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            font-size: 0.8rem;
-            transition: var(--transition);
-        }
-
-        .mobile-footer a:hover {
-            transform: translateY(-3px);
-        }
-
-        .mobile-footer i {
-            font-size: 1.2rem;
-            margin-bottom: 5px;
-        }
-
-        /* Botón flotante de ayuda */
-        .help-fab {
-            position: fixed;
-            bottom: 80px;
-            right: 20px;
-            width: 56px;
-            height: 56px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--info-color), #0288d1);
-            color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-            cursor: pointer;
-            z-index: 99;
-            transition: var(--transition);
-        }
-
-        .help-fab:hover {
-            transform: scale(1.1);
-            box-shadow: 0 6px 15px rgba(0,0,0,0.3);
-        }
-
-        /* Sección de progreso */
-        .progress-section {
-            background: linear-gradient(135deg, white 0%, #f0f7ff 100%);
-            border-radius: 20px;
-            padding: 25px;
-            margin-bottom: 25px;
-            box-shadow: var(--shadow);
-            border: 2px solid var(--info-color);
-        }
-
-        .progress-title {
-            color: var(--info-color);
-            font-size: 1.5rem;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .progress-container {
-            margin-bottom: 15px;
-        }
-
-        .progress-label {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 5px;
-        }
-
-        .progress-bar {
-            height: 10px;
-            background-color: #e0e0e0;
-            border-radius: 5px;
-            overflow: hidden;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(to right, var(--info-color), #0288d1);
-            transition: width 1s ease;
-        }
-
-        /* Responsive */
         @media (max-width: 768px) {
-            .container {
-                padding: 15px;
-            }
-
-            .header {
-                flex-direction: column;
-                gap: 15px;
-                padding: 15px;
-            }
-
-            .header h1 {
-                font-size: 1.3rem;
-            }
-
-            .header-buttons {
-                width: 100%;
-                justify-content: space-between;
-            }
-
-            .recipe-buttons .btn {
-                min-width: 100%;
-            }
-
-            .recipes-container {
-                grid-template-columns: 1fr;
-            }
-
-            .modal-content {
-                width: 95%;
-                margin: 20% auto;
-            }
-
-            .mobile-footer {
-                display: flex;
-            }
-
-            .anemia-content {
-                flex-direction: column;
-            }
-
-            .food-grid, .avoid-grid {
-                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-            }
-
-            .combo-card {
-                flex-direction: column;
-            }
-
-            .combo-image {
-                width: 100%;
-                height: 150px;
-            }
-
-            .nav-tab {
-                padding: 10px 5px;
-                font-size: 0.8rem;
-            }
-
-            .nav-tab i {
-                font-size: 1.2rem;
-            }
-        }
-
-        @media (min-width: 769px) {
-            .mobile-footer {
-                display: none;
-            }
+             .header { flex-direction: column; gap: 15px; padding: 15px; top: 0; border-radius: 0; }
         }
     </style>
 </head>
@@ -1345,1158 +139,388 @@
     <div class="overlay"></div>
     <div class="container">
         <div class="header">
-            <h1><i class="fas fa-shopping-basket"></i> Comida con Despensa</h1>
+            <h1><i class="fas fa-carrot"></i> Cocina Inteligente</h1>
             <div class="header-buttons">
                 <a href="#" id="backToProfile" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Volver al Perfil</a>
-                <a href="index1.html" class="btn btn-danger"><i class="fas fa-sign-out-alt"></i> Salir</a>
+                <button id="logout-btn" class="btn btn-danger"><i class="fas fa-sign-out-alt"></i> Salir</button>
             </div>
         </div>
 
-        <!-- Navegación por pestañas -->
         <div class="nav-tabs">
-            <div class="nav-tab active" data-tab="anemia">
-                <i class="fas fa-heartbeat"></i>
-                <span>Anemia</span>
-            </div>
-            <div class="nav-tab" data-tab="foods">
-                <i class="fas fa-utensils"></i>
-                <span>Alimentos</span>
-            </div>
-            <div class="nav-tab" data-tab="pantry">
-                <i class="fas fa-shopping-basket"></i>
-                <span>Mi Despensa</span>
-            </div>
-            <div class="nav-tab" data-tab="recipes">
-                <i class="fas fa-book"></i>
-                <span>Recetas</span>
-            </div>
+            <div class="nav-tab active" data-tab="anemia"><i class="fas fa-heartbeat"></i><span>Anemia</span></div>
+            <div class="nav-tab" data-tab="foods"><i class="fas fa-utensils"></i><span>Alimentos</span></div>
+            <div class="nav-tab" data-tab="recipes"><i class="fas fa-book-open"></i><span>Recetas</span></div>
         </div>
 
-        <!-- Contenido de la pestaña Anemia -->
         <div class="tab-content active" id="anemia-tab">
-            <!-- Sección de Anemia -->
             <div class="anemia-section">
-                <h2 class="anemia-title"><i class="fas fa-heartbeat"></i> ¿Qué es la Anemia y cómo prevenirla?</h2>
-                <div class="anemia-content">
-                    <div class="anemia-text">
-                        <p>La anemia es una condición donde el cuerpo no tiene suficientes glóbulos rojos sanos para transportar oxígeno adecuadamente. En los niños, puede causar fatiga, debilidad y problemas de desarrollo.</p>
-                        <p>¡La buena noticia es que podemos prevenirla con una alimentación adecuada! Los alimentos ricos en hierro son nuestros mejores aliados.</p>
-                        <div class="anemia-formula">
-                            <span class="formula-item btn-iron">
-                                <i class="fas fa-tint"></i> Hierro
-                            </span>
-                            <span style="font-size: 1.5rem;">+</span>
-                            <span class="formula-item btn-vitamin-c">
-                                <i class="fas fa-lemon"></i> Vitamina C
-                            </span>
-                            <span style="font-size: 1.5rem;">=</span>
-                            <span class="formula-item btn-success">
-                                <i class="fas fa-shield-alt"></i> Protección contra la Anemia
-                            </span>
-                        </div>
+                <h2 class="anemia-title"><i class="fas fa-hand-holding-medical"></i> La Anemia: Un Reto que Superaremos Juntos</h2>
+                <p class="anemia-intro-text">
+                    La anemia es una realidad alarmante que afecta a <strong>2 millones de niños en el Perú</strong>. No es solo cansancio; es un obstáculo que puede frenar el desarrollo cognitivo y físico de nuestros hijos. Pero con inteligencia y dedicación, podemos cambiar esta historia.
+                </p>
+                <h3 class="section-title" style="color: var(--primary-blue);"><i class="fas fa-cogs"></i> Un Problema Multidimensional</h3>
+                <div class="multidimensional-section">
+                    <div class="dimension-card nutricional">
+                        <h4><i class="fas fa-leaf"></i> Nutricional</h4>
+                        <p>Va más allá del hierro. Requiere un equilibrio de vitaminas y proteínas esenciales para construir un futuro fuerte.</p>
                     </div>
-                    <div class="anemia-image">
-                        <img src="https://picsum.photos/seed/anemia-prevention/300/200.jpg" alt="Prevención de la anemia">
+                    <div class="dimension-card psicologico">
+                        <h4><i class="fas fa-brain"></i> Psicológico</h4>
+                        <p>Un entorno positivo y la motivación familiar son claves en el camino hacia la recuperación del niño.</p>
+                    </div>
+                    <div class="dimension-card cognitivo">
+                        <h4><i class="fas fa-child-reaching"></i> Cognitivo</h4>
+                        <p>Una nutrición adecuada es vital para prevenir retrasos y potenciar el desarrollo motor y cerebral.</p>
                     </div>
                 </div>
-            </div>
-
-            <!-- Sección de Progreso -->
-            <div class="progress-section">
-                <h2 class="progress-title"><i class="fas fa-chart-line"></i> Progreso de Nutrición</h2>
-                <div class="progress-container">
-                    <div class="progress-label">
-                        <span>Nivel de Hierro</span>
-                        <span>75%</span>
-                    </div>
-                    <div class="progress-bar">
-                        <div class="progress-fill" style="width: 75%;"></div>
-                    </div>
-                </div>
-                <div class="progress-container">
-                    <div class="progress-label">
-                        <span>Vitamina C</span>
-                        <span>60%</span>
-                    </div>
-                    <div class="progress-bar">
-                        <div class="progress-fill" style="width: 60%;"></div>
-                    </div>
-                </div>
-                <div class="progress-container">
-                    <div class="progress-label">
-                        <span>Proteínas</span>
-                        <span>85%</span>
-                    </div>
-                    <div class="progress-bar">
-                        <div class="progress-fill" style="width: 85%;"></div>
-                    </div>
+                <div class="charts-container" style="margin-top: 30px;">
+                    <div class="chart-card"><h4>Fuentes Clave de Hierro</h4><canvas id="paretoChart"></canvas></div>
+                    <div class="chart-card"><h4>Seguimiento Nutricional</h4><canvas id="controlChart"></canvas></div>
                 </div>
             </div>
         </div>
 
-        <!-- Contenido de la pestaña Alimentos -->
         <div class="tab-content" id="foods-tab">
-            <!-- Sección de Alimentos Recomendados -->
             <div class="recommended-foods">
-                <h2 class="recommended-title"><i class="fas fa-check-circle"></i> Alimentos Recomendados para Prevenir la Anemia</h2>
+                <h2 class="section-title recommended-title"><i class="fas fa-check-circle"></i> Alimentos para Potenciar</h2>
                 <div class="food-grid">
-                    <div class="food-card">
+                    <div class="food-card" data-title="Hígado de Pollo" data-description="Considerado un superalimento contra la anemia. Es la fuente más concentrada de hierro hemo, que el cuerpo absorbe con una eficiencia excepcional." data-tip="Cocínalo a la plancha con cebolla o en un paté suave para untar en pan integral. Una pequeña porción una vez por semana es suficiente.">
                         <div class="food-image">
-                            <img src="https://picsum.photos/seed/spinach/200/150.jpg" alt="Espinacas">
+                            <img src="https://picsum.photos/seed/liver/200/150" alt="Hígado">
+                            <div class="food-card-overlay"><i class="fas fa-search-plus"></i></div>
                         </div>
-                        <div class="food-info">
-                            <div class="food-name">Espinacas</div>
-                            <div class="food-benefit">
-                                <i class="fas fa-leaf"></i> Rica en hierro y folato
-                            </div>
-                            <div class="iron-level">
-                                <div class="iron-bar">
-                                    <div class="iron-fill" style="width: 85%;"></div>
-                                </div>
-                                <div class="iron-percentage">85%</div>
-                            </div>
-                        </div>
+                        <div class="food-info"><div class="food-name">Hígado de Pollo</div><div class="food-benefit"><i class="fas fa-star"></i> Hierro de alta potencia</div></div>
                     </div>
-                    <div class="food-card">
+                    <div class="food-card" data-title="Carne de Res Magra" data-description="Excelente fuente de hierro hemo, zinc y vitamina B12, todos cruciales para la producción de glóbulos rojos y el desarrollo neurológico." data-tip="Prepara albóndigas, carne molida en salsa de tomate o tiritas salteadas con pimientos para un extra de vitamina C.">
                         <div class="food-image">
-                            <img src="https://picsum.photos/seed/lentils/200/150.jpg" alt="Lentejas">
+                            <img src="https://picsum.photos/seed/beef/200/150" alt="Carne de Res">
+                             <div class="food-card-overlay"><i class="fas fa-search-plus"></i></div>
                         </div>
-                        <div class="food-info">
-                            <div class="food-name">Lentejas</div>
-                            <div class="food-benefit">
-                                <i class="fas fa-seedling"></i> Alta en hierro vegetal
-                            </div>
-                            <div class="iron-level">
-                                <div class="iron-bar">
-                                    <div class="iron-fill" style="width: 90%;"></div>
-                                </div>
-                                <div class="iron-percentage">90%</div>
-                            </div>
-                        </div>
+                        <div class="food-info"><div class="food-name">Carne de Res Magra</div><div class="food-benefit"><i class="fas fa-drumstick-bite"></i> Hierro fácil de absorber</div></div>
                     </div>
-                    <div class="food-card">
+                    <div class="food-card" data-title="Lentejas" data-description="Las reinas de las legumbres. Repletas de hierro no hemo, fibra y proteínas vegetales que brindan energía sostenida." data-tip="Combínalas siempre con una fuente de vitamina C: un chorrito de limón al servir, pimientos en el guiso o una naranja de postre.">
                         <div class="food-image">
-                            <img src="https://picsum.photos/seed/red-meat/200/150.jpg" alt="Carne roja">
+                            <img src="https://picsum.photos/seed/lentils/200/150" alt="Lentejas">
+                            <div class="food-card-overlay"><i class="fas fa-search-plus"></i></div>
                         </div>
-                        <div class="food-info">
-                            <div class="food-name">Carne roja</div>
-                            <div class="food-benefit">
-                                <i class="fas fa-drumstick-bite"></i> Hierro de fácil absorción
-                            </div>
-                            <div class="iron-level">
-                                <div class="iron-bar">
-                                    <div class="iron-fill" style="width: 95%;"></div>
-                                </div>
-                                <div class="iron-percentage">95%</div>
-                            </div>
-                        </div>
+                        <div class="food-info"><div class="food-name">Lentejas</div><div class="food-benefit"><i class="fas fa-seedling"></i> Poder vegetal</div></div>
                     </div>
-                    <div class="food-card">
+                    <div class="food-card" data-title="Espinacas" data-description="Famosas por su contenido de hierro, también aportan ácido fólico, vital para la formación de células sanguíneas." data-tip="El hierro de las espinacas se absorbe mejor cuando se cocinan. Añádelas a tortillas, cremas o batidos con frutas cítricas.">
                         <div class="food-image">
-                            <img src="https://picsum.photos/seed/orange/200/150.jpg" alt="Naranja">
+                            <img src="https://picsum.photos/seed/spinach/200/150" alt="Espinacas">
+                             <div class="food-card-overlay"><i class="fas fa-search-plus"></i></div>
                         </div>
-                        <div class="food-info">
-                            <div class="food-name">Naranja</div>
-                            <div class="food-benefit">
-                                <i class="fas fa-lemon"></i> Vitamina C para absorber hierro
-                            </div>
-                            <div class="iron-level">
-                                <div class="iron-bar">
-                                    <div class="iron-fill" style="width: 40%;"></div>
-                                </div>
-                                <div class="iron-percentage">40%</div>
-                            </div>
-                        </div>
+                        <div class="food-info"><div class="food-name">Espinacas</div><div class="food-benefit"><i class="fas fa-leaf"></i> Hierro y Ácido Fólico</div></div>
                     </div>
-                    <div class="food-card">
+                    <div class="food-card" data-title="Brócoli" data-description="Este vegetal es un dos por uno: contiene hierro y una gran cantidad de vitamina C en el mismo paquete, facilitando su propia absorción." data-tip="Cocínalo al vapor para preservar sus nutrientes. Sírvelo como acompañamiento o en purés para los más pequeños.">
                         <div class="food-image">
-                            <img src="https://picsum.photos/seed/eggs/200/150.jpg" alt="Huevos">
+                            <img src="https://picsum.photos/seed/broccoli/200/150" alt="Brócoli">
+                            <div class="food-card-overlay"><i class="fas fa-search-plus"></i></div>
                         </div>
-                        <div class="food-info">
-                            <div class="food-name">Huevos</div>
-                            <div class="food-benefit">
-                                <i class="fas fa-egg"></i> Hierro y proteínas
-                            </div>
-                            <div class="iron-level">
-                                <div class="iron-bar">
-                                    <div class="iron-fill" style="width: 70%;"></div>
-                                </div>
-                                <div class="iron-percentage">70%</div>
-                            </div>
-                        </div>
+                        <div class="food-info"><div class="food-name">Brócoli</div><div class="food-benefit"><i class="fas fa-lemon"></i> Hierro + Vitamina C</div></div>
                     </div>
-                    <div class="food-card">
+                    <div class="food-card" data-title="Huevo" data-description="La yema del huevo es una fuente conveniente y económica de hierro, además de aportar proteínas de alta calidad y colina para el cerebro." data-tip="Sírvelo cocido, en tortilla o revuelto. Acompáñalo con una rebanada de tomate para añadir vitamina C a la comida.">
                         <div class="food-image">
-                            <img src="https://picsum.photos/seed/strawberry/200/150.jpg" alt="Fresas">
+                            <img src="https://picsum.photos/seed/egg/200/150" alt="Huevo">
+                            <div class="food-card-overlay"><i class="fas fa-search-plus"></i></div>
                         </div>
-                        <div class="food-info">
-                            <div class="food-name">Fresas</div>
-                            <div class="food-benefit">
-                                <i class="fas fa-lemon"></i> Vitamina C y antioxidantes
-                            </div>
-                            <div class="iron-level">
-                                <div class="iron-bar">
-                                    <div class="iron-fill" style="width: 35%;"></div>
-                                </div>
-                                <div class="iron-percentage">35%</div>
-                            </div>
-                        </div>
+                        <div class="food-info"><div class="food-name">Huevo</div><div class="food-benefit"><i class="fas fa-egg"></i> Nutrición completa</div></div>
                     </div>
                 </div>
             </div>
 
-            <!-- Sección de Alimentos a Evitar -->
             <div class="avoid-foods">
-                <h2 class="avoid-title"><i class="fas fa-times-circle"></i> Alimentos a Limitar o Evitar</h2>
-                <div class="avoid-grid">
-                    <div class="avoid-card">
-                        <div class="avoid-image">
-                            <img src="https://picsum.photos/seed/coffee/200/150.jpg" alt="Café">
-                            <div class="avoid-badge">Limitar</div>
-                        </div>
-                        <div class="avoid-info">
-                            <div class="avoid-name">Café y té</div>
-                            <div class="avoid-reason">
-                                <i class="fas fa-exclamation-triangle"></i> Dificulta la absorción de hierro
-                            </div>
-                        </div>
+                <h2 class="section-title avoid-title"><i class="fas fa-times-circle"></i> Alimentos a Limitar para el Niño</h2>
+                <div class="food-grid">
+                    <div class="avoid-card" data-title="Té y Café" data-description="Contienen compuestos llamados taninos que actúan como 'ladrones' de hierro, inhibiendo su absorción en el intestino." data-tip="Evita que el niño consuma estas bebidas. Nunca deben acompañar las comidas principales. Prioriza siempre el agua.">
+                        <div class="food-image"><img src="https://picsum.photos/seed/tea/200/150" alt="Té"><div class="food-card-overlay"><i class="fas fa-search-plus"></i></div></div>
+                        <div class="food-info"><div class="avoid-name">Té y Café</div><div class="avoid-reason"><i class="fas fa-ban"></i> Bloquean el hierro</div></div>
                     </div>
-                    <div class="avoid-card">
-                        <div class="avoid-image">
-                            <img src="https://picsum.photos/seed/candy/200/150.jpg" alt="Dulces">
-                            <div class="avoid-badge">Evitar</div>
-                        </div>
-                        <div class="avoid-info">
-                            <div class="avoid-name">Dulces y azúcares</div>
-                            <div class="avoid-reason">
-                                <i class="fas fa-exclamation-triangle"></i> Poco valor nutricional
-                            </div>
-                        </div>
+                    <div class="avoid-card" data-title="Gaseosas y Refrescos" data-description="Estas bebidas azucaradas contienen fosfatos que interfieren con la absorción del hierro. Además, no aportan ningún nutriente valioso." data-tip="Elimina estas bebidas de la dieta del niño. Ofrecen una falsa sensación de saciedad que le quita el apetito para alimentos nutritivos.">
+                        <div class="food-image"><img src="https://picsum.photos/seed/soda/200/150" alt="Gaseosas"><div class="food-card-overlay"><i class="fas fa-search-plus"></i></div></div>
+                        <div class="food-info"><div class="avoid-name">Gaseosas y Refrescos</div><div class="avoid-reason"><i class="fas fa-exclamation-triangle"></i> Interfieren con nutrientes</div></div>
                     </div>
-                    <div class="avoid-card">
-                        <div class="avoid-image">
-                            <img src="https://picsum.photos/seed/soda/200/150.jpg" alt="Refrescos">
-                            <div class="avoid-badge">Evitar</div>
-                        </div>
-                        <div class="avoid-info">
-                            <div class="avoid-name">Refrescos</div>
-                            <div class="avoid-reason">
-                                <i class="fas fa-exclamation-triangle"></i> Interfiere con la absorción de nutrientes
-                            </div>
-                        </div>
+                    <div class="avoid-card" data-title="Leche en Exceso" data-description="Aunque es vital, un consumo excesivo de leche (más de 700ml al día) puede interferir con la absorción de hierro y desplazar otros alimentos." data-tip="La leche es importante, pero no debe ser la bebida principal en las comidas. Ofrece la cantidad recomendada para su edad.">
+                        <div class="food-image"><img src="https://picsum.photos/seed/milk/200/150" alt="Leche"><div class="food-card-overlay"><i class="fas fa-search-plus"></i></div></div>
+                        <div class="food-info"><div class="avoid-name">Leche en Exceso</div><div class="avoid-reason"><i class="fas fa-info-circle"></i> Limita la absorción</div></div>
                     </div>
-                    <div class="avoid-card">
-                        <div class="avoid-image">
-                            <img src="https://picsum.photos/seed/processed-food/200/150.jpg" alt="Comida procesada">
-                            <div class="avoid-badge">Limitar</div>
-                        </div>
-                        <div class="avoid-info">
-                            <div class="avoid-name">Comida procesada</div>
-                            <div class="avoid-reason">
-                                <i class="fas fa-exclamation-triangle"></i> Bajo contenido de hierro
-                            </div>
-                        </div>
+                    <div class="avoid-card" data-title="Alimentos Procesados" data-description="Suelen ser bajos en nutrientes esenciales como el hierro y altos en sodio, grasas y aditivos que el niño no necesita." data-tip="Basa la alimentación en productos frescos y naturales. Lee las etiquetas y elige opciones con pocos ingredientes.">
+                        <div class="food-image"><img src="https://picsum.photos/seed/processed/200/150" alt="Procesados"><div class="food-card-overlay"><i class="fas fa-search-plus"></i></div></div>
+                        <div class="food-info"><div class="avoid-name">Alimentos Procesados</div><div class="avoid-reason"><i class="fas fa-industry"></i> Bajo valor nutricional</div></div>
                     </div>
-                </div>
-            </div>
-
-            <!-- Sección de Combos Recomendados -->
-            <div class="combos-section">
-                <h2 class="combos-title"><i class="fas fa-magic"></i> Combos Mágicos contra la Anemia</h2>
-                <div class="combo-card">
-                    <div class="combo-image">
-                        <img src="https://picsum.photos/seed/lentil-salad/120/120.jpg" alt="Ensalada de lentejas">
+                    <div class="avoid-card" data-title="Cereales sin Preparar" data-description="Los cereales integrales y legumbres contienen fitatos que pueden reducir la absorción de hierro. ¡Pero hay solución!" data-tip="Remoja las legumbres y cereales integrales (como la avena) durante la noche. Este simple paso reduce los fitatos y mejora la disponibilidad de nutrientes.">
+                        <div class="food-image"><img src="https://picsum.photos/seed/wholegrain/200/150" alt="Cereales"><div class="food-card-overlay"><i class="fas fa-search-plus"></i></div></div>
+                        <div class="food-info"><div class="avoid-name">Cereales sin Preparar</div><div class="avoid-reason"><i class="fas fa-hourglass-half"></i> Contienen inhibidores</div></div>
                     </div>
-                    <div class="combo-info">
-                        <div class="combo-name">Ensalada de Lentejas con Pimientos</div>
-                        <div class="combo-description">Lentejas ricas en hierro combinadas con pimientos rojos que aportan vitamina C.</div>
-                        <div class="combo-benefits">
-                            <div class="combo-benefit">
-                                <i class="fas fa-tint"></i> Hierro
-                            </div>
-                            <div class="combo-benefit">
-                                <i class="fas fa-lemon"></i> Vitamina C
-                            </div>
-                            <div class="combo-benefit">
-                                <i class="fas fa-heart"></i> Saludable
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="combo-card">
-                    <div class="combo-image">
-                        <img src="https://picsum.photos/seed/spinach-omelette/120/120.jpg" alt="Tortilla de espinacas">
-                    </div>
-                    <div class="combo-info">
-                        <div class="combo-name">Tortilla de Espinacas con Tomate</div>
-                        <div class="combo-description">Huevos con espinacas y tomate fresco, una combinación perfecta de hierro y vitamina C.</div>
-                        <div class="combo-benefits">
-                            <div class="combo-benefit">
-                                <i class="fas fa-tint"></i> Hierro
-                            </div>
-                            <div class="combo-benefit">
-                                <i class="fas fa-lemon"></i> Vitamina C
-                            </div>
-                            <div class="combo-benefit">
-                                <i class="fas fa-egg"></i> Proteína
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="combo-card">
-                    <div class="combo-image">
-                        <img src="https://picsum.photos/seed/beef-citrus/120/120.jpg" alt="Carne con cítricos">
-                    </div>
-                    <div class="combo-info">
-                        <div class="combo-name">Carne con Salsa de Naranja</div>
-                        <div class="combo-description">Carne roja (fuente de hierro hemo) con una salsa a base de naranja para maximizar la absorción.</div>
-                        <div class="combo-benefits">
-                            <div class="combo-benefit">
-                                <i class="fas fa-tint"></i> Hierro
-                            </div>
-                            <div class="combo-benefit">
-                                <i class="fas fa-lemon"></i> Vitamina C
-                            </div>
-                            <div class="combo-benefit">
-                                <i class="fas fa-drumstick-bite"></i> Hierro hemo
-                            </div>
-                        </div>
+                     <div class="avoid-card" data-title="Golosinas y Snacks" data-description="Aportan una gran cantidad de azúcar y calorías vacías, quitando el apetito del niño para las comidas principales que sí contienen hierro." data-tip="Ofrece frutas frescas, trocitos de queso o yogur natural como snacks. Reserva las golosinas solo para ocasiones muy especiales.">
+                        <div class="food-image"><img src="https://picsum.photos/seed/candy/200/150" alt="Golosinas"><div class="food-card-overlay"><i class="fas fa-search-plus"></i></div></div>
+                        <div class="food-info"><div class="avoid-name">Golosinas y Snacks</div><div class="avoid-reason"><i class="fas fa-cookie-bite"></i> Desplazan comidas reales</div></div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Contenido de la pestaña Mi Despensa -->
-        <div class="tab-content" id="pantry-tab">
-            <div class="instructions">
-                <button class="collapsible">
-                    <span>Instrucciones para usar Comida con Despensa</span>
-                    <i class="fas fa-chevron-down"></i>
-                </button>
-                <div class="collapsible-content active">
-                    <div class="step">
-                        <div class="step-number">1</div>
-                        <div>Agrega tus ingredientes (manual o por foto).</div>
-                    </div>
-                    <div class="step">
-                        <div class="step-number">2</div>
-                        <div>Guarda tu despensa.</div>
-                    </div>
-                    <div class="step">
-                        <div class="step-number">3</div>
-                        <div>Genera tus recetas personalizadas.</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="food-input">
-                <div class="tabs">
-                    <div class="tab active" data-tab="manual">Entrada Manual</div>
-                    <div class="tab" data-tab="photo">Carga por Foto</div>
-                </div>
-
-                <div class="tab-content active" id="manual-tab">
-                    <div class="input-group">
-                        <div class="autocomplete">
-                            <input type="text" id="ingredient-input" placeholder="Añade un ingrediente...">
-                        </div>
-                        <button id="add-ingredient" class="btn btn-primary"><i class="fas fa-plus"></i> Agregar</button>
-                    </div>
-                    <div class="food-list" id="ingredients-list"></div>
-                </div>
-
-                <div class="tab-content" id="photo-tab">
-                    <div class="file-upload">
-                        <input type="file" id="photo-upload" accept="image/*">
-                        <div class="file-upload-btn">
-                            <i class="fas fa-camera"></i>
-                            <div>
-                                <strong>Subir foto de mi despensa</strong>
-                                <div>Haz clic o arrastra una imagen aquí</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div style="margin-top: 20px; text-align: center;">
-                    <button id="save-pantry" class="btn btn-success"><i class="fas fa-save"></i> Guardar mi Despensa</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Contenido de la pestaña Recetas -->
         <div class="tab-content" id="recipes-tab">
+            <div class="pantry-grid">
+                <div class="pantry-card">
+                    <h3><i class="fas fa-pen-to-square"></i> Añadir a mi Despensa</h3>
+                    <div class="input-group">
+                        <input type="text" id="ingredient-input" placeholder="Ej: Lentejas, pollo, arroz...">
+                        <button id="add-ingredient" class="btn btn-primary"><i class="fas fa-plus"></i></button>
+                    </div>
+                    <input type="file" id="photo-upload" accept="image/*" hidden>
+                    <label for="photo-upload" class="file-upload-area">
+                        <i class="fas fa-camera"></i>
+                        <p>Toca para subir una foto de tu despensa</p>
+                    </label>
+                </div>
+                 <div class="pantry-card" id="saved-pantry-section">
+                    <h3><i class="fas fa-shopping-basket"></i> Mi Despensa Guardada</h3>
+                    <div class="ingredients-list-container" id="ingredients-list">
+                        <p style="color: #999;">Aquí aparecerán tus ingredientes...</p>
+                    </div>
+                    <div id="pantry-image-container"></div>
+                </div>
+            </div>
+            <div class="pantry-actions">
+                <button id="save-pantry" class="btn btn-success"><i class="fas fa-save"></i> Guardar Despensa</button>
+                <button id="clear-pantry-btn" class="btn btn-danger"><i class="fas fa-trash"></i> Limpiar Despensa</button>
+            </div>
+            
+            <h3 style="margin-top: 40px; margin-bottom: 15px; color: var(--primary-blue); text-align: center; font-size: 1.5rem;"><i class="fas fa-lightbulb"></i> Generador de Recetas con IA (Versión Demo)</h3>
             <div class="recipe-buttons">
-                <button class="btn btn-primary" data-meal="desayuno"><i class="fas fa-coffee"></i> Generar Desayuno</button>
-                <button class="btn btn-warning" data-meal="almuerzo"><i class="fas fa-utensils"></i> Generar Almuerzo</button>
-                <button class="btn btn-info" data-meal="cena"><i class="fas fa-moon"></i> Generar Cena</button>
-                <button class="btn btn-secondary" data-meal="postre"><i class="fas fa-ice-cream"></i> Generar Postre</button>
+                <button class="btn btn-primary" data-meal="desayuno"><i class="fas fa-mug-saucer"></i> Desayuno</button>
+                <button class="btn btn-warning" data-meal="almuerzo"><i class="fas fa-utensils"></i> Almuerzo</button>
+                <button class="btn btn-info" data-meal="cena"><i class="fas fa-moon"></i> Cena</button>
+                <button class="btn btn-secondary" data-meal="postre"><i class="fas fa-ice-cream"></i> Postre</button>
             </div>
 
-            <div class="loader" id="loader"></div>
-
+            <div id="loader" class="loader"></div>
+            <div id="recipe-dev-message" style="display: none;"></div>
             <div class="recipes-container" id="recipes-container"></div>
         </div>
     </div>
-
-    <!-- Botón flotante de ayuda -->
-    <div class="help-fab" id="helpFab">
-        <i class="fas fa-question"></i>
-    </div>
-
-    <!-- Footer para móviles -->
-    <div class="mobile-footer">
-        <a href="#" id="mobileBackToProfile">
-            <i class="fas fa-arrow-left"></i>
-            <span>Volver</span>
-        </a>
-        <a href="#" id="mobileHome">
-            <i class="fas fa-home"></i>
-            <span>Inicio</span>
-        </a>
-        <a href="#" id="mobileProfile">
-            <i class="fas fa-user"></i>
-            <span>Perfil</span>
-        </a>
-        <a href="#" id="mobileExit">
-            <i class="fas fa-sign-out-alt"></i>
-            <span>Salir</span>
-        </a>
-    </div>
-
-    <!-- Modal de confirmación -->
-    <div id="confirm-modal" class="modal">
+    
+    <div id="food-modal" class="modal">
         <div class="modal-content">
-            <div class="modal-header">
-                <h3>Confirmar acción</h3>
-                <span class="close">&times;</span>
-            </div>
+            <div class="modal-header"><h3 id="modal-title"></h3><span class="close" id="modal-close">&times;</span></div>
             <div class="modal-body">
-                <p id="confirm-message">¿Estás seguro de que quieres realizar esta acción?</p>
-            </div>
-            <div class="modal-footer">
-                <button id="confirm-cancel" class="btn btn-secondary">Cancelar</button>
-                <button id="confirm-ok" class="btn btn-danger">Confirmar</button>
+                <p id="modal-description"></p>
+                <div class="recipe-detail recipe-tip"><i class="fas fa-lightbulb"></i><div><strong>Consejo para el niño:</strong> <span id="modal-tip"></span></div></div>
             </div>
         </div>
     </div>
-
-    <!-- Toast container -->
+    
     <div class="toast-container" id="toastContainer"></div>
 
     <script>
-        // Lista de alimentos comunes ricos en hierro para autocompletado
-        const ironRichFoods = [
-            "Espinacas", "Acelgas", "Lentejas", "Garbanzos", "Frijoles", "Carne de res", "Pollo", "Pescado", 
-            "Hígado", "Huevo", "Tofu", "Quinoa", "Avena", "Cereales fortificados", "Pipas de calabaza", 
-            "Sésamo", "Almendras", "Nueces", "Pistachos", "Pasas", "Ciruelas pasas", "Higos secos", 
-            "Remolacha", "Brócoli", "Col rizada", "Perejil", "Algas marinas", "Moluscos", "Ostras", 
-            "Sardinas", "Atún", "Salmón", "Tofu", "Tempeh", "Edamame", "Soja", "Chocolate negro", 
-            "Tamarindo", "Cacao en polvo", "Espirulina", "Chlorella", "Moringa", "Maca", "Cañihua", "Kiwicha"
-        ];
-
-        // Datos de ejemplo para recetas iniciales
-        const sampleRecipes = [
-            {
-                nombreReceta: "Tortilla de Espinacas",
-                ingredientes: ["3 huevos", "1 taza de espinacas frescas", "1/2 cebolla", "1 diente de ajo", "Aceite de oliva", "Sal y pimienta"],
-                preparacion: ["Picar finamente la cebolla y el ajo.", "Sofreír en una sartén con aceite de oliva.", "Añadir las espinacas y cocinar hasta que se marchiten.", "Batir los huevos con sal y pimienta.", "Verter los huevos sobre las espinacas y cocinar a fuego medio.", "Voltear cuando esté cuajada por abajo."],
-                consejosDespensa: "Las espinacas son ricas en hierro no hemo, que se absorbe mejor con vitamina C. Acompaña con un vaso de jugo de naranja.",
-                beneficiosNiño: "Aporta hierro esencial para prevenir la anemia y fortalece el sistema inmunológico.",
-                alertaAlergenos: "Contiene huevo. No recomendado para alérgicos al huevo."
-            },
-            {
-                nombreReceta: "Lentejas con Verduras",
-                ingredientes: ["1 taza de lentejas", "2 zanahorias", "1 pimiento verde", "1 tomate", "1 cebolla", "2 dientes de ajo", "1 hoja de laurel", "Aceite de oliva", "Sal"],
-                preparacion: ["Poner las lentejas en remojo durante 2 horas.", "Cortar todas las verduras en trozos pequeños.", "Sofreír la cebolla y el ajo en una olla con aceite.", "Añadir el resto de verduras y cocinar 5 minutos.", "Agregar las lentejas escurridas y cubrir con agua.", "Añadir la hoja de laurel y sal. Cocinar a fuego lento 30-40 minutos."],
-                consejosDespensa: "Las lentejas son una excelente fuente de hierro vegetal. Combínalas con alimentos ricos en vitamina C para mejorar su absorción.",
-                beneficiosNiño: "Aporta hierro, fibra y proteínas vegetales, esenciales para el desarrollo y prevención de la anemia.",
-                alertaAlergenos: "Sin alérgenos comunes. Apto para la mayoría de las dietas."
-            },
-            {
-                nombreReceta: "Salmón al Horno con Espárragos",
-                ingredientes: ["2 filetes de salmón", "1 manojo de espárragos", "1 limón", "2 dientes de ajo", "Aceite de oliva", "Sal", "Pimienta", "Eneldo fresco"],
-                preparacion: ["Precalentar el horno a 200°C.", "Lavar y cortar los espárragos.", "Colocar los filetes de salmón y los espárragos en una bandeja para horno.", "Rociar con aceite de oliva, sal, pimienta y ajo picado.", "Exprimir el jugo de medio limón sobre todo.", "Hornear durante 15-20 minutos.", "Servir decorado con eneldo fresco y rodajas de limón."],
-                consejosDespensa: "El salmón es rico en hierro hemo de fácil absorción y también aporta omega-3, beneficioso para el desarrollo cerebral.",
-                beneficiosNiño: "Proporciona ácidos grasos omega-3, proteínas de alta calidad y hierro, fundamentales para el desarrollo cognitivo y físico.",
-                alertaAlergenos: "Contiene pescado. No recomendado para alérgicos al pescado o mariscos."
-            },
-            {
-                nombreReceta: "Ensalada de Quinoa con Remolacha",
-                ingredientes: ["1 taza de quinoa", "2 remolachas medianas", "1 pepino", "1/4 taza de nueces", "2 cucharadas de aceite de oliva", "1 cucharada de vinagre de manzana", "Sal", "Pimienta"],
-                preparacion: ["Cocinar la quinoa según las instrucciones del paquete y dejar enfriar.", "Cocer las remolachas hasta que estén tiernas, pelar y cortar en cubos.", "Cortar el pepino en dados pequeños.", "Triturar ligeramente las nueces.", "Mezclar la quinoa cocida con las remolachas y el pepino.", "Aliñar con aceite, vinagre, sal y pimienta.", "Espolvorear con las nueces trituradas antes de servir."],
-                consejosDespensa: "La quinoa y la remolacha son excelentes fuentes de hierro. Añade perejil fresco para un extra de vitamina C.",
-                beneficiosNiño: "Aporta hierro, fibra, antioxidantes y proteínas completas, apoyando el crecimiento y la prevención de la anemia.",
-                alertaAlergenos: "Contiene frutos secos (nueces). No recomendado para alérgicos a frutos secos."
-            },
-            {
-                nombreReceta: "Hígado de Pollo en Salsa",
-                ingredientes: ["400g de hígado de pollo", "1 cebolla", "2 dientes de ajo", "1 tomate", "1/2 taza de caldo de pollo", "1 cucharada de harina", "Aceite de oliva", "Sal", "Pimienta", "Perejil fresco"],
-                preparacion: ["Limpiar y cortar el hígado en trozos medianos.", "Picar finamente la cebolla y el ajo.", "Sofreír la cebolla y el ajo en una sartén con aceite.", "Añadir el hígado y cocinar hasta que esté dorado por fuera.", "Incorporar el tomate picado y cocinar unos minutos.", "Espolvorear la harina y remover bien.", "Añadir el caldo de pollo y cocinar a fuego lento 10 minutos.", "Sazonar con sal y pimienta, y espolvorear con perejil fresco picado."],
-                consejosDespensa: "El hígado es una de las mejores fuentes de hierro hemo. Acompaña con una ensalada de vegetales frescos para añadir vitamina C.",
-                beneficiosNiño: "Extremadamente rico en hierro de alta absorción y vitamina A, esencial para prevenir la anemia y apoyar la visión.",
-                alertaAlergenos: "Contiene hígado de pollo. No recomendado para personas con hiperuricemia o gota."
-            },
-            {
-                nombreReceta: "Batido de Frutas Rojas",
-                ingredientes: ["1 taza de fresas", "1/2 taza de frambuesas", "1/2 taza de arándanos", "1 plátano", "1 taza de leche o bebida vegetal fortificada", "1 cucharada de semillas de chía", "Miel al gusto"],
-                preparacion: ["Lavar bien todas las frutas.", "Cortar las fresas y el plátano en trozos.", "Colocar todas las frutas en la licuadora.", "Añadir la leche o bebida vegetal.", "Incorporar las semillas de chía y la miel.", "Licuar hasta obtener una mezcla homogénea.", "Servir frío."],
-                consejosDespensa: "Las frutas rojas aportan vitamina C que mejora la absorción del hierro. Las semillas de chía añaden hierro extra.",
-                beneficiosNiño: "Proporciona antioxidantes, vitamina C y hierro, fortaleciendo el sistema inmunológico y ayudando a prevenir la anemia.",
-                alertaAlergenos: "Contiene lácteos (si se usa leche). Para opción vegana, usar bebida vegetal."
-            }
-        ];
-
-        // Variables globales
-        let childId = "";
-        let childData = {};
-        let ingredients = [];
-        let recipes = [];
-
-        // Storage Adapter - Para facilitar migración a backend
-        const storageAdapter = {
-            // Users
-            getUsers: function() {
-                const users = localStorage.getItem('yachay_users');
-                return users ? JSON.parse(users) : [];
-            },
-            saveUsers: function(users) {
-                localStorage.setItem('yachay_users', JSON.stringify(users));
-            },
-            
-            // Children
-            getChildren: function() {
-                const children = localStorage.getItem('yachay_children');
-                return children ? JSON.parse(children) : [];
-            },
-            saveChildren: function(children) {
-                localStorage.setItem('yachay_children', JSON.stringify(children));
-            },
-            
-            // Responses
-            getResponses: function() {
-                const responses = localStorage.getItem('yachay_responses');
-                return responses ? JSON.parse(responses) : {};
-            },
-            saveResponses: function(responses) {
-                localStorage.setItem('yachay_responses', JSON.stringify(responses));
-            },
-            
-            // Session
-            getSession: function() {
-                const session = localStorage.getItem('yachay_session');
-                return session ? JSON.parse(session) : { currentUserId: null, exploringAsGuest: false, lastActiveAt: null };
-            },
-            saveSession: function(session) {
-                localStorage.setItem('yachay_session', JSON.stringify(session));
-            },
-            
-            // Audit Log
-            getAuditLog: function() {
-                const auditLog = localStorage.getItem('yachay_auditLog');
-                return auditLog ? JSON.parse(auditLog) : [];
-            },
-            saveAuditLog: function(auditLog) {
-                localStorage.setItem('yachay_auditLog', JSON.stringify(auditLog));
-            }
+    document.addEventListener('DOMContentLoaded', function() {
+        const sampleRecipes = {
+            desayuno: [
+                { name: "Batido Súper Guerrero", ingredients: ["1/2 plátano", "1/4 taza de avena", "1 taza de espinacas frescas", "1/2 taza de leche", "4 fresas"], steps: ["Lava bien las espinacas y fresas.", "Coloca todos los ingredientes en la licuadora.", "Licúa hasta obtener una mezcla homogénea y sin grumos.", "Sirve inmediatamente para aprovechar todos los nutrientes."], chefTip: "Puedes añadir una cucharadita de semillas de chía para un extra de fibra y omega-3. Si está muy espeso, añade un poco más de leche.", nutriBenefit: "El hierro de las espinacas y la avena se combina con la vitamina C de las fresas, creando una sinergia que multiplica la absorción de hierro y fortalece el sistema inmune.", allergenAlert: "Contiene lácteos. Usa leche de almendras para una versión sin lactosa." },
+                { name: "Torrejas de Quinua y Manzana", ingredients: ["1/2 taza de quinua cocida", "1 huevo", "1/4 de manzana rallada", "Pizca de canela", "Aceite de coco"], steps: ["En un bol, mezcla la quinua cocida con el huevo batido, la manzana rallada y la canela.", "Calienta un poco de aceite de coco en una sartén a fuego medio.", "Vierte pequeñas porciones de la mezcla para formar torrejas.", "Cocina 2-3 minutos por cada lado, hasta que estén doradas.", "Sirve tibio."], chefTip: "Puedes acompañarlas con un poco de miel de abeja (para mayores de 1 año) o puré de frutas.", nutriBenefit: "La quinua es una proteína completa que también aporta hierro. El huevo suma más hierro y nutrientes esenciales para el cerebro del niño.", allergenAlert: "Contiene huevo. Verifica que la quinua esté bien lavada para eliminar las saponinas." },
+                { name: "Huevos Revueltos con Tomate", ingredients: ["2 huevos", "1/2 tomate picado sin pepas", "1 cucharadita de aceite de oliva", "Una pizca de orégano"], steps: ["Calienta el aceite en una sartén y sofríe el tomate por un par de minutos.", "Bate los huevos en un bol y viértelos sobre el tomate.", "Revuelve constantemente con una espátula hasta que los huevos estén cocidos pero aún jugosos.", "Espolvorea una pizca de orégano antes de servir."], chefTip: "Puedes añadir trocitos de queso fresco o espinacas picadas para hacerlo aún más nutritivo.", nutriBenefit: "Un clásico potente: el hierro de la yema de huevo se absorbe mucho mejor gracias a la vitamina C del tomate. Simple, rápido y efectivo.", allergenAlert: "Contiene huevo. Es una excelente opción baja en carbohidratos." }
+            ],
+            almuerzo: [
+                { name: "Guiso Power de Lentejas", ingredients: ["1/2 taza de lentejas (remojadas)", "1/4 de cebolla", "1/2 zanahoria", "1/4 de pimiento rojo", "1 papa pequeña"], steps: ["Sofríe la cebolla, zanahoria y pimiento picados en una olla.", "Añade las lentejas escurridas y la papa en cubos.", "Cubre con agua o caldo y cocina a fuego lento hasta que todo esté tierno.", "Puedes licuar una parte para espesar el guiso."], chefTip: "Sirve con un chorrito de limón o al lado de una ensalada de tomate para maximizar la absorción de hierro.", nutriBenefit: "Las lentejas son una fuente increíble de hierro vegetal. El pimiento rojo no solo da sabor, sino que su vitamina C es crucial para que el cuerpo aproveche ese hierro.", allergenAlert: "Libre de alérgenos comunes. Un plato fundamental en la lucha contra la anemia." },
+                { name: "Tiritas de Hígado Saltado", ingredients: ["100g de hígado de pollo en tiritas", "1/4 de cebolla roja en juliana", "1/4 de tomate en juliana", "Chorrito de vinagre", "Perejil"], steps: ["Sella las tiritas de hígado en una sartén caliente con poco aceite.", "Añade la cebolla y saltea por un minuto.", "Incorpora el tomate, un chorrito de vinagre y saltea rápidamente.", "Retira del fuego y espolvorea perejil picado."], chefTip: "El secreto es una cocción muy rápida para que el hígado quede suave y no amargo. Sírvelo con arroz o puré.", nutriBenefit: "El hígado es el rey del hierro hemo, el que más fácilmente absorbe el cuerpo. Es un superalimento para reponer las reservas de hierro rápidamente.", allergenAlert: "Asegúrate de que el hígado sea fresco y de buena calidad." },
+                { name: "Pescado al Vapor con Brócoli", ingredients: ["1 filete de pescado blanco", "3-4 arbolitos de brócoli", "Rodajas de limón", "Hierbas aromáticas (eneldo, perejil)"], steps: ["Coloca el filete de pescado en un plato con las rodajas de limón y hierbas.", "Pon los arbolitos de brócoli al lado.", "Cocina todo al vapor durante 10-12 minutos, hasta que el pescado esté cocido.", "Sírvelo inmediatamente."], chefTip: "El vapor es el mejor método para conservar los nutrientes. Puedes añadir otras verduras como zanahoria en bastones.", nutriBenefit: "El brócoli es un alimento estrella: aporta hierro y, a la vez, muchísima vitamina C. Esta combinación perfecta asegura una excelente nutrición.", allergenAlert: "Contiene pescado. Ideal para una cena ligera y altamente nutritiva." }
+            ],
+            cena: [
+                { name: "Crema de Espinacas y Papa", ingredients: ["1 taza de espinacas", "1 papa amarilla pequeña", "1/4 de cebolla", "1 taza de caldo de pollo o verduras"], steps: ["Sofríe la cebolla en una olla.", "Añade la papa en cubos y el caldo. Cocina hasta que la papa esté suave.", "Agrega las espinacas y cocina solo por 1 minuto para que no pierdan su color.", "Licúa todo hasta obtener una crema suave."], chefTip: "Puedes añadir un chorrito de leche o crema para hacerla más cremosa. Sírvela con crutones integrales.", nutriBenefit: "Una forma deliciosa y fácil de que los niños coman espinacas. El ácido fólico y el hierro de esta verdura son vitales para la sangre.", allergenAlert: "Puede contener lácteos si se añade leche/crema." },
+                { name: "Tortilla de Acelga", ingredients: ["4-5 hojas de acelga cocida y picada", "2 huevos", "1 cucharada de queso parmesano", "Pizca de nuez moscada"], steps: ["Exprime bien la acelga cocida para quitar el exceso de agua.", "En un bol, bate los huevos y mézclalos con la acelga, el queso y la nuez moscada.", "Cocina la tortilla en una sartén pequeña por ambos lados.", "Corta en triángulos para servir."], chefTip: "Ideal para que los niños la coman con las manos. Puedes hacerla en moldes de muffin en el horno.", nutriBenefit: "La acelga, prima de la espinaca, también es rica en hierro y vitaminas. Combinada con el huevo, se crea una cena ligera pero muy nutritiva.", allergenAlert: "Contiene huevo y lácteos." },
+                { name: "Arroz Tapado de Sangrecita", ingredients: ["1/4 taza de sangrecita de pollo cocida y graneada", "1/4 de cebolla roja picada", "Ajo molido", "Ají panca molido (opcional, sin picante)", "Arroz cocido"], steps: ["Prepara un aderezo con cebolla, ajo y ají panca.", "Incorpora la sangrecita y cocínala por unos minutos.", "En un molde pequeño, coloca una capa de arroz, una capa del guiso de sangrecita y tapa con más arroz.", "Desmolda en el plato."], chefTip: "Acompaña siempre con una pequeña ensalada de cebolla y tomate o un refresco de camu camu para la vitamina C.", nutriBenefit: "La sangrecita es uno de los alimentos más recomendados para combatir la anemia por su altísimo contenido de hierro de fácil absorción.", allergenAlert: "Plato de origen peruano, muy efectivo y económico." }
+            ],
+            postre: [
+                { name: "Mousse de Sangrecita con Chocolate", ingredients: ["100g de sangrecita cocida", "50g de chocolate bitter (>70% cacao)", "1/4 taza de leche", "Endulzante al gusto (opcional)"], steps: ["Derrite el chocolate a baño maría o en el microondas.", "Licúa la sangrecita cocida con la leche hasta que no queden grumos.", "Incorpora el chocolate derretido y sigue licuando hasta obtener una mezcla homogénea.", "Vierte en copas y refrigera por al menos 2 horas."], chefTip: "Decora con fresas o frambuesas. El sabor del chocolate enmascara por completo el de la sangrecita, ¡es un postre secreto!", nutriBenefit: "Una forma innovadora y deliciosa de darles a los niños los beneficios del hierro de la sangrecita. El cacao puro también aporta hierro y antioxidantes.", allergenAlert: "Puede contener lácteos." },
+                { name: "Galletas de Avena y Lentejas", ingredients: ["1/2 taza de puré de lentejas cocidas", "1 taza de avena", "1 plátano maduro hecho puré", "1/4 taza de pasas", "Canela en polvo"], steps: ["Precalienta el horno a 180°C.", "En un bol, mezcla todos los ingredientes hasta formar una masa pegajosa.", "Con una cuchara, forma pequeñas galletas en una bandeja para horno engrasada.", "Hornea por 15-20 minutos o hasta que los bordes estén dorados."], chefTip: "Asegúrate de que las lentejas estén bien cocidas y sin sal para el puré. Son ideales para la lonchera.", nutriBenefit: "¡Una galleta que combate la anemia! Combina el hierro de las lentejas y la avena en un formato que a los niños les encanta.", allergenAlert: "Asegúrate que la avena sea libre de gluten si es necesario." },
+                { name: "Helado de Remolacha y Fresa", ingredients: ["1/2 remolacha pequeña, cocida y en trozos", "1 taza de fresas congeladas", "1/2 plátano congelado", "Un chorrito de jugo de naranja"], steps: ["Asegúrate de que la fruta y la remolacha estén bien congeladas.", "Coloca todos los ingredientes en un procesador de alimentos o licuadora potente.", "Procesa hasta obtener una textura cremosa y suave, similar a un helado.", "Sirve inmediatamente."], chefTip: "Si no tienes procesador, puedes licuar y luego congelar por un par de horas, revolviendo ocasionalmente.", nutriBenefit: "La remolacha (betarraga) es conocida por su aporte de hierro y folatos. Las fresas y la naranja aportan la vitamina C necesaria para una absorción óptima.", allergenAlert: "Postre natural, vegano y libre de alérgenos comunes." }
+            ]
         };
 
-        // --- INICIO DE FUNCIONES DE SINCRONIZACIÓN ---
+        let ingredients = [];
+        const childId = new URLSearchParams(window.location.search).get('childId');
+        if (!childId) { setTimeout(() => window.location.href = 'index.html', 2000); return; }
         
-        // Función para sincronizar la eliminación/restauración entre páginas
-        function syncChildDeletionAcrossPages(childId, action) {
-            // action puede ser 'soft-delete', 'restore' o 'permanent-delete'
-            const syncData = {
-                childId: childId,
-                action: action,
-                timestamp: new Date().toISOString()
-            };
-            
-            // Guardar en localStorage para que otras páginas puedan detectar cambios
-            localStorage.setItem('yachay_sync_action', JSON.stringify(syncData));
-            
-            // Notificar a otras pestañas abiertas usando BroadcastChannel
-            if ('BroadcastChannel' in window) {
-                const channel = new BroadcastChannel('yachay_sync');
-                channel.postMessage(syncData);
-            }
+        function initializeApp() {
+            loadChildData();
+            renderCharts();
+            initializeFoodModals();
+            initializeTabs();
+            initializePantry();
+            initializeRecipeGeneration();
+            initializeLogout();
         }
 
-        // --- FIN DE FUNCIONES DE SINCRONIZACIÓN ---
-
-        // Función para mostrar notificaciones toast mejoradas
-        function showToast(message, type = 'info') {
-            const toastContainer = document.getElementById('toastContainer');
-            const toastId = 'toast-' + Date.now();
-            
-            const toastHtml = `
-                <div id="${toastId}" class="custom-toast toast-${type}">
-                    <div class="me-2">
-                        ${type === 'success' ? '<i class="fas fa-check-circle text-success"></i>' : 
-                          type === 'error' ? '<i class="fas fa-exclamation-circle text-danger"></i>' : 
-                          '<i class="fas fa-info-circle text-info"></i>'}
-                    </div>
-                    <div class="flex-grow-1">${message}</div>
-                    <button type="button" class="btn-close ms-2" onclick="document.getElementById('${toastId}').remove()"></button>
-                </div>
-            `;
-            
-            toastContainer.insertAdjacentHTML('beforeend', toastHtml);
-            
-            // Auto remove after 5 seconds
-            setTimeout(() => {
-                const toast = document.getElementById(toastId);
-                if (toast) toast.remove();
-            }, 5000);
-        }
-
-        // Función para obtener el childId de la URL
-        function getChildIdFromUrl() {
-            const urlParams = new URLSearchParams(window.location.search);
-            return urlParams.get('childId');
-        }
-
-        // Función para cargar los datos del niño desde localStorage
         function loadChildData() {
-            const childrenData = storageAdapter.getChildren();
-            const child = childrenData.find(c => c.id === childId);
+            const child = (JSON.parse(localStorage.getItem('yachay_children') || '[]')).find(c => c.id === childId);
             if (child) {
-                childData = child;
-                updateHeaderWithChildName();
-                return true;
-            }
-            return false;
-        }
-
-        // Función para actualizar el encabezado con el nombre del niño
-        function updateHeaderWithChildName() {
-            const headerTitle = document.querySelector('.header h1');
-            headerTitle.innerHTML = `<i class="fas fa-shopping-basket"></i> Comida con Despensa para ${childData.name}`;
-            
-            // Actualizar enlace de volver al perfil
-            const backToProfileLink = document.getElementById('backToProfile');
-            backToProfileLink.href = `chicos.html?childId=${childId}`;
-            
-            // Actualizar enlaces del footer móvil
-            const mobileBackToProfile = document.getElementById('mobileBackToProfile');
-            const mobileProfile = document.getElementById('mobileProfile');
-            
-            mobileBackToProfile.href = `chicos.html?childId=${childId}`;
-            mobileProfile.href = `chicos.html?childId=${childId}`;
-        }
-
-        // Función para cargar los ingredientes guardados
-        function loadSavedIngredients() {
-            const savedIngredients = localStorage.getItem(`pantry_${childId}`);
-            if (savedIngredients) {
-                ingredients = JSON.parse(savedIngredients);
-                renderIngredients();
+                document.querySelector('.header h1').innerHTML = `<i class="fas fa-carrot"></i> Cocina para ${child.name}`;
+                document.getElementById('backToProfile').href = `chicos.html?childId=${childId}`;
             }
         }
 
-        // Función para renderizar los ingredientes
-        function renderIngredients() {
-            const ingredientsList = document.getElementById('ingredients-list');
-            ingredientsList.innerHTML = '';
-            
-            ingredients.forEach((ingredient, index) => {
-                const item = document.createElement('div');
-                item.className = 'food-item';
-                item.innerHTML = `
-                    <span>${ingredient}</span>
-                    <button class="remove-btn" data-index="${index}"><i class="fas fa-times"></i></button>
-                `;
-                ingredientsList.appendChild(item);
+        function showToast(message, type = 'info') {
+            const container = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+            toast.className = `custom-toast toast-${type}`;
+            toast.innerHTML = `<div>${message}</div>`;
+            container.appendChild(toast);
+            setTimeout(() => toast.remove(), 4000);
+        }
+
+        function initializeTabs() {
+             document.querySelectorAll('.nav-tab').forEach(tab => tab.addEventListener('click', (e) => {
+                document.querySelectorAll('.nav-tab, .tab-content').forEach(el => el.classList.remove('active'));
+                const tabId = e.currentTarget.dataset.tab;
+                e.currentTarget.classList.add('active');
+                document.getElementById(`${tabId}-tab`).classList.add('active');
+            }));
+        }
+
+        function initializePantry() {
+            const savedPantry = localStorage.getItem(`pantry_${childId}`);
+            if (savedPantry) {
+                const pantryData = JSON.parse(savedPantry);
+                ingredients = pantryData.manualIngredients || [];
+                if (pantryData.imageUrl) {
+                    document.getElementById('pantry-image-container').innerHTML = `<img src="${pantryData.imageUrl}" id="pantry-image-preview" alt="Vista previa de despensa">`;
+                }
+            }
+            renderPantry();
+
+            document.getElementById('add-ingredient').addEventListener('click', () => {
+                const input = document.getElementById('ingredient-input');
+                const value = input.value.trim();
+                if (value && !ingredients.includes(value)) {
+                    ingredients.push(value);
+                    renderPantry();
+                    input.value = '';
+                }
             });
-            
-            // Añadir event listeners a los botones de eliminar
-            document.querySelectorAll('.remove-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const index = parseInt(this.getAttribute('data-index'));
-                    removeIngredient(index);
-                });
-            });
-        }
 
-        // Función para agregar un ingrediente
-        function addIngredient() {
-            const input = document.getElementById('ingredient-input');
-            const ingredient = input.value.trim();
-            
-            if (ingredient && !ingredients.includes(ingredient)) {
-                ingredients.push(ingredient);
-                renderIngredients();
-                input.value = '';
-                closeAllLists();
-            }
-        }
-
-        // Función para eliminar un ingrediente
-        function removeIngredient(index) {
-            const item = document.querySelectorAll('.food-item')[index];
-            item.classList.add('removing');
-            
-            setTimeout(() => {
-                ingredients.splice(index, 1);
-                renderIngredients();
-            }, 500);
-        }
-
-        // Función para guardar la despensa
-        function savePantry() {
-            localStorage.setItem(`pantry_${childId}`, JSON.stringify(ingredients));
-            
-            // Mostrar mensaje de confirmación
-            showToast('Despensa guardada correctamente', 'success');
-        }
-
-        // Función para generar recetas
-        function generateRecipe(mealType) {
-            // Mostrar mensaje de desarrollo
-            showDevelopmentMessage();
-        }
-
-        // Función para mostrar mensaje de desarrollo
-        function showDevelopmentMessage() {
-            const existingMessage = document.querySelector('.development-message');
-            if (existingMessage) {
-                existingMessage.remove();
-            }
-            
-            const message = document.createElement('div');
-            message.className = 'development-message';
-            message.innerHTML = '<i class="fas fa-tools"></i> Funcionalidad en desarrollo. Próximamente podrás generar recetas personalizadas con IA.';
-            
-            const recipesContainer = document.getElementById('recipes-container');
-            recipesContainer.parentNode.insertBefore(message, recipesContainer);
-            
-            setTimeout(() => {
-                message.style.animation = 'fadeOut 0.5s';
-                setTimeout(() => {
-                    if (message.parentNode) {
-                        message.parentNode.removeChild(message);
+            document.getElementById('photo-upload').addEventListener('change', (event) => {
+                const file = event.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        const container = document.getElementById('pantry-image-container');
+                        container.innerHTML = `<img src="${e.target.result}" id="pantry-image-preview" alt="Vista previa de despensa">`;
                     }
-                }, 500);
-            }, 5000);
-        }
-
-        // Función para agregar una receta a la lista
-        function addRecipe(recipe) {
-            // Si ya hay 6 recetas, eliminar la más antigua
-            if (recipes.length >= 6) {
-                const oldestRecipe = document.querySelector('.recipe-card');
-                if (oldestRecipe) {
-                    oldestRecipe.classList.add('removing');
-                    setTimeout(() => {
-                        recipes.shift();
-                        renderRecipes();
-                    }, 500);
-                }
-            }
-            
-            recipes.push(recipe);
-            renderRecipes();
-        }
-
-        // Función para renderizar las recetas
-        function renderRecipes() {
-            const recipesContainer = document.getElementById('recipes-container');
-            recipesContainer.innerHTML = '';
-            
-            recipes.forEach((recipe, index) => {
-                const card = document.createElement('div');
-                card.className = 'recipe-card';
-                
-                // Generar HTML para ingredientes
-                const ingredientsHtml = recipe.ingredientes.map(ing => `<li>${ing}</li>`).join('');
-                
-                // Generar HTML para preparación
-                const preparationHtml = recipe.preparacion.map(step => `<li>${step}</li>`).join('');
-                
-                card.innerHTML = `
-                    <h3><i class="fas fa-utensils"></i> ${recipe.nombreReceta}</h3>
-                    
-                    <h4><i class="fas fa-shopping-basket"></i> Ingredientes:</h4>
-                    <ul>${ingredientsHtml}</ul>
-                    
-                    <h4><i class="fas fa-list-ol"></i> Preparación:</h4>
-                    <ol>${preparationHtml}</ol>
-                    
-                    <div class="recipe-tip">
-                        <i class="fas fa-lightbulb"></i>
-                        <div>
-                            <strong>Consejos para tu Despensa:</strong> ${recipe.consejosDespensa}
-                        </div>
-                    </div>
-                    
-                    <div class="recipe-benefit">
-                        <i class="fas fa-heartbeat"></i>
-                        <div>
-                            <strong>Beneficios para el Niño:</strong> ${recipe.beneficiosNiño}
-                        </div>
-                    </div>
-                    
-                    ${recipe.alertaAlergenos ? `
-                    <div class="recipe-alert">
-                        <i class="fas fa-exclamation-triangle"></i>
-                        <div>
-                            <strong>Alerta de Alérgenos:</strong> ${recipe.alertaAlergenos}
-                        </div>
-                    </div>
-                    ` : ''}
-                    
-                    <button class="copy-btn" data-recipe-index="${index}">
-                        <i class="fas fa-copy"></i> Copiar Receta
-                    </button>
-                `;
-                
-                recipesContainer.appendChild(card);
-            });
-            
-            // Añadir event listeners a los botones de copiar
-            document.querySelectorAll('.copy-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const index = parseInt(this.getAttribute('data-recipe-index'));
-                    copyRecipe(index);
-                });
-            });
-        }
-
-        // Función para copiar una receta al portapapeles
-        function copyRecipe(index) {
-            const recipe = recipes[index];
-            
-            let textToCopy = `${recipe.nombreReceta}\n\n`;
-            textToCopy += `Ingredientes:\n`;
-            recipe.ingredientes.forEach(ing => {
-                textToCopy += `- ${ing}\n`;
-            });
-            
-            textToCopy += `\nPreparación:\n`;
-            recipe.preparacion.forEach((step, i) => {
-                textToCopy += `${i + 1}. ${step}\n`;
-            });
-            
-            textToCopy += `\nConsejos para tu Despensa: ${recipe.consejosDespensa}\n`;
-            textToCopy += `Beneficios para el Niño: ${recipe.beneficiosNiño}\n`;
-            
-            if (recipe.alertaAlergenos) {
-                textToCopy += `Alerta de Alérgenos: ${recipe.alertaAlergenos}\n`;
-            }
-            
-            navigator.clipboard.writeText(textToCopy).then(() => {
-                showToast('Receta copiada al portapapeles', 'success');
-            }).catch(err => {
-                showToast('Error al copiar la receta', 'error');
-                console.error('Error al copiar: ', err);
-            });
-        }
-
-        // Función para inicializar las recetas de ejemplo
-        function initializeSampleRecipes() {
-            recipes = [...sampleRecipes];
-            renderRecipes();
-        }
-
-        // Función para inicializar el autocompletado
-        function initAutocomplete() {
-            const input = document.getElementById('ingredient-input');
-            
-            input.addEventListener('input', function() {
-                closeAllLists();
-                const val = this.value;
-                
-                if (!val) return false;
-                
-                const autocompleteList = document.createElement('div');
-                autocompleteList.setAttribute('id', this.id + 'autocomplete-list');
-                autocompleteList.setAttribute('class', 'autocomplete-items');
-                this.parentNode.appendChild(autocompleteList);
-                
-                const filteredFoods = ironRichFoods.filter(food => 
-                    food.toLowerCase().includes(val.toLowerCase())
-                );
-                
-                filteredFoods.slice(0, 5).forEach(food => {
-                    const item = document.createElement('div');
-                    item.innerHTML = '<strong>' + food.substr(0, val.length) + '</strong>' + food.substr(val.length);
-                    item.innerHTML += "<input type='hidden' value='" + food + "'>";
-                    
-                    item.addEventListener('click', function() {
-                        input.value = this.getElementsByTagName('input')[0].value;
-                        closeAllLists();
-                    });
-                    
-                    autocompleteList.appendChild(item);
-                });
-            });
-            
-            // Cerrar la lista si se hace clic fuera
-            document.addEventListener('click', function(e) {
-                if (e.target !== input) {
-                    closeAllLists();
+                    reader.readAsDataURL(file);
+                    showToast('Foto cargada. La IA la analizará pronto.', 'info');
                 }
             });
-        }
-
-        // Función para cerrar todas las listas de autocompletado
-        function closeAllLists(elmnt) {
-            const items = document.getElementsByClassName('autocomplete-items');
-            for (let i = 0; i < items.length; i++) {
-                if (elmnt !== items[i] && elmnt !== document.getElementById('ingredient-input')) {
-                    items[i].parentNode.removeChild(items[i]);
-                }
-            }
-        }
-
-        // Función para inicializar las pestañas
-        function initTabs() {
-            const tabs = document.querySelectorAll('.tab');
-            tabs.forEach(tab => {
-                tab.addEventListener('click', function() {
-                    const tabId = this.getAttribute('data-tab');
-                    
-                    // Desactivar todas las pestañas
-                    tabs.forEach(t => t.classList.remove('active'));
-                    document.querySelectorAll('.tab-content').forEach(content => {
-                        content.classList.remove('active');
-                    });
-                    
-                    // Activar la pestaña seleccionada
-                    this.classList.add('active');
-                    document.getElementById(tabId + '-tab').classList.add('active');
-                });
-            });
-        }
-
-        // Función para inicializar las pestañas de navegación principal
-        function initNavTabs() {
-            const navTabs = document.querySelectorAll('.nav-tab');
-            navTabs.forEach(tab => {
-                tab.addEventListener('click', function() {
-                    const tabId = this.getAttribute('data-tab');
-                    
-                    // Desactivar todas las pestañas
-                    navTabs.forEach(t => t.classList.remove('active'));
-                    document.querySelectorAll('.tab-content').forEach(content => {
-                        content.classList.remove('active');
-                    });
-                    
-                    // Activar la pestaña seleccionada
-                    this.classList.add('active');
-                    document.getElementById(tabId + '-tab').classList.add('active');
-                });
-            });
-        }
-
-        // Función para inicializar el colapsable
-        function initCollapsible() {
-            const coll = document.querySelector('.collapsible');
-            coll.addEventListener('click', function() {
-                this.classList.toggle('active');
-                const content = this.nextElementSibling;
-                content.classList.toggle('active');
-                
-                const icon = this.querySelector('i');
-                if (content.classList.contains('active')) {
-                    icon.classList.remove('fa-chevron-down');
-                    icon.classList.add('fa-chevron-up');
-                } else {
-                    icon.classList.remove('fa-chevron-up');
-                    icon.classList.add('fa-chevron-down');
-                }
-            });
-        }
-
-        // Función para inicializar el modal de confirmación
-        function initModal() {
-            const modal = document.getElementById('confirm-modal');
-            const closeBtn = document.querySelector('.close');
-            const cancelBtn = document.getElementById('confirm-cancel');
             
-            closeBtn.addEventListener('click', function() {
-                modal.style.display = 'none';
-            });
-            
-            cancelBtn.addEventListener('click', function() {
-                modal.style.display = 'none';
-            });
-            
-            window.addEventListener('click', function(event) {
-                if (event.target === modal) {
-                    modal.style.display = 'none';
-                }
-            });
-        }
-
-        // Función para mostrar el modal de confirmación
-        function showConfirmModal(message, onConfirm) {
-            const modal = document.getElementById('confirm-modal');
-            const messageEl = document.getElementById('confirm-message');
-            const confirmBtn = document.getElementById('confirm-ok');
-            
-            messageEl.textContent = message;
-            modal.style.display = 'block';
-            
-            // Eliminar event listeners previos
-            const newConfirmBtn = confirmBtn.cloneNode(true);
-            confirmBtn.parentNode.replaceChild(newConfirmBtn, confirmBtn);
-            
-            // Añadir nuevo event listener
-            newConfirmBtn.addEventListener('click', function() {
-                modal.style.display = 'none';
-                if (onConfirm) onConfirm();
-            });
-        }
-
-        // Función para inicializar la carga de fotos
-        function initPhotoUpload() {
-            const photoInput = document.getElementById('photo-upload');
-            const fileUploadBtn = document.querySelector('.file-upload-btn');
-            
-            photoInput.addEventListener('change', function() {
-                if (this.files && this.files[0]) {
-                    const fileName = this.files[0].name;
-                    fileUploadBtn.innerHTML = `
-                        <i class="fas fa-check-circle" style="color: var(--success-color);"></i>
-                        <div>
-                            <strong>Imagen cargada</strong>
-                            <div>${fileName}</div>
-                        </div>
-                    `;
-                    
-                    // En una implementación real, aquí se procesaría la imagen
-                    // Por ahora, solo mostramos un mensaje
-                    showToast('Imagen cargada correctamente. Próximamente procesaremos tus ingredientes automáticamente.', 'info');
-                }
-            });
-        }
-
-        // Función para inicializar el footer móvil
-        function initMobileFooter() {
-            // Enlace de inicio
-            document.getElementById('mobileHome').addEventListener('click', function(e) {
-                e.preventDefault();
-                window.location.href = 'index1.html';
-            });
-            
-            // Enlace de salir
-            document.getElementById('mobileExit').addEventListener('click', function(e) {
-                e.preventDefault();
-                window.location.href = 'index1.html';
-            });
-        }
-
-        // Función para inicializar el botón flotante de ayuda
-        function initHelpFab() {
-            const helpFab = document.getElementById('helpFab');
-            
-            helpFab.addEventListener('click', function() {
-                showConfirmModal(
-                    '¿Necesitas ayuda? Esta aplicación te permite gestionar tu despensa y generar recetas personalizadas para prevenir la anemia en niños. Explora las diferentes secciones para obtener más información.',
-                    function() {
-                        // Acción al confirmar
-                    }
-                );
-            });
-        }
-
-        // Función de inicialización
-        function init() {
-            // --- INICIO DE VERIFICACIÓN DE SINCRONIZACIÓN AL CARGAR ---
-            // Verificar si hay acciones de sincronización pendientes de otras pestañas
-            const syncAction = localStorage.getItem('yachay_sync_action');
-            if (syncAction) {
-                const syncData = JSON.parse(syncAction);
-                // Si la acción es reciente (menos de 5 segundos), la procesamos
-                const actionTime = new Date(syncData.timestamp);
-                const now = new Date();
-                if ((now - actionTime) < 5000) {
-                    // Si la acción afecta al niño actual, redirigimos
-                    const currentChildId = getChildIdFromUrl();
-                    if (currentChildId === syncData.childId) {
-                        if (syncData.action === 'soft-delete' || syncData.action === 'permanent-delete') {
-                            showToast('El perfil actual ha sido eliminado', 'info');
-                            setTimeout(() => {
-                                window.location.href = 'chicos.html';
-                            }, 2000);
-                        }
-                    }
-                }
-                // Limpiamos la acción para no procesarla de nuevo
-                localStorage.removeItem('yachay_sync_action');
-            }
-
-            // Configurar listener para sincronización en tiempo real con otras pestañas
-            if ('BroadcastChannel' in window) {
-                const channel = new BroadcastChannel('yachay_sync');
-                channel.onmessage = function(event) {
-                    const syncData = event.data;
-                    // Si recibimos un mensaje de sincronización, verificamos si afecta al niño actual
-                    const currentChildId = getChildIdFromUrl();
-                    if (currentChildId === syncData.childId) {
-                        if (syncData.action === 'soft-delete' || syncData.action === 'permanent-delete') {
-                            showToast('El perfil actual ha sido eliminado', 'info');
-                            setTimeout(() => {
-                                window.location.href = 'chicos.html';
-                            }, 2000);
-                        }
-                    }
+            document.getElementById('save-pantry').addEventListener('click', () => {
+                const imgSrc = document.getElementById('pantry-image-preview')?.src || null;
+                const pantryData = {
+                    manualIngredients: ingredients,
+                    imageUrl: imgSrc
                 };
-            }
-            // --- FIN DE VERIFICACIÓN DE SINCRONIZACIÓN AL CARGAR ---
-
-            // Obtener el childId de la URL
-            childId = getChildIdFromUrl();
-            
-            if (!childId) {
-                showToast('No se encontró el ID del niño', 'error');
-                return;
-            }
-            
-            // Cargar los datos del niño
-            if (!loadChildData()) {
-                showToast('No se encontraron datos del niño', 'error');
-                return;
-            }
-            
-            // Cargar ingredientes guardados
-            loadSavedIngredients();
-            
-            // Inicializar componentes
-            initAutocomplete();
-            initTabs();
-            initNavTabs();
-            initCollapsible();
-            initModal();
-            initPhotoUpload();
-            initMobileFooter();
-            initHelpFab();
-            
-            // Inicializar recetas de ejemplo
-            initializeSampleRecipes();
-            
-            // Event listeners
-            document.getElementById('add-ingredient').addEventListener('click', addIngredient);
-            document.getElementById('ingredient-input').addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
-                    addIngredient();
-                }
+                localStorage.setItem(`pantry_${childId}`, JSON.stringify(pantryData));
+                showToast('Despensa guardada con éxito', 'success');
             });
-            
-            document.getElementById('save-pantry').addEventListener('click', savePantry);
-            
-            // Botones de generación de recetas
-            document.querySelectorAll('[data-meal]').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const mealType = this.getAttribute('data-meal');
-                    generateRecipe(mealType);
-                });
+
+            document.getElementById('clear-pantry-btn').addEventListener('click', () => {
+                if (confirm('¿Estás seguro de que quieres borrar todos los ingredientes y la foto de tu despensa?')) {
+                    ingredients = [];
+                    document.getElementById('pantry-image-container').innerHTML = '';
+                    localStorage.removeItem(`pantry_${childId}`);
+                    renderPantry();
+                    showToast('Despensa limpiada.', 'info');
+                }
             });
         }
 
-        // Ejecutar la inicialización cuando el DOM esté cargado
-        document.addEventListener('DOMContentLoaded', init);
+        function renderPantry() {
+            const listContainer = document.getElementById('ingredients-list');
+            listContainer.innerHTML = '';
+            if (ingredients.length === 0) {
+                 listContainer.innerHTML = `<p style="color: #999;">Aquí aparecerán tus ingredientes...</p>`;
+            } else {
+                ingredients.forEach((ing, index) => {
+                    const item = document.createElement('div');
+                    item.className = 'food-item-tag';
+                    item.innerHTML = `<span>${ing}</span><button data-index="${index}">&times;</button>`;
+                    listContainer.appendChild(item);
+                });
+            }
+            listContainer.querySelectorAll('button').forEach(btn => btn.addEventListener('click', (e) => {
+                ingredients.splice(e.target.dataset.index, 1);
+                renderPantry();
+            }));
+        }
+
+        function initializeRecipeGeneration() {
+            document.querySelectorAll('.recipe-buttons .btn').forEach(btn => btn.addEventListener('click', () => generateRecipes(btn.dataset.meal)));
+        }
+        
+        function generateRecipes(mealType) {
+            const loader = document.getElementById('loader');
+            const container = document.getElementById('recipes-container');
+            const devMessage = document.getElementById('recipe-dev-message');
+            
+            container.innerHTML = '';
+            devMessage.style.display = 'none';
+            loader.style.display = 'block';
+
+            setTimeout(() => {
+                loader.style.display = 'none';
+                const recipesToDisplay = sampleRecipes[mealType];
+                recipesToDisplay.forEach(recipe => {
+                    const card = document.createElement('div');
+                    card.className = 'recipe-card';
+                    card.style.borderColor = mealType === 'desayuno' ? 'var(--primary-color)' : mealType === 'almuerzo' ? 'var(--warning-color)' : mealType === 'cena' ? 'var(--info-color)' : 'var(--secondary-color)';
+                    card.innerHTML = `
+                        <h3><i class="fas fa-utensils"></i> ${recipe.name}</h3>
+                        <h4><i class="fas fa-list-check"></i> Ingredientes:</h4><ul>${recipe.ingredients.map(i => `<li>${i}</li>`).join('')}</ul>
+                        <h4><i class="fas fa-shoe-prints"></i> Pasos:</h4><ol>${recipe.steps.map(s => `<li>${s}</li>`).join('')}</ol>
+                        <div class="recipe-detail recipe-tip"><i class="fas fa-lightbulb"></i><div><strong>Consejo del Chef:</strong> ${recipe.chefTip}</div></div>
+                        <div class="recipe-detail recipe-benefit"><i class="fas fa-heart-pulse"></i><div><strong>Beneficio Nutricional:</strong> ${recipe.nutriBenefit}</div></div>
+                        <div class="recipe-detail recipe-alert"><i class="fas fa-triangle-exclamation"></i><div><strong>Alérgenos:</strong> ${recipe.allergenAlert}</div></div>
+                    `;
+                    container.appendChild(card);
+                });
+                devMessage.innerHTML = `<div class="development-message">IA en desarrollo. ¡Estas son 3 ideas nutritivas para inspirarte!</div>`;
+                devMessage.style.display = 'block';
+            }, 1500);
+        }
+
+        function initializeFoodModals() {
+            const foodModal = document.getElementById('food-modal');
+            const modalClose = document.getElementById('modal-close');
+            document.querySelectorAll('.food-card, .avoid-card').forEach(card => {
+                card.addEventListener('click', () => {
+                    document.getElementById('modal-title').innerText = card.dataset.title;
+                    document.getElementById('modal-description').innerText = card.dataset.description;
+                    document.getElementById('modal-tip').innerText = card.dataset.tip;
+                    foodModal.style.display = 'block';
+                });
+            });
+            modalClose.onclick = () => foodModal.style.display = 'none';
+            window.onclick = (event) => { if (event.target == foodModal) { foodModal.style.display = "none"; }};
+        }
+
+        function initializeLogout() {
+            document.getElementById('logout-btn').addEventListener('click', () => {
+                localStorage.removeItem('yachay_session');
+                showToast('Cerrando sesión...', 'info');
+                setTimeout(() => window.location.href = 'index.html', 1500);
+            });
+        }
+
+        function renderCharts() {
+            if(window.myParetoChart) window.myParetoChart.destroy();
+            if(window.myControlChart) window.myControlChart.destroy();
+            const paretoCtx = document.getElementById('paretoChart').getContext('2d');
+            window.myParetoChart = new Chart(paretoCtx, { type: 'bar', data: { labels: ['Hígado', 'Carnes Rojas', 'Lentejas', 'Espinacas', 'Huevo'], datasets: [{ label: 'Aporte de Hierro (mg por porción)', data: [9.0, 3.5, 3.3, 2.7, 1.2], backgroundColor: 'rgba(178, 34, 34, 0.7)' }] }, options: { responsive: true, maintainAspectRatio: false } });
+            const controlCtx = document.getElementById('controlChart').getContext('2d');
+            window.myControlChart = new Chart(controlCtx, { type: 'line', data: { labels: ['Lunes', 'Martes', 'Miérc', 'Jueves', 'Viernes'], datasets: [{ label: 'Consumo Actual (mg)', data: [7, 8, 6, 9, 7.5], borderColor: 'rgba(3, 169, 244, 1)', tension: 0.1 }, { label: 'Recomendado (mg)', data: [8, 8, 8, 8, 8], borderColor: 'rgba(255, 152, 0, 1)', borderDash: [5, 5] }] }, options: { responsive: true, maintainAspectRatio: false } });
+        }
+        
+        initializeApp();
+    });
     </script>
 </body>
 </html>

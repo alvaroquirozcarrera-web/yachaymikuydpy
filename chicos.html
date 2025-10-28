@@ -500,7 +500,7 @@
                     <p class="profile-header-message" id="dynamicMessage"></p>
                 </div>
             </div>
-            <a href="index1.html" class="btn-exit">
+            <a href="#" id="logoutBtn" class="btn-exit">
                 <i class="fas fa-sign-out-alt"></i> Salir
             </a>
         </header>
@@ -643,7 +643,42 @@
     <div class="toast-container" id="toastContainer"></div>
 
     <script>
-        const storageAdapter = { getUsers: () => JSON.parse(localStorage.getItem('yachay_users') || '[]'), getChildren: () => JSON.parse(localStorage.getItem('yachay_children') || '[]'), getSession: () => JSON.parse(localStorage.getItem('yachay_session') || '{"currentUserId":null,"exploringAsGuest":false}'), saveChildren: (children) => localStorage.setItem('yachay_children', JSON.stringify(children)), saveResponses: (responses) => localStorage.setItem('yachay_responses', JSON.stringify(responses)) };
+        // --- INICIO: LÓGICA DE SESIÓN E INACTIVIDAD ---
+        let inactivityTimer;
+
+        // Función central para cerrar sesión y redirigir
+        function logoutAndRedirect() {
+            const session = storageAdapter.getSession();
+            session.currentUserId = null;
+            session.exploringAsGuest = false;
+            storageAdapter.saveSession(session); // Guardamos la sesión actualizada
+            
+            showToast('Sesión cerrada por inactividad.', 'info');
+            
+            // Esperamos un momento para que el toast sea visible antes de redirigir
+            setTimeout(() => {
+                window.location.href = 'index.html';
+            }, 1500);
+        }
+
+        // Función para reiniciar el temporizador de inactividad
+        function resetInactivityTimer() {
+            clearTimeout(inactivityTimer);
+            // El timeout es de 1 minuto (60000 milisegundos)
+            inactivityTimer = setTimeout(logoutAndRedirect, 60000);
+        }
+        // --- FIN: LÓGICA DE SESIÓN E INACTIVIDAD ---
+
+        // Adapter mejorado para incluir saveSession
+        const storageAdapter = {
+            getUsers: () => JSON.parse(localStorage.getItem('yachay_users') || '[]'),
+            getChildren: () => JSON.parse(localStorage.getItem('yachay_children') || '[]'),
+            getSession: () => JSON.parse(localStorage.getItem('yachay_session') || '{"currentUserId":null,"exploringAsGuest":false}'),
+            saveSession: (session) => localStorage.setItem('yachay_session', JSON.stringify(session)), // MÉTODO AÑADIDO
+            saveChildren: (children) => localStorage.setItem('yachay_children', JSON.stringify(children)),
+            saveResponses: (responses) => localStorage.setItem('yachay_responses', JSON.stringify(responses))
+        };
+        
         function showToast(message, type = 'info') { const container = document.getElementById('toastContainer'); if (!container) return; const toastId = 'toast-' + Date.now(); const toastHtml = ` <div id="${toastId}" class="custom-toast toast-${type}"> <div class="me-2"> ${type === 'success' ? '<i class="fas fa-check-circle text-success"></i>' : type === 'error' ? '<i class="fas fa-exclamation-circle text-danger"></i>' : '<i class="fas fa-info-circle text-info"></i>'} </div> <div class="flex-grow-1">${message}</div> <button type="button" class="btn-close ms-2" onclick="document.getElementById('${toastId}').remove()"></button> </div> `; container.insertAdjacentHTML('beforeend', toastHtml); setTimeout(() => document.getElementById(toastId)?.remove(), 5000); }
         function calculateAge(dob) { const age = new Date(new Date() - new Date(dob)).getFullYear() - 1970; return age > 0 ? age : 0; }
         function getURLParameter(name) { return new URLSearchParams(window.location.search).get(name); }
@@ -683,6 +718,17 @@
         }
 
         document.addEventListener('DOMContentLoaded', function() {
+            // --- INICIO: CONFIGURACIÓN DEL TEMPORIZADOR Y EVENTOS ---
+            resetInactivityTimer(); // Inicia el temporizador al cargar la página
+            
+            // Añade listeners para resetear el temporizador con la interacción del usuario
+            window.addEventListener('mousemove', resetInactivityTimer);
+            window.addEventListener('mousedown', resetInactivityTimer);
+            window.addEventListener('keypress', resetInactivityTimer);
+            window.addEventListener('touchmove', resetInactivityTimer);
+            window.addEventListener('scroll', resetInactivityTimer, true);
+            // --- FIN: CONFIGURACIÓN DEL TEMPORIZADOR Y EVENTOS ---
+
             createFoodAnimation();
             displayDynamicMessage();
 
@@ -706,6 +752,27 @@
             }
 
             loadChildProfile(currentChild, isGuestMode);
+            
+            // --- INICIO: LÓGICA DEL BOTÓN SALIR ---
+            const logoutButton = document.getElementById('logoutBtn');
+            if(logoutButton) {
+                logoutButton.addEventListener('click', (e) => {
+                    e.preventDefault(); // Previene la navegación del enlace
+                    
+                    const session = storageAdapter.getSession();
+                    session.currentUserId = null;
+                    session.exploringAsGuest = false;
+                    storageAdapter.saveSession(session);
+                    
+                    showToast('Has cerrado sesión.', 'info');
+                    
+                    setTimeout(() => {
+                        window.location.href = 'index.html';
+                    }, 1500);
+                });
+            }
+            // --- FIN: LÓGICA DEL BOTÓN SALIR ---
+
 
             function loadChildProfile(child, guest) {
                 document.getElementById('childName').textContent = child.name;
