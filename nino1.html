@@ -35,6 +35,7 @@
         .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(255, 152, 0, 0.4); }
         .btn-danger { background: linear-gradient(45deg, var(--danger-red), #e85d75); color: var(--white); box-shadow: 0 4px 15px rgba(220, 53, 69, 0.3); }
         .btn-danger:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(220, 53, 69, 0.4); }
+        .btn-success { background: linear-gradient(45deg, var(--success-green), #218838); color: var(--white); }
         
         .main-nav-tabs { display: flex; background: var(--white); border-radius: 15px; box-shadow: 0 5px 20px var(--shadow-color); margin-bottom: 30px; padding: 5px; }
         .main-nav-tab { flex: 1; padding: 15px; text-align: center; cursor: pointer; color: var(--gray); font-weight: 600; transition: all 0.3s ease; border-radius: 10px; display: flex; align-items: center; justify-content: center; gap: 10px; }
@@ -72,16 +73,16 @@
         .food-benefit { font-size: 0.8rem; color: var(--success-green); }
         .avoid-reason { font-size: 0.8rem; color: var(--danger-red); }
 
-        /* Recipes Section */
+        /* Recipes Section - ESTILOS COPIADOS DEL CÓDIGO FUNCIONAL */
         .pantry-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; margin-bottom: 25px; }
-        .pantry-card { background: var(--white); border-radius: 20px; padding: 25px; box-shadow: 0 8px 30px var(--shadow-color); }
+        .pantry-card { background: white; border-radius: 20px; padding: 25px; box-shadow: 0 8px 30px var(--shadow-color); }
         .pantry-card h3 { margin-bottom: 15px; color: var(--dark-blue); font-weight: 700; }
         .manual-input { display: flex; gap: 10px; margin-bottom: 15px; }
         .ingredient-input { flex: 1; padding: 12px 15px; border: 2px solid #ddd; border-radius: 10px; font-size: 1rem; }
         .ingredients-list-container { display: flex; flex-wrap: wrap; gap: 10px; padding: 10px; background: #f0f8ff; border-radius: 10px; min-height: 40px; margin-bottom: 15px; }
-        .food-item-tag { display: inline-flex; align-items: center; background: var(--success-green); color: white; padding: 5px 12px; border-radius: 20px; font-size: 0.9rem; }
+        .food-item-tag { display: inline-flex; align-items: center; background: var(--success-green); color: white; padding: 5px 12px; border-radius: 20px; font-size: 0.9rem; animation: fadeIn 0.3s; }
         .food-item-tag button { background: none; border: none; color: white; margin-left: 8px; cursor: pointer; font-size: 1rem; }
-        #pantry-image-preview-Recetas { max-width: 100px; border-radius: 10px; margin-top: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        #pantry-image-preview-Recetas { max-width: 150px; border-radius: 10px; margin-top: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
         .file-input { display: none; }
         .pantry-actions { display: flex; gap: 10px; margin-top: 20px; }
         .meal-buttons { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 20px; }
@@ -90,13 +91,11 @@
         .btn-lunch { background: linear-gradient(45deg, var(--success-green), #218838); }
         .btn-dinner { background: linear-gradient(45deg, var(--accent-purple), #5a32a3); }
         .btn-dessert { background: linear-gradient(45deg, var(--accent-pink), #b02a6e); }
-        .recipes-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; width: 100%; }
-        .recipe-card { background: var(--white); border-radius: 15px; box-shadow: 0 5px 15px var(--shadow-color); overflow: hidden; display: flex; flex-direction: column; }
-        .recipe-header { padding: 15px 20px; background: linear-gradient(45deg, var(--light-blue), var(--primary-blue)); color: var(--white); }
-        .recipe-title { font-size: 1.2rem; font-weight: 700; }
-        .recipe-body { padding: 20px; flex-grow: 1; display: flex; flex-direction: column; }
-        .recipe-section { margin-bottom: 15px; }
-        .section-subtitle { font-size: 1rem; font-weight: 600; margin-bottom: 10px; }
+        .recipes-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .recipe-card { background: white; border-radius: 20px; padding: 25px; box-shadow: 0 8px 30px var(--shadow-color); animation: fadeIn 0.5s; border-left: 5px solid; display: flex; flex-direction: column; }
+        .recipe-card h3 { color: var(--primary-blue); margin-bottom: 15px; }
+        .recipe-card h4 { margin-top: 15px; margin-bottom: 10px; }
+        .recipe-card ul, .recipe-card ol { margin-left: 20px; flex-grow: 1; }
         .recipe-info-box { border-left: 4px solid; padding: 15px; border-radius: 0 10px 10px 0; margin-bottom: 15px; font-size: 0.9rem; }
         .tips-box { background-color: rgba(40, 167, 69, 0.08); border-color: var(--success-green); }
         .benefits-box { background-color: rgba(93, 140, 196, 0.08); border-color: var(--primary-blue); }
@@ -108,6 +107,7 @@
         .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); z-index: 100; justify-content: center; align-items: center; }
         .modal-content { background-color: var(--white); border-radius: 15px; padding: 30px; max-width: 500px; width: 90%; animation: fadeIn 0.3s ease; }
         .modal-header { display: flex; justify-content: space-between; align-items: center; }
+        .development-message { background: linear-gradient(135deg, #fff3cd, #ffeaa7); border: 1px solid #ffeeba; color: #856404; padding: 15px; border-radius: 10px; margin: 20px 0; text-align: center; font-weight: bold; }
         
         @media (max-width: 992px) { 
             .pantry-grid, .recipes-container { grid-template-columns: 1fr; } 
@@ -233,8 +233,8 @@
                     <div class="ingredients-list-container" id="ingredientsListRecetas"></div>
                     <div id="pantry-image-container-Recetas"></div>
                     <div class="pantry-actions">
-                        <button id="savePantryBtnRecetas" class="btn btn-primary" style="background: var(--success-green); flex: 2;"><i class="fas fa-save"></i> Guardar</button>
-                        <button id="clearPantryBtnRecetas" class="btn btn-danger"><i class="fas fa-trash"></i></button>
+                        <button id="savePantryBtnRecetas" class="btn btn-success" style="flex: 2;"><i class="fas fa-save"></i> Guardar Despensa</button>
+                        <button id="clearPantryBtnRecetas" class="btn btn-danger"><i class="fas fa-trash"></i> Limpiar Despensa</button>
                     </div>
                 </div>
             </section>
@@ -248,6 +248,7 @@
                     <button class="btn-meal btn-dessert" data-meal="postre"><i class="fas fa-ice-cream"></i> Postre</button>
                 </div>
                  <div class="spinner-container" id="spinnerContainerRecetas"><div class="spinner"></div></div>
+                 <div id="recipe-dev-message" style="display: none;"></div>
                 <div class="recipes-container" id="recipes-container"></div>
             </section>
         </div>
@@ -273,29 +274,31 @@
             // --- DATOS GLOBALES Y DE EJEMPLO ---
             const sampleRecipes = {
                 desayuno: [
-                    { name: "Batido Súper Guerrero", type:"Desayuno", ingredients: ["1/2 plátano", "1/4 taza de avena", "1 taza de espinacas", "1/2 taza de leche", "4 fresas"], steps: ["Lava bien las espinacas y fresas.", "Coloca todo en la licuadora.", "Licúa hasta que esté homogéneo.", "Sirve inmediatamente."], tips: "Añade semillas de chía para un extra de fibra y omega-3.", benefits: "El hierro de las espinacas y avena se potencia con la vitamina C de las fresas, multiplicando su absorción.", allergens: "Contiene lácteos. Usa leche de almendras para una versión sin lactosa." },
-                    { name: "Torrejas de Quinua y Manzana", type:"Desayuno", ingredients: ["1/2 taza de quinua cocida", "1 huevo", "1/4 de manzana rallada", "Pizca de canela"], steps: ["Mezcla la quinua, huevo, manzana y canela.", "Forma pequeñas torrejas y cocínalas en una sartén con poco aceite.", "Dora 2-3 minutos por lado."], tips: "Acompáñalas con miel (para mayores de 1 año) o puré de frutas.", benefits: "La quinua y el huevo aportan hierro y proteínas de alta calidad, esenciales para el cerebro.", allergens: "Contiene huevo." },
-                    { name: "Huevos Revueltos con Tomate", type:"Desayuno", ingredients: ["2 huevos", "1/2 tomate picado", "Aceite de oliva", "Orégano"], steps: ["Sofríe el tomate en el aceite.", "Bate los huevos y viértelos sobre el tomate.", "Revuelve hasta que estén cocidos pero aún jugosos.", "Espolvorea orégano."], tips: "Añade trocitos de queso fresco o espinacas para hacerlo aún más nutritivo.", benefits: "Un clásico potente: el hierro de la yema se absorbe mejor gracias a la vitamina C del tomate.", allergens: "Contiene huevo." }
+                    { name: "Batido Súper Guerrero", ingredients: ["1/2 plátano", "1/4 taza de avena", "1 taza de espinacas", "1/2 taza de leche", "4 fresas"], steps: ["Lava bien las espinacas y fresas.", "Coloca todo en la licuadora.", "Licúa hasta que esté homogéneo.", "Sirve inmediatamente."], chefTip: "Añade semillas de chía para un extra de fibra y omega-3.", nutriBenefit: "El hierro de las espinacas y avena se potencia con la vitamina C de las fresas.", allergenAlert: "Contiene lácteos." },
+                    { name: "Torrejas de Quinua y Manzana", ingredients: ["1/2 taza de quinua cocida", "1 huevo", "1/4 de manzana rallada", "Pizca de canela"], steps: ["Mezcla la quinua, huevo, manzana y canela.", "Forma pequeñas torrejas y cocínalas.", "Dora 2-3 minutos por lado."], chefTip: "Acompáñalas con miel o puré de frutas.", nutriBenefit: "La quinua y el huevo aportan hierro y proteínas.", allergenAlert: "Contiene huevo." },
+                    { name: "Huevos Revueltos con Tomate", ingredients: ["2 huevos", "1/2 tomate picado", "Aceite de oliva", "Orégano"], steps: ["Sofríe el tomate.", "Bate los huevos y viértelos sobre el tomate.", "Revuelve hasta que estén cocidos.", "Espolvorea orégano."], chefTip: "Añade queso fresco o espinacas.", nutriBenefit: "El hierro de la yema se absorbe mejor con la vitamina C del tomate.", allergenAlert: "Contiene huevo." }
                 ],
                  almuerzo: [
-                    { name: "Guiso Power de Lentejas", type:"Almuerzo", ingredients: ["1/2 taza de lentejas", "cebolla", "zanahoria", "pimiento rojo", "papa"], steps: ["Sofríe la cebolla, zanahoria y pimiento.", "Añade las lentejas y la papa en cubos.", "Cubre con agua y cocina a fuego lento."], tips: "Sirve con un chorrito de limón para maximizar la absorción de hierro.", benefits: "Las lentejas son una fuente increíble de hierro vegetal, y el pimiento rojo aporta la vitamina C crucial para su absorción.", allergens: "Libre de alérgenos comunes." },
-                    { name: "Tiritas de Hígado Saltado", type:"Almuerzo", ingredients: ["100g de hígado de pollo", "cebolla roja", "tomate", "vinagre", "perejil"], steps: ["Sella las tiritas de hígado en una sartén caliente.", "Añade la cebolla y saltea.", "Incorpora el tomate, vinagre y saltea rápidamente.", "Espolvorea perejil."], tips: "La cocción rápida mantiene el hígado suave. Sírvelo con arroz o puré.", benefits: "El hígado es el rey del hierro hemo, el que más fácilmente absorbe el cuerpo. Ideal para reponer reservas de hierro.", allergens: "Asegúrate de que el hígado sea fresco." },
-                    { name: "Pescado al Vapor con Brócoli", type:"Almuerzo", ingredients: ["1 filete de pescado blanco", "brócoli", "limón", "eneldo"], steps: ["Coloca el pescado y brócoli en una vaporera con limón y hierbas.", "Cocina al vapor durante 10-12 minutos.", "Sírvelo inmediatamente."], tips: "El vapor es el mejor método para conservar los nutrientes. Puedes añadir zanahoria.", benefits: "El brócoli es un alimento estrella: aporta hierro y, a la vez, muchísima vitamina C. Una combinación perfecta.", allergens: "Contiene pescado." }
+                    { name: "Guiso Power de Lentejas", ingredients: ["1/2 taza de lentejas", "cebolla", "zanahoria", "pimiento rojo", "papa"], steps: ["Sofríe la cebolla, zanahoria y pimiento.", "Añade las lentejas y la papa.", "Cubre con agua y cocina a fuego lento."], chefTip: "Sirve con un chorrito de limón.", nutriBenefit: "Las lentejas son una fuente increíble de hierro vegetal.", allergenAlert: "Libre de alérgenos comunes." },
+                    { name: "Tiritas de Hígado Saltado", ingredients: ["100g de hígado de pollo", "cebolla roja", "tomate", "vinagre", "perejil"], steps: ["Sella las tiritas de hígado.", "Añade la cebolla y saltea.", "Incorpora el tomate, vinagre y saltea.", "Espolvorea perejil."], chefTip: "La cocción rápida mantiene el hígado suave.", nutriBenefit: "El hígado es el rey del hierro hemo.", allergenAlert: "Asegúrate de que el hígado sea fresco." },
+                    { name: "Pescado al Vapor con Brócoli", ingredients: ["1 filete de pescado blanco", "brócoli", "limón", "eneldo"], steps: ["Coloca el pescado y brócoli en una vaporera.", "Cocina al vapor durante 10-12 minutos.", "Sírvelo inmediatamente."], chefTip: "Puedes añadir zanahoria.", nutriBenefit: "El brócoli aporta hierro y vitamina C.", allergenAlert: "Contiene pescado." }
                 ],
                 cena: [
-                     { name: "Crema de Espinacas y Papa", type:"Cena", ingredients: ["1 taza de espinacas", "1 papa pequeña", "1/4 de cebolla", "1 taza de caldo"], steps: ["Sofríe la cebolla.", "Añade la papa y el caldo, cocina hasta que esté suave.", "Agrega las espinacas por 1 minuto.", "Licúa todo."], tips: "Añade un chorrito de leche para hacerla más cremosa.", benefits: "Una forma deliciosa de que los niños coman espinacas. El ácido fólico y el hierro de esta verdura son vitales para la sangre.", allergens: "Puede contener lácteos." },
-                    { name: "Tortilla de Acelga", type:"Cena", ingredients: ["5 hojas de acelga cocida", "2 huevos", "queso parmesano", "nuez moscada"], steps: ["Exprime bien la acelga cocida.", "Bate los huevos y mézclalos con la acelga y queso.", "Cocina la tortilla por ambos lados."], tips: "Ideal para que los niños la coman con las manos.", benefits: "La acelga, prima de la espinaca, también es rica en hierro. Combinada con el huevo, se crea una cena nutritiva.", allergens: "Contiene huevo y lácteos." },
-                    { name: "Arroz Tapado de Sangrecita", type:"Cena", ingredients: ["1/4 taza de sangrecita de pollo", "cebolla roja", "ajo molido", "arroz cocido"], steps: ["Prepara un aderezo con cebolla y ajo.", "Incorpora la sangrecita y cocínala.", "En un molde, coloca una capa de arroz, el guiso y tapa con más arroz.", "Desmolda."], tips: "Acompaña con ensalada de cebolla y tomate para la vitamina C.", benefits: "La sangrecita es uno de los alimentos más recomendados para combatir la anemia por su altísimo contenido de hierro.", allergens: "Plato de origen peruano, muy efectivo." }
+                     { name: "Crema de Espinacas y Papa", ingredients: ["1 taza de espinacas", "1 papa pequeña", "1/4 de cebolla", "1 taza de caldo"], steps: ["Sofríe la cebolla.", "Añade la papa y el caldo, cocina hasta que esté suave.", "Agrega las espinacas por 1 minuto.", "Licúa todo."], chefTip: "Añade un chorrito de leche para hacerla más cremosa.", nutriBenefit: "Una forma deliciosa de que los niños coman espinacas.", allergenAlert: "Puede contener lácteos." },
+                    { name: "Tortilla de Acelga", ingredients: ["5 hojas de acelga cocida", "2 huevos", "queso parmesano", "nuez moscada"], steps: ["Exprime bien la acelga cocida.", "Bate los huevos y mézclalos con la acelga y queso.", "Cocina la tortilla por ambos lados."], chefTip: "Ideal para que los niños la coman con las manos.", nutriBenefit: "La acelga es rica en hierro.", allergenAlert: "Contiene huevo y lácteos." },
+                    { name: "Arroz Tapado de Sangrecita", ingredients: ["1/4 taza de sangrecita de pollo", "cebolla roja", "ajo molido", "arroz cocido"], steps: ["Prepara un aderezo con cebolla y ajo.", "Incorpora la sangrecita y cocínala.", "En un molde, coloca una capa de arroz, el guiso y tapa con más arroz.", "Desmolda."], chefTip: "Acompaña con ensalada de cebolla y tomate.", nutriBenefit: "La sangrecita es rica en hierro.", allergenAlert: "Plato de origen peruano." }
                 ],
                 postre: [
-                    { name: "Mousse de Chocolate y Palta", type:"Postre", ingredients: ["1 palta madura", "2 cdas de cacao en polvo", "1 cda de miel", "1/4 taza de leche"], steps: ["Licúa la palta con el cacao, miel y leche.", "Refrigera por 1 hora.", "Sirve frío, decorado con fresas."], tips: "El sabor del chocolate enmascara por completo el de la palta.", benefits: "Rico en hierro del cacao y grasas saludables del aguacate. Las fresas aportan vitamina C.", allergens: "Puede contener lácteos." },
-                    { name: "Galletas de Avena y Lentejas", type:"Postre", ingredients: ["1/2 taza de puré de lentejas", "1 taza de avena", "1 plátano maduro", "1/4 taza de pasas"], steps: ["Mezcla todos los ingredientes.", "Forma pequeñas galletas en una bandeja.", "Hornea por 15-20 minutos a 180°C."], tips: "Son ideales para la lonchera.", benefits: "¡Una galleta que combate la anemia! Combina el hierro de las lentejas y la avena.", allergens: "Asegúrate que la avena sea libre de gluten si es necesario." },
-                    { name: "Helado de Remolacha y Fresa", type:"Postre", ingredients: ["1/2 remolacha cocida", "1 taza de fresas congeladas", "1/2 plátano congelado", "jugo de naranja"], steps: ["Procesa todos los ingredientes hasta obtener una textura cremosa.", "Sirve inmediatamente."], tips: "Si no tienes procesador, puedes licuar y luego congelar por un par de horas.", benefits: "La remolacha es conocida por su aporte de hierro y folatos. Las fresas y naranja aportan vitamina C.", allergens: "Postre natural, vegano y libre de alérgenos." }
+                    { name: "Mousse de Chocolate y Palta", ingredients: ["1 palta madura", "2 cdas de cacao en polvo", "1 cda de miel", "1/4 taza de leche"], steps: ["Licúa la palta con el cacao, miel y leche.", "Refrigera por 1 hora.", "Sirve frío, decorado con fresas."], chefTip: "El sabor del chocolate enmascara por completo el de la palta.", nutriBenefit: "Rico en hierro del cacao y grasas saludables.", allergenAlert: "Puede contener lácteos." },
+                    { name: "Galletas de Avena y Lentejas", ingredients: ["1/2 taza de puré de lentejas", "1 taza de avena", "1 plátano maduro", "1/4 taza de pasas"], steps: ["Mezcla todos los ingredientes.", "Forma pequeñas galletas en una bandeja.", "Hornea por 15-20 minutos a 180°C."], chefTip: "Son ideales para la lonchera.", nutriBenefit: "Combina el hierro de las lentejas y la avena.", allergenAlert: "Asegúrate que la avena sea libre de gluten si es necesario." },
+                    { name: "Helado de Remolacha y Fresa", ingredients: ["1/2 remolacha cocida", "1 taza de fresas congeladas", "1/2 plátano congelado", "jugo de naranja"], steps: ["Procesa todos los ingredientes hasta obtener una textura cremosa.", "Sirve inmediatamente."], chefTip: "Si no tienes procesador, licúa y luego congela.", nutriBenefit: "La remolacha es conocida por su aporte de hierro.", allergenAlert: "Postre natural, vegano." }
                 ]
             };
             
             // --- INICIALIZACIÓN PRINCIPAL ---
             let inactivityTimer;
+            let ingredients = []; // Cambiado de ingredientsRecetas a ingredients como en el código funcional
+
             initializeApp();
 
             function initializeApp() {
@@ -310,8 +313,8 @@
                 initializeTabs();
                 renderCharts();
                 initializeFoodModals();
-                initializePantry('Recetas');
-                initializeRecipeGeneration('Recetas');
+                initializePantry(); // Sin sufijo
+                initializeRecipeGeneration();
                 initializeLogoutButton();
             }
 
@@ -323,7 +326,7 @@
                 };
                 const resetTimer = () => {
                     clearTimeout(inactivityTimer);
-                    inactivityTimer = setTimeout(logout, 60000); // 1 minuto = 60000 ms
+                    inactivityTimer = setTimeout(logout, 60000);
                 };
                 ['load', 'mousemove', 'mousedown', 'keypress', 'scroll', 'touchstart'].forEach(event => window.addEventListener(event, resetTimer));
             }
@@ -388,137 +391,118 @@
                 window.onclick = (event) => { if (event.target == foodModal) foodModal.style.display = "none"; };
             }
 
-            let ingredientsRecetas = [];
-            
-            function initializePantry(suffix) {
+            // --- LÓGICA DE DESPENSA (COPIADA Y ADAPTADA DEL CÓDIGO FUNCIONAL) ---
+            function initializePantry() {
                 const session = JSON.parse(localStorage.getItem('yachay_session') || '{}');
                 const pantryKey = session.currentUserId ? `familyPantry_${session.currentUserId}` : 'familyPantry_guest';
                 
                 const savedPantry = localStorage.getItem(pantryKey);
-                if (savedPantry) { 
+                if (savedPantry) {
                     const pantryData = JSON.parse(savedPantry);
-                    ingredientsRecetas = pantryData.manualIngredients || [];
-                    
-                    // Cargar imagen guardada si existe
+                    ingredients = pantryData.manualIngredients || [];
                     if (pantryData.imageUrl) {
-                        document.getElementById(`pantry-image-container-${suffix}`).innerHTML = 
-                            `<img src="${pantryData.imageUrl}" id="pantry-image-preview-${suffix}" alt="Vista previa" style="max-width: 100px; border-radius: 10px; margin-top: 10px;">`;
+                        document.getElementById('pantry-image-container-Recetas').innerHTML = `<img src="${pantryData.imageUrl}" id="pantry-image-preview-Recetas" alt="Vista previa">`;
                     }
                 }
-                renderIngredients(suffix);
+                renderPantry();
 
-                const input = document.getElementById(`ingredientInput${suffix}`);
-                const addBtn = document.getElementById(`addIngredientBtn${suffix}`);
-                const saveBtn = document.getElementById(`savePantryBtn${suffix}`);
-                const clearBtn = document.getElementById(`clearPantryBtn${suffix}`);
-                const fileInput = document.getElementById(`fileInput${suffix}`);
-
-                const addAction = () => {
+                document.getElementById('addIngredientBtnRecetas').addEventListener('click', () => {
+                    const input = document.getElementById('ingredientInputRecetas');
                     const value = input.value.trim();
-                    if (value && !ingredientsRecetas.includes(value)) {
-                        ingredientsRecetas.push(value);
-                        renderIngredients(suffix);
+                    if (value && !ingredients.includes(value)) {
+                        ingredients.push(value);
+                        renderPantry();
                         input.value = '';
                     }
-                };
-                
-                addBtn.addEventListener('click', addAction);
-                input.addEventListener('keypress', e => { if (e.key === 'Enter') addAction(); });
-
-                saveBtn.addEventListener('click', () => {
-                    const imgSrc = document.getElementById(`pantry-image-preview-${suffix}`)?.src || null;
-                    const pantryData = {
-                        manualIngredients: ingredientsRecetas,
-                        imageUrl: imgSrc
-                    };
-                    localStorage.setItem(pantryKey, JSON.stringify(pantryData));
-                    alert('¡Despensa guardada!');
                 });
 
-                clearBtn.addEventListener('click', () => {
-                    if(confirm('¿Limpiar la despensa?')) {
-                        ingredientsRecetas = [];
-                        renderIngredients(suffix);
-                        document.getElementById(`pantry-image-container-${suffix}`).innerHTML = '';
-                        localStorage.removeItem(pantryKey);
-                    }
-                });
+                document.getElementById('ingredientInputRecetas').addEventListener('keypress', e => { if (e.key === 'Enter') document.getElementById('addIngredientBtnRecetas').click(); });
 
-                fileInput.addEventListener('change', (event) => {
-                     const file = event.target.files[0];
+                document.getElementById('fileInputRecetas').addEventListener('change', (event) => {
+                    const file = event.target.files[0];
                     if (file) {
                         const reader = new FileReader();
-                        reader.onload = e => {
-                            document.getElementById(`pantry-image-container-${suffix}`).innerHTML = 
-                                `<img src="${e.target.result}" id="pantry-image-preview-${suffix}" alt="Vista previa" style="max-width: 100px; border-radius: 10px; margin-top: 10px;">`;
+                        reader.onload = function(e) {
+                            const container = document.getElementById('pantry-image-container-Recetas');
+                            container.innerHTML = `<img src="${e.target.result}" id="pantry-image-preview-Recetas" alt="Vista previa">`;
                         }
                         reader.readAsDataURL(file);
                     }
                 });
-            }
-
-            function renderIngredients(suffix) {
-                const list = document.getElementById(`ingredientsList${suffix}`);
-                list.innerHTML = '';
-                if(ingredientsRecetas.length === 0) {
-                    list.innerHTML = '<p style="color: var(--gray); font-style: italic;">Tu despensa está vacía.</p>';
-                    return;
-                }
-                ingredientsRecetas.forEach((ing, index) => {
-                    const item = document.createElement('div');
-                    item.className = 'food-item-tag';
-                    item.innerHTML = `<span>${ing}</span><button data-index="${index}">&times;</button>`;
-                    item.querySelector('button').onclick = (e) => {
-                        ingredientsRecetas.splice(e.currentTarget.dataset.index, 1);
-                        renderIngredients(suffix);
-                    };
-                    list.appendChild(item);
-                });
-            }
-
-            function initializeRecipeGeneration(suffix) {
-                document.querySelectorAll('.btn-meal').forEach(btn => {
-                    btn.addEventListener('click', () => generateRecipes(btn.dataset.meal, suffix));
-                });
-            }
             
-            function generateRecipes(mealType, suffix) {
-                const spinner = document.getElementById(`spinnerContainer${suffix}`);
-                const grid = document.getElementById('recipes-container');
-                spinner.style.display = 'flex';
-                grid.innerHTML = '';
+                document.getElementById('savePantryBtnRecetas').addEventListener('click', () => {
+                    const imgSrc = document.getElementById('pantry-image-preview-Recetas')?.src || null;
+                    const pantryData = {
+                        manualIngredients: ingredients,
+                        imageUrl: imgSrc
+                    };
+                    localStorage.setItem(pantryKey, JSON.stringify(pantryData));
+                    alert('¡Despensa guardada con éxito!');
+                });
+
+                document.getElementById('clearPantryBtnRecetas').addEventListener('click', () => {
+                    if (confirm('¿Estás seguro de que quieres borrar todos los ingredientes y la foto de tu despensa?')) {
+                        ingredients = [];
+                        document.getElementById('pantry-image-container-Recetas').innerHTML = '';
+                        localStorage.removeItem(pantryKey);
+                        renderPantry();
+                    }
+                });
+            }
+
+            function renderPantry() {
+                const listContainer = document.getElementById('ingredientsListRecetas');
+                listContainer.innerHTML = '';
+                if (ingredients.length === 0) {
+                    listContainer.innerHTML = `<p style="color: #999;">Aquí aparecerán tus ingredientes...</p>`;
+                } else {
+                    ingredients.forEach((ing, index) => {
+                        const item = document.createElement('div');
+                        item.className = 'food-item-tag';
+                        item.innerHTML = `<span>${ing}</span><button data-index="${index}">&times;</button>`;
+                        listContainer.appendChild(item);
+                    });
+                }
+                listContainer.querySelectorAll('button').forEach(btn => btn.addEventListener('click', (e) => {
+                    ingredients.splice(e.target.dataset.index, 1);
+                    renderPantry();
+                }));
+            }
+
+            // --- LÓGICA DE RECETAS (COPIADA Y ADAPTADA) ---
+            function initializeRecipeGeneration() {
+                document.querySelectorAll('.btn-meal').forEach(btn => btn.addEventListener('click', () => generateRecipes(btn.dataset.meal)));
+            }
+           
+            function generateRecipes(mealType) {
+                const loader = document.getElementById('spinnerContainerRecetas');
+                const container = document.getElementById('recipes-container');
+                const devMessage = document.getElementById('recipe-dev-message');
+            
+                container.innerHTML = '';
+                devMessage.style.display = 'none';
+                loader.style.display = 'flex';
 
                 setTimeout(() => {
-                    spinner.style.display = 'none';
-                    const recipes = sampleRecipes[mealType];
-                    recipes.forEach(recipe => {
-                        grid.appendChild(createRecipeCard(recipe));
+                    loader.style.display = 'none';
+                    const recipesToDisplay = sampleRecipes[mealType];
+                    recipesToDisplay.forEach(recipe => {
+                        const card = document.createElement('div');
+                        card.className = 'recipe-card';
+                        card.style.borderColor = mealType === 'desayuno' ? 'var(--accent-orange)' : mealType === 'almuerzo' ? 'var(--success-green)' : mealType === 'cena' ? 'var(--accent-purple)' : 'var(--accent-pink)';
+                        card.innerHTML = `
+                            <h3><i class="fas fa-utensils"></i> ${recipe.name}</h3>
+                            <h4><i class="fas fa-list-check"></i> Ingredientes:</h4><ul>${recipe.ingredients.map(i => `<li>${i}</li>`).join('')}</ul>
+                            <h4><i class="fas fa-shoe-prints"></i> Pasos:</h4><ol>${recipe.steps.map(s => `<li>${s}</li>`).join('')}</ol>
+                            <div class="recipe-info-box benefits-box"><p><strong>Beneficio:</strong> ${recipe.nutriBenefit}</p></div>
+                            <div class="recipe-info-box tips-box"><p><strong>Consejo:</strong> ${recipe.chefTip}</p></div>
+                            <div class="recipe-info-box allergy-box"><p><strong>Alérgenos:</strong> ${recipe.allergenAlert}</p></div>
+                        `;
+                        container.appendChild(card);
                     });
+                    devMessage.innerHTML = `<div class="development-message">IA en desarrollo. ¡Estas son 3 ideas nutritivas para inspirarte!</div>`;
+                    devMessage.style.display = 'block';
                 }, 1500);
-            }
-
-            function createRecipeCard(recipe) {
-                const card = document.createElement('div');
-                card.className = 'recipe-card';
-                card.innerHTML = `
-                    <div class="recipe-header">
-                        <h3 class="recipe-title">${recipe.name}</h3>
-                    </div>
-                    <div class="recipe-body">
-                        <div class="recipe-section">
-                            <h4 class="section-subtitle">Ingredientes</h4>
-                            <ul class="ingredient-list" style="list-style-type: disc; color: var(--gray); padding-left: 20px;">${recipe.ingredients.map(i => `<li>${i}</li>`).join('')}</ul>
-                        </div>
-                        <div class="recipe-section">
-                            <h4 class="section-subtitle">Preparación</h4>
-                            <ol class="steps-list" style="color: var(--gray); padding-left: 20px;">${recipe.steps.map(s => `<li>${s}</li>`).join('')}</ol>
-                        </div>
-                         <div class="recipe-info-box benefits-box"><p><strong>Beneficios:</strong> ${recipe.benefits}</p></div>
-                         <div class="recipe-info-box tips-box"><p><strong>Consejo:</strong> ${recipe.tips}</p></div>
-                         <div class="recipe-info-box allergy-box"><p><strong>Alérgenos:</strong> ${recipe.allergens}</p></div>
-                    </div>
-                `;
-                return card;
             }
 
             function initializeLogoutButton() {
@@ -527,8 +511,6 @@
                     window.location.href = 'index.html';
                 });
             }
-            
-            initializeApp();
         });
     </script>
 </body>
