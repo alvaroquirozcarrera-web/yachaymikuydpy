@@ -7,6 +7,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intro.js/7.2.0/introjs.min.css">
+
     <style>
         :root {
             --primary-blue: #2c5aa0;
@@ -31,13 +34,167 @@
             --danger-red: #dc3545;
             --danger-red-dark: #c82333;
             
-            /* Variables para el footer */
+            /* Variables para el footer y modales */
             --text-dark: #212529;
             --shadow: 0 8px 24px rgba(0, 0, 0, 0.08); 
             --radius: 12px;
             --transition: all 0.3s ease-in-out;
             --accent-red-footer: #e63946;
+
+            /* Variables de Intro.js (Guía) - MODIFICADAS */
+            --primary-blue-guide: #2c5aa0; 
+            --accent-color-guide: #5d8cc4;
+            --medium-gray-guide: #dee2e6;
+            
+            /* Variables para el chatbot (cambiadas a rojo) */
+            --chatbot-primary: #dc3545;
+            --chatbot-dark: #c82333;
+            --chatbot-light: #e85d75;
         }
+
+        /* --- 1.1. ESTILOS PERSONALIZADOS PARA LA GUÍA (INTRO.JS) - MODIFICADOS --- */
+        .introjs-overlay {
+            background-color: rgba(0, 0, 0, 0.6);
+        }
+        
+        .introjs-helperLayer {
+            background-color: rgba(255, 255, 255, 0.3);
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(44, 90, 160, 0.4);
+        }
+        
+        .introjs-tooltip {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--white);
+            border-radius: var(--radius);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            border: none;
+            color: var(--text-dark);
+            max-width: 400px;
+            padding: 25px;
+            position: fixed;
+            top: 50% !important;
+            left: 50% !important;
+            transform: translate(-50%, -50%) !important;
+            margin: 0 !important;
+            z-index: 1100000 !important;
+        }
+        
+        .introjs-tooltiptext {
+            font-size: 1rem;
+            line-height: 1.6;
+            font-weight: 400;
+            margin-bottom: 20px;
+        }
+        
+        .introjs-tooltip-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary-blue-guide);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .introjs-tooltip-title i {
+            color: var(--accent-color-guide);
+        }
+        
+        .introjs-tooltipbuttons {
+            border-top: 1px solid var(--medium-gray-guide);
+            padding-top: 15px;
+            margin-top: 15px;
+            text-align: right;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .introjs-button {
+            background: linear-gradient(to right, var(--primary-blue-guide), var(--accent-color-guide));
+            color: var(--white);
+            border-radius: 50px;
+            font-weight: 600;
+            border: none;
+            padding: 10px 20px;
+            transition: var(--transition);
+            text-shadow: none;
+            font-family: 'Montserrat', sans-serif;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+        
+        .introjs-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(44, 90, 160, 0.3);
+            color: var(--white);
+        }
+        
+        .introjs-skipbutton {
+            background: transparent;
+            color: var(--gray);
+            font-weight: 600;
+            text-shadow: none;
+            padding: 10px 20px;
+            border-radius: 50px;
+            border: 1px solid var(--gray);
+            transition: var(--transition);
+        }
+        
+        .introjs-skipbutton:hover {
+            background: var(--light-gray);
+            color: var(--text-dark);
+            transform: translateY(-2px);
+        }
+        
+        .introjs-disabled, .introjs-disabled:hover {
+            background: var(--medium-gray-guide);
+            color: #888;
+            transform: none;
+            box-shadow: none;
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+        
+        /* Ocultar las flechas ya que el tooltip está centrado */
+        .introjs-arrow {
+            display: none;
+        }
+        
+        /* Estilo para el número de paso */
+        .introjs-tooltip .introjs-step-number {
+            background-color: var(--primary-blue-guide);
+            color: var(--white);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            margin-right: 10px;
+            flex-shrink: 0;
+        }
+        
+        /* Estilos para dispositivos móviles */
+        @media (max-width: 768px) {
+            .introjs-tooltip {
+                max-width: 90%;
+                padding: 20px;
+                font-size: 0.9rem;
+            }
+            
+            .introjs-tooltipbuttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .introjs-button, .introjs-skipbutton {
+                width: 100%;
+                text-align: center;
+            }
+        }
+        /* --- FIN ESTILOS GUÍA --- */
 
         @keyframes fadeIn {
             from {
@@ -497,6 +654,140 @@
         .toast-error { border-left: 5px solid var(--danger-red); }
         .toast-info { border-left: 5px solid var(--accent-cyan); }
 
+
+        /* --- INICIO: ESTILOS DEL CHATBOT (MODIFICADOS A ROJO) --- */
+        .chatbot-container {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1030;
+        }
+        .chat-fab {
+            background: var(--chatbot-primary); /* Cambiado a rojo */
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        .chat-fab:hover {
+            transform: scale(1.1);
+            background: var(--chatbot-dark); /* Cambiado a rojo oscuro */
+            box-shadow: 0 10px 30px rgba(220, 53, 69, 0.4); /* Sombra rojiza */
+        }
+        .chat-window {
+            position: absolute;
+            bottom: 80px;
+            right: 0;
+            width: 350px;
+            height: 450px;
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            transform: scale(0);
+            transform-origin: bottom right;
+            transition: transform 0.3s ease-in-out;
+        }
+        .chat-window.active {
+            transform: scale(1);
+        }
+        .chat-header {
+            background: linear-gradient(135deg, var(--chatbot-primary), var(--chatbot-light)); /* Cambiado a rojo */
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .chat-header h5 {
+            margin: 0;
+            font-weight: 700;
+        }
+        .close-chat {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            opacity: 0.8;
+            transition: var(--transition);
+        }
+        .close-chat:hover {
+            opacity: 1;
+        }
+        .chat-body {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            background-color: #f9f9f9;
+        }
+        .chat-message {
+            padding: 10px 15px;
+            border-radius: 18px;
+            max-width: 80%;
+            line-height: 1.4;
+            font-size: 0.9rem;
+        }
+        .chat-message.bot {
+            background: var(--light-gray);
+            color: var(--text-dark);
+            border-bottom-left-radius: 4px;
+            align-self: flex-start;
+        }
+        .chat-message.user {
+            background: var(--chatbot-primary); /* Cambiado a rojo */
+            color: var(--white);
+            border-bottom-right-radius: 4px;
+            align-self: flex-end;
+        }
+        .chat-input {
+            display: flex;
+            border-top: 1px solid #ddd;
+            padding: 10px;
+            background: var(--white);
+        }
+        .chat-input input {
+            flex: 1;
+            border: 1px solid #ddd;
+            border-radius: 50px;
+            padding: 8px 15px;
+            font-size: 0.9rem;
+            outline: none;
+        }
+        .chat-input input:focus {
+            border-color: var(--chatbot-primary); /* Cambiado a rojo */
+            box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25); /* Cambiado a rojo */
+        }
+        .chat-input button {
+            background: var(--chatbot-primary); /* Cambiado a rojo */
+            border: none;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-left: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .chat-input button:hover {
+            background: var(--chatbot-dark); /* Cambiado a rojo oscuro */
+        }
+        /* --- FIN: ESTILOS DEL CHATBOT --- */
+
+
         @media (max-width: 768px) {
             .container { padding: 20px; padding-top: 10px; }
             .top-bar { padding: 12px 15px; }
@@ -506,6 +797,19 @@
             .group-header h1 { font-size: 2rem; }
             .dashboard-grid { grid-template-columns: 1fr; }
             .btn-exit { align-self: center; }
+
+            /* AÑADIDO: Estilos Chatbot para móvil */
+            .chat-window {
+                width: 90vw;
+                height: 70vh;
+                bottom: 80px;
+                right: 5vw;
+                transform-origin: bottom center;
+            }
+            .chatbot-container {
+                bottom: 20px;
+                right: 20px;
+            }
         }
     </style>
 </head>
@@ -639,16 +943,38 @@
         </main>
     </div>
 
+    <div class="chatbot-container">
+        <div class="chat-window" id="chatWindow">
+            <div class="chat-header">
+                <h5><i class="fas fa-robot"></i> Asistente Yachay</h5>
+                <button class="close-chat" id="closeChatBtn">&times;</button>
+            </div>
+            <div class="chat-body" id="chatBody">
+                <div class="chat-message bot">
+                    ¡Hola! Soy el asistente de Yachay Mikuy. ¿En qué puedo ayudarte hoy?
+                </div>
+            </div>
+            <div class="chat-input">
+                <input type="text" id="chatInput" placeholder="Escribe tu pregunta...">
+                <button id="chatSendBtn"><i class="fas fa-paper-plane"></i></button>
+            </div>
+        </div>
+        <div class="chat-fab" id="chatFab">
+            <i class="fas fa-comments"></i>
+        </div>
+    </div>
+
+
     <footer class="footer">
       <div class="footer-content">
           <div class="footer-section">
               <h3>Redes Sociales</h3>
               <div class="social-links">
-                  <a href="https://facebook.com/yachaymikuy" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
-                  <a href="https://twitter.com/yachaymikuy" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a>
-                  <a href="https://instagram.com/yachaymikuy" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
-                  <a href="https://youtube.com/channel/yachaymikuy" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a>
-                  <a href="https://wa.me/51918072862" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://facebook.com/yachaymikuy" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.linkedin.com/company/yachay-mikuy/posts/?feedView=all" target="_blank" title="linkedin"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://instagram.com/yachaymikuy" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="https://youtu.be/La15HNlOpEM" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a>
+                    <a href="https://wa.me/51918072862" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
               </div>
           </div>
           <div class="footer-section">
@@ -673,6 +999,8 @@
 
     <div id="actionModalContainer"></div>
     <div class="toast-container" id="toastContainer"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intro.js/7.2.0/intro.min.js"></script>
 
     <script>
         // === INICIO: LÓGICA DE INACTIVIDAD ===
@@ -700,6 +1028,191 @@
             console.log("Sesión cerrada.");
         }
         // === FIN: LÓGICA DE SESIÓN ===
+
+        // --- INICIO: LÓGICA DE LA GUÍA INTERACTIVA (Intro.js) - MODIFICADA ---
+        function startGuidedTour() {
+            // Evitar que se inicie una guía si ya hay una activa
+            if (document.querySelector('.introjs-overlay')) {
+                return;
+            }
+
+            // MODIFICADO: Pasos detallados para los 6 módulos
+            const steps = [
+                {
+                    element: '.group-header',
+                    intro: '<div class="introjs-tooltip-title"><span class="introjs-step-number">1</span><i class="fas fa-users"></i> Panel Familiar</div><div class="introjs-tooltiptext">¡Bienvenido al <b>Panel Familiar</b>! Aquí verás un resumen de los perfiles que estás gestionando.</div>'
+                },
+                {
+                    element: '#childrenListContainer',
+                    intro: '<div class="introjs-tooltip-title"><span class="introjs-step-number">2</span><i class="fas fa-child"></i> Perfiles de tus Hijos</div><div class="introjs-tooltiptext">Estos son los perfiles de tus hijos. Puedes hacer clic en cualquiera para ver un <b>resumen rápido</b> de sus datos y respuestas.</div>'
+                },
+                {
+                    element: '.card-pantry',
+                    intro: '<div class="introjs-tooltip-title"><span class="introjs-step-number">3</span><i class="fas fa-shopping-basket"></i> Comida con Despensa</div><div class="introjs-tooltiptext">Usa esta opción para generar un plan de comidas semanal basado en los ingredientes que ya tienes en casa. ¡Es genial para ahorrar!</div>'
+                },
+                {
+                    element: '.card-region',
+                    intro: '<div class="introjs-tooltip-title"><span class="introjs-step-number">4</span><i class="fas fa-map-marked-alt"></i> Comida por Región</div><div class="introjs-tooltiptext">¿No sabes qué cocinar? Selecciona un departamento y obtén un plan basado en alimentos de temporada y platos típicos de esa zona.</div>'
+                },
+                {
+                    element: '.card-wellness',
+                    intro: '<div class="introjs-tooltip-title"><span class="introjs-step-number">5</span><i class="fas fa-brain"></i> Bienestar Psicológico</div><div class="introjs-tooltiptext">La nutrición también es mental. Encuentra consejos y actividades para la salud emocional de tu familia aquí.</div>'
+                },
+                {
+                    element: '.card-academic',
+                    intro: '<div class="introjs-tooltip-title"><span class="introjs-step-number">6</span><i class="fas fa-book-reader"></i> Apoyo Académico</div><div class="introjs-tooltiptext">Encuentra estrategias y recursos para potenciar el rendimiento escolar y los hábitos de estudio de la familia.</div>'
+                },
+                {
+                    element: '.card-games',
+                    intro: '<div class="introjs-tooltip-title"><span class="introjs-step-number">7</span><i class="fas fa-puzzle-piece"></i> Jugando es Divertido</div><div class="introjs-tooltiptext">Explora juegos educativos y actividades lúdicas para estimular la mente y la creatividad de tus hijos.</div>'
+                },
+                {
+                    element: '.card-daily',
+                    intro: '<div class="introjs-tooltip-title"><span class="introjs-step-number">8</span><i class="fas fa-plate-wheat"></i> Platos del Día</div><div class="introjs-tooltiptext">Recibe tres recomendaciones diarias (desayuno, almuerzo y cena) de platos balanceados para toda la familia.</div>'
+                },
+                {
+                    element: '#exitButton',
+                    intro: '<div class="introjs-tooltip-title"><span class="introjs-step-number">9</span><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</div><div class="introjs-tooltiptext">Usa este botón para <b>Cerrar Sesión</b> de forma segura y volver a la pantalla de inicio.</div>'
+                },
+                {
+                    element: '.top-bar .btn-back-top',
+                    intro: '<div class="introjs-tooltip-title"><span class="introjs-step-number">10</span><i class="fas fa-arrow-left"></i> Volver</div><div class="introjs-tooltiptext">Y si quieres volver al panel de perfiles (la pantalla anterior), solo haz clic aquí en <b>Volver</b>.</div>'
+                }
+            ];
+
+            if (steps.length > 0) {
+                introJs().setOptions({
+                    steps: steps,
+                    nextLabel: 'Siguiente &rarr;',
+                    prevLabel: '&larr; Anterior',
+                    doneLabel: '¡Entendido!',
+                    skipLabel: 'x',
+                    showBullets: false,
+                    exitOnOverlayClick: false,
+                    tooltipPosition: 'center',
+                    positionPrecedence: ['center'],
+                    showStepNumbers: false,
+                    tooltipClass: 'custom-intro-tooltip'
+                }).start();
+            }
+        }
+        // --- FIN: LÓGICA DE LA GUÍA INTERACTIVA ---
+
+
+        // --- INICIO: LÓGICA DEL CHATBOT ---
+        
+        // MODIFICADO: Base de conocimiento ampliada
+        const chatKnowledgeBase = {
+            // Conocimiento General (de la app)
+            saludos: { keywords: ['hola', 'buenos dias', 'buenas tardes', 'buenas noches', 'saludos'], response: '¡Hola! Soy el asistente virtual de Yachay Mikuy. ¿En qué puedo ayudarte hoy? Puedes preguntarme sobre nuestros servicios o sobre las funciones de esta página.' },
+            acerca: { keywords: ['acerca de', 'quienes son', 'mision', 'vision', 'equipo', 'yachay mikuy'], response: '<b>Nuestra Misión:</b> Reducir la anemia infantil en más del 60% en Latinoamérica con soluciones personalizadas y accesibles.<br><b>Nuestra Visión:</b> Ser la plataforma líder que transforma la nutrición infantil en Latinoamérica.' },
+            servicios: { keywords: ['servicios', 'que hacen', 'ia', 'plan', 'mikuycito'], response: 'Ofrecemos <b>Planes Personalizados con IA</b> para procesar la información de cada niño y generar un plan único. También usamos <b>Gamificación con "Mikuycito"</b>, un aliado interactivo con juegos y recompensas para hacer el proceso divertido.' },
+            precios: { keywords: ['precio', 'costo', 'cuanto cuesta', 'precios'], response: 'Creemos que la salud no debe ser un lujo. Nuestros precios son:<br><ul><li><b>Público General:</b> $5 mensuales.</li><li><b>Áreas Vulnerables:</b> $3 mensuales.</li></ul>Además, contamos con funciones gratuitas para todos.' },
+            faq_diferencia: { keywords: ['diferente', 'diferencia', 'competencia'], response: 'A diferencia de soluciones genéricas, nosotros no ofrecemos una solución única. Entendemos que la anemia es multidimensional, por eso creamos planes 100% personalizados que se adaptan a la realidad local de cada familia.' },
+            faq_edades: { keywords: ['edad', 'edades', 'para quien es'], response: 'Nuestra plataforma está diseñada principalmente para niños de 0 a 13 años, una etapa crucial para el desarrollo físico y cognitivo.' },
+            privacidad: { keywords: ['privacidad', 'datos', 'seguro', 'seguridad'], response: 'La seguridad de tus datos es nuestra máxima prioridad. Cumplimos con todas las normativas y usamos encriptación. Requerimos consentimiento parental explícito y los tutores tienen control total sobre la información para rectificarla o eliminarla.' },
+            terminos: { keywords: ['terminos', 'condiciones', 'legal', 'medico'], response: 'Es importante recordar que Yachay Mikuy es una herramienta de apoyo y educación. <b>No reemplaza el diagnóstico o consejo de un profesional médico cualificado.</b> Siempre consulta a tu pediatra antes de realizar cambios significativos en la dieta.' },
+
+            // --- AÑADIDO: Conocimiento Específico de esta Página (yachay.html) ---
+            despensa: {
+                keywords: ['despensa', 'comida con despensa', 'ingredientes', 'lista de compras'],
+                response: 'Puedes encontrar la función <b>Comida con Despensa</b> aquí en el panel. Te permite generar planes de comidas semanales optimizando los ingredientes que ya tienes en casa. ¡Es genial para ahorrar!'
+            },
+            region: {
+                keywords: ['region', 'regional', 'departamento', 'comida por region', 'piura', 'lima'],
+                response: 'El módulo <b>Comida por Región</b> te permite descubrir platos nutritivos basados en los alimentos de temporada de un departamento específico del Perú. ¡Solo selecciónalo de la lista en la tarjeta naranja!'
+            },
+            bienestar: {
+                keywords: ['bienestar', 'psicologico', 'emocional', 'salud mental', 'estres'],
+                response: 'La tarjeta de <b>Bienestar Psicológico</b> (la de color morado) te da acceso a consejos y actividades para fomentar el desarrollo emocional y la salud mental de tus hijos.'
+            },
+            academico: {
+                keywords: ['academico', 'apoyo academico', 'colegio', 'estudios', 'tareas'],
+                response: 'En <b>Apoyo Académico</b> (la tarjeta color turquesa), encontrarás estrategias y recursos para potenciar el rendimiento escolar y los hábitos de estudio de la familia.'
+            },
+            juegos: {
+                keywords: ['juegos', 'jugando', 'divertido', 'gamificacion', 'entretenimiento'],
+                response: 'La sección <b>Jugando es Divertido</b> (la tarjeta rosada) tiene una selección de juegos educativos y actividades lúdicas para estimular la mente y la creatividad de tus hijos.'
+            },
+            platos_dia: {
+                keywords: ['platos del dia', 'diario', 'hoy', 'sugerencias', 'desayuno', 'almuerzo', 'cena'],
+                response: 'En <b>Platos del Día</b> (la tarjeta celeste), recibirás tres recomendaciones diarias (desayuno, almuerzo y cena) de platos balanceados y nutritivos para toda la familia.'
+            }
+        };
+
+
+        function normalizeText(text) {
+            return text.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        }
+
+        function getBotResponse(userInput) {
+            const normalizedInput = normalizeText(userInput);
+            for (const key in chatKnowledgeBase) {
+                const entry = chatKnowledgeBase[key];
+                for (const keyword of entry.keywords) {
+                    if (normalizedInput.includes(normalizeText(keyword))) {
+                        return entry.response;
+                    }
+                }
+            }
+            return 'No entendí tu pregunta. Intenta reformularla. Puedo responder sobre: Acerca de Yachay, Servicios, Precios, y las 6 funciones de esta página (despensa, región, bienestar, etc.).';
+        }
+
+        function addChatMessage(message, sender) {
+            const chatBody = document.getElementById('chatBody');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `chat-message ${sender}`;
+            messageDiv.innerHTML = message;
+            chatBody.appendChild(messageDiv);
+            chatBody.scrollTop = chatBody.scrollHeight;
+        }
+
+        function clearChat() {
+            const chatBody = document.getElementById('chatBody');
+            chatBody.innerHTML = '<div class="chat-message bot">¡Hola! Soy el asistente de Yachay Mikuy. ¿En qué puedo ayudarte hoy?</div>';
+            chatBody.scrollTop = 0;
+        }
+
+        function handleSendMessage() {
+            const chatInput = document.getElementById('chatInput');
+            const message = chatInput.value.trim();
+            if (message === '') return;
+            addChatMessage(message, 'user');
+            chatInput.value = '';
+            setTimeout(() => {
+                const botResponse = getBotResponse(message);
+                addChatMessage(botResponse, 'bot');
+            }, 500);
+        }
+
+        function setupChatbotListeners() {
+            const chatFab = document.getElementById('chatFab');
+            const chatWindow = document.getElementById('chatWindow');
+            const closeChatBtn = document.getElementById('closeChatBtn');
+            const chatSendBtn = document.getElementById('chatSendBtn');
+            const chatInput = document.getElementById('chatInput');
+
+            chatFab.addEventListener('click', () => {
+                const isActive = chatWindow.classList.toggle('active');
+                if (!isActive) {
+                    clearChat();
+                }
+            });
+            
+            closeChatBtn.addEventListener('click', () => {
+                chatWindow.classList.remove('active');
+                clearChat();
+            });
+
+            chatSendBtn.addEventListener('click', handleSendMessage);
+            chatInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    handleSendMessage();
+                }
+            });
+        }
+        // --- FIN: LÓGICA DEL CHATBOT ---
+
 
         const storageAdapter = { getUsers: function() { const users = localStorage.getItem('yachay_users'); return users ? JSON.parse(users) : []; }, saveUsers: function(users) { localStorage.setItem('yachay_users', JSON.stringify(users)); }, getChildren: function() { const children = localStorage.getItem('yachay_children'); return children ? JSON.parse(children) : []; }, saveChildren: function(children) { localStorage.setItem('yachay_children', JSON.stringify(children)); }, getResponses: function() { const responses = localStorage.getItem('yachay_responses'); return responses ? JSON.parse(responses) : {}; }, saveResponses: function(responses) { localStorage.setItem('yachay_responses', JSON.stringify(responses)); }, getSession: function() { const session = localStorage.getItem('yachay_session'); return session ? JSON.parse(session) : { currentUserId: null, exploringAsGuest: false, lastActiveAt: null }; }, saveSession: function(session) { localStorage.setItem('yachay_session', JSON.stringify(session)); }, getAuditLog: function() { const auditLog = localStorage.getItem('yachay_auditLog'); return auditLog ? JSON.parse(auditLog) : []; }, saveAuditLog: function(auditLog) { localStorage.setItem('yachay_auditLog', JSON.stringify(auditLog)); } };
         function syncChildDeletionAcrossPages(childId, action) { const syncData = { childId: childId, action: action, timestamp: new Date().toISOString() }; localStorage.setItem('yachay_sync_action', JSON.stringify(syncData)); if ('BroadcastChannel' in window) { const channel = new BroadcastChannel('yachay_sync'); channel.postMessage(syncData); } }
@@ -753,6 +1266,10 @@
             window.addEventListener('keypress', resetInactivityTimer);
             window.addEventListener('touchmove', resetInactivityTimer);
             window.addEventListener('scroll', resetInactivityTimer, true);
+            
+            // --- AÑADIDO: Iniciar Chatbot y Guía ---
+            setupChatbotListeners();
+            setTimeout(startGuidedTour, 500); // 500ms de retraso para que cargue la página
             
             // === MANEJO DEL BOTÓN SALIR ===
             document.getElementById('exitButton').addEventListener('click', function(e) {

@@ -5,14 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Yachay Mikuy - Combatiendo la Anemia Infantil</title>
     
-    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
-    <!-- AOS Animation -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/intro.js/7.2.0/introjs.min.css" rel="stylesheet">
     
     <style>
         :root {
@@ -44,32 +41,68 @@
         
         body {
             font-family: 'Nunito', sans-serif;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
             color: var(--text-dark);
             line-height: 1.6;
             overflow-x: hidden;
         }
         
-        /* Estilos del Header (copiados del archivo original) */
+        /* Estilos del Header - Modificado */
         .header {
-            background: linear-gradient(135deg, var(--primary-blue), var(--accent-color));
+            background-color: var(--primary-blue); /* Color azul oscuro sólido */
             color: white;
-            padding: 15px 0;
+            padding: 0;
             box-shadow: 0 4px 20px rgba(0,0,0,0.15);
             z-index: 1000;
             position: fixed;
             width: 100%;
             top: 0;
-            backdrop-filter: blur(10px);
-            border-bottom: 2px solid rgba(255,255,255,0.1);
+            height: 80px; /* Aumentado para acomodar el logo más grande */
+        }
+        
+        .header-container {
+            display: flex;
+            align-items: center;
+            justify-content: center; /* Centrado del contenido */
+            height: 100%;
+            padding: 0 20px;
+        }
+        
+        .logo-container {
+            height: 80px; /* Altura igual a la del header */
+            width: 80px; /* Ancho igual a la altura para mantener circular */
+            border-radius: 50%;
+            background-color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            overflow: hidden;
+            position: relative;
+            z-index: 10;
+            transition: transform 0.3s ease;
+        }
+        
+        .logo-container:hover {
+            transform: scale(1.05); /* Ligera animación al pasar el cursor */
+        }
+        
+        .logo-container img {
+            height: 90%; /* 90% del alto del contenedor para que sea grande pero se vea completo */
+            width: 90%; /* 90% del ancho del contenedor */
+            object-fit: contain; /* Contain para mantener la resolución y que se vea completo */
+            padding: 0; /* Sin padding */
+            display: block; /* Block para mejor centrado */
         }
         
         .logo {
             font-size: 2rem;
-            font-weight: 900;
+            font-weight: 800;
             display: flex;
             align-items: center;
+            height: 80px; /* Altura fija para la barra */
+            padding: 5px 0; /* Pequeño padding para dar espacio */
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            margin-left: 15px; /* Espacio entre logo y texto */
         }
         
         .logo i {
@@ -85,12 +118,29 @@
             100% { transform: scale(1); }
         }
         
-        /* Estilos del Footer (copiados del archivo original) */
+        /* Ajustes para dispositivos móviles */
+        @media (max-width: 768px) {
+            .header {
+                height: 60px; /* Altura reducida para móviles */
+            }
+            
+            .logo-container {
+                height: 60px; /* Altura de imagen igual a la del header */
+                width: 60px;
+            }
+            
+            .logo {
+                font-size: 1.5rem;
+                height: 60px;
+            }
+        }
+        
+        /* Estilos del Footer */
         .footer { 
             background: linear-gradient(135deg, var(--primary-blue), var(--accent-color)); 
             color: rgba(255,255,255,0.9); 
             padding: 2.5rem 5%; 
-            margin-top: 3rem;
+            margin-top: 0; /* Eliminado el margen superior para reducir espacio */
             position: relative;
             overflow: hidden;
         }
@@ -193,68 +243,69 @@
             z-index: 2;
         }
         
-        /* Estilos específicos para esta página */
+        /* Estilos específicos para esta página - Modificados */
         .main-content {
-            margin-top: 70px;
-            padding-bottom: 30px;
+            margin-top: 80px; /* Ajustado a la nueva altura del header */
+            padding-bottom: 0; /* Eliminado el padding inferior para reducir espacio */
         }
         
-        .hero-section {
-            background: linear-gradient(135deg, rgba(26, 75, 140, 0.95), rgba(33, 150, 243, 0.95)), 
-                        url('https://images.unsplash.com/photo-1494537176433-7a3c4ef2046f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80');
+        /* Sección con imagen de fondo - Mejorada */
+        .section-with-bg {
+            position: relative;
+            padding: 60px 0; /* Reducido el padding vertical para reducir espacio */
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
             color: white;
-            padding: 60px 0;
-            text-align: center;
-            position: relative;
             overflow: hidden;
         }
         
-        .hero-section::before {
+        /* Reducir padding específicamente para la sección de alimentos */
+        .section-with-bg:nth-of-type(4) {
+            padding: 40px 0; /* Padding aún más reducido para la sección de alimentos */
+        }
+        
+        .section-with-bg::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="none"/><path d="M0,0 L100,100 M100,0 L0,100" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></svg>');
-            background-size: 20px 20px;
-            opacity: 0.3;
-            animation: movePattern 20s linear infinite;
+            background: rgba(0, 0, 0, 0.5); /* Reducido el overlay para mejorar visibilidad de las imágenes */
+            z-index: 1;
         }
         
-        @keyframes movePattern {
-            0% { transform: translate(0, 0); }
-            100% { transform: translate(20px, 20px); }
-        }
-        
-        .hero-content {
-            position: relative;
+        /* Añadido filtro para mejorar la apariencia de las imágenes */
+        .section-with-bg::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.3));
             z-index: 2;
+            pointer-events: none;
         }
         
-        .hero-title {
-            font-size: 3.5rem;
-            font-weight: 900;
-            margin-bottom: 15px;
-            text-shadow: 3px 3px 6px rgba(0,0,0,0.4);
-            animation: titleGlow 2s ease-in-out infinite alternate;
+        .section-content {
+            position: relative;
+            z-index: 3; /* Incrementado para asegurar que el contenido esté por encima de los overlays */
         }
         
-        @keyframes titleGlow {
-            from { text-shadow: 3px 3px 6px rgba(0,0,0,0.4), 0 0 20px rgba(255,255,255,0.3); }
-            to { text-shadow: 3px 3px 6px rgba(0,0,0,0.4), 0 0 30px rgba(255,255,255,0.6); }
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.7); /* Aumentada la sombra para mejorar legibilidad */
         }
         
-        .hero-subtitle {
-            font-size: 1.4rem;
-            margin-bottom: 25px;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
+        .section-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
             font-weight: 600;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.7); /* Aumentada la sombra para mejorar legibilidad */
         }
         
         .btn-hero {
@@ -299,85 +350,44 @@
             color: white;
         }
         
-        .section-title {
-            font-size: 2.5rem;
-            font-weight: 800;
+        /* Estilos para tarjetas */
+        .card-custom {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            transition: all 0.4s ease;
+            height: 100%;
+        }
+        
+        .card-custom:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+        
+        .card-title-custom {
+            font-size: 1.3rem;
+            font-weight: 700;
             color: var(--primary-blue);
             margin-bottom: 15px;
-            position: relative;
-            display: inline-block;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
         }
         
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -8px;
-            left: 0;
-            width: 80px;
-            height: 4px;
-            background: linear-gradient(90deg, var(--accent-red), var(--secondary-color));
-            border-radius: 2px;
-            animation: titleUnderline 2s ease-in-out infinite;
+        .card-text-custom {
+            color: var(--text-dark);
+            font-size: 0.95rem;
         }
         
-        @keyframes titleUnderline {
-            0%, 100% { width: 80px; }
-            50% { width: 120px; }
-        }
-        
-        .stats-section {
-            padding: 50px 0;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .stats-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60"><polygon points="30,10 35,20 45,20 37,28 40,38 30,32 20,38 23,28 15,20 25,20" fill="rgba(255,255,255,0.1)"/></svg>');
-            background-size: 60px 60px;
-            animation: floatStars 30s linear infinite;
-        }
-        
-        @keyframes floatStars {
-            0% { transform: translateY(0) rotate(0deg); }
-            100% { transform: translateY(-100px) rotate(360deg); }
-        }
-        
+        /* Estilos para estadísticas */
         .stat-card {
-            background: rgba(255,255,255,0.95);
+            background: rgba(255, 255, 255, 0.9);
             text-align: center;
             padding: 25px 15px;
             border-radius: 20px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.15);
             transition: all 0.4s ease;
             height: 100%;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.3);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .stat-card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        
-        .stat-card:hover::before {
-            opacity: 1;
+            margin-bottom: 20px;
         }
         
         .stat-card:hover {
@@ -406,377 +416,15 @@
             font-weight: 600;
         }
         
-        .problem-section {
-            padding: 50px 0;
-            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
-        }
-        
-        .food-card {
-            background: white;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-            transition: all 0.4s ease;
-            height: 100%;
-            position: relative;
-        }
-        
-        .food-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 5px;
-            background: linear-gradient(90deg, var(--accent-red), var(--secondary-color), var(--primary-color));
-            transform: scaleX(0);
-            transition: transform 0.3s ease;
-        }
-        
-        .food-card:hover::before {
-            transform: scaleX(1);
-        }
-        
-        .food-card:hover {
-            transform: translateY(-10px) rotateX(5deg);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-        }
-        
-        .food-img {
-            height: 180px;
-            width: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-        
-        .food-card:hover .food-img {
-            transform: scale(1.1);
-        }
-        
-        .food-content {
-            padding: 20px;
-            position: relative;
-        }
-        
-        .food-title {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: var(--primary-blue);
-            margin-bottom: 10px;
-        }
-        
-        .food-description {
-            color: var(--text-dark);
-            margin-bottom: 15px;
-            font-size: 0.95rem;
-        }
-        
-        .food-nutrients {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 15px;
-        }
-        
-        .nutrient {
-            text-align: center;
-            padding: 10px 5px;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            border-radius: 12px;
-            flex: 1;
-            margin: 0 3px;
-            transition: all 0.3s ease;
-        }
-        
-        .nutrient:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-        
-        .nutrient-name {
-            font-size: 0.75rem;
-            color: var(--text-dark);
-            font-weight: 600;
-        }
-        
-        .nutrient-value {
-            font-weight: 800;
-            color: var(--accent-red);
-            font-size: 0.9rem;
-        }
-        
-        .awards-section {
-            padding: 50px 0;
-            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
-        }
-        
-        .award-card {
-            background: white;
-            border-radius: 20px;
-            padding: 25px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            transition: all 0.4s ease;
-            height: 100%;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .award-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 6px;
-            height: 100%;
-            background: linear-gradient(to bottom, var(--primary-blue), var(--accent-color), var(--accent-red));
-        }
-        
-        .award-card::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle, rgba(26, 75, 140, 0.1) 0%, transparent 70%);
-            transition: all 0.5s ease;
-        }
-        
-        .award-card:hover::after {
-            top: -25%;
-            right: -25%;
-        }
-        
-        .award-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-        }
-        
-        .award-icon {
-            font-size: 2.5rem;
-            background: linear-gradient(45deg, var(--accent-red), var(--secondary-color));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 15px;
-            animation: iconFloat 3s ease-in-out infinite;
-        }
-        
-        @keyframes iconFloat {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-        
-        .award-title {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: var(--primary-blue);
-            margin-bottom: 10px;
-        }
-        
-        .award-achievement {
-            font-weight: 700;
-            color: var(--accent-red);
-            margin-bottom: 10px;
-            font-size: 0.95rem;
-        }
-        
-        .award-competencies {
-            color: var(--text-dark);
-            font-size: 0.9rem;
-        }
-        
-        .solution-section {
-            padding: 50px 0;
-            background: linear-gradient(135deg, #d299c2 0%, #fef9d7 100%);
-        }
-        
-        .feature-card {
-            background: white;
-            border-radius: 20px;
-            padding: 30px 20px;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            transition: all 0.4s ease;
-            height: 100%;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .feature-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(26, 75, 140, 0.05) 0%, rgba(33, 150, 243, 0.05) 100%);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        
-        .feature-card:hover::before {
-            opacity: 1;
-        }
-        
-        .feature-card:hover {
-            transform: translateY(-10px) scale(1.03);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-        }
-        
-        .feature-icon {
-            font-size: 3rem;
-            background: linear-gradient(45deg, var(--primary-blue), var(--accent-color));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 20px;
-            animation: iconRotate 4s linear infinite;
-        }
-        
-        @keyframes iconRotate {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        
-        .feature-title {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: var(--primary-blue);
-            margin-bottom: 15px;
-        }
-        
-        .feature-description {
-            color: var(--text-dark);
-            font-size: 0.95rem;
-        }
-        
-        .cta-section {
-            background: linear-gradient(135deg, var(--primary-blue), var(--accent-color));
-            color: white;
-            padding: 60px 0;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .cta-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><circle cx="50" cy="50" r="30" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="2"/></svg>');
-            background-size: 100px 100px;
-            animation: moveCircles 15s linear infinite;
-        }
-        
-        @keyframes moveCircles {
-            0% { transform: translate(0, 0); }
-            100% { transform: translate(100px, 100px); }
-        }
-        
-        .cta-content {
-            position: relative;
-            z-index: 2;
-        }
-        
-        .cta-title {
-            font-size: 2.5rem;
-            font-weight: 800;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
-        
-        .cta-subtitle {
-            font-size: 1.2rem;
-            margin-bottom: 30px;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-            font-weight: 600;
-        }
-        
-        .btn-cta {
-            background: linear-gradient(45deg, var(--accent-red), #ff6b6b);
-            color: white;
-            border: none;
-            border-radius: 50px;
-            padding: 18px 45px;
-            font-size: 1.2rem;
-            font-weight: 700;
-            transition: all 0.4s ease;
-            box-shadow: 0 8px 25px rgba(230, 57, 70, 0.5);
-            text-decoration: none;
-            display: inline-block;
-            margin: 10px;
-            position: relative;
-            overflow: hidden;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            z-index: 1000;
-            cursor: pointer;
-        }
-        
-        .btn-cta::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            transition: left 0.5s;
-        }
-        
-        .btn-cta:hover::before {
-            left: 100%;
-        }
-        
-        .btn-cta:hover {
-            background: linear-gradient(45deg, #d62828, var(--accent-red));
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 15px 35px rgba(230, 57, 70, 0.7);
-            color: white;
-        }
-        
-        .btn-cta-outline {
-            background: transparent;
-            color: white;
-            border: 3px solid white;
-            border-radius: 50px;
-            padding: 15px 40px;
-            font-size: 1.2rem;
-            font-weight: 700;
-            transition: all 0.4s ease;
-            text-decoration: none;
-            display: inline-block;
-            margin: 10px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            z-index: 1000;
-            cursor: pointer;
-        }
-        
-        .btn-cta-outline:hover {
-            background: white;
-            color: var(--primary-blue);
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 15px 35px rgba(255,255,255,0.3);
-        }
-        
-        /* Nuevas secciones */
-        .team-section {
-            padding: 50px 0;
-            background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
-        }
-        
+        /* Estilos para tarjetas de equipo */
         .team-member {
-            background: white;
+            background: rgba(255, 255, 255, 0.9);
             border-radius: 20px;
             overflow: hidden;
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             transition: all 0.4s ease;
             height: 100%;
-            position: relative;
+            margin-bottom: 20px;
         }
         
         .team-member:hover {
@@ -798,7 +446,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            object-fit: contain; /* Cambiado a contain para mostrar la imagen completa */
+            object-fit: contain;
             transition: transform 0.5s ease;
         }
         
@@ -855,104 +503,92 @@
             transform: translateY(-3px);
         }
         
-        .impact-section {
-            padding: 50px 0;
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-        }
-        
-        .impact-card {
-            background: white;
-            border-radius: 20px;
-            padding: 25px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        /* Estilos para tarjetas de alimentos - Corregidos */
+        .food-card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
             transition: all 0.4s ease;
             height: 100%;
-            position: relative;
-            overflow: hidden;
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
         }
         
-        .impact-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
+        .food-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+        
+        .food-img-container {
+            position: relative;
             width: 100%;
-            height: 5px;
-            background: linear-gradient(90deg, var(--accent-red), var(--secondary-color), var(--primary-color));
-            transform: scaleX(0);
-            transition: transform 0.3s ease;
-        }
-        
-        .impact-card:hover::before {
-            transform: scaleX(1);
-        }
-        
-        .impact-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-        }
-        
-        .impact-icon {
-            font-size: 2.5rem;
-            background: linear-gradient(45deg, var(--accent-red), var(--secondary-color));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 15px;
-            animation: iconFloat 3s ease-in-out infinite;
-        }
-        
-        .impact-title {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: var(--primary-blue);
-            margin-bottom: 10px;
-        }
-        
-        .impact-description {
-            color: var(--text-dark);
-            font-size: 0.95rem;
-        }
-        
-        .community-section {
-            padding: 50px 0;
-            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-        }
-        
-        .community-card {
-            background: white;
-            border-radius: 20px;
-            padding: 25px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            transition: all 0.4s ease;
-            height: 100%;
-            position: relative;
+            height: 200px; /* Altura fija para todas las imágenes */
             overflow: hidden;
         }
         
-        .community-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        .food-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Asegura que todas las imágenes cubran el espacio */
+            transition: transform 0.5s ease;
         }
         
-        .community-icon {
-            font-size: 2.5rem;
-            background: linear-gradient(45deg, var(--primary-blue), var(--accent-color));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 15px;
-            animation: iconRotate 4s linear infinite;
+        .food-card:hover .food-img {
+            transform: scale(1.05);
         }
         
-        .community-title {
+        .food-content {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .food-title {
             font-size: 1.3rem;
             font-weight: 700;
             color: var(--primary-blue);
             margin-bottom: 10px;
         }
         
-        .community-description {
+        .food-description {
             color: var(--text-dark);
+            margin-bottom: 15px;
             font-size: 0.95rem;
+            flex-grow: 1;
+        }
+        
+        .food-nutrients {
+            display: flex;
+            justify-content: center;
+            margin-top: auto;
+        }
+        
+        .nutrient {
+            text-align: center;
+            padding: 10px 15px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+        
+        .nutrient:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .nutrient-name {
+            font-size: 0.75rem;
+            color: var(--text-dark);
+            font-weight: 600;
+        }
+        
+        .nutrient-value {
+            font-weight: 800;
+            color: var(--accent-red);
+            font-size: 0.9rem;
         }
         
         /* Floating elements */
@@ -992,7 +628,7 @@
             50% { transform: translateY(-20px) rotate(10deg); }
         }
         
-        /* Botón flotante para "Conoce más" */
+        /* Floating "Conoce más" */
         .floating-know-more {
             position: fixed;
             bottom: 30px;
@@ -1029,76 +665,345 @@
         
         /* Responsive adjustments */
         @media (max-width: 768px) {
-            .hero-title {
-                font-size: 2.5rem;
-            }
-            
-            .hero-subtitle {
-                font-size: 1.1rem;
-            }
-            
-            .section-title {
-                font-size: 2rem;
-            }
-            
-            .stat-number {
-                font-size: 2.5rem;
-            }
-            
-            .cta-title {
-                font-size: 2rem;
-            }
-            
-            .btn-hero, .btn-cta {
-                padding: 15px 30px;
-                font-size: 1.1rem;
-            }
-            
-            .floating-know-more {
-                bottom: 20px;
-                right: 20px;
-                padding: 12px 20px;
-                font-size: 0.9rem;
-            }
+            .section-title { font-size: 2rem; }
+            .section-subtitle { font-size: 1.1rem; }
+            .stat-number { font-size: 2.5rem; }
+            .btn-hero { padding: 15px 30px; font-size: 1.1rem; }
+            .floating-know-more { bottom: 20px; right: 20px; padding: 12px 20px; font-size: 0.9rem; }
+        }
+
+        /* === ESTILOS: CHATBOT (ACTUALIZADO A ROJO) === */
+        #chatbot-toggle {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, var(--accent-red), #ff6b6b); /* Cambiado a rojo */
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            border: none;
+            box-shadow: var(--shadow);
+            cursor: pointer;
+            z-index: 1030;
+            transition: var(--transition);
+            animation: floatButton 3s ease-in-out infinite reverse;
+        }
+        #chatbot-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 10px 30px rgba(230, 57, 70, 0.5); /* Sombra roja al pasar el cursor */
+        }
+
+        #chatbot-window {
+            position: fixed;
+            bottom: 100px;
+            left: 30px;
+            width: 320px;
+            height: 450px;
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            z-index: 1029;
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+            animation: modalSlideIn 0.3s;
+        }
+
+        .chatbot-header {
+            background: linear-gradient(135deg, var(--accent-red), #ff6b6b); /* Cambiado a rojo */
+            color: var(--white);
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .chatbot-header h4 { 
+            margin: 0; 
+            font-weight: 700; 
+            display: flex; 
+            align-items: center;
+        }
+        .chatbot-header-icon {
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+        
+        #chatbot-close {
+            background: none; border: none; color: var(--white);
+            font-size: 1.25rem; cursor: pointer; opacity: 0.8;
+            transition: var(--transition);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        #chatbot-close:hover { 
+            opacity: 1; 
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: rotate(90deg);
+        }
+
+        #chat-messages {
+            flex: 1; padding: 1rem; overflow-y: auto;
+            display: flex; flex-direction: column; gap: 10px;
+        }
+        .chat-message {
+            padding: 10px 15px; border-radius: 18px;
+            max-width: 80%; line-height: 1.4; font-size: 0.95rem;
+        }
+        .chat-message.bot {
+            background: rgba(230, 57, 70, 0.1); /* Fondo rojo suave */
+            color: var(--text-dark);
+            border-bottom-left-radius: 4px; align-self: flex-start;
+        }
+        .chat-message.user {
+            background: var(--primary-blue); color: var(--white);
+            border-bottom-right-radius: 4px; align-self: flex-end;
+        }
+
+        #chat-suggestions {
+            padding: 0.5rem 1rem; border-top: 1px solid var(--medium-gray);
+            display: flex; flex-wrap: wrap; gap: 5px;
+        }
+        #chat-suggestions button {
+            background: var(--white); border: 1px solid var(--accent-red); /* Borde rojo */
+            color: var(--accent-red); /* Texto rojo */
+            border-radius: 50px;
+            font-size: 0.8rem; padding: 4px 10px;
+            cursor: pointer; transition: var(--transition);
+        }
+        #chat-suggestions button:hover { background: var(--accent-red); color: var(--white); } /* Fondo rojo al pasar el cursor */
+
+        .chat-input-area {
+            display: flex; border-top: 1px solid var(--medium-gray);
+            padding: 0.5rem;
+        }
+        #chat-input {
+            flex: 1; border: none; outline: none;
+            padding: 0.5rem; font-family: 'Nunito', sans-serif;
+        }
+        #chat-send {
+            background: none; border: none; color: var(--accent-red); /* Color rojo */
+            font-size: 1.25rem; cursor: pointer;
+            padding: 0.5rem; transition: var(--transition);
+        }
+        #chat-send:hover { color: var(--primary-blue); }
+        
+        
+        /* === 🎨 NUEVO DISEÑO: TEMA DEL TOUR GUIADO === */
+        
+        /* Overlay (fondo oscuro) */
+        .introjs-overlay {
+            background-color: #000;
+            opacity: 0.7 !important; /* Más oscuro para más foco */
+        }
+        
+        /* Tema principal del Tooltip */
+        .introjs-yachay-theme {
+            font-family: 'Nunito', sans-serif;
+            background-color: var(--white);
+            border: none;
+            border-radius: var(--radius);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
+            width: 90vw;
+            max-width: 400px; /* Ancho máximo */
+            padding: 0;
+            overflow: hidden; /* Para que el header encaje bien */
+        }
+
+        /* Título del tooltip */
+        .introjs-yachay-theme .introjs-tooltip-title {
+            font-size: 1.1rem;
+            font-weight: 800;
+            padding: 1rem 1.5rem;
+            margin: 0;
+            background: linear-gradient(135deg, var(--primary-blue), var(--accent-color));
+            color: var(--white);
+        }
+        
+        /* Texto del tooltip */
+        .introjs-yachay-theme .introjs-tooltiptext {
+            color: var(--text-dark);
+            font-size: 1rem;
+            line-height: 1.6;
+            font-weight: 500;
+            padding: 1.5rem;
+            margin: 0;
+        }
+        
+        /* Barra de progreso */
+        .introjs-yachay-theme .introjs-progress {
+            background-color: var(--medium-gray);
+            border-radius: 0;
+            height: 6px;
+            margin: 0;
+        }
+        .introjs-yachay-theme .introjs-progressbar {
+            background-color: var(--accent-red);
+        }
+        
+        /* Contenedor de botones */
+        .introjs-yachay-theme .introjs-tooltipbuttons {
+            border-top: 1px solid var(--light-gray);
+            padding: 1rem 1.5rem;
+            margin: 0;
+            display: flex; /* <-- Clave para alinear botones */
+            justify-content: space-between; /* <-- Clave para alinear botones */
+            align-items: center;
+        }
+        
+        /* Botones (Siguiente, Hecho) */
+        .introjs-yachay-theme .introjs-button {
+            font-family: 'Nunito', sans-serif;
+            font-weight: 700;
+            text-decoration: none;
+            color: var(--white) !important;
+            background: linear-gradient(45deg, var(--primary-blue), var(--accent-color));
+            border-radius: 50px;
+            padding: 10px 20px !important;
+            border: none;
+            transition: var(--transition);
+            box-shadow: 0 4px 15px rgba(26, 75, 140, 0.4);
+            text-shadow: none;
+            white-space: nowrap; /* Evita que el texto del botón se parta */
+        }
+        
+        .introjs-yachay-theme .introjs-button:hover {
+            background: linear-gradient(45deg, var(--accent-red), #ff6b6b);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(230, 57, 70, 0.5);
+            color: var(--white) !important;
+        }
+        
+        /* === ¡ESTILO CORREGIDO! Botón x y Anterior (Estilo Secundario) === */
+        .introjs-yachay-theme .introjs-skipbutton,
+        .introjs-yachay-theme .introjs-prevbutton {
+            font-family: 'Nunito', sans-serif;
+            font-weight: 700;
+            text-decoration: none;
+            color: var(--primary-blue) !important; /* Texto azul */
+            background: var(--white) !important; /* Fondo blanco */
+            border-radius: 50px;
+            padding: 10px 20px !important;
+            border: 2px solid var(--primary-blue) !important; /* Borde azul */
+            transition: var(--transition);
+            box-shadow: none; /* Sin sombra */
+            text-shadow: none;
+            white-space: nowrap; 
+        }
+        
+        .introjs-yachay-theme .introjs-skipbutton:hover,
+        .introjs-yachay-theme .introjs-prevbutton:hover {
+            background: var(--primary-blue) !important; /* Se invierte en hover */
+            color: var(--white) !important;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 15px rgba(26, 75, 140, 0.4);
+        }
+
+        /* Oculta la flecha (ya no es necesaria con 'floating') */
+        .introjs-yachay-theme .introjs-arrow {
+            display: none !important;
+        }
+
+        /* Estilos para los modales del footer */
+        .modal { 
+            display: none; position: fixed; z-index: 1055; 
+            left: 0; top: 0; width: 100%; height: 100%; 
+            background-color: rgba(0,0,0,0.5); 
+            justify-content: center; align-items: center; 
+            padding: 1rem; 
+        }
+        .modal.active { display: flex; }
+        @keyframes modalSlideIn { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        .modal-content { 
+            background-color: var(--white); border-radius: var(--radius); 
+            width: 100%; max-width: 600px; max-height: 90vh; 
+            position: relative; animation: modalSlideIn 0.4s; 
+            display: flex; flex-direction: column; z-index: 1056;
+        }
+        .modal-header { 
+            padding: 1.5rem; border-bottom: 1px solid var(--medium-gray); 
+            display: flex; justify-content: space-between; align-items: center; 
+        }
+        .modal-header h2 { margin: 0; color: var(--primary-blue); }
+        .modal-body { padding: 1.5rem; overflow-y: auto; flex: 1; }
+        .modal-body::-webkit-scrollbar { width: 8px; }
+        .modal-body::-webkit-scrollbar-track { background: var(--light-gray); border-radius: 4px; }
+        .modal-body::-webkit-scrollbar-thumb { background: var(--primary-blue); border-radius: 4px; }
+        .modal-body::-webkit-scrollbar-thumb:hover { background: var(--accent-red); }
+        .close-modal { 
+            background: none; border: none; font-size: 1.5rem; 
+            cursor: pointer; color: var(--dark-color); 
+            transition: var(--transition);
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .close-modal:hover { 
+            color: var(--accent-red); 
+            transform: rotate(90deg);
+            background-color: rgba(230, 57, 70, 0.1);
+        }
+        
+        /* Estilos para contenido de modales */
+        .content-section { margin-bottom: 1.5rem; }
+        .content-section h3 { 
+            color: var(--primary-blue); margin-bottom: 0.8rem; 
+            font-size: 1.1rem; display: flex; 
+            align-items: center; gap: 0.5rem; 
+        }
+        .content-section p { line-height: 1.6; color: var(--text-dark); }
+        .content-section ul { margin-left: 1.5rem; margin-top: 0.5rem; }
+        .content-section li { margin-bottom: 0.5rem; line-height: 1.5; }
+        .highlight-box { 
+            background: var(--light-gray); padding: 1rem; 
+            border-radius: 8px; border-left: 4px solid var(--accent-red); 
+            margin: 1rem 0; 
         }
     </style>
 </head>
 <body>
-    <!-- Floating elements -->
     <i class="fas fa-apple-alt floating-element floating-element-1"></i>
     <i class="fas fa-heart floating-element floating-element-2"></i>
     <i class="fas fa-child floating-element floating-element-3"></i>
     
-    <!-- Header (copiado del archivo original) -->
     <header class="header">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-md-6">
-                    <div class="logo">
-                        <i class="fas fa-apple-alt"></i>
-                        Yachay Mikuy
-                    </div>
-                </div>
-                <div class="col-md-6 text-md-end">
-                    <div id="userMenu" class="d-none">
-                        <span id="userName" class="me-3"></span>
-                        <button id="logoutBtn" class="btn btn-light btn-sm">
-                            <i class="fas fa-sign-out-alt"></i> Cerrar sesión
-                        </button>
-                    </div>
+        <div class="header-container">
+            <div class="logo-container">
+                <img src="logo.png" alt="Yachay Mikuy Logo">
+            </div>
+            <div class="logo">
+                <i class=""></i>
+                Yachay Mikuy
+            </div>
+            <div class="ms-auto">
+                <div id="userMenu" class="d-none">
+                    <span id="userName" class="me-3"></span>
+                    <button id="logoutBtn" class="btn btn-light btn-sm">
+                        <i class="fas fa-sign-out-alt"></i> Cerrar sesión
+                    </button>
                 </div>
             </div>
         </div>
     </header>
 
-    <!-- Main Content -->
     <main class="main-content">
-        <!-- Hero Section -->
-        <section class="hero-section">
-            <div class="container">
-                <div class="hero-content" data-aos="fade-up">
-                    <h1 class="hero-title">Yachay Mikuy</h1>
-                    <p class="hero-subtitle">Combatiendo la anemia infantil en Perú con planes de alimentación personalizados y adaptados culturalmente</p>
+        <!-- Sección 1: Hero -->
+        <section class="section-with-bg" style="background-image: url('foto.jpg');">
+            <div class="container section-content">
+                <div class="text-center" data-aos="fade-up">
+                    <h1 class="section-title">Yachay Mikuy</h1>
+                    <p class="section-subtitle">Combatiendo la anemia infantil en Perú con planes de alimentación personalizados y adaptados culturalmente</p>
                     <div class="d-flex justify-content-center">
                         <a href="index1.html#login" class="btn-hero" onclick="forceLogin(event)">Comenzar Ahora</a>
                     </div>
@@ -1106,12 +1011,12 @@
             </div>
         </section>
 
-        <!-- Stats Section -->
-        <section class="stats-section">
-            <div class="container">
+        <!-- Sección 2: Estadísticas -->
+        <section class="section-with-bg" style="background-image: url('foto1.jpg');">
+            <div class="container section-content">
                 <div class="text-center mb-4">
-                    <h2 class="section-title text-white" data-aos="fade-up">La Realidad de la Anemia en Perú</h2>
-                    <p class="lead text-white" data-aos="fade-up" data-aos-delay="100">Las estadísticas nos motivan a actuar</p>
+                    <h2 class="section-title" data-aos="fade-up">La Realidad de la Anemia en Perú</h2>
+                    <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">Las estadísticas nos motivan a actuar</p>
                 </div>
                 <div class="row g-3">
                     <div class="col-md-3 col-6" data-aos="fade-up" data-aos-delay="100">
@@ -1142,17 +1047,20 @@
             </div>
         </section>
 
-        <!-- Problem Section -->
-        <section class="problem-section">
-            <div class="container">
+
+        <!-- Sección 3: Alimentos -->
+        <section class="section-with-bg" style="background-image: url('foto2.jpg');">
+            <div class="container section-content">
                 <div class="text-center mb-4">
                     <h2 class="section-title" data-aos="fade-up">Alimentos Clave contra la Anemia</h2>
-                    <p class="lead" data-aos="fade-up" data-aos-delay="100">Descubre cómo los alimentos peruanos pueden combatir la anemia</p>
+                    <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">Descubre cómo los alimentos peruanos pueden combatir la anemia</p>
                 </div>
                 <div class="row g-3">
                     <div class="col-md-4 col-lg-2" data-aos="fade-up" data-aos-delay="100">
                         <div class="food-card">
-                            <img src="https://www.lavanguardia.com/uploads/2020/11/05/5fb28177d1c94.jpeg" alt="Hígado de pollo" class="food-img">
+                            <div class="food-img-container">
+                                <img src="https://www.lavanguardia.com/uploads/2020/11/05/5fb28177d1c94.jpeg" alt="Hígado de pollo" class="food-img">
+                            </div>
                             <div class="food-content">
                                 <h3 class="food-title">Hígado</h3>
                                 <p class="food-description">Fuente de hierro hemínico</p>
@@ -1167,7 +1075,9 @@
                     </div>
                     <div class="col-md-4 col-lg-2" data-aos="fade-up" data-aos-delay="200">
                         <div class="food-card">
-                            <img src="https://foods.pe/wp-content/uploads/2021/10/kiwicha-planta-foods-superalimentos-peruanos-681x1024.jpg" alt="Kiwicha" class="food-img">
+                            <div class="food-img-container">
+                                <img src="https://foods.pe/wp-content/uploads/2021/10/kiwicha-planta-foods-superalimentos-peruanos-681x1024.jpg" alt="Kiwicha" class="food-img">
+                            </div>
                             <div class="food-content">
                                 <h3 class="food-title">Kiwicha</h3>
                                 <p class="food-description">Superfood andino</p>
@@ -1182,7 +1092,9 @@
                     </div>
                     <div class="col-md-4 col-lg-2" data-aos="fade-up" data-aos-delay="300">
                         <div class="food-card">
-                            <img src="https://vamosacomerrico.com/wp-content/uploads/2019/04/beneficios-lentejas.jpg" alt="Lentejas" class="food-img">
+                            <div class="food-img-container">
+                                <img src="https://vamosacomerrico.com/wp-content/uploads/2019/04/beneficios-lentejas.jpg" alt="Lentejas" class="food-img">
+                            </div>
                             <div class="food-content">
                                 <h3 class="food-title">Lentejas</h3>
                                 <p class="food-description">Proteína vegetal</p>
@@ -1197,7 +1109,9 @@
                     </div>
                     <div class="col-md-4 col-lg-2" data-aos="fade-up" data-aos-delay="400">
                         <div class="food-card">
-                            <img src="https://www.primeraedicion.com.ar/wp-content/uploads/2021/07/cacao.jpg" alt="Cacao" class="food-img">
+                            <div class="food-img-container">
+                                <img src="https://www.primeraedicion.com.ar/wp-content/uploads/2021/07/cacao.jpg" alt="Cacao" class="food-img">
+                            </div>
                             <div class="food-content">
                                 <h3 class="food-title">Cacao</h3>
                                 <p class="food-description">Antioxidantes</p>
@@ -1212,7 +1126,9 @@
                     </div>
                     <div class="col-md-4 col-lg-2" data-aos="fade-up" data-aos-delay="500">
                         <div class="food-card">
-                            <img src="https://www.telemundo.com/sites/nbcutelemundo/files/images/promo/video_clip/2015/10/13/pescado.jpg" alt="Pescado" class="food-img">
+                            <div class="food-img-container">
+                                <img src="https://image.freepik.com/foto-gratis/filete-pescado-crudo-tilapia-tabla-cortar-limon-especias-mesa-oscura_78677-2408.jpg" alt="Pescado" class="food-img">
+                            </div>
                             <div class="food-content">
                                 <h3 class="food-title">Pescado</h3>
                                 <p class="food-description">Omega-3</p>
@@ -1227,7 +1143,9 @@
                     </div>
                     <div class="col-md-4 col-lg-2" data-aos="fade-up" data-aos-delay="600">
                         <div class="food-card">
-                            <img src="https://cdn.portalfruticola.com/2016/01/quinoa-plants.jpeg" alt="Quinua" class="food-img">
+                            <div class="food-img-container">
+                                <img src="https://cienciauanl.uanl.mx/wp-content/uploads/2015/01/quinuapropiedades.jpg" alt="Quinua" class="food-img">
+                            </div>
                             <div class="food-content">
                                 <h3 class="food-title">Quinua</h3>
                                 <p class="food-description">Proteína completa</p>
@@ -1244,12 +1162,12 @@
             </div>
         </section>
 
-        <!-- Team Section -->
-        <section class="team-section">
-            <div class="container">
+        <!-- Sección 4: Equipo -->
+        <section class="section-with-bg" style="background-image: url('foto3.jpg');">
+            <div class="container section-content">
                 <div class="text-center mb-4">
                     <h2 class="section-title" data-aos="fade-up">Nuestro Equipo</h2>
-                    <p class="lead" data-aos="fade-up" data-aos-delay="100">Profesionales comprometidos con la nutrición infantil</p>
+                    <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">Profesionales comprometidos con la nutrición infantil</p>
                 </div>
                 <div class="row g-4">
                     <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
@@ -1262,8 +1180,8 @@
                                 <p class="team-role">CEO</p>
                                 <p class="team-description">Lidera la estrategia general, coordina al equipo y representa al proyecto ante instituciones y aliados.</p>
                                 <div class="team-social">
-                                    <a href="#"><i class="fab fa-linkedin"></i></a>
-                                    <a href="#"><i class="fab fa-twitter"></i></a>
+                                    <a href=""><i class="fab fa-linkedin"></i></a>
+                                    <a href=""><i class="fab fa-twitter"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -1278,8 +1196,8 @@
                                 <p class="team-role">CTO</p>
                                 <p class="team-description">Desarrolla la plataforma digital, dirige la parte tecnológica y garantiza la seguridad y funcionamiento del sistema.</p>
                                 <div class="team-social">
-                                    <a href="#"><i class="fab fa-linkedin"></i></a>
-                                    <a href="#"><i class="fab fa-github"></i></a>
+                                    <a href="https://www.linkedin.com/in/alvaro-quiroz-carrera/"><i class="fab fa-linkedin"></i></a>
+                                    <a href="https://www.linkedin.com/in/alvaro-quiroz-carrera/"><i class="fab fa-github"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -1294,301 +1212,342 @@
                                 <p class="team-role">CFO</p>
                                 <p class="team-description">Administra el presupuesto, controla gastos y diseña estrategias financieras sostenibles.</p>
                                 <div class="team-social">
-                                    <a href="#"><i class="fab fa-linkedin"></i></a>
-                                    <a href="#"><i class="fab fa-instagram"></i></a>
+                                    <a href="https://www.linkedin.com/in/luz-montalvo-cucchi/"><i class="fab fa-linkedin"></i></a>
+                                    <a href="https://www.linkedin.com/in/luz-montalvo-cucchi/"><i class="fab fa-instagram"></i></a>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4" data-aos="fade-up" data-aos-delay="400">
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
                         <div class="team-member">
                             <div class="team-img-container">
-                                <img src="herman.png" alt="Hitler Tafur Lobato " class="team-img">
+                                <img src="herman.png" alt="Hitler Tafur Lobato" class="team-img">
                             </div>
                             <div class="team-content">
-                                <h3 class="team-name">Hitler Tafur Lobato </h3>
+                                <h3 class="team-name">Hitler Tafur Lobato</h3>
                                 <p class="team-role">Director de Alianzas</p>
                                 <p class="team-description">Gestiona convenios con instituciones, municipios y ONG para ampliar el impacto del proyecto.</p>
                                 <div class="team-social">
-                                    <a href="#"><i class="fab fa-linkedin"></i></a>
-                                    <a href="#"><i class="fab fa-twitter"></i></a>
+                                    <a href=""><i class="fab fa-linkedin"></i></a>
+                                    <a href=""><i class="fab fa-instagram"></i></a>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4" data-aos="fade-up" data-aos-delay="500">
+
+
+
+
+                    <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
                         <div class="team-member">
                             <div class="team-img-container">
                                 <img src="arturo.jpg" alt="Brayan De La Cruz Fernández" class="team-img">
                             </div>
                             <div class="team-content">
                                 <h3 class="team-name">Brayan De La Cruz Fernández</h3>
-                                <p class="team-role">CPO/CMO</p>
+                                <p class="team-role">CFO</p>
                                 <p class="team-description">Define el producto y las estrategias de marketing, cuidando la experiencia del usuario y la imagen de marca.</p>
                                 <div class="team-social">
-                                    <a href="#"><i class="fab fa-linkedin"></i></a>
-                                    <a href="#"><i class="fab fa-dribbble"></i></a>
+                                    <a href=""><i class="fab fa-linkedin"></i></a>
+                                    <a href=""><i class="fab fa-instagram"></i></a>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4" data-aos="fade-up" data-aos-delay="600">
+
+
+
+
+                    <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
                         <div class="team-member">
                             <div class="team-img-container">
                                 <img src="alex.jpg" alt="Alex Fernando García Tito" class="team-img">
                             </div>
                             <div class="team-content">
                                 <h3 class="team-name">Alex Fernando García Tito</h3>
-                                <p class="team-role">COO</p>
+                                <p class="team-role">CFO</p>
                                 <p class="team-description">Supervisa las operaciones diarias, el cumplimiento de plazos y la ejecución del piloto del proyecto.</p>
                                 <div class="team-social">
-                                    <a href="#"><i class="fab fa-linkedin"></i></a>
-                                    <a href="#"><i class="fab fa-twitter"></i></a>
+                                    <a href=""><i class="fab fa-linkedin"></i></a>
+                                    <a href=""><i class="fab fa-instagram"></i></a>
                                 </div>
                             </div>
                         </div>
                     </div>
+
+
+
+
                 </div>
             </div>
         </section>
 
-        <!-- Awards Section -->
-        <section class="awards-section">
-            <div class="container">
+        <!-- Sección 5: Logros -->
+        <section class="section-with-bg" style="background-image: url('foto4.jpg');">
+            <div class="container section-content">
                 <div class="text-center mb-4">
                     <h2 class="section-title" data-aos="fade-up">Nuestros Logros</h2>
-                    <p class="lead" data-aos="fade-up" data-aos-delay="100">Reconocimientos que validan nuestro impacto</p>
+                    <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">Reconocimientos que validan nuestro impacto</p>
                 </div>
                 <div class="row g-3">
                     <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
-                        <div class="award-card">
-                            <div class="award-icon">
-                                <i class="fas fa-trophy"></i>
+                        <div class="card-custom text-center">
+                            <div class="mb-3">
+                                <i class="fas fa-trophy" style="font-size: 2.5rem; background: linear-gradient(45deg, var(--accent-red), var(--secondary-color)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;"></i>
                             </div>
-                            <h3 class="award-title">Hult Prize UNMSM</h3>
-                            <p class="award-achievement">Finalista (Top 4)</p>
-                            <p class="award-competencies">Diseño de negocios de alto impacto social</p>
+                            <h3 class="card-title-custom">Hult Prize UNMSM</h3>
+                            <p class="card-text-custom fw-bold">Finalista (Top 4)</p>
+                            <p class="card-text-custom">Diseño de negocios de alto impacto social</p>
                         </div>
                     </div>
                     <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
-                        <div class="award-card">
-                            <div class="award-icon">
-                                <i class="fas fa-globe"></i>
+                        <div class="card-custom text-center">
+                            <div class="mb-3">
+                                <i class="fas fa-globe" style="font-size: 2.5rem; background: linear-gradient(45deg, var(--accent-red), var(--secondary-color)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;"></i>
                             </div>
-                            <h3 class="award-title">Babson Global</h3>
-                            <p class="award-achievement">Top 10 mundial</p>
-                            <p class="award-competencies">Visión de negocio global</p>
+                            <h3 class="card-title-custom">Babson Global</h3>
+                            <p class="card-text-custom fw-bold">Top 10 mundial</p>
+                            <p class="card-text-custom">Visión de negocio global</p>
                         </div>
                     </div>
                     <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="300">
-                        <div class="award-card">
-                            <div class="award-icon">
-                                <i class="fas fa-rocket"></i>
+                        <div class="card-custom text-center">
+                            <div class="mb-3">
+                                <i class="fas fa-rocket" style="font-size: 2.5rem; background: linear-gradient(45deg, var(--accent-red), var(--secondary-color)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;"></i>
                             </div>
-                            <h3 class="award-title">Jump Chile 2025</h3>
-                            <p class="award-achievement">Top 100 Latinoamérica</p>
-                            <p class="award-competencies">Lean Startup y validación</p>
+                            <h3 class="card-title-custom">Jump Chile 2025</h3>
+                            <p class="card-text-custom fw-bold">Top 100 Latinoamérica</p>
+                            <p class="card-text-custom">Lean Startup y validación</p>
                         </div>
                     </div>
                     <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="400">
-                        <div class="award-card">
-                            <div class="award-icon">
-                                <i class="fas fa-medal"></i>
+                        <div class="card-custom text-center">
+                            <div class="mb-3">
+                                <i class="fas fa-medal" style="font-size: 2.5rem; background: linear-gradient(45deg, var(--accent-red), var(--secondary-color)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;"></i>
                             </div>
-                            <h3 class="award-title">Bootcamp UDEP</h3>
-                            <p class="award-achievement">3er lugar</p>
-                            <p class="award-competencies">Design Thinking</p>
+                            <h3 class="card-title-custom">Bootcamp UDEP</h3>
+                            <p class="card-text-custom fw-bold">3er lugar</p>
+                            <p class="card-text-custom">Design Thinking</p>
                         </div>
                     </div>
                     <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="500">
-                        <div class="award-card">
-                            <div class="award-icon">
-                                <i class="fas fa-graduation-cap"></i>
+                        <div class="card-custom text-center">
+                            <div class="mb-3">
+                                <i class="fas fa-graduation-cap" style="font-size: 2.5rem; background: linear-gradient(45deg, var(--accent-red), var(--secondary-color)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;"></i>
                             </div>
-                            <h3 class="award-title">Aspire Leaders</h3>
-                            <p class="award-achievement">Programa Harvard</p>
-                            <p class="award-competencies">Liderazgo</p>
+                            <h3 class="card-title-custom">Aspire Leaders</h3>
+                            <p class="card-text-custom fw-bold">Programa Harvard</p>
+                            <p class="card-text-custom">Liderazgo</p>
                         </div>
                     </div>
                     <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="600">
-                        <div class="award-card">
-                            <div class="award-icon">
-                                <i class="fas fa-star"></i>
+                        <div class="card-custom text-center">
+                            <div class="mb-3">
+                                <i class="fas fa-star" style="font-size: 2.5rem; background: linear-gradient(45deg, var(--accent-red), var(--secondary-color)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;"></i>
                             </div>
-                            <h3 class="award-title">Santander X</h3>
-                            <p class="award-achievement">Participante Destacado</p>
-                            <p class="award-competencies">Modelos de negocio</p>
+                            <h3 class="card-title-custom">Santander X</h3>
+                            <p class="card-text-custom fw-bold">Participante Destacado</p>
+                            <p class="card-text-custom">Modelos de negocio</p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Impact Section -->
-        <section class="impact-section">
-            <div class="container">
+        <!-- Sección 6: Impacto -->
+        <section class="section-with-bg" style="background-image: url('foto5.jpg');">
+            <div class="container section-content">
                 <div class="text-center mb-4">
-                    <h2 class="section-title text-white" data-aos="fade-up">Impacto Regional y Global</h2>
-                    <p class="lead text-white" data-aos="fade-up" data-aos-delay="100">La anemia infantil es un problema que nos afecta a todos</p>
+                    <h2 class="section-title" data-aos="fade-up">Impacto Regional y Global</h2>
+                    <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">La anemia infantil es un problema que nos afecta a todos</p>
                 </div>
                 <div class="row g-3">
                     <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
-                        <div class="impact-card">
-                            <div class="impact-icon">
-                                <i class="fas fa-globe-americas"></i>
+                        <div class="card-custom">
+                            <div class="mb-3">
+                                <i class="fas fa-globe-americas" style="font-size: 2.5rem; background: linear-gradient(45deg, var(--accent-red), var(--secondary-color)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;"></i>
                             </div>
-                            <h3 class="impact-title">América Latina</h3>
-                            <p class="impact-description">En América Latina, más de 13 millones de niños menores de 5 años sufren de anemia, afectando su desarrollo cognitivo y físico.</p>
+                            <h3 class="card-title-custom">América Latina</h3>
+                            <p class="card-text-custom">En América Latina, más de 13 millones de niños menores de 5 años sufren de anemia, afectando su desarrollo cognitivo y físico.</p>
                         </div>
                     </div>
                     <div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
-                        <div class="impact-card">
-                            <div class="impact-icon">
-                                <i class="fas fa-globe"></i>
+                        <div class="card-custom">
+                            <div class="mb-3">
+                                <i class="fas fa-globe" style="font-size: 2.5rem; background: linear-gradient(45deg, var(--accent-red), var(--secondary-color)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;"></i>
                             </div>
-                            <h3 class="impact-title">Mundial</h3>
-                            <p class="impact-description">A nivel mundial, la OMS estima que 560 millones de niños menores de 5 años sufren anemia, principalmente en países en desarrollo.</p>
+                            <h3 class="card-title-custom">Mundial</h3>
+                            <p class="card-text-custom">A nivel mundial, la OMS estima que 560 millones de niños menores de 5 años sufren anemia, principalmente en países en desarrollo.</p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Solution Section -->
-        <section class="solution-section">
-            <div class="container">
+        <!-- Sección 7: Solución -->
+        <section class="section-with-bg" style="background-image: url('foto6.jpg');">
+            <div class="container section-content">
                 <div class="text-center mb-4">
                     <h2 class="section-title" data-aos="fade-up">Nuestra Solución</h2>
-                    <p class="lead" data-aos="fade-up" data-aos-delay="100">Tecnología adaptada a la realidad peruana</p>
+                    <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">Tecnología adaptada a la realidad peruana</p>
                 </div>
                 <div class="row g-3">
                     <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
-                        <div class="feature-card">
-                            <div class="feature-icon">
-                                <i class="fas fa-mobile-alt"></i>
+                        <div class="card-custom text-center">
+                            <div class="mb-3">
+                                <i class="fas fa-mobile-alt" style="font-size: 2.5rem; background: linear-gradient(45deg, var(--primary-blue), var(--accent-color)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;"></i>
                             </div>
-                            <h3 class="feature-title">Plataforma Digital</h3>
-                            <p class="feature-description">Funciona incluso en zonas con conectividad limitada</p>
+                            <h3 class="card-title-custom">Plataforma Digital</h3>
+                            <p class="card-text-custom">Funciona incluso en zonas con conectividad limitada</p>
                         </div>
                     </div>
                     <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
-                        <div class="feature-card">
-                            <div class="feature-icon">
-                                <i class="fas fa-utensils"></i>
+                        <div class="card-custom text-center">
+                            <div class="mb-3">
+                                <i class="fas fa-utensils" style="font-size: 2.5rem; background: linear-gradient(45deg, var(--primary-blue), var(--accent-color)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;"></i>
                             </div>
-                            <h3 class="feature-title">Planes Personalizados</h3>
-                            <p class="feature-description">Adaptados a cada niño y su contexto cultural</p>
+                            <h3 class="card-title-custom">Planes Personalizados</h3>
+                            <p class="card-text-custom">Adaptados a cada niño y su contexto cultural</p>
                         </div>
                     </div>
                     <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
-                        <div class="feature-card">
-                            <div class="feature-icon">
-                                <i class="fas fa-chart-line"></i>
+                        <div class="card-custom text-center">
+                            <div class="mb-3">
+                                <i class="fas fa-chart-line" style="font-size: 2.5rem; background: linear-gradient(45deg, var(--primary-blue), var(--accent-color)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;"></i>
                             </div>
-                            <h3 class="feature-title">Seguimiento Continuo</h3>
-                            <p class="feature-description">Monitoreo con alertas automáticas</p>
+                            <h3 class="card-title-custom">Seguimiento Continuo</h3>
+                            <p class="card-text-custom">Monitoreo con alertas automáticas</p>
                         </div>
                     </div>
                     <div class="col-md-4" data-aos="fade-up" data-aos-delay="400">
-                        <div class="feature-card">
-                            <div class="feature-icon">
-                                <i class="fas fa-book-open"></i>
+                        <div class="card-custom text-center">
+                            <div class="mb-3">
+                                <i class="fas fa-book-open" style="font-size: 2.5rem; background: linear-gradient(45deg, var(--primary-blue), var(--accent-color)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;"></i>
                             </div>
-                            <h3 class="feature-title">Educación Nutricional</h3>
-                            <p class="feature-description">Recetas con ingredientes locales</p>
+                            <h3 class="card-title-custom">Educación Nutricional</h3>
+                            <p class="card-text-custom">Recetas con ingredientes locales</p>
                         </div>
                     </div>
                     <div class="col-md-4" data-aos="fade-up" data-aos-delay="500">
-                        <div class="feature-card">
-                            <div class="feature-icon">
-                                <i class="fas fa-users"></i>
+                        <div class="card-custom text-center">
+                            <div class="mb-3">
+                                <i class="fas fa-users" style="font-size: 2.5rem; background: linear-gradient(45deg, var(--primary-blue), var(--accent-color)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;"></i>
                             </div>
-                            <h3 class="feature-title">Comunidad de Apoyo</h3>
-                            <p class="feature-description">Conexión con profesionales y familias</p>
+                            <h3 class="card-title-custom">Comunidad de Apoyo</h3>
+                            <p class="card-text-custom">Conexión con profesionales y familias</p>
                         </div>
                     </div>
                     <div class="col-md-4" data-aos="fade-up" data-aos-delay="600">
-                        <div class="feature-card">
-                            <div class="feature-icon">
-                                <i class="fas fa-heart"></i>
+                        <div class="card-custom text-center">
+                            <div class="mb-3">
+                                <i class="fas fa-heart" style="font-size: 2.5rem; background: linear-gradient(45deg, var(--primary-blue), var(--accent-color)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;"></i>
                             </div>
-                            <h3 class="feature-title">Enfoque Cultural</h3>
-                            <p class="feature-description">Valorizando productos andinos</p>
+                            <h3 class="card-title-custom">Enfoque Cultural</h3>
+                            <p class="card-text-custom">Valorizando productos andinos</p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Community Section -->
-        <section class="community-section">
-            <div class="container">
+        <!-- Sección 8: Comunidad -->
+        <section class="section-with-bg" style="background-image: url('foto7.jpg');">
+            <div class="container section-content">
                 <div class="text-center mb-4">
-                    <h2 class="section-title text-white" data-aos="fade-up">Comunidad Yachay Mikuy</h2>
-                    <p class="lead text-white" data-aos="fade-up" data-aos-delay="100">Juntos transformamos la nutrición infantil</p>
+                    <h2 class="section-title" data-aos="fade-up">Comunidad Yachay Mikuy</h2>
+                    <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">Juntos transformamos la nutrición infantil</p>
                 </div>
                 <div class="row g-3">
                     <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
-                        <div class="community-card">
-                            <div class="community-icon">
-                                <i class="fas fa-users"></i>
+                        <div class="card-custom">
+                            <div class="mb-3">
+                                <i class="fas fa-users" style="font-size: 2.5rem; background: linear-gradient(45deg, var(--primary-blue), var(--accent-color)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;"></i>
                             </div>
-                            <h3 class="community-title">Padres y Cuidadores</h3>
-                            <p class="community-description">Más de 5,000 familias ya confían en nuestros planes nutricionales personalizados.</p>
+                            <h3 class="card-title-custom">Padres y Cuidadores</h3>
+                            <p class="card-text-custom">Más de 5,000 familias ya confían en nuestros planes nutricionales personalizados.</p>
                         </div>
                     </div>
                     <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
-                        <div class="community-card">
-                            <div class="community-icon">
-                                <i class="fas fa-user-md"></i>
+                        <div class="card-custom">
+                            <div class="mb-3">
+                                <i class="fas fa-user-md" style="font-size: 2.5rem; background: linear-gradient(45deg, var(--primary-blue), var(--accent-color)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;"></i>
                             </div>
-                            <h3 class="community-title">Profesionales de la Salud</h3>
-                            <p class="community-description">Médicos y nutricionistas que recomiendan nuestra plataforma a sus pacientes.</p>
+                            <h3 class="card-title-custom">Profesionales de la Salud</h3>
+                            <p class="card-text-custom">Médicos y nutricionistas que recomiendan nuestra plataforma a sus pacientes.</p>
                         </div>
                     </div>
                     <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
-                        <div class="community-card">
-                            <div class="community-icon">
-                                <i class="fas fa-school"></i>
+                        <div class="card-custom">
+                            <div class="mb-3">
+                                <i class="fas fa-school" style="font-size: 2.5rem; background: linear-gradient(45deg, var(--primary-blue), var(--accent-color)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;"></i>
                             </div>
-                            <h3 class="community-title">Instituciones Educativas</h3>
-                            <p class="community-description">Colegios y centros educativos que implementan nuestros programas.</p>
+                            <h3 class="card-title-custom">Instituciones Educativas</h3>
+                            <p class="card-text-custom">Colegios y centros educativos que implementan nuestros programas.</p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- CTA Section -->
-        <section class="cta-section">
-            <div class="container">
-                <div class="cta-content" data-aos="fade-up">
-                    <h2 class="cta-title">Únete a la lucha contra la anemia infantil</h2>
-                    <p class="cta-subtitle">Juntos podemos transformar la nutrición de miles de niños en Perú</p>
+        <!-- Sección 9: CTA -->
+        <section class="section-with-bg" style="background-image: url('foto8.jpg');">
+            <div class="container section-content">
+                <div class="text-center" data-aos="fade-up">
+                    <h2 class="section-title">Únete a la lucha contra la anemia infantil</h2>
+                    <p class="section-subtitle">Juntos podemos transformar la nutrición de miles de niños en Perú</p>
                     <div class="d-flex justify-content-center">
-                        <a href="index1.html#login" class="btn-cta" onclick="forceLogin(event)">Comenzar Ahora</a>
+                        <a href="index1.html#login" class="btn-hero" onclick="forceLogin(event)">Comenzar Ahora</a>
                     </div>
                 </div>
             </div>
         </section>
     </main>
 
-    <!-- Botón flotante "Conoce más" -->
     <a href="#" class="floating-know-more" id="knowMoreBtn">
         <i class="fas fa-info-circle"></i>
         <span>Conoce más</span>
     </a>
+    
+    <button id="chatbot-toggle">
+        <i class="fas fa-robot"></i>
+    </button>
+    <div id="chatbot-window" style="display: none;">
+        <div class="chatbot-header">
+            <h4><i class="fas fa-robot chatbot-header-icon"></i> Yachay-Bot</h4>
+            <button id="chatbot-close">&times;</button>
+        </div>
+        <div id="chat-messages">
+            </div>
+        <div id="chat-suggestions">
+            </div>
+        <div class="chat-input-area">
+            <input type="text" id="chat-input" placeholder="Escribe tu pregunta...">
+            <button id="chat-send"><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
 
-    <!-- Footer (copiado del archivo original) -->
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-section">
                 <h3>Redes Sociales</h3>
                 <div class="social-links">
                     <a href="https://facebook.com/yachaymikuy" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
-                    <a href="https://twitter.com/yachaymikuy" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.linkedin.com/company/yachay-mikuy/posts/?feedView=all" target="_blank" title="linkedin"><i class="fab fa-linkedin"></i></a>
                     <a href="https://instagram.com/yachaymikuy" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
-                    <a href="https://youtube.com/channel/yachaymikuy" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a>
+                    <a href="https://youtu.be/La15HNlOpEM" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a>
                     <a href="https://wa.me/51918072862" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
                 </div>
             </div>
@@ -1612,9 +1571,12 @@
         <div class="footer-bottom">&copy; 2025 Yachay Mikuy. Todos los derechos reservados.</div>
     </footer>
 
-    <!-- Scripts -->
+    <div id="action-modal-container"></div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intro.js/7.2.0/intro.min.js"></script>
+
     <script>
         // Inicializar AOS (Animate On Scroll)
         AOS.init({
@@ -1638,9 +1600,7 @@
         
         // Configurar modales del footer
         document.addEventListener('DOMContentLoaded', function() {
-            const actionModalContainer = document.createElement('div');
-            actionModalContainer.id = 'action-modal-container';
-            document.body.appendChild(actionModalContainer);
+            const actionModalContainer = document.getElementById('action-modal-container');
 
             // Objeto con las plantillas HTML para cada modal
             const templates = {
@@ -1757,7 +1717,7 @@
                                         <li>Cifrado de extremo a extremo</li>
                                         <li>Consentimiento parental explícito</li>
                                         <li>Cumplimiento con normativas de protección de datos</li>
-                                        <li>Acceso restringido solo a personal autorizado</li>
+                                        <li>Acceso                                        <li>Acceso restringido solo a personal autorizado</li>
                                     </ul>
                                 </div>
                                 <div class="content-section">
@@ -1985,112 +1945,337 @@
                 closeModal: () => { actionModalContainer.innerHTML = ''; }
             };
 
-            // Listener de clics para todo el documento - MODIFICADO
+            // Listener de clics para todo el documento
             document.body.addEventListener('click', (e) => {
-                // Permitir que los enlaces principales funcionen normalmente
                 const isMainLink = e.target.closest('a[href="index1.html"]');
                 const isExternalLink = e.target.closest('a[target="_blank"]');
                 
-                if (isMainLink || isExternalLink) {
-                    // No prevenir el comportamiento por defecto para estos enlaces
-                    return;
-                }
+                if (isMainLink || isExternalLink) { return; }
                 
-                // Prevenir la acción por defecto solo para los demás enlaces
-                if (e.target.closest('a')) {
+                if (e.target.closest('a') && !e.target.closest('.team-social a')) { 
                      e.preventDefault();
                 }
                 
-                // Abrir modales según el ID del enlace clickeado
                 if (e.target.matches('#aboutLink')) { ui.openModal(templates.aboutModal()); }
                 if (e.target.matches('#servicesLink')) { ui.openModal(templates.servicesModal()); }
                 if (e.target.matches('#faqLink')) { ui.openModal(templates.faqModal()); }
                 if (e.target.matches('#privacyLink')) { ui.openModal(templates.privacyModal()); }
                 if (e.target.matches('#termsLink')) { ui.openModal(templates.termsModal()); }
                 
-                // Cerrar el modal si se hace clic en el fondo o en el botón de cerrar
                 if (e.target.matches('.modal') || e.target.matches('.close-modal')) { 
                     ui.closeModal(); 
                 }
             });
             
-            // Funcionalidad para el botón flotante "Conoce más"
+            // Botón flotante "Conoce más"
             document.getElementById('knowMoreBtn').addEventListener('click', function(e) {
                 e.preventDefault();
                 ui.openModal(templates.aboutModal());
             });
+
+
+            // ===========================================
+            // === LÓGICA DEL CHATBOT Y DEL TOUR (ACTUALIZADA) ===
+            // ===========================================
+
+            // --- Lógica del Chatbot ---
+            const chatbotToggle = document.getElementById('chatbot-toggle');
+            const chatbotWindow = document.getElementById('chatbot-window');
+            const chatbotClose = document.getElementById('chatbot-close');
+            const chatMessages = document.getElementById('chat-messages');
+            const chatInput = document.getElementById('chat-input');
+            const chatSend = document.getElementById('chat-send');
+            const chatSuggestions = document.getElementById('chat-suggestions');
+
+            // --- ¡NUEVA BASE DE CONOCIMIENTO! (Basada en PDF y Web) ---
+            const todasSugerencias = [
+                '¿Qué es Yachay Mikuy?',
+                '¿Cuál es el problema de la anemia?',
+                '¿Cómo funciona la solución?',
+                '¿Qué tan rápida es la recuperación?',
+                '¿Quién es Alvaro Quiroz?',
+                '¿Quién es la CEO?',
+                '¿Qué es Hult Prize?',
+                'Háblame de la Kiwicha',
+                '¿Qué son los ODS?',
+                '¿Cuál es el teléfono de contacto?',
+                '¿Cuál es la realidad de la anemia?',
+                'Háblame de los logros',
+                '¿Es un problema multidimensional?',
+                '¿Por qué fallan otras soluciones?',
+                '¿El proyecto está validado?',
+                '¿Tienen aliados?',
+                '¿Cuál es el plan de expansión?',
+                '¿Es un proyecto escalable?'
+            ];
+            
+            // Función para ABRIR el chat
+            function openChat() {
+                chatbotWindow.style.display = 'flex';
+                // Añadir saludo inicial solo si está vacío
+                if (chatMessages.children.length === 0) {
+                    agregarMensaje('¡Hola! 👋 Soy Yachay-Bot. Puedes preguntarme sobre el equipo, los premios, los alimentos o cualquier cosa que veas en la página.', 'bot');
+                }
+                actualizarSugerencias();
+            }
+            
+            // Función para CERRAR y REINICIAR el chat
+            function closeChat() {
+                chatbotWindow.style.display = 'none';
+                chatMessages.innerHTML = ''; // ¡Borra el historial del chat!
+            }
+
+            // Abrir y cerrar el chat
+            chatbotToggle.addEventListener('click', () => {
+                const esVisible = chatbotWindow.style.display === 'flex';
+                if (esVisible) {
+                    closeChat();
+                } else {
+                    openChat();
+                }
+            });
+            chatbotClose.addEventListener('click', closeChat);
+
+            // Enviar mensaje
+            chatSend.addEventListener('click', enviarMensaje);
+            chatInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    enviarMensaje();
+                }
+            });
+
+            function enviarMensaje() {
+                const texto = chatInput.value.trim();
+                if (texto === '') return;
+
+                agregarMensaje(texto, 'user');
+                chatInput.value = '';
+                
+                setTimeout(() => {
+                    generarRespuestaBot(texto);
+                }, 500);
+            }
+
+            function agregarMensaje(texto, tipo) {
+                const divMensaje = document.createElement('div');
+                divMensaje.className = `chat-message ${tipo}`;
+                divMensaje.innerText = texto;
+                chatMessages.appendChild(divMensaje);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+
+            // --- ¡FUNCIÓN ACTUALIZADA CON CONOCIMIENTO DEL PDF! ---
+            function generarRespuestaBot(textoUsuario) {
+                const texto = textoUsuario.toLowerCase();
+                let respuesta;
+
+                // Saludos y despedidas
+                if (texto.includes('hola') || texto.includes('buenos dias') || texto.includes('buenas tardes')) {
+                    respuesta = '¡Hola! 👋 Soy Yachay-Bot. ¿En qué puedo ayudarte hoy?';
+                
+                } else if (texto.includes('gracias') || texto.includes('adios') || texto.includes('chao')) {
+                    respuesta = '¡De nada! Ha sido un placer ayudarte. Estoy aquí si necesitas algo más. 😊';
+
+                // --- INFO DEL PDF: Contacto ---
+                } else if (texto.includes('email') || texto.includes('correo')) {
+                    respuesta = '¡Claro! Nuestro correo de contacto es yachay.mikuy@gmail.com. También lo puedes encontrar en el pie de página.';
+                } else if (texto.includes('telefono') || texto.includes('whatsapp') || texto.includes('celular') || texto.includes('contacto')) {
+                    // El PDF menciona un número, pero el footer tiene otro (el de Alvaro). Mencionamos ambos.
+                    respuesta = 'Nuestro número de contacto principal es +51 929 177 801. También puedes encontrar nuestro WhatsApp de soporte, +51 918 072 862, en el pie de página.';
+                } else if (texto.includes('donde estan') || texto.includes('ubicacion') || texto.includes('direccion')) {
+                    respuesta = 'Nos encontramos en Lima - Perú.';
+
+                // Enlaces Útiles (Info de la Web)
+                } else if (texto.includes('enlaces') || texto.includes('acerca de') || texto.includes('servicios') || texto.includes('faq') || texto.includes('preguntas frecuentes') || texto.includes('politica') || texto.includes('terminos')) {
+                    respuesta = 'Puedes encontrar todos nuestros enlaces útiles, como "Acerca de Nosotros", "Servicios", "Preguntas Frecuentes", "Política de Privacidad" y "Términos y Condiciones", en el pie de página (la sección azul al final de todo).';
+
+                // --- INFO DEL PDF: Problema y Anemia ---
+                } else if (texto.includes('problema') || texto.includes('anemia') || texto.includes('realidad')) {
+                    respuesta = 'El problema es una tendencia creciente. 560 millones de niños en el mundo sufren de anemia, 23 millones en América Latina y 2 millones en Perú.';
+                } else if (texto.includes('multidimensional') || texto.includes('cognitivo') || texto.includes('psicologico')) {
+                    respuesta = '¡Exacto! La anemia no es solo nutricional. Es un problema multidimensional que afecta lo Cognitivo (retrasos en desarrollo motor) y lo Psicológico (la motivación es clave).';
+                } else if (texto.includes('soluciones actuales') || texto.includes('limitaciones') || texto.includes('gobierno')) {
+                    respuesta = 'Actualmente existen estrategias como el Plan Multisectorial del gobierno o suplementos. Sin embargo, son limitadas porque no consideran diferencias individuales ni se adaptan a la realidad local.';
+
+                // --- INFO DEL PDF: Solución Yachay Mikuy ---
+                } else if (texto.includes('yachay mikuy') || texto.includes('que es esto') || texto.includes('que hacen')) {
+                    respuesta = 'Yachay Mikuy es la primera plataforma que combate la anemia con planes nutricionales personalizados, usando un enfoque integral y adaptación a las circunstancias locales.';
+                } else if (texto.includes('como funciona') || texto.includes('proceso') || texto.includes('mikuycito')) {
+                    respuesta = 'Nuestro proceso tiene 5 pasos: 1. Recopilamos info del niño. 2. Usamos IA y Big Data para analizarla. 3. Generamos un plan personalizado. 4. El niño interactúa con "Mikuycito" (gamificación). 5. Hacemos monitoreo y ajustes continuos.';
+                } else if (texto.includes('rapido') || texto.includes('cuanto tiempo') || texto.includes('ventaja') || texto.includes('recuperacion')) {
+                    respuesta = 'Nuestra gran ventaja es una recuperación ¡hasta 5 veces más rápida!. El tratamiento tradicional (OMS) dura 5 meses o más, pero con nuestra personalización, apuntamos a 1 mes, basado en estudios que lo validan.';
+
+                // --- INFO DEL PDF: Impacto y Validación ---
+                } else if (texto.includes('impacto') || texto.includes('ods')) {
+                    respuesta = 'Hemos impactado en 5 regiones (Piura, Lima, etc.). Logramos que el 98% de los padres valoren más los alimentos locales. Además, apuntamos a 4 ODS: 2 (Hambre Cero), 3 (Salud y Bienestar), 10 (Reducción Desigualdades) y 17 (Alianzas).';
+                } else if (texto.includes('validacion') || texto.includes('validado') || texto.includes('b2c')) {
+                    respuesta = '¡Sí! En nuestra fase inicial B2C, validamos con más de 50 madres y padres. Descubrimos que el 90% ha tenido problemas y dudas sobre la nutrición de sus hijos y el 95% necesita apoyo y estrategias.';
+                
+                // --- INFO DEL PDF: Futuro y Aliados ---
+                } else if (texto.includes('escalable') || texto.includes('viable')) {
+                    respuesta = 'Totalmente. Nuestro modelo es escalable, viable e impactante. A medida que crecemos en usuarios, el costo por usuario baja, permitiendo mayor impacto a menor costo.';
+                } else if (texto.includes('futuro') || texto.includes('proyeccion') || texto.includes('expansion')) {
+                    respuesta = 'Tenemos un plan de expansión claro: 2025 en ciudades piloto de Perú, 2026 expansión nacional, 2027 entramos a Colombia y Ecuador, y para 2029 queremos cubrir toda LATAM.';
+                } else if (texto.includes('aliados') || texto.includes('partners') || texto.includes('colaboracion')) {
+                    respuesta = 'Buscamos oportunidades de colaboración con ONGs locales (como Fundación Baltazar y Nicolás o Cáritas del Perú), empresas privadas (como Alicorp o Nestlé) y fundaciones internacionales (como la Fundación Bill & Melinda Gates).';
+
+                // --- INFO DE LA WEB: Equipo (Más detallado) ---
+                } else if (texto.includes('equipo') || texto.includes('creadores') || texto.includes('quienes son')) {
+                    respuesta = 'Nuestro equipo está formado por 6 profesionales: María Teresa(CEO), Alvaro (CTO), Luz (CFO).¡Puedes ver sus fotos en la sección "Nuestro Equipo"!';
+                } else if (texto.includes('luz') || texto.includes('montalvo') || texto.includes('ceo')) {
+                    respuesta = 'María Teresa es nuestra CEO. Ella lidera la estrategia general, coordina al equipo y representa al proyecto ante instituciones y aliados.';
+                } else if (texto.includes('alvaro') || texto.includes('quiroz') || texto.includes('cto')) {
+                    respuesta = 'Alvaro Quiroz Carrera es nuestro CTO. Él desarrolla la plataforma digital, dirige la parte tecnológica y garantiza la seguridad y funcionamiento del sistema.';
+                } else if (texto.includes('Equipo yachay') || texto.includes('perez') || texto.includes('cfo')) {
+                    respuesta = 'Equipo yachay Pérez Núñez es nuestro CFO. Administra el presupuesto, controla gastos y diseña estrategias financieras sostenibles.';
+                
+                // --- INFO DE LA WEB: Alimentos (No en el PDF) ---
+                } else if (texto.includes('higado') || texto.includes('hígado')) {
+                    respuesta = 'El hígado es un alimento clave. Es una gran fuente de hierro hemínico, con aproximadamente 9mg por porción.';
+                } else if (texto.includes('kiwicha')) {
+                    respuesta = 'La kiwicha es un superfood andino increíble. Es rica en hierro, con 7.6mg por porción.';
+                } else if (texto.includes('lentejas')) {
+                    respuesta = 'Las lentejas son una fantástica proteína vegetal y contienen 3.3mg de hierro por porción.';
+
+                // --- INFO DE LA WEB: Logros (Más detallado) ---
+                } else if (texto.includes('logros') || texto.includes('premios') || texto.includes('reconocimientos')) {
+                    respuesta = '¡Estamos orgullosos de nuestros logros! Hemos sido finalistas en Hult Prize UNMSM, Top 10 mundial en Babson Global, Top 100 en Jump Chile 2025, 3er lugar en Bootcamp UDEP, seleccionados para Aspire Leaders de Harvard y participantes destacados en Santander X.';
+                } else if (texto.includes('hult prize')) {
+                    respuesta = 'Fuimos Finalistas (Top 4) en el Hult Prize UNMSM, destacando por nuestro diseño de negocios de alto impacto social.';
+                
+                // --- INFO DE LA WEB: Solución (Complementario) ---
+                } else if (texto.includes('comunidad')) {
+                    respuesta = 'Nuestra comunidad está formada por padres y cuidadores, profesionales de la salud e instituciones educativas. ¡Todos juntos transformamos la nutrición infantil!';
+                } else if (texto.includes('plataforma digital') || texto.includes('offline')) {
+                    respuesta = 'Tenemos una plataforma digital que funciona incluso en zonas con conectividad limitada, ¡para llegar a todos!';
+                } else if (texto.includes('planes personalizados')) {
+                    respuesta = 'Creamos planes de alimentación adaptados a cada niño, su edad, su contexto cultural y los alimentos locales disponibles.';
+                
+                // --- ¡LÓGICA DE RECOMENDACIÓN! (Cuando no entiende) ---
+                } else {
+                    respuesta = 'No he entendido muy bien esa pregunta. ¿Quizás quisiste preguntar por una de estas opciones? 🤔';
+                }
+
+                agregarMensaje(respuesta, 'bot');
+                
+                // ¡Siempre actualiza las sugerencias aleatorias!
+                actualizarSugerencias();
+            }
+
+            // --- ¡FUNCIÓN ACTUALIZADA CON NUEVAS SUGERENCIAS! ---
+            function actualizarSugerencias() {
+                chatSuggestions.innerHTML = '';
+                // Mezclar y tomar 3 sugerencias aleatorias de la nueva lista
+                const sugerenciasMezcladas = todasSugerencias.sort(() => 0.5 - Math.random()).slice(0, 3);
+                
+                sugerenciasMezcladas.forEach(texto => {
+                    const btnSugerencia = document.createElement('button');
+                    btnSugerencia.innerText = texto;
+                    btnSugerencia.addEventListener('click', () => {
+                        chatInput.value = texto;
+                        enviarMensaje();
+                    });
+                    chatSuggestions.appendChild(btnSugerencia);
+                });
+            }
+
+
+            // --- Lógica del Tour Guiado ---
+            if (!sessionStorage.getItem('tourYachayVisto')) {
+                const intro = introJs();
+                
+                intro.setOptions({
+                    steps: [
+                        { 
+                            title: 'Paso 1 de 11',
+                            element: document.querySelector('.header'), 
+                            intro: '¡Bienvenido a Yachay Mikuy! Este es nuestro menú de navegación.',
+                            position: 'floating'
+                        },
+                        { 
+                            title: 'Paso 2 de 11',
+                            element: document.querySelector('.section-with-bg'), 
+                            intro: 'Aquí encontrarás el título principal y nuestro lema. ¡Puedes hacer clic en "Comenzar Ahora" para registrarte!',
+                            position: 'floating'
+                        },
+                        { 
+                            title: 'Paso 3 de 11',
+                            element: document.querySelectorAll('.section-with-bg')[1], 
+                            intro: 'Esta sección te muestra las estadísticas más impactantes sobre la anemia en Perú.',
+                            position: 'floating'
+                        },
+                        { 
+                            title: 'Paso 4 de 11',
+                            element: document.querySelectorAll('.section-with-bg')[2], 
+                            intro: 'Descubre los alimentos clave de nuestra región que usamos para combatir la anemia.',
+                            position: 'floating'
+                        },
+                        { 
+                            title: 'Paso 5 de 11',
+                            element: document.querySelectorAll('.section-with-bg')[3], 
+                            intro: '¡Conoce al equipo multidisciplinario detrás de Yachay Mikuy!',
+                            position: 'floating'
+                        },
+                        { 
+                            title: 'Paso 6 de 11',
+                            element: document.querySelectorAll('.section-with-bg')[4], 
+                            intro: 'Estos son algunos de los reconocimientos y logros que ha obtenido nuestro proyecto.',
+                            position: 'floating'
+                        },
+                        { 
+                            title: 'Paso 7 de 11',
+                            element: document.querySelectorAll('.section-with-bg')[5], 
+                            intro: 'Entiende la magnitud del problema de la anemia a nivel regional y global.',
+                            position: 'floating'
+                        },
+                        { 
+                            title: 'Paso 8 de 11',
+                            element: document.querySelectorAll('.section-with-bg')[6], 
+                            intro: 'Te explicamos cómo funciona nuestra solución tecnológica y sus características principales.',
+                            position: 'floating'
+                        },
+                        { 
+                            title: 'Paso 9 de 11',
+                            element: document.querySelectorAll('.section-with-bg')[7], 
+                            intro: 'Nuestra comunidad incluye padres, profesionales de la salud e instituciones.',
+                            position: 'floating'
+                        },
+                        { 
+                            title: 'Paso 10 de 11',
+                            element: document.querySelectorAll('.section-with-bg')[8], 
+                            intro: 'Desde aquí también puedes unirte a nuestra plataforma.',
+                            position: 'floating'
+                        },
+                        { 
+                            title: 'Paso 11 de 11',
+                            element: document.querySelector('.footer'), 
+                            intro: 'Finalmente, en el pie de página encontrarás nuestras redes sociales, información de contacto y enlaces útiles. ¡Disfruta tu visita!',
+                            position: 'floating'
+                        }
+                    ],
+                    nextLabel: 'Siguiente &rarr;',
+                    prevLabel: '&larr; Anterior',
+                    skipLabel: 'x', // Texto corto
+                    doneLabel: '¡Entendido!',
+                    showProgress: true,
+                    showBullets: false, 
+                    tooltipClass: 'introjs-yachay-theme', 
+                    scrollPadding: 50
+                });
+
+                intro.oncomplete(() => {
+                    sessionStorage.setItem('tourYachayVisto', 'true');
+                });
+                intro.onexit(() => {
+                    sessionStorage.setItem('tourYachayVisto', 'true');
+                });
+
+                setTimeout(() => {
+                    intro.start();
+                }, 500);
+            }
+
         });
     </script>
-    
-    <style>
-        /* Estilos para los modales del footer */
-        .modal { 
-            display: none; 
-            position: fixed; 
-            z-index: 1055; 
-            left: 0; top: 0; 
-            width: 100%; height: 100%; 
-            background-color: rgba(0,0,0,0.5); 
-            justify-content: center; 
-            align-items: center; 
-            padding: 1rem; 
-        }
-        .modal.active { display: flex; }
-        @keyframes modalSlideIn { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-        .modal-content { 
-            background-color: var(--white); 
-            border-radius: var(--radius); 
-            width: 100%; 
-            max-width: 600px; 
-            max-height: 90vh; 
-            position: relative; 
-            animation: modalSlideIn 0.4s; 
-            display: flex; flex-direction: column; 
-            z-index: 1056;
-        }
-        .modal-header { 
-            padding: 1.5rem; 
-            border-bottom: 1px solid var(--medium-gray); 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-        }
-        .modal-header h2 { margin: 0; color: var(--primary-blue); }
-        .modal-body { padding: 1.5rem; overflow-y: auto; flex: 1; }
-        .modal-body::-webkit-scrollbar { width: 8px; }
-        .modal-body::-webkit-scrollbar-track { background: var(--light-gray); border-radius: 4px; }
-        .modal-body::-webkit-scrollbar-thumb { background: var(--primary-blue); border-radius: 4px; }
-        .modal-body::-webkit-scrollbar-thumb:hover { background: var(--accent-red); }
-        .close-modal { 
-            background: none; 
-            border: none; 
-            font-size: 1.5rem; 
-            cursor: pointer; 
-            color: var(--dark-color); 
-            transition: var(--transition); 
-        }
-        .close-modal:hover { color: var(--accent-red); transform: rotate(90deg); }
-        
-        /* --- ESTILOS PARA CONTENIDO DE MODALES --- */
-        .content-section { margin-bottom: 1.5rem; }
-        .content-section h3 { 
-            color: var(--primary-blue); 
-            margin-bottom: 0.8rem; 
-            font-size: 1.1rem; 
-            display: flex; 
-            align-items: center; 
-            gap: 0.5rem; 
-        }
-        .content-section p { line-height: 1.6; color: var(--text-dark); }
-        .content-section ul { margin-left: 1.5rem; margin-top: 0.5rem; }
-        .content-section li { margin-bottom: 0.5rem; line-height: 1.5; }
-        .highlight-box { 
-            background: var(--light-gray); 
-            padding: 1rem; 
-            border-radius: 8px; 
-            border-left: 4px solid var(--accent-red); 
-            margin: 1rem 0; 
-        }
-    </style>
 </body>
 </html>
