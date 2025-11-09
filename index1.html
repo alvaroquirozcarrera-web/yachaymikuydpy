@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intro.js/7.2.0/introjs.min.css">
+
     <style>
         :root {
             --primary-blue: #1a4b8c; 
@@ -48,6 +50,142 @@
             overflow-x: hidden; /* Prevenir scroll horizontal por los íconos */
         }
         
+        /* --- 1.1. ESTILOS PERSONALIZADOS PARA LA GUÍA (INTRO.JS) --- */
+        .introjs-overlay {
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 100% !important;
+            height: 100% !important;
+            z-index: 999999 !important;
+            background-color: rgba(0, 0, 0, 0.5) !important;
+        }
+
+        .introjs-tooltip {
+            font-family: 'Nunito', sans-serif;
+            background-color: var(--white);
+            border-radius: var(--radius);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            border: none;
+            color: var(--text-dark);
+            max-width: 380px;
+            padding: 25px;
+            position: fixed !important;
+            top: 50% !important;
+            left: 50% !important;
+            transform: translate(-50%, -50%) !important;
+            z-index: 1000000 !important;
+            overflow: hidden;
+        }
+
+        .introjs-tooltip::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, var(--primary-blue), var(--accent-red));
+        }
+
+        .introjs-tooltiptext {
+            font-size: 1rem;
+            line-height: 1.7;
+            font-weight: 400;
+            margin-bottom: 15px;
+        }
+
+        .introjs-tooltipbuttons {
+            border-top: 1px solid var(--medium-gray);
+            padding-top: 20px;
+            margin-top: 20px;
+            text-align: center;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .introjs-button {
+            background: linear-gradient(to right, var(--primary-blue), var(--accent-color));
+            color: var(--white);
+            border-radius: 50px;
+            font-weight: 600;
+            border: none;
+            padding: 10px 25px;
+            transition: all 0.3s ease;
+            text-shadow: none;
+            font-family: 'Nunito', sans-serif;
+            flex: 1;
+            margin: 0 5px;
+        }
+
+        .introjs-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            color: var(--white);
+        }
+
+        .introjs-skipbutton {
+            background: transparent;
+            color: #6c757d;
+            font-weight: 600;
+            text-shadow: none;
+            padding: 10px 20px;
+            border-radius: 50px;
+            border: 1px solid #dee2e6;
+        }
+
+        .introjs-skipbutton:hover {
+            background: var(--light-gray);
+            color: var(--text-dark);
+        }
+
+        .introjs-disabled, .introjs-disabled:hover {
+            background: var(--medium-gray);
+            color: #888;
+            transform: none;
+            box-shadow: none;
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        /* Ocultar las flechas ya que no son necesarias con el tooltip centrado */
+        .introjs-arrow {
+            display: none !important;
+        }
+
+        /* Indicadores de progreso */
+        .introjs-progress {
+            background-color: rgba(0,0,0,0.1);
+            height: 4px;
+            border-radius: 2px;
+            margin-bottom: 15px;
+            overflow: hidden;
+        }
+
+        .introjs-progressbar {
+            height: 100%;
+            background: linear-gradient(to right, var(--primary-blue), var(--accent-red));
+            border-radius: 2px;
+            transition: width 0.3s ease;
+        }
+
+        /* Número de paso */
+        .introjs-tooltipNumber {
+            background: var(--primary-blue);
+            color: white;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 25px;
+            font-weight: bold;
+            position: absolute;
+            top: 15px;
+            right: 15px;
+        }
+        /* --- FIN ESTILOS GUÍA --- */
+
+
         /* --- INICIO: ESTILOS PARA EL FONDO ANIMADO CON EMOJIS --- */
         .animated-bg {
             position: fixed;
@@ -87,21 +225,52 @@
         .header {
             background: linear-gradient(135deg, var(--primary-blue), var(--accent-color));
             color: white;
-            padding: 20px 0;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            padding: 3px 0;
+            box-shadow: 0 4px 4px rgba(0,0,0,0.1);
             z-index: 100;
         }
         
+        /* ESTILO ACTUALIZADO DEL LOGO - MÁS GRANDE */
         .logo {
-            font-size: 2rem;
+            font-size: 2.5rem; /* Aumentado de 2rem */
             font-weight: 800;
             display: flex;
             align-items: center;
+            height: 120px; /* Aumentado de 80px */
+            padding: 10px 0; /* Aumentado el padding */
         }
-        
-        .logo i {
-            margin-right: 10px;
-            color: var(--secondary-color);
+
+        .logo img {
+            height: 100%; /* 100% del alto del contenedor */
+            width: auto;
+            max-width: 200px; /* Aumentado de 120px */
+            border-radius: 50%;
+            margin-right: 20px; /* Aumentado de 15px */
+            object-fit: contain;
+            transition: transform 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Ajustes para dispositivos móviles */
+        @media (max-width: 768px) {
+            .logo {
+                height:  50px; /* Aumentado de 60px */
+                font-size: 2rem; /* Aumentado de 1.5rem */
+            }
+            
+            .logo img {
+                max-width: 120px; /* Aumentado de 90px */
+            }
+            
+            /* Ajustes para la guía en móviles */
+            .introjs-tooltip {
+                max-width: 90% !important;
+                padding: 20px !important;
+            }
         }
         
         .main-container {
@@ -116,7 +285,7 @@
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             border: none;
             overflow: hidden;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             animation: fadeIn 0.5s ease-in-out;
         }
         
@@ -126,8 +295,8 @@
         }
 
         .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
         }
         
         .card-header {
@@ -188,18 +357,35 @@
         }
         
         .btn-community {
-            background: linear-gradient(to right, #9c27b0, #673ab7);
+            background: linear-gradient(135deg, #9c27b0, #673ab7);
             border: none;
             border-radius: 50px;
-            padding: 10px 25px;
+            padding: 12px 30px;
             font-weight: 600;
             transition: all 0.3s ease;
             color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-community::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: 0.5s;
+        }
+        
+        .btn-community:hover::before {
+            left: 100%;
         }
         
         .btn-community:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(156, 39, 176, 0.4);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(156, 39, 176, 0.4);
             color: white;
         }
         
@@ -476,6 +662,8 @@
             color: rgba(255,255,255,0.8); 
             padding: 3rem 5%; 
             margin-top: auto;
+            position: relative; /* Para la guía */
+            z-index: 1; /* Para la guía */
         }
         .footer-content { 
             display: grid; 
@@ -611,10 +799,255 @@
             border-left: 4px solid var(--accent-red); 
             margin: 1rem 0; 
         }
+
+        /* --- 2. INICIO: ESTILOS DEL CHATBOT (DISEÑO MEJORADO) --- */
+        .chatbot-container {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1030;
+        }
+        .chat-fab {
+            /* --- MODIFICADO: Cambiado a rojo --- */
+            background: var(--accent-red); /* Cambiado de azul a rojo */
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        .chat-fab:hover {
+            transform: scale(1.1);
+            /* --- MODIFICADO: Cambiado a rojo más oscuro en hover --- */
+            background: #c62828; /* Rojo más oscuro en hover */
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+        .chat-window {
+            position: absolute;
+            bottom: 80px;
+            right: 0;
+            width: 380px;
+            height: 500px;
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            transform: scale(0);
+            transform-origin: bottom right;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .chat-window.active {
+            transform: scale(1);
+        }
+        .chat-header {
+            /* --- MODIFICADO: Cambiado a rojo --- */
+            background: linear-gradient(135deg, var(--accent-red), #ff6b6b); /* Cambiado de azul a rojo */
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .chat-header h5 {
+            margin: 0;
+            font-weight: 700;
+        }
+        .close-chat {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            opacity: 0.8;
+            transition: var(--transition);
+        }
+        .close-chat:hover {
+            opacity: 1;
+        }
+        .chat-body {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            padding-bottom: 80px; /* Espacio para los botones de sugerencia y el input */
+        }
+        .chat-message {
+            padding: 10px 15px;
+            border-radius: 18px;
+            max-width: 80%;
+            line-height: 1.4;
+        }
+        .chat-message.bot {
+            /* --- MODIFICADO: Cambiado a rojo suave --- */
+            background: rgba(230, 57, 70, 0.1); /* Cambiado de gris a rojo suave */
+            color: var(--text-dark);
+            border-bottom-left-radius: 4px;
+            align-self: flex-start;
+        }
+        .chat-message.user {
+            background: var(--primary-blue);
+            color: var(--white);
+            border-bottom-right-radius: 4px;
+            align-self: flex-end;
+        }
+        
+        /* --- MODIFICADO: Contenedor fijo para botones de sugerencia --- */
+        .chat-suggestions-container {
+            position: absolute;
+            bottom: 60px; /* Justo encima del input */
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 10px 15px;
+            border-top: 1px solid var(--medium-gray);
+            z-index: 10;
+        }
+        
+        .chat-suggestions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+        }
+        
+        .suggestion-btn {
+            background-color: rgba(26, 75, 140, 0.1);
+            border: 1px solid var(--primary-blue);
+            color: var(--primary-blue);
+            border-radius: 15px;
+            padding: 5px 12px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .suggestion-btn:hover {
+            background-color: var(--primary-blue);
+            color: white;
+        }
+        
+        .chat-input {
+            display: flex;
+            border-top: 1px solid var(--medium-gray);
+            padding: 10px;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+        }
+        .chat-input input {
+            flex: 1;
+            border: 1px solid var(--medium-gray);
+            border-radius: 50px;
+            padding: 8px 15px;
+            font-size: 0.9rem;
+            outline: none;
+        }
+        .chat-input input:focus {
+            /* --- MODIFICADO: Cambiado a rojo en focus --- */
+            border-color: var(--accent-red); /* Cambiado de azul a rojo */
+            box-shadow: 0 0 0 0.2rem rgba(230, 57, 70, 0.25); /* Cambiado a rojo */
+        }
+        .chat-input button {
+            /* --- MODIFICADO: Cambiado a rojo --- */
+            background: var(--accent-red); /* Cambiado de azul a rojo */
+            border: none;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-left: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .chat-input button:hover {
+            /* --- MODIFICADO: Cambiado a rojo más oscuro en hover --- */
+            background: #c62828; /* Cambiado de azul a rojo más oscuro */
+        }
+        
+        /* Efecto de escritura para mensajes del bot */
+        .typing-indicator {
+            display: flex;
+            align-items: center;
+            padding: 10px 15px;
+        }
+
+        .typing-indicator span {
+            height: 8px;
+            width: 8px;
+            background-color: #999;
+            border-radius: 50%;
+            display: inline-block;
+            margin: 0 2px;
+            animation: typing 1.4s infinite;
+        }
+
+        .typing-indicator span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .typing-indicator span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes typing {
+            0%, 60%, 100% {
+                transform: translateY(0);
+            }
+            30% {
+                transform: translateY(-10px);
+            }
+        }
+        /* --- FIN: ESTILOS DEL CHATBOT --- */
+
+        
+        /* --- INICIO: ESTILOS PARA BADGE "NUEVO" COMUNIDAD --- */
+        .new-badge {
+            position: absolute;
+            top: -15px; /* Ajustar para que esté "encima" */
+            left: 50%;
+            background-color: var(--accent-red, #e63946); /* Color llamativo */
+            color: white;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: 800;
+            cursor: pointer; /* Para indicar que es clickeable */
+            z-index: 10;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            animation: bounce 1.5s infinite;
+        }
+        
+        /* Animación para llamar la atención */
+        @keyframes bounce {
+            0%, 100% { transform: translate(-50%, 0); }
+            50% { transform: translate(-50%, -5px); }
+        }
+
+        /* Asegurarse que el popover se vea bien */
+        .popover-header {
+            background-color: var(--primary-blue);
+            color: white;
+            font-weight: 600;
+        }
+        /* --- FIN: ESTILOS BADGE --- */
+
         
         @media (max-width: 768px) {
             .logo {
-                font-size: 1.5rem;
+                font-size: 2rem; /* Aumentado de 1.5rem */
             }
             
             .child-card {
@@ -637,6 +1070,19 @@
                 margin-top: 10px;
                 width: 100%;
             }
+
+            /* Estilos Chatbot para móvil */
+            .chat-window {
+                width: 90vw;
+                height: 70vh;
+                bottom: 80px;
+                right: 5vw;
+                transform-origin: bottom center;
+            }
+            .chatbot-container {
+                bottom: 20px;
+                right: 20px;
+            }
         }
     </style>
 </head>
@@ -648,7 +1094,7 @@
             <div class="row align-items-center">
                 <div class="col-md-6">
                     <div class="logo">
-                        <i class="fas fa-apple-alt"></i>
+                        <img src="logo.png" alt="Yachay Mikuy" class="logo-img">
                         Yachay Mikuy
                     </div>
                 </div>
@@ -674,7 +1120,7 @@
                 <div class="col-md-10 col-lg-8">
                     <div class="card auth-card">
                         <div class="card-header text-center">
-                            <h3>Bienvenido a Yachay Mikuy</h3>
+                            <h3 style="color: white;">Bienvenido a Yachay Mikuy</h3>
                         </div>
                         <div class="card-body p-4 p-md-5">
                             <p class="form-text mb-4 fw-bold">"Nutrición Inteligente, Futuro Brillante"</p>
@@ -792,9 +1238,22 @@
                         <button id="generatePlanBtn" class="btn btn-success ms-2">
                             <i class="fas fa-file-medical"></i> Generar plan nutricional
                         </button>
-                        <button id="communityBtn" class="btn btn-community ms-2 d-none">
-                            <i class="fas fa-users"></i> Comunidad
-                        </button>
+                        
+                        <div id="communityBtnContainer" class="position-relative d-inline-block ms-2 d-none">
+                            <span id="newCommunityBadge" class="new-badge" 
+                                  data-bs-toggle="popover" 
+                                  data-bs-trigger="click"
+                                  data-bs-placement="top" 
+                                  data-bs-html="true"
+                                  title="¡Nueva Función!"
+                                  data-bs-content="Una comunidad que permitirá interactuar con más usuarios o enviar mensajes a los administradores.">
+                                NUEVO
+                            </span>
+                            <button id="communityBtn" class="btn btn-community">
+                                <i class="fas fa-users"></i> Comunidad
+                            </button>
+                        </div>
+
                     </div>
                 </div>
                 
@@ -967,17 +1426,47 @@
     
     <div id="action-modal-container"></div>
     
+    <div class="chatbot-container">
+        <div class="chat-window" id="chatWindow">
+            <div class="chat-header">
+                <h5><i class="fas fa-robot"></i> Asistente Yachay</h5>
+                <button class="close-chat" id="closeChatBtn">&times;</button>
+            </div>
+            <div class="chat-body" id="chatBody">
+                <div class="chat-message bot">
+                    ¡Hola! Soy el asistente de Yachay Mikuy. ¿En qué puedo ayudarte hoy?
+                </div>
+            </div>
+            
+            <!-- Contenedor fijo para botones de sugerencia -->
+            <div class="chat-suggestions-container" id="chatSuggestionsContainer">
+                <div class="chat-suggestions" id="chatSuggestions">
+                    <!-- Los botones de sugerencia se generarán dinámicamente aquí -->
+                </div>
+            </div>
+            
+            <div class="chat-input">
+                <input type="text" id="chatInput" placeholder="Escribe tu pregunta...">
+                <button id="chatSendBtn"><i class="fas fa-paper-plane"></i></button>
+            </div>
+        </div>
+        <div class="chat-fab" id="chatFab">
+            <i class="fas fa-comments"></i>
+        </div>
+    </div>
+
+
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-section">
                 <h3 class="footer-logo">Yachay Mikuy</h3>
                 <p>Nutrición Inteligente para un Futuro Brillante. Combatimos la anemia infantil con planes personalizados y accesibles.</p>
                 <div class="social-links">
-                    <a href="#" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a>
-                    <a href="#" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
-                    <a href="#" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a>
-                    <a href="#" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://facebook.com/yachaymikuy" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.linkedin.com/company/yachay-mikuy/posts/?feedView=all" target="_blank" title="linkedin"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://instagram.com/yachaymikuy" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="https://youtu.be/La15HNlOpEM" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a>
+                    <a href="https://wa.me/51918072862" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
                 </div>
             </div>
             <div class="footer-section">
@@ -1002,12 +1491,15 @@
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intro.js/7.2.0/intro.min.js"></script>
+
     <script>
         /*
          * README - Guía de uso para desarrolladores
          * * Esta aplicación utiliza localStorage para almacenar todos los datos de forma local.
          * * Se ha implementado un sistema de redirección silenciosa a index.html tras 1 minuto de inactividad.
          * * El cierre de sesión también redirige a index.html.
+         * * Se ha añadido un chatbot (HTML/CSS/JS) y una guía interactiva (Intro.js).
          */
         
         // === INICIO: LÓGICA DE INACTIVIDAD ===
@@ -1237,8 +1729,7 @@
                 'q3': { type: 'date', value: '2020-03-22', timestamp: new Date().toISOString(), version: 1 },
                 'q4': { type: 'select', value: '15-17', timestamp: new Date().toISOString(), version: 1 },
                 'q5': { type: 'select', value: 'No tengo', timestamp: new Date().toISOString(), version: 1 },
-                'q6': { type: 'select', value: 'No', timestamp: new Date().toISOString(), version: 1 },
-                'q7': { type: 'select', value: 'No', timestamp: new Date().toISOString(), version: 1 },
+                'q6': { type: 'select', value: 'No', timestamp: new Date().toISOString(), version: 1 },                'q7': { type: 'select', value: 'No', timestamp: new Date().toISOString(), version: 1 },
                 'q8': { type: 'select', value: 'Hace menos de 3 meses', timestamp: new Date().toISOString(), version: 1 },
                 'q9': { type: 'select', value: 'Sí', timestamp: new Date().toISOString(), version: 1 },
                 'q10': { type: 'select', value: 'Sí', timestamp: new Date().toISOString(), version: 1 },
@@ -1734,6 +2225,9 @@
             document.getElementById('dashboardSection').classList.add('d-none');
             document.getElementById('userMenu').classList.add('d-none');
             document.getElementById('backBtn').classList.remove('d-none');
+            
+            // --- Iniciar la guía para esta sección ---
+            setTimeout(startGuidedTour, 200);
         }
         
         function showDashboardSection() {
@@ -1749,16 +2243,21 @@
                 if (user) {
                     document.getElementById('userName').textContent = user.name;
                     document.getElementById('userMenu').classList.remove('d-none');
-                    document.getElementById('communityBtn').classList.remove('d-none');
+                    // MODIFICADO: Apuntar al contenedor
+                    document.getElementById('communityBtnContainer').classList.remove('d-none');
                 }
             } else if (session.exploringAsGuest) {
                 document.getElementById('userName').textContent = 'Invitado';
                 document.getElementById('userMenu').classList.remove('d-none');
                 document.getElementById('logoutBtn').textContent = 'Salir de modo invitado';
-                document.getElementById('communityBtn').classList.add('d-none');
+                // MODIFICADO: Apuntar al contenedor
+                document.getElementById('communityBtnContainer').classList.add('d-none');
             }
             
             renderChildren();
+            
+            // --- Iniciar la guía para esta sección ---
+            setTimeout(startGuidedTour, 200);
         }
         
         function renderChildren() {
@@ -1780,9 +2279,9 @@
                 childCard.className = 'col-md-6 col-lg-4 mb-4';
                 
                 const avatarClass = child.avatarCustomization === '1' ? 'avatar-1' : 
-                                      child.avatarCustomization === '2' ? 'avatar-2' : 'avatar-3';
+                                    child.avatarCustomization === '2' ? 'avatar-2' : 'avatar-3';
                 const avatarIcon = child.avatarCustomization === '1' ? 'fa-child' : 
-                                     child.avatarCustomization === '2' ? 'fa-baby' : 'fa-user-ninja';
+                                   child.avatarCustomization === '2' ? 'fa-baby' : 'fa-user-ninja';
                 
                 const progressColor = child.progressPercent === 100 ? 'success' : 
                                       child.progressPercent >= 50 ? 'warning' : 'info';
@@ -2051,7 +2550,7 @@
                     trashItem.className = 'trash-item';
                     
                     const avatarClass = child.avatarCustomization === '1' ? 'avatar-1' : 
-                                      child.avatarCustomization === '2' ? 'avatar-2' : 'avatar-3';
+                                            child.avatarCustomization === '2' ? 'avatar-2' : 'avatar-3';
                     
                     trashItem.innerHTML = `
                         <div class="d-flex align-items-center">
@@ -2166,7 +2665,528 @@
             }
         }
 
-        // Event Listeners
+        // --- 5. INICIO: LÓGICA DE LA GUÍA INTERACTIVA ---
+        function startGuidedTour() {
+            // Evitar que se inicie una guía si ya hay una activa
+            if (document.querySelector('.introjs-overlay')) {
+                return;
+            }
+
+            const authSectionVisible = !document.getElementById('authSection').classList.contains('d-none');
+            const dashboardSectionVisible = !document.getElementById('dashboardSection').classList.contains('d-none');
+            const isGuest = document.getElementById('logoutBtn').textContent.includes('invitado');
+
+            let steps = [];
+
+            if (authSectionVisible) {
+                // Guía para la página de Autenticación
+                steps = [
+                    {
+                        element: '#showRegisterLink',
+                        intro: 'Haz clic aquí para <b>Crear una nueva cuenta</b>.'
+                    },
+                    {
+                        element: '#forgotPasswordLink',
+                        intro: 'Si olvidaste tu contraseña, haz clic aquí para <b>Recuperarla</b>.'
+                    },
+                    {
+                        element: '#loginForm',
+                        intro: 'Ingresa tus datos aquí para <b>Iniciar Sesión</b>.'
+                    },
+                    {
+                        element: '#guestBtn',
+                        intro: 'Haz clic aquí para <b>Continuar como invitado</b> y explorar la aplicación.'
+                    },
+                    {
+                        element: '#backBtn',
+                        intro: 'Usa este botón para <b>Volver</b> a la página principal de Yachay Mikuy.'
+                    },
+                    {
+                        element: '.footer',
+                        intro: 'Este es el <b>Pie de página</b>, donde encontrarás enlaces útiles e información de contacto.'
+                    }
+                ];
+            } else if (dashboardSectionVisible && isGuest) {
+                // Guía para el Dashboard de Invitado
+                steps = [
+                    {
+                        element: '#addChildBtn',
+                        intro: '<b>Agregar Hijo:</b> No te permite agregar un hijo porque tienes que registrarte.'
+                    },
+                    {
+                        element: '#generatePlanBtn',
+                        intro: '<b>Generar Plan Nutricional:</b> Este plan te ayuda para que la IA tome decisiones con toda la información de tus hijos (en este modo, usa perfiles de demostración).'
+                    },
+                    {
+                        // Intentar seleccionar el primer botón, si existe
+                        element: document.querySelector('.child-card .continue-btn') || '#childrenContainer',
+                        intro: '<b>Ver Plan Nutricional:</b> Si das clic aquí, la IA solo te recomendará información específica de ese niño, sin contar los demás registrados.'
+                    },
+                    {
+                        element: '#viewTrashBtn',
+                        intro: '<b>Papelera:</b> Es cuando eliminas algún niño, el cual te permitirá recuperarlo después si deseas o puedes eliminarlo definitivamente. (Función desactivada para invitados).'
+                    },
+                    {
+                        element: '#logoutBtn',
+                        intro: '<b>Salir y Registrarse:</b> Este botón te redirige a la página principal para que puedas registrarte.'
+                    }
+                ];
+            } else if (dashboardSectionVisible && !isGuest) {
+                // Guía para el Dashboard de Usuario Registrado
+                steps = [
+                    {
+                        element: '#addChildBtn',
+                        intro: '<b>Agregar Hijo:</b> Aquí puedes agregar a tus hijos. Solo se permiten edades de 0 a 13 años.'
+                    },
+                    {
+                        element: '#generatePlanBtn',
+                        intro: '<b>Generar Plan Nutricional:</b> Este plan consolida la información de todos tus hijos (que hayan completado el cuestionario) para darte un plan general.'
+                    },
+                    {
+                        element: '#viewTrashBtn',
+                        intro: '<b>Papelera:</b> Es cuando eliminas algún niño, el cual te permitirá recuperarlo después si deseas o puedes eliminarlo definitivamente.'
+                    },
+                    {
+                        // Intentar seleccionar el primer botón, si no, el contenedor
+                        element: document.querySelector('.child-card .continue-btn') || '#childrenContainer',
+                        intro: '<b>Gestión de Hijo:</b> Primero debes llenar todos los datos del cuestionario. Una vez completo (100%), este botón te permitirá <b>Ver su plan nutricional</b> individual.'
+                    },
+                    {
+                        element: '#logoutBtn',
+                        intro: '<b>Salir:</b> Haz clic aquí para cerrar tu sesión.'
+                    }
+                ];
+            }
+
+            if (steps.length > 0) {
+                introJs().setOptions({
+                    steps: steps,
+                    nextLabel: 'Siguiente &rarr;',
+                    prevLabel: '&larr; Anterior',
+                    doneLabel: '¡Entendido!',
+                    skipLabel: 'x',
+                    showBullets: false,
+                    exitOnOverlayClick: false, // Para que sea "estático"
+                    tooltipClass: 'custom-intro-tooltip',
+                    tooltipPosition: 'center', // Centrar el tooltip
+                    positionPrecedence: ['center'], // Priorizar posición central
+                    showStepNumbers: false,
+                    showProgress: false
+                }).start();
+            }
+        }
+        // --- FIN: LÓGICA DE LA GUÍA INTERACTIVA ---
+
+
+        // --- 6. INICIO: LÓGICA DEL CHATBOT ---
+        
+        // Base de conocimiento del Chatbot (con info de los modales)
+        const chatKnowledgeBase = {
+            // Saludos
+            saludos: {
+                keywords: ['hola', 'buenos dias', 'buenas tardes', 'buenas noches', 'saludos'],
+                response: '¡Hola! Soy el asistente virtual de Yachay Mikuy. ¿En qué puedo ayudarte hoy? Puedes preguntarme sobre nuestros servicios, precios, o qué hacemos.'
+            },
+            // Acerca de
+            acerca: {
+                keywords: ['acerca de', 'quienes son', 'mision', 'vision', 'equipo', 'yachay mikuy'],
+                response: '<b>Nuestra Misión:</b> Reducir la anemia infantil en más del 60% en Latinoamérica con soluciones personalizadas y accesibles.<br><b>Nuestra Visión:</b> Ser la plataforma líder que transforma la nutrición infantil en Latinoamérica.<br><b>Equipo:</b> Somos un equipo multidisciplinario con experiencia en innovación y tecnología, dedicados a crear soluciones de alto impacto.'
+            },
+            // Servicios
+            servicios: {
+                keywords: ['servicios', 'que hacen', 'ia', 'plan', 'gamificacion', 'mikuycito'],
+                response: 'Ofrecemos <b>Planes Personalizados con IA</b> para procesar la información de cada niño y generar un plan único. También usamos <b>Gamificación con "Mikuycito"</b>, un aliado interactivo con juegos y recompensas para hacer el proceso divertido.'
+            },
+            // Precios
+            precios: {
+                keywords: ['precio', 'costo', 'cuanto cuesta', 'precios'],
+                response: 'Creemos que la salud no debe ser un lujo. Nuestros precios son:<br><ul><li><b>Público General:</b> $5 mensuales.</li><li><b>Áreas Vulnerables:</b> $3 mensuales.</li></ul>Además, contamos con funciones gratuitas para todos.'
+            },
+            // PDF (Placeholder)
+            pdf: {
+                keywords: ['pdf', 'documento', 'informacion'],
+                response: 'Aún estoy esperando que me proporcionen el documento PDF. Cuando lo tenga, podré responder preguntas específicas sobre su contenido. Por ahora, ¡pregunta sobre nuestros servicios!'
+            },
+            // FAQ - Diferencia
+            faq_diferencia: {
+                keywords: ['diferente', 'diferencia', 'competencia'],
+                response: 'A diferencia de soluciones genéricas, nosotros no ofrecemos una solución única. Entendemos que la anemia es multidimensional, por eso creamos planes 100% personalizados que se adaptan a la realidad local de cada familia.'
+            },
+            // FAQ - Edades
+            faq_edades: {
+                keywords: ['edad', 'edades', 'para quien es'],
+                response: 'Nuestra plataforma está diseñada principalmente para niños de 0 a 13 años, una etapa crucial para el desarrollo físico y cognitivo.'
+            },
+            // FAQ - Garantía
+            faq_garantia: {
+                keywords: ['funciona', 'garantia', 'eficaz'],
+                response: 'Nuestro sistema se basa en datos y estudios científicos (como los de The Lancet y Nutri H) que confirman que las intervenciones personalizadas reducen la anemia en tiempos tan cortos como 1 o 2 meses.'
+            },
+            // Privacidad
+            privacidad: {
+                keywords: ['privacidad', 'datos', 'seguro', 'seguridad'],
+                response: 'La seguridad de tus datos es nuestra máxima prioridad. Cumplimos con todas las normativas y usamos encriptación. Requerimos consentimiento parental explícito y los tutores tienen control total sobre la información para rectificarla o eliminarla.'
+            },
+            // Términos
+            terminos: {
+                keywords: ['terminos', 'condiciones', 'legal', 'medico'],
+                response: 'Es importante recordar que Yachay Mikuy es una herramienta de apoyo y educación. <b>No reemplaza el diagnóstico o consejo de un profesional médico cualificado.</b> Siempre consulta a tu pediatra antes de realizar cambios significativos en la dieta.'
+            }
+        };
+
+        // Función para normalizar texto (quitar acentos, minúsculas)
+        function normalizeText(text) {
+            return text
+                .toLowerCase()
+                .normalize("NFD")
+                .replace(/[\u0300-\u036f]/g, "");
+        }
+
+        // Función para obtener respuesta del bot
+        function getBotResponse(userInput) {
+            const normalizedInput = normalizeText(userInput);
+            
+            for (const key in chatKnowledgeBase) {
+                const entry = chatKnowledgeBase[key];
+                for (const keyword of entry.keywords) {
+                    if (normalizedInput.includes(normalizeText(keyword))) {
+                        return entry.response;
+                    }
+                }
+            }
+            
+            // Respuesta por defecto
+            return 'No entendí tu pregunta. Intenta reformularla. Puedo responder sobre: Acerca de Yachay, Servicios, Precios, y Preguntas Frecuentes.';
+        }
+
+        // Función para agregar mensaje al chat
+        function addChatMessage(message, sender) {
+            const chatBody = document.getElementById('chatBody');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `chat-message ${sender}`;
+            messageDiv.innerHTML = message; // Usamos innerHTML para renderizar el HTML de las respuestas
+            chatBody.appendChild(messageDiv);
+            
+            // Auto-scroll al final
+            chatBody.scrollTop = chatBody.scrollHeight;
+        }
+
+        // --- INICIO MODIFICACIÓN: Función para limpiar el chat al cerrar ---
+        function clearChat() {
+            const chatBody = document.getElementById('chatBody');
+            // Restablecer al mensaje de bienvenida original
+            chatBody.innerHTML = '<div class="chat-message bot">¡Hola! Soy el asistente de Yachay Mikuy. ¿En qué puedo ayudarte hoy?</div>';
+            // Asegurarse que el scroll esté arriba
+            chatBody.scrollTop = 0;
+        }
+        // --- FIN MODIFICACIÓN ---
+
+        // Función para manejar el envío de mensajes
+        function handleSendMessage() {
+            const chatInput = document.getElementById('chatInput');
+            const message = chatInput.value.trim();
+            
+            if (message === '') return;
+            
+            addChatMessage(message, 'user');
+            chatInput.value = '';
+            
+            // Mostrar indicador de escritura
+            showTypingIndicator();
+            
+            // Simular respuesta del bot
+            setTimeout(() => {
+                hideTypingIndicator();
+                const botResponse = getBotResponse(message);
+                addChatMessage(botResponse, 'bot');
+            }, 800);
+        }
+
+        // Función para mostrar indicador de escritura
+        function showTypingIndicator() {
+            const chatBody = document.getElementById('chatBody');
+            const typingDiv = document.createElement('div');
+            typingDiv.className = 'typing-indicator';
+            typingDiv.id = 'typing-indicator';
+            typingDiv.innerHTML = `
+                <span></span>
+                <span></span>
+                <span></span>
+            `;
+            chatBody.appendChild(typingDiv);
+            chatBody.scrollTop = chatBody.scrollHeight;
+        }
+
+        // Función para ocultar indicador de escritura
+        function hideTypingIndicator() {
+            const typingIndicator = document.getElementById('typing-indicator');
+            if (typingIndicator) {
+                typingIndicator.remove();
+            }
+        }
+
+        // Función para generar botones de sugerencia
+        function generateSuggestionButtons() {
+            const suggestions = [
+                ["¿Qué es Yachay Mikuy?", "¿Cómo funciona?", "¿Para qué edades es?"],
+                ["¿Cuánto cuesta el servicio?", "¿Es seguro?", "¿Necesito registro?"],
+                ["¿Cómo empiezo?", "¿Qué necesito?", "¿Tienen prueba gratuita?"],
+                ["¿Cómo combaten la anemia?", "¿Qué es Mikuycito?", "¿Cómo funciona la IA?"]
+            ];
+            
+            const randomSet = suggestions[Math.floor(Math.random() * suggestions.length)];
+            const suggestionsContainer = document.getElementById('chatSuggestions');
+            
+            // Limpiar botones anteriores
+            suggestionsContainer.innerHTML = '';
+            
+            randomSet.forEach(suggestion => {
+                const button = document.createElement('button');
+                button.className = 'suggestion-btn';
+                button.textContent = suggestion;
+                button.addEventListener('click', () => {
+                    document.getElementById('chatInput').value = suggestion;
+                    handleSendMessage();
+                    generateSuggestionButtons(); // Generar nuevas sugerencias
+                });
+                suggestionsContainer.appendChild(button);
+            });
+        }
+
+        // Event Listeners del Chatbot
+        function setupChatbotListeners() {
+            const chatFab = document.getElementById('chatFab');
+            const chatWindow = document.getElementById('chatWindow');
+            const closeChatBtn = document.getElementById('closeChatBtn');
+            const chatSendBtn = document.getElementById('chatSendBtn');
+            const chatInput = document.getElementById('chatInput');
+
+            chatFab.addEventListener('click', () => {
+                // MODIFICADO: Comprobar si se está cerrando
+                const isActive = chatWindow.classList.toggle('active');
+                if (!isActive) {
+                    // Si se está cerrando (isActive ahora es false)
+                    clearChat();
+                } else {
+                    // Si se está abriendo, generar botones de sugerencia
+                    setTimeout(generateSuggestionButtons, 500);
+                }
+            });
+            
+            closeChatBtn.addEventListener('click', () => {
+                chatWindow.classList.remove('active');
+                clearChat(); // <-- MODIFICADO: Limpiar al cerrar con 'X'
+            });
+
+            chatSendBtn.addEventListener('click', handleSendMessage);
+            
+            chatInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    handleSendMessage();
+                }
+            });
+        }
+        // --- FIN: LÓGICA DEL CHATBOT ---
+
+        // Funciones de UI para modales del footer
+        function setupFooterModals() {
+            const actionModalContainer = document.getElementById('action-modal-container');
+
+            const templates = {
+                aboutModal: () => `
+                    <div class="modal active">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h2>Acerca de Yachay Mikuy</h2>
+                                <button class="close-modal">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="content-section">
+                                    <h3><i class="fas fa-bullseye"></i> Nuestra Misión</h3>
+                                    <p>Reducir la anemia infantil en más del 60% y mejorar la nutrición infantil en Latinoamérica con soluciones personalizadas, accesibles y sostenibles.</p>
+                                </div>
+                                <div class="content-section">
+                                    <h3><i class="fas fa-eye"></i> Nuestra Visión</h3>
+                                    <p>Ser la plataforma líder que transforma la nutrición infantil en Latinoamérica, asegurando un futuro brillante para cada niño a través de la tecnología y el conocimiento ancestral.</p>
+                                </div>
+                                <div class="content-section">
+                                    <h3><i class="fas fa-users"></i> Nuestro Equipo</h3>
+                                    <p>Somos un equipo multidisciplinario con más de tres años de experiencia en innovación, tecnología y gestión. Nuestro equipo incluye a María Palacios (Directora Ejecutiva), Álvaro Quiroz (Director de Tecnología), Luz Montalvo, Christian Valdivia y Steve Gómez, todos dedicados a crear soluciones escalables y de alto impacto.</p>
+                                </div>
+                                <div class="highlight-box">
+                                    <h3 style="margin-top:0;"><i class="fas fa-exclamation-circle"></i> Un Problema Real</h3>
+                                    <p>En América Latina, alrededor de 23 millones de niños sufren de anemia. Solo en Perú, 2 millones están afectados. Estas cifras nos impulsan a actuar.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>`,
+                servicesModal: () => `
+                    <div class="modal active">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h2>Nuestros Servicios</h2>
+                                <button class="close-modal">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="content-section">
+                                    <h3><i class="fas fa-robot"></i> Planes Personalizados con IA</h3>
+                                    <p>Somos la primera plataforma que combate la anemia a través de planes personalizados con enfoque integral. Usamos IA y Big Data para procesar la información de cada niño y generar un plan único que se adapta a sus circunstancias locales y culturales.</p>
+                                    <ul>
+                                        <li>Recopilación de información del niño.</li>
+                                        <li>Procesamiento de datos con IA y Big Data.</li>
+                                        <li>Generación de un plan 100% personalizado.</li>
+                                        <li>Monitoreo y ajustes constantes.</li>
+                                    </ul>
+                                </div>
+                                <div class="content-section">
+                                    <h3><i class="fas fa-gamepad"></i> Gamificación con "Mikuycito"</h3>
+                                    <p>Para hacer el proceso divertido y educativo, hemos creado a Mikuycito, el aliado interactivo de la alimentación inteligente.</p>
+                                    <ul>
+                                        <li>Avatar personalizable para cada niño.</li>
+                                        <li>Juegos interactivos sobre nutrición.</li>
+                                        <li>Recompensas y premios por rachas de alimentación saludable.</li>
+                                        <li>Cuestionarios de aprendizaje.</li>
+                                    </ul>
+                                </div>
+                                <div class="content-section">
+                                    <h3><i class="fas fa-dollar-sign"></i> Precios Accesibles</h3>
+                                    <p>Creemos que la salud no debe ser un lujo. Por eso ofrecemos precios asequibles para todos.</p>
+                                    <ul>
+                                        <li><b>Público General:</b> $5 mensuales.</li>
+                                        <li><b>Áreas Vulnerables:</b> $3 mensuales.</li>
+                                        <li>Además, contamos con funciones gratuitas para todos.</li>
+                                    </ul>
+                                </div>
+                                <div class="highlight-box">
+                                    <h3 style="margin-top:0;"><i class="fas fa-rocket"></i> Recuperación 5 Veces más Rápida</h3>
+                                    <p>Con nuestra metodología personalizada, el tiempo de recuperación de la anemia se reduce de 5 meses (o más) a tan solo 1 mes.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>`,
+                faqModal: () => `
+                    <div class="modal active">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h2>Preguntas Frecuentes</h2>
+                                <button class="close-modal">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="content-section">
+                                    <h3><i class="fas fa-question-circle"></i> ¿Por qué Yachay Mikuy es diferente?</h3>
+                                    <p>A diferencia de los suplementos genéricos o programas estatales, nosotros no ofrecemos una solución única para todos. Entendemos que la anemia es un problema multidimensional (nutricional, psicológico, cognitivo). Por eso, creamos planes 100% personalizados que consideran las diferencias individuales y se adaptan a la realidad local de cada familia.</p>
+                                </div>
+                                <div class="content-section">
+                                    <h3><i class="fas fa-child"></i> ¿Para qué edades está diseñada la plataforma?</h3>
+                                    <p>Nuestra plataforma está diseñada principalmente para niños de 0 a 13 años, una etapa crucial para el desarrollo físico y cognitivo.</p>
+                                </div>
+                                <div class="content-section">
+                                    <h3><i class="fas fa-user-plus"></i> ¿Cómo garantizan que el plan funcionará?</h3>
+                                    <p>Nuestro sistema se basa en datos y estudios científicos que demuestran la eficacia de los tratamientos personalizados. Un estudio en The Lancet (2010) y otro de Nutri H (2023) confirman que la fortificación y las intervenciones personalizadas reducen la anemia en tiempos tan cortos como 1 o 2 meses.</p>
+                                </div>
+                                <div class="content-section">
+                                    <h3><i class="fas fa-shield-alt"></i> ¿Es seguro compartir los datos de mis hijos?</h3>
+                                    <p>La seguridad y privacidad de tus datos son nuestra máxima prioridad. Cumplimos con todas las normativas de protección de datos y utilizamos tecnología de encriptación para mantener segura la información. Solo usamos los datos para generar y mejorar los planes nutricionales.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>`,
+                privacyModal: () => `
+                    <div class="modal active">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h2>Política de Privacidad</h2>
+                                <button class="close-modal">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="content-section">
+                                    <h3><i class="fas fa-info-circle"></i> Información que Recopilamos</h3>
+                                    <p>Recopilamos información personal y de salud de manera responsable para personalizar la experiencia:</p>
+                                    <ul>
+                                        <li><strong>Datos del Tutor:</strong> Nombre, correo electrónico, teléfono.</li>
+                                        <li><strong>Datos del Niño:</strong> Nombre, fecha de nacimiento, peso, altura, historial médico relevante, hábitos alimenticios y de actividad física.</li>
+                                        <li><strong>Datos de Uso:</strong> Interacciones con la plataforma y el avatar Mikuycito.</li>
+                                    </ul>
+                                </div>
+                                <div class="content-section">
+                                    <h3><i class="fas fa-cogs"></i> Uso de la Información</h3>
+                                    <p>Utilizamos la información para:</p>
+                                    <ul>
+                                        <li>Generar planes de alimentación personalizados mediante nuestros algoritmos de IA.</li>
+                                        <li>Monitorear el progreso y ajustar las recomendaciones.</li>
+                                        <li>Mejorar nuestros servicios y realizar investigaciones anonimizadas para combatir la malnutrición.</li>
+                                        <li>Comunicar actualizaciones importantes sobre la cuenta y el plan nutricional.</li>
+                                    </ul>
+                                </div>
+                                <div class="content-section">
+                                    <h3><i class="fas fa-user-shield"></i> Consentimiento Parental</h3>
+                                    <p>Requerimos el consentimiento explícito y verificable de los padres o tutores legales para recopilar y procesar los datos de un menor de edad. Los tutores tienen el control total sobre la información y pueden solicitar su acceso, rectificación o eliminación en cualquier momento.</p>
+                                </div>
+                                <div class="highlight-box">
+                                    <h3 style="margin-top:0;"><i class="fas fa-exclamation-triangle"></i> Importante</h3>
+                                    <p>No compartimos datos personales identificables con terceros sin su consentimiento explícito, excepto cuando sea requerido por ley. Esta política se actualiza periódicamente.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>`,
+                termsModal: () => `
+                                <div class="modal active">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h2>Términos y Condiciones</h2>
+                                            <button class="close-modal">&times;</button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="content-section">
+                                                <h3><i class="fas fa-check-circle"></i> Aceptación de los Términos</h3>
+                                                <p>Al utilizar la plataforma Yachay Mikuy, aceptas estos términos y condiciones. El uso de la plataforma para un menor de edad implica que usted, como padre o tutor, acepta estos términos en su nombre.</p>
+                                            </div>
+                                            <div class="content-section">
+                                                <h3><i class="fas fa-heart"></i> Descargo de Responsabilidad Médica</h3>
+                                                <p>Yachay Mikuy es una herramienta de apoyo y educación nutricional. <strong>No reemplaza el diagnóstico, consejo o tratamiento de un profesional médico cualificado.</strong> Siempre consulte a su pediatra o nutricionista antes de realizar cambios significativos en la dieta de su hijo, especialmente si existen condiciones médicas preexistentes.</p>
+                                            </div>
+                                            <div class="content-section">
+                                                <h3><i class="fas user-check"></i> Responsabilidades del Usuario</h3>
+                                                <ul>
+                                                    <li>Usted es responsable de proporcionar información precisa y actualizada sobre su hijo para garantizar la personalización efectiva del plan.</li>
+                                                    <li>Es su responsabilidad supervisar la implementación del plan nutricional y el uso de la aplicación por parte del menor.</li>
+                                                    <li>Se compromete a no utilizar la plataforma para fines ilegales o no autorizados.</li>
+                                                </ul>
+                                            </div>
+                                            <div class="content-section">
+                                                <h3><i class="fas fa-copyright"></i> Propiedad Intelectual</h3>
+                                                <p>Todo el contenido, algoritmos y la marca Yachay Mikuy son propiedad de sus creadores. Queda prohibida su reproducción o distribución sin autorización expresa.</p>
+                                            </div>
+                                            <div class="highlight-box">
+                                                <h3 style="margin-top:0;"><i class="fas fa-sync-alt"></i> Modificaciones</h3>
+                                                <p>Nos reservamos el derecho de modificar estos términos en cualquier momento. Se notificará a los usuarios de cambios significativos. El uso continuado de la plataforma constituirá la aceptación de los nuevos términos.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>`
+            };
+
+            const ui = {
+                openModal: (content) => { actionModalContainer.innerHTML = content; },
+                closeModal: () => { actionModalContainer.innerHTML = ''; }
+            };
+
+            document.body.addEventListener('click', (e) => {
+                const target = e.target.closest('a') || e.target;
+                
+                if (target.matches('#aboutLink')) { e.preventDefault(); ui.openModal(templates.aboutModal()); }
+                if (target.matches('#servicesLink')) { e.preventDefault(); ui.openModal(templates.servicesModal()); }
+                if (target.matches('#faqLink')) { e.preventDefault(); ui.openModal(templates.faqModal()); }
+                if (target.matches('#privacyLink')) { e.preventDefault(); ui.openModal(templates.privacyModal()); }
+                if (target.matches('#termsLink')) { e.preventDefault(); ui.openModal(templates.termsModal()); }
+                
+                if (e.target.matches('.modal') || e.target.matches('.close-modal')) { 
+                    ui.closeModal(); 
+                }
+            });
+        }
+
+        // Event Listeners Generales
         document.addEventListener('DOMContentLoaded', function() {
             resetInactivityTimer();
             window.addEventListener('mousemove', resetInactivityTimer, false);
@@ -2364,6 +3384,20 @@
                 window.location.href = 'comunidad.html';
             });
             
+            // --- INICIO MODIFICACIÓN: Inicializar Popover "NUEVO" ---
+            const popoverTriggerEl = document.getElementById('newCommunityBadge');
+            if (popoverTriggerEl) {
+                const popover = new bootstrap.Popover(popoverTriggerEl, {
+                    container: 'body' // Para evitar problemas de z-index
+                });
+                
+                // Evitar que el click en el badge active el botón de comunidad
+                popoverTriggerEl.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                });
+            }
+            // --- FIN MODIFICACIÓN ---
+
             document.querySelectorAll('.avatar-option').forEach(option => {
                 option.addEventListener('click', function() {
                     document.querySelectorAll('.avatar-option').forEach(opt => {
@@ -2425,6 +3459,11 @@
             
             setupFooterModals();
             
+            // INICIAR EL CHATBOT
+            setupChatbotListeners();
+            
+            // La guía ahora se llama desde showAuthSection() o showDashboardSection()
+
             if (window.location.hash === '#perfiles-de-tus-hijos') {
                 const dashboardSection = document.getElementById('dashboardSection');
                 if (dashboardSection && dashboardSection.classList.contains('d-none')) {
@@ -2439,203 +3478,6 @@
                 }, 100);
             }
         });
-        
-        function setupFooterModals() {
-            const actionModalContainer = document.getElementById('action-modal-container');
-
-            const templates = {
-                aboutModal: () => `
-                    <div class="modal active">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h2>Acerca de Yachay Mikuy</h2>
-                                <button class="close-modal">&times;</button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="content-section">
-                                    <h3><i class="fas fa-bullseye"></i> Nuestra Misión</h3>
-                                    <p>Reducir la anemia infantil en más del 60% y mejorar la nutrición infantil en Latinoamérica con soluciones personalizadas, accesibles y sostenibles.</p>
-                                </div>
-                                <div class="content-section">
-                                    <h3><i class="fas fa-eye"></i> Nuestra Visión</h3>
-                                    <p>Ser la plataforma líder que transforma la nutrición infantil en Latinoamérica, asegurando un futuro brillante para cada niño a través de la tecnología y el conocimiento ancestral.</p>
-                                </div>
-                                <div class="content-section">
-                                    <h3><i class="fas fa-users"></i> Nuestro Equipo</h3>
-                                    <p>Somos un equipo multidisciplinario con más de tres años de experiencia en innovación, tecnología y gestión. Nuestro equipo incluye a María Palacios (Directora Ejecutiva), Álvaro Quiroz (Director de Tecnología), Luz Montalvo, Christian Valdivia y Steve Gómez, todos dedicados a crear soluciones escalables y de alto impacto.</p>
-                                </div>
-                                <div class="highlight-box">
-                                    <h3 style="margin-top:0;"><i class="fas fa-exclamation-circle"></i> Un Problema Real</h3>
-                                    <p>En América Latina, alrededor de 23 millones de niños sufren de anemia. Solo en Perú, 2 millones están afectados. Estas cifras nos impulsan a actuar.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>`,
-                servicesModal: () => `
-                    <div class="modal active">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h2>Nuestros Servicios</h2>
-                                <button class="close-modal">&times;</button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="content-section">
-                                    <h3><i class="fas fa-robot"></i> Planes Personalizados con IA</h3>
-                                    <p>Somos la primera plataforma que combate la anemia a través de planes personalizados con enfoque integral. Usamos IA y Big Data para procesar la información de cada niño y generar un plan único que se adapta a sus circunstancias locales y culturales.</p>
-                                    <ul>
-                                        <li>Recopilación de información del niño.</li>
-                                        <li>Procesamiento de datos con IA y Big Data.</li>
-                                        <li>Generación de un plan 100% personalizado.</li>
-                                        <li>Monitoreo y ajustes constantes.</li>
-                                    </ul>
-                                </div>
-                                <div class="content-section">
-                                    <h3><i class="fas fa-gamepad"></i> Gamificación con "Mikuycito"</h3>
-                                    <p>Para hacer el proceso divertido y educativo, hemos creado a Mikuycito, el aliado interactivo de la alimentación inteligente.</p>
-                                    <ul>
-                                        <li>Avatar personalizable para cada niño.</li>
-                                        <li>Juegos interactivos sobre nutrición.</li>
-                                        <li>Recompensas y premios por rachas de alimentación saludable.</li>
-                                        <li>Cuestionarios de aprendizaje.</li>
-                                    </ul>
-                                </div>
-                                <div class="content-section">
-                                    <h3><i class="fas fa-dollar-sign"></i> Precios Accesibles</h3>
-                                    <p>Creemos que la salud no debe ser un lujo. Por eso ofrecemos precios asequibles para todos.</p>
-                                    <ul>
-                                        <li><b>Público General:</b> $5 mensuales.</li>
-                                        <li><b>Áreas Vulnerables:</b> $3 mensuales.</li>
-                                        <li>Además, contamos con funciones gratuitas para todos.</li>
-                                    </ul>
-                                </div>
-                                <div class="highlight-box">
-                                    <h3 style="margin-top:0;"><i class="fas fa-rocket"></i> Recuperación 5 Veces más Rápida</h3>
-                                    <p>Con nuestra metodología personalizada, el tiempo de recuperación de la anemia se reduce de 5 meses (o más) a tan solo 1 mes.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>`,
-                faqModal: () => `
-                    <div class="modal active">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h2>Preguntas Frecuentes</h2>
-                                <button class="close-modal">&times;</button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="content-section">
-                                    <h3><i class="fas fa-question-circle"></i> ¿Por qué Yachay Mikuy es diferente?</h3>
-                                    <p>A diferencia de los suplementos genéricos o programas estatales, nosotros no ofrecemos una solución única para todos. Entendemos que la anemia es un problema multidimensional (nutricional, psicológico, cognitivo). Por eso, creamos planes 100% personalizados que consideran las diferencias individuales y se adaptan a la realidad local de cada familia.</p>
-                                </div>
-                                <div class="content-section">
-                                    <h3><i class="fas fa-child"></i> ¿Para qué edades está diseñada la plataforma?</h3>
-                                    <p>Nuestra plataforma está diseñada principalmente para niños de 0 a 13 años, una etapa crucial para el desarrollo físico y cognitivo.</p>
-                                </div>
-                                <div class="content-section">
-                                    <h3><i class="fas fa-user-plus"></i> ¿Cómo garantizan que el plan funcionará?</h3>
-                                    <p>Nuestro sistema se basa en datos y estudios científicos que demuestran la eficacia de los tratamientos personalizados. Un estudio en The Lancet (2010) y otro de Nutri H (2023) confirman que la fortificación y las intervenciones personalizadas reducen la anemia en tiempos tan cortos como 1 o 2 meses.</p>
-                                </div>
-                                <div class="content-section">
-                                    <h3><i class="fas fa-shield-alt"></i> ¿Es seguro compartir los datos de mis hijos?</h3>
-                                    <p>La seguridad y privacidad de tus datos son nuestra máxima prioridad. Cumplimos con todas las normativas de protección de datos y utilizamos tecnología de encriptación para mantener segura la información. Solo usamos los datos para generar y mejorar los planes nutricionales.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>`,
-                privacyModal: () => `
-                    <div class="modal active">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h2>Política de Privacidad</h2>
-                                <button class="close-modal">&times;</button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="content-section">
-                                    <h3><i class="fas fa-info-circle"></i> Información que Recopilamos</h3>
-                                    <p>Recopilamos información personal y de salud de manera responsable para personalizar la experiencia:</p>
-                                    <ul>
-                                        <li><strong>Datos del Tutor:</strong> Nombre, correo electrónico, teléfono.</li>
-                                        <li><strong>Datos del Niño:</strong> Nombre, fecha de nacimiento, peso, altura, historial médico relevante, hábitos alimenticios y de actividad física.</li>
-                                        <li><strong>Datos de Uso:</strong> Interacciones con la plataforma y el avatar Mikuycito.</li>
-                                    </ul>
-                                </div>
-                                <div class="content-section">
-                                    <h3><i class="fas fa-cogs"></i> Uso de la Información</h3>
-                                    <p>Utilizamos la información para:</p>
-                                    <ul>
-                                        <li>Generar planes de alimentación personalizados mediante nuestros algoritmos de IA.</li>
-                                        <li>Monitorear el progreso y ajustar las recomendaciones.</li>
-                                        <li>Mejorar nuestros servicios y realizar investigaciones anonimizadas para combatir la malnutrición.</li>
-                                        <li>Comunicar actualizaciones importantes sobre la cuenta y el plan nutricional.</li>
-                                    </ul>
-                                </div>
-                                <div class="content-section">
-                                    <h3><i class="fas fa-user-shield"></i> Consentimiento Parental</h3>
-                                    <p>Requerimos el consentimiento explícito y verificable de los padres o tutores legales para recopilar y procesar los datos de un menor de edad. Los tutores tienen el control total sobre la información y pueden solicitar su acceso, rectificación o eliminación en cualquier momento.</p>
-                                </div>
-                                <div class="highlight-box">
-                                    <h3 style="margin-top:0;"><i class="fas fa-exclamation-triangle"></i> Importante</h3>
-                                    <p>No compartimos datos personales identificables con terceros sin su consentimiento explícito, excepto cuando sea requerido por ley. Esta política se actualiza periódicamente.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>`,
-                termsModal: () => `
-                     <div class="modal active">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h2>Términos y Condiciones</h2>
-                                <button class="close-modal">&times;</button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="content-section">
-                                    <h3><i class="fas fa-check-circle"></i> Aceptación de los Términos</h3>
-                                    <p>Al utilizar la plataforma Yachay Mikuy, aceptas estos términos y condiciones. El uso de la plataforma para un menor de edad implica que usted, como padre o tutor, acepta estos términos en su nombre.</p>
-                                </div>
-                                <div class="content-section">
-                                    <h3><i class="fas fa-heart"></i> Descargo de Responsabilidad Médica</h3>
-                                    <p>Yachay Mikuy es una herramienta de apoyo y educación nutricional. <strong>No reemplaza el diagnóstico, consejo o tratamiento de un profesional médico cualificado.</strong> Siempre consulte a su pediatra o nutricionista antes de realizar cambios significativos en la dieta de su hijo, especialmente si existen condiciones médicas preexistentes.</p>
-                                </div>
-                                <div class="content-section">
-                                    <h3><i class="fas user-check"></i> Responsabilidades del Usuario</h3>
-                                    <ul>
-                                        <li>Usted es responsable de proporcionar información precisa y actualizada sobre su hijo para garantizar la personalización efectiva del plan.</li>
-                                        <li>Es su responsabilidad supervisar la implementación del plan nutricional y el uso de la aplicación por parte del menor.</li>
-                                        <li>Se compromete a no utilizar la plataforma para fines ilegales o no autorizados.</li>
-                                    </ul>
-                                </div>
-                                <div class="content-section">
-                                    <h3><i class="fas fa-copyright"></i> Propiedad Intelectual</h3>
-                                    <p>Todo el contenido, algoritmos y la marca Yachay Mikuy son propiedad de sus creadores. Queda prohibida su reproducción o distribución sin autorización expresa.</p>
-                                </div>
-                                <div class="highlight-box">
-                                    <h3 style="margin-top:0;"><i class="fas fa-sync-alt"></i> Modificaciones</h3>
-                                    <p>Nos reservamos el derecho de modificar estos términos en cualquier momento. Se notificará a los usuarios de cambios significativos. El uso continuado de la plataforma constituirá la aceptación de los nuevos términos.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>`
-            };
-
-            const ui = {
-                openModal: (content) => { actionModalContainer.innerHTML = content; },
-                closeModal: () => { actionModalContainer.innerHTML = ''; }
-            };
-
-            document.body.addEventListener('click', (e) => {
-                const target = e.target.closest('a') || e.target;
-                
-                if (target.matches('#aboutLink')) { e.preventDefault(); ui.openModal(templates.aboutModal()); }
-                if (target.matches('#servicesLink')) { e.preventDefault(); ui.openModal(templates.servicesModal()); }
-                if (target.matches('#faqLink')) { e.preventDefault(); ui.openModal(templates.faqModal()); }
-                if (target.matches('#privacyLink')) { e.preventDefault(); ui.openModal(templates.privacyModal()); }
-                if (target.matches('#termsLink')) { e.preventDefault(); ui.openModal(templates.termsModal()); }
-                
-                if (e.target.matches('.modal') || e.target.matches('.close-modal')) { 
-                    ui.closeModal(); 
-                }
-            });
-        }
     </script>
 </body>
 </html>
