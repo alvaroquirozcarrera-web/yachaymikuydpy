@@ -41,155 +41,243 @@
             --transition: all 0.3s ease-in-out;
             --accent-red: #e63946;
 
-            /* Variables de Intro.js (Guía) - MODIFICADAS */
-            --primary-blue-guide: #2c5aa0; 
-            --accent-color-guide: #5d8cc4;
-            --medium-gray-guide: #dee2e6;
+            /* Variables de Intro.js (Guía) - DISEÑO CHIC */
+            --primary-guide: #6366f1;
+            --secondary-guide: #8b5cf6;
+            --accent-guide: #ec4899;
+            --bg-guide: #ffffff;
+            --text-guide: #1f2937;
+            --border-guide: #e5e7eb;
         }
 
-        /* --- 1.1. ESTILOS PERSONALIZADOS PARA LA GUÍA (INTRO.JS) - MODIFICADOS --- */
+        /* --- ESTILOS PERSONALIZADOS PARA LA GUÍA (INTRO.JS) - DISEÑO CHIC --- */
         .introjs-overlay {
-            background-color: rgba(0, 0, 0, 0.6);
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(236, 72, 153, 0.1) 100%);
+            backdrop-filter: blur(5px);
         }
         
         .introjs-helperLayer {
-            background-color: rgba(255, 255, 255, 0.3);
-            border-radius: 8px;
-            box-shadow: 0 0 15px rgba(44, 90, 160, 0.4);
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.15) 0%, rgba(139, 92, 246, 0.15) 50%, rgba(236, 72, 153, 0.15) 100%);
+            border-radius: 16px;
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.3), 0 20px 40px rgba(0, 0, 0, 0.1);
+            animation: pulse-border 2s infinite;
+        }
+        
+        @keyframes pulse-border {
+            0%, 100% { box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.3), 0 20px 40px rgba(0, 0, 0, 0.1); }
+            50% { box-shadow: 0 0 0 6px rgba(236, 72, 153, 0.4), 0 25px 50px rgba(0, 0, 0, 0.15); }
         }
         
         .introjs-tooltip {
-            font-family: 'Montserrat', sans-serif;
-            background-color: var(--white);
-            border-radius: var(--radius);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #ffffff 0%, #fafbff 100%);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(99, 102, 241, 0.1);
             border: none;
-            color: var(--text-dark);
-            max-width: 400px;
-            padding: 25px;
-            position: fixed;
+            color: var(--text-guide);
+            max-width: 380px;
+            padding: 0;
+            position: fixed !important;
             top: 50% !important;
             left: 50% !important;
             transform: translate(-50%, -50%) !important;
             margin: 0 !important;
             z-index: 1100000 !important;
+            overflow: hidden;
+            animation: slideInUp 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        
+        .introjs-tooltip::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-guide) 0%, var(--secondary-guide) 50%, var(--accent-guide) 100%);
+            animation: gradient-shift 3s ease infinite;
+        }
+        
+        @keyframes gradient-shift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translate(-50%, -40%) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1);
+            }
         }
         
         .introjs-tooltiptext {
-            font-size: 1rem;
-            line-height: 1.6;
+            font-size: 0.95rem;
+            line-height: 1.5;
             font-weight: 400;
-            margin-bottom: 20px;
+            margin: 0;
+            padding: 20px 20px 15px;
         }
         
         .introjs-tooltip-title {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: 700;
-            color: var(--primary-blue-guide);
-            margin-bottom: 15px;
+            background: linear-gradient(135deg, var(--primary-guide) 0%, var(--secondary-guide) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 0;
+            padding: 18px 20px 15px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
+            position: relative;
+        }
+        
+        .introjs-tooltip-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 20px;
+            right: 20px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.2), transparent);
         }
         
         .introjs-tooltip-title i {
-            color: var(--accent-color-guide);
+            background: linear-gradient(135deg, var(--primary-guide) 0%, var(--accent-guide) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 1.2rem;
         }
         
-        .introjs-tooltipbuttons {
-            border-top: 1px solid var(--medium-gray-guide);
-            padding-top: 15px;
-            margin-top: 15px;
-            text-align: right;
-            display: flex;
-            justify-content: space-between;
-        }
-        
-        .introjs-button {
-            background: linear-gradient(to right, var(--primary-blue-guide), var(--accent-color-guide));
-            color: var(--white);
-            border-radius: 50px;
-            font-weight: 600;
-            border: none;
-            padding: 10px 20px;
-            transition: var(--transition);
-            text-shadow: none;
-            font-family: 'Montserrat', sans-serif;
-            cursor: pointer;
-            font-size: 0.9rem;
-        }
-        
-        .introjs-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(44, 90, 160, 0.3);
-            color: var(--white);
-        }
-        
-        .introjs-skipbutton {
-            background: transparent;
-            color: var(--gray);
-            font-weight: 600;
-            text-shadow: none;
-            padding: 10px 20px;
-            border-radius: 50px;
-            border: 1px solid var(--gray);
-            transition: var(--transition);
-        }
-        
-        .introjs-skipbutton:hover {
-            background: var(--light-gray);
-            color: var(--text-dark);
-            transform: translateY(-2px);
-        }
-        
-        .introjs-disabled, .introjs-disabled:hover {
-            background: var(--medium-gray-guide);
-            color: #888;
-            transform: none;
-            box-shadow: none;
-            opacity: 0.7;
-            cursor: not-allowed;
-        }
-        
-        /* Ocultar las flechas ya que el tooltip está centrado */
-        .introjs-arrow {
-            display: none;
-        }
-        
-        /* Estilo para el número de paso */
         .introjs-tooltip .introjs-step-number {
-            background-color: var(--primary-blue-guide);
+            background: linear-gradient(135deg, var(--primary-guide) 0%, var(--secondary-guide) 100%);
             color: var(--white);
-            width: 30px;
-            height: 30px;
+            width: 28px;
+            height: 28px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: 700;
-            margin-right: 10px;
+            font-size: 0.85rem;
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
             flex-shrink: 0;
         }
         
-        /* Estilos para dispositivos móviles */
+        .introjs-tooltipbuttons {
+            padding: 15px 20px 20px;
+            display: flex;
+            gap: 10px;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.02) 0%, rgba(236, 72, 153, 0.02) 100%);
+            border-top: 1px solid rgba(99, 102, 241, 0.08);
+        }
+        
+        .introjs-button {
+            background: linear-gradient(135deg, var(--primary-guide) 0%, var(--secondary-guide) 100%);
+            color: var(--white);
+            border-radius: 12px;
+            font-weight: 600;
+            border: none;
+            padding: 10px 18px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-shadow: none;
+            font-family: 'Poppins', sans-serif;
+            cursor: pointer;
+            font-size: 0.85rem;
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .introjs-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .introjs-button:hover::before {
+            left: 100%;
+        }
+        
+        .introjs-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(99, 102, 241, 0.4);
+        }
+        
+        .introjs-skipbutton {
+            background: transparent;
+            color: var(--gray);
+            font-weight: 500;
+            text-shadow: none;
+            padding: 10px 18px;
+            border-radius: 12px;
+            border: 1px solid var(--border-guide);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-family: 'Poppins', sans-serif;
+            flex: 1;
+            font-size: 0.85rem;
+        }
+        
+        .introjs-skipbutton:hover {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.05) 0%, rgba(236, 72, 153, 0.05) 100%);
+            color: var(--primary-guide);
+            border-color: rgba(99, 102, 241, 0.3);
+            transform: translateY(-1px);
+        }
+        
+        .introjs-disabled, .introjs-disabled:hover {
+            background: var(--border-guide);
+            color: #9ca3af;
+            transform: none;
+            box-shadow: none;
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        
+        /* Ocultar completamente las flechas del tooltip */
+        .introjs-arrow {
+            display: none !important;
+        }
+        
+        /* Estilos para dispositivos móviles - DISEÑO CHIC */
         @media (max-width: 768px) {
             .introjs-tooltip {
-                max-width: 90%;
-                padding: 20px;
-                font-size: 0.9rem;
+                max-width: 92%;
+                margin: 0 4% !important;
+                left: 50% !important;
+                right: auto !important;
+                width: auto !important;
+                transform: translate(-50%, -50%) !important;
+                top: 50% !important;
+                bottom: auto !important;
+                position: fixed !important;
+                border-radius: 20px;
+                animation: slideInUp 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
             }
             
             .introjs-tooltipbuttons {
-                flex-direction: column;
-                gap: 10px;
+                flex-direction: row;
+                gap: 8px;
             }
             
             .introjs-button, .introjs-skipbutton {
-                width: 100%;
-                text-align: center;
+                flex: 1;
+                padding: 12px 15px;
+                font-size: 0.9rem;
             }
         }
-        /* --- FIN ESTILOS GUÍA --- */
+        /* --- FIN ESTILOS GUÍA CHIC --- */
 
 
         @keyframes fadeIn {
@@ -993,13 +1081,13 @@
         }
         // --- FIN: LÓGICA DE SESIÓN E INACTIVIDAD ---
 
-        // --- INICIO: LÓGICA DE LA GUÍA INTERACTIVA (Intro.js) - MODIFICADA ---
+        // --- INICIO: LÓGICA DE LA GUÍA INTERACTIVA (Intro.js) - DISEÑO CHIC ---
         function startGuidedTour() {
             if (document.querySelector('.introjs-overlay')) {
                 return;
             }
 
-            // MODIFICADO: Pasos detallados para los 6 módulos
+            // Pasos detallados para los 6 módulos
             const steps = [
                 {
                     element: '.profile-header',
@@ -1042,10 +1130,10 @@
             if (steps.length > 0) {
                 introJs().setOptions({
                     steps: steps,
-                    nextLabel: 'Siguiente &rarr;',
-                    prevLabel: '&larr; Anterior',
-                    doneLabel: '¡Entendido!',
-                    skipLabel: 'x',
+                    nextLabel: 'Siguiente →',
+                    prevLabel: '← Anterior',
+                    doneLabel: '¡Listo!',
+                    skipLabel: 'X',
                     showBullets: false,
                     exitOnOverlayClick: false,
                     tooltipPosition: 'center',
@@ -1060,7 +1148,7 @@
 
         // --- INICIO: LÓGICA DEL CHATBOT ---
         
-        // MODIFICADO: Base de conocimiento ampliada
+        // Base de conocimiento ampliada
         const chatKnowledgeBase = {
             // Conocimiento General (de la app)
             saludos: { keywords: ['hola', 'buenos dias', 'buenas tardes', 'buenas noches', 'saludos'], response: '¡Hola! Soy el asistente virtual de Yachay Mikuy. ¿En qué puedo ayudarte hoy? Puedes preguntarme sobre nuestros servicios o sobre las funciones de esta página.' },
@@ -1355,4 +1443,4 @@
         }
     </script>
 </body>
-</html>
+</html> 

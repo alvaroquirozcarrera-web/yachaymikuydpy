@@ -1,0 +1,1528 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yachay Mikuy - Nuestros Planes</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/intro.js/7.2.0/introjs.min.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-blue: #1a4b8c; 
+            --accent-red: #e63946; 
+            --primary-color: #4CAF50;
+            --secondary-color: #FF9800;
+            --accent-color: #2196F3;
+            --light-color: #F5F5F5;
+            --dark-color: #333333;
+            --success-color: #8BC34A;
+            --warning-color: #FFC107;
+            --danger-color: #F44336;
+            --info-color: #03A9F4;
+            --white: #ffffff;
+            --light-gray: #f8f9fa;
+            --medium-gray: #dee2e6;
+            --text-dark: #212529;
+            --shadow: 0 8px 24px rgba(0, 0, 0, 0.08); 
+            --radius: 12px;
+            --transition: all 0.3s ease-in-out;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Nunito', sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        /* Estilos del Header - Modificado */
+        .header {
+            background-color: var(--primary-blue); /* Color azul oscuro sólido */
+            color: white;
+            padding: 0;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            z-index: 1000;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            height: 80px; /* Aumentado para acomodar el logo más grande */
+        }
+        
+        .header-container {
+            display: flex;
+            align-items: center;
+            justify-content: center; /* Centrado del contenido */
+            height: 100%;
+            padding: 0 20px;
+        }
+        
+        .logo-container {
+            height: 80px; /* Altura igual a la del header */
+            width: 80px; /* Ancho igual a la altura para mantener circular */
+            border-radius: 50%;
+            background-color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            overflow: hidden;
+            position: relative;
+            z-index: 10;
+            transition: transform 0.3s ease;
+        }
+        
+        .logo-container:hover {
+            transform: scale(1.05); /* Ligera animación al pasar el cursor */
+        }
+        
+        .logo-container img {
+            height: 90%; /* 90% del alto del contenedor para que sea grande pero se vea completo */
+            width: 90%; /* 90% del ancho del contenedor */
+            object-fit: contain; /* Contain para mantener la resolución y que se vea completo */
+            padding: 0; /* Sin padding */
+            display: block; /* Block para mejor centrado */
+        }
+        
+        .logo {
+            font-size: 2rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            height: 80px; /* Altura fija para la barra */
+            padding: 5px 0; /* Pequeño padding para dar espacio */
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            margin-left: 15px; /* Espacio entre logo y texto */
+        }
+        
+        .logo i {
+            margin-right: 10px;
+            color: var(--secondary-color);
+            font-size: 2.2rem;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        /* Ajustes para dispositivos móviles */
+        @media (max-width: 768px) {
+            .header {
+                height: 60px; /* Altura reducida para móviles */
+            }
+            
+            .logo-container {
+                height: 60px; /* Altura de imagen igual a la del header */
+                width: 60px;
+            }
+            
+            .logo {
+                font-size: 1.5rem;
+                height: 60px;
+            }
+        }
+        
+        /* Estilos del Footer */
+        .footer { 
+            background: linear-gradient(135deg, var(--primary-blue), var(--accent-color)); 
+            color: rgba(255,255,255,0.9); 
+            padding: 2.5rem 5%; 
+            margin-top: 0; /* Eliminado el margen superior para reducir espacio */
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="none"/><circle cx="50" cy="50" r="40" fill="rgba(255,255,255,0.05)"/></svg>');
+            background-size: 100px 100px;
+            opacity: 0.3;
+        }
+        
+        .footer-content { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
+            gap: 2rem; 
+            max-width: 1200px; 
+            margin: 0 auto; 
+            position: relative;
+            z-index: 2;
+        }
+        .footer-section { 
+            display: flex; 
+            flex-direction: column; 
+        }
+        .footer-section h3 { 
+            color: var(--white); 
+            margin-bottom: 1.2rem; 
+            font-size: 1.2rem; 
+            font-weight: 700;
+            position: relative; 
+            padding-bottom: 0.5rem; 
+        }
+        .footer-section h3::after { 
+            content: ''; 
+            position: absolute; 
+            bottom: 0; 
+            left: 0; 
+            width: 40px; 
+            height: 3px; 
+            background: var(--accent-red); 
+            border-radius: 2px;
+        }
+        .footer-links { list-style: none; padding: 0; margin: 0; }
+        .footer-links li { margin-bottom: 0.8rem; }
+        .footer-links a { 
+            color: rgba(255,255,255,0.8); 
+            text-decoration: none; 
+            transition: var(--transition); 
+            display: flex; 
+            align-items: center; 
+            gap: 0.5rem; 
+            font-weight: 500;
+        }
+        .footer-links a:hover { 
+            color: var(--white); 
+            transform: translateX(5px); 
+            text-shadow: 0 0 10px rgba(255,255,255,0.5);
+        }
+        .footer-links a i { width: 20px; text-align: center; }
+        .footer-section p { 
+            margin-bottom: 0.8rem; 
+            display: flex; 
+            align-items: center; 
+            gap: 0.5rem; 
+            font-weight: 500;
+        }
+        .social-links { 
+            display: flex; 
+            gap: 1rem; 
+            margin-top: 1rem; 
+        }
+        .social-links a { 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            width: 45px; 
+            height: 45px; 
+            background: rgba(255,255,255,0.1); 
+            border-radius: 50%; 
+            transition: var(--transition); 
+            border: 2px solid rgba(255,255,255,0.2);
+        }
+        .social-links a:hover { 
+            background: var(--accent-red); 
+            transform: translateY(-5px) rotate(360deg); 
+            box-shadow: 0 10px 20px rgba(230, 57, 70, 0.4);
+        }
+        .footer-bottom { 
+            text-align: center; 
+            margin-top: 2rem; 
+            padding-top: 1.5rem; 
+            border-top: 1px solid rgba(255,255,255,0.2); 
+            font-size: 0.9rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        /* Estilos específicos para esta página - Modificados */
+        .main-content {
+            margin-top: 80px; /* Ajustado a la nueva altura del header */
+            padding-bottom: 0; /* Eliminado el padding inferior para reducir espacio */
+        }
+        
+        /* Sección con imagen de fondo - Mejorada */
+        .section-with-bg {
+            position: relative;
+            padding: 60px 0; /* Reducido el padding vertical para reducir espacio */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
+            overflow: hidden;
+            background-color: var(--light-gray); /* Color de fondo si la imagen no carga */
+        }
+        
+        .section-with-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5); /* Reducido el overlay para mejorar visibilidad de las imágenes */
+            z-index: 1;
+        }
+        
+        /* Añadido filtro para mejorar la apariencia de las imágenes */
+        .section-with-bg::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.3));
+            z-index: 2;
+            pointer-events: none;
+        }
+        
+        .section-content {
+            position: relative;
+            z-index: 3; /* Incrementado para asegurar que el contenido esté por encima de los overlays */
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.7); /* Aumentada la sombra para mejorar legibilidad */
+        }
+        
+        .section-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            font-weight: 600;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.7); /* Aumentada la sombra para mejorar legibilidad */
+        }
+        
+        /* Estilos genéricos (ya no se usan en esta página) */
+        .btn-hero, .card-custom, .stat-card, .team-member, .food-card {
+             /* Los estilos base están aquí por si se re-usan, pero la página de precios usará los suyos */
+        }
+        
+        /* Floating elements */
+        .floating-element {
+            position: fixed;
+            pointer-events: none;
+            opacity: 0.1;
+            z-index: 1;
+        }
+        
+        .floating-element-1 {
+            top: 20%;
+            left: 5%;
+            font-size: 3rem;
+            color: var(--accent-red);
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .floating-element-2 {
+            top: 60%;
+            right: 5%;
+            font-size: 3rem;
+            color: var(--primary-blue);
+            animation: float 8s ease-in-out infinite reverse;
+        }
+        
+        .floating-element-3 {
+            bottom: 20%;
+            left: 10%;
+            font-size: 3rem;
+            color: var(--secondary-color);
+            animation: float 7s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(10deg); }
+        }
+        
+        /* Floating "Conoce más" */
+        .floating-know-more {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(45deg, var(--accent-red), #ff6b6b);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 15px 25px;
+            font-size: 1rem;
+            font-weight: 700;
+            transition: all 0.4s ease;
+            box-shadow: 0 8px 25px rgba(230, 57, 70, 0.5);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 1000;
+            animation: floatButton 3s ease-in-out infinite;
+            cursor: pointer;
+        }
+        
+        @keyframes floatButton {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .floating-know-more:hover {
+            background: linear-gradient(45deg, #d62828, var(--accent-red));
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 35px rgba(230, 57, 70, 0.7);
+            color: white;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .section-title { font-size: 2rem; }
+            .section-subtitle { font-size: 1.1rem; }
+            .floating-know-more { bottom: 20px; right: 20px; padding: 12px 20px; font-size: 0.9rem; }
+        }
+
+        /* === ESTILOS: CHATBOT (ACTUALIZADO A ROJO) === */
+        #chatbot-toggle {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, var(--accent-red), #ff6b6b); /* Cambiado a rojo */
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            border: none;
+            box-shadow: var(--shadow);
+            cursor: pointer;
+            z-index: 1030;
+            transition: var(--transition);
+            animation: floatButton 3s ease-in-out infinite reverse;
+        }
+        #chatbot-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 10px 30px rgba(230, 57, 70, 0.5); /* Sombra roja al pasar el cursor */
+        }
+
+        #chatbot-window {
+            position: fixed;
+            bottom: 100px;
+            left: 30px;
+            width: 320px;
+            height: 450px;
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            z-index: 1029;
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+            animation: modalSlideIn 0.3s;
+        }
+
+        .chatbot-header {
+            background: linear-gradient(135deg, var(--accent-red), #ff6b6b); /* Cambiado a rojo */
+            color: var(--white);
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .chatbot-header h4 { 
+            margin: 0; 
+            font-weight: 700; 
+            display: flex; 
+            align-items: center;
+        }
+        .chatbot-header-icon {
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+        
+        #chatbot-close {
+            background: none; border: none; color: var(--white);
+            font-size: 1.25rem; cursor: pointer; opacity: 0.8;
+            transition: var(--transition);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        #chatbot-close:hover { 
+            opacity: 1; 
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: rotate(90deg);
+        }
+
+        #chat-messages {
+            flex: 1; padding: 1rem; overflow-y: auto;
+            display: flex; flex-direction: column; gap: 10px;
+        }
+        .chat-message {
+            padding: 10px 15px; border-radius: 18px;
+            max-width: 80%; line-height: 1.4; font-size: 0.95rem;
+        }
+        .chat-message.bot {
+            background: rgba(230, 57, 70, 0.1); /* Fondo rojo suave */
+            color: var(--text-dark);
+            border-bottom-left-radius: 4px; align-self: flex-start;
+        }
+        .chat-message.user {
+            background: var(--primary-blue); color: var(--white);
+            border-bottom-right-radius: 4px; align-self: flex-end;
+        }
+
+        #chat-suggestions {
+            padding: 0.5rem 1rem; border-top: 1px solid var(--medium-gray);
+            display: flex; flex-wrap: wrap; gap: 5px;
+        }
+        #chat-suggestions button {
+            background: var(--white); border: 1px solid var(--accent-red); /* Borde rojo */
+            color: var(--accent-red); /* Texto rojo */
+            border-radius: 50px;
+            font-size: 0.8rem; padding: 4px 10px;
+            cursor: pointer; transition: var(--transition);
+        }
+        #chat-suggestions button:hover { background: var(--accent-red); color: var(--white); } /* Fondo rojo al pasar el cursor */
+
+        .chat-input-area {
+            display: flex; border-top: 1px solid var(--medium-gray);
+            padding: 0.5rem;
+        }
+        #chat-input {
+            flex: 1; border: none; outline: none;
+            padding: 0.5rem; font-family: 'Nunito', sans-serif;
+        }
+        #chat-send {
+            background: none; border: none; color: var(--accent-red); /* Color rojo */
+            font-size: 1.25rem; cursor: pointer;
+            padding: 0.5rem; transition: var(--transition);
+        }
+        #chat-send:hover { color: var(--primary-blue); }
+        
+        
+        /* === 🎨 NUEVO DISEÑO: TEMA DEL TOUR GUIADO === */
+        
+        /* Overlay (fondo oscuro) */
+        .introjs-overlay {
+            background-color: #000;
+            opacity: 0.7 !important; /* Más oscuro para más foco */
+        }
+        
+        /* Tema principal del Tooltip */
+        .introjs-yachay-theme {
+            font-family: 'Nunito', sans-serif;
+            background-color: var(--white);
+            border: none;
+            border-radius: var(--radius);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
+            width: 90vw;
+            max-width: 400px; /* Ancho máximo */
+            padding: 0;
+            overflow: hidden; /* Para que el header encaje bien */
+        }
+
+        /* Título del tooltip */
+        .introjs-yachay-theme .introjs-tooltip-title {
+            font-size: 1.1rem;
+            font-weight: 800;
+            padding: 1rem 1.5rem;
+            margin: 0;
+            background: linear-gradient(135deg, var(--primary-blue), var(--accent-color));
+            color: var(--white);
+        }
+        
+        /* Texto del tooltip */
+        .introjs-yachay-theme .introjs-tooltiptext {
+            color: var(--text-dark);
+            font-size: 1rem;
+            line-height: 1.6;
+            font-weight: 500;
+            padding: 1.5rem;
+            margin: 0;
+        }
+        
+        /* Barra de progreso */
+        .introjs-yachay-theme .introjs-progress {
+            background-color: var(--medium-gray);
+            border-radius: 0;
+            height: 6px;
+            margin: 0;
+        }
+        .introjs-yachay-theme .introjs-progressbar {
+            background-color: var(--accent-red);
+        }
+        
+        /* Contenedor de botones */
+        .introjs-yachay-theme .introjs-tooltipbuttons {
+            border-top: 1px solid var(--light-gray);
+            padding: 1rem 1.5rem;
+            margin: 0;
+            display: flex; /* <-- Clave para alinear botones */
+            justify-content: space-between; /* <-- Clave para alinear botones */
+            align-items: center;
+        }
+        
+        /* Botones (Siguiente, Hecho) */
+        .introjs-yachay-theme .introjs-button {
+            font-family: 'Nunito', sans-serif;
+            font-weight: 700;
+            text-decoration: none;
+            color: var(--white) !important;
+            background: linear-gradient(45deg, var(--primary-blue), var(--accent-color));
+            border-radius: 50px;
+            padding: 10px 20px !important;
+            border: none;
+            transition: var(--transition);
+            box-shadow: 0 4px 15px rgba(26, 75, 140, 0.4);
+            text-shadow: none;
+            white-space: nowrap; /* Evita que el texto del botón se parta */
+        }
+        
+        .introjs-yachay-theme .introjs-button:hover {
+            background: linear-gradient(45deg, var(--accent-red), #ff6b6b);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(230, 57, 70, 0.5);
+            color: var(--white) !important;
+        }
+        
+        /* === ¡ESTILO CORREGIDO! Botón x y Anterior (Estilo Secundario) === */
+        .introjs-yachay-theme .introjs-skipbutton,
+        .introjs-yachay-theme .introjs-prevbutton {
+            font-family: 'Nunito', sans-serif;
+            font-weight: 700;
+            text-decoration: none;
+            color: var(--primary-blue) !important; /* Texto azul */
+            background: var(--white) !important; /* Fondo blanco */
+            border-radius: 50px;
+            padding: 10px 20px !important;
+            border: 2px solid var(--primary-blue) !important; /* Borde azul */
+            transition: var(--transition);
+            box-shadow: none; /* Sin sombra */
+            text-shadow: none;
+            white-space: nowrap; 
+        }
+        
+        .introjs-yachay-theme .introjs-skipbutton:hover,
+        .introjs-yachay-theme .introjs-prevbutton:hover {
+            background: var(--primary-blue) !important; /* Se invierte en hover */
+            color: var(--white) !important;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 15px rgba(26, 75, 140, 0.4);
+        }
+
+        /* Oculta la flecha (ya no es necesaria con 'floating') */
+        .introjs-yachay-theme .introjs-arrow {
+            display: none !important;
+        }
+
+        /* Estilos para los modales del footer */
+        .modal { 
+            display: none; position: fixed; z-index: 1055; 
+            left: 0; top: 0; width: 100%; height: 100%; 
+            background-color: rgba(0,0,0,0.5); 
+            justify-content: center; align-items: center; 
+            padding: 1rem; 
+        }
+        .modal.active { display: flex; }
+        @keyframes modalSlideIn { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        .modal-content { 
+            background-color: var(--white); border-radius: var(--radius); 
+            width: 100%; max-width: 600px; max-height: 90vh; 
+            position: relative; animation: modalSlideIn 0.4s; 
+            display: flex; flex-direction: column; z-index: 1056;
+        }
+        .modal-header { 
+            padding: 1.5rem; border-bottom: 1px solid var(--medium-gray); 
+            display: flex; justify-content: space-between; align-items: center; 
+        }
+        .modal-header h2 { margin: 0; color: var(--primary-blue); }
+        .modal-body { padding: 1.5rem; overflow-y: auto; flex: 1; }
+        .modal-body::-webkit-scrollbar { width: 8px; }
+        .modal-body::-webkit-scrollbar-track { background: var(--light-gray); border-radius: 4px; }
+        .modal-body::-webkit-scrollbar-thumb { background: var(--primary-blue); border-radius: 4px; }
+        .modal-body::-webkit-scrollbar-thumb:hover { background: var(--accent-red); }
+        .close-modal { 
+            background: none; border: none; font-size: 1.5rem; 
+            cursor: pointer; color: var(--dark-color); 
+            transition: var(--transition);
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .close-modal:hover { 
+            color: var(--accent-red); 
+            transform: rotate(90deg);
+            background-color: rgba(230, 57, 70, 0.1);
+        }
+        
+        /* Estilos para contenido de modales */
+        .content-section { margin-bottom: 1.5rem; }
+        .content-section h3 { 
+            color: var(--primary-blue); margin-bottom: 0.8rem; 
+            font-size: 1.1rem; display: flex; 
+            align-items: center; gap: 0.5rem; 
+        }
+        .content-section p { line-height: 1.6; color: var(--text-dark); }
+        .content-section ul { margin-left: 1.5rem; margin-top: 0.5rem; }
+        .content-section li { margin-bottom: 0.5rem; line-height: 1.5; }
+        .highlight-box { 
+            background: var(--light-gray); padding: 1rem; 
+            border-radius: 8px; border-left: 4px solid var(--accent-red); 
+            margin: 1rem 0; 
+        }
+
+        /* --- NUEVOS ESTILOS PARA PÁGINA DE PRECIOS (INDEX2) --- */
+        .pricing-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            overflow: hidden;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid var(--medium-gray);
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+
+        .pricing-header {
+            background: linear-gradient(45deg, var(--primary-blue), var(--accent-color));
+            color: var(--white);
+            padding: 2.5rem 2rem;
+            text-align: center;
+        }
+        
+        .pricing-header i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+            opacity: 0.8;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .pricing-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin: 0;
+        }
+
+        .pricing-body {
+            padding: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1; /* Para que el botón se alinee al fondo */
+            color: var(--text-dark); /* Asegura que el texto sea oscuro */
+        }
+
+        .price {
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: var(--primary-blue);
+            text-align: center;
+            line-height: 1.1;
+        }
+
+        .price-period {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .price-subtitle {
+            text-align: center;
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--accent-red);
+            margin-bottom: 2rem;
+        }
+
+        .features-list {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 2.5rem 0;
+            flex-grow: 1; /* Empuja el botón hacia abajo */
+        }
+
+        .features-list li {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+            color: var(--text-dark);
+        }
+
+        .features-list li i {
+            color: var(--success-color);
+            font-size: 1.2rem;
+        }
+
+        .btn-pricing-primary {
+            background: linear-gradient(45deg, var(--primary-blue), var(--accent-color));
+            color: var(--white) !important;
+            border: none;
+            border-radius: 50px;
+            padding: 14px 30px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            transition: var(--transition);
+            text-align: center;
+            text-decoration: none;
+            display: block;
+            width: 100%;
+            box-shadow: 0 5px 15px rgba(26, 75, 140, 0.3);
+        }
+        
+        .btn-pricing-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(26, 75, 140, 0.4);
+            color: var(--white) !important;
+        }
+        
+        .btn-pricing-secondary {
+            background: linear-gradient(45deg, var(--secondary-color), #ffb74d);
+            color: var(--white) !important;
+            border: none;
+            border-radius: 50px;
+            padding: 14px 30px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            transition: var(--transition);
+            text-align: center;
+            text-decoration: none;
+            display: block;
+            width: 100%;
+            box-shadow: 0 5px 15px rgba(255, 152, 0, 0.3);
+        }
+        
+        .btn-pricing-secondary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 152, 0, 0.4);
+            color: var(--white) !important;
+        }
+
+        .btn-guest {
+            background: var(--secondary-color);
+            border: none;
+            border-radius: 50px;
+            padding: 14px 30px;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            color: var(--white) !important;
+            font-size: 1.1rem;
+            text-decoration: none;
+            box-shadow: 0 5px 15px rgba(255, 152, 0, 0.3);
+        }
+        
+        .btn-guest:hover {
+            background: #E68900;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 152, 0, 0.4);
+            color: var(--white) !important;
+        }
+        /* --- FIN NUEVOS ESTILOS --- */
+
+    </style>
+</head>
+<body>
+    <i class="fas fa-apple-alt floating-element floating-element-1"></i>
+    <i class="fas fa-heart floating-element floating-element-2"></i>
+    <i class="fas fa-child floating-element floating-element-3"></i>
+    
+    <header class="header">
+        <div class="header-container">
+            <div class="logo-container">
+                <img src="logo.png" alt="Yachay Mikuy Logo">
+            </div>
+            <div class="logo">
+                <i class=""></i>
+                Yachay Mikuy
+            </div>
+            <div class="ms-auto">
+                <div id="userMenu" class="d-none">
+                    <span id="userName" class="me-3"></span>
+                    <button id="logoutBtn" class="btn btn-light btn-sm">
+                        <i class="fas fa-sign-out-alt"></i> Cerrar sesión
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <section class="section-with-bg" style="background-image: url('foto8.jpg');"> <div class="container section-content" style="padding-top: 4rem; padding-bottom: 4rem;">
+                <div class="text-center" data-aos="fade-up">
+                    <h1 class="section-title">Nuestros Planes</h1>
+                    <p class="section-subtitle">Elige el plan que se acomoda a tu familia. Un solo pago para todos tus hijos.</p>
+                </div>
+
+                <div class="row g-4 justify-content-center" style="padding-top: 2rem;">
+
+                    <div class="col-lg-5 col-md-8" data-aos="fade-up" data-aos-delay="100">
+                        <div class="pricing-card">
+                            <div class="pricing-header">
+                                <i class="fas fa-users"></i>
+                                <h3 class="pricing-title">Plan Familiar</h3>
+                            </div>
+                            <div class="pricing-body">
+                                <div class="price">
+                                    $5<span class="price-period"> / mes</span>
+                                </div>
+                                <div class="price-subtitle">
+                                    <strong>Un solo pago por familia</strong>
+                                </div>
+                                <ul class="features-list">
+                                    <li><i class="fas fa-check-circle"></i> Planes nutricionales <strong>ilimitados</strong></li>
+                                    <li><i class="fas fa-check-circle"></i> Perfiles para <strong>todos tus hijos</strong></li>
+                                    <li><i class="fas fa-check-circle"></i> Seguimiento y reportes con IA</li>
+                                    <li><i class="fas fa-check-circle"></i> Acceso a la comunidad de apoyo</li>
+                                    <li><i class="fas fa-check-circle"></i> Recetario y guías educativas</li>
+                                </ul>
+                                <a href="index1.html" class="btn-pricing-primary">Ingresar y Registrarse</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-5 col-md-8" data-aos="fade-up" data-aos-delay="200">
+                        <div class="pricing-card">
+                            <div class="pricing-header" style="background: linear-gradient(45deg, var(--secondary-color), #ffb74d);">
+                                <i class="fas fa-handshake"></i>
+                                <h3 class="pricing-title">Plan Convenio</h3>
+                            </div>
+                            <div class="pricing-body">
+                                <div class="price">
+                                    Gratis<span class="price-period"> (para ti)</span>
+                                </div>
+                                <div class="price-subtitle">
+                                    <strong>Financiado por tu Municipalidad</strong>
+                                </div>
+                                <ul class="features-list">
+                                    <li><i class="fas fa-check-circle"></i> <strong>Todos los beneficios</strong> del Plan Familiar</li>
+                                    <li><i class="fas fa-check-circle"></i> Cobertura total del costo por convenios</li>
+                                    <li><i class="fas fa-check-circle"></i> Acceso gratuito para familias empadronadas</li>
+                                    <li><i class="fas fa-check-circle"></i> Apoyo directo de gestores locales</li>
+                                    <li><i class="fas fa-check-circle"></i> Regístrate para saber si tu municipalidad aplica</li>
+                                </ul>
+                                <a href="index1.html" class="btn-pricing-secondary">Verificar Convenio</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="text-center" data-aos="fade-up" data-aos-delay="300" style="margin-top: 4rem;">
+                    <p class="section-subtitle" style="margin-bottom: 1.5rem; font-size: 1.1rem; color: var(--white);">¿Solo quieres explorar?</p>
+                    <a href="index1.html" class="btn-guest" id="guestBtnLink">
+                        <i class="fas fa-user-secret"></i> Explorar como invitado
+                    </a>
+                </div>
+
+            </div>
+        </section>
+    </main>
+    <a href="#" class="floating-know-more" id="knowMoreBtn">
+        <i class="fas fa-info-circle"></i>
+        <span>Conoce más</span>
+    </a>
+    
+    <button id="chatbot-toggle">
+        <i class="fas fa-robot"></i>
+    </button>
+    <div id="chatbot-window" style="display: none;">
+        <div class="chatbot-header">
+            <h4><i class="fas fa-robot chatbot-header-icon"></i> Yachay-Bot</h4>
+            <button id="chatbot-close">&times;</button>
+        </div>
+        <div id="chat-messages">
+            </div>
+        <div id="chat-suggestions">
+            </div>
+        <div class="chat-input-area">
+            <input type="text" id="chat-input" placeholder="Escribe tu pregunta...">
+            <button id="chat-send"><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Redes Sociales</h3>
+                <div class="social-links">
+                    <a href="https://facebook.com/yachaymikuy" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.linkedin.com/company/yachay-mikuy/posts/?feedView=all" target="_blank" title="linkedin"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://instagram.com/yachaymikuy" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="https://youtu.be/La15HNlOpEM" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a>
+                    <a href="https://wa.me/51918072862" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Contacto</h3>
+                <p><i class="fas fa-envelope"></i> yachay.mikuy@gmail.com</p>
+                <p><i class="fas fa-phone"></i> +51 918 072 862</p>
+                <p><i class="fas fa-map-marker-alt"></i> Lima - Perú</p>
+            </div>
+            <div class="footer-section">
+                <h3>Enlaces Útiles</h3>
+                <ul class="footer-links">
+                    <li><a href="#" id="aboutLink"><i class="fas fa-info-circle"></i> Acerca de Nosotros</a></li>
+                    <li><a href="#" id="servicesLink"><i class="fas fa-concierge-bell"></i> Servicios</a></li>
+                    <li><a href="#" id="faqLink"><i class="fas fa-question-circle"></i> Preguntas Frecuentes</a></li>
+                    <li><a href="#" id="privacyLink"><i class="fas fa-shield-alt"></i> Política de Privacidad</a></li>
+                    <li><a href="#" id="termsLink"><i class="fas fa-file-contract"></i> Términos y Condiciones</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">&copy; 2025 Yachay Mikuy. Todos los derechos reservados.</div>
+    </footer>
+
+    <div id="action-modal-container"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intro.js/7.2.0/intro.min.js"></script>
+
+    <script>
+        // Inicializar AOS (Animate On Scroll)
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 100
+        });
+        
+        // Función para forzar el inicio de sesión
+        function forceLogin(event) {
+            event.preventDefault();
+            // Limpiar cualquier sesión existente
+            localStorage.removeItem('userLoggedIn');
+            localStorage.removeItem('userName');
+            sessionStorage.removeItem('userLoggedIn');
+            sessionStorage.removeItem('userName');
+            
+            // Redirigir a la página de inicio de sesión
+            window.location.href = 'index1.html#login';
+        }
+        
+        // Configurar modales del footer
+        document.addEventListener('DOMContentLoaded', function() {
+            const actionModalContainer = document.getElementById('action-modal-container');
+
+            // Objeto con las plantillas HTML para cada modal
+            const templates = {
+                aboutModal: () => `
+                    <div class="modal active">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h2>Acerca de Yachay Mikuy</h2>
+                                <button class="close-modal">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="content-section">
+                                    <h3><i class="fas fa-bullseye"></i> Nuestra Misión</h3>
+                                    <p>Reducir la prevalencia de anemia y malnutrición en niños de 0 a 13 años mediante planes de alimentación personalizados, adaptados culturalmente y económicamente a la realidad de las familias peruanas.</p>
+                                </div>
+                                <div class="content-section">
+                                    <h3><i class="fas fa-eye"></i> Nuestra Visión</h3>
+                                    <p>Convertirnos en la plataforma digital líder en nutrición infantil en Perú, contribuyendo al desarrollo humano y social del país a través de hábitos alimentarios saludables.</p>
+                                </div>
+                                <div class="content-section">
+                                    <h3><i class="fas fa-users"></i> Nuestro Equipo</h3>
+                                    <p>Contamos con un equipo multidisciplinario de profesionales de la salud, nutricionistas, desarrolladores de software y expertos en educación, comprometidos con mejorar la nutrición infantil en el país.</p>
+                                </div>
+                                <div class="content-section">
+                                    <h3><i class="fas fa-chart-line"></i> Impacto</h3>
+                                    <p>Según estudios del INEI (2023), la anemia infantil afecta a más del 40% de niños menores de 3 años en algunas regiones del Perú. Nuestro proyecto busca reducir esta cifra mediante intervenciones personalizadas y seguimiento continuo.</p>
+                                </div>
+                                <div class="highlight-box">
+                                    <h3 style="margin-top:0;"><i class="fas fa-award"></i> Reconocimientos</h3>
+                                    <p>Proyecto seleccionado por la Universidad de Piura como iniciativa de impacto social en el programa de Ingeniería Industrial y de Sistemas.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>`,
+                servicesModal: () => `
+                    <div class="modal active">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h2>Nuestros Servicios</h2>
+                                <button class="close-modal">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="content-section">
+                                    <h3><i class="fas fa-utensils"></i> Planes de Alimentación Personalizados</h3>
+                                    <p>Desarrollamos planes nutricionales adaptados a las necesidades específicas de cada niño, considerando:</p>
+                                    <ul>
+                                        <li>Edad y estado de salud</li>
+                                        <li>Disponibilidad de alimentos locales</li>
+                                        <li>Hábitos culturales y preferencias familiares</li>
+                                        <li>Capacidad económica del hogar</li>
+                                    </ul>
+                                </div>
+                                <div class="content-section">
+                                    <h3><i class="fas fa-chart-line"></i> Seguimiento Nutricional</h3>
+                                    <p>Monitoreamos el progreso de cada niño a través de:</p>
+                                    <ul>
+                                        <li>Registro diario de consumo alimentario</li>
+                                        <li>Evaluación periódica de indicadores de salud</li>
+                                        <li>Ajustes automáticos según resultados obtenidos</li>
+                                        <li>Reportes mensuales para padres y tutores</li>
+                                    </ul>
+                                </div>
+                                <div class="content-section">
+                                    <h3><i class="fas fa-graduation-cap"></i> Educación Nutricional</h3>
+                                    <p>Ofrecemos material educativo en múltiples formatos:</p>
+                                    <ul>
+                                        <li>Recetas prácticas con ingredientes locales</li>
+                                        <li>Videos tutoriales de preparación</li>
+                                        <li>Guías informativas sobre nutrientes esenciales</li>
+                                        <li>Consejos para mejorar hábitos alimentarios</li>
+                                    </ul>
+                                </div>
+                                <div class="content-section">
+                                    <h3><i class="fas fa-users"></i> Comunidad de Apoyo</h3>
+                                    <p>Conectamos a las familias con:</p>
+                                    <ul>
+                                        <li>Nutricionistas y profesionales de la salud</li>
+                                        <li>Otras familias que comparten experiencias</li>
+                                        <li>Foros de discusión y consejos prácticos</li>
+                                        <li>Eventos virtuales de capacitación</li>
+                                    </ul>
+                                </div>
+                                <div class="highlight-box">
+                                    <h3 style="margin-top:0;"><i class="fas fa-mobile-alt"></i> Accesibilidad</h3>
+                                    <p>Nuestra plataforma funciona en modo offline y cuenta con versión ligera para zonas con conectividad limitada.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>`,
+                faqModal: () => `
+                    <div class="modal active">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h2>Preguntas Frecuentes</h2>
+                                <button class="close-modal">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="content-section">
+                                    <h3><i class="fas fa-question-circle"></i> ¿Qué es Yachay Mikuy?</h3>
+                                    <p>Yachay Mikuy es una plataforma digital que ofrece planes de alimentación personalizados para combatir la anemia infantil en Perú, combinando tecnología, educación y nutrición culturalmente adaptada.</p>
+                                </div>
+                                <div class="content-section">
+                                    <h3><i class="fas fa-child"></i> ¿Para qué edades está diseñada la plataforma?</h3>
+                                    <p>Nuestra plataforma está diseñada para niños de 0 a 13 años, etapa crucial en el desarrollo donde los hábitos alimentarios se consolidan y se pueden prevenir deficiencias nutricionales a largo plazo.</p>
+                                </div>
+                                <div class="content-section">
+                                    <h3><i class="fas fa-user-plus"></i> ¿Cómo puedo registrarme?</h3>
+                                    <p>Puedes registrarte haciendo clic en el botón "Ingresar y Registrarse" en nuestra página de planes y completando el formulario. El proceso es rápido y seguro.</p>
+                                </div>
+                                <div class="content-section">
+                                    <h3><i class="fas fa-shield-alt"></i> ¿Es seguro compartir los datos de mis hijos?</h3>
+                                    <p>Sí, implementamos medidas avanzadas de protección de datos:</p>
+                                    <ul>
+                                        <li>Cifrado de extremo a extremo</li>
+                                        <li>Consentimiento parental explícito</li>
+                                        <li>Cumplimiento con normativas de protección de datos</li>
+                                        <li>Acceso restringido solo a personal autorizado</li>
+                                    </ul>
+                                </div>
+                                <div class="content-section">
+                                    <h3><i class="fas fa-heartbeat"></i> ¿Cómo funciona el seguimiento nutricional?</h3>
+                                    <p>A través de nuestra aplicación, puedes registrar el consumo alimentario de tus hijos y nosotros monitoreamos su progreso. El sistema genera alertas y recomendaciones automáticas según los resultados obtenidos.</p>
+                                </div>
+                                <div class="content-section">
+                                    <h3><i class="fas fa-dollar-sign"></i> ¿Qué costo tiene el servicio?</h3>
+                                    <p>Ofrecemos un plan familiar de $5 mensuales. También gestionamos planes subsidiados gratuitos para familias en distritos con convenios municipales.</p>
+                                </div>
+                                <div class="content-section">
+                                    <h3><i class="fas fa-wifi"></i> ¿Funciona sin internet?</h3>
+                                    <p>Sí, contamos con modo offline que permite:</p>
+                                    <ul>
+                                        <li>Acceso a recetas y guías descargadas</li>
+                                        <li>Registro de consumo para sincronizar después</li>
+                                        <li>Notificaciones vía SMS para zonas rurales</li>
+                                    </ul>
+                                </div>
+                                <div class="content-section">
+                                    <h3><i class="fas fa-hands-helping"></i> ¿Cómo obtengo ayuda si tengo problemas?</h3>
+                                    <p>Puedes contactarnos a través de:</p>
+                                    <ul>
+                                        <li>Chat en vivo en la aplicación</li>
+                                        <li>Correo electrónico: yachay.mikuy@gmail.com</li>
+                                        <li>Teléfono/WhatsApp: +51 918 072 862</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>`,
+                privacyModal: () => `
+                    <div class="modal active">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h2>Política de Privacidad</h2>
+                                <button class="close-modal">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="content-section">
+                                    <h3><i class="fas fa-info-circle"></i> Información que Recopilamos</h3>
+                                    <p>Recopilamos información personal y de salud de manera responsable:</p>
+                                    <ul>
+                                        <li><strong>Datos personales:</strong> Nombre, correo electrónico, teléfono, departamento de residencia</li>
+                                        <li><strong>Datos de los niños:</strong> Nombre, fecha de nacimiento, peso, altura, historial médico relevante</li>
+                                        <li><strong>Datos de uso:</strong> Interacciones con la plataforma, preferencias alimentarias, progreso nutricional</li>
+                                    </ul>
+                                </div>
+                                <div class="content-section">
+                                    <h3><i class="fas fa-cogs"></i> Uso de la Información</h3>
+                                    <p>Utilizamos tu información para:</p>
+                                    <ul>
+                                        <li>Proporcionar planes de alimentación personalizados</li>
+                                        <li>Realizar seguimiento nutricional efectivo</li>
+                                        <li>Mejorar continuamente nuestros servicios</li>
+                                        <li>Comunicarnos contigo sobre actualizaciones relevantes</li>
+                                        <li>Generar reportes estadísticos anonimizados</li>
+                                    </ul>
+                                </div>
+                                <div class="content-section">
+                                    <h3><i class="fas fa-lock"></i> Protección de Datos</h3>
+                                    <p>Implementamos medidas de seguridad robustas, incluyendo cifrado SSL y almacenamiento seguro.</p>
+                                </div>
+                                <div class="content-section">
+                                    <h3><i class="fas fa-user-shield"></i> Derechos de los Usuarios</h3>
+                                    <p>Tienes derecho a acceder, rectificar, cancelar u oponerte al tratamiento de tus datos contactando a yachay.mikuy@gmail.com</p>
+                                </div>
+                                <div class="content-section">
+                                    <h3><i class="fas fa-user-friends"></i> Consentimiento Parental</h3>
+                                    <p>Requerimos consentimiento explícito de padres o tutores para el tratamiento de datos de menores.</p>
+                                </div>
+                                <div class="highlight-box">
+                                    <h3 style="margin-top:0;"><i class="fas fa-exclamation-triangle"></i> Importante</h3>
+                                    <p>Esta política se actualiza periódicamente. Te notificaremos cualquier cambio significativo.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>`,
+                termsModal: () => `
+                    <div class="modal active">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h2>Términos y Condiciones</h2>
+                                <button class="close-modal">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="content-section">
+                                    <h3><i class="fas fa-check-circle"></i> Aceptación de los Términos</h3>
+                                    <p>Al utilizar la plataforma Yachay Mikuy, aceptas estos términos y condiciones. Si no estás de acuerdo, no debes utilizar nuestros servicios.</p>
+                                </div>
+                                <div class="content-section">
+                                    <h3><i class="fas fa-cube"></i> Descripción del Servicio</h3>
+                                    <p>Yachay Mikuy es una plataforma digital que ofrece planes de alimentación personalizados, seguimiento y educación nutricional para niños de 0 a 13 años.</p>
+                                </div>
+                                <div class="content-section">
+                                    <h3><i class="fas fa-user-check"></i> Responsabilidades del Usuario</h3>
+                                    <p>Como usuario, te comprometes a proporcionar información veraz, mantener la confidencialidad de tu acceso y seguir las recomendaciones de manera responsable.</p>
+                                </div>
+                                <div class="content-section">
+                                    <h3><i class="fas fa-ban"></i> Uso Prohibido</h3>
+                                    <p>Está prohibido utilizar la plataforma para fines comerciales no autorizados, distribuir malware o proporcionar información médica falsa.</p>
+                                </div>
+                                <div class="content-section">
+                                    <h3><i class="fas fa-heart"></i> Información Médica</h3>
+                                    <p>Importante: Yachay Mikuy <strong>no reemplaza la consulta médica profesional</strong>. Nuestras recomendaciones son complementarias y deben ser supervisadas por un profesional de la salud.</p>
+                                </div>
+                                <div class="content-section">
+                                    <h3><i class="fas fa-exclamation-triangle"></i> Limitación de Responsabilidad</h3>
+                                    <p>Yachay Mikuy no se responsabiliza por el uso indebido de la plataforma o por consecuencias derivadas de no seguir adecuadamente las recomendaciones.</p>
+                                </div>
+                                <div class="content-section">
+                                    <h3><i class="fas fa-gavel"></i> Ley Aplicable</h3>
+                                    <p>Estos términos se rigen por las leyes de la República del Perú. Cualquier disputa será resuelta en los tribunales de Lima, Perú.</p>
+                                </div>
+                                <div class="highlight-box">
+                                    <h3 style="margin-top:0;"><i class="fas fa-calendar-alt"></i> Vigencia</h3>
+                                    <p>Estos términos entran en vigor a partir del 1 de enero de 2025 y permanecerán vigentes hasta su modificación.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>`
+            };
+
+            // Funciones para abrir y cerrar el modal
+            const ui = {
+                openModal: (content) => { actionModalContainer.innerHTML = content; },
+                closeModal: () => { actionModalContainer.innerHTML = ''; }
+            };
+
+            // Listener de clics para todo el documento
+            document.body.addEventListener('click', (e) => {
+                const isMainLink = e.target.closest('a[href="index1.html"]');
+                const isExternalLink = e.target.closest('a[target="_blank"]');
+                
+                // No prevenir default para links de registro, invitado o externos
+                if (isMainLink || isExternalLink) { return; }
+                
+                // Prevenir default para otros links <a> (como los del footer)
+                if (e.target.closest('a') && !e.target.closest('.team-social a')) { 
+                     e.preventDefault();
+                }
+                
+                if (e.target.matches('#aboutLink')) { ui.openModal(templates.aboutModal()); }
+                if (e.target.matches('#servicesLink')) { ui.openModal(templates.servicesModal()); }
+                if (e.target.matches('#faqLink')) { ui.openModal(templates.faqModal()); }
+                if (e.target.matches('#privacyLink')) { ui.openModal(templates.privacyModal()); }
+                if (e.target.matches('#termsLink')) { ui.openModal(templates.termsModal()); }
+                
+                if (e.target.matches('.modal') || e.target.matches('.close-modal')) { 
+                    ui.closeModal(); 
+                }
+            });
+            
+            // Botón flotante "Conoce más"
+            document.getElementById('knowMoreBtn').addEventListener('click', function(e) {
+                e.preventDefault();
+                ui.openModal(templates.aboutModal());
+            });
+
+
+            // ===========================================
+            // === LÓGICA DEL CHATBOT Y DEL TOUR (ACTUALIZADA) ===
+            // ===========================================
+
+            // --- Lógica del Chatbot ---
+            const chatbotToggle = document.getElementById('chatbot-toggle');
+            const chatbotWindow = document.getElementById('chatbot-window');
+            const chatbotClose = document.getElementById('chatbot-close');
+            const chatMessages = document.getElementById('chat-messages');
+            const chatInput = document.getElementById('chat-input');
+            const chatSend = document.getElementById('chat-send');
+            const chatSuggestions = document.getElementById('chat-suggestions');
+
+            // --- ¡NUEVA BASE DE CONOCIMIENTO! (Basada en PDF y Web) ---
+            const todasSugerencias = [
+                '¿Qué es Yachay Mikuy?',
+                '¿Cuál es el problema de la anemia?',
+                '¿Cómo funciona la solución?',
+                '¿Qué tan rápida es la recuperación?',
+                '¿Quién es Alvaro Quiroz?',
+                '¿Quién es la CEO?',
+                '¿Qué es Hult Prize?',
+                'Háblame de la Kiwicha',
+                '¿Cuál es el teléfono de contacto?',
+                'Háblame de los logros',
+                '¿Por qué fallan otras soluciones?',
+                '¿El proyecto está validado?',
+                '¿Tienen aliados?',
+                '¿Cuál es el plan de expansión?'
+            ];
+            
+            // Función para ABRIR el chat
+            function openChat() {
+                chatbotWindow.style.display = 'flex';
+                // Añadir saludo inicial solo si está vacío
+                if (chatMessages.children.length === 0) {
+                    agregarMensaje('¡Hola! 👋 Soy Yachay-Bot. Puedes preguntarme sobre el equipo, los premios, los alimentos o cualquier cosa que veas en la página.', 'bot');
+                }
+                actualizarSugerencias();
+            }
+            
+            // Función para CERRAR y REINICIAR el chat
+            function closeChat() {
+                chatbotWindow.style.display = 'none';
+                chatMessages.innerHTML = ''; // ¡Borra el historial del chat!
+            }
+
+            // Abrir y cerrar el chat
+            chatbotToggle.addEventListener('click', () => {
+                const esVisible = chatbotWindow.style.display === 'flex';
+                if (esVisible) {
+                    closeChat();
+                } else {
+                    openChat();
+                }
+            });
+            chatbotClose.addEventListener('click', closeChat);
+
+            // Enviar mensaje
+            chatSend.addEventListener('click', enviarMensaje);
+            chatInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    enviarMensaje();
+                }
+            });
+
+            function enviarMensaje() {
+                const texto = chatInput.value.trim();
+                if (texto === '') return;
+
+                agregarMensaje(texto, 'user');
+                chatInput.value = '';
+                
+                setTimeout(() => {
+                    generarRespuestaBot(texto);
+                }, 500);
+            }
+
+            function agregarMensaje(texto, tipo) {
+                const divMensaje = document.createElement('div');
+                divMensaje.className = `chat-message ${tipo}`;
+                divMensaje.innerText = texto;
+                chatMessages.appendChild(divMensaje);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+
+            // --- ¡FUNCIÓN ACTUALIZADA CON CONOCIMIENTO! ---
+            function generarRespuestaBot(textoUsuario) {
+                const texto = textoUsuario.toLowerCase();
+                let respuesta;
+
+                // Saludos y despedidas
+                if (texto.includes('hola') || texto.includes('buenos dias') || texto.includes('buenas tardes')) {
+                    respuesta = '¡Hola! 👋 Soy Yachay-Bot. ¿En qué puedo ayudarte hoy?';
+                
+                } else if (texto.includes('gracias') || texto.includes('adios') || texto.includes('chao')) {
+                    respuesta = '¡De nada! Ha sido un placer ayudarte. Estoy aquí si necesitas algo más. 😊';
+
+                // --- INFO: Contacto ---
+                } else if (texto.includes('email') || texto.includes('correo')) {
+                    respuesta = '¡Claro! Nuestro correo de contacto es yachay.mikuy@gmail.com. También lo puedes encontrar en el pie de página.';
+                } else if (texto.includes('telefono') || texto.includes('whatsapp') || texto.includes('celular') || texto.includes('contacto')) {
+                    respuesta = 'Nuestro WhatsApp de soporte es +51 918 072 862, lo puedes encontrar en el pie de página.';
+                } else if (texto.includes('donde estan') || texto.includes('ubicacion') || texto.includes('direccion')) {
+                    respuesta = 'Nos encontramos en Lima - Perú.';
+
+                // --- INFO: Planes y Precios ---
+                } else if (texto.includes('precio') || texto.includes('costo') || texto.includes('planes')) {
+                    respuesta = 'Tenemos un "Plan Familiar" por $5 al mes, que cubre a todos los hijos de la familia. También tenemos un "Plan Convenio" que es gratuito para ti si tu municipalidad tiene un acuerdo con nosotros.';
+                } else if (texto.includes('familiar')) {
+                    respuesta = 'El Plan Familiar cuesta $5 al mes y te da acceso ilimitado para todos tus hijos. Incluye planes personalizados, seguimiento con IA y acceso a la comunidad.';
+                } else if (texto.includes('convenio') || texto.includes('municipalidad') || texto.includes('gratis')) {
+                    respuesta = 'El Plan Convenio es gratuito para las familias. El costo lo asume la municipalidad u organización aliada. Para saber si aplicas, debes registrarte y verificar si tu municipalidad está en nuestra lista de convenios.';
+                } else if (texto.includes('invitado')) {
+                    respuesta = '¡Claro! Puedes hacer clic en "Explorar como invitado" para entrar a la plataforma y ver cómo funciona antes de registrarte.';
+
+                // --- INFO: General ---
+                } else if (texto.includes('yachay mikuy') || texto.includes('que es esto') || texto.includes('que hacen')) {
+                    respuesta = 'Yachay Mikuy es la primera plataforma que combate la anemia con planes nutricionales personalizados, usando un enfoque integral y adaptación a las circunstancias locales.';
+                } else if (texto.includes('como funciona') || texto.includes('proceso') || texto.includes('mikuycito')) {
+                    respuesta = 'Nuestro proceso tiene 5 pasos: 1. Recopilamos info del niño. 2. Usamos IA y Big Data para analizarla. 3. Generamos un plan personalizado. 4. El niño interactúa con "Mikuycito" (gamificación). 5. Hacemos monitoreo y ajustes continuos.';
+                } else if (texto.includes('rapido') || texto.includes('cuanto tiempo') || texto.includes('ventaja') || texto.includes('recuperacion')) {
+                    respuesta = 'Nuestra gran ventaja es una recuperación ¡hasta 5 veces más rápida!. El tratamiento tradicional (OMS) dura 5 meses o más, pero con nuestra personalización, apuntamos a 1 mes, basado en estudios que lo validan.';
+
+                // --- INFO: Equipo ---
+                } else if (texto.includes('equipo') || texto.includes('creadores') || texto.includes('quienes son')) {
+                    respuesta = 'Nuestro equipo está formado por profesionales como Luz María Montalvo (CEO) y Alvaro Quiroz (CTO). ¡Puedes ver sus fotos en la sección "Nuestro Equipo" en la página principal (index.html)!';
+                } else if (texto.includes('luz') || texto.includes('montalvo') || texto.includes('ceo')) {
+                    respuesta = 'Luz María Montalvo Cucchi es nuestra CEO. Ella lidera la estrategia general y coordina al equipo.';
+                } else if (texto.includes('alvaro') || texto.includes('quiroz') || texto.includes('cto')) {
+                    respuesta = 'Alvaro Quiroz Carrera es nuestro CTO. Él desarrolla la plataforma digital y dirige toda la parte tecnológica.';
+                
+                // --- INFO: Logros ---
+                } else if (texto.includes('logros') || texto.includes('premios') || texto.includes('reconocimientos')) {
+                    respuesta = '¡Estamos orgullosos de nuestros logros! Hemos sido finalistas en Hult Prize UNMSM, Top 10 mundial en Babson Global, y Top 100 en Jump Chile 2025, entre otros.';
+                } else if (texto.includes('hult prize')) {
+                    respuesta = 'Fuimos Finalistas (Top 4) en el Hult Prize UNMSM, destacando por nuestro diseño de negocios de alto impacto social.';
+                
+                // --- LÓGICA DE RECOMENDACIÓN! (Cuando no entiende) ---
+                } else {
+                    respuesta = 'No he entendido muy bien esa pregunta. ¿Quizás quisiste preguntar por una de estas opciones? 🤔';
+                }
+
+                agregarMensaje(respuesta, 'bot');
+                
+                // ¡Siempre actualiza las sugerencias aleatorias!
+                actualizarSugerencias();
+            }
+
+            // --- ¡FUNCIÓN ACTUALIZADA CON NUEVAS SUGERENCIAS! ---
+            function actualizarSugerencias() {
+                chatSuggestions.innerHTML = '';
+                // Mezclar y tomar 3 sugerencias aleatorias de la nueva lista
+                const sugerenciasMezcladas = todasSugerencias.sort(() => 0.5 - Math.random()).slice(0, 3);
+                
+                sugerenciasMezcladas.forEach(texto => {
+                    const btnSugerencia = document.createElement('button');
+                    btnSugerencia.innerText = texto;
+                    btnSugerencia.addEventListener('click', () => {
+                        chatInput.value = texto;
+                        enviarMensaje();
+                    });
+                    chatSuggestions.appendChild(btnSugerencia);
+                });
+            }
+
+
+            // --- Lógica del Tour Guiado (Simplificada para esta página) ---
+            if (!sessionStorage.getItem('tourYachayVistoPlanes')) {
+                const intro = introJs();
+                
+                intro.setOptions({
+                    steps: [
+                        { 
+                            title: 'Paso 1 de 4',
+                            element: document.querySelector('.pricing-card:nth-child(1)'), 
+                            intro: 'Este es nuestro <strong>Plan Familiar</strong>. Con un solo pago mensual de $5, cubres a todos los hijos de tu hogar.',
+                            position: 'top'
+                        },
+                        { 
+                            title: 'Paso 2 de 4',
+                            element: document.querySelector('.pricing-card:nth-child(2)'), 
+                            intro: 'Este es el <strong>Plan Convenio</strong>. Es gratuito para ti si tu municipalidad o una organización aliada financia el plan.',
+                            position: 'top'
+                        },
+                        { 
+                            title: 'Paso 3 de 4',
+                            element: document.querySelector('.btn-pricing-primary'), 
+                            intro: 'Haz clic aquí para <strong>Ingresar o Registrarte</strong> y empezar a crear los perfiles de tus hijos.',
+                            position: 'top'
+                        },
+                        { 
+                            title: 'Paso 4 de 4',
+                            element: document.getElementById('guestBtnLink'), 
+                            intro: 'O si prefieres, puedes <strong>Explorar como invitado</strong> para conocer la plataforma por dentro antes de registrarte.',
+                            position: 'top'
+                        }
+                    ],
+                    nextLabel: 'Siguiente &rarr;',
+                    prevLabel: '&larr; Anterior',
+                    skipLabel: 'x', // Texto corto
+                    doneLabel: '¡Entendido!',
+                    showProgress: true,
+                    showBullets: false, 
+                    tooltipClass: 'introjs-yachay-theme', 
+                    scrollPadding: 50
+                });
+
+                intro.oncomplete(() => {
+                    sessionStorage.setItem('tourYachayVistoPlanes', 'true');
+                });
+                intro.onexit(() => {
+                    sessionStorage.setItem('tourYachayVistoPlanes', 'true');
+                });
+
+                setTimeout(() => {
+                    intro.start();
+                }, 500);
+            }
+
+        });
+    </script>
+</body>
+</html>

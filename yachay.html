@@ -41,7 +41,7 @@
             --transition: all 0.3s ease-in-out;
             --accent-red-footer: #e63946;
 
-            /* Variables de Intro.js (Guía) - MODIFICADAS */
+            /* Variables de Intro.js (Guía) - MEJORADAS */
             --primary-blue-guide: #2c5aa0; 
             --accent-color-guide: #5d8cc4;
             --medium-gray-guide: #dee2e6;
@@ -52,7 +52,7 @@
             --chatbot-light: #e85d75;
         }
 
-        /* --- 1.1. ESTILOS PERSONALIZADOS PARA LA GUÍA (INTRO.JS) - MODIFICADOS --- */
+        /* --- 1.1. ESTILOS PERSONALIZADOS PARA LA GUÍA (INTRO.JS) - MEJORADOS --- */
         .introjs-overlay {
             background-color: rgba(0, 0, 0, 0.6);
         }
@@ -70,8 +70,8 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
             border: none;
             color: var(--text-dark);
-            max-width: 400px;
-            padding: 25px;
+            max-width: 350px; /* Reducido de 400px */
+            padding: 20px; /* Reducido de 25px */
             position: fixed;
             top: 50% !important;
             left: 50% !important;
@@ -81,20 +81,20 @@
         }
         
         .introjs-tooltiptext {
-            font-size: 1rem;
-            line-height: 1.6;
+            font-size: 0.95rem; /* Reducido de 1rem */
+            line-height: 1.5; /* Reducido de 1.6 */
             font-weight: 400;
-            margin-bottom: 20px;
+            margin-bottom: 15px; /* Reducido de 20px */
         }
         
         .introjs-tooltip-title {
-            font-size: 1.2rem;
+            font-size: 1.1rem; /* Reducido de 1.2rem */
             font-weight: 700;
             color: var(--primary-blue-guide);
-            margin-bottom: 15px;
+            margin-bottom: 12px; /* Reducido de 15px */
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px; /* Reducido de 10px */
         }
         
         .introjs-tooltip-title i {
@@ -103,11 +103,13 @@
         
         .introjs-tooltipbuttons {
             border-top: 1px solid var(--medium-gray-guide);
-            padding-top: 15px;
-            margin-top: 15px;
+            padding-top: 12px; /* Reducido de 15px */
+            margin-top: 12px; /* Reducido de 15px */
             text-align: right;
             display: flex;
             justify-content: space-between;
+            flex-wrap: wrap; /* Añadido para mejor adaptación en móviles */
+            gap: 8px; /* Añadido espacio entre botones */
         }
         
         .introjs-button {
@@ -116,12 +118,14 @@
             border-radius: 50px;
             font-weight: 600;
             border: none;
-            padding: 10px 20px;
+            padding: 8px 16px; /* Reducido de 10px 20px */
             transition: var(--transition);
             text-shadow: none;
             font-family: 'Montserrat', sans-serif;
             cursor: pointer;
-            font-size: 0.9rem;
+            font-size: 0.85rem; /* Reducido de 0.9rem */
+            flex: 1; /* Añadido para mejor distribución */
+            min-width: 80px; /* Añadido para asegurar tamaño mínimo */
         }
         
         .introjs-button:hover {
@@ -135,10 +139,12 @@
             color: var(--gray);
             font-weight: 600;
             text-shadow: none;
-            padding: 10px 20px;
+            padding: 8px 16px; /* Reducido de 10px 20px */
             border-radius: 50px;
             border: 1px solid var(--gray);
             transition: var(--transition);
+            flex: 1; /* Añadido para mejor distribución */
+            min-width: 80px; /* Añadido para asegurar tamaño mínimo */
         }
         
         .introjs-skipbutton:hover {
@@ -165,33 +171,68 @@
         .introjs-tooltip .introjs-step-number {
             background-color: var(--primary-blue-guide);
             color: var(--white);
-            width: 30px;
-            height: 30px;
+            width: 26px; /* Reducido de 30px */
+            height: 26px; /* Reducido de 30px */
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: 700;
-            margin-right: 10px;
+            margin-right: 8px; /* Reducido de 10px */
             flex-shrink: 0;
+            font-size: 0.85rem; /* Añadido para ajustar el tamaño del número */
         }
         
-        /* Estilos para dispositivos móviles */
+        /* Estilos para dispositivos móviles - MEJORADOS */
         @media (max-width: 768px) {
             .introjs-tooltip {
-                max-width: 90%;
-                padding: 20px;
-                font-size: 0.9rem;
+                max-width: 85%; /* Reducido de 90% */
+                padding: 15px; /* Reducido de 20px */
+                font-size: 0.85rem; /* Reducido de 0.9rem */
             }
             
             .introjs-tooltipbuttons {
-                flex-direction: column;
-                gap: 10px;
+                flex-direction: row; /* Mantenemos en fila para mejor uso del espacio */
+                gap: 8px;
             }
             
             .introjs-button, .introjs-skipbutton {
-                width: 100%;
+                flex: 1; /* Ambos botones ocupan espacio igual */
                 text-align: center;
+                padding: 8px 12px; /* Reducido para móviles */
+                font-size: 0.8rem; /* Reducido para móviles */
+            }
+            
+            .introjs-tooltip-title {
+                font-size: 1rem; /* Reducido para móviles */
+            }
+            
+            .introjs-tooltiptext {
+                font-size: 0.85rem; /* Reducido para móviles */
+            }
+        }
+        
+        /* Estilos para pantallas muy pequeñas */
+        @media (max-width: 480px) {
+            .introjs-tooltip {
+                max-width: 90%;
+                padding: 12px;
+            }
+            
+            .introjs-button, .introjs-skipbutton {
+                padding: 6px 10px;
+                font-size: 0.75rem;
+            }
+            
+            .introjs-tooltip-title {
+                font-size: 0.9rem;
+                gap: 6px;
+            }
+            
+            .introjs-tooltip .introjs-step-number {
+                width: 22px;
+                height: 22px;
+                font-size: 0.75rem;
             }
         }
         /* --- FIN ESTILOS GUÍA --- */
@@ -1029,14 +1070,14 @@
         }
         // === FIN: LÓGICA DE SESIÓN ===
 
-        // --- INICIO: LÓGICA DE LA GUÍA INTERACTIVA (Intro.js) - MODIFICADA ---
+        // --- INICIO: LÓGICA DE LA GUÍA INTERACTIVA (Intro.js) - MEJORADA ---
         function startGuidedTour() {
             // Evitar que se inicie una guía si ya hay una activa
             if (document.querySelector('.introjs-overlay')) {
                 return;
             }
 
-            // MODIFICADO: Pasos detallados para los 6 módulos
+            // MEJORADO: Pasos más concisos para los 6 módulos
             const steps = [
                 {
                     element: '.group-header',
@@ -1044,31 +1085,31 @@
                 },
                 {
                     element: '#childrenListContainer',
-                    intro: '<div class="introjs-tooltip-title"><span class="introjs-step-number">2</span><i class="fas fa-child"></i> Perfiles de tus Hijos</div><div class="introjs-tooltiptext">Estos son los perfiles de tus hijos. Puedes hacer clic en cualquiera para ver un <b>resumen rápido</b> de sus datos y respuestas.</div>'
+                    intro: '<div class="introjs-tooltip-title"><span class="introjs-step-number">2</span><i class="fas fa-child"></i> Perfiles de tus Hijos</div><div class="introjs-tooltiptext">Estos son los perfiles de tus hijos. Haz clic en cualquiera para ver un <b>resumen rápido</b> de sus datos.</div>'
                 },
                 {
                     element: '.card-pantry',
-                    intro: '<div class="introjs-tooltip-title"><span class="introjs-step-number">3</span><i class="fas fa-shopping-basket"></i> Comida con Despensa</div><div class="introjs-tooltiptext">Usa esta opción para generar un plan de comidas semanal basado en los ingredientes que ya tienes en casa. ¡Es genial para ahorrar!</div>'
+                    intro: '<div class="introjs-tooltip-title"><span class="introjs-step-number">3</span><i class="fas fa-shopping-basket"></i> Comida con Despensa</div><div class="introjs-tooltiptext">Genera planes de comidas semanales basados en los ingredientes que ya tienes en casa.</div>'
                 },
                 {
                     element: '.card-region',
-                    intro: '<div class="introjs-tooltip-title"><span class="introjs-step-number">4</span><i class="fas fa-map-marked-alt"></i> Comida por Región</div><div class="introjs-tooltiptext">¿No sabes qué cocinar? Selecciona un departamento y obtén un plan basado en alimentos de temporada y platos típicos de esa zona.</div>'
+                    intro: '<div class="introjs-tooltip-title"><span class="introjs-step-number">4</span><i class="fas fa-map-marked-alt"></i> Comida por Región</div><div class="introjs-tooltiptext">Selecciona un departamento y obtén un plan basado en alimentos de temporada y platos típicos.</div>'
                 },
                 {
                     element: '.card-wellness',
-                    intro: '<div class="introjs-tooltip-title"><span class="introjs-step-number">5</span><i class="fas fa-brain"></i> Bienestar Psicológico</div><div class="introjs-tooltiptext">La nutrición también es mental. Encuentra consejos y actividades para la salud emocional de tu familia aquí.</div>'
+                    intro: '<div class="introjs-tooltip-title"><span class="introjs-step-number">5</span><i class="fas fa-brain"></i> Bienestar Psicológico</div><div class="introjs-tooltiptext">Encuentra consejos y actividades para la salud emocional de tu familia.</div>'
                 },
                 {
                     element: '.card-academic',
-                    intro: '<div class="introjs-tooltip-title"><span class="introjs-step-number">6</span><i class="fas fa-book-reader"></i> Apoyo Académico</div><div class="introjs-tooltiptext">Encuentra estrategias y recursos para potenciar el rendimiento escolar y los hábitos de estudio de la familia.</div>'
+                    intro: '<div class="introjs-tooltip-title"><span class="introjs-step-number">6</span><i class="fas fa-book-reader"></i> Apoyo Académico</div><div class="introjs-tooltiptext">Descubre estrategias y recursos para potenciar el rendimiento escolar y los hábitos de estudio.</div>'
                 },
                 {
                     element: '.card-games',
-                    intro: '<div class="introjs-tooltip-title"><span class="introjs-step-number">7</span><i class="fas fa-puzzle-piece"></i> Jugando es Divertido</div><div class="introjs-tooltiptext">Explora juegos educativos y actividades lúdicas para estimular la mente y la creatividad de tus hijos.</div>'
+                    intro: '<div class="introjs-tooltip-title"><span class="introjs-step-number">7</span><i class="fas fa-puzzle-piece"></i> Jugando es Divertido</div><div class="introjs-tooltiptext">Explora juegos educativos y actividades lúdicas para estimular la mente y la creatividad.</div>'
                 },
                 {
                     element: '.card-daily',
-                    intro: '<div class="introjs-tooltip-title"><span class="introjs-step-number">8</span><i class="fas fa-plate-wheat"></i> Platos del Día</div><div class="introjs-tooltiptext">Recibe tres recomendaciones diarias (desayuno, almuerzo y cena) de platos balanceados para toda la familia.</div>'
+                    intro: '<div class="introjs-tooltip-title"><span class="introjs-step-number">8</span><i class="fas fa-plate-wheat"></i> Platos del Día</div><div class="introjs-tooltiptext">Recibe tres recomendaciones diarias (desayuno, almuerzo y cena) de platos balanceados.</div>'
                 },
                 {
                     element: '#exitButton',
@@ -1076,7 +1117,7 @@
                 },
                 {
                     element: '.top-bar .btn-back-top',
-                    intro: '<div class="introjs-tooltip-title"><span class="introjs-step-number">10</span><i class="fas fa-arrow-left"></i> Volver</div><div class="introjs-tooltiptext">Y si quieres volver al panel de perfiles (la pantalla anterior), solo haz clic aquí en <b>Volver</b>.</div>'
+                    intro: '<div class="introjs-tooltip-title"><span class="introjs-step-number">10</span><i class="fas fa-arrow-left"></i> Volver</div><div class="introjs-tooltiptext">Haz clic aquí para volver al panel de perfiles (la pantalla anterior).</div>'
                 }
             ];
 
@@ -1326,9 +1367,142 @@
             const regionButton = document.getElementById('regionButton');
             regionButton.addEventListener('click', function() { const selectedDepartment = regionSelector.value; if (selectedDepartment) { window.location.href = `nino2.html?departamento=${selectedDepartment}&${isGuestMode ? 'guest=true' : ''}`; } else { showToast('Por favor, seleccione un departamento.', 'info'); } });
             
-            function showChildDetails(child) { const responses = storageAdapter.getResponses(); const childResponses = responses[child.id] || {}; const modalHtml = ` <div class="modal active child-details-modal"> <div class="modal-content"> <div class="modal-header"> <h2>Detalles de ${child.name}</h2> <button class="close-modal">&times;</button> </div> <div class="modal-body"> <div class="child-detail-item"> <span class="child-detail-label">Edad:</span> <span class="child-detail-value">${calculateAge(child.dob)} años</span> </div> <div class="child-detail-item"> <span class="child-detail-label">Fecha de nacimiento:</span> <span class="child-detail-value">${new Date(child.dob).toLocaleDateString()}</span> </div> <div class="child-detail-item"> <span class="child-detail-label">Sexo:</span> <span class="child-detail-value">${child.sex === 'male' ? 'Masculino' : child.sex === 'female' ? 'Femenino' : 'Otro'}</span> </div> <div class="child-detail-item"> <span class="child-detail-label">Progreso del cuestionario:</span> <span class="child-detail-value">${child.progressPercent}%</span> </div> <div class="responses-summary"> <h4>Resumen de respuestas importantes:</h4> ${getImportantResponses(childResponses)} </div> </div> </div> </div> `; document.getElementById('actionModalContainer').innerHTML = modalHtml; document.querySelector('.close-modal').addEventListener('click', function() { document.getElementById('actionModalContainer').innerHTML = ''; }); document.querySelector('.modal').addEventListener('click', function(e) { if (e.target === this) { document.getElementById('actionModalContainer').innerHTML = ''; } }); }
-            function getImportantResponses(childResponses) { const importantQuestions = { 'q1': 'Peso actual', 'q2': 'Estatura actual', 'q13': 'Desayuno habitual', 'q15': 'Almuerzo habitual', 'q17': 'Porciones de fruta al día', 'q21': 'Consumo de agua', 'q28': 'Actividad física', 'q34': 'Horas de sueño' }; let html = ''; for (const [questionId, questionLabel] of Object.entries(importantQuestions)) { if (childResponses[questionId]) { html += ` <div class="response-item"> <div class="response-question">${questionLabel}:</div> <div class="response-answer">${childResponses[questionId].value}</div> </div> `; } } if (html === '') { html = '<p>No hay respuestas relevantes registradas.</p>'; } return html; }
-            function createGuestChildrenIfNotExists() { let childrenData = storageAdapter.getChildren(); const hasAlvaro = childrenData.some(child => child.id === 'guest-alvaro'); const hasLuz = childrenData.some(child => child.id === 'guest-luz'); if (!hasAlvaro) { childrenData.push({ id: 'guest-alvaro', name: 'Alvaro', dob: '2017-08-10', sex: 'male', avatarCustomization: '1', theme: 'default', ownerId: null, createdAt: new Date().toISOString(), updatedAt: new Date().toISOString(), progressPercent: 100, deletedAt: null, version: 1 }); } if (!hasLuz) { childrenData.push({ id: 'guest-luz', name: 'Luz', dob: '2019-12-05', sex: 'female', avatarCustomization: '2', theme: 'default', ownerId: null, createdAt: new Date().toISOString(), updatedAt: new Date().toISOString(), progressPercent: 100, deletedAt: null, version: 1 }); } storageAdapter.saveChildren(childrenData); const responses = storageAdapter.getResponses(); if (!responses['guest-alvaro']) { responses['guest-alvaro'] = {}; for (let i = 1; i <= 50; i++) { responses['guest-alvaro'][`q${i}`] = { type: 'select', value: 'Respuesta de ejemplo', timestamp: new Date().toISOString(), version: 1 }; } } if (!responses['guest-luz']) { responses['guest-luz'] = {}; for (let i = 1; i <= 50; i++) { responses['guest-luz'][`q${i}`] = { type: 'select', value: 'Respuesta de ejemplo', timestamp: new Date().toISOString(), version: 1 }; } } storageAdapter.saveResponses(responses); }
+            function showChildDetails(child) { 
+                const responses = storageAdapter.getResponses(); 
+                const childResponses = responses[child.id] || {}; 
+                const modalHtml = ` 
+                    <div class="modal active child-details-modal"> 
+                        <div class="modal-content"> 
+                            <div class="modal-header"> 
+                                <h2>Detalles de ${child.name}</h2> 
+                                <button class="close-modal">&times;</button> 
+                            </div> 
+                            <div class="modal-body"> 
+                                <div class="child-detail-item"> 
+                                    <span class="child-detail-label">Edad:</span> 
+                                    <span class="child-detail-value">${calculateAge(child.dob)} años</span> 
+                                </div> 
+                                <div class="child-detail-item"> 
+                                    <span class="child-detail-label">Fecha de nacimiento:</span> 
+                                    <span class="child-detail-value">${new Date(child.dob).toLocaleDateString()}</span> 
+                                </div> 
+                                <div class="child-detail-item"> 
+                                    <span class="child-detail-label">Sexo:</span> 
+                                    <span class="child-detail-value">${child.sex === 'male' ? 'Masculino' : child.sex === 'female' ? 'Femenino' : 'Otro'}</span> 
+                                </div> 
+                                <div class="child-detail-item"> 
+                                    <span class="child-detail-label">Progreso del cuestionario:</span> 
+                                    <span class="child-detail-value">${child.progressPercent}%</span> 
+                                </div> 
+                                <div class="responses-summary"> 
+                                    <h4>Resumen de respuestas importantes:</h4> 
+                                    ${getImportantResponses(childResponses)} 
+                                </div> 
+                            </div> 
+                        </div> 
+                    </div> 
+                `; 
+                document.getElementById('actionModalContainer').innerHTML = modalHtml; 
+                document.querySelector('.close-modal').addEventListener('click', function() { 
+                    document.getElementById('actionModalContainer').innerHTML = ''; 
+                }); 
+                document.querySelector('.modal').addEventListener('click', function(e) { 
+                    if (e.target === this) { 
+                        document.getElementById('actionModalContainer').innerHTML = ''; 
+                    } 
+                }); 
+            } 
+            
+            function getImportantResponses(childResponses) { 
+                const importantQuestions = { 
+                    'q1': 'Peso actual', 
+                    'q2': 'Estatura actual', 
+                    'q13': 'Desayuno habitual', 
+                    'q15': 'Almuerzo habitual', 
+                    'q17': 'Porciones de fruta al día', 
+                    'q21': 'Consumo de agua', 
+                    'q28': 'Actividad física', 
+                    'q34': 'Horas de sueño' 
+                }; 
+                let html = ''; 
+                for (const [questionId, questionLabel] of Object.entries(importantQuestions)) { 
+                    if (childResponses[questionId]) { 
+                        html += ` 
+                            <div class="response-item"> 
+                                <div class="response-question">${questionLabel}:</div> 
+                                <div class="response-answer">${childResponses[questionId].value}</div> 
+                            </div> 
+                        `; 
+                    } 
+                } 
+                if (html === '') { 
+                    html = '<p>No hay respuestas relevantes registradas.</p>'; 
+                } 
+                return html; 
+            } 
+            
+            function createGuestChildrenIfNotExists() { 
+                let childrenData = storageAdapter.getChildren(); 
+                const hasAlvaro = childrenData.some(child => child.id === 'guest-alvaro'); 
+                const hasLuz = childrenData.some(child => child.id === 'guest-luz'); 
+                if (!hasAlvaro) { 
+                    childrenData.push({ 
+                        id: 'guest-alvaro', 
+                        name: 'Alvaro', 
+                        dob: '2017-08-10', 
+                        sex: 'male', 
+                        avatarCustomization: '1', 
+                        theme: 'default', 
+                        ownerId: null, 
+                        createdAt: new Date().toISOString(), 
+                        updatedAt: new Date().toISOString(), 
+                        progressPercent: 100, 
+                        deletedAt: null, 
+                        version: 1 
+                    }); 
+                } 
+                if (!hasLuz) { 
+                    childrenData.push({ 
+                        id: 'guest-luz', 
+                        name: 'Luz', 
+                        dob: '2019-12-05', 
+                        sex: 'female', 
+                        avatarCustomization: '2', 
+                        theme: 'default', 
+                        ownerId: null, 
+                        createdAt: new Date().toISOString(), 
+                        updatedAt: new Date().toISOString(), 
+                        progressPercent: 100, 
+                        deletedAt: null, 
+                        version: 1 
+                    }); 
+                } 
+                storageAdapter.saveChildren(childrenData); 
+                const responses = storageAdapter.getResponses(); 
+                if (!responses['guest-alvaro']) { 
+                    responses['guest-alvaro'] = {}; 
+                    for (let i = 1; i <= 50; i++) { 
+                        responses['guest-alvaro'][`q${i}`] = { 
+                            type: 'select', 
+                            value: 'Respuesta de ejemplo', 
+                            timestamp: new Date().toISOString(), 
+                            version: 1 
+                        }; 
+                    } 
+                } 
+                if (!responses['guest-luz']) { 
+                    responses['guest-luz'] = {}; 
+                    for (let i = 1; i <= 50; i++) { 
+                        responses['guest-luz'][`q${i}`] = { 
+                            type: 'select', 
+                            value: 'Respuesta de ejemplo', 
+                            timestamp: new Date().toISOString(), 
+                            version: 1 
+                        }; 
+                    } 
+                } 
+                storageAdapter.saveResponses(responses); 
+            } 
         });
 
         document.addEventListener('DOMContentLoaded', function() {
@@ -1374,4 +1548,4 @@
         });
     </script>
 </body>
-</html>
+</html>  

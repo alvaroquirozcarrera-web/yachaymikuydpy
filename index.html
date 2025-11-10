@@ -1005,7 +1005,7 @@
                     <h1 class="section-title">Yachay Mikuy</h1>
                     <p class="section-subtitle">Combatiendo la anemia infantil en Perú con planes de alimentación personalizados y adaptados culturalmente</p>
                     <div class="d-flex justify-content-center">
-                        <a href="index1.html#login" class="btn-hero" onclick="forceLogin(event)">Comenzar Ahora</a>
+                        <a href="index2.html#login" class="btn-hero" onclick="forceLogin(event)">Comenzar Ahora</a>
                     </div>
                 </div>
             </div>
@@ -1509,7 +1509,7 @@
                     <h2 class="section-title">Únete a la lucha contra la anemia infantil</h2>
                     <p class="section-subtitle">Juntos podemos transformar la nutrición de miles de niños en Perú</p>
                     <div class="d-flex justify-content-center">
-                        <a href="index1.html#login" class="btn-hero" onclick="forceLogin(event)">Comenzar Ahora</a>
+                        <a href="index2.html#login" class="btn-hero" onclick="forceLogin(event)">Comenzar Ahora</a>
                     </div>
                 </div>
             </div>
@@ -1595,7 +1595,7 @@
             sessionStorage.removeItem('userName');
             
             // Redirigir a la página de inicio de sesión
-            window.location.href = 'index1.html#login';
+            window.location.href = 'index2.html#login';
         }
         
         // Configurar modales del footer
@@ -1947,7 +1947,7 @@
 
             // Listener de clics para todo el documento
             document.body.addEventListener('click', (e) => {
-                const isMainLink = e.target.closest('a[href="index1.html"]');
+                const isMainLink = e.target.closest('a[href="index2.html"]');
                 const isExternalLink = e.target.closest('a[target="_blank"]');
                 
                 if (isMainLink || isExternalLink) { return; }
