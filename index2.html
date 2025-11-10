@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/intro.js/7.2.0/introjs.min.css" rel="stylesheet">
     
     <style>
         :root {
@@ -170,15 +169,6 @@
             .header-container {
                 padding: 0 10px; /* Menos espacio lateral en móvil */
             }
-            
-            /* ELIMINADO: Ya no es necesario, el spacer izquierdo no se usa */
-            /* .header-col-side:first-child { ... } */
-            
-            /* ELIMINADO: Ya no es necesario, es el default */
-            /* .header-col-side { ... } */
-            
-            /* ELIMINADO: Ya no es necesario, es el default */
-            /* .header-col-center { ... } */
 
             .logo-container {
                 height: 60px;
@@ -565,138 +555,6 @@
         }
         #chat-send:hover { color: var(--primary-blue); }
         
-        
-        /* === INICIO: CORRECCIÓN DEL TOUR GUIADO === */
-        
-        /* Overlay (fondo oscuro) */
-        .introjs-overlay {
-            background-color: #000;
-            opacity: 0.7 !important; 
-            /* 1. Z-index alto para el overlay */
-            z-index: 999999 !important; 
-        }
-        
-        /* Tema principal del Tooltip */
-        .introjs-yachay-theme {
-            font-family: 'Nunito', sans-serif;
-            background-color: var(--white);
-            border: none;
-            border-radius: var(--radius);
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
-            width: 90vw;
-            max-width: 400px; 
-            padding: 0;
-            overflow: hidden; 
-            /* 2. Forzamos el centrado y la visibilidad */
-            position: fixed !important;
-            top: 50% !important;
-            left: 50% !important;
-            transform: translate(-50%, -50%) !important;
-            /* 3. Z-index MÁS ALTO que el overlay */
-            z-index: 10000000 !important; 
-        }
-
-        /* Título del tooltip */
-        .introjs-yachay-theme .introjs-tooltip-title {
-            font-size: 1.1rem;
-            font-weight: 800;
-            padding: 1rem 1.5rem;
-            margin: 0;
-            background: linear-gradient(135deg, var(--primary-blue), var(--accent-color));
-            color: var(--white);
-        }
-        
-        /* Texto del tooltip */
-        .introjs-yachay-theme .introjs-tooltiptext {
-            color: var(--text-dark);
-            font-size: 1rem;
-            line-height: 1.6;
-            font-weight: 500;
-            padding: 1.5rem;
-            margin: 0;
-        }
-        
-        /* Barra de progreso */
-        .introjs-yachay-theme .introjs-progress {
-            background-color: var(--medium-gray);
-            border-radius: 0;
-            height: 6px;
-            margin: 0;
-        }
-        .introjs-yachay-theme .introjs-progressbar {
-            background-color: var(--accent-red);
-        }
-        
-        /* Contenedor de botones */
-        .introjs-yachay-theme .introjs-tooltipbuttons {
-            border-top: 1px solid var(--light-gray);
-            padding: 1rem 1.5rem;
-            margin: 0;
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center;
-        }
-        
-        /* Botones (Siguiente, Hecho) */
-        .introjs-yachay-theme .introjs-button {
-            font-family: 'Nunito', sans-serif;
-            font-weight: 700;
-            text-decoration: none;
-            color: var(--white) !important;
-            background: linear-gradient(45deg, var(--primary-blue), var(--accent-color));
-            border-radius: 50px;
-            padding: 10px 20px !important;
-            border: none;
-            transition: var(--transition);
-            box-shadow: 0 4px 15px rgba(26, 75, 140, 0.4);
-            text-shadow: none;
-            white-space: nowrap; 
-            /* 4. Aseguramos que los botones también sean visibles */
-            position: relative !important;
-            z-index: 10000001 !important;
-        }
-        
-        .introjs-yachay-theme .introjs-button:hover {
-            background: linear-gradient(45deg, var(--accent-red), #ff6b6b);
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(230, 57, 70, 0.5);
-            color: var(--white) !important;
-        }
-        
-        /* Botón x y Anterior (Estilo Secundario) */
-        .introjs-yachay-theme .introjs-skipbutton,
-        .introjs-yachay-theme .introjs-prevbutton {
-            font-family: 'Nunito', sans-serif;
-            font-weight: 700;
-            text-decoration: none;
-            color: var(--primary-blue) !important; 
-            background: var(--white) !important; 
-            border-radius: 50px;
-            padding: 10px 20px !important;
-            border: 2px solid var(--primary-blue) !important; 
-            transition: var(--transition);
-            box-shadow: none; 
-            text-shadow: none;
-            white-space: nowrap; 
-            /* 4. Aseguramos que los botones también sean visibles */
-            position: relative !important;
-            z-index: 10000001 !important;
-        }
-        
-        .introjs-yachay-theme .introjs-skipbutton:hover,
-        .introjs-yachay-theme .introjs-prevbutton:hover {
-            background: var(--primary-blue) !important; 
-            color: var(--white) !important;
-            transform: translateY(-3px);
-            box-shadow: 0 4px 15px rgba(26, 75, 140, 0.4);
-        }
-
-        /* Oculta la flecha (ya no es necesaria con 'floating') */
-        .introjs-yachay-theme .introjs-arrow {
-            display: none !important;
-        }
-        /* === FIN: CORRECCIÓN DEL TOUR GUIADO === */
-
 
         /* Estilos para los modales del footer */
         .modal { 
@@ -1075,9 +933,8 @@
 
     <div id="action-modal-container"></div>
 
- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/intro.js/7.2.0/intro.min.js"></script>
 
     <script>
         // === INICIO: LÓGICA DE INACTIVIDAD ===
@@ -1420,7 +1277,7 @@
 
 
             // ===========================================
-            // === LÓGICA DEL CHATBOT Y DEL TOUR (ACTUALIZADA) ===
+            // === LÓGICA DEL CHATBOT ===
             // ===========================================
 
             // --- Lógica del Chatbot ---
@@ -1573,72 +1430,6 @@
                     });
                     chatSuggestions.appendChild(btnSugerencia);
                 });
-            }
-
-
-            // --- Lógica del Tour Guiado (Simplificada para esta página) ---
-            if (!sessionStorage.getItem('tourYachayVistoPlanes')) {
-                const intro = introJs();
-                
-                // === INICIO DE LA CORRECCIÓN ===
-                intro.setOptions({
-                    steps: [
-                        { 
-                            title: 'Paso 1 de 5',
-                            element: document.getElementById('backBtn'), 
-                            intro: '¡Hola! Esta es la página de planes. Usa este botón para <strong>Volver a la página principal</strong> (index.html).'
-                            // ELIMINADO: position: 'floating'
-                        },
-                        { 
-                            title: 'Paso 2 de 5',
-                            element: document.querySelector('.pricing-card:nth-child(1)'), 
-                            intro: 'Este es nuestro <strong>Plan Familiar</strong>. Con un solo pago mensual de $5, cubres a todos los hijos de tu hogar.'
-                            // ELIMINADO: position: 'floating'
-                        },
-                        { 
-                            title: 'Paso 3 de 5',
-                            element: document.querySelector('.pricing-card:nth-child(2)'), 
-                            intro: 'Este es el <strong>Plan Convenio</strong>. Es gratuito para ti si tu municipalidad o una organización aliada financia el plan.'
-                            // ELIMINADO: position: 'floating'
-                        },
-                        { 
-                            title: 'Paso 4 de 5',
-                            element: document.querySelector('.btn-pricing-primary'), 
-                            intro: 'Haz clic aquí para <strong>Ingresar o Registrarte</strong> (te llevará a index1.html) y empezar a crear los perfiles de tus hijos.'
-                            // ELIMINADO: position: 'floating'
-                        },
-                        { 
-                            title: 'Paso 5 de 5',
-                            element: document.getElementById('guestBtnLink'), 
-                            intro: 'O si prefieres, puedes <strong>Explorar como invitado</strong> para conocer la plataforma por dentro antes de registrarte.'
-                            // ELIMINADO: position: 'floating'
-                        }
-                    ],
-                    nextLabel: 'Siguiente &rarr;',
-                    prevLabel: '&larr; Anterior',
-                    skipLabel: 'x', // Texto corto
-                    doneLabel: '¡Entendido!',
-                    showProgress: true,
-                    showBullets: false, 
-                    tooltipClass: 'introjs-yachay-theme', // <-- Esta es la clave
-                    scrollPadding: 50
-                    
-                    // ELIMINADAS: Las siguientes líneas que causaban el conflicto
-                    // tooltipPosition: 'auto', 
-                    // positionPrecedence: ['element', 'top', 'bottom', 'left', 'right'] 
-                });
-                // === FIN DE LA CORRECCIÓN ===
-
-                intro.oncomplete(() => {
-                    sessionStorage.setItem('tourYachayVistoPlanes', 'true');
-                });
-                intro.onexit(() => {
-                    sessionStorage.setItem('tourYachayVistoPlanes', 'true');
-                });
-
-                setTimeout(() => {
-                    intro.start();
-                }, 500);
             }
 
         });
