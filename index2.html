@@ -1075,7 +1075,7 @@
 
     <div id="action-modal-container"></div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/intro.js/7.2.0/intro.min.js"></script>
 
@@ -1580,38 +1580,38 @@
             if (!sessionStorage.getItem('tourYachayVistoPlanes')) {
                 const intro = introJs();
                 
+                // === INICIO DE LA CORRECCIÓN ===
                 intro.setOptions({
                     steps: [
                         { 
                             title: 'Paso 1 de 5',
                             element: document.getElementById('backBtn'), 
-                            intro: '¡Hola! Esta es la página de planes. Usa este botón para <strong>Volver a la página principal</strong> (index.html).',
-                            /* MODIFICADO: Cambiado a 'floating' para ser consistente */
-                            position: 'floating'
+                            intro: '¡Hola! Esta es la página de planes. Usa este botón para <strong>Volver a la página principal</strong> (index.html).'
+                            // ELIMINADO: position: 'floating'
                         },
                         { 
                             title: 'Paso 2 de 5',
                             element: document.querySelector('.pricing-card:nth-child(1)'), 
-                            intro: 'Este es nuestro <strong>Plan Familiar</strong>. Con un solo pago mensual de $5, cubres a todos los hijos de tu hogar.',
-                            position: 'floating' // Forzado a flotar para asegurar visibilidad
+                            intro: 'Este es nuestro <strong>Plan Familiar</strong>. Con un solo pago mensual de $5, cubres a todos los hijos de tu hogar.'
+                            // ELIMINADO: position: 'floating'
                         },
                         { 
                             title: 'Paso 3 de 5',
                             element: document.querySelector('.pricing-card:nth-child(2)'), 
-                            intro: 'Este es el <strong>Plan Convenio</strong>. Es gratuito para ti si tu municipalidad o una organización aliada financia el plan.',
-                            position: 'floating' // Forzado a flotar
+                            intro: 'Este es el <strong>Plan Convenio</strong>. Es gratuito para ti si tu municipalidad o una organización aliada financia el plan.'
+                            // ELIMINADO: position: 'floating'
                         },
                         { 
                             title: 'Paso 4 de 5',
                             element: document.querySelector('.btn-pricing-primary'), 
-                            intro: 'Haz clic aquí para <strong>Ingresar o Registrarte</strong> (te llevará a index1.html) y empezar a crear los perfiles de tus hijos.',
-                            position: 'floating' // Forzado a flotar
+                            intro: 'Haz clic aquí para <strong>Ingresar o Registrarte</strong> (te llevará a index1.html) y empezar a crear los perfiles de tus hijos.'
+                            // ELIMINADO: position: 'floating'
                         },
                         { 
                             title: 'Paso 5 de 5',
                             element: document.getElementById('guestBtnLink'), 
-                            intro: 'O si prefieres, puedes <strong>Explorar como invitado</strong> para conocer la plataforma por dentro antes de registrarte.',
-                            position: 'floating' // Forzado a flotar
+                            intro: 'O si prefieres, puedes <strong>Explorar como invitado</strong> para conocer la plataforma por dentro antes de registrarte.'
+                            // ELIMINADO: position: 'floating'
                         }
                     ],
                     nextLabel: 'Siguiente &rarr;',
@@ -1620,12 +1620,14 @@
                     doneLabel: '¡Entendido!',
                     showProgress: true,
                     showBullets: false, 
-                    tooltipClass: 'introjs-yachay-theme', 
-                    scrollPadding: 50,
-                    // 5. Forzamos a no usar 'position' del step
-                    tooltipPosition: 'auto', 
-                    positionPrecedence: ['element', 'top', 'bottom', 'left', 'right'] 
+                    tooltipClass: 'introjs-yachay-theme', // <-- Esta es la clave
+                    scrollPadding: 50
+                    
+                    // ELIMINADAS: Las siguientes líneas que causaban el conflicto
+                    // tooltipPosition: 'auto', 
+                    // positionPrecedence: ['element', 'top', 'bottom', 'left', 'right'] 
                 });
+                // === FIN DE LA CORRECCIÓN ===
 
                 intro.oncomplete(() => {
                     sessionStorage.setItem('tourYachayVistoPlanes', 'true');
